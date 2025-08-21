@@ -1,7 +1,8 @@
 ﻿require("@nomicfoundation/hardhat-toolbox");
+require('@openzeppelin/hardhat-upgrades');
 
 module.exports = {
-  solidity: "0.8.7",
+  solidity: "0.8.28",
   paths: {
     sources: "./contracts",
     tests: "./test",

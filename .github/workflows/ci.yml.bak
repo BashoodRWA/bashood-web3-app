@@ -19,6 +19,6 @@ jobs:
       - name: Install dependencies
         run: npm install
       - name: Run Hardhat tests
-        run: npm test
+        run: npx hardhat test --no-compile
         env:
           CI: true
