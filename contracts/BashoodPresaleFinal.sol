@@ -1,4 +1,4 @@
-﻿// SPDX-License-Identifier: MIT
+// SPDX-License-Identifier: MIT
 pragma solidity ^0.8.7;
 
 // Comentario de seguridad: este contrato sigue recomendaciones de Slither y mejores prÃ¡cticas de auditorÃ­a.
