@@ -1,24 +1,15 @@
-# Logs
-logs
-*.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
-lerna-debug.log*
+# Local env
+.env
 
-node_modules
-dist
-dist-ssr
-*.local
+# Coverage artifacts
+coverage/
+coverage.json
 
-# Editor directories and files
-.vscode/*
-!.vscode/extensions.json
-.idea
-.DS_Store
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
+# Hardhat cache
+cache/
+
+# backup files
+.github/workflows/ci.yml.bak
+
+# Node
+node_modules/
