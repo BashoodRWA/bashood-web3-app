@@ -1,6 +1,4 @@
-﻿    /// @notice Permite al admin configurar el parÃ¡metro de staleness del orÃ¡culo
-    /// @notice Permite al admin configurar la wallet de operaciones
-// SPDX-License-Identifier: MIT
+﻿// SPDX-License-Identifier: MIT
 pragma solidity ^0.8.7;
 
 // Comentario de seguridad: este contrato sigue recomendaciones de Slither y mejores prÃ¡cticas de auditorÃ­a.
@@ -611,4 +609,5 @@ contract BashoodPresaleFinal is ReentrancyGuard, AccessControl, IERC1155Receiver
         return interfaceId == type(IERC1155Receiver).interfaceId || super.supportsInterface(interfaceId);
     }
 }
+
 

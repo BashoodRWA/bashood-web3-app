@@ -1,54 +1,4 @@
-﻿ 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
-33Ã—
-33Ã—
-33Ã—
-33Ã—
-33Ã—
- 
- 
- 
-17Ã—
-15Ã—
-15Ã—
- 
- 
- 
-5Ã—
-2Ã—
-2Ã—
- 
- 
- 
- 
-28Ã—
- 
- 
- 
-27Ã—
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- // SPDX-License-Identifier: MIT
+﻿ // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.7;
  
 import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
@@ -99,4 +49,5 @@ contract TaxHandler is Initializable, OwnableUpgradeable {
  
  
  
+
 

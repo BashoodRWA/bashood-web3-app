@@ -1,100 +1,4 @@
-﻿ 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
-15Ã—
-15Ã—
-15Ã—
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
-6Ã—
-5Ã—
- 
- 
- 
-2Ã—
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- // SPDX-License-Identifier: MIT
+﻿ // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.28;
  
 import "@openzeppelin/contracts/token/ERC1155/ERC1155.sol";
@@ -191,4 +95,5 @@ contract BashoodMultiToken is ERC1155, Ownable, ReentrancyGuard, AccessControl {
  
  
  
+
 
