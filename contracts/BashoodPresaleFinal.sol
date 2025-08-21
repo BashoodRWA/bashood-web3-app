@@ -531,12 +531,12 @@ contract BashoodPresaleFinal is ReentrancyGuard, AccessControl, IERC1155Receiver
         require(_referralContract != address(0), "Referral contract required");
         require(Address.isContract(_referralContract), "Referral must be contract");
         require(_projectWallet != address(0), "Project wallet required");
-        _setupRole(DEFAULT_ADMIN_ROLE, msg.sender);
-        _setupRole(ADMIN_ROLE, msg.sender);
-        _setupRole(EMERGENCY_ROLE, msg.sender);
+    _grantRole(DEFAULT_ADMIN_ROLE, msg.sender);
+    _grantRole(ADMIN_ROLE, msg.sender);
+    _grantRole(EMERGENCY_ROLE, msg.sender);
     // Also grant ADMIN_ROLE to the project wallet so tests that pass the
     // project wallet as an admin account can act as ADMIN_ROLE immediately.
-    _setupRole(ADMIN_ROLE, _projectWallet);
+    _grantRole(ADMIN_ROLE, _projectWallet);
         deployer = msg.sender;
 
         bashoodToken = IERC20(_bashoodToken);

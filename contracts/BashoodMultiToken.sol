@@ -27,8 +27,8 @@ contract BashoodMultiToken is ERC1155, Ownable, ReentrancyGuard, AccessControl {
  
     constructor(address initialOwner) ERC1155("https://myapi.com/metadata/{id}.json") {
         transferOwnership(initialOwner);
-        _setupRole(DEFAULT_ADMIN_ROLE, initialOwner);
-        _setupRole(MINTER_ROLE, initialOwner);
+    _grantRole(DEFAULT_ADMIN_ROLE, initialOwner);
+    _grantRole(MINTER_ROLE, initialOwner);
     }
  
     function grantMinterRole(address minter) external onlyRole(DEFAULT_ADMIN_ROLE) {
