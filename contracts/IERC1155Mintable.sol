@@ -1,4 +1,4 @@
-// SPDX-License-Identifier: MIT
+﻿// SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
 import "@openzeppelin/contracts/token/ERC1155/IERC1155.sol";
@@ -6,3 +6,4 @@ import "@openzeppelin/contracts/token/ERC1155/IERC1155.sol";
 interface IERC1155Mintable is IERC1155 {
     function mint(address to, uint256 id, uint256 amount, bytes calldata data) external;
 }
+

@@ -1,13 +1,13 @@
-    /// @notice Permite al admin configurar el parámetro de staleness del oráculo
+﻿    /// @notice Permite al admin configurar el parÃ¡metro de staleness del orÃ¡culo
     /// @notice Permite al admin configurar la wallet de operaciones
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.7;
 
-// Comentario de seguridad: este contrato sigue recomendaciones de Slither y mejores prácticas de auditoría.
-// - Validación estricta de destinatarios
-// - Naming conventions en parámetros y setters
-// - Documentación sobre uso de block.timestamp y llamadas low-level
-// - Protección contra reentrancia en funciones críticas
+// Comentario de seguridad: este contrato sigue recomendaciones de Slither y mejores prÃ¡cticas de auditorÃ­a.
+// - ValidaciÃ³n estricta de destinatarios
+// - Naming conventions en parÃ¡metros y setters
+// - DocumentaciÃ³n sobre uso de block.timestamp y llamadas low-level
+// - ProtecciÃ³n contra reentrancia en funciones crÃ­ticas
 
 import "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 import "./AggregatorV3Interface.sol";
@@ -21,7 +21,7 @@ import "@openzeppelin/contracts/utils/cryptography/ECDSA.sol";
 import "./IERC1155Mintable.sol";
 import "./BashoodReferral.sol";
 
-// Interfaz mínima para burnFrom
+// Interfaz mÃ­nima para burnFrom
 interface IBashoodToken {
     function burnFrom(address account, uint256 amount) external;
 }
@@ -42,7 +42,7 @@ contract BashoodPresaleFinal is ReentrancyGuard, AccessControl, IERC1155Receiver
     mapping(uint256 => Proposal) public proposals;
     uint256 public nextProposalId = 1;
 
-    // Parámetros para utilidad BHT y control de precios
+    // ParÃ¡metros para utilidad BHT y control de precios
     uint16 public bhtDiscountBps = 0; // basis points, inicia en 0
     uint16 public burnBps = 0; // basis points, inicia en 0
     address public operationsWallet = address(0);
@@ -106,12 +106,12 @@ contract BashoodPresaleFinal is ReentrancyGuard, AccessControl, IERC1155Receiver
         require(operationsWallet != address(0), "Ops wallet req");
         require(maxPriceStaleness > 0, "Staleness req");
         require(address(priceFeed) != address(0), "PriceFeed req");
-        // Oráculo: solo para asegurar que está activo y fresco
+        // OrÃ¡culo: solo para asegurar que estÃ¡ activo y fresco
         (, int256 price, , uint256 updatedAt,) = priceFeed.latestRoundData();
         require(price > 0, "Invalid price");
         require(block.timestamp - updatedAt <= maxPriceStaleness, "Price too stale");
 
-        // Quema el depósito
+        // Quema el depÃ³sito
     try IBashoodToken(address(bashoodToken)).burnFrom(msg.sender, depositBHT) {
             emit Burned(msg.sender, depositBHT);
             emit BHTBurned(msg.sender, depositBHT);
@@ -147,7 +147,7 @@ contract BashoodPresaleFinal is ReentrancyGuard, AccessControl, IERC1155Receiver
             operationsWallet = newWallet;
             emit OperationsWalletChanged(newWallet);
         }
-    // Oráculo Chainlink para BHT/USD
+    // OrÃ¡culo Chainlink para BHT/USD
     AggregatorV3Interface public priceFeed;
 
     event PriceFeedChanged(address newFeed);
@@ -157,7 +157,7 @@ contract BashoodPresaleFinal is ReentrancyGuard, AccessControl, IERC1155Receiver
         emit PriceFeedChanged(newFeed);
     }
 
-    /// @notice Permite al admin configurar el parámetro de staleness del oráculo
+    /// @notice Permite al admin configurar el parÃ¡metro de staleness del orÃ¡culo
     function setMaxPriceStaleness(uint32 newStaleness) external onlyRole(ADMIN_ROLE) {
         require(newStaleness > 0, "Staleness must be > 0");
         maxPriceStaleness = newStaleness;
@@ -302,7 +302,7 @@ contract BashoodPresaleFinal is ReentrancyGuard, AccessControl, IERC1155Receiver
         _;
     }
 
-    // Asignación de roles para administración, emergencia y whitelist
+    // AsignaciÃ³n de roles para administraciÃ³n, emergencia y whitelist
     function assignRoles(address admin, address emergency, address whitelist) external onlyRole(DEFAULT_ADMIN_ROLE) {
         require(admin != address(0), "E1");
         require(emergency != address(0), "E2");
@@ -317,7 +317,7 @@ contract BashoodPresaleFinal is ReentrancyGuard, AccessControl, IERC1155Receiver
         whitelistEnabled = whitelistEnabled_;
     }
 
-    // Establecer el máximo de NFTs por usuario
+    // Establecer el mÃ¡ximo de NFTs por usuario
     function setMaxPerUser(uint256 maxPerUser_) external onlyRole(ADMIN_ROLE) {
         require(maxPerUser_ > 0, "E5");
         maxPerUser = maxPerUser_;
@@ -414,19 +414,19 @@ contract BashoodPresaleFinal is ReentrancyGuard, AccessControl, IERC1155Receiver
 
         emit AssetPurchased(msg.sender, nftId, quantity, discountedCost);
     }
-    // Función para setear el signer
+    // FunciÃ³n para setear el signer
     function setSigner(address _signer) external onlyRole(ADMIN_ROLE) {
         require(_signer != address(0), "Signer required");
         signerAddress = _signer;
     }
 
-    // Función para setear el rescue contract
+    // FunciÃ³n para setear el rescue contract
     function setRescueContract(address _rescue) external onlyRole(ADMIN_ROLE) {
         require(_rescue != address(0), "Rescue required");
         rescueContract = _rescue;
     }
 
-    // Funciones públicas de rescate para compatibilidad con los tests
+    // Funciones pÃºblicas de rescate para compatibilidad con los tests
     function rescueUnsoldNFTs(uint256 nftId, address to, uint256 amount) external onlyRole(ADMIN_ROLE) nonReentrant {
         require(rescueContract != address(0), "Rescue required");
         (bool success, ) = rescueContract.call(
@@ -514,7 +514,7 @@ contract BashoodPresaleFinal is ReentrancyGuard, AccessControl, IERC1155Receiver
     // address immutable rescueContract; // Eliminado para compatibilidad con tests
 
     /// @notice Asigna el contrato de rescate (solo en el constructor)
-    // La dirección debe ser válida y solo puede asignarse una vez
+    // La direcciÃ³n debe ser vÃ¡lida y solo puede asignarse una vez
     constructor(
         address _bashoodToken,
         address _nftContract,
@@ -556,7 +556,7 @@ contract BashoodPresaleFinal is ReentrancyGuard, AccessControl, IERC1155Receiver
     }
 
     /// @notice Delegar rescate de NFTs no vendidos
-    /// @dev Protegido con nonReentrant y validación estricta de destinatarios
+    /// @dev Protegido con nonReentrant y validaciÃ³n estricta de destinatarios
     function delegateRescueUnsoldNfts(uint256 nftId, address to, uint256 amount) external onlyRole(ADMIN_ROLE) nonReentrant {
         require(to != address(0), "E46");
         (bool success, ) = rescueContract.call(
@@ -566,7 +566,7 @@ contract BashoodPresaleFinal is ReentrancyGuard, AccessControl, IERC1155Receiver
     }
 
     /// @notice Delegar rescate de tokens ERC20
-    /// @dev Protegido con nonReentrant y validación estricta de destinatarios
+    /// @dev Protegido con nonReentrant y validaciÃ³n estricta de destinatarios
     function delegateRescueErc20(address tokenAddress, address to, uint256 amount) external onlyRole(ADMIN_ROLE) nonReentrant {
         require(tokenAddress != address(0), "E47");
         require(to != address(0), "E48");
@@ -577,7 +577,7 @@ contract BashoodPresaleFinal is ReentrancyGuard, AccessControl, IERC1155Receiver
     }
 
     /// @notice Delegar retiro de ETH en emergencia
-    /// @dev Protegido con nonReentrant y validación estricta de destinatarios
+    /// @dev Protegido con nonReentrant y validaciÃ³n estricta de destinatarios
     function delegateEmergencyWithdrawEth() external onlyRole(EMERGENCY_ROLE) nonReentrant {
         require(rescueContract != address(0), "E45");
         (bool success, ) = rescueContract.call(
@@ -611,3 +611,4 @@ contract BashoodPresaleFinal is ReentrancyGuard, AccessControl, IERC1155Receiver
         return interfaceId == type(IERC1155Receiver).interfaceId || super.supportsInterface(interfaceId);
     }
 }
+
