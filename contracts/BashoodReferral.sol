@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
+import "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
  
 interface IReferralValidator {
     function isValid(address referrer) external view returns (bool);
@@ -10,11 +11,11 @@ interface IBashoodMultiToken {
     function balanceOf(address account, uint256 id) external view returns (uint256);
 }
  
-contract BashoodReferral {
-    address public owner;
+contract BashoodReferral is ReentrancyGuard {
+    address public immutable owner;
     address public presaleAddress;
-    IReferralValidator public validator;
-    IBashoodMultiToken public nftContract;
+    IReferralValidator public immutable validator;
+    IBashoodMultiToken public immutable nftContract;
  
     uint256 public constant NFT_ID = 1;
     uint256 public constant REQUIRED_REFERRALS = 3;
@@ -33,11 +34,13 @@ contract BashoodReferral {
         _;
     }
  
+    event PresaleContractUpdated(address indexed oldAddress, address indexed newAddress);
+
     constructor(address _presaleAddress, address _validator, address _nftContract) {
-    require(_presaleAddress != address(0), "Invalid presale address");
-    require(_validator != address(0), "Invalid validator address");
-    require(_nftContract != address(0), "Invalid NFT contract address");
- 
+        require(_presaleAddress != address(0), "Invalid presale address");
+        require(_validator != address(0), "Invalid validator address");
+        require(_nftContract != address(0), "Invalid NFT contract address");
+
         owner = msg.sender;
         presaleAddress = _presaleAddress;
         validator = IReferralValidator(_validator);
@@ -46,6 +49,8 @@ contract BashoodReferral {
  
     function setPresaleContract(address _presaleAddress) external {
         require(msg.sender == owner, "Only owner can set presale address");
+        require(_presaleAddress != address(0), "Invalid presale address");
+        emit PresaleContractUpdated(presaleAddress, _presaleAddress);
         presaleAddress = _presaleAddress;
     }
  
@@ -73,13 +78,14 @@ contract BashoodReferral {
         emit ReferralRegistered(msg.sender, referrer);
     }
  
-    function claimNFT() external {
+    function claimNFT() external nonReentrant {
         require(referralCount[msg.sender] >= REQUIRED_REFERRALS, "No tienes suficientes referidos para reclamar");
         require(!claimedNFT[msg.sender], "Ya reclamaste tu NFT");
- 
+
         claimedNFT[msg.sender] = true;
+        // Effects before interaction
         nftContract.mint(msg.sender, NFT_ID, 1, "");
- 
+
         emit NFTClaimed(msg.sender);
     }
  

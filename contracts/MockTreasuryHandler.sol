@@ -7,11 +7,13 @@ contract MockTreasuryHandler {
     event FeeTransferred(address indexed from, address indexed to, uint256 amount);
 
     function initialize(address _treasury) public {
-        treasury = _treasury;
+    require(_treasury != address(0), "Invalid treasury");
+    treasury = _treasury;
     }
 
     function updateTreasuryWallet(address _treasury) public {
-        treasury = _treasury;
+    require(_treasury != address(0), "Invalid treasury");
+    treasury = _treasury;
     }
 
     function getTreasury() public view returns (address) {

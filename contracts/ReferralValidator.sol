@@ -2,9 +2,10 @@
 pragma solidity ^0.8.20;
 
 contract ReferralValidator {
-    address public owner;
+    address public immutable owner;
 
     constructor(address _owner) {
+        require(_owner != address(0), "Invalid owner");
         owner = _owner;
     }
 

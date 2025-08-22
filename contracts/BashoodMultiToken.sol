@@ -26,8 +26,8 @@ contract BashoodMultiToken is ERC1155, Ownable, ReentrancyGuard, AccessControl {
     bytes32 public constant MINTER_ROLE = keccak256("MINTER_ROLE");
  
     constructor(address initialOwner) ERC1155("https://myapi.com/metadata/{id}.json") Ownable(initialOwner) {
-    _grantRole(DEFAULT_ADMIN_ROLE, initialOwner);
-    _grantRole(MINTER_ROLE, initialOwner);
+        _grantRole(DEFAULT_ADMIN_ROLE, initialOwner);
+        _grantRole(MINTER_ROLE, initialOwner);
     }
  
     function grantMinterRole(address minter) external onlyRole(DEFAULT_ADMIN_ROLE) {
@@ -73,9 +73,9 @@ contract BashoodMultiToken is ERC1155, Ownable, ReentrancyGuard, AccessControl {
         emit TokensPurchased(msg.sender, tokensToReceive);
     }
  
-    function mintAllNFTs() external onlyOwner {
+    function mintAllNFTs() external onlyOwner nonReentrant {
         require(nftCounter == 1, "NFTs ya han sido minteados");
- 
+
         for (uint256 i = 1; i <= 30; i++) {
             _mint(owner(), BASHOOD_NFT, 1, "");
             nftOwners[i] = owner();
@@ -83,12 +83,14 @@ contract BashoodMultiToken is ERC1155, Ownable, ReentrancyGuard, AccessControl {
         }
     }
  
-    function withdrawFunds() external onlyOwner {
+    function withdrawFunds() external onlyOwner nonReentrant {
         uint256 balance = address(this).balance;
         require(balance > 0, "No hay fondos");
- 
-        payable(owner()).transfer(balance);
+
+        // Effects done before interaction
         emit FundsWithdrawn(owner(), balance);
+        (bool ok, ) = payable(owner()).call{value: balance}("");
+        require(ok, "Transfer failed");
     }
 }
  
