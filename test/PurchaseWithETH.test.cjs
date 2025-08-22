@@ -1,20 +1,16 @@
 const { expect } = require("chai");
 const { ethers } = require("hardhat");
 
-describe("PurchaseWithBHT integration", function () {
-  let owner, buyer, referrer, projectWallet;
-  let mockBHT, mockERC20, mockNFT, referral, presale;
+describe("PurchaseWithETH integration", function () {
+  let owner, buyer, projectWallet;
+  let mockBHT, mockNFT, referral, presale;
 
   beforeEach(async function () {
-    [owner, buyer, referrer, projectWallet] = await ethers.getSigners();
+    [owner, buyer, projectWallet] = await ethers.getSigners();
 
     const MockBHT = await ethers.getContractFactory("MockBashoodToken");
     mockBHT = await MockBHT.deploy();
     await mockBHT.waitForDeployment();
-
-    const MockERC20 = await ethers.getContractFactory("MockERC20");
-    mockERC20 = await MockERC20.deploy();
-    await mockERC20.waitForDeployment();
 
     const MockNFT = await ethers.getContractFactory("MockNFT1155");
     mockNFT = await MockNFT.deploy();
@@ -31,35 +27,29 @@ describe("PurchaseWithBHT integration", function () {
       await mockNFT.getAddress(),
       await referral.getAddress(),
       await projectWallet.getAddress(),
-      ethers.parseEther("0.1"),
-      ethers.parseEther("0.2"),
+      ethers.parseEther("0.01"),
+      ethers.parseEther("0.02"),
       0,
       0,
       100
     );
     await presale.waitForDeployment();
 
-    await presale.connect(owner).setOperationsWallet(await owner.getAddress()).catch(()=>{});
-    await presale.connect(owner).setMaxPriceStaleness(1000).catch(()=>{});
     await presale.connect(owner).grantRole(await presale.ADMIN_ROLE(), await owner.getAddress());
+    await presale.connect(owner).setOperationsWallet(await owner.getAddress()).catch(()=>{});
     await presale.connect(owner).setSigner(await owner.getAddress()).catch(()=>{});
-    await mockBHT.mint(await buyer.getAddress(), ethers.parseEther("10"));
-    await mockBHT.connect(buyer).approve(await presale.getAddress(), ethers.parseEther("10"));
+    await presale.connect(owner).setMaxPriceStaleness(1000).catch(()=>{});
+
+    await presale.connect(owner).startPresale();
   });
 
-  it("allows purchaseWithBHT when allowances and params correct (happy path)", async function () {
-    await presale.connect(owner).startPresale();
-    const MockPrice = await ethers.getContractFactory("MockPriceFeed");
-    const mockPrice = await MockPrice.deploy(1e18, 18);
-    await mockPrice.waitForDeployment();
-    await presale.connect(owner).setPriceFeed(await mockPrice.getAddress());
-    await presale.connect(owner).setMaxPriceStaleness(1000);
-    await presale.connect(owner).setOperationsWallet(await owner.getAddress());
-    await mockBHT.connect(buyer).approve(await presale.getAddress(), ethers.parseEther("1"));
-    const nonce = 1;
+  it("allows purchaseWithETH and transfers NFT and funds", async function () {
+    const nonce = 2;
     const messageHash = ethers.keccak256(ethers.concat([ethers.toBeHex(await buyer.getAddress(), 32), ethers.toBeHex(nonce, 32)]));
     const signature = await owner.signMessage(ethers.getBytes(messageHash));
-    await presale.connect(buyer).purchaseWithBHT(1, 1, nonce, signature);
+
+    await presale.connect(buyer).purchaseWithETH(1, 1, nonce, signature, { value: ethers.parseEther("0.01") });
+
     const totalSold = await presale.totalNFTsSold();
     expect(Number(totalSold)).to.equal(1);
   });

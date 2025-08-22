@@ -30,6 +30,7 @@ contract BashoodToken is ERC20, Ownable, ReentrancyGuard, Pausable {
     event TreasuryFeeChanged(uint256 oldFee, uint256 newFee);
  
     constructor(address _treasuryWallet) ERC20("Bashood Token", "BHT") Ownable(msg.sender) {
+        require(_treasuryWallet != address(0), "Treasury required");
         treasuryWallet = _treasuryWallet;
         _mint(msg.sender, 1_000_000_000 * 10 ** decimals());
     }
