@@ -38,41 +38,21 @@ describe("BashoodPresaleFinal", function () {
 
   // Deploy BashoodPresaleFinal con argumentos validos (use unqualified name)
   const BashoodPresaleFinal = await ethers.getContractFactory("BashoodPresaleFinal");
-  try {
-      const args = [
-        await token.getAddress(),
-        await nft.getAddress(),
-        await referral.getAddress(),
-        owner.address, // projectWallet/address (payable) - use .address like the minimal test
-        ethers.parseEther("1"), // nftPriceETH
-        ethers.parseEther("2"), // nftPriceBHT
-        1700000000, // presaleStart
-        1800000000, // presaleEnd
-        10 // maxNFTSupply
-      ];
-  // ...existing code...
-      try {
-        // log of constructor types intentionally removed to reduce noise
-      } catch (e) {
-        // no-op
-      }
-  // Debug: print expected constructor inputs and actual args to diagnose deployment arg mismatch
-  const ctorInputs = (BashoodPresaleFinal.interface && BashoodPresaleFinal.interface.deploy && BashoodPresaleFinal.interface.deploy.inputs) || [];
-  // eslint-disable-next-line no-console
-  // eslint-disable-next-line no-console
-  console.log('BashoodPresaleFinal ctor inputs:', ctorInputs.map(i => i.type + ' ' + i.name));
-  // eslint-disable-next-line no-console
-  console.log('deploy args length:', args.length);
-  for (let i = 0; i < args.length; i++) {
-    // eslint-disable-next-line no-console
-    console.log(i, 'arg type:', typeof args[i], 'value preview:', String(args[i]).slice(0,80));
-  }
+  const args = [
+    await token.getAddress(),
+    await nft.getAddress(),
+    await referral.getAddress(),
+    owner.address, // projectWallet/address (payable)
+    ethers.parseEther("1"), // nftPriceETH
+    ethers.parseEther("2"), // nftPriceBHT
+    1700000000, // presaleStart
+    1800000000, // presaleEnd
+    10 // maxNFTSupply
+  ];
+
   // Deploy presale with validated args
   presale = await BashoodPresaleFinal.deploy(...args);
-    } catch (err) {
-      console.error('Deploy failed. args:', err, err && err.toString ? err.toString() : err);
-      throw err;
-    }
+  await presale.waitForDeployment();
     await presale.waitForDeployment();
     // Grant ADMIN_ROLE then configure operations wallet and signer using setters
     await presale.connect(owner).grantRole(await presale.ADMIN_ROLE(), await owner.getAddress());
