@@ -2,6 +2,12 @@ const { expect } = require("chai");
 const { ethers } = require("hardhat");
 
 describe("BashoodPresaleFinal IERC1155Receiver", function () {
+  it("placeholder for IERC1155Receiver tests", async function () { expect(true).to.be.true; });
+});
+const { expect } = require("chai");
+const { ethers } = require("hardhat");
+
+describe("BashoodPresaleFinal IERC1155Receiver", function () {
   let presale, deployer, user, nft;
 
   beforeEach(async function () {

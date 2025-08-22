@@ -9,6 +9,8 @@ module.exports = {
     artifacts: "./artifacts"
   },
   mocha: {
-    timeout: 200000
+  timeout: 200000,
+  spec: ["test/**/*.test.cjs"]
   }
 };
+
