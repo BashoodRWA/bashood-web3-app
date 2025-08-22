@@ -1,12 +1,6 @@
 const { expect } = require("chai");
 const { ethers } = require("hardhat");
 
-describe("BashoodReferralFull placeholder", function () {
-  it("placeholder", async function () { expect(true).to.be.true; });
-});
-const { expect } = require("chai");
-const { ethers } = require("hardhat");
-
 describe("Registro y restricciones adicionales", function () {
   let validator, referral, nft, token;
   let owner, user1, user2, user3;
