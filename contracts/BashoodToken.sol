@@ -29,34 +29,64 @@ contract BashoodToken is ERC20, Ownable, ReentrancyGuard, Pausable {
     event BurnRateChanged(uint256 oldRate, uint256 newRate);
     event TreasuryFeeChanged(uint256 oldFee, uint256 newFee);
  
-    constructor(address _treasuryWallet) ERC20("Bashood Token", "BHT") Ownable() {
+    constructor(address _treasuryWallet) ERC20("Bashood Token", "BHT") Ownable(msg.sender) {
         treasuryWallet = _treasuryWallet;
         _mint(msg.sender, 1_000_000_000 * 10 ** decimals());
     }
  
     // --- Transferencia con quema y fee a tesorerÃ­a ---
-    function _transfer(address sender, address recipient, uint256 amount) internal override whenNotPaused {
+    // Implement transfer logic with burn and fee in the public transfer methods
+    function transfer(address recipient, uint256 amount) public override whenNotPaused returns (bool) {
+        address sender = _msgSender();
         require(amount > 0, "Transfer amount must be greater than zero");
- 
+
         uint256 burnAmount = (amount * burnRate) / DENOMINATOR;
         uint256 feeAmount = (amount * treasuryFee) / DENOMINATOR;
         uint256 sendAmount = amount - burnAmount - feeAmount;
- 
+
         require(sendAmount > 0, "Send amount must be greater than zero");
- 
+
         if (burnAmount > 0) {
             super._burn(sender, burnAmount);
             totalBurned += burnAmount;
             emit TokensBurned(sender, burnAmount);
         }
- 
+
         if (feeAmount > 0) {
             super._transfer(sender, treasuryWallet, feeAmount);
             totalToTreasury += feeAmount;
             emit FeeToTreasury(sender, feeAmount);
         }
- 
+
         super._transfer(sender, recipient, sendAmount);
+        return true;
+    }
+
+    function transferFrom(address sender, address recipient, uint256 amount) public override whenNotPaused returns (bool) {
+        address spender = _msgSender();
+        _spendAllowance(sender, spender, amount);
+
+        require(amount > 0, "Transfer amount must be greater than zero");
+        uint256 burnAmount = (amount * burnRate) / DENOMINATOR;
+        uint256 feeAmount = (amount * treasuryFee) / DENOMINATOR;
+        uint256 sendAmount = amount - burnAmount - feeAmount;
+
+        require(sendAmount > 0, "Send amount must be greater than zero");
+
+        if (burnAmount > 0) {
+            super._burn(sender, burnAmount);
+            totalBurned += burnAmount;
+            emit TokensBurned(sender, burnAmount);
+        }
+
+        if (feeAmount > 0) {
+            super._transfer(sender, treasuryWallet, feeAmount);
+            totalToTreasury += feeAmount;
+            emit FeeToTreasury(sender, feeAmount);
+        }
+
+        super._transfer(sender, recipient, sendAmount);
+        return true;
     }
  
     // --- Donaciones directas al contrato ---

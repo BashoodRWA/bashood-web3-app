@@ -1,0 +1,111 @@
+{
+  "_format": "hh-sol-artifact-1",
+  "contractName": "MockTreasuryHandler",
+  "sourceName": "contracts/MockTreasuryHandler.sol",
+  "abi": [
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "from",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "to",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "FeeTransferred",
+      "type": "event"
+    },
+    {
+      "inputs": [],
+      "name": "getTreasury",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "from",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "to",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "handleTreasuryTransfer",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_treasury",
+          "type": "address"
+        }
+      ],
+      "name": "initialize",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "treasury",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_treasury",
+          "type": "address"
+        }
+      ],
+      "name": "updateTreasuryWallet",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x6080604052348015600f57600080fd5b506102018061001f6000396000f3fe608060405234801561001057600080fd5b50600436106100575760003560e01c80633b19e84a1461005c57806361d027b314610080578063809d458d1461009357806382c7667a146100c5578063c4d66de814610093575b600080fd5b6100646100d8565b6040516001600160a01b03909116815260200160405180910390f35b600054610064906001600160a01b031681565b6100c36100a136600461016d565b600080546001600160a01b0319166001600160a01b0392909216919091179055565b005b6100c36100d336600461018f565b6100ff565b600080546001600160a01b0316156100fa57506000546001600160a01b031690565b503090565b816001600160a01b0316836001600160a01b03167f1d6298f49fc15449b78df91fcca6812136edc2972366cb70aa0d9145a308cd318360405161014491815260200190565b60405180910390a3505050565b80356001600160a01b038116811461016857600080fd5b919050565b60006020828403121561017f57600080fd5b61018882610151565b9392505050565b6000806000606084860312156101a457600080fd5b6101ad84610151565b92506101bb60208501610151565b915060408401359050925092509256fea2646970667358221220750a32238fb72dd3f4060d1518f413e1cef0f3f079df90b63b46f4867dc8ab7b64736f6c634300081c0033",
+  "deployedBytecode": "0x608060405234801561001057600080fd5b50600436106100575760003560e01c80633b19e84a1461005c57806361d027b314610080578063809d458d1461009357806382c7667a146100c5578063c4d66de814610093575b600080fd5b6100646100d8565b6040516001600160a01b03909116815260200160405180910390f35b600054610064906001600160a01b031681565b6100c36100a136600461016d565b600080546001600160a01b0319166001600160a01b0392909216919091179055565b005b6100c36100d336600461018f565b6100ff565b600080546001600160a01b0316156100fa57506000546001600160a01b031690565b503090565b816001600160a01b0316836001600160a01b03167f1d6298f49fc15449b78df91fcca6812136edc2972366cb70aa0d9145a308cd318360405161014491815260200190565b60405180910390a3505050565b80356001600160a01b038116811461016857600080fd5b919050565b60006020828403121561017f57600080fd5b61018882610151565b9392505050565b6000806000606084860312156101a457600080fd5b6101ad84610151565b92506101bb60208501610151565b915060408401359050925092509256fea2646970667358221220750a32238fb72dd3f4060d1518f413e1cef0f3f079df90b63b46f4867dc8ab7b64736f6c634300081c0033",
+  "linkReferences": {},
+  "deployedLinkReferences": {}
+}

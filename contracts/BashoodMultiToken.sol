@@ -25,8 +25,7 @@ contract BashoodMultiToken is ERC1155, Ownable, ReentrancyGuard, AccessControl {
  
     bytes32 public constant MINTER_ROLE = keccak256("MINTER_ROLE");
  
-    constructor(address initialOwner) ERC1155("https://myapi.com/metadata/{id}.json") {
-        transferOwnership(initialOwner);
+    constructor(address initialOwner) ERC1155("https://myapi.com/metadata/{id}.json") Ownable(initialOwner) {
     _grantRole(DEFAULT_ADMIN_ROLE, initialOwner);
     _grantRole(MINTER_ROLE, initialOwner);
     }

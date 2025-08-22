@@ -29,14 +29,14 @@ contract BashoodReferral {
     event NFTClaimed(address indexed user);
  
     modifier onlyPresale() {
-        Erequire(msg.sender == presaleAddress, "Only presale can call this");
+    require(msg.sender == presaleAddress, "Only presale can call this");
         _;
     }
  
     constructor(address _presaleAddress, address _validator, address _nftContract) {
-        require(_presaleAddress != address(0), "Invalid presale address");
-        Erequire(_validator != address(0), "Invalid validator address");
-        Erequire(_nftContract != address(0), "Invalid NFT contract address");
+    require(_presaleAddress != address(0), "Invalid presale address");
+    require(_validator != address(0), "Invalid validator address");
+    require(_nftContract != address(0), "Invalid NFT contract address");
  
         owner = msg.sender;
         presaleAddress = _presaleAddress;
@@ -49,11 +49,11 @@ contract BashoodReferral {
         presaleAddress = _presaleAddress;
     }
  
-    function rewardReferrer(address user, address referrer) external EonlyPresale {
-        Erequire(user != address(0), "Direccion del referido no valida");
-        Erequire(referrer != address(0), "Direccion del referidor no valida");
-        Erequire(user != referrer, "No puedes referirte a ti mismo");
-        Erequire(referrals[user] == address(0), "Este usuario ya fue referido");
+    function rewardReferrer(address user, address referrer) external onlyPresale {
+        require(user != address(0), "Direccion del referido no valida");
+        require(referrer != address(0), "Direccion del referidor no valida");
+        require(user != referrer, "No puedes referirte a ti mismo");
+        require(referrals[user] == address(0), "Este usuario ya fue referido");
         // require(validator.isValid(referrer), "Referrer not valid"); // deshabilitado para tests
  
         referrals[user] = referrer;
@@ -74,7 +74,7 @@ contract BashoodReferral {
     }
  
     function claimNFT() external {
-        Irequire(referralCount[msg.sender] >= REQUIRED_REFERRALS, "No tienes suficientes referidos para reclamar");
+        require(referralCount[msg.sender] >= REQUIRED_REFERRALS, "No tienes suficientes referidos para reclamar");
         require(!claimedNFT[msg.sender], "Ya reclamaste tu NFT");
  
         claimedNFT[msg.sender] = true;

@@ -483,6 +483,13 @@ contract BashoodPresaleFinal is ReentrancyGuard, AccessControl, IERC1155Receiver
         }
     }
 
+    // Internal helper to check if an address is a contract (avoids using Address library directly)
+    function _isContract(address account) internal view returns (bool) {
+        uint256 size;
+        assembly { size := extcodesize(account) }
+        return size > 0;
+    }
+
     // Verificar firma del comprador
     function _verifySignature(
         address user,
@@ -490,9 +497,10 @@ contract BashoodPresaleFinal is ReentrancyGuard, AccessControl, IERC1155Receiver
         bytes calldata signature
     ) internal view returns (bool) {
         require(signerAddress != address(0), "E31");
-        bytes32 messageHash = keccak256(abi.encodePacked(user, nonce));
-        bytes32 ethSignedMessageHash = ECDSA.toEthSignedMessageHash(messageHash);
-        return ECDSA.recover(ethSignedMessageHash, signature) == signerAddress;
+    bytes32 messageHash = keccak256(abi.encodePacked(user, nonce));
+    // Construct the Ethereum Signed Message hash manually to avoid library ABI mismatch
+    bytes32 ethSignedMessageHash = keccak256(abi.encodePacked("\x19Ethereum Signed Message:\n32", messageHash));
+    return ECDSA.recover(ethSignedMessageHash, signature) == signerAddress;
     }
 
     // Finalizar la preventa (sin emitir evento)
@@ -525,11 +533,11 @@ contract BashoodPresaleFinal is ReentrancyGuard, AccessControl, IERC1155Receiver
         uint256 _maxNFTSupply
     ) {
         require(_bashoodToken != address(0), "BHT contract required");
-        require(Address.isContract(_bashoodToken), "BHT must be contract");
+    require(_isContract(_bashoodToken), "BHT must be contract");
         require(_nftContract != address(0), "NFT contract required");
-        require(Address.isContract(_nftContract), "NFT must be contract");
+    require(_isContract(_nftContract), "NFT must be contract");
         require(_referralContract != address(0), "Referral contract required");
-        require(Address.isContract(_referralContract), "Referral must be contract");
+    require(_isContract(_referralContract), "Referral must be contract");
         require(_projectWallet != address(0), "Project wallet required");
     _grantRole(DEFAULT_ADMIN_ROLE, msg.sender);
     _grantRole(ADMIN_ROLE, msg.sender);

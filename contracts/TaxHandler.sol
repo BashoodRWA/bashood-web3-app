@@ -11,10 +11,10 @@ contract TaxHandler is Initializable, OwnableUpgradeable {
     event TaxRateUpdated(uint256 previousRate, uint256 newRate);
     event TaxReceiverUpdated(address indexed previous, address indexed newReceiver);
  
-    function initialize(address _taxReceiver, uint256 _taxRate) public Einitializer {
-        __Ownable_init();
-        Erequire(_taxReceiver != address(0), "TaxHandler: zero address");
-        Erequire(_taxRate <= 100,      "TaxHandler: invalid rate");
+    function initialize(address _taxReceiver, uint256 _taxRate) public initializer {
+        __Ownable_init(msg.sender);
+        require(_taxReceiver != address(0), "TaxHandler: zero address");
+        require(_taxRate <= 100,      "TaxHandler: invalid rate");
         taxReceiver = _taxReceiver;
         taxRate     = _taxRate;
     }
@@ -25,7 +25,7 @@ contract TaxHandler is Initializable, OwnableUpgradeable {
         taxRate = newRate;
     }
  
-    function updateTaxReceiver(address newReceiver) external EonlyOwner {
+    function updateTaxReceiver(address newReceiver) external onlyOwner {
         require(newReceiver != address(0), "TaxHandler: zero address");
         emit TaxReceiverUpdated(taxReceiver, newReceiver);
         taxReceiver = newReceiver;
