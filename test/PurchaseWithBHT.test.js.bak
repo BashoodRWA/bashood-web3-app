@@ -3,6 +3,12 @@
 const { expect } = require("chai");
 const { ethers } = require("hardhat");
 
+// backup content
+// backup of original PurchaseWithBHT.test.js
+
+const { expect } = require("chai");
+const { ethers } = require("hardhat");
+
 // Backup of original PurchaseWithBHT.test.js
 
 const placeholderBackup = true;
