@@ -39,6 +39,11 @@ describe("PurchaseWithBHT integration", function () {
     );
     await presale.waitForDeployment();
 
+  // Transfer some NFTs from owner to presale so purchases can succeed
+  const ownerAddr = await owner.getAddress();
+  const presaleAddr = await presale.getAddress();
+  await mockNFT.connect(owner).safeTransferFrom(ownerAddr, presaleAddr, 1, 10, "0x");
+
     await presale.connect(owner).setOperationsWallet(await owner.getAddress()).catch(()=>{});
     await presale.connect(owner).setMaxPriceStaleness(1000).catch(()=>{});
     await presale.connect(owner).grantRole(await presale.ADMIN_ROLE(), await owner.getAddress());
@@ -49,16 +54,23 @@ describe("PurchaseWithBHT integration", function () {
 
   it("allows purchaseWithBHT when allowances and params correct (happy path)", async function () {
     await presale.connect(owner).startPresale();
-    const MockPrice = await ethers.getContractFactory("MockPriceFeed");
-    const mockPrice = await MockPrice.deploy(1e18, 18);
+  const MockPrice = await ethers.getContractFactory("MockPriceFeed");
+  const mockPrice = await MockPrice.deploy(ethers.parseUnits("1", 18), 18);
     await mockPrice.waitForDeployment();
     await presale.connect(owner).setPriceFeed(await mockPrice.getAddress());
     await presale.connect(owner).setMaxPriceStaleness(1000);
     await presale.connect(owner).setOperationsWallet(await owner.getAddress());
     await mockBHT.connect(buyer).approve(await presale.getAddress(), ethers.parseEther("1"));
-    const nonce = 1;
-    const messageHash = ethers.keccak256(ethers.concat([ethers.toBeHex(await buyer.getAddress(), 32), ethers.toBeHex(nonce, 32)]));
-    const signature = await owner.signMessage(ethers.getBytes(messageHash));
+  const nonce = 1;
+  const buyerAddr = await buyer.getAddress();
+  // Match Solidity: keccak256(abi.encodePacked(address (20 bytes), uint256 (32 bytes)))
+  const messageHash = ethers.keccak256(
+    ethers.concat([
+      ethers.getBytes(buyerAddr),
+      ethers.getBytes(ethers.toBeHex(nonce, 32))
+    ])
+  );
+  const signature = await owner.signMessage(ethers.getBytes(messageHash));
     await presale.connect(buyer).purchaseWithBHT(1, 1, nonce, signature);
     const totalSold = await presale.totalNFTsSold();
     expect(Number(totalSold)).to.equal(1);

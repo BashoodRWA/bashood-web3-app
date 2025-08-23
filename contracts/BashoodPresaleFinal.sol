@@ -427,6 +427,7 @@ contract BashoodPresaleFinal is ReentrancyGuard, AccessControl, IERC1155Receiver
     // Funciones pÃºblicas de rescate para compatibilidad con los tests
     function rescueUnsoldNFTs(uint256 nftId, address to, uint256 amount) external onlyRole(ADMIN_ROLE) nonReentrant {
         require(rescueContract != address(0), "Rescue required");
+        require(to != address(0), "Zero recipient");
         (bool success, ) = rescueContract.call(
             abi.encodeWithSignature("rescueUnsoldNFTs(address,uint256,address,uint256)", address(nftContract), nftId, to, amount)
         );
@@ -435,6 +436,8 @@ contract BashoodPresaleFinal is ReentrancyGuard, AccessControl, IERC1155Receiver
 
     function rescueERC20(address tokenAddress, address to, uint256 amount) external onlyRole(ADMIN_ROLE) nonReentrant {
         require(rescueContract != address(0), "Rescue required");
+        require(tokenAddress != address(0), "Zero token");
+        require(to != address(0), "Zero recipient");
         (bool success, ) = rescueContract.call(
             abi.encodeWithSignature("rescueERC20(address,address,uint256)", tokenAddress, to, amount)
         );
@@ -443,6 +446,7 @@ contract BashoodPresaleFinal is ReentrancyGuard, AccessControl, IERC1155Receiver
 
     function emergencyWithdrawETH() external onlyRole(EMERGENCY_ROLE) nonReentrant {
         require(rescueContract != address(0), "Rescue required");
+        require(projectWallet != address(0), "Zero project wallet");
         (bool success, ) = rescueContract.call(
             abi.encodeWithSignature("emergencyWithdrawETH(address)", projectWallet)
         );

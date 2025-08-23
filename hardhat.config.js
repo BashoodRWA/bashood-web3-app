@@ -10,7 +10,12 @@ module.exports = {
   },
   mocha: {
   timeout: 200000,
-  spec: ["test/**/*.test.cjs"]
+  spec: ["test/**/*.test.cjs"],
+  // Configure reporter for CI JUnit output
+  reporter: process.env.MOCHA_REPORTER || 'spec',
+  reporterOptions: {
+    mochaFile: process.env.MOCHA_FILE || 'reports/test-results.xml'
+  }
   }
 };
 
