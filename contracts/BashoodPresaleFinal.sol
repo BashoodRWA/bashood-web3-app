@@ -18,7 +18,7 @@ import "@openzeppelin/contracts/token/ERC1155/IERC1155Receiver.sol";
 import "@openzeppelin/contracts/utils/cryptography/ECDSA.sol";
 import "./IERC1155Mintable.sol";
 import "./BashoodReferral.sol";
-import "./IBashoodRescue.sol";
+import "./interfaces/IBashoodRescue.sol";
 
 // Interfaz mÃ­nima para burnFrom
 interface IBashoodToken {
@@ -422,6 +422,11 @@ contract BashoodPresaleFinal is ReentrancyGuard, AccessControl, IERC1155Receiver
     // FunciÃ³n para setear el rescue contract
     function setRescueContract(address _rescue) external onlyRole(ADMIN_ROLE) {
         require(_rescue != address(0), "Rescue required");
+        // Ensure the target contract implements the IBashoodRescue interface
+        require(
+            IERC165(_rescue).supportsInterface(type(IBashoodRescue).interfaceId),
+            "Rescue ABI mismatch"
+        );
         rescueContract = _rescue;
     }
 

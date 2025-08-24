@@ -5,6 +5,8 @@ import "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 import "@openzeppelin/contracts/access/AccessControl.sol";
 import "@openzeppelin/contracts/token/ERC1155/IERC1155.sol";
 import "@openzeppelin/contracts/token/ERC1155/IERC1155Receiver.sol";
+import "@openzeppelin/contracts/utils/introspection/IERC165.sol";
+import "./interfaces/IBashoodRescue.sol";
 
 /// @title BashoodRescue
 /// @notice Custodia y rescate de activos del ecosistema (ERC1155 y ERC20),
@@ -126,6 +128,7 @@ contract BashoodRescue is AccessControl, IERC1155Receiver {
     {
         return
             interfaceId == type(IERC1155Receiver).interfaceId ||
+            interfaceId == type(IBashoodRescue).interfaceId ||
             super.supportsInterface(interfaceId);
     }
 
