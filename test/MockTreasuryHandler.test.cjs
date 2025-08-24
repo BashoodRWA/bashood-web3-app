@@ -1,6 +1,8 @@
 const { expect } = require("chai");
 const { ethers } = require("hardhat");
 
+const ZERO_ADDRESS = '0x0000000000000000000000000000000000000000';
+
 describe("MockTreasuryHandler", function () {
   let handler, owner, addr1, addr2;
 
@@ -16,7 +18,7 @@ describe("MockTreasuryHandler", function () {
   });
 
   it("2. Inicializa con address(0)", async function () {
-    await handler.initialize(ethers.ZeroAddress);
+  await handler.initialize(ZERO_ADDRESS);
   });
 
   it("3. updateTreasuryWallet con address válida", async function () {
@@ -24,7 +26,7 @@ describe("MockTreasuryHandler", function () {
   });
 
   it("4. updateTreasuryWallet con address(0)", async function () {
-    await handler.updateTreasuryWallet(ethers.ZeroAddress);
+  await handler.updateTreasuryWallet(ZERO_ADDRESS);
   });
 
   it("5. getTreasury retorna address(this)", async function () {
@@ -36,11 +38,11 @@ describe("MockTreasuryHandler", function () {
   });
 
   it("7. handleTreasuryTransfer con from=address(0)", async function () {
-    await handler.handleTreasuryTransfer(ethers.ZeroAddress, addr1.address, 100);
+  await handler.handleTreasuryTransfer(ZERO_ADDRESS, addr1.address, 100);
   });
 
   it("8. handleTreasuryTransfer con to=address(0)", async function () {
-    await handler.handleTreasuryTransfer(owner.address, ethers.ZeroAddress, 100);
+  await handler.handleTreasuryTransfer(owner.address, ZERO_ADDRESS, 100);
   });
 
   it("9. handleTreasuryTransfer con amount=0", async function () {

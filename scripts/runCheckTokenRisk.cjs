@@ -4,6 +4,7 @@ const fs = require('fs');
 async function run() {
   const argv = process.argv.slice(2);
   const validate = argv.includes('--validate') || argv.includes('-v');
+  const txcount = argv.includes('--txcount') || argv.includes('-t');
   const token = argv.find(a => !a.startsWith('--') && !a.startsWith('-')) || '0x6B175474E89094C44Da98b954EedeAC495271d0F'; // DAI as default
   const rpc = process.env.MAINNET_RPC_URL || 'https://rpc.ankr.com/eth';
   const provider = new ethers.JsonRpcProvider ? new ethers.JsonRpcProvider(rpc) : new ethers.providers.JsonRpcProvider(rpc);
@@ -61,7 +62,19 @@ async function run() {
       try {
         const codeAt = await provider.getCode(a);
         const bal = await provider.getBalance(a);
-        likelyDetails.push({ address: a, hasCode: (codeAt && codeAt !== '0x'), balance: bal ? bal.toString() : '0' });
+        const detail = { address: a, hasCode: (codeAt && codeAt !== '0x'), balance: bal ? bal.toString() : '0' };
+        if (txcount) {
+          try {
+            const txc = await provider.getTransactionCount(a);
+            detail.txCount = typeof txc === 'bigint' ? txc.toString() : String(txc);
+            detail.onchainActive = (detail.hasCode || (detail.balance && detail.balance !== '0') || (detail.txCount && detail.txCount !== '0'));
+          } catch (e) {
+            detail.txCountError = String(e);
+          }
+        } else {
+          detail.onchainActive = (detail.hasCode || (detail.balance && detail.balance !== '0'));
+        }
+        likelyDetails.push(detail);
       } catch (e) {
         likelyDetails.push({ address: a, error: String(e) });
       }

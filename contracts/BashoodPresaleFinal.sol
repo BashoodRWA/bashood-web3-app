@@ -18,6 +18,7 @@ import "@openzeppelin/contracts/token/ERC1155/IERC1155Receiver.sol";
 import "@openzeppelin/contracts/utils/cryptography/ECDSA.sol";
 import "./IERC1155Mintable.sol";
 import "./BashoodReferral.sol";
+import "./IBashoodRescue.sol";
 
 // Interfaz mÃ­nima para burnFrom
 interface IBashoodToken {
@@ -428,29 +429,38 @@ contract BashoodPresaleFinal is ReentrancyGuard, AccessControl, IERC1155Receiver
     function rescueUnsoldNFTs(uint256 nftId, address to, uint256 amount) external onlyRole(ADMIN_ROLE) nonReentrant {
         require(rescueContract != address(0), "Rescue required");
         require(to != address(0), "Zero recipient");
-        (bool success, ) = rescueContract.call(
-            abi.encodeWithSignature("rescueUnsoldNFTs(address,uint256,address,uint256)", address(nftContract), nftId, to, amount)
-        );
-        require(success, "Rescue NFT failed");
+        try IBashoodRescue(rescueContract).rescueUnsoldNFTs(address(nftContract), nftId, to, amount) {
+            // success
+        } catch Error(string memory reason) {
+            revert(string(abi.encodePacked("Rescue NFT failed: ", reason)));
+        } catch {
+            revert("Rescue NFT failed");
+        }
     }
 
     function rescueERC20(address tokenAddress, address to, uint256 amount) external onlyRole(ADMIN_ROLE) nonReentrant {
         require(rescueContract != address(0), "Rescue required");
         require(tokenAddress != address(0), "Zero token");
         require(to != address(0), "Zero recipient");
-        (bool success, ) = rescueContract.call(
-            abi.encodeWithSignature("rescueERC20(address,address,uint256)", tokenAddress, to, amount)
-        );
-        require(success, "Rescue ERC20 failed");
+        try IBashoodRescue(rescueContract).rescueERC20(tokenAddress, to, amount) {
+            // success
+        } catch Error(string memory reason) {
+            revert(string(abi.encodePacked("Rescue ERC20 failed: ", reason)));
+        } catch {
+            revert("Rescue ERC20 failed");
+        }
     }
 
     function emergencyWithdrawETH() external onlyRole(EMERGENCY_ROLE) nonReentrant {
         require(rescueContract != address(0), "Rescue required");
         require(projectWallet != address(0), "Zero project wallet");
-        (bool success, ) = rescueContract.call(
-            abi.encodeWithSignature("emergencyWithdrawETH(address)", projectWallet)
-        );
-        require(success, "Rescue ETH failed");
+        try IBashoodRescue(rescueContract).emergencyWithdrawETH(projectWallet) {
+            // success
+        } catch Error(string memory reason) {
+            revert(string(abi.encodePacked("Rescue ETH failed: ", reason)));
+        } catch {
+            revert("Rescue ETH failed");
+        }
     }
 
     function _calculateBhtAmounts(uint256 quantity) internal view returns (uint256 discountedCost, uint256 burnAmount, uint256 opsAmount) {
@@ -569,10 +579,14 @@ contract BashoodPresaleFinal is ReentrancyGuard, AccessControl, IERC1155Receiver
     /// @dev Protegido con nonReentrant y validaciÃ³n estricta de destinatarios
     function delegateRescueUnsoldNfts(uint256 nftId, address to, uint256 amount) external onlyRole(ADMIN_ROLE) nonReentrant {
         require(to != address(0), "E46");
-        (bool success, ) = rescueContract.call(
-            abi.encodeWithSignature("rescueUnsoldNFTs(address,uint256,address,uint256)", address(nftContract), nftId, to, amount)
-        );
-        require(success, "Rescue NFT failed");
+        require(rescueContract != address(0), "E45");
+        try IBashoodRescue(rescueContract).rescueUnsoldNFTs(address(nftContract), nftId, to, amount) {
+            // success
+        } catch Error(string memory reason) {
+            revert(string(abi.encodePacked("Delegate rescue NFT failed: ", reason)));
+        } catch {
+            revert("Delegate rescue NFT failed");
+        }
     }
 
     /// @notice Delegar rescate de tokens ERC20
@@ -580,20 +594,27 @@ contract BashoodPresaleFinal is ReentrancyGuard, AccessControl, IERC1155Receiver
     function delegateRescueErc20(address tokenAddress, address to, uint256 amount) external onlyRole(ADMIN_ROLE) nonReentrant {
         require(tokenAddress != address(0), "E47");
         require(to != address(0), "E48");
-        (bool success, ) = rescueContract.call(
-            abi.encodeWithSignature("rescueERC20(address,address,uint256)", tokenAddress, to, amount)
-        );
-        require(success, "Rescue ERC20 failed");
+        require(rescueContract != address(0), "E45");
+        try IBashoodRescue(rescueContract).rescueERC20(tokenAddress, to, amount) {
+            // success
+        } catch Error(string memory reason) {
+            revert(string(abi.encodePacked("Delegate rescue ERC20 failed: ", reason)));
+        } catch {
+            revert("Delegate rescue ERC20 failed");
+        }
     }
 
     /// @notice Delegar retiro de ETH en emergencia
     /// @dev Protegido con nonReentrant y validaciÃ³n estricta de destinatarios
     function delegateEmergencyWithdrawEth() external onlyRole(EMERGENCY_ROLE) nonReentrant {
         require(rescueContract != address(0), "E45");
-        (bool success, ) = rescueContract.call(
-            abi.encodeWithSignature("emergencyWithdrawETH(address)", projectWallet)
-        );
-        require(success, "Rescue ETH failed");
+        try IBashoodRescue(rescueContract).emergencyWithdrawETH(projectWallet) {
+            // success
+        } catch Error(string memory reason) {
+            revert(string(abi.encodePacked("Delegate rescue ETH failed: ", reason)));
+        } catch {
+            revert("Delegate rescue ETH failed");
+        }
     }
 
     // IERC1155Receiver implementation

@@ -15,6 +15,7 @@ function isLikelyEthAddress(hex20) {
 async function run() {
   const argv = process.argv.slice(2)
   const validate = argv.includes('--validate') || argv.includes('-v')
+  const txcount = argv.includes('--txcount') || argv.includes('-t')
   const tokenArg = argv.find(a => !a.startsWith('--') && !a.startsWith('-'))
   const token = (tokenArg || '0x6B175474E89094C44Da98b954EedeAC495271d0F').toLowerCase()
   const rpc = process.env.MAINNET_RPC_URL
@@ -69,7 +70,19 @@ async function run() {
       try {
         const codeAt = await client.getBytecode({ address: a })
         const bal = await client.getBalance({ address: a })
-        likelyDetails.push({ address: a, hasCode: !!(codeAt && codeAt !== '0x'), balance: bal?.toString?.() ?? String(bal) })
+        const detail = { address: a, hasCode: !!(codeAt && codeAt !== '0x'), balance: bal?.toString?.() ?? String(bal) }
+        if (txcount) {
+          try {
+            const txc = await client.getTransactionCount({ address: a })
+            detail.txCount = typeof txc === 'bigint' ? txc.toString() : String(txc)
+            detail.onchainActive = (detail.hasCode || (detail.balance && detail.balance !== '0') || (detail.txCount && detail.txCount !== '0'))
+          } catch (e) {
+            detail.txCountError = String(e)
+          }
+        } else {
+          detail.onchainActive = (detail.hasCode || (detail.balance && detail.balance !== '0'))
+        }
+        likelyDetails.push(detail)
       } catch (e) {
         likelyDetails.push({ address: a, error: String(e) })
       }

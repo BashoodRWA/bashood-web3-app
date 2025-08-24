@@ -22,10 +22,48 @@ export async function checkTokenRisk(provider: any, token: string) {
   }
 
   // 2) Hard-coded external addresses (PUSH20)
-  const push20 = /73[0-9a-f]{40}/gi; // 0x73 = PUSH20
-  const hardcodedAddrs = (runtimeCode.match(push20) || []);
-  if (hardcodedAddrs.length > 2) {
-    risks.push(`Multiple hard-coded addresses (${hardcodedAddrs.length})`);
+  // We capture the 20-byte operand after the PUSH20 opcode (0x73), normalize and deduplicate
+  const rc = runtimeCode.toLowerCase();
+  const push20 = /73([0-9a-f]{40})/gi; // 0x73 = PUSH20, capture the 20 bytes following
+  const found: string[] = [];
+  let m: RegExpExecArray | null;
+  while ((m = push20.exec(rc)) !== null) found.push(m[1]);
+
+  // helper to classify a 20-byte hex word: likely address vs embedded data
+  function isLikelyEthAddress(hex20: string) {
+    // reject all-zero or all-ff
+    if (!hex20 || /^0{40}$/.test(hex20) || /^f{40}$/.test(hex20)) return false;
+    // decode bytes and check printable ascii ratio; if many printable chars -> likely data
+    const buf = Buffer.from(hex20, 'hex');
+    let printable = 0;
+    for (const b of buf) {
+      if (b >= 32 && b <= 126) printable++;
+    }
+    const printableRatio = printable / 20;
+    if (printableRatio > 0.5) return false; // treat as embedded ascii/data
+    // otherwise treat as plausible address
+    return true;
+  }
+
+  const uniques = Array.from(new Set(found.map(h => h.toLowerCase())));
+  // partition into likely addresses and data-like words
+  const likelyAddrs: string[] = [];
+  const dataWords: string[] = [];
+  for (const h of uniques) {
+    if (isLikelyEthAddress(h)) likelyAddrs.push('0x' + h);
+    else dataWords.push('0x' + h);
+  }
+  // ignore zero/token address in the likely list
+  const tokenNormalized = token ? token.toLowerCase().replace(/^0x/, '') : '';
+  const filteredLikely = likelyAddrs.filter(a => a !== '0x' + tokenNormalized && a !== '0x' + '0'.repeat(40));
+
+  if (filteredLikely.length > 2) {
+    risks.push(`Multiple hard-coded addresses (${filteredLikely.length}): ${filteredLikely.slice(0, 5).join(', ')}`);
+  } else if (dataWords.length > 0 && filteredLikely.length > 0) {
+    // mixed content: report both categories concisely
+    risks.push(`Found ${filteredLikely.length} likely addresses and ${dataWords.length} data-like 20-byte words (examples: ${[...filteredLikely.slice(0,3), ...dataWords.slice(0,2)].join(', ')})`);
+  } else if (dataWords.length > 3) {
+    risks.push(`Multiple embedded 20-byte data words (${dataWords.length}) — may indicate embedded metadata`);
   }
 
   // 3) Low-level call opcodes abundance (CALL = 0xf1)

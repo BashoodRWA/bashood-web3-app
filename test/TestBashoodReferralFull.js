@@ -1,4 +1,4 @@
-import { expect } from "chai";
+const { expect } = require("chai");
 
 describe("Scaffold: TestBashoodReferralFull", function () {
   it("placeholder: test file present", async function () {

@@ -30,6 +30,7 @@ This repo includes small utilities to scan an on-chain token contract's runtime 
 
 Flags and usage
 - `--validate` (`-v`) — optional flag to enable on-chain validation of candidate addresses found in PUSH20 operands. When used, the runner will check each likely address for contract bytecode and balance.
+ - `--txcount` (`-t`) — optional flag (used with `--validate`) to also fetch the transaction count for each likely address and include a simple `onchainActive` heuristic (contract code, non-zero balance, or non-zero txCount).
 
 Examples
 ```powershell
@@ -40,6 +41,10 @@ node scripts/runCheckTokenRisk.viem.mjs --validate 0x6B175474E89094C44Da98b954Ee
 # Run CommonJS runner (also accepts --validate)
 $env:MAINNET_RPC_URL='https://eth-mainnet.g.alchemy.com/v2/<KEY>'
 node scripts/runCheckTokenRisk.cjs --validate 0x6B175474E89094C44Da98b954EedeAC495271d0F
+
+# With transaction-count heuristic
+$env:MAINNET_RPC_URL='https://eth-mainnet.g.alchemy.com/v2/<KEY>'
+node scripts/runCheckTokenRisk.viem.mjs --validate --txcount 0x6B175474E89094C44Da98b954EedeAC495271d0F
 ```
 
 Notes

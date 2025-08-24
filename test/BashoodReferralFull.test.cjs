@@ -1,6 +1,8 @@
 const { expect } = require("chai");
 const { ethers } = require("hardhat");
 
+const ZERO_ADDRESS = '0x0000000000000000000000000000000000000000';
+
 describe("Registro y restricciones adicionales", function () {
   let validator, referral, nft, token;
   let owner, user1, user2, user3;

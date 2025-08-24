@@ -1,6 +1,8 @@
 const { expect } = require("chai");
 const { ethers } = require("hardhat");
 
+const ZERO_ADDRESS = '0x0000000000000000000000000000000000000000';
+
 describe("BashoodNFT", function () {
   let BashoodNFT, nft;
   let owner, addr1, addr2;
@@ -27,7 +29,7 @@ describe("BashoodNFT", function () {
 
   it("3. Debería fallar si se intenta mintear a la dirección cero", async function () {
     await expect(
-      nft.mintNFT(ethers.ZeroAddress, "https://example.com/token/3")
+      nft.mintNFT(ZERO_ADDRESS, "https://example.com/token/3")
     ).to.be.revertedWith("ERC721: mint to the zero address");
   });
 
@@ -102,8 +104,8 @@ describe("BashoodNFT", function () {
   it("16. Debería fallar transferFrom a dirección cero", async function () {
     await nft.mintNFT(owner.address, "https://example.com/token/1");
     await expect(
-      nft.transferFrom(owner.address, ethers.ZeroAddress, 1)
-  ).to.be.revertedWithCustomError(nft, 'ERC721InvalidReceiver').withArgs(ethers.ZeroAddress);
+      nft.transferFrom(owner.address, ZERO_ADDRESS, 1)
+  ).to.be.revertedWithCustomError(nft, 'ERC721InvalidReceiver').withArgs(ZERO_ADDRESS);
   });
 
   it("17. Debería soportar la interfaz ERC721", async function () {
