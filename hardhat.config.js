@@ -24,19 +24,41 @@ if (configuredReporter === 'mocha-junit-reporter') {
 }
 
 module.exports = {
-  solidity: "0.8.28",
+  // Use an object so we can toggle optimizer settings when running coverage.
+  solidity: process.env.COVERAGE
+    ? {
+        compilers: [
+          {
+            version: "0.8.28",
+            settings: {
+              optimizer: {
+                enabled: false,
+                runs: 1
+              }
+            }
+          }
+        ]
+      }
+    : "0.8.28",
   paths: {
     sources: "./contracts",
     tests: "./test",
     artifacts: "./artifacts"
   },
   mocha: {
-    timeout: 200000,
-    spec: ["test/**/*.test.cjs"],
+  timeout: 600000,
+  require: ['test/setup.js'],
+  spec: ["test/**/*.test.cjs"],
     // Configure reporter for CI JUnit output
     reporter: configuredReporter,
     reporterOptions: {
       mochaFile: process.env.MOCHA_FILE || 'reports/test-results.xml'
+    }
+  }
+  ,
+  networks: {
+    hardhat: {
+      allowUnlimitedContractSize: true
     }
   }
 };

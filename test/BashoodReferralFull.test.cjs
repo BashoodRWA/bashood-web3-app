@@ -1,5 +1,7 @@
-const { expect } = require("chai");
-const { ethers } = require("hardhat");
+if (typeof globalThis._chai_expect === 'undefined') globalThis._chai_expect = require('chai').expect;
+const expect = globalThis._chai_expect;
+const hh = require('hardhat');
+const ethers = globalThis.ethers || hh.ethers;
 
 const ZERO_ADDRESS = '0x0000000000000000000000000000000000000000';
 
@@ -15,11 +17,11 @@ describe("Registro y restricciones adicionales", function () {
     validator = await Validator.deploy(owner.address);
     await validator.waitForDeployment();
 
-    const NFT = await ethers.getContractFactory("MockNFT1155");
+  const NFT = await ethers.getContractFactory("contracts/MockNFT1155.sol:MockNFT1155");
     nft = await NFT.deploy();
     await nft.waitForDeployment();
 
-    const Token = await ethers.getContractFactory("MockERC20");
+  const Token = await ethers.getContractFactory("contracts/mocks/MockERC20.sol:MockERC20");
     token = await Token.deploy();
     await token.waitForDeployment();
 

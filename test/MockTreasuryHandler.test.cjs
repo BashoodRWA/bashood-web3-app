@@ -1,5 +1,7 @@
-const { expect } = require("chai");
-const { ethers } = require("hardhat");
+if (typeof globalThis._chai_expect === 'undefined') globalThis._chai_expect = require('chai').expect;
+const expect = globalThis._chai_expect;
+const hh = require('hardhat');
+const ethers = globalThis.ethers || hh.ethers;
 
 const ZERO_ADDRESS = '0x0000000000000000000000000000000000000000';
 
@@ -8,7 +10,7 @@ describe("MockTreasuryHandler", function () {
 
   beforeEach(async function () {
     [owner, addr1, addr2] = await ethers.getSigners();
-    const MockTreasuryHandler = await ethers.getContractFactory("MockTreasuryHandler");
+  const MockTreasuryHandler = await ethers.getContractFactory("contracts/MockTreasuryHandler.sol:MockTreasuryHandler");
     handler = await MockTreasuryHandler.deploy();
     await handler.waitForDeployment();
   });

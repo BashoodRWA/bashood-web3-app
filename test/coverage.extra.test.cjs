@@ -1,4 +1,5 @@
-const { expect } = require('chai');
+if (typeof globalThis._chai_expect === 'undefined') globalThis._chai_expect = require('chai').expect;
+const expect = globalThis._chai_expect;
 const { ethers, upgrades } = require('hardhat');
 
 // Local helpers to avoid depending on ethers.utils/constants in coverage runtime
@@ -27,7 +28,7 @@ describe('Coverage extras', function () {
   it('BashoodToken: transfer, fee, burn, donate, burn and treasury/staking flows', async function () {
   console.log('DBG addrs', { ownerAddr, aliceAddr, bobAddr });
     console.log('STEP: deploy MockBHT');
-    const MockBHT = await ethers.getContractFactory('MockBHT');
+  const MockBHT = await ethers.getContractFactory('contracts/mocks/MockBHT.sol:MockBHT');
   const mock = await MockBHT.deploy();
   await mock.waitForDeployment();
 
@@ -108,13 +109,13 @@ describe('Coverage extras', function () {
   });
 
   it('MockBHT and MockRescue basic behaviors', async function () {
-    const MockBHT = await ethers.getContractFactory('MockBHT');
+    const MockBHT = await ethers.getContractFactory('contracts/mocks/MockBHT.sol:MockBHT');
   const m = await MockBHT.deploy();
   await m.waitForDeployment();
     await m.mint(alice.address, 1000);
   expect((await m.balanceOf(alice.address)).toString()).to.equal('1000');
 
-    const MockRescue = await ethers.getContractFactory('MockRescue');
+  const MockRescue = await ethers.getContractFactory('contracts/mocks/MockRescue.sol:MockRescue');
   const r = await MockRescue.deploy();
   await r.waitForDeployment();
     expect(await r.ping()).to.equal(true);

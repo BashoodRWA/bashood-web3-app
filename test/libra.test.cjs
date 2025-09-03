@@ -1,5 +1,7 @@
-const { expect } = require("chai");
-const { ethers } = require("hardhat");
+if (typeof globalThis._chai_expect === 'undefined') globalThis._chai_expect = require('chai').expect;
+const expect = globalThis._chai_expect;
+const hh = require('hardhat');
+const ethers = globalThis.ethers || hh.ethers;
 
 describe("Libra - ReentrancyGuard example", function () {
   it("allows deposit and withdraw normally", async function () {

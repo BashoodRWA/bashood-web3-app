@@ -1,5 +1,7 @@
-const { expect } = require("chai");
-const { ethers } = require("hardhat");
+if (typeof globalThis._chai_expect === 'undefined') globalThis._chai_expect = require('chai').expect;
+const expect = globalThis._chai_expect;
+const hh = require('hardhat');
+const ethers = globalThis.ethers || hh.ethers;
 
 describe("BashoodRescue - focused branch coverage", function () {
   let owner, alice, bob;
@@ -16,11 +18,11 @@ describe("BashoodRescue - focused branch coverage", function () {
   rescue = await Rescue.deploy(owner.address, alice.address);
   await rescue.waitForDeployment();
 
-  MockERC20 = await ethers.getContractFactory("MockERC20");
+  MockERC20 = await ethers.getContractFactory("contracts/mocks/MockERC20.sol:MockERC20");
   token = await MockERC20.deploy();
     await token.waitForDeployment();
 
-  MockNFT1155 = await ethers.getContractFactory("MockNFT1155");
+  MockNFT1155 = await ethers.getContractFactory("contracts/mocks/MockNFT1155.sol:MockNFT1155");
   nft = await MockNFT1155.deploy();
     await nft.waitForDeployment();
 

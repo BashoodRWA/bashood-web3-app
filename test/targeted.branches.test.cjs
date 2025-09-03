@@ -1,5 +1,9 @@
-const { expect } = require('chai');
-const { ethers } = require('hardhat');
+if (typeof globalThis._chai_expect === 'undefined') globalThis._chai_expect = require('chai').expect;
+const expect = globalThis._chai_expect;
+const hh = require('hardhat');
+const ethers = globalThis.ethers || hh.ethers;
+const getPresaleHelpers = () => globalThis._presaleHelpers || require('./helpers/presaleHelpers');
+const { deployPresale, setPriceFresh, signNonce } = getPresaleHelpers();
 const ZERO_ADDRESS = '0x0000000000000000000000000000000000000000';
 
 describe('Targeted branches and edge cases', function () {
@@ -54,11 +58,11 @@ describe('Targeted branches and edge cases', function () {
   });
 
   it('BashoodPresaleFinal: admin setters and validation reverts', async function () {
-    const MockERC = await ethers.getContractFactory('MockERC20');
+  const MockERC = await ethers.getContractFactory('contracts/mocks/MockERC20.sol:MockERC20');
     const mockERC = await MockERC.deploy();
     await mockERC.waitForDeployment();
 
-    const MockNFT = await ethers.getContractFactory('MockNFT1155');
+  const MockNFT = await ethers.getContractFactory('contracts/mocks/MockNFT1155.sol:MockNFT1155');
     const mockNFT = await MockNFT.deploy();
     await mockNFT.waitForDeployment();
 
@@ -71,19 +75,18 @@ describe('Targeted branches and edge cases', function () {
     const refAddr = (typeof ref.getAddress === 'function') ? await ref.getAddress() : ref.address;
     const projectWalletAddr = (typeof projectWallet.getAddress === 'function') ? await projectWallet.getAddress() : projectWallet.address;
 
-    const Presale = await ethers.getContractFactory('BashoodPresaleFinal');
-    const presale = await Presale.deploy(
-      mockERCAddr,
-      mockNFTAddr,
-      refAddr,
-      projectWalletAddr,
-      1, // nftPriceETH
-      1, // nftPriceBHT
-      0, // presaleStart
-      0, // presaleEnd
-      100 // maxNFTSupply
-    );
-    await presale.waitForDeployment();
+    const Presale = await ethers.getContractFactory('contracts/BashoodPresaleFinal.sol:BashoodPresaleFinal');
+    let presale;
+    try {
+      presale = await Presale.deploy(mockERCAddr, mockNFTAddr, refAddr, projectWalletAddr, 1, 1, 0, 0, 100);
+      await presale.waitForDeployment();
+    } catch (err) {
+      const unsigned = Presale.getDeployTransaction(mockERCAddr, mockNFTAddr, refAddr, projectWalletAddr, 1, 1, 0, 0, 100);
+      if (!unsigned || !unsigned.data) throw new Error('Presale deploy transaction data missing (getDeployTransaction returned empty)');
+      const sent = await owner.sendTransaction({ to: undefined, data: unsigned.data });
+      const receipt = await sent.wait();
+      presale = await ethers.getContractAt('BashoodPresaleFinal', receipt.contractAddress);
+    }
 
     // setMaxPriceStaleness must be > 0
   await expect(presale.connect(owner).setMaxPriceStaleness(0)).to.be.revertedWith('Staleness must be > 0');

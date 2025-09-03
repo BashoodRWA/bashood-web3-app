@@ -4,19 +4,19 @@ async function main() {
   const { ethers } = hre;
   const [owner, referrer, user, treasury] = await ethers.getSigners();
 
-  const MockERC20 = await ethers.getContractFactory('MockERC20');
+  const MockERC20 = await ethers.getContractFactory('contracts/mocks/MockERC20.sol:MockERC20');
   console.log('About to deploy MockERC20');
   const token = await MockERC20.deploy();
   console.log('MockERC20 deployed');
   await token.waitForDeployment();
   await token.mint(await user.getAddress(), ethers.parseEther('100'));
 
-  const MockNFT = await ethers.getContractFactory('MockNFT1155');
+  const MockNFT = await ethers.getContractFactory('contracts/mocks/MockNFT1155.sol:MockNFT1155');
   console.log('About to deploy MockNFT1155');
   const nft = await MockNFT.deploy();
   console.log('MockNFT deployed');
   await nft.waitForDeployment();
-  await nft.mintTo(await owner.getAddress(), 1, 10);
+  await nft.mint(await owner.getAddress(), 1, 10);
 
   // Deploy a simple ReferralValidator and then deploy BashoodReferral with correct args
   const Validator = await ethers.getContractFactory('ReferralValidator');
@@ -32,7 +32,7 @@ async function main() {
   console.log('Referral deployed');
   await referral.waitForDeployment();
 
-  const MockRescue = await ethers.getContractFactory('MockRescue');
+  const MockRescue = await ethers.getContractFactory('contracts/mocks/MockRescue.sol:MockRescue');
   console.log('About to deploy MockRescue');
   const mockRescue = await MockRescue.deploy();
   console.log('MockRescue deployed');
@@ -68,8 +68,12 @@ async function main() {
 
   // Use getDeployTransaction to validate ABI encoding without sending the constructor tx
   try {
-    const tx = await BashoodPresaleFinal.getDeployTransaction(...args);
-    console.log('getDeployTransaction succeeded, data length:', tx.data ? tx.data.length : 0);
+  const tx = await BashoodPresaleFinal.getDeployTransaction(...args);
+  console.log('getDeployTransaction succeeded, data length:', tx.data ? tx.data.length : 0);
+  console.log('About to actually deploy BashoodPresaleFinal via factory.deploy...');
+  const presale = await BashoodPresaleFinal.deploy(...args);
+  await presale.waitForDeployment();
+  console.log('Presale deployed at', await presale.getAddress());
   } catch (err) {
     console.error('getDeployTransaction failed:', err && err.stack || err);
     throw err;

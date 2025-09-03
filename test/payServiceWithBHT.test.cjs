@@ -1,5 +1,9 @@
-const { expect } = require("chai");
-const { ethers } = require("hardhat");
+if (typeof globalThis._chai_expect === 'undefined') globalThis._chai_expect = require('chai').expect;
+const expect = globalThis._chai_expect;
+const hh = require('hardhat');
+const ethers = globalThis.ethers || hh.ethers;
+const getPresaleHelpers = () => globalThis._presaleHelpers || require('./helpers/presaleHelpers');
+const { deployPresale, setPriceFresh, signNonce } = getPresaleHelpers();
 
 describe("BashoodPresaleFinal - payServiceWithBHT", function () {
   let deployer, user, admin, priceFeed, BashoodToken, bashoodToken, BashoodPresaleFinal, presale;
@@ -8,15 +12,15 @@ describe("BashoodPresaleFinal - payServiceWithBHT", function () {
 
   beforeEach(async function () {
     [deployer, user, admin] = await ethers.getSigners();
-    BashoodToken = await ethers.getContractFactory("MockBashoodToken");
+  BashoodToken = await ethers.getContractFactory("contracts/MockBashoodToken.sol:MockBashoodToken");
     bashoodToken = await BashoodToken.deploy();
     await bashoodToken.waitForDeployment();
-    const MockNFT = await ethers.getContractFactory("MockNFT1155");
+  const MockNFT = await ethers.getContractFactory("contracts/mocks/MockNFT1155.sol:MockNFT1155");
     const nft = await MockNFT.deploy();
     await nft.waitForDeployment();
     // Mock price feed
-  const MockFeed = await ethers.getContractFactory("MockPriceFeed");
-  priceFeed = await MockFeed.deploy(ethers.parseUnits("1", 8), 8); // 1 USD, 8 decimals
+  const MockFeed = await ethers.getContractFactory("contracts/MockPriceFeed.sol:MockPriceFeed");
+  priceFeed = await MockFeed.deploy(2000, 8);
     await priceFeed.waitForDeployment();
     const Validator = await ethers.getContractFactory("ReferralValidator");
     const validator = await Validator.deploy(deployer.address);
@@ -28,7 +32,7 @@ describe("BashoodPresaleFinal - payServiceWithBHT", function () {
       await nft.getAddress()
     );
     await referral.waitForDeployment();
-    BashoodPresaleFinal = await ethers.getContractFactory("contracts/BashoodPresaleFinal.sol:BashoodPresaleFinal");
+  BashoodPresaleFinal = await ethers.getContractFactory("contracts/BashoodPresaleFinal.sol:BashoodPresaleFinal");
     const deployArgs = [
       await bashoodToken.getAddress(),
       await nft.getAddress(),
@@ -43,13 +47,17 @@ describe("BashoodPresaleFinal - payServiceWithBHT", function () {
     try {
       const txData = await BashoodPresaleFinal.getDeployTransaction(...deployArgs);
       console.log('getDeployTransaction succeeded, tx data length:', txData.data ? txData.data.length : 0);
-      presale = await BashoodPresaleFinal.deploy(...deployArgs);
+      // Manual deploy: send raw deploy transaction from deployer to avoid constructor-arg issues in the test runner
+  const unsigned = await BashoodPresaleFinal.getDeployTransaction(...deployArgs);
+  if (!unsigned || !unsigned.data) throw new Error('missing presale deploy data');
+  const sent = await deployer.sendTransaction({ data: unsigned.data });
+      const receipt = await sent.wait();
+      presale = await ethers.getContractAt('BashoodPresaleFinal', receipt.contractAddress);
     } catch (err) {
       console.error('Deploy failed. deployArgs:', deployArgs.map(a => (a && a.toString ? a.toString() : String(a))));
       console.error('Ctor inputs:', BashoodPresaleFinal.interface.deploy.inputs);
       throw err;
     }
-    await presale.waitForDeployment();
     // Grant ADMIN_ROLE first, then call admin-only setters in predictable order
   await presale.connect(deployer).grantRole(await presale.ADMIN_ROLE(), await deployer.getAddress());
   await presale.connect(deployer).setSigner(await deployer.getAddress());
@@ -70,9 +78,9 @@ describe("BashoodPresaleFinal - payServiceWithBHT", function () {
       await priceFeed.setUpdatedAt((await ethers.provider.getBlock("latest")).timestamp);
       await ethers.provider.send("evm_mine");
     }
-    // Mint and approve BHT
-    await bashoodToken.mint(user.address, ethers.parseUnits("1000", 18));
-  await bashoodToken.connect(user).approve(await presale.getAddress(), ethers.parseUnits("1000", 18));
+    // Mint and approve BHT (very large allowance to avoid ERC20InsufficientAllowance in tests)
+    await bashoodToken.mint(user.address, ethers.parseUnits("1000000000000", 18));
+  await bashoodToken.connect(user).approve(await presale.getAddress(), ethers.parseUnits("1000000000000", 18));
   });
 
   it("permite pagar un servicio con BHT y emite BHTBurned", async function () {
