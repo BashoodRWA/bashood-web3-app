@@ -5,8 +5,8 @@ async function main() {
   const [deployer, issuer] = await hre.ethers.getSigners();
   console.log('Deploying from', deployer.address);
 
-  const ERC20Mock = await hre.ethers.getContractFactory('MockERC20');
-  const legacy = await ERC20Mock.deploy('Legacy', 'L');
+  const ERC20Mock = await hre.ethers.getContractFactory('contracts/mocks/MockERC20.sol:MockERC20');
+  const legacy = await ERC20Mock.deploy();
   await legacy.waitForDeployment();
   console.log('Legacy token:', legacy.target);
 

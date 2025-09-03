@@ -15,7 +15,7 @@ contract TokenWrapperERC20 is ERC20, Ownable {
     event Wrapped(address indexed user, uint256 amount);
     event Unwrapped(address indexed user, uint256 amount);
 
-    constructor(address legacyToken, address registryAddr, address issuer_, string memory name_, string memory symbol_) ERC20(name_, symbol_) {
+    constructor(address legacyToken, address registryAddr, address issuer_, string memory name_, string memory symbol_) ERC20(name_, symbol_) Ownable(msg.sender) {
         legacy = IERC20(legacyToken);
         registry = ComplianceRegistry(registryAddr);
         issuer = issuer_;

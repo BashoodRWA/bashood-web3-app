@@ -5,6 +5,7 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 
 /// @notice Minimal Compliance Registry POC storing merkle roots and expirations per issuer
 contract ComplianceRegistry is Ownable {
+    constructor() Ownable(msg.sender) {}
     struct RootInfo { bytes32 root; uint256 expiry; }
     mapping(address => RootInfo) public issuerRoots;
 

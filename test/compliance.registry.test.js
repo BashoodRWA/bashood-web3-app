@@ -7,8 +7,8 @@ describe('ComplianceRegistry + TokenWrapper POC', function () {
 
   beforeEach(async function () {
     [owner, user, issuer] = await ethers.getSigners();
-    const ERC20Mock = await ethers.getContractFactory('MockERC20');
-    legacy = await ERC20Mock.deploy('Legacy', 'L');
+  const ERC20Mock = await ethers.getContractFactory('contracts/mocks/MockERC20.sol:MockERC20');
+  legacy = await ERC20Mock.deploy();
     await legacy.waitForDeployment();
 
     const Registry = await ethers.getContractFactory('ComplianceRegistry');
