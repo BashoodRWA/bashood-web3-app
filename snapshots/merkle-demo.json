@@ -1,0 +1,42 @@
+{
+  "generatedAt": "2025-09-03T09:41:58.968Z",
+  "generatedBy": "local-user",
+  "chainOfCustody": {
+    "csvPath": "C:\\Users\\Franchu\\Desktop\\bashood-hardhat-tests\\snapshots\\holders.csv",
+    "csvSha256": "05f7f501a173ca820a033b9506e9f8e60062e2855c263c7e643478b94be7a132"
+  },
+  "root": "0x5bbf05d1966e019687b76f469e103860cb59c7f0c5af93135acdbe148a6df664",
+  "leavesCount": 2,
+  "leaves": [
+    "0xa374e55f8cefd231921481fc20edca300e7b96869707d8b88403d65dbc97efcb",
+    "0x1ce50cfdb4c5f1cc20bf4544f47a03564503311c2cf18c977e3da0db7d5dd710"
+  ],
+  "proofs": {
+    "0": {
+      "index": 0,
+      "entry": {
+        "address": "0xAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAa",
+        "token_type": "ERC20",
+        "token_id": "0",
+        "balance": "1000000000000000000"
+      },
+      "leaf": "0xa374e55f8cefd231921481fc20edca300e7b96869707d8b88403d65dbc97efcb",
+      "proof": [
+        "0x1ce50cfdb4c5f1cc20bf4544f47a03564503311c2cf18c977e3da0db7d5dd710"
+      ]
+    },
+    "1": {
+      "index": 1,
+      "entry": {
+        "address": "0xBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBb",
+        "token_type": "ERC721",
+        "token_id": "1234",
+        "balance": "1"
+      },
+      "leaf": "0x1ce50cfdb4c5f1cc20bf4544f47a03564503311c2cf18c977e3da0db7d5dd710",
+      "proof": [
+        "0xa374e55f8cefd231921481fc20edca300e7b96869707d8b88403d65dbc97efcb"
+      ]
+    }
+  }
+}
