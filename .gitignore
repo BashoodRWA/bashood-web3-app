@@ -16,3 +16,6 @@ artifacts/
 
 # Node
 node_modules/
+
+# Ignore snapshots CSVs to avoid accidental commits
+snapshots/*.csv
