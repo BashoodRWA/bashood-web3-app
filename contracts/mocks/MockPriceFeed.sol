@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.19;
 
-import "../oracles/IPriceFeed.sol";
+import "contracts/oracles/IPriceFeed.sol";
 
 contract MockPriceFeed is IPriceFeed {
     uint8 public immutable override decimals;
