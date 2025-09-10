@@ -4,7 +4,7 @@ pragma solidity ^0.8.19;
 import "../oracles/IPriceFeed.sol";
 
 contract MockPriceFeed is IPriceFeed {
-    uint8 public override decimals;
+    uint8 public immutable override decimals;
     uint80 public roundId;
     int256 public answer;
     uint256 public startedAt;
