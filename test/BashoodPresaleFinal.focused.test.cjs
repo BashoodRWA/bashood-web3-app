@@ -26,61 +26,38 @@ describe('BashoodPresaleFinal - focused branches', function () {
     await nft.waitForDeployment();
 
   MockPriceFeed = await ethers.getContractFactory('contracts/mocks/MockPriceFeed.sol:MockPriceFeed');
-  priceFeed = await MockPriceFeed.deploy();
+  // MockPriceFeed constructor expects (uint8 decimals, int256 initialAnswer)
+  priceFeed = await MockPriceFeed.deploy(8, ethers.parseUnits('1', 8));
     await priceFeed.waitForDeployment();
 
   Referral = await ethers.getContractFactory('BashoodReferral');
   referral = await Referral.deploy(owner.address, owner.address, await nft.getAddress());
   await referral.waitForDeployment();
 
-  // Deploy presale contract - prefer manual deploy via getDeployTransaction but
-  // fall back to Factory.deploy(...) if the unsigned tx is not available.
-  BPF = await ethers.getContractFactory('contracts/BashoodPresaleFinal.sol:BashoodPresaleFinal');
+  // Deploy presale using shared helper to avoid getDeployTransaction issues
+  const getPresaleHelpers = () => globalThis._presaleHelpers || require('./helpers/presaleHelpers');
+  const { deployPresale } = getPresaleHelpers();
   const now = Math.floor(Date.now() / 1000);
-  const deployArgs = [
-    bht.getAddress ? await bht.getAddress() : (bht.address || bht.target),
-    nft.getAddress ? await nft.getAddress() : (nft.address || nft.target),
-    referral.getAddress ? await referral.getAddress() : (referral.address || referral.target),
-    project.address,
-    ethers.parseEther('0.01'), // nftPriceETH
-    ethers.parseEther('1'), // nftPriceBHT (1 BHT)
-    now - 10,
-    now + 3600,
-    100 // max supply
-  ];
-  let presaleAddress;
-  try {
-    const deployTx = BPF.getDeployTransaction(...deployArgs);
-    if (deployTx && deployTx.data && deployTx.data.length > 2) {
-      const sent = await owner.sendTransaction({ to: undefined, data: deployTx.data });
-      const receipt = await sent.wait();
-      presaleAddress = receipt.contractAddress;
-    } else {
-      // fallback to normal deploy
-      const instance = await BPF.deploy(...deployArgs);
-      await instance.waitForDeployment();
-      presaleAddress = instance.target || instance.address;
-    }
-  } catch (err) {
-    throw err;
-  }
-  presale = await ethers.getContractAt('BashoodPresaleFinal', presaleAddress);
+  const helpers = await deployPresale({ bhtAddr: (bht.getAddress ? await bht.getAddress() : (bht.address || bht.target)), nftAddr: (nft.getAddress ? await nft.getAddress() : (nft.address || nft.target)), referralAddr: (referral.getAddress ? await referral.getAddress() : (referral.address || referral.target)), projectWallet: project.address });
+  presale = helpers.presale;
 
-    // set price feed and staleness
-    await presale.setPriceFeed(priceFeed.getAddress ? await priceFeed.getAddress() : priceFeed.address);
-    await presale.setMaxPriceStaleness(1000);
+  // set price feed and staleness
+  await presale.setPriceFeed(await priceFeed.getAddress());
+  await presale.setMaxPriceStaleness(1000);
+  // ensure signer is set so signature checks succeed
+  await presale.setSigner(owner.address);
 
-    // give presale some NFTs
-    const presaleAddr = presale.getAddress ? await presale.getAddress() : presale.address;
-    await nft.mint(presaleAddr, 1, 5);
+    // give presale some NFTs (defensivo: si ya tiene, el try/catch lo ignora)
+    const presaleAddr = await presale.getAddress();
+    try { await nft.mint(presaleAddr, 1, 5); } catch (e) { /* ignore if already minted */ }
 
     // allow operations wallet and burn settings
     await presale.setOperationsWallet(project.address);
     await presale.setBurnBps(0);
     await presale.setDiscountBps(0);
 
-    // set signer (owner will sign)
-    await presale.setSigner(owner.address);
+  // set signer (owner will sign)
+  await presale.setSigner(owner.address);
 
     // activate presale via startPresale role
     // grant ADMIN_ROLE to owner already; use startPresale
@@ -89,14 +66,19 @@ describe('BashoodPresaleFinal - focused branches', function () {
 
   it('purchaseWithETH: success happy path and project wallet receive', async function () {
     // set price feed to a valid price and updatedAt
-    await priceFeed.setPrice(ethers.parseUnits('1', 8).toString(), Math.floor(Date.now() / 1000));
+  const MockPrice = await ethers.getContractFactory("contracts/mocks/MockPriceFeed.sol:MockPriceFeed");
+  const mockPrice = await MockPrice.deploy(8, ethers.parseUnits('1', 8));
+  await mockPrice.waitForDeployment();
+  await setPriceFresh(mockPrice, ethers.parseUnits('1', 8));
+  // set numeric price on price feed (was incorrectly passing an address)
+  await setPriceFresh(priceFeed, ethers.parseUnits('1', 8));
 
     // prepare a valid signature (owner is the configured signer)
     const nonce = 1;
     const messageHash = ethers.solidityPackedKeccak256(['address','uint256'], [alice.address, nonce]);
     const signature = await owner.signMessage(ethers.getBytes(messageHash));
 
-    const price = ethers.parseEther('0.01');
+  const price = await presale.nftPriceETH();
     const before = await ethers.provider.getBalance(project.address);
 
     await expect(presale.connect(alice).purchaseWithETH(1, 1, nonce, signature, { value: price }))
@@ -110,36 +92,41 @@ describe('BashoodPresaleFinal - focused branches', function () {
 
   it('purchaseWithETH: reverts when msg.value incorrect and when not allowed nftId or out of stock', async function () {
     const nonce = 2;
-    // valid signature but nft id not allowed
+    const nftPrice = await presale.nftPriceETH();
+    // valid signature but nft id not allowed — use contract price
     const sig1 = await owner.signMessage(ethers.getBytes(ethers.solidityPackedKeccak256(['address','uint256'], [alice.address, nonce])));
-    await expect(presale.connect(alice).purchaseWithETH(99, 1, nonce, sig1, { value: ethers.parseEther('0.01') }))
+    await expect(presale.connect(alice).purchaseWithETH(99, 1, nonce, sig1, { value: nftPrice }))
       .to.be.revertedWith('E14');
 
-    // allowed id but not enough stock
+    // allowed id but not enough stock — send correct total value for 10 units to ensure E16
     const nonce2 = 3;
     const sig2 = await owner.signMessage(ethers.getBytes(ethers.solidityPackedKeccak256(['address','uint256'], [alice.address, nonce2])));
-    await expect(presale.connect(alice).purchaseWithETH(1, 10, nonce2, sig2, { value: ethers.parseEther('0.1') }))
+    await expect(presale.connect(alice).purchaseWithETH(1, 10, nonce2, sig2, { value: nftPrice * 10n }))
       .to.be.revertedWith('E16');
 
-    // incorrect msg.value
+    // incorrect msg.value — send a wrong amount relative to contract price to trigger E18
     const nonce3 = 4;
     const sig3 = await owner.signMessage(ethers.getBytes(ethers.solidityPackedKeccak256(['address','uint256'], [alice.address, nonce3])));
-    await expect(presale.connect(alice).purchaseWithETH(1, 1, nonce3, sig3, { value: ethers.parseEther('0.02') }))
+    await expect(presale.connect(alice).purchaseWithETH(1, 1, nonce3, sig3, { value: nftPrice * 2n }))
       .to.be.revertedWith('E18');
   });
 
   it('purchaseWithBHT: success and failure paths for allowance and nonce reuse', async function () {
     // set price feed
-    await priceFeed.setPrice(ethers.parseUnits('1', 8).toString(), Math.floor(Date.now() / 1000));
-    // mint BHT to alice and approve presale
-    await bht.mint(alice.address, ethers.parseEther('10'));
-    await bht.connect(alice).approve(presale.getAddress ? await presale.getAddress() : presale.address, ethers.parseEther('10'));
+  // ensure price and timestamp are fresh
+  await setPriceFresh(priceFeed, ethers.parseUnits('1', 8));
+  // mint BHT to alice and approve presale
+  await bht.mint(alice.address, ethers.parseEther('10'));
+  await bht.connect(alice).approve(presale.getAddress ? await presale.getAddress() : presale.address, ethers.parseEther('10'));
 
     // successful purchase with correct signature
     const nonce = 5;
     const sig = await owner.signMessage(ethers.getBytes(ethers.solidityPackedKeccak256(['address','uint256'], [alice.address, nonce])));
 
-    await expect(presale.connect(alice).purchaseWithBHT(1, 1, nonce, sig))
+  // ensure presale has NFT stock for this test
+  const presaleAddr = await presale.getAddress();
+  try { await nft.mint(presaleAddr, 1, 5); } catch (e) { /* ignore if already minted */ }
+  await expect(presale.connect(alice).purchaseWithBHT(1, 1, nonce, sig))
       .to.emit(presale, 'AssetPurchased')
       .withArgs(alice.address, 1, 1, ethers.parseEther('1'));
 

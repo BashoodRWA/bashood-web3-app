@@ -26,39 +26,37 @@ describe("PurchaseWithETH integration", function () {
     referral = await Referral.deploy(await owner.getAddress(), await owner.getAddress(), await mockNFT.getAddress());
     await referral.waitForDeployment();
 
-  const Presale = await ethers.getContractFactory("contracts/BashoodPresaleFinal.sol:BashoodPresaleFinal");
-  const deployArgs = [
-      await mockBHT.getAddress(),
-      await mockNFT.getAddress(),
-      await referral.getAddress(),
-      await projectWallet.getAddress(),
-      ethers.parseEther("0.01"),
-      ethers.parseEther("0.02"),
-      0,
-      0,
-      100
-    ];
-  // try unsigned deploy tx, fallback to Factory.deploy
-  const unsigned = await Presale.getDeployTransaction(...deployArgs);
-  if (unsigned && unsigned.data && unsigned.data.length > 2) {
-    const sent = await owner.sendTransaction({ to: undefined, data: unsigned.data });
-    const receipt = await sent.wait();
-    presale = await ethers.getContractAt('BashoodPresaleFinal', receipt.contractAddress);
-  } else {
-    const instance = await Presale.deploy(...deployArgs);
-    await instance.waitForDeployment();
-    presale = instance;
-  }
+  // use shared helper to deploy presale and mocks reliably
+  const helpers = getPresaleHelpers();
+  const d = await helpers.deployPresale();
+  presale = d.presale;
+  mockBHT = d.bht;
+  mockNFT = d.nft;
+  referral = d.referral;
 
-  // Transfer NFTs to presale contract to allow purchases
+  // Ensure presale has NFTs (deployPresale helper may mint to owner instead)
   const ownerAddr = await owner.getAddress();
   const presaleAddr = await presale.getAddress();
-  await mockNFT.connect(owner).safeTransferFrom(ownerAddr, presaleAddr, 1, 10, "0x");
+  try {
+    // try mint directly to presale (most robust)
+    await mockNFT.mint(presaleAddr, 1, 10);
+  } catch (e) {
+    try { await mockNFT.mintTo(presaleAddr, 1, 10); } catch (e2) {
+      // last resort: transfer from owner if owner holds supply
+      try { await mockNFT.connect(owner).safeTransferFrom(ownerAddr, presaleAddr, 1, 10, "0x"); } catch (e3) { /* ignore */ }
+    }
+  }
 
     await presale.connect(owner).grantRole(await presale.ADMIN_ROLE(), await owner.getAddress());
     await presale.connect(owner).setOperationsWallet(await owner.getAddress()).catch(()=>{});
     await presale.connect(owner).setSigner(await owner.getAddress()).catch(()=>{});
     await presale.connect(owner).setMaxPriceStaleness(1000).catch(()=>{});
+
+    // set a fresh price feed used by deployPresale helper
+    try {
+      const price = d.price;
+      if (price) await setPriceFresh(price, ethers.parseUnits('1', 8));
+    } catch (e) { /* ignore if helper didn't provide a price */ }
 
     await presale.connect(owner).startPresale();
   });
@@ -75,7 +73,9 @@ describe("PurchaseWithETH integration", function () {
   );
   const signature = await owner.signMessage(ethers.getBytes(messageHash));
 
-    await presale.connect(buyer).purchaseWithETH(1, 1, nonce, signature, { value: ethers.parseEther("0.01") });
+  // use contract price to avoid magic-number mismatches
+  const nftPrice = await presale.nftPriceETH();
+  await presale.connect(buyer).purchaseWithETH(1, 1, nonce, signature, { value: nftPrice });
 
     const totalSold = await presale.totalNFTsSold();
     expect(Number(totalSold)).to.equal(1);

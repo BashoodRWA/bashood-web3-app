@@ -22,39 +22,11 @@ describe("BashoodPresaleFinal IERC1155Receiver", function () {
     // deploy a referral with placeholder presale/validator (deployer) and correct NFT address, then set real presale address below
     const referral = await BashoodReferral.deploy(deployer.address, deployer.address, await nft.getAddress());
     await referral.waitForDeployment();
-    // Deploy BashoodPresaleFinal con mocks válidos (use manual-deploy to avoid deploy issues)
-  const BashoodPresaleFinal = await ethers.getContractFactory("contracts/BashoodPresaleFinal.sol:BashoodPresaleFinal");
-    const deployTx = BashoodPresaleFinal.getDeployTransaction(
-      await token.getAddress(),
-      await nft.getAddress(),
-      await referral.getAddress(),
-      deployer.address,
-      ethers.parseEther("1"),
-      ethers.parseEther("2"),
-      1700000000,
-      1800000000,
-      10
-    );
-  if (!deployTx || !deployTx.data || deployTx.data.length <= 2) {
-    // fallback to Factory.deploy
-    const instance = await BashoodPresaleFinal.deploy(
-      await token.getAddress(),
-      await nft.getAddress(),
-      await referral.getAddress(),
-      deployer.address,
-      ethers.parseEther("1"),
-      ethers.parseEther("2"),
-      1700000000,
-      1800000000,
-      10
-    );
-    await instance.waitForDeployment();
-    presale = instance;
-  } else {
-    const sent = await deployer.sendTransaction({ to: undefined, data: deployTx.data });
-    const receipt = await sent.wait();
-    presale = await ethers.getContractAt('BashoodPresaleFinal', receipt.contractAddress);
-  }
+    // Use test helper to deploy presale with the mocks we've created above
+    const getPresaleHelpers = () => globalThis._presaleHelpers || require('./helpers/presaleHelpers');
+    const { deployPresale } = getPresaleHelpers();
+    const helpers = await deployPresale({ bhtAddr: await token.getAddress(), nftAddr: await nft.getAddress(), referralAddr: await referral.getAddress(), projectWallet: deployer.address });
+    presale = helpers.presale;
     // Configure operations wallet and signer using setters
     await presale.connect(deployer).setOperationsWallet(deployer.address);
     await presale.connect(deployer).setSigner(deployer.address);

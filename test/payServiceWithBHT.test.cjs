@@ -12,52 +12,16 @@ describe("BashoodPresaleFinal - payServiceWithBHT", function () {
 
   beforeEach(async function () {
     [deployer, user, admin] = await ethers.getSigners();
-  BashoodToken = await ethers.getContractFactory("contracts/MockBashoodToken.sol:MockBashoodToken");
-    bashoodToken = await BashoodToken.deploy();
-    await bashoodToken.waitForDeployment();
-  const MockNFT = await ethers.getContractFactory("contracts/mocks/MockNFT1155.sol:MockNFT1155");
-    const nft = await MockNFT.deploy();
-    await nft.waitForDeployment();
-    // Mock price feed
-  const MockFeed = await ethers.getContractFactory("contracts/MockPriceFeed.sol:MockPriceFeed");
-  priceFeed = await MockFeed.deploy(2000, 8);
-    await priceFeed.waitForDeployment();
-    const Validator = await ethers.getContractFactory("ReferralValidator");
-    const validator = await Validator.deploy(deployer.address);
-    await validator.waitForDeployment();
-    const BashoodReferral = await ethers.getContractFactory("contracts/BashoodReferral.sol:BashoodReferral");
-    const referral = await BashoodReferral.deploy(
-      await deployer.getAddress(),
-      await validator.getAddress(),
-      await nft.getAddress()
-    );
-    await referral.waitForDeployment();
-  BashoodPresaleFinal = await ethers.getContractFactory("contracts/BashoodPresaleFinal.sol:BashoodPresaleFinal");
-    const deployArgs = [
-      await bashoodToken.getAddress(),
-      await nft.getAddress(),
-      await referral.getAddress(),
-  await admin.getAddress(),
-  BigInt(0),
-  BigInt(0),
-  BigInt(1),
-  BigInt(10000000000),
-  BigInt(100)
-    ];
-    try {
-      const txData = await BashoodPresaleFinal.getDeployTransaction(...deployArgs);
-      console.log('getDeployTransaction succeeded, tx data length:', txData.data ? txData.data.length : 0);
-      // Manual deploy: send raw deploy transaction from deployer to avoid constructor-arg issues in the test runner
-  const unsigned = await BashoodPresaleFinal.getDeployTransaction(...deployArgs);
-  if (!unsigned || !unsigned.data) throw new Error('missing presale deploy data');
-  const sent = await deployer.sendTransaction({ data: unsigned.data });
-      const receipt = await sent.wait();
-      presale = await ethers.getContractAt('BashoodPresaleFinal', receipt.contractAddress);
-    } catch (err) {
-      console.error('Deploy failed. deployArgs:', deployArgs.map(a => (a && a.toString ? a.toString() : String(a))));
-      console.error('Ctor inputs:', BashoodPresaleFinal.interface.deploy.inputs);
-      throw err;
-    }
+    // use centralized helper to deploy presale reliably
+    const helpers = getPresaleHelpers();
+    const d = await helpers.deployPresale({});
+    presale = d.presale;
+    bashoodToken = d.bht;
+    priceFeed = d.price;
+    // ensure admin/signers mapping used in tests
+    await presale.connect(deployer).grantRole(await presale.ADMIN_ROLE(), await deployer.getAddress());
+    await presale.connect(deployer).setSigner(await deployer.getAddress());
+    await presale.connect(deployer).setOperationsWallet(await admin.getAddress());
     // Grant ADMIN_ROLE first, then call admin-only setters in predictable order
   await presale.connect(deployer).grantRole(await presale.ADMIN_ROLE(), await deployer.getAddress());
   await presale.connect(deployer).setSigner(await deployer.getAddress());
@@ -74,7 +38,10 @@ describe("BashoodPresaleFinal - payServiceWithBHT", function () {
     await ethers.provider.send("evm_mine");
     await presale.connect(deployer).startPresale();
     // Ensure price feed shows a fresh updatedAt so BHT calculations don't revert
-    if (priceFeed.setUpdatedAt) {
+    // Use centralized helper to set both answer and timestamp consistently
+    if (typeof setPriceFresh === 'function') {
+      await setPriceFresh(priceFeed, ethers.parseUnits('1', 8));
+    } else if (priceFeed.setUpdatedAt) {
       await priceFeed.setUpdatedAt((await ethers.provider.getBlock("latest")).timestamp);
       await ethers.provider.send("evm_mine");
     }

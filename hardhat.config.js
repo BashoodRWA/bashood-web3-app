@@ -47,8 +47,10 @@ module.exports = {
   },
   mocha: {
   timeout: 600000,
-  require: ['test/setup.js'],
-  spec: ["test/**/*.test.cjs"],
+  // Ensure setup runs before any test files. Use 'file' for ESM-aware preloads and keep 'require' for CJS.
+  file: ['test/setup.cjs', 'test/setup.js'],
+  require: ['test/setup.cjs', 'test/setup.js'],
+  spec: ["test/**/*.test.cjs", "test/**/*.test.js"],
     // Configure reporter for CI JUnit output
     reporter: configuredReporter,
     reporterOptions: {

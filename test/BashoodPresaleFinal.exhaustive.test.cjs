@@ -10,47 +10,11 @@ describe("BashoodPresaleFinal - exhaustive suite", function () {
   let owner, buyer, referrer, projectWallet;
 
   async function deployPresaleWithDefaults(opts = {}) {
-    const signers = await ethers.getSigners();
-    owner = signers[0]; buyer = signers[1]; referrer = signers[2]; projectWallet = signers[3];
-
-    const MockBHT = await ethers.getContractFactory("contracts/MockBashoodToken.sol:MockBashoodToken");
-    const mockBHT = await MockBHT.deploy();
-    await mockBHT.waitForDeployment();
-
-    const MockNFT = await ethers.getContractFactory("contracts/mocks/MockNFT1155.sol:MockNFT1155");
-    const mockNFT = await MockNFT.deploy();
-    await mockNFT.waitForDeployment();
-    await mockNFT.mint(await owner.getAddress(), 1, 20);
-
-    const Referral = await ethers.getContractFactory("BashoodReferral");
-    const referral = await Referral.deploy(await owner.getAddress(), await owner.getAddress(), await mockNFT.getAddress());
-    await referral.waitForDeployment();
-
-  const Presale = await ethers.getContractFactory('contracts/BashoodPresaleFinal.sol:BashoodPresaleFinal');
-    const presaleArgs = [
-      await mockBHT.getAddress(),
-      await mockNFT.getAddress(),
-      await referral.getAddress(),
-      opts.projectWallet || await projectWallet.getAddress(),
-      ethers.parseEther("0.01"),
-      ethers.parseEther("0.02"),
-      0,
-      0,
-      100
-    ];
-
-    const tx = await Presale.getDeployTransaction(...presaleArgs);
-    const sent = await owner.sendTransaction({ data: tx.data });
-    const receipt = await sent.wait();
-    const presale = await ethers.getContractAt('BashoodPresaleFinal', receipt.contractAddress);
-
-    // Admin setup
-    await presale.connect(owner).setOperationsWallet(await owner.getAddress());
-    await presale.connect(owner).setMaxPriceStaleness(1000);
-    await presale.connect(owner).grantRole(await presale.ADMIN_ROLE(), await owner.getAddress());
-    await presale.connect(owner).setSigner(await owner.getAddress());
-
-    return { presale, mockBHT, mockNFT, referral, owner, buyer, referrer };
+    // delegate to shared test helper to keep deployments consistent
+    const helpers = require('./helpers/presaleHelpers');
+    const d = await helpers.deployPresale();
+    owner = d.owner; buyer = d.buyer; referrer = d.referrer; projectWallet = d.projectWallet;
+    return { presale: d.presale, mockBHT: d.bht, mockNFT: d.nft, referral: d.referral, owner, buyer, referrer };
   }
 
   it('ETH happy path: purchase transfers NFT and ETH', async function () {
@@ -60,8 +24,9 @@ describe("BashoodPresaleFinal - exhaustive suite", function () {
     await presale.connect(owner).setSigner(await owner.getAddress());
     await presale.connect(owner).startPresale();
 
-    // Transfer NFT to presale
-    await mockNFT.connect(owner).safeTransferFrom(await owner.getAddress(), await presale.getAddress(), 1, 1, '0x');
+  // Ensure mockNFT has stock: mint to owner then transfer to presale
+  await mockNFT.connect(owner).mint(await owner.getAddress(), 1, 1);
+  await mockNFT.connect(owner).safeTransferFrom(await owner.getAddress(), await presale.getAddress(), 1, 1, '0x');
 
     const nonce = 501;
     const buyerAddr = await buyer.getAddress();
@@ -69,7 +34,8 @@ describe("BashoodPresaleFinal - exhaustive suite", function () {
     const signature = await owner.signMessage(ethers.getBytes(messageHash));
 
     const projectBefore = await ethers.provider.getBalance(await owner.getAddress());
-    await presale.connect(buyer).purchaseWithETH(1, 1, nonce, signature, { value: ethers.parseEther('0.01') });
+  const nftPrice = await presale.nftPriceETH();
+  await presale.connect(buyer).purchaseWithETH(1, 1, nonce, signature, { value: nftPrice });
     const total = await presale.totalNFTsSold();
     expect(Number(total)).to.equal(1);
   });
@@ -79,17 +45,23 @@ describe("BashoodPresaleFinal - exhaustive suite", function () {
 
     // price feed
   const MockPrice = await ethers.getContractFactory("contracts/mocks/MockPriceFeed.sol:MockPriceFeed");
-    const mockPrice = await MockPrice.deploy();
+  const mockPrice = await MockPrice.deploy(8, ethers.parseUnits('1', 8));
     await mockPrice.waitForDeployment();
-    await mockPrice.setPrice(ethers.parseUnits('1', 18), Math.floor(Date.now() / 1000));
-    await presale.connect(owner).setPriceFeed(await mockPrice.getAddress());
+  await setPriceFresh(mockPrice, ethers.parseUnits('1', 8));
+  await presale.connect(owner).setPriceFeed(await mockPrice.getAddress());
+  // ensure signer is set so signature verification does not revert (E31) and staleness is configured
+  await presale.connect(owner).setSigner(await owner.getAddress());
+  await presale.connect(owner).setMaxPriceStaleness(1000);
+  // operations wallet must be configured before BHT purchases (contract requires it)
+  await presale.connect(owner).setOperationsWallet(await owner.getAddress());
 
-    // mint and approve
+  // mint and approve
     await mockBHT.mint(await buyer.getAddress(), ethers.parseEther('5'));
     await mockBHT.connect(buyer).approve(await presale.getAddress(), ethers.parseEther('5'));
 
-    // transfer NFT
-    await mockNFT.connect(owner).safeTransferFrom(await owner.getAddress(), await presale.getAddress(), 1, 2, '0x');
+  // mint and transfer NFT stock to presale
+  await mockNFT.connect(owner).mint(await owner.getAddress(), 1, 2);
+  await mockNFT.connect(owner).safeTransferFrom(await owner.getAddress(), await presale.getAddress(), 1, 2, '0x');
 
     await presale.connect(owner).startPresale();
 
@@ -101,7 +73,8 @@ describe("BashoodPresaleFinal - exhaustive suite", function () {
     const buyerBalBefore = await mockBHT.balanceOf(buyerAddr);
     await presale.connect(buyer).purchaseWithBHT(1, 1, nonce, signature);
     const buyerBalAfter = await mockBHT.balanceOf(buyerAddr);
-    expect(buyerBalBefore - buyerBalAfter).to.equal(ethers.parseEther('0.02'));
+  const expectedBhtCost = await presale.nftPriceBHT();
+  expect(buyerBalBefore - buyerBalAfter).to.equal(expectedBhtCost);
 	const total = await presale.totalNFTsSold();
 	expect(Number(total)).to.equal(1);
   });
@@ -110,16 +83,23 @@ describe("BashoodPresaleFinal - exhaustive suite", function () {
     const { presale, mockBHT, mockNFT, owner, buyer } = await deployPresaleWithDefaults();
     // price feed
   const MockPrice = await ethers.getContractFactory("contracts/mocks/MockPriceFeed.sol:MockPriceFeed");
-  const mockPrice = await MockPrice.deploy();
+  const mockPrice = await MockPrice.deploy(8, ethers.parseUnits('2000', 8));
     await mockPrice.waitForDeployment();
-    await mockPrice.setPrice(ethers.parseUnits('1', 18), Math.floor(Date.now() / 1000));
+  await setPriceFresh(mockPrice, ethers.parseUnits('1', 8));
     await presale.connect(owner).setPriceFeed(await mockPrice.getAddress());
 
     await mockBHT.mint(await buyer.getAddress(), ethers.parseEther('1'));
     await mockBHT.connect(buyer).approve(await presale.getAddress(), ethers.parseEther('1'));
-    await mockNFT.connect(owner).safeTransferFrom(await owner.getAddress(), await presale.getAddress(), 1, 1, '0x');
+  // ensure owner has an NFT to transfer
+  await mockNFT.connect(owner).mint(await owner.getAddress(), 1, 1);
+  await mockNFT.connect(owner).safeTransferFrom(await owner.getAddress(), await presale.getAddress(), 1, 1, '0x');
 
-    await presale.connect(owner).startPresale();
+  // configure signer, price staleness and operations wallet so signature checks reach E24
+  await presale.connect(owner).setSigner(await owner.getAddress());
+  await presale.connect(owner).setMaxPriceStaleness(1000);
+  await presale.connect(owner).setOperationsWallet(await owner.getAddress());
+
+  await presale.connect(owner).startPresale();
 
     const nonce = 601;
     const buyerAddr = await buyer.getAddress();
@@ -132,16 +112,23 @@ describe("BashoodPresaleFinal - exhaustive suite", function () {
   it('nonce reuse prevented (E25/E13) across ETH/BHT', async function () {
     const { presale, mockBHT, mockNFT, owner, buyer } = await deployPresaleWithDefaults();
   const MockPrice = await ethers.getContractFactory("contracts/mocks/MockPriceFeed.sol:MockPriceFeed");
-  const mockPrice = await MockPrice.deploy();
+  const mockPrice = await MockPrice.deploy(8, ethers.parseUnits('2000', 8));
     await mockPrice.waitForDeployment();
-    await mockPrice.setPrice(ethers.parseUnits('1', 18), Math.floor(Date.now() / 1000));
+  await setPriceFresh(mockPrice, ethers.parseUnits('1', 8));
     await presale.connect(owner).setPriceFeed(await mockPrice.getAddress());
 
     await mockBHT.mint(await buyer.getAddress(), ethers.parseEther('5'));
     await mockBHT.connect(buyer).approve(await presale.getAddress(), ethers.parseEther('5'));
-    await mockNFT.connect(owner).safeTransferFrom(await owner.getAddress(), await presale.getAddress(), 1, 2, '0x');
+  // ensure presale has NFTs available
+  await mockNFT.connect(owner).mint(await owner.getAddress(), 1, 2);
+  await mockNFT.connect(owner).safeTransferFrom(await owner.getAddress(), await presale.getAddress(), 1, 2, '0x');
 
-    await presale.connect(owner).startPresale();
+  // configure signer, operations wallet and staleness so BHT path validates price
+  await presale.connect(owner).setSigner(await owner.getAddress());
+  await presale.connect(owner).setMaxPriceStaleness(1000);
+  await presale.connect(owner).setOperationsWallet(await owner.getAddress());
+
+  await presale.connect(owner).startPresale();
 
     const nonce = 701;
     const buyerAddr = await buyer.getAddress();
@@ -153,7 +140,8 @@ describe("BashoodPresaleFinal - exhaustive suite", function () {
     // Reuse of same nonce for ETH should revert with E13
     const messageHash2 = ethers.keccak256(ethers.concat([ethers.getBytes(buyerAddr), ethers.getBytes(ethers.toBeHex(nonce, 32))]));
     const signature2 = await owner.signMessage(ethers.getBytes(messageHash2));
-    await expect(presale.connect(buyer).purchaseWithETH(1, 1, nonce, signature2, { value: ethers.parseEther('0.01') })).to.be.revertedWith('E13');
+  const nftPrice = await presale.nftPriceETH();
+  await expect(presale.connect(buyer).purchaseWithETH(1, 1, nonce, signature2, { value: nftPrice })).to.be.revertedWith('E13');
   });
 
 });

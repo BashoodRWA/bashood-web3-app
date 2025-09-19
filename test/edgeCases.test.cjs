@@ -15,8 +15,10 @@ describe("BashoodPresaleFinal - Edge Cases", function () {
     const nft = await MockNFT.deploy();
     await nft.waitForDeployment();
   // Use constructor-based MockPriceFeed for this test file (supports setAnswer and setUpdatedAt)
-  const MockFeed = await ethers.getContractFactory("contracts/MockPriceFeed.sol:MockPriceFeed");
-  priceFeed = await MockFeed.deploy(2000, 8);
+  const MockFeed = await ethers.getContractFactory("contracts/mocks/MockPriceFeed.sol:MockPriceFeed");
+  // deploy(MockPriceFeed) expects (uint8 decimals, int256 answer). Use parseUnits
+  // to scale the human price (2000) to the feed decimals (8).
+  priceFeed = await MockFeed.deploy(8, ethers.parseUnits('2000', 8));
     await priceFeed.waitForDeployment();
     const Validator = await ethers.getContractFactory("ReferralValidator");
     const validator = await Validator.deploy(deployer.address);
@@ -40,22 +42,11 @@ describe("BashoodPresaleFinal - Edge Cases", function () {
       BigInt(10000000000), // presaleEnd (far future)
       BigInt(100)
     ];
-    console.log('deployArgs length:', deployArgs.length);
-    console.log('ctor input count:', BashoodPresaleFinal.interface.deploy.inputs.length);
-    try {
-      // Sanity-check deploy transaction to catch bad argument shapes early
-      const txData = await BashoodPresaleFinal.getDeployTransaction(...deployArgs);
-      console.log('getDeployTransaction succeeded, tx data length:', txData.data ? txData.data.length : 0);
-  const unsigned = await BashoodPresaleFinal.getDeployTransaction(...deployArgs);
-  if (!unsigned || !unsigned.data) throw new Error('missing presale deploy data');
-  const sent = await deployer.sendTransaction({ data: unsigned.data });
-      const receipt = await sent.wait();
-      presale = await ethers.getContractAt('BashoodPresaleFinal', receipt.contractAddress);
-    } catch (err) {
-      console.error('Deploy failed. deployArgs:', deployArgs.map(a => (a && a.toString ? a.toString() : String(a))));
-      console.error('Ctor inputs:', BashoodPresaleFinal.interface.deploy.inputs);
-      throw err;
-    }
+  // Use shared deploy helper to avoid direct getDeployTransaction usage
+  const getPresaleHelpers = () => globalThis._presaleHelpers || require('./helpers/presaleHelpers');
+  const { deployPresale } = getPresaleHelpers();
+  const helpers = await deployPresale({ bhtAddr: await bashoodToken.getAddress(), nftAddr: await nft.getAddress(), referralAddr: await referral.getAddress(), projectWallet: await admin.getAddress(), bhtArgs: [] });
+  presale = helpers.presale;
   await presale.connect(deployer).grantRole(await presale.ADMIN_ROLE(), await deployer.getAddress());
   await presale.connect(deployer).setSigner(await deployer.getAddress());
   await presale.connect(deployer).setOperationsWallet(await admin.getAddress());
@@ -68,9 +59,13 @@ describe("BashoodPresaleFinal - Edge Cases", function () {
     await ethers.provider.send("evm_setNextBlockTimestamp", [nextTimestamp]);
     await ethers.provider.send("evm_mine");
     await presale.connect(deployer).startPresale();
-  // setUpdatedAt exists on constructor-variant mock
-  await priceFeed.setUpdatedAt((await ethers.provider.getBlock("latest")).timestamp);
-  await ethers.provider.send("evm_mine");
+  // set both answer and updatedAt via the existing helpers object (keeps tests consistent)
+  if (typeof helpers.setPriceFresh === 'function') {
+    await helpers.setPriceFresh(priceFeed, ethers.parseUnits('2000', 8));
+  } else {
+    await priceFeed.setUpdatedAt((await ethers.provider.getBlock("latest")).timestamp);
+    await ethers.provider.send("evm_mine");
+  }
   await bashoodToken.mint(user.address, ethers.parseUnits("1000", 18));
   await bashoodToken.connect(user).approve(await presale.getAddress(), ethers.parseUnits("1000", 18));
   });

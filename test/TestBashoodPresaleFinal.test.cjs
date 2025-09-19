@@ -37,36 +37,15 @@ describe("BashoodPresaleFinal", function () {
     await mockRescue.waitForDeployment();
     const mockRescueAddress = await mockRescue.getAddress();
 
-  // Deploy BashoodPresaleFinal con argumentos validos (use unqualified name)
-  const BashoodPresaleFinal = await ethers.getContractFactory("contracts/BashoodPresaleFinal.sol:BashoodPresaleFinal");
-  const args = [
-    await token.getAddress(),
-    await nft.getAddress(),
-    await referral.getAddress(),
-    owner.address, // projectWallet/address (payable)
-    ethers.parseEther("1"), // nftPriceETH
-    ethers.parseEther("2"), // nftPriceBHT
-    1700000000, // presaleStart
-    1800000000, // presaleEnd
-    10 // maxNFTSupply
-  ];
-
-  // Deploy presale with validated args using manual-deploy fallback
-  const deployTx = BashoodPresaleFinal.getDeployTransaction(...args);
-  if (deployTx && deployTx.data && deployTx.data.length > 2) {
-    const sent = await owner.sendTransaction({ to: undefined, data: deployTx.data });
-    const receipt = await sent.wait();
-    presale = await ethers.getContractAt('BashoodPresaleFinal', receipt.contractAddress);
-    await presale.waitForDeployment();
-  } else {
-    const instance = await BashoodPresaleFinal.deploy(...args);
-    await instance.waitForDeployment();
-    presale = instance;
-  }
-    // Grant ADMIN_ROLE then configure operations wallet and signer using setters
-    await presale.connect(owner).grantRole(await presale.ADMIN_ROLE(), await owner.getAddress());
-    await presale.connect(owner).setOperationsWallet(await owner.getAddress());
-    await presale.connect(owner).setSigner(await owner.getAddress());
+  // Deploy presale using shared helper to avoid manual getDeployTransaction usage
+  const getPresaleHelpers = () => globalThis._presaleHelpers || require('./helpers/presaleHelpers');
+  const { deployPresale } = getPresaleHelpers();
+  const helpers = await deployPresale({ bhtAddr: await token.getAddress(), nftAddr: await nft.getAddress(), referralAddr: await referral.getAddress(), projectWallet: owner.address });
+  presale = helpers.presale;
+  // Grant ADMIN_ROLE then configure operations wallet and signer using setters
+  await presale.connect(owner).grantRole(await presale.ADMIN_ROLE(), await owner.getAddress());
+  await presale.connect(owner).setOperationsWallet(await owner.getAddress());
+  await presale.connect(owner).setSigner(await owner.getAddress());
   });
 
   it("Should set the right unlockTime", async function () {

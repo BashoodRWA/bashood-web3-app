@@ -17,16 +17,17 @@ describe('BashoodPresaleFinal — extra coverage step2', function () {
   it('submitProposal: reverts when oracle stale', async () => {
     const { presale, price, owner, bht, projectWallet } = await deployPresale();
     // configure admin-required deps
-    await presale.connect(owner).setOperationsWallet(projectWallet.address);
-    await presale.connect(owner).setPriceFeed(price.target);
+  await presale.connect(owner).setOperationsWallet(projectWallet.address);
+  await presale.connect(owner).setPriceFeed(await price.getAddress());
     await presale.connect(owner).setMaxPriceStaleness(1000);
-    // ensure price updatedAt is stale
-    await price.setUpdatedAt(1);
+  // ensure price updatedAt is stale: set a known answer and then stale it
+  await setPriceFresh(price, ethers.parseUnits('1', 8));
+  await price.setUpdatedAt(1);
     // mint and approve so allowance check passes
     const deposit = ethers.parseUnits('1', 18);
     await bht.mint(owner.address, deposit);
-    await bht.connect(owner).approve(presale.target, deposit);
-    await expect(presale.connect(owner).submitProposal('0x', deposit)).to.be.revertedWith('Price too stale');
+  await bht.connect(owner).approve(await presale.getAddress(), deposit);
+  await expect(presale.connect(owner).submitProposal('0x', deposit)).to.be.revertedWith('Price too stale');
   });
 
   it('assignRoles: rejects zero addresses and accepts valid set', async () => {
@@ -39,7 +40,7 @@ describe('BashoodPresaleFinal — extra coverage step2', function () {
   it('payServiceWithBHT: operations wallet unset -> revert', async () => {
     const { presale, owner, price, bht } = await deployPresale();
     // configure price so _bhtFromFiat will run until ops wallet check
-    await presale.connect(owner).setPriceFeed(price.target);
+  await presale.connect(owner).setPriceFeed(await price.getAddress());
     await presale.connect(owner).setMaxPriceStaleness(1000);
     await setPriceFresh(price, ethers.parseUnits('1', 8));
     // call numeric overload to avoid bytes32 issues
@@ -49,7 +50,7 @@ describe('BashoodPresaleFinal — extra coverage step2', function () {
   it('payServiceWithBHT: fiat zero -> revert', async () => {
     const { presale, owner, projectWallet, price } = await deployPresale();
     await presale.connect(owner).setOperationsWallet(projectWallet.address);
-    await presale.connect(owner).setPriceFeed(price.target);
+  await presale.connect(owner).setPriceFeed(await price.getAddress());
     await presale.connect(owner).setMaxPriceStaleness(1000);
     await setPriceFresh(price, ethers.parseUnits('1', 8));
   await expect(presale.connect(owner)['payServiceWithBHT(uint256,uint256)'](1, 0)).to.be.revertedWith('E21');
@@ -59,14 +60,14 @@ describe('BashoodPresaleFinal — extra coverage step2', function () {
     // deploy presale with rejecting BHT mock; set rejectTo after deploy
     const { owner, projectWallet, presale, bht, price } = await deployPresale({ bhtFactory: 'contracts/mocks/MockBHTRejecting.sol:MockBHTRejecting', bhtArgs: ['Reject','RJT', ethers.ZeroAddress] });
     await presale.connect(owner).setOperationsWallet(projectWallet.address);
-    await presale.connect(owner).setPriceFeed(price.target);
+    await presale.connect(owner).setPriceFeed((typeof price.getAddress === 'function') ? await price.getAddress() : (price.address || price.target));
     await presale.connect(owner).setMaxPriceStaleness(1000);
     await setPriceFresh(price, ethers.parseUnits('1', 8));
     // configure token to reject ops wallet
     await bht.setRejectTo(projectWallet.address);
     // mint and approve for owner so transferFrom will attempt to send to ops wallet which rejects
     await bht.mint(owner.address, ethers.parseUnits('100', 18));
-    await bht.connect(owner).approve(presale.target, ethers.parseUnits('100', 18));
+  await bht.connect(owner).approve(await presale.getAddress(), ethers.parseUnits('100', 18));
   await expect(presale.connect(owner)['payServiceWithBHT(uint256,uint256)'](1, 1)).to.be.revertedWith('recipient rejects');
   });
 
@@ -75,7 +76,7 @@ describe('BashoodPresaleFinal — extra coverage step2', function () {
     const MockRescue = await ethers.getContractFactory('contracts/mocks/MockRescueRevertWithReason.sol:MockRescueRevertWithReason');
     const mr = await MockRescue.deploy();
     await mr.waitForDeployment();
-    await presale.connect(owner).setRescueContract(mr.target);
+  await presale.connect(owner).setRescueContract(await mr.getAddress());
     // delegateRescueUnsoldNfts(uint256 nftId, address to, uint256 amount)
     await expect(presale.connect(owner).delegateRescueUnsoldNfts(1, owner.address, 1)).to.be.revertedWith('Delegate rescue NFT failed: boom');
   });
@@ -85,13 +86,13 @@ describe('BashoodPresaleFinal — extra coverage step2', function () {
     const MockRescue = await ethers.getContractFactory('contracts/mocks/MockRescueRevertNoReason.sol:MockRescueRevertNoReason');
     const mr = await MockRescue.deploy();
     await mr.waitForDeployment();
-    await presale.connect(owner).setRescueContract(mr.target);
+  await presale.connect(owner).setRescueContract(await mr.getAddress());
   // use a real token address so the function proceeds to call the rescue contract
   const MockERC20 = await ethers.getContractFactory('contracts/MockERC20.sol:MockERC20');
   const token = await MockERC20.deploy();
   await token.waitForDeployment();
   // delegateRescueErc20(address tokenAddress, address to, uint256 amount)
-  await expect(presale.connect(owner).delegateRescueErc20(token.target, owner.address, 1)).to.be.revertedWith('Delegate rescue ERC20 failed');
+  await expect(presale.connect(owner).delegateRescueErc20(await token.getAddress(), owner.address, 1)).to.be.revertedWith('Delegate rescue ERC20 failed');
   });
 
 });

@@ -1,20 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.19;
 
-interface IPriceFeed {
-    function latestRoundData()
-        external
-        view
-        returns (
-            uint80 roundId,
-            int256 answer,
-            uint256 startedAt,
-            uint256 updatedAt,
-            uint80 answeredInRound
-        );
-
-    function decimals() external view returns (uint8);
-}
+import "../oracles/IPriceFeed.sol";
 
 contract MockPriceFeed is IPriceFeed {
     uint8 public immutable override decimals;
@@ -33,7 +20,7 @@ contract MockPriceFeed is IPriceFeed {
         answeredInRound = 1;
     }
 
-    function setAnswer(int256 _answer) external {
+    function setAnswer(int256 _answer) public {
         answer = _answer;
         roundId += 1;
         startedAt = block.timestamp;
@@ -42,7 +29,7 @@ contract MockPriceFeed is IPriceFeed {
     }
 
     /// @notice set answer and an arbitrary updatedAt (useful for stale tests)
-    function setAnswerWithTimestamp(int256 _answer, uint256 _updatedAt) external {
+    function setAnswerWithTimestamp(int256 _answer, uint256 _updatedAt) public {
         answer = _answer;
         roundId += 1;
         startedAt = _updatedAt;
@@ -53,6 +40,19 @@ contract MockPriceFeed is IPriceFeed {
     /// @notice override answeredInRound for testing
     function setAnsweredInRound(uint80 _answeredInRound) external {
         answeredInRound = _answeredInRound;
+    }
+
+    // Backwards-compatibility helpers for older tests that call the
+    // alternative mock API (setPrice / setUpdatedAt). These are thin
+    // wrappers that delegate to the canonical mock functions so tests
+    // don't need to be updated everywhere.
+    function setPrice(int256 newAnswer) external {
+        setAnswer(newAnswer);
+    }
+
+    function setUpdatedAt(uint256 ts) external {
+        // preserve current answer but set a custom timestamp
+        setAnswerWithTimestamp(answer, ts);
     }
 
     function latestRoundData()

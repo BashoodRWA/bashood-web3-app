@@ -13,15 +13,15 @@ describe('BashoodPresaleFinal - targeted coverage', function () {
     const { presale, bht, nft, price, referral } = await deployPresale();
 
     // configure price feed and staleness
-    await presale.setPriceFeed(price.target);
+  await presale.setPriceFeed(await price.getAddress());
     await presale.setMaxPriceStaleness(1);
-    // make price stale by setting updatedAt in the past
-    await price.setPrice(ethers.parseUnits('1', 8));
+    // make price stale by setting updatedAt in the past (use helper then stale it)
+  await setPriceFresh(price, ethers.parseUnits('1', 8));
     const block = await ethers.provider.getBlock('latest');
     await price.setUpdatedAt(block.timestamp - 1000);
 
   // approve enough allowance
-  await bht.approve(presale.target, ethers.parseUnits('1', 18));
+  await bht.approve(await presale.getAddress(), ethers.parseUnits('1', 18));
 
     // deposit zero should revert early
     await expect(presale.submitProposal('0x', 0)).to.be.revertedWith('Deposit req');
@@ -76,7 +76,7 @@ describe('BashoodPresaleFinal - targeted coverage', function () {
 
     // set operations wallet and price feed, staleness
     await presale.setOperationsWallet(projectWallet.address);
-    await presale.setPriceFeed(price.target);
+  await presale.setPriceFeed(await price.getAddress());
     await presale.setMaxPriceStaleness(10000);
     await setPriceFresh(price, ethers.parseUnits('1', 8));
 
@@ -88,7 +88,7 @@ describe('BashoodPresaleFinal - targeted coverage', function () {
     // payMilestone with burn fallback: configure bht so burnFrom will revert, but transferFrom will work
     // approve sufficient allowance
     await bht.mint(owner.address, ethers.parseUnits('100', 18));
-    await bht.approve(presale.target, ethers.parseUnits('100', 18));
+  await bht.approve(await presale.getAddress(), ethers.parseUnits('100', 18));
     // execute milestone payment (should attempt burn and fallback)
     await presale.payMilestoneWithBHT(1, ethers.parseUnits('1', 18));
   });
@@ -104,12 +104,12 @@ describe('BashoodPresaleFinal - targeted coverage', function () {
     await mrn.waitForDeployment();
 
     // set rescue to one that reverts with reason
-  await presale.setRescueContract(mrw.target);
+  await presale.setRescueContract(await mrw.getAddress());
   await expect(presale.rescueUnsoldNFTs(1, owner.address, 1)).to.be.revertedWith('Rescue NFT failed: boom');
   await expect(presale.rescueERC20(owner.address, owner.address, 1)).to.be.revertedWith('Rescue ERC20 failed: erc20-boom');
 
     // set rescue to one that reverts without reason
-    await presale.setRescueContract(mrn.target);
+  await presale.setRescueContract(await mrn.getAddress());
     await expect(presale.rescueUnsoldNFTs(1, owner.address, 1)).to.be.revertedWith('Rescue NFT failed');
     await expect(presale.rescueERC20(owner.address, owner.address, 1)).to.be.revertedWith('Rescue ERC20 failed');
   });

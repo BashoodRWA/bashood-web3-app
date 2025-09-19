@@ -1,6 +1,9 @@
 if (typeof globalThis._chai_expect === 'undefined') globalThis._chai_expect = require('chai').expect;
 const expect = globalThis._chai_expect;
-const { ethers } = require("hardhat");
+const hh = require('hardhat');
+const ethers = globalThis.ethers || hh.ethers;
+const getPresaleHelpers = () => globalThis._presaleHelpers || require('./helpers/presaleHelpers');
+const { setPriceFresh } = getPresaleHelpers();
 
 describe("BashoodPresaleFinal - focused2", function () {
   let owner, buyer, referrer, projectWallet;
@@ -22,77 +25,32 @@ describe("BashoodPresaleFinal - focused2", function () {
     referral = await Referral.deploy(await owner.getAddress(), await owner.getAddress(), await mockNFT.getAddress());
     await referral.waitForDeployment();
 
-  const Presale = await ethers.getContractFactory('contracts/BashoodPresaleFinal.sol:BashoodPresaleFinal');
-    console.log('DEBUG-TEST: Presale factory deploy inputs length =', (Presale.interface && Presale.interface.deploy && Presale.interface.deploy.inputs && Presale.interface.deploy.inputs.length) || 0);
-    console.log('DEBUG-TEST: Presale factory deploy inputs types =', (Presale.interface && Presale.interface.deploy && Presale.interface.deploy.inputs && Presale.interface.deploy.inputs.map(i=>i.type)) || []);
-    const testArgs = [
-      await mockBHT.getAddress(),
-      await mockNFT.getAddress(),
-      await referral.getAddress(),
-      await projectWallet.getAddress(),
-      ethers.parseEther("0.1"),
-      ethers.parseEther("0.2"),
-      0,
-      0,
-      100
-    ];
-    // Try normal factory deploy; if ethers ContractFactory.deploy throws constructor length error,
-    // fall back to manual deploy via getDeployTransaction + owner.sendTransaction.
-    // Deploy presale manually via getDeployTransaction to avoid ContractFactory.deploy issues in this test runner.
-    console.log('DEBUG-TEST: about to call getDeployTransaction');
-    let tx;
-    try {
-      tx = await Presale.getDeployTransaction(...testArgs);
-      console.log('DEBUG-TEST: getDeployTransaction returned data length', tx && tx.data && tx.data.length);
-    } catch (err) {
-      console.error('DEBUG-TEST: getDeployTransaction ERROR', err && err.stack || err);
-      throw err;
-    }
+  // Use centralized helper to deploy presale and transfer mocks as needed
+  const getPresaleHelpers = () => globalThis._presaleHelpers || require('./helpers/presaleHelpers');
+  const { deployPresale } = getPresaleHelpers();
+  const helpers = await deployPresale({ bhtAddr: await mockBHT.getAddress(), nftAddr: await mockNFT.getAddress(), referralAddr: await referral.getAddress(), projectWallet: await projectWallet.getAddress() });
+  presale = helpers.presale;
 
-    console.log('DEBUG-TEST: about to send transaction to deploy');
-    let sent;
-    try {
-      sent = await owner.sendTransaction({ data: tx.data });
-      console.log('DEBUG-TEST: sent tx hash', sent && sent.hash);
-    } catch (err) {
-      console.error('DEBUG-TEST: sendTransaction ERROR', err && err.stack || err);
-      throw err;
-    }
-
-    console.log('DEBUG-TEST: waiting for receipt');
-    let receipt;
-    try {
-      receipt = await sent.wait();
-      console.log('DEBUG-TEST: receipt obtained, contractAddress=', receipt && receipt.contractAddress);
-    } catch (err) {
-      console.error('DEBUG-TEST: receipt.wait ERROR', err && err.stack || err);
-      throw err;
-    }
-
-    const deployedPresaleAddress = receipt && receipt.contractAddress;
-    presale = await ethers.getContractAt('BashoodPresaleFinal', deployedPresaleAddress);
-    await presale.waitForDeployment();
-
-    // Transfer NFTs to presale
-    const ownerAddr = await owner.getAddress();
-    const presaleAddr = await presale.getAddress();
-    await mockNFT.connect(owner).safeTransferFrom(ownerAddr, presaleAddr, 1, 10, "0x");
+  // Ensure NFTs are available in presale and basic config
+  const ownerAddr = await owner.getAddress();
+  const presaleAddr = await presale.getAddress();
+  await mockNFT.connect(owner).safeTransferFrom(ownerAddr, presaleAddr, 1, 10, "0x");
 
   await presale.connect(owner).setOperationsWallet(await owner.getAddress());
   await presale.connect(owner).setMaxPriceStaleness(1000);
   await presale.connect(owner).grantRole(await presale.ADMIN_ROLE(), await owner.getAddress());
   await presale.connect(owner).setSigner(await owner.getAddress());
-    await mockBHT.mint(await buyer.getAddress(), ethers.parseEther("10"));
-    await mockBHT.connect(buyer).approve(await presale.getAddress(), ethers.parseEther("10"));
+  await mockBHT.mint(await buyer.getAddress(), ethers.parseEther("10"));
+  await mockBHT.connect(buyer).approve(await presale.getAddress(), ethers.parseEther("10"));
   });
 
   it("should allow purchaseWithBHT happy path and increment totals", async function () {
     await presale.connect(owner).startPresale();
   const MockPrice = await ethers.getContractFactory("contracts/mocks/MockPriceFeed.sol:MockPriceFeed");
-    const mockPrice = await MockPrice.deploy();
-    await mockPrice.waitForDeployment();
-    // set initial price and updatedAt on the mock oracle
-    await mockPrice.setPrice(ethers.parseUnits("1", 18), Math.floor(Date.now() / 1000));
+  const mockPrice = await MockPrice.deploy(8, ethers.parseUnits('1', 8));
+  await mockPrice.waitForDeployment();
+  // set initial price and updatedAt on the mock oracle
+  await setPriceFresh(mockPrice, ethers.parseUnits('1', 8));
     await presale.connect(owner).setPriceFeed(await mockPrice.getAddress());
     await presale.connect(owner).setMaxPriceStaleness(1000);
     await presale.connect(owner).setOperationsWallet(await owner.getAddress());

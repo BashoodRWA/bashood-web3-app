@@ -3,7 +3,7 @@ const { expect } = require("chai");
 describe("ChainlinkPriceFeed wrapper", function () {
   it("compiles and returns latest price from mock", async function () {
   const Mock = await ethers.getContractFactory("contracts/mocks/MockPriceFeed.sol:MockPriceFeed");
-  const mock = await Mock.deploy(8, 200000000000); // 2000.0 with 8 decimals (2000 * 10^8)
+  const mock = await Mock.deploy(8, ethers.parseUnits('2000', 8)); // 2000.0 with 8 decimals
   await mock.waitForDeployment();
 
   const Wrapper = await ethers.getContractFactory("contracts/oracles/ChainlinkPriceFeed.sol:ChainlinkPriceFeed");

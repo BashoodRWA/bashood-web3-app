@@ -14,11 +14,13 @@ describe('Presale coverage step4 (caller & rescue branches)', function () {
     await presale.connect(owner).setMaxPriceStaleness(1000);
     await presale.connect(owner).setBurnBps(100);
     await presale.connect(owner).setDiscountBps(0);
-    await presale.connect(owner).setPriceFeed(price.target);
+  const priceAddr = (typeof price.getAddress === 'function') ? await price.getAddress() : (price.address || price.target);
+  await presale.connect(owner).setPriceFeed(priceAddr);
     await setPriceFresh(price, ethers.parseUnits('1', 8));
     // approve and mint BHT
     await bht.mint(buyer.address, ethers.parseUnits('1000', 18));
-    await bht.connect(buyer).approve(presale.target, ethers.parseUnits('1000', 18));
+  const presaleAddr = (typeof presale.getAddress === 'function') ? await presale.getAddress() : (presale.address || presale.target);
+  await bht.connect(buyer).approve(presaleAddr, ethers.parseUnits('1000', 18));
 
   // prepare signature
   const nonce = 1;
@@ -33,11 +35,13 @@ describe('Presale coverage step4 (caller & rescue branches)', function () {
     await caller.waitForDeployment();
 
   // mint and approve BHT to the caller contract so allowance checks can pass if executed
-  await bht.mint(caller.target, ethers.parseUnits('1000', 18));
-  await caller.approveToken(bht.target, presale.target, ethers.parseUnits('1000', 18));
+  const callerAddr = (typeof caller.getAddress === 'function') ? await caller.getAddress() : (caller.address || caller.target);
+  const bhtAddr = (typeof bht.getAddress === 'function') ? await bht.getAddress() : (bht.address || bht.target);
+  await bht.mint(callerAddr, ethers.parseUnits('1000', 18));
+    await caller.approveToken(bhtAddr, presaleAddr, ethers.parseUnits('1000', 18));
 
     await expect(
-      caller.callPurchaseWithBHT(presale.target, 1, 1, nonce, sig)
+      caller.callPurchaseWithBHT(presaleAddr, 1, 1, nonce, sig)
     ).to.be.revertedWith('E19'); // msg.sender == tx.origin check
   });
 
@@ -49,19 +53,21 @@ describe('Presale coverage step4 (caller & rescue branches)', function () {
     await presale.connect(owner).setMaxPriceStaleness(1000);
     await presale.connect(owner).setBurnBps(100);
     await presale.connect(owner).setDiscountBps(0);
-    await presale.connect(owner).setPriceFeed(price.target);
+  const priceAddr2 = (typeof price.getAddress === 'function') ? await price.getAddress() : (price.address || price.target);
+  await presale.connect(owner).setPriceFeed(priceAddr2);
     await setPriceFresh(price, ethers.parseUnits('1', 8));
 
+    const presaleAddr = (typeof presale.getAddress === 'function') ? await presale.getAddress() : (presale.address || presale.target);
     await bht.mint(buyer.address, ethers.parseUnits('1000', 18));
-    await bht.connect(buyer).approve(presale.target, ethers.parseUnits('1000', 18));
+  await bht.connect(buyer).approve(presaleAddr, ethers.parseUnits('1000', 18));
 
     const nonce = 2;
     const sig = signNonce(owner, buyer.address, nonce);
 
     // start presale and mint/approve funds
     await presale.connect(owner).startPresale();
-    await bht.mint(buyer.address, ethers.parseUnits('1000', 18));
-    await bht.connect(buyer).approve(presale.target, ethers.parseUnits('1000', 18));
+  await bht.mint(buyer.address, ethers.parseUnits('1000', 18));
+  await bht.connect(buyer).approve(presaleAddr, ethers.parseUnits('1000', 18));
 
     await expect(
       presale.connect(buyer).purchaseWithBHT(1,1,nonce,sig)
@@ -75,7 +81,8 @@ describe('Presale coverage step4 (caller & rescue branches)', function () {
     await mockWith.waitForDeployment();
 
     // set rescue contract and attempt rescue
-    await presale.connect(owner).setRescueContract(mockWith.target);
+  const mockWithAddr = (typeof mockWith.getAddress === 'function') ? await mockWith.getAddress() : (mockWith.address || mockWith.target);
+  await presale.connect(owner).setRescueContract(mockWithAddr);
 
     await expect(
       presale.connect(owner).rescueUnsoldNFTs(1, owner.address, 1)
@@ -96,7 +103,8 @@ describe('Presale coverage step4 (caller & rescue branches)', function () {
     const mockNo = await MockNo.deploy();
     await mockNo.waitForDeployment();
 
-    await presale.connect(owner).setRescueContract(mockNo.target);
+  const mockNoAddr = (typeof mockNo.getAddress === 'function') ? await mockNo.getAddress() : (mockNo.address || mockNo.target);
+  await presale.connect(owner).setRescueContract(mockNoAddr);
 
     await expect(
       presale.connect(owner).rescueUnsoldNFTs(1, owner.address, 1)

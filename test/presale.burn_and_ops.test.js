@@ -14,39 +14,39 @@ describe('Presale burn fallback and ops transfer failure', function () {
     const rejecting = await MockBHTRejecting.deploy('rBHT','rBHT', ethers.ZeroAddress);
     await rejecting.waitForDeployment();
 
-    // replace bht in presale by deploying a new presale with rejecting token
-    const BashoodPresaleFinal = await ethers.getContractFactory('contracts/BashoodPresaleFinal.sol:BashoodPresaleFinal');
-    const txData = await BashoodPresaleFinal.getDeployTransaction(
-      rejecting.target,
-      nft.target,
-      referral.target,
-      projectWallet.address,
-      ethers.parseEther('0.1'),
-      ethers.parseUnits('10', 18),
-      0,0,100
-    );
-    const tx = await owner.sendTransaction({ data: txData.data });
-    const r = await tx.wait();
-    const presale2 = await ethers.getContractAt('BashoodPresaleFinal', r.contractAddress);
+  // replace bht in presale by deploying a new presale with rejecting token
+  const d2 = await deployPresale({ bhtAddr: await rejecting.getAddress() });
+  const presale2 = d2.presale;
 
-  // set price, signer, and staleness
-  await presale2.setPriceFeed(price.target);
+  // set price, signer, and staleness on the new presale instance (use d2.price/d2.nft)
+  const priceAddr2 = (typeof d2.price.getAddress === 'function') ? await d2.price.getAddress() : (d2.price.address || d2.price.target);
+  await presale2.setPriceFeed(priceAddr2);
   await presale2.setMaxPriceStaleness(1000);
   await presale2.setSigner(owner.address);
   await presale2.startPresale();
-    await setPriceFresh(price, 1);
+  await setPriceFresh(d2.price, ethers.parseUnits('1', 8));
 
     // Mint bht and approve
     await rejecting.mint(buyer.address, ethers.parseUnits('100',18));
-    await rejecting.connect(buyer).approve(presale2.target, ethers.MaxUint256);
+  await rejecting.connect(buyer).approve(await presale2.getAddress(), ethers.MaxUint256);
 
     // Set operations wallet and burn/discount bps
     await presale2.setOperationsWallet(projectWallet.address);
     await presale2.setDiscountBps(0);
     await presale2.setBurnBps(500); // 5%
 
-    // Ensure NFT minted to presale
-    await nft.mint(presale2.target, 1, 10);
+  // Ensure NFT minted to presale2 (use d2.nft if available)
+  const nft2 = d2.nft || nft;
+  try {
+    await nft2.mint(await presale2.getAddress(), 1, 10);
+  } catch (e) {
+    try {
+      await nft2.mint(await presale2.getAddress(), 1, 10, '0x');
+    } catch (e2) {
+      await nft2.mint(owner.address, 1, 10);
+      await nft2.connect(owner).safeTransferFrom(owner.address, await presale2.getAddress(), 1, 10, '0x');
+    }
+  }
 
     // Sign
     const nonce = 1;
@@ -64,43 +64,43 @@ describe('Presale burn fallback and ops transfer failure', function () {
   const rejecting = await MockBHTReturnFalse.deploy('rBHT','rBHT', projectWallet.address);
     await rejecting.waitForDeployment();
 
-    // deploy presale with rejecting token
-    const BashoodPresaleFinal = await ethers.getContractFactory('contracts/BashoodPresaleFinal.sol:BashoodPresaleFinal');
-    const txData = await BashoodPresaleFinal.getDeployTransaction(
-      rejecting.target,
-      nft.target,
-      referral.target,
-      projectWallet.address,
-      ethers.parseEther('0.1'),
-      ethers.parseUnits('10', 18),
-      0,0,100
-    );
-    const tx = await owner.sendTransaction({ data: txData.data });
-    const r = await tx.wait();
-    const presale2 = await ethers.getContractAt('BashoodPresaleFinal', r.contractAddress);
+  // deploy presale with rejecting token (ops wallet rejection scenario)
+  const d3 = await deployPresale({ bhtAddr: await rejecting.getAddress() });
+  const presale2 = d3.presale;
 
-  await presale2.setPriceFeed(price.target);
+  const priceAddr3 = (typeof d3.price.getAddress === 'function') ? await d3.price.getAddress() : (d3.price.address || d3.price.target);
+  await presale2.setPriceFeed(priceAddr3);
   await presale2.setMaxPriceStaleness(1000);
   await presale2.setSigner(owner.address);
   await presale2.startPresale();
-    await setPriceFresh(price, 1);
+  await setPriceFresh(d3.price, ethers.parseUnits('1', 8));
 
     // Mint bht and approve
     await rejecting.mint(buyer.address, ethers.parseUnits('100',18));
-    await rejecting.connect(buyer).approve(presale2.target, ethers.MaxUint256);
+  await rejecting.connect(buyer).approve(await presale2.getAddress(), ethers.MaxUint256);
 
     // Ops wallet currently set to projectWallet which rejects
   await presale2.setOperationsWallet(projectWallet.address);
     await presale2.setDiscountBps(0);
     await presale2.setBurnBps(0);
 
-    // Ensure NFT minted to presale
-    await nft.mint(presale2.target, 1, 10);
+    // Ensure NFT minted to presale2 (use d3.nft if available)
+    const nft3 = d3.nft || nft;
+    try {
+      await nft3.mint(await presale2.getAddress(), 1, 10);
+    } catch (e) {
+      try {
+        await nft3.mint(await presale2.getAddress(), 1, 10, '0x');
+      } catch (e2) {
+        await nft3.mint(owner.address, 1, 10);
+        await nft3.connect(owner).safeTransferFrom(owner.address, await presale2.getAddress(), 1, 10, '0x');
+      }
+    }
 
     const nonce = 2;
     const sig = await signNonce(owner, buyer.address, nonce);
 
-    // ops transfer fails and should revert
-    await expect(presale2.connect(buyer).purchaseWithBHT(1, 1, nonce, sig)).to.be.revertedWith('Ops transfer failed');
+  // ops transfer fails and should revert with Ops transfer failed (contract requires ops transfer success)
+  await expect(presale2.connect(buyer).purchaseWithBHT(1, 1, nonce, sig)).to.be.revertedWith('Ops transfer failed');
   });
 });

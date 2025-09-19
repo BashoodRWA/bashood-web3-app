@@ -33,10 +33,11 @@ describe("BashoodPresaleFinal - BHT transfer to projectWallet fails", function (
       0,0,100
     ];
 
-    const tx = await Presale.getDeployTransaction(...presaleArgs);
-    const sent = await owner.sendTransaction({ data: tx.data });
-    const receipt = await sent.wait();
-    const presale = await ethers.getContractAt('BashoodPresaleFinal', receipt.contractAddress);
+    // Use shared helper to deploy presale and normalize constructor args. We
+    // keep the mockBHT we created as project-wallet rejecter by passing its
+    // address as projectWallet to the helper.
+    const d = await deployPresale({ bhtAddr: await mockBHT.getAddress(), nftAddr: await mockNFT.getAddress(), referralAddr: await referral.getAddress(), projectWallet: rejectAddr });
+    const presale = d.presale;
 
     await presale.connect(owner).setSigner(await owner.getAddress());
     await presale.connect(owner).setMaxPriceStaleness(1000);
@@ -44,17 +45,17 @@ describe("BashoodPresaleFinal - BHT transfer to projectWallet fails", function (
 
     // setup price feed
   const MockPrice = await ethers.getContractFactory("contracts/mocks/MockPriceFeed.sol:MockPriceFeed");
-    const mockPrice = await MockPrice.deploy();
-    await mockPrice.waitForDeployment();
-    await mockPrice.setPrice(ethers.parseUnits('1', 18), Math.floor(Date.now() / 1000));
+  const mockPrice = await MockPrice.deploy(8, ethers.parseUnits('1', 8));
+  await mockPrice.waitForDeployment();
+  await setPriceFresh(mockPrice, ethers.parseUnits('1', 8));
     await presale.connect(owner).setPriceFeed(await mockPrice.getAddress());
 
     // buyer funds and approval
     await mockBHT.mint(await buyer.getAddress(), ethers.parseEther('5'));
     await mockBHT.connect(buyer).approve(await presale.getAddress(), ethers.parseEther('5'));
 
-    // transfer NFT to presale
-    await mockNFT.connect(owner).safeTransferFrom(await owner.getAddress(), await presale.getAddress(), 1, 1, '0x');
+  // transfer NFT to presale
+  await mockNFT.connect(owner).safeTransferFrom(await owner.getAddress(), await presale.getAddress(), 1, 1, '0x');
 
     const nonce = 801;
     const buyerAddr = await buyer.getAddress();

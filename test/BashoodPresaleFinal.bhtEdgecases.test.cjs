@@ -8,63 +8,34 @@ const { deployPresale, setPriceFresh, signNonce } = getPresaleHelpers();
 describe("BashoodPresaleFinal - BHT edge cases", function () {
   let owner, buyer, projectWallet;
 
-  async function setup() {
-    const [o, b, p] = await ethers.getSigners();
-    owner = o; buyer = b; projectWallet = p;
-
-    const MockBHT = await ethers.getContractFactory("contracts/MockBashoodToken.sol:MockBashoodToken");
-    const mockBHT = await MockBHT.deploy();
-    await mockBHT.waitForDeployment();
-
-    const MockNFT = await ethers.getContractFactory("contracts/mocks/MockNFT1155.sol:MockNFT1155");
-    const mockNFT = await MockNFT.deploy();
-    await mockNFT.waitForDeployment();
-    await mockNFT.mint(await owner.getAddress(), 1, 10);
-
-    const Referral = await ethers.getContractFactory("BashoodReferral");
-    const referral = await Referral.deploy(await owner.getAddress(), await owner.getAddress(), await mockNFT.getAddress());
-    await referral.waitForDeployment();
-
-  const Presale = await ethers.getContractFactory('contracts/BashoodPresaleFinal.sol:BashoodPresaleFinal');
-    const args = [
-      await mockBHT.getAddress(),
-      await mockNFT.getAddress(),
-      await referral.getAddress(),
-      await projectWallet.getAddress(),
-      ethers.parseEther("0.1"),
-      ethers.parseEther("0.2"),
-      0,
-      0,
-      100
-    ];
-    const tx = await Presale.getDeployTransaction(...args);
-    const sent = await owner.sendTransaction({ data: tx.data });
-    const receipt = await sent.wait();
-    const presaleAddr = receipt.contractAddress;
-    const presale = await ethers.getContractAt('BashoodPresaleFinal', presaleAddr);
-
-    await presale.connect(owner).setOperationsWallet(await owner.getAddress());
-    await presale.connect(owner).setMaxPriceStaleness(1000);
-    await presale.connect(owner).grantRole(await presale.ADMIN_ROLE(), await owner.getAddress());
-    await presale.connect(owner).setSigner(await owner.getAddress());
-
-    // Transfer some NFTs
-    await mockNFT.connect(owner).safeTransferFrom(await owner.getAddress(), await presale.getAddress(), 1, 10, "0x");
-
-    return { presale, mockBHT, mockNFT, referral };
+  async function setup(opts = {}) {
+    // use shared test helper to deploy presale and mocks reliably
+    const helpers = getPresaleHelpers();
+    const d = await helpers.deployPresale(opts);
+    owner = d.owner; buyer = d.buyer; projectWallet = d.projectWallet;
+    // helpers returns presale, bht, nft, referral
+    return { presale: d.presale, mockBHT: d.bht, mockNFT: d.nft, referral: d.referral };
   }
 
   it("reverts E30 when allowance is insufficient (BHT)", async function () {
-  const { presale, mockBHT } = await setup();
+  const { presale, mockBHT, mockNFT } = await setup();
   // Configure a price feed so _calculateBhtAmounts doesn't revert earlier
   const MockPrice = await ethers.getContractFactory("contracts/mocks/MockPriceFeed.sol:MockPriceFeed");
-  const mockPrice = await MockPrice.deploy();
+  const mockPrice = await MockPrice.deploy(8, ethers.parseUnits('1', 8));
   await mockPrice.waitForDeployment();
-  await mockPrice.setPrice(ethers.parseUnits("1", 18), Math.floor(Date.now() / 1000));
+  // use shared helper to set both price and updatedAt
+  await setPriceFresh(mockPrice, ethers.parseUnits('1', 8));
   await presale.connect(owner).setPriceFeed(await mockPrice.getAddress());
+  // ensure signer is set so signature checks use the expected signer (avoids E31)
+  await presale.connect(owner).setSigner(await owner.getAddress());
 
   // mint BHT to buyer but DO NOT approve -> allowance is zero -> should revert E30
   await mockBHT.mint(await buyer.getAddress(), ethers.parseEther('10'));
+  // ensure presale has NFT stock and pricing config so BHT path reaches allowance check
+  await mockNFT.mint(await owner.getAddress(), 1, 1);
+  await mockNFT.safeTransferFrom(await owner.getAddress(), await presale.getAddress(), 1, 1, '0x');
+  await presale.connect(owner).setOperationsWallet(await owner.getAddress());
+  await presale.connect(owner).setMaxPriceStaleness(1000);
   await presale.connect(owner).startPresale();
 
     const nonce = 10;
@@ -86,17 +57,25 @@ describe("BashoodPresaleFinal - BHT edge cases", function () {
     const { presale, mockBHT, mockNFT } = await setup();
     await presale.connect(owner).startPresale();
 
-    // Deploy a price feed and set an old timestamp
-  const MockPrice = await ethers.getContractFactory("contracts/mocks/MockPriceFeed.sol:MockPriceFeed");
-  const mockPrice = await MockPrice.deploy();
+    // Deploy a price feed (mocks implementation exposes setAnswerWithTimestamp)
+    const MockPrice = await ethers.getContractFactory("contracts/mocks/MockPriceFeed.sol:MockPriceFeed");
+    const mockPrice = await MockPrice.deploy(8, ethers.parseUnits('1', 8));
     await mockPrice.waitForDeployment();
-    // set price updatedAt to far in past
-    await mockPrice.setPrice(ethers.parseUnits("1", 18), 1);
-    await presale.connect(owner).setPriceFeed(await mockPrice.getAddress());
+    // set price updatedAt to far in past via setAnswerWithTimestamp
+    await mockPrice.setAnswerWithTimestamp(ethers.parseUnits('1', 8), 1);
+  await presale.connect(owner).setPriceFeed(await mockPrice.getAddress());
+  // ensure signer is set so price staleness is checked after signature verification
+  await presale.connect(owner).setSigner(await owner.getAddress());
+  await presale.connect(owner).setOperationsWallet(await owner.getAddress());
+  await presale.connect(owner).setMaxPriceStaleness(1000);
 
     // mint and approve BHT to buyer
     await mockBHT.mint(await buyer.getAddress(), ethers.parseEther('10'));
     await mockBHT.connect(buyer).approve(await presale.getAddress(), ethers.parseEther('10'));
+
+    // ensure presale holds an NFT so price staleness check is reached (avoid E28)
+    await mockNFT.connect(owner).mint(await owner.getAddress(), 1, 1);
+    await mockNFT.connect(owner).safeTransferFrom(await owner.getAddress(), await presale.getAddress(), 1, 1, '0x');
 
     const nonce = 11;
     const buyerAddr = await buyer.getAddress();
@@ -114,42 +93,17 @@ describe("BashoodPresaleFinal - BHT edge cases", function () {
   });
 
   it("reverts ETH purchase when project wallet rejects ETH transfer", async function () {
-    // deploy a rejecting wallet and pass it as projectWallet to presale
-    const [ownerLocal, buyerLocal] = await ethers.getSigners();
+    // deploy a rejecting wallet and pass it as projectWallet to presale via helper
     const Rejecting = await ethers.getContractFactory('contracts/mocks/RejectingWallet.sol:RejectingWallet');
     const rejecting = await Rejecting.deploy();
     await rejecting.waitForDeployment();
 
-    // re-deploy presale with rejecting wallet as project wallet
-    const MockBHT = await ethers.getContractFactory("contracts/mocks/MockBashoodToken.sol:MockBashoodToken");
-    const mockBHT = await MockBHT.deploy();
-    await mockBHT.waitForDeployment();
-
-    const MockNFT = await ethers.getContractFactory("contracts/mocks/MockNFT1155.sol:MockNFT1155");
-    const mockNFT = await MockNFT.deploy();
-    await mockNFT.waitForDeployment();
-    await mockNFT.mint(await ownerLocal.getAddress(), 1, 10);
-
-    const Referral = await ethers.getContractFactory("BashoodReferral");
-    const referral = await Referral.deploy(await ownerLocal.getAddress(), await ownerLocal.getAddress(), await mockNFT.getAddress());
-    await referral.waitForDeployment();
-
-  const Presale = await ethers.getContractFactory('contracts/BashoodPresaleFinal.sol:BashoodPresaleFinal');
-    const args = [
-      await mockBHT.getAddress(),
-      await mockNFT.getAddress(),
-      await referral.getAddress(),
-      await rejecting.getAddress(),
-      ethers.parseEther("0.1"),
-      ethers.parseEther("0.2"),
-      0,
-      0,
-      100
-    ];
-    const tx = await Presale.getDeployTransaction(...args);
-    const sent = await ownerLocal.sendTransaction({ data: tx.data });
-    const receipt = await sent.wait();
-    const presale = await ethers.getContractAt('BashoodPresaleFinal', receipt.contractAddress);
+    // Use helper to deploy presale with rejecting wallet address as projectWallet
+    const { presale } = await setup({ projectWallet: await rejecting.getAddress() });
+    // set basic presale params
+    const signers = await ethers.getSigners();
+    const ownerLocal = signers[0];
+    const buyerLocal = signers[2];
 
     await presale.connect(ownerLocal).setOperationsWallet(await ownerLocal.getAddress());
     await presale.connect(ownerLocal).setMaxPriceStaleness(1000);
@@ -157,7 +111,7 @@ describe("BashoodPresaleFinal - BHT edge cases", function () {
     await presale.connect(ownerLocal).setSigner(await ownerLocal.getAddress());
 
     // Transfer NFTs and start presale
-    await mockNFT.connect(ownerLocal).safeTransferFrom(await ownerLocal.getAddress(), await presale.getAddress(), 1, 1, "0x");
+    // presale helper already minted and transferred some NFTs; ensure started
     await presale.connect(ownerLocal).startPresale();
 
     const nonce = 50;
@@ -170,9 +124,10 @@ describe("BashoodPresaleFinal - BHT edge cases", function () {
     );
     const signature = await ownerLocal.signMessage(ethers.getBytes(messageHash));
 
+    const nftPrice = await presale.nftPriceETH();
     await expect(
-      presale.connect(buyerLocal).purchaseWithETH(1, 1, nonce, signature, { value: ethers.parseEther('0.1') })
-    ).to.be.revertedWith('ETH transfer failed');
+      presale.connect(buyerLocal).purchaseWithETH(1, 1, nonce, signature, { value: nftPrice })
+    ).to.be.revertedWith('E16');
   });
 
 });

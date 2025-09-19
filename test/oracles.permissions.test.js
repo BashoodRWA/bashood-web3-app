@@ -4,7 +4,7 @@ describe("ChainlinkPriceFeed - permissions", function () {
   it("setFeed onlyOwner", async function () {
     const [owner, other] = await ethers.getSigners();
     const Mock = await ethers.getContractFactory("contracts/mocks/MockPriceFeed.sol:MockPriceFeed");
-    const mock = await Mock.connect(owner).deploy(8, 2000_00000000);
+  const mock = await Mock.connect(owner).deploy(8, ethers.parseUnits('2000', 8));
     await mock.waitForDeployment();
 
     const Wrapper = await ethers.getContractFactory("contracts/oracles/ChainlinkPriceFeed.sol:ChainlinkPriceFeed");

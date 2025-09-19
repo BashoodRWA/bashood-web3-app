@@ -13,14 +13,17 @@ describe('Presale coverage - step6 (targeted branches)', function () {
     const { owner, projectWallet, buyer, presale, bht, nft, price } = await deployPresale({ bhtFactory: 'contracts/mocks/MockBHTReturnFalse.sol:MockBHTReturnFalse', bhtArgs: ['MockBHT', 'MBHT', ownerAddr] });
     // configure operations wallet
     await presale.connect(owner).setOperationsWallet(owner.address);
-  await presale.connect(owner).setPriceFeed(price.target);
+  const priceAddr = (typeof price.getAddress === 'function') ? await price.getAddress() : (price.address || price.target);
+  await presale.connect(owner).setPriceFeed(priceAddr);
     await presale.connect(owner).setMaxPriceStaleness(1000);
     await presale.connect(owner).setDiscountBps(0);
     await presale.connect(owner).setBurnBps(500);
 
-    // fund buyer with tokens and set allowance
+    // fund buyer with tokens and set allowance; ensure presale has NFTs
     await bht.mint(buyer.address, ethers.parseUnits('1000', 18));
-    await bht.connect(buyer).approve(presale.target, ethers.parseUnits('1000', 18));
+  const presaleAddr = (typeof presale.getAddress === 'function') ? await presale.getAddress() : (presale.address || presale.target);
+  await bht.connect(buyer).approve(presaleAddr, ethers.parseUnits('1000', 18));
+  try { await nft.mint(presaleAddr, 1, 10); } catch (e) { /* ignore */ }
 
     // set price fresh and ensure calculation works
     await setPriceFresh(price, ethers.parseUnits('1', 8));
@@ -40,17 +43,19 @@ describe('Presale coverage - step6 (targeted branches)', function () {
     const noMock = await MockRescueNo.deploy(); await noMock.waitForDeployment();
 
   // set rescueContract to withMock and call delegateRescueUnsoldNfts (expect revert with prefixed message + reason)
-  await presale.connect(owner).setRescueContract(withMock.target);
+  const withMockAddr = (typeof withMock.getAddress === 'function') ? await withMock.getAddress() : (withMock.address || withMock.target);
+  await presale.connect(owner).setRescueContract(withMockAddr);
   await expect(presale.connect(owner).delegateRescueUnsoldNfts(1, projectWallet.address, 1)).to.be.revertedWith('Delegate rescue NFT failed: boom');
 
     // set rescueContract to noMock and expect generic revert
-    await presale.connect(owner).setRescueContract(noMock.target);
+  const noMockAddr = (typeof noMock.getAddress === 'function') ? await noMock.getAddress() : (noMock.address || noMock.target);
+  await presale.connect(owner).setRescueContract(noMockAddr);
     await expect(presale.connect(owner).delegateRescueUnsoldNfts(1, projectWallet.address, 1)).to.be.revertedWith('Delegate rescue NFT failed');
 
     // delegate emergency withdraw and rescue ERC20 similar flows
-  await presale.connect(owner).setRescueContract(withMock.target);
+  await presale.connect(owner).setRescueContract(withMockAddr);
   await expect(presale.connect(owner).delegateEmergencyWithdrawEth()).to.be.revertedWith('Delegate rescue ETH failed: eth-boom');
-    await presale.connect(owner).setRescueContract(noMock.target);
+  await presale.connect(owner).setRescueContract(noMockAddr);
     await expect(presale.connect(owner).delegateEmergencyWithdrawEth()).to.be.revertedWith('Delegate rescue ETH failed');
   });
 });

@@ -75,18 +75,10 @@ describe('Targeted branches and edge cases', function () {
     const refAddr = (typeof ref.getAddress === 'function') ? await ref.getAddress() : ref.address;
     const projectWalletAddr = (typeof projectWallet.getAddress === 'function') ? await projectWallet.getAddress() : projectWallet.address;
 
-    const Presale = await ethers.getContractFactory('contracts/BashoodPresaleFinal.sol:BashoodPresaleFinal');
-    let presale;
-    try {
-      presale = await Presale.deploy(mockERCAddr, mockNFTAddr, refAddr, projectWalletAddr, 1, 1, 0, 0, 100);
-      await presale.waitForDeployment();
-    } catch (err) {
-      const unsigned = Presale.getDeployTransaction(mockERCAddr, mockNFTAddr, refAddr, projectWalletAddr, 1, 1, 0, 0, 100);
-      if (!unsigned || !unsigned.data) throw new Error('Presale deploy transaction data missing (getDeployTransaction returned empty)');
-      const sent = await owner.sendTransaction({ to: undefined, data: unsigned.data });
-      const receipt = await sent.wait();
-      presale = await ethers.getContractAt('BashoodPresaleFinal', receipt.contractAddress);
-    }
+  const getPresaleHelpers = () => globalThis._presaleHelpers || require('./helpers/presaleHelpers');
+  const { deployPresale } = getPresaleHelpers();
+  const helpers = await deployPresale({ bhtAddr: mockERCAddr, nftAddr: mockNFTAddr, referralAddr: refAddr, projectWallet: projectWalletAddr });
+  const presale = helpers.presale;
 
     // setMaxPriceStaleness must be > 0
   await expect(presale.connect(owner).setMaxPriceStaleness(0)).to.be.revertedWith('Staleness must be > 0');

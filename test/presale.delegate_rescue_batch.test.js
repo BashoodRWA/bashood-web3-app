@@ -2,7 +2,8 @@ const hh = require('hardhat');
 const ethers = globalThis.ethers || hh.ethers;
 if (typeof globalThis._chai_expect === 'undefined') globalThis._chai_expect = require('chai').expect;
 const expect = globalThis._chai_expect;
-const _ph = globalThis._presaleHelpers;
+const getPresaleHelpers = () => globalThis._presaleHelpers || require('./helpers/presaleHelpers');
+const _ph = getPresaleHelpers();
 const deployPresale = _ph.deployPresale;
 
 describe('BashoodPresaleFinal - delegate rescue and ERC1155 selectors', function () {
@@ -16,12 +17,14 @@ describe('BashoodPresaleFinal - delegate rescue and ERC1155 selectors', function
     const noMock = await MockRescueNo.deploy();
     await noMock.waitForDeployment();
 
-    await presale.connect(owner).setRescueContract(withMock.target);
+    const withAddr = (typeof withMock.getAddress === 'function') ? await withMock.getAddress() : (withMock.address || withMock.target);
+    const noAddr = (typeof noMock.getAddress === 'function') ? await noMock.getAddress() : (noMock.address || noMock.target);
+    await presale.connect(owner).setRescueContract(withAddr);
     await expect(
       presale.connect(owner).delegateRescueErc20(owner.address, owner.address, 1)
     ).to.be.revertedWith('Delegate rescue ERC20 failed: erc20-boom');
 
-    await presale.connect(owner).setRescueContract(noMock.target);
+    await presale.connect(owner).setRescueContract(noAddr);
     await expect(
       presale.connect(owner).delegateRescueErc20(owner.address, owner.address, 1)
     ).to.be.revertedWith('Delegate rescue ERC20 failed');
@@ -37,12 +40,14 @@ describe('BashoodPresaleFinal - delegate rescue and ERC1155 selectors', function
     const noMock = await MockRescueNo.deploy();
     await noMock.waitForDeployment();
 
-    await presale.connect(owner).setRescueContract(withMock.target);
+    const withAddr = (typeof withMock.getAddress === 'function') ? await withMock.getAddress() : (withMock.address || withMock.target);
+    const noAddr = (typeof noMock.getAddress === 'function') ? await noMock.getAddress() : (noMock.address || noMock.target);
+    await presale.connect(owner).setRescueContract(withAddr);
     await expect(
       presale.connect(owner).delegateRescueUnsoldNfts(1, owner.address, 1)
     ).to.be.revertedWith('Delegate rescue NFT failed: boom');
 
-    await presale.connect(owner).setRescueContract(noMock.target);
+    await presale.connect(owner).setRescueContract(noAddr);
     await expect(
       presale.connect(owner).delegateRescueUnsoldNfts(1, owner.address, 1)
     ).to.be.revertedWith('Delegate rescue NFT failed');
@@ -58,10 +63,12 @@ describe('BashoodPresaleFinal - delegate rescue and ERC1155 selectors', function
     const noMock = await MockRescueNo.deploy();
     await noMock.waitForDeployment();
 
-    await presale.connect(owner).setRescueContract(withMock.target);
+    const withAddr = (typeof withMock.getAddress === 'function') ? await withMock.getAddress() : (withMock.address || withMock.target);
+    const noAddr = (typeof noMock.getAddress === 'function') ? await noMock.getAddress() : (noMock.address || noMock.target);
+    await presale.connect(owner).setRescueContract(withAddr);
     await expect(presale.connect(owner).delegateEmergencyWithdrawEth()).to.be.revertedWith('Delegate rescue ETH failed: eth-boom');
 
-    await presale.connect(owner).setRescueContract(noMock.target);
+  await presale.connect(owner).setRescueContract(noAddr);
     await expect(presale.connect(owner).delegateEmergencyWithdrawEth()).to.be.revertedWith('Delegate rescue ETH failed');
   });
 

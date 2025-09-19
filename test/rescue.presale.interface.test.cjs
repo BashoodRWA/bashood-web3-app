@@ -20,40 +20,11 @@ describe('Presale rescue interface enforcement', function () {
     const referral = await Referral.deploy(await owner.getAddress(), await owner.getAddress(), await mockNFT.getAddress());
     await referral.waitForDeployment();
 
-     const Presale = await ethers.getContractFactory('contracts/BashoodPresaleFinal.sol:BashoodPresaleFinal');
-    const now = Math.floor(Date.now() / 1000);
-    // Try direct deploy first, fall back to raw unsigned deployTx if needed
-    let presale;
-    try {
-      presale = await Presale.deploy(
-        await mockBHT.getAddress(),
-        await mockNFT.getAddress(),
-        await referral.getAddress(),
-        await owner.getAddress(),
-        1, // nftPriceETH
-        1, // nftPriceBHT
-        now - 1000, // presaleStart
-        now + 1000, // presaleEnd
-        100 // maxNFTSupply
-      );
-      await presale.waitForDeployment();
-    } catch (err) {
-      const unsigned = Presale.getDeployTransaction(
-        await mockBHT.getAddress(),
-        await mockNFT.getAddress(),
-        await referral.getAddress(),
-        await owner.getAddress(),
-        1,
-        1,
-        now - 1000,
-        now + 1000,
-        100
-      );
-      if (!unsigned || !unsigned.data) throw new Error('Presale deploy transaction data missing');
-      const sent = await owner.sendTransaction({ to: undefined, data: unsigned.data });
-      const receipt = await sent.wait();
-      presale = await ethers.getContractAt('BashoodPresaleFinal', receipt.contractAddress);
-    }
+  const getPresaleHelpers = () => globalThis._presaleHelpers || require('./helpers/presaleHelpers');
+  const { deployPresale } = getPresaleHelpers();
+  const now = Math.floor(Date.now() / 1000);
+  const helpers = await deployPresale({ bhtAddr: await mockBHT.getAddress(), nftAddr: await mockNFT.getAddress(), referralAddr: await referral.getAddress(), projectWallet: await owner.getAddress() });
+  const presale = helpers.presale;
 
   // Deploy a random contract that does NOT implement the interface
   const NotRescue = await ethers.getContractFactory('NotRescue');

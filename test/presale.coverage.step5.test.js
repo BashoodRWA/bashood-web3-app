@@ -13,14 +13,16 @@ describe('BashoodPresaleFinal coverage - step5', function () {
 
     // setup presale config
     await presale.connect(owner).setOperationsWallet(projectWallet.address);
-    await presale.connect(owner).setPriceFeed(price.target);
+      const priceAddr = (typeof price.getAddress === 'function') ? await price.getAddress() : (price.address || price.target);
+    await presale.connect(owner).setPriceFeed(priceAddr);
     await presale.connect(owner).setMaxPriceStaleness(1000);
     await setPriceFresh(price, ethers.parseUnits('1', 8));
     await presale.connect(owner).setSigner(owner.address);
     await presale.connect(owner).startPresale();
 
-  // mint some NFTs into the presale contract so transfer will succeed
-  await nft.mint(presale.target, 1, 10);
+  // mint some NFTs into the presale contract so transfer will succeed (defensive)
+    const presaleAddr = (typeof presale.getAddress === 'function') ? await presale.getAddress() : (presale.address || presale.target);
+  try { await nft.mint(presaleAddr, 1, 10); } catch (e) { /* ignore if already minted */ }
 
     // prepare buyer funds and allowance
     const nonce = 1;
@@ -29,7 +31,7 @@ describe('BashoodPresaleFinal coverage - step5', function () {
     // price and amounts are high precision; mint a generous balance
     const discountedCost = ethers.parseUnits('10', 18);
     await bht.mint(buyer.address, discountedCost);
-    await bht.connect(buyer).approve(presale.target, discountedCost);
+  await bht.connect(buyer).approve(presaleAddr, discountedCost);
 
     // call purchaseWithBHT as buyer (should use burnFrom provided by mock)
     await expect(presale.connect(buyer).purchaseWithBHT(1, 1, nonce, signature))
@@ -41,7 +43,8 @@ describe('BashoodPresaleFinal coverage - step5', function () {
 
     // setup
     await presale.connect(owner).setOperationsWallet(projectWallet.address);
-    await presale.connect(owner).setPriceFeed(price.target);
+      const priceAddr2 = (typeof price.getAddress === 'function') ? await price.getAddress() : (price.address || price.target);
+  await presale.connect(owner).setPriceFeed(priceAddr2);
     await presale.connect(owner).setMaxPriceStaleness(1000);
     await setPriceFresh(price, ethers.parseUnits('1', 8));
     await presale.connect(owner).setSigner(owner.address);
@@ -50,7 +53,8 @@ describe('BashoodPresaleFinal coverage - step5', function () {
     await presale.connect(owner).startPresale();
 
   // mint NFTs into presale
-  await nft.mint(presale.target, 1, 10);
+    const presaleAddr2 = (typeof presale.getAddress === 'function') ? await presale.getAddress() : (presale.address || presale.target);
+  await nft.mint(presaleAddr2, 1, 10);
 
     const nonce = 2;
     const signature = signNonce(owner, buyer.address, nonce);
@@ -58,7 +62,7 @@ describe('BashoodPresaleFinal coverage - step5', function () {
     // compute approximate cost and mint/approve
     const discountedCost = ethers.parseUnits('10', 18);
     await bht.mint(buyer.address, discountedCost);
-    await bht.connect(buyer).approve(presale.target, discountedCost);
+  await bht.connect(buyer).approve(presaleAddr2, discountedCost);
 
     await expect(presale.connect(buyer).purchaseWithBHT(1, 1, nonce, signature))
       .to.emit(presale, 'AssetPurchased');
@@ -68,7 +72,7 @@ describe('BashoodPresaleFinal coverage - step5', function () {
     const { owner, projectWallet, buyer, presale, bht, price } = await deployPresale();
 
     await presale.connect(owner).setOperationsWallet(projectWallet.address);
-    await presale.connect(owner).setPriceFeed(price.target);
+  await presale.connect(owner).setPriceFeed((typeof price.getAddress === 'function') ? await price.getAddress() : (price.address || price.target));
     await presale.connect(owner).setMaxPriceStaleness(1000);
     await setPriceFresh(price, ethers.parseUnits('1', 8));
     // set a burn rate to exercise burn branch
@@ -79,7 +83,8 @@ describe('BashoodPresaleFinal coverage - step5', function () {
     const fiatQuoteUsd = ethers.parseUnits('1', 18);
     const bhtAmount = ethers.parseUnits('10', 18);
     await bht.mint(buyer.address, bhtAmount);
-    await bht.connect(buyer).approve(presale.target, bhtAmount);
+  const presaleAddr = (typeof presale.getAddress === 'function') ? await presale.getAddress() : (presale.address || presale.target);
+  await bht.connect(buyer).approve(presaleAddr, bhtAmount);
 
   // use numeric overload (convenience) to avoid needing formatBytes32String helper
   await expect(presale.connect(buyer)["payServiceWithBHT(uint256,uint256)"](1, fiatQuoteUsd))

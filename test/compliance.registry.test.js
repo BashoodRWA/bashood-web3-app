@@ -1,5 +1,6 @@
 const { expect } = require('chai');
-const { ethers } = require('hardhat');
+const hh = require('hardhat');
+const ethers = globalThis.ethers || hh.ethers;
 
 describe('ComplianceRegistry + TokenWrapper POC', function () {
   let owner, user, issuer;
