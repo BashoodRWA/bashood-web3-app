@@ -91,6 +91,7 @@ contract BashoodPresaleFinal is ReentrancyGuard, AccessControl, IERC1155Receiver
     event ServicePaid(bytes32 indexed serviceId, address indexed payer, uint256 fiatQuoteUsd, uint256 bhtAmount);
     event MilestonePaid(bytes32 indexed projectId, uint8 stage, address indexed payer, uint256 fiatQuoteUsd, uint256 bhtAmount);
     event AssetPurchased(address indexed buyer, uint256 indexed nftId, uint256 quantity, uint256 amount);
+    event ReferralRewardFailed(address indexed buyer, address referrer, string reason);
     event Burned(address indexed user, uint256 amount);
     event NewBuyer(address indexed buyer);
     event PresaleFinalized(uint256 timestamp);
@@ -361,9 +362,16 @@ contract BashoodPresaleFinal is ReentrancyGuard, AccessControl, IERC1155Receiver
         require(sent, "ETH transfer failed");
         nftContract.safeTransferFrom(address(this), msg.sender, nftId, quantity, "");
 
+        // Reward referrer if present, but protect purchase flow from referral reverts
         address referrer = referralContract.getReferrerOf(msg.sender);
         if (referrer != address(0)) {
-            referralContract.rewardReferrer(msg.sender, referrer);
+            try referralContract.rewardReferrer(msg.sender, referrer) {
+                // reward succeeded
+            } catch Error(string memory reason) {
+                emit ReferralRewardFailed(msg.sender, referrer, reason);
+            } catch {
+                emit ReferralRewardFailed(msg.sender, referrer, "unknown");
+            }
         }
 
         emit AssetPurchased(msg.sender, nftId, quantity, msg.value);
@@ -406,9 +414,16 @@ contract BashoodPresaleFinal is ReentrancyGuard, AccessControl, IERC1155Receiver
 
         nftContract.safeTransferFrom(address(this), msg.sender, nftId, quantity, "");
 
+        // Reward referrer if present, but protect purchase flow from referral reverts
         address referrer = referralContract.getReferrerOf(msg.sender);
         if (referrer != address(0)) {
-            referralContract.rewardReferrer(msg.sender, referrer);
+            try referralContract.rewardReferrer(msg.sender, referrer) {
+                // reward succeeded
+            } catch Error(string memory reason) {
+                emit ReferralRewardFailed(msg.sender, referrer, reason);
+            } catch {
+                emit ReferralRewardFailed(msg.sender, referrer, "unknown");
+            }
         }
 
         emit AssetPurchased(msg.sender, nftId, quantity, discountedCost);
