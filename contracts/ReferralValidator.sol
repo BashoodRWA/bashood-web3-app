@@ -1,7 +1,11 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract ReferralValidator {
+interface IReferralValidator {
+    function isValid(address referrer) external view returns (bool);
+}
+
+contract ReferralValidator is IReferralValidator {
     address public immutable owner;
 
     constructor(address _owner) {
@@ -10,7 +14,7 @@ contract ReferralValidator {
     }
 
     // For tests, treat any non-zero address as valid
-    function isValid(address referrer) external view returns (bool) {
+    function isValid(address referrer) external view override returns (bool) {
         return referrer != address(0);
     }
 }
