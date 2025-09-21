@@ -76,10 +76,14 @@ contract BashoodMultiToken is ERC1155, Ownable, ReentrancyGuard, AccessControl {
     function mintAllNFTs() external onlyOwner nonReentrant {
         require(nftCounter == 1, "NFTs ya han sido minteados");
 
+        // defense-in-depth: mark nftCounter as final value before minting to avoid
+        // potential reentrancy or callback-based re-entry relying on the precondition.
+        nftCounter = 31;
+
         for (uint256 i = 1; i <= 30; i++) {
             _mint(owner(), BASHOOD_NFT, 1, "");
             nftOwners[i] = owner();
-            nftCounter++;
+            // nftCounter already set to final value
         }
     }
  
