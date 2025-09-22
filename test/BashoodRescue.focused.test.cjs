@@ -67,6 +67,8 @@ describe("BashoodRescue - focused branch coverage", function () {
   await owner.sendTransaction({ to: rescueAddr, value: 1_000 });
 
     // alice was granted EMERGENCY_ROLE in constructor
+  // admin must set projectWallet before emergency withdraw
+  await rescue.connect(owner).setProjectWallet(await owner.getAddress());
   await expect(rescue.connect(alice).emergencyWithdrawETH())
       .to.emit(rescue, 'EmergencyEthWithdrawn');
 

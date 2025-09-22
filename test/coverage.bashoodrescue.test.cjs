@@ -96,10 +96,11 @@ describe("Coverage: BashoodRescue focused tests", function () {
     // only emergency role can call
   await expect(rescue.connect(admin).emergencyWithdrawETH()).to.be.reverted;
 
-    // invalid wallet zero address
+    // invalid wallet zero address -> set project wallet then withdraw
   await expect(rescue.connect(emergency).emergencyWithdrawETH()).to.be.revertedWith("Rescue: invalid wallet");
 
-    // successful withdraw
+  // set project wallet and then emergency withdraw should succeed
+  await rescue.connect(admin).setProjectWallet(await admin.getAddress());
   await expect(rescue.connect(emergency).emergencyWithdrawETH())
       .to.emit(rescue, 'EmergencyEthWithdrawn');
 
