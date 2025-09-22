@@ -26,6 +26,8 @@ describe("PoC: BashoodRescue emergencyWithdrawETH", function () {
     let didRevert = false;
     try {
       const mockAddr = (typeof mock.getAddress === 'function') ? await mock.getAddress() : (mock.address || mock.target);
+      // set the rescue's project wallet to the mock so the call sends to it
+      await rescue.connect(deployer).setProjectWallet(mockAddr);
   const tx = await rescueWithEmergency.emergencyWithdrawETH();
       await tx.wait();
     } catch (e) {
