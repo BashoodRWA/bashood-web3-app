@@ -94,16 +94,16 @@ describe("Coverage: BashoodRescue focused tests", function () {
     await alice.sendTransaction({ to: await rescue.getAddress ? await rescue.getAddress() : rescue.address, value: ethers.parseEther("0.1") });
 
     // only emergency role can call
-    await expect(rescue.connect(admin).emergencyWithdrawETH(await alice.getAddress())).to.be.reverted;
+  await expect(rescue.connect(admin).emergencyWithdrawETH()).to.be.reverted;
 
     // invalid wallet zero address
-    await expect(rescue.connect(emergency).emergencyWithdrawETH(ethers.ZeroAddress)).to.be.revertedWith("Rescue: invalid wallet");
+  await expect(rescue.connect(emergency).emergencyWithdrawETH()).to.be.revertedWith("Rescue: invalid wallet");
 
     // successful withdraw
-    await expect(rescue.connect(emergency).emergencyWithdrawETH(await alice.getAddress()))
+  await expect(rescue.connect(emergency).emergencyWithdrawETH())
       .to.emit(rescue, 'EmergencyEthWithdrawn');
 
     // now contract has no ETH
-    await expect(rescue.connect(emergency).emergencyWithdrawETH(await alice.getAddress())).to.be.revertedWith("Rescue: no ETH");
+  await expect(rescue.connect(emergency).emergencyWithdrawETH()).to.be.revertedWith("Rescue: no ETH");
   });
 });

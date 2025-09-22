@@ -28,6 +28,6 @@ contract MockPresale {
 
     function delegateEmergencyWithdrawEth(address payable projectWallet) external {
         require(rescue != address(0), "no rescue");
-        IBashoodRescue(rescue).emergencyWithdrawETH(projectWallet);
+        IBashoodRescue(rescue).emergencyWithdrawETH();
     }
 }

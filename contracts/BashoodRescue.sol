@@ -27,6 +27,9 @@ contract BashoodRescue is AccessControl, IERC1155Receiver, ReentrancyGuard {
     // Allow listing of authorized callers (e.g., presale contract) that can invoke rescue
     mapping(address => bool) public authorizedCallers;
 
+    // wallet where emergency ETH will be forwarded
+    address payable public projectWallet;
+
     /// @param admin     Dirección con ADMIN_ROLE y DEFAULT_ADMIN_ROLE.
     /// @param emergency Dirección con EMERGENCY_ROLE.
     constructor(address admin, address emergency) {
@@ -35,6 +38,12 @@ contract BashoodRescue is AccessControl, IERC1155Receiver, ReentrancyGuard {
         _grantRole(DEFAULT_ADMIN_ROLE, admin);
         _grantRole(ADMIN_ROLE, admin);
         _grantRole(EMERGENCY_ROLE, emergency);
+    }
+
+    /// @notice Set the project wallet used by emergencyWithdrawETH
+    function setProjectWallet(address payable _projectWallet) external onlyRole(ADMIN_ROLE) {
+        require(_projectWallet != address(0), "Rescue: invalid wallet");
+        projectWallet = _projectWallet;
     }
 
     /// @notice Rescata NFTs ERC1155 custodiados por este contrato.
@@ -77,7 +86,7 @@ contract BashoodRescue is AccessControl, IERC1155Receiver, ReentrancyGuard {
     }
 
     /// @notice Retira todo el ETH disponible a la wallet del proyecto (emergencias).
-    function emergencyWithdrawETH(address payable projectWallet) external onlyRole(EMERGENCY_ROLE) nonReentrant {
+    function emergencyWithdrawETH() external onlyRole(EMERGENCY_ROLE) nonReentrant {
         require(projectWallet != address(0), "Rescue: invalid wallet");
         uint256 bal = address(this).balance;
         require(bal > 0, "Rescue: no ETH");

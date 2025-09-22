@@ -10,6 +10,7 @@ pragma solidity ^0.8.7;
 import "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 import "./AggregatorV3Interface.sol";
 import "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
+import "@openzeppelin/contracts/utils/math/Math.sol";
 import "@openzeppelin/contracts/utils/Pausable.sol";
 import "@openzeppelin/contracts/access/AccessControl.sol";
 import "@openzeppelin/contracts/utils/Address.sol";
@@ -106,9 +107,11 @@ contract BashoodPresaleFinal is ReentrancyGuard, AccessControl, IERC1155Receiver
         require(maxPriceStaleness > 0, "Staleness req");
         require(address(priceFeed) != address(0), "PriceFeed req");
         // OrÃ¡culo: solo para asegurar que estÃ¡ activo y fresco
-        (, int256 price, , uint256 updatedAt,) = priceFeed.latestRoundData();
-        require(price > 0, "Invalid price");
-        require(block.timestamp - updatedAt <= maxPriceStaleness, "Price too stale");
+    (uint80 roundId, int256 price, uint256 startedAt, uint256 updatedAt, uint80 answeredInRound) = priceFeed.latestRoundData();
+    require(price > 0, "Invalid price");
+    require(updatedAt > 0, "Price too stale");
+    require(block.timestamp - updatedAt <= maxPriceStaleness, "Price too stale");
+    require(answeredInRound >= roundId, "Incomplete round");
 
         // Quema el depÃ³sito
     try IBashoodToken(address(bashoodToken)).burnFrom(msg.sender, depositBHT) {
@@ -189,14 +192,16 @@ contract BashoodPresaleFinal is ReentrancyGuard, AccessControl, IERC1155Receiver
     function _bhtFromFiat(uint256 fiatQuoteUsd) internal view returns (uint256) {
         require(maxPriceStaleness > 0, "Staleness req");
         require(address(priceFeed) != address(0), "PriceFeed req");
-        (, int256 answer, , uint256 updatedAt,) = priceFeed.latestRoundData();
-        require(answer > 0, "Invalid price");
+        (uint80 roundId, int256 answer, uint256 startedAt, uint256 updatedAt, uint80 answeredInRound) = priceFeed.latestRoundData();
+    require(answer > 0, "Invalid price");
+    require(updatedAt > 0, "Price too stale");
         require(block.timestamp - updatedAt <= maxPriceStaleness, "Price too stale");
+        require(answeredInRound >= roundId, "Incomplete round");
         uint8 decimals_ = priceFeed.decimals();
         // fiatQuoteUsd has 18 decimals; answer has decimals_ decimals representing USD per BHT
         // bhtAmount = fiatQuoteUsd * (10 ** decimals_) / uint256(answer)
-        uint256 numerator = fiatQuoteUsd * (10 ** uint256(decimals_));
-        return numerator / uint256(answer);
+        // Use mulDiv to avoid precision loss: (fiatQuoteUsd * 10**decimals_) / answer
+        return Math.mulDiv(fiatQuoteUsd, 10 ** uint256(decimals_), uint256(answer));
     }
 
     /// @notice Pay for a service identified by bytes32 id
@@ -217,9 +222,10 @@ contract BashoodPresaleFinal is ReentrancyGuard, AccessControl, IERC1155Receiver
     // Enforce caps at time of payment
     require(bhtDiscountBps <= 2000, "Discount cap");
     require(burnBps <= 1500, "Burn cap");
-        uint256 bhtAmount = _bhtFromFiat(fiatQuoteUsd);
-        uint256 discounted = (bhtAmount * (10000 - bhtDiscountBps)) / 10000;
-        uint256 burnAmount = (discounted * burnBps) / 10000;
+    uint256 bhtAmount = _bhtFromFiat(fiatQuoteUsd);
+    // Use mulDiv for discount and burn calculations to minimize rounding issues
+    uint256 discounted = Math.mulDiv(bhtAmount, (10000 - bhtDiscountBps), 10000);
+    uint256 burnAmount = Math.mulDiv(discounted, burnBps, 10000);
         uint256 opsAmount = discounted - burnAmount;
 
         // Try to burn
@@ -257,9 +263,9 @@ contract BashoodPresaleFinal is ReentrancyGuard, AccessControl, IERC1155Receiver
     // Enforce caps at time of payment
     require(bhtDiscountBps <= 2000, "Discount cap");
     require(burnBps <= 1500, "Burn cap");
-        uint256 bhtAmount = _bhtFromFiat(fiatQuoteUsd);
-        uint256 discounted = (bhtAmount * (10000 - bhtDiscountBps)) / 10000;
-        uint256 burnAmount = (discounted * burnBps) / 10000;
+    uint256 bhtAmount = _bhtFromFiat(fiatQuoteUsd);
+    uint256 discounted = Math.mulDiv(bhtAmount, (10000 - bhtDiscountBps), 10000);
+    uint256 burnAmount = Math.mulDiv(discounted, burnBps, 10000);
         uint256 opsAmount = discounted - burnAmount;
 
         if (burnAmount > 0) {
@@ -459,7 +465,7 @@ contract BashoodPresaleFinal is ReentrancyGuard, AccessControl, IERC1155Receiver
     function emergencyWithdrawETH() external onlyRole(EMERGENCY_ROLE) nonReentrant {
         require(rescueContract != address(0), "Rescue required");
         require(projectWallet != address(0), "Zero project wallet");
-        try IBashoodRescue(rescueContract).emergencyWithdrawETH(projectWallet) {
+    try IBashoodRescue(rescueContract).emergencyWithdrawETH() {
             // success
         } catch Error(string memory reason) {
             revert(string(abi.encodePacked("Rescue ETH failed: ", reason)));
@@ -475,14 +481,16 @@ contract BashoodPresaleFinal is ReentrancyGuard, AccessControl, IERC1155Receiver
         require(maxPriceStaleness > 0, "Staleness req");
         require(address(priceFeed) != address(0), "PriceFeed req");
 
-        (, int256 answer, , uint256 updatedAt,) = priceFeed.latestRoundData();
-        require(answer > 0, "Invalid price");
+        (uint80 roundId, int256 answer, uint256 startedAt, uint256 updatedAt, uint80 answeredInRound) = priceFeed.latestRoundData();
+    require(answer > 0, "Invalid price");
+    require(updatedAt > 0, "Price too stale");
         require(block.timestamp - updatedAt <= maxPriceStaleness, "Price too stale");
+        require(answeredInRound >= roundId, "Incomplete round");
 
-        uint256 baseCost = nftPriceBHT * quantity;
-        uint256 discount = (baseCost * bhtDiscountBps) / 10000;
-        discountedCost = baseCost - discount;
-        burnAmount = (discountedCost * burnBps) / 10000;
+        uint256 baseCost = Math.mulDiv(nftPriceBHT, quantity, 1);
+        // discount and burns using mulDiv for precision
+        discountedCost = Math.mulDiv(baseCost, (10000 - bhtDiscountBps), 10000);
+        burnAmount = Math.mulDiv(discountedCost, burnBps, 10000);
         opsAmount = discountedCost - burnAmount;
     }
 
@@ -613,7 +621,7 @@ contract BashoodPresaleFinal is ReentrancyGuard, AccessControl, IERC1155Receiver
     /// @dev Protegido con nonReentrant y validaciÃ³n estricta de destinatarios
     function delegateEmergencyWithdrawEth() external onlyRole(EMERGENCY_ROLE) nonReentrant {
         require(rescueContract != address(0), "E45");
-        try IBashoodRescue(rescueContract).emergencyWithdrawETH(projectWallet) {
+    try IBashoodRescue(rescueContract).emergencyWithdrawETH() {
             // success
         } catch Error(string memory reason) {
             revert(string(abi.encodePacked("Delegate rescue ETH failed: ", reason)));

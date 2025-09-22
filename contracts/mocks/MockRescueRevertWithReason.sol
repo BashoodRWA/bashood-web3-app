@@ -17,7 +17,7 @@ contract MockRescueRevertWithReason is ERC165, IBashoodRescue {
         revert("erc20-boom");
     }
 
-    function emergencyWithdrawETH(address payable) external pure override {
+    function emergencyWithdrawETH() external pure override {
         revert("eth-boom");
     }
 }

@@ -22,7 +22,7 @@ contract MockRescueRecorder is ERC165, IBashoodRescue {
         emit RescueCalled(msg.sender, "rescueERC20");
     }
 
-    function emergencyWithdrawETH(address payable) external override {
+    function emergencyWithdrawETH() external override {
         calls += 1;
         emit RescueCalled(msg.sender, "emergencyWithdrawETH");
     }

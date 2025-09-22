@@ -26,7 +26,7 @@ describe("PoC: BashoodRescue emergencyWithdrawETH", function () {
     let didRevert = false;
     try {
       const mockAddr = (typeof mock.getAddress === 'function') ? await mock.getAddress() : (mock.address || mock.target);
-      const tx = await rescueWithEmergency.emergencyWithdrawETH(mockAddr);
+  const tx = await rescueWithEmergency.emergencyWithdrawETH();
       await tx.wait();
     } catch (e) {
       didRevert = true;

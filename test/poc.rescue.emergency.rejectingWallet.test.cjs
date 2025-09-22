@@ -22,7 +22,7 @@ describe('PoC: BashoodRescue.emergencyWithdrawETH -> recipient rejects ETH', fun
     await owner.sendTransaction({ to: rescueAddr, value: ethers.parseEther('0.1') });
 
     // The emergency signer has EMERGENCY_ROLE per constructor - call emergencyWithdrawETH pointing to rejecting wallet
-    await expect(rescue.connect(emergency).emergencyWithdrawETH(await rejecting.getAddress()))
+  await expect(rescue.connect(emergency).emergencyWithdrawETH())
       .to.be.revertedWith('Rescue: ETH transfer failed');
   });
 });

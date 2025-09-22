@@ -67,10 +67,10 @@ describe("BashoodRescue - focused branch coverage", function () {
   await owner.sendTransaction({ to: rescueAddr, value: 1_000 });
 
     // alice was granted EMERGENCY_ROLE in constructor
-    await expect(rescue.connect(alice).emergencyWithdrawETH(owner.address))
+  await expect(rescue.connect(alice).emergencyWithdrawETH())
       .to.emit(rescue, 'EmergencyEthWithdrawn');
 
     // unauthorized should revert
-    await expect(rescue.connect(bob).emergencyWithdrawETH(bob.address)).to.be.reverted;
+  await expect(rescue.connect(bob).emergencyWithdrawETH()).to.be.reverted;
   });
 });

@@ -21,6 +21,6 @@ describe("PoC: BashoodRescue emergencyWithdrawETH revert path", function () {
     // Call emergencyWithdrawETH and expect revert
     const rescueWithEmergency = rescue.connect(emergency);
     const revAddr = (typeof rev.getAddress === 'function') ? await rev.getAddress() : (rev.address || rev.target);
-    await expect(rescueWithEmergency.emergencyWithdrawETH(revAddr)).to.be.revertedWith("Rescue: ETH transfer failed");
+  await expect(rescueWithEmergency.emergencyWithdrawETH()).to.be.revertedWith("Rescue: ETH transfer failed");
   });
 });
