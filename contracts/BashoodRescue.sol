@@ -2,6 +2,7 @@
 pragma solidity ^0.8.20;
 
 import "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
+import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 import "@openzeppelin/contracts/access/AccessControl.sol";
 import "@openzeppelin/contracts/token/ERC1155/IERC1155.sol";
 import "@openzeppelin/contracts/token/ERC1155/IERC1155Receiver.sol";
@@ -11,7 +12,7 @@ import "./interfaces/IBashoodRescue.sol";
 /// @title BashoodRescue
 /// @notice Custodia y rescate de activos del ecosistema (ERC1155 y ERC20),
 ///         con retiro de ETH en emergencia. Preparado para recibir ERC1155.
-contract BashoodRescue is AccessControl, IERC1155Receiver {
+contract BashoodRescue is AccessControl, IERC1155Receiver, ReentrancyGuard {
     using SafeERC20 for IERC20;
 
     bytes32 public constant ADMIN_ROLE     = keccak256("ADMIN_ROLE");
@@ -76,7 +77,7 @@ contract BashoodRescue is AccessControl, IERC1155Receiver {
     }
 
     /// @notice Retira todo el ETH disponible a la wallet del proyecto (emergencias).
-    function emergencyWithdrawETH(address payable projectWallet) external onlyRole(EMERGENCY_ROLE) {
+    function emergencyWithdrawETH(address payable projectWallet) external onlyRole(EMERGENCY_ROLE) nonReentrant {
         require(projectWallet != address(0), "Rescue: invalid wallet");
         uint256 bal = address(this).balance;
         require(bal > 0, "Rescue: no ETH");
