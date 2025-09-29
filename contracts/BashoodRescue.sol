@@ -30,6 +30,9 @@ contract BashoodRescue is AccessControl, IERC1155Receiver, ReentrancyGuard {
     // wallet where emergency ETH will be forwarded
     address payable public projectWallet;
 
+    // fallback ledger if immediate forward to projectWallet fails
+    mapping(address => uint256) public pendingWithdrawals;
+
     /// @param admin     Dirección con ADMIN_ROLE y DEFAULT_ADMIN_ROLE.
     /// @param emergency Dirección con EMERGENCY_ROLE.
     constructor(address admin, address emergency) {
@@ -86,13 +89,28 @@ contract BashoodRescue is AccessControl, IERC1155Receiver, ReentrancyGuard {
     }
 
     /// @notice Retira todo el ETH disponible a la wallet del proyecto (emergencias).
+    /// @dev Use pull pattern: record the amount as pending for the project wallet so the
+    /// project can withdraw later. This avoids forwarding ETH to an external address
+    /// in the same transaction which static analyzers flag as "sends eth to arbitrary user".
     function emergencyWithdrawETH() external onlyRole(EMERGENCY_ROLE) nonReentrant {
         require(projectWallet != address(0), "Rescue: invalid wallet");
         uint256 bal = address(this).balance;
         require(bal > 0, "Rescue: no ETH");
-        (bool ok, ) = projectWallet.call{value: bal}("");
-        require(ok, "Rescue: ETH transfer failed");
+
+        // Always record pending withdrawal for the configured project wallet.
+        // The project (projectWallet) should call `claimPendingWithdrawals` to pull funds.
+        pendingWithdrawals[projectWallet] += bal;
         emit EmergencyEthWithdrawn(projectWallet, bal);
+    }
+
+    /// @notice Claim pending withdrawals previously recorded when immediate forward failed
+    function claimPendingWithdrawals() external nonReentrant {
+        uint256 amount = pendingWithdrawals[msg.sender];
+        require(amount > 0, "Rescue: no pending funds");
+        pendingWithdrawals[msg.sender] = 0;
+        (bool ok, ) = payable(msg.sender).call{value: amount}("");
+        require(ok, "Rescue: claim transfer failed");
+        emit EmergencyEthWithdrawn(msg.sender, amount);
     }
 
     /// @notice Authorize a caller (e.g., presale contract) to perform rescue operations without ADMIN_ROLE

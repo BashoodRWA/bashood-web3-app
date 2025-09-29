@@ -26,10 +26,16 @@ describe("PoC: BashoodRescue emergencyWithdrawETH reentrancy and reject tests", 
   const rescueAddr = await getAddress(rescue);
   await owner.sendTransaction({ to: rescueAddr, value: parseEther("1") });
 
-    // attempt emergency withdraw to a wallet that reverts
     // set project wallet to the reverting wallet (admin = owner)
     await rescue.connect(owner).setProjectWallet(revertWalletAddr);
-    await expect(rescue.connect(owner).emergencyWithdrawETH()).to.be.revertedWith("Rescue: ETH transfer failed");
+    // After the pull-pattern change, emergencyWithdrawETH will always record pendingWithdrawals
+    // for the project wallet; the project must call claimPendingWithdrawals to pull funds.
+    await expect(rescue.connect(owner).emergencyWithdrawETH())
+      .to.emit(rescue, 'EmergencyEthWithdrawn')
+      .withArgs(revertWalletAddr, parseEther('1'));
+
+    const pending = await rescue.pendingWithdrawals(revertWalletAddr);
+    expect(pending).to.equal(parseEther('1'));
   });
 
   it("PoC: ensure EMERGENCY_ROLE check prevents reentry attempts from project wallet callback", async function () {
