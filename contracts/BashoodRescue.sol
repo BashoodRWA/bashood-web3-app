@@ -3,6 +3,7 @@ pragma solidity ^0.8.20;
 
 import "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 import "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
+import "@openzeppelin/contracts/utils/Address.sol";
 import "@openzeppelin/contracts/access/AccessControl.sol";
 import "@openzeppelin/contracts/token/ERC1155/IERC1155.sol";
 import "@openzeppelin/contracts/token/ERC1155/IERC1155Receiver.sol";
@@ -56,7 +57,7 @@ contract BashoodRescue is AccessControl, IERC1155Receiver, ReentrancyGuard {
         uint256 nftId,
         address to,
         uint256 amount
-    ) external {
+    ) external nonReentrant {
         require(authorizedCallers[msg.sender] || hasRole(ADMIN_ROLE, msg.sender), "Rescue: not authorized");
         require(nftContract != address(0), "Rescue: invalid nft");
         require(to != address(0), "Rescue: invalid to");
@@ -65,8 +66,11 @@ contract BashoodRescue is AccessControl, IERC1155Receiver, ReentrancyGuard {
         IERC1155 nft = IERC1155(nftContract);
         require(nft.balanceOf(address(this), nftId) >= amount, "Rescue: insufficient NFT balance");
 
-        nft.safeTransferFrom(address(this), to, nftId, amount, "");
+        // Checks-effects-interactions: emit the event before the external transfer so
+        // state consistent observers (and static analyzers) see the intent before
+        // any external call that may reenter.
         emit ERC1155Rescued(nftContract, nftId, to, amount);
+        nft.safeTransferFrom(address(this), to, nftId, amount, "");
     }
 
     /// @notice Rescata tokens ERC20 custodiados por este contrato.
@@ -108,8 +112,9 @@ contract BashoodRescue is AccessControl, IERC1155Receiver, ReentrancyGuard {
         uint256 amount = pendingWithdrawals[msg.sender];
         require(amount > 0, "Rescue: no pending funds");
         pendingWithdrawals[msg.sender] = 0;
-        (bool ok, ) = payable(msg.sender).call{value: amount}("");
-        require(ok, "Rescue: claim transfer failed");
+        // Use OpenZeppelin Address.sendValue which reverts on failure and is the
+        // recommended safe replacement for low-level .call when forwarding ETH.
+        Address.sendValue(payable(msg.sender), amount);
         emit EmergencyEthWithdrawn(msg.sender, amount);
     }
 
