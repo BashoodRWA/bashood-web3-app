@@ -23,6 +23,9 @@ describe("PoC: BashoodRescue emergencyWithdrawETH revert path", function () {
     const revAddr = (typeof rev.getAddress === 'function') ? await rev.getAddress() : (rev.address || rev.target);
   // Set project wallet on rescue to the reverting wallet
   await rescue.connect(deployer).setProjectWallet(revAddr);
-  await expect(rescueWithEmergency.emergencyWithdrawETH()).to.be.revertedWith("Rescue: ETH transfer failed");
+  await expect(rescueWithEmergency.emergencyWithdrawETH()).to.emit(rescue, 'EmergencyEthWithdrawn');
+
+  const pending = await rescue.pendingWithdrawals(revAddr);
+  expect(pending).to.be.gt(0);
   });
 });

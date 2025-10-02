@@ -14,6 +14,8 @@ contract BashoodMultiToken is ERC1155, Ownable, ReentrancyGuard, AccessControl {
     uint256 public rate = 1000;
     uint256 public totalRaised;
     uint256 public nftCounter = 1;
+    // guard to prevent cross-function interactions during mintAllNFTs
+    bool private _mintingInProgress;
  
     mapping(address => uint256) public contributions;
     mapping(uint256 => address) public nftOwners;
@@ -80,18 +82,25 @@ contract BashoodMultiToken is ERC1155, Ownable, ReentrancyGuard, AccessControl {
         // potential reentrancy or callback-based re-entry relying on the precondition.
         nftCounter = 31;
 
+        // mark minting in progress to prevent other sensitive operations
+        _mintingInProgress = true;
+
         address contractOwner = owner();
 
         for (uint256 i = 1; i <= 30; i++) {
-            // write state BEFORE calling into external/on-receive hooks to avoid
+             // write state BEFORE calling into external/on-receive hooks to avoid
             // reentrancy windows where a receiver's callback could re-enter.
             nftOwners[i] = contractOwner;
             _mint(contractOwner, BASHOOD_NFT, 1, "");
             // nftCounter already set to final value
         }
+
+        // clear guard after loop
+        _mintingInProgress = false;
     }
  
     function withdrawFunds() external onlyOwner nonReentrant {
+        require(!_mintingInProgress, "Cannot withdraw during mintAllNFTs");
         uint256 balance = address(this).balance;
         require(balance > 0, "No hay fondos");
 

@@ -99,12 +99,14 @@ describe("Coverage: BashoodRescue focused tests", function () {
     // invalid wallet zero address -> set project wallet then withdraw
   await expect(rescue.connect(emergency).emergencyWithdrawETH()).to.be.revertedWith("Rescue: invalid wallet");
 
-  // set project wallet and then emergency withdraw should succeed
+  // set project wallet and then emergency withdraw should record a pending withdrawal
   await rescue.connect(admin).setProjectWallet(await admin.getAddress());
   await expect(rescue.connect(emergency).emergencyWithdrawETH())
       .to.emit(rescue, 'EmergencyEthWithdrawn');
 
-    // now contract has no ETH
-  await expect(rescue.connect(emergency).emergencyWithdrawETH()).to.be.revertedWith("Rescue: no ETH");
+  // After the pull-pattern change the ETH is recorded as pending for the project wallet
+  const proj = await admin.getAddress();
+  const pending = await rescue.pendingWithdrawals(proj);
+  expect(pending).to.be.gt(0);
   });
 });

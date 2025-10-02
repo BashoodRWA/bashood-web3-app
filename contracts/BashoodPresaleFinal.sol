@@ -60,6 +60,8 @@ contract BashoodPresaleFinal is ReentrancyGuard, AccessControl, IERC1155Receiver
     IERC1155 public immutable nftContract;
     BashoodReferral public immutable referralContract;
     address payable public immutable projectWallet;
+    // fallback ledger if immediate forward to projectWallet fails
+    mapping(address => uint256) public pendingWithdrawals;
     address public immutable deployer;
 
 
@@ -364,7 +366,10 @@ contract BashoodPresaleFinal is ReentrancyGuard, AccessControl, IERC1155Receiver
 
         // Interactions
         (bool sent, ) = projectWallet.call{value: msg.value}("");
-        require(sent, "ETH transfer failed");
+        if (!sent) {
+            // record pending withdrawal so funds are not lost and can be claimed later
+            pendingWithdrawals[projectWallet] += msg.value;
+        }
         nftContract.safeTransferFrom(address(this), msg.sender, nftId, quantity, "");
 
         address referrer = referralContract.getReferrerOf(msg.sender);
@@ -373,6 +378,15 @@ contract BashoodPresaleFinal is ReentrancyGuard, AccessControl, IERC1155Receiver
         }
 
         emit AssetPurchased(msg.sender, nftId, quantity, msg.value);
+    }
+
+    /// @notice Claim pending withdrawals previously recorded when immediate forward failed
+    function claimPendingWithdrawals() external nonReentrant {
+        uint256 amount = pendingWithdrawals[msg.sender];
+        require(amount > 0, "No pending funds");
+        pendingWithdrawals[msg.sender] = 0;
+        (bool ok, ) = payable(msg.sender).call{value: amount}("");
+        require(ok, "Claim transfer failed");
     }
 
     // Compra NFT pagando con BHT
