@@ -82,15 +82,14 @@ contract BashoodMultiToken is ERC1155, Ownable, ReentrancyGuard, AccessControl {
         // potential reentrancy or callback-based re-entry relying on the precondition.
         nftCounter = 31;
 
-        // mark minting in progress to prevent other sensitive operations
-        _mintingInProgress = true;
+            _mintingInProgress = true; // mark minting in progress to prevent other sensitive operations
 
         address contractOwner = owner();
 
         for (uint256 i = 1; i <= 30; i++) {
              // write state BEFORE calling into external/on-receive hooks to avoid
             // reentrancy windows where a receiver's callback could re-enter.
-            nftOwners[i] = contractOwner;
+                nftOwners[i] = contractOwner; // update state before external calls to prevent reentrancy via ERC1155 callbacks
             _mint(contractOwner, BASHOOD_NFT, 1, "");
             // nftCounter already set to final value
         }
