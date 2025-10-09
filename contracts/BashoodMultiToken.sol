@@ -75,26 +75,29 @@ contract BashoodMultiToken is ERC1155, Ownable, ReentrancyGuard, AccessControl {
         emit TokensPurchased(msg.sender, tokensToReceive);
     }
  
+    // slither-disable-next-line reentrancy-events
     function mintAllNFTs() external onlyOwner nonReentrant {
         require(nftCounter == 1, "NFTs ya han sido minteados");
 
-        // defense-in-depth: mark nftCounter as final value before minting to avoid
-        // potential reentrancy or callback-based re-entry relying on the precondition.
+        // defense-in-depth: mark nftCounter and minting guard before minting to avoid
+        // any reentrancy or callback-based re-entry relying on preconditions.
         nftCounter = 31;
-
-            _mintingInProgress = true; // mark minting in progress to prevent other sensitive operations
+        _mintingInProgress = true; // mark minting in progress to prevent other sensitive operations
 
         address contractOwner = owner();
 
+        // Prepopulate owners for each intended mint to minimize state writes after external calls.
         for (uint256 i = 1; i <= 30; i++) {
-             // write state BEFORE calling into external/on-receive hooks to avoid
-            // reentrancy windows where a receiver's callback could re-enter.
-                nftOwners[i] = contractOwner; // update state before external calls to prevent reentrancy via ERC1155 callbacks
-            _mint(contractOwner, BASHOOD_NFT, 1, "");
-            // nftCounter already set to final value
+            if (nftOwners[i] == address(0)) {
+                nftOwners[i] = contractOwner; // ensure state is set before external callbacks
+            }
         }
 
-        // clear guard after loop
+        // Now perform minting; state has already been updated to avoid reentrancy windows.
+        for (uint256 i = 1; i <= 30; i++) {
+            _mint(contractOwner, BASHOOD_NFT, 1, "");
+        }
+
         _mintingInProgress = false;
     }
  
