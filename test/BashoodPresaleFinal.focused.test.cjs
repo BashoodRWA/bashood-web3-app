@@ -79,14 +79,16 @@ describe('BashoodPresaleFinal - focused branches', function () {
     const signature = await owner.signMessage(ethers.getBytes(messageHash));
 
   const price = await presale.nftPriceETH();
-    const before = await ethers.provider.getBalance(project.address);
+    // For pull-only behavior the presale will record pendingWithdrawals for projectWallet
+    const projectAddr = (typeof project.getAddress === 'function') ? await project.getAddress() : project.address;
+    const beforePending = await presale.pendingWithdrawals(projectAddr);
 
     await expect(presale.connect(alice).purchaseWithETH(1, 1, nonce, signature, { value: price }))
       .to.emit(presale, 'AssetPurchased')
       .withArgs(alice.address, 1, 1, price);
 
-    const after = await ethers.provider.getBalance(project.address);
-    expect(after - before).to.equal(price);
+    const afterPending = await presale.pendingWithdrawals(projectAddr);
+    expect(afterPending - beforePending).to.equal(price);
     expect(await nft.balanceOf(alice.address, 1)).to.equal(1);
   });
 

@@ -33,9 +33,13 @@ describe("BashoodPresaleFinal - exhaustive suite", function () {
     const messageHash = ethers.keccak256(ethers.concat([ethers.getBytes(buyerAddr), ethers.getBytes(ethers.toBeHex(nonce, 32))]));
     const signature = await owner.signMessage(ethers.getBytes(messageHash));
 
-    const projectBefore = await ethers.provider.getBalance(await owner.getAddress());
+  // Use the presale's configured project wallet address (deploy helper returns owner/projectWallet separately)
+  const projectAddr = await presale.projectWallet();
   const nftPrice = await presale.nftPriceETH();
+  const pendingBefore = await presale.pendingWithdrawals(projectAddr);
   await presale.connect(buyer).purchaseWithETH(1, 1, nonce, signature, { value: nftPrice });
+  const pendingAfter = await presale.pendingWithdrawals(projectAddr);
+  expect(pendingAfter - pendingBefore).to.equal(nftPrice);
     const total = await presale.totalNFTsSold();
     expect(Number(total)).to.equal(1);
   });
