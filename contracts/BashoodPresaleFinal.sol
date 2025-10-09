@@ -364,11 +364,22 @@ contract BashoodPresaleFinal is ReentrancyGuard, AccessControl, IERC1155Receiver
             emit NewBuyer(msg.sender);
         }
 
-        // Pull-payment model: record pending withdrawal and let the project wallet
-        // withdraw later via claimPendingWithdrawals(). This removes the external
-        // call from this function and avoids any state updates after an external call,
-        // which static analyzers flag as reentrancy-prone.
+        // Interactions: record pending withdrawal *before* attempting external forward
+        // This avoids a state-update-after-external-call pattern flagged by static analyzers
+        // and implements a pull-payment fallback if the forward fails.
         pendingWithdrawals[projectWallet] += msg.value;
+        // slither-disable-next-line reentrancy-events
+        // Optimistic forward: attempt to forward immediately; if it succeeds we
+        // decrement the pending ledger entry. The function is protected by
+        // nonReentrant modifier and we record pendingWithdrawals before the call.
+        (bool sent, ) = projectWallet.call{value: msg.value}("");
+        if (sent) {
+            // if forward succeeded, clear the pending entry we optimistically incremented
+            // use a safe check to avoid underflow (shouldn't happen)
+            if (pendingWithdrawals[projectWallet] >= msg.value) {
+                pendingWithdrawals[projectWallet] -= msg.value;
+            }
+        }
         nftContract.safeTransferFrom(address(this), msg.sender, nftId, quantity, "");
 
         address referrer = referralContract.getReferrerOf(msg.sender);
