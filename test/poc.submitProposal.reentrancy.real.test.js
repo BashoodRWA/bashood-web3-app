@@ -13,9 +13,10 @@ describe("PoC real: BashoodPresaleFinal.submitProposal against MaliciousBHT", fu
     const MockReferral = await ethers.getContractFactory("contracts/mocks/MockReferral.sol:MockReferral");
     const MaliciousBHT = await ethers.getContractFactory("contracts/mocks/MaliciousBHT.sol:MaliciousBHT");
 
-    const nft = await MockNFT.deploy();
-    const price = await MockPriceFeed.deploy(8, parseUnits ? parseUnits('1', 8) : ethers.utils.parseUnits('1', 8));
-    const referral = await MockReferral.deploy(ethers.constants.AddressZero, ethers.constants.AddressZero, nft.address);
+  const nft = await MockNFT.deploy();
+  const price = await MockPriceFeed.deploy(8, parseUnits ? parseUnits('1', 8) : ethers.utils.parseUnits('1', 8));
+  const ZERO = "0x0000000000000000000000000000000000000000";
+  const referral = await MockReferral.deploy(ZERO, ZERO, nft.address);
     const mal = await MaliciousBHT.deploy();
 
     // Deploy real presale contract
