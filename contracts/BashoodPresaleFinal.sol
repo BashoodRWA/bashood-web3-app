@@ -108,7 +108,7 @@ contract BashoodPresaleFinal is ReentrancyGuard, AccessControl, IERC1155Receiver
         require(operationsWallet != address(0), "Ops wallet req");
         require(maxPriceStaleness > 0, "Staleness req");
         require(address(priceFeed) != address(0), "PriceFeed req");
-        // OrÃ¡culo: solo para asegurar que estÃ¡ activo y fresco
+        // Oráculo: solo para asegurar que está activo y fresco
     (uint80 roundId, int256 price, uint256 startedAt, uint256 updatedAt, uint80 answeredInRound) = priceFeed.latestRoundData();
     require(price > 0, "Invalid price");
     require(updatedAt > 0, "Price too stale");
@@ -116,25 +116,38 @@ contract BashoodPresaleFinal is ReentrancyGuard, AccessControl, IERC1155Receiver
     require(block.timestamp <= updatedAt + maxPriceStaleness, "Price too stale");
     require(answeredInRound >= roundId, "Incomplete round");
 
-        // Quema el depÃ³sito
-    try IBashoodToken(address(bashoodToken)).burnFrom(msg.sender, depositBHT) {
+        // Create proposal state first (checks-effects-interactions) then collect the deposit.
+        uint256 pid = nextProposalId;
+        proposals[pid] = Proposal({
+            proposer: msg.sender,
+            data: data,
+            depositBHT: 0,
+            finalized: false
+        });
+        // advance counter early so IDs are reserved and deterministic even if transfer reverts
+        nextProposalId = pid + 1;
+
+        // Now collect the deposit from the proposer. We prefer to pull funds into this contract
+        // and then burn/forward as needed. If the external transfer fails the whole tx reverts
+        // and the proposal above will not persist (atomicity).
+        bool burned = false;
+        try IBashoodToken(address(bashoodToken)).burnFrom(msg.sender, depositBHT) {
+            burned = true;
             emit Burned(msg.sender, depositBHT);
             emit BHTBurned(msg.sender, depositBHT);
         } catch {
+            // Fallback: attempt to transfer directly to the dead address. This is equivalent
+            // to burning when burnFrom is not available. If this fails the tx will revert.
             bool burnOk = bashoodToken.transferFrom(msg.sender, 0x000000000000000000000000000000000000dEaD, depositBHT);
             require(burnOk, "Burn transfer failed");
+            burned = true;
             emit Burned(msg.sender, depositBHT);
             emit BHTBurned(msg.sender, depositBHT);
         }
 
-        proposals[nextProposalId] = Proposal({
-            proposer: msg.sender,
-            data: data,
-            depositBHT: depositBHT,
-            finalized: false
-        });
-        emit ProposalSubmitted(nextProposalId, msg.sender, depositBHT);
-        nextProposalId++;
+        // Record the collected deposit on the proposal (must be done after successful collection)
+        proposals[pid].depositBHT = depositBHT;
+        emit ProposalSubmitted(pid, msg.sender, depositBHT);
     }
 
     function finalizeProposal(uint256 id) external onlyRole(ADMIN_ROLE) nonReentrant {
