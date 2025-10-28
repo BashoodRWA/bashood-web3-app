@@ -19,12 +19,12 @@ describe("PoC real: BashoodPresaleFinal.submitProposal against MaliciousBHT", fu
   const referral = await MockReferral.deploy(ZERO, ZERO, nft.address);
     const mal = await MaliciousBHT.deploy();
 
-    // Deploy real presale contract
+    // Deploy real presale contract directly
     const BashoodPresaleFinal = await ethers.getContractFactory("contracts/BashoodPresaleFinal.sol:BashoodPresaleFinal");
-    const unsigned = await BashoodPresaleFinal.getDeployTransaction(
-      mal.getAddress ? await mal.getAddress() : mal.address,
-      nft.getAddress ? await nft.getAddress() : nft.address,
-      referral.getAddress ? await referral.getAddress() : referral.address,
+    const presale = await BashoodPresaleFinal.deploy(
+      mal.address,
+      nft.address,
+      referral.address,
       owner.address,
       1, // nftPriceETH
       1, // nftPriceBHT
@@ -32,10 +32,8 @@ describe("PoC real: BashoodPresaleFinal.submitProposal against MaliciousBHT", fu
       9999999999, // presaleEnd
       100 // maxNFTSupply
     );
-    const tx = await owner.sendTransaction({ data: unsigned.data });
-    const receipt = await tx.wait();
-    const presaleAddr = receipt.contractAddress;
-    const presale = await ethers.getContractAt('BashoodPresaleFinal', presaleAddr);
+    await presale.deployed();
+    const presaleAddr = presale.address;
 
     // configure presale
     await presale.setPriceFeed(price.getAddress ? await price.getAddress() : price.address);
