@@ -19,28 +19,23 @@ describe("PoC real: BashoodPresaleFinal.submitProposal against MaliciousBHT", fu
   const referral = await MockReferral.deploy(ZERO, ZERO, nft.address);
     const mal = await MaliciousBHT.deploy();
 
-    // Deploy real presale contract directly
+    // Deploy real presale contract using unsigned tx to avoid provider constructor differences
     const BashoodPresaleFinal = await ethers.getContractFactory("contracts/BashoodPresaleFinal.sol:BashoodPresaleFinal");
-    const presale = await BashoodPresaleFinal.deploy(
-      mal.address,
-      nft.address,
-      referral.address,
+    const unsigned = await BashoodPresaleFinal.getDeployTransaction(
+      mal.getAddress ? await mal.getAddress() : mal.address,
+      nft.getAddress ? await nft.getAddress() : nft.address,
+      referral.getAddress ? await referral.getAddress() : referral.address,
       owner.address,
-      1, // nftPriceETH
-      1, // nftPriceBHT
-      1, // presaleStart
-      9999999999, // presaleEnd
-      100 // maxNFTSupply
+      1,
+      1,
+      1,
+      9999999999,
+      100
     );
-    await presale.deployed();
-    // Some ethers versions expose .address, others require reading the deploy transaction receipt
-    let presaleAddress;
-    try {
-      presaleAddress = presale.getAddress ? await presale.getAddress() : presale.address;
-    } catch {
-      const r = await presale.deployTransaction.wait();
-      presaleAddress = r.contractAddress;
-    }
+    const tx = await owner.sendTransaction({ data: unsigned.data });
+    const receipt = await tx.wait();
+    const presaleAddress = receipt.contractAddress;
+    const presale = await ethers.getContractAt('BashoodPresaleFinal', presaleAddress);
 
   // configure presale
   await presale.setPriceFeed(price.getAddress ? await price.getAddress() : price.address);
