@@ -112,7 +112,8 @@ contract BashoodPresaleFinal is ReentrancyGuard, AccessControl, IERC1155Receiver
     (uint80 roundId, int256 price, uint256 startedAt, uint256 updatedAt, uint80 answeredInRound) = priceFeed.latestRoundData();
     require(price > 0, "Invalid price");
     require(updatedAt > 0, "Price too stale");
-    require(block.timestamp - updatedAt <= maxPriceStaleness, "Price too stale");
+    // Prefer explicit additive comparison to avoid underflow and make intent clear
+    require(block.timestamp <= updatedAt + maxPriceStaleness, "Price too stale");
     require(answeredInRound >= roundId, "Incomplete round");
 
         // Quema el depÃ³sito
@@ -197,7 +198,8 @@ contract BashoodPresaleFinal is ReentrancyGuard, AccessControl, IERC1155Receiver
         (uint80 roundId, int256 answer, uint256 startedAt, uint256 updatedAt, uint80 answeredInRound) = priceFeed.latestRoundData();
     require(answer > 0, "Invalid price");
     require(updatedAt > 0, "Price too stale");
-        require(block.timestamp - updatedAt <= maxPriceStaleness, "Price too stale");
+        // Prefer explicit additive comparison to avoid underflow and make intent clear
+        require(block.timestamp <= updatedAt + maxPriceStaleness, "Price too stale");
         require(answeredInRound >= roundId, "Incomplete round");
         uint8 decimals_ = priceFeed.decimals();
         // fiatQuoteUsd has 18 decimals; answer has decimals_ decimals representing USD per BHT
@@ -384,9 +386,10 @@ contract BashoodPresaleFinal is ReentrancyGuard, AccessControl, IERC1155Receiver
     function claimPendingWithdrawals() external nonReentrant {
         uint256 amount = pendingWithdrawals[msg.sender];
         require(amount > 0, "No pending funds");
+        // zero-out before transfer to follow checks-effects-interactions
         pendingWithdrawals[msg.sender] = 0;
-        (bool ok, ) = payable(msg.sender).call{value: amount}("");
-        require(ok, "Claim transfer failed");
+        // Use OpenZeppelin Address.sendValue which reverts on failure and documents intent
+        Address.sendValue(payable(msg.sender), amount);
     }
 
     // Compra NFT pagando con BHT
@@ -498,7 +501,8 @@ contract BashoodPresaleFinal is ReentrancyGuard, AccessControl, IERC1155Receiver
         (uint80 roundId, int256 answer, uint256 startedAt, uint256 updatedAt, uint80 answeredInRound) = priceFeed.latestRoundData();
     require(answer > 0, "Invalid price");
     require(updatedAt > 0, "Price too stale");
-        require(block.timestamp - updatedAt <= maxPriceStaleness, "Price too stale");
+        // Prefer explicit additive comparison to avoid underflow and make intent clear
+        require(block.timestamp <= updatedAt + maxPriceStaleness, "Price too stale");
         require(answeredInRound >= roundId, "Incomplete round");
 
         uint256 baseCost = Math.mulDiv(nftPriceBHT, quantity, 1);
