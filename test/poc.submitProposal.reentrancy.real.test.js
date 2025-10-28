@@ -49,7 +49,10 @@ describe("PoC real: BashoodPresaleFinal.submitProposal against MaliciousBHT", fu
 
   await malAsAttacker.approve(presaleAddress, parseUnits ? parseUnits('50', 18) : ethers.utils.parseUnits('50', 18));
 
-    // point malicious token at the real presale
+  // point malicious token at the real presale (debug prints to ensure addresses are valid)
+  console.log("mal.address", mal.address);
+  console.log("presaleAddress", presaleAddress);
+  console.log("nft.address", nft.address);
   await mal.setTarget(presaleAddress);
 
     // Call submitProposal as attacker; if reentrancy occurs the malicious counter will reflect nested calls
