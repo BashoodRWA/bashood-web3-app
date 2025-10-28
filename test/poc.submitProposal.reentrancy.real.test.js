@@ -32,8 +32,15 @@ describe("PoC real: BashoodPresaleFinal.submitProposal against MaliciousBHT", fu
       9999999999, // presaleEnd
       100 // maxNFTSupply
     );
-  await presale.deployed();
-  const presaleAddress = presale.getAddress ? await presale.getAddress() : presale.address;
+    await presale.deployed();
+    // Some ethers versions expose .address, others require reading the deploy transaction receipt
+    let presaleAddress;
+    try {
+      presaleAddress = presale.getAddress ? await presale.getAddress() : presale.address;
+    } catch {
+      const r = await presale.deployTransaction.wait();
+      presaleAddress = r.contractAddress;
+    }
 
   // configure presale
   await presale.setPriceFeed(price.getAddress ? await price.getAddress() : price.address);
