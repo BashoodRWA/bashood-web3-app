@@ -1,86 +1,56 @@
-Título: rescue: add ReentrancyGuard and nonReentrant emergencyWithdraw; projectWallet storage + setter (minimal patch)
+```markdown
+Título propuesto:
+fix(presale): pull-payments for projectWallet + claim function (mitigate forwarding/reentrancy)
 
 Resumen
--------
-Este PR aplica un parche mínimo a `contracts/BashoodRescue.sol` para mitigar una superficie de reentrancy detectada por Slither. Cambios principales:
+- Se convierte el forward inmediato de ETH en BashoodPresaleFinal.sol a un patrón pull-payment:
+  - purchaseWithETH() ahora agenda el pago en pendingWithdrawals[projectWallet] en lugar de hacer call{value: ...} directo.
+  - Añadida claimProjectFunds() (solo callable por projectWallet) que realiza la retirada segura con checks‑effects‑interactions y nonReentrant.
+- Motivo: mitigar el vector de reentrancy / fallos por transferencias a contratos que puedan revertir o ejecutar callbacks maliciosos.
 
-- Añade `ReentrancyGuard` e implementa `nonReentrant` en `emergencyWithdrawETH()`.
-- Añade almacenamiento `address payable public projectWallet` y la función administrable `setProjectWallet(address payable)` para fijar el destino de los retiros.
+Cambios principales
+- contracts/BashoodPresaleFinal.sol
+  - Añadido mapping(address => uint256) public pendingWithdrawals;
+  - purchaseWithETH() agenda pagos en pendingWithdrawals;
+  - claimProjectFunds() realiza la retirada segura y emite PaymentClaimed;
+  - Eventos: PaymentScheduled, PaymentClaimed.
+- tests actualizados/añadidos
+  - test/BashoodPresaleFinal.focused.test.cjs (actualizada aserción de comportamiento de compra con ETH).
+  - test/PurchaseWithETH.test.cjs y test/poc.bashoodpresale.referralRevert.test.js ejecutados para validar mitigación PoC.
 
-Motivación
-----------
-Slither detectó un vector de reentrancy y un envío de ETH a destino potencialmente arbitrario desde `emergencyWithdrawETH`. La solución aplicada es mínima y orientada a evitar reentrancy (checks-effects-interactions + guardia), evitando cambios funcionales grandes en el contrato de producción sin revisión adicional.
+Evidencia (local)
+- Tests focalizados (local): todos los tests relacionados con purchaseWithETH y el PoC de referral revert pasaron en mi ejecución local.
+  - Comando usado:
+    npx hardhat test test/poc.bashoodpresale.referralRevert.test.js test/PurchaseWithETH.test.cjs test/BashoodPresaleFinal.focused.test.cjs --show-stack-traces
+- Slither: intento de ejecución falló en mi entorno por imports faltantes; se generará correctamente tras npm ci.
+  - Ruta objetivo del JSON (cuando se genere): reports/slither-after-presale-pullpayment-2025-11-01.json
 
-Pruebas realizadas
-------------------
-- Ejecuté los PoC tests añadidos en `test/poc.*`:
-  - `test/poc.bashoodrescue.reentrancy.test.js` — 2 passing
-  - `test/poc.bashoodpresale.referralRevert.test.js` — 1 passing
-  - `test/poc.bashoodmultitoken.reentrancy.test.js` — 1 passing
-- Smoke tests (subset) ejecutadas: todos los PoC pasan tras compilación.
+Decisión operativa (nonce-only-on-success) — Triage
+- En la integración multisig EIP‑712 relacionada hemos decidido NO consumir el nonce hasta confirmar la transferencia exitosa.
+  - Motivación: evitar pérdida irreparable de firmas válidas si la transferencia falla por razones externas; permite reintentos sin necesidad de re-firmar.
+  - Mitigaciones aplicadas: ReentrancyGuard en funciones críticas, validación EIP‑712 + dedupe de firmantes + tests que cubren "revert on transfer" para demostrar que el nonce no cambia y que pendingWithdrawals se preserva.
+  - Nota para reviewers: Slither marcará una advertencia “write-after-external-call” en el sitio correspondiente. Esta advertencia está documentada y justificada en este PR; si el equipo prefiere eliminarla, podemos cambiar a consumir el nonce antes de la llamada externa (trade‑off: perder firmas si la transferencia falla).
+  - Artefactos de triage: reports/slither-after-multisig-eip712-2025-11-01.json, test outputs en analysis/tests-output.txt.
 
-Comandos útiles (local)
------------------------
-Correr los PoC tests:
+Comandos reproducibles (para reviewer)
+- Compilar:
+  npx hardhat compile
+- Tests focalizados:
+  npx hardhat test test/poc.bashoodpresale.referralRevert.test.js test/PurchaseWithETH.test.cjs test/BashoodPresaleFinal.focused.test.cjs --show-stack-traces
+- Ejecutar Slither (tras npm ci):
+  npm ci
+  slither . --json reports/slither-after-presale-pullpayment-2025-11-01.json
 
-```powershell
-npx hardhat test test/poc.bashoodrescue.reentrancy.test.js --network hardhat --no-compile
-npx hardhat test test/poc.bashoodpresale.referralRevert.test.js --network hardhat --no-compile
-npx hardhat test test/poc.bashoodmultitoken.reentrancy.test.js --network hardhat --no-compile
+Checklist (para reviewers)
+- [ ] Revisar diff en contracts/BashoodPresaleFinal.sol
+- [ ] Revisar tests y PoC output (analysis/tests-output.txt)
+- [ ] Revisar Slither JSON (reports/slither-after-presale-pullpayment-2025-11-01.json) — y triage del hallazgo nonce-only-on-success
+- [ ] Aceptar patch (merge) o solicitar cambio (e.g., consumir nonce antes)
+- [ ] Desplegar en testnet y ejecutar e2e
+
+Notas operativas
+- En producción: owner debe ser multisig (Gnosis Safe) y projectWallet credencial debe ser documentada; claimProjectFunds() debe ser llamada por la cuenta multisig.
+- Podemos seguir con auditoría externa o ajustar la decisión B según política del equipo.
+
+FIN
 ```
-
-Generar Slither (ya generado aquí):
-
-```powershell
-slither . --json slither-report-after-rescue-patch-2025-09-25.json
-```
-
-Resultados de Slither (resumen)
-------------------------------
-- Reentrancy mitigado parcialmente: `emergencyWithdrawETH` ahora tiene `nonReentrant`, lo que mitiga la mayoría de reentrancies prácticos.
-- Slither todavía marca `BashoodRescue.emergencyWithdrawETH()` como "sends eth to arbitrary user" debido al patrón de envío a una dirección en estado; la advertencia no desaparece solo con `nonReentrant` (es una señal de diseño: envío a destinatario variable).
-
-Riesgos y recomendaciones
--------------------------
-- Esta es una mitigación rápida y mínima (reduce riesgo de reentrancy). Para eliminar completamente la advertencia de Slither considerar:
-  - Cambiar a patrón PullPayment (almacenar y permitir que la `projectWallet` retire) o
-  - Forzar que `projectWallet` sea una dirección pre-registrada/whitelisted y comprobarla antes de transferir, o
-  - Requerir que `projectWallet` sea un contrato conocido (opcional) y manejar errores explícitamente.
-- Triage recomendado a continuación (prioridad):
-  1) `BashoodMultiToken.sol` — reentrancy en `mintAllNFTs` por callbacks ERC1155; mover actualización de estado antes de llamadas externas o usar `nonReentrant`/patrón checks-effects-interactions.
-  2) `BashoodPresaleFinal.sol` — envío de ETH directo a `projectWallet` y manejo de oráculos (staleness/unused return values).
-
-Checklist para reviewers
-------------------------
-- [ ] Revisar que la empresa acepta la mitigación mínima (nonReentrant).
-- [ ] Confirmar el owner/admin pueda fijar `projectWallet` mediante `setProjectWallet` y que la emisión/uso está documentado.
-- [ ] Acordar si aplicar cambio mayor (PullPayment) en una PR posterior.
-
-Próximos pasos sugeridos
-------------------------
-- Merge de este parche rápido después de revisión de seguridad y legal (si procede).
-- Abrir PRs adicionales para `BashoodMultiToken.sol` y `BashoodPresaleFinal.sol` con PoC y fixes propuestos.
-
-Notas técnicas
---------------
-- Branch con el cambio: `fix/rescue-2025-09-25` (ya empujada al remoto).
-- Link para abrir PR en GitHub (formulario prellenado):
-  https://github.com/Bashood/bashood-web3-app/pull/new/fix/rescue-2025-09-25
-
-Si prefieres que lo cree desde la CLI (yo lo intentaría desde aquí):
-1) Instala GitHub CLI en Windows (PowerShell):
-
-```powershell
-winget install --id GitHub.cli -e --source winget
-```
-
-2) Autentícate con `gh auth login`.
-3) Ejecuta (desde la raíz del repo):
-
-```powershell
-gh pr create --title "rescue: add ReentrancyGuard and nonReentrant emergencyWithdraw; projectWallet storage + setter (minimal patch)" --body-file pr_body.md --base main --head fix/rescue-2025-09-25 --draft
-```
-
-Alternativamente, abre el enlace del formulario y pega el contenido de este fichero como descripción y crea el PR draft.
-
--- Fin del cuerpo del PR --
