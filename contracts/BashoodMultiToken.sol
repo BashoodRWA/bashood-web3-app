@@ -14,8 +14,6 @@ contract BashoodMultiToken is ERC1155, Ownable, ReentrancyGuard, AccessControl {
     uint256 public rate = 1000;
     uint256 public totalRaised;
     uint256 public nftCounter = 1;
-    // guard to prevent cross-function interactions during mintAllNFTs
-    bool private _mintingInProgress;
  
     mapping(address => uint256) public contributions;
     mapping(uint256 => address) public nftOwners;
@@ -75,34 +73,25 @@ contract BashoodMultiToken is ERC1155, Ownable, ReentrancyGuard, AccessControl {
         emit TokensPurchased(msg.sender, tokensToReceive);
     }
  
-    // slither-disable-next-line reentrancy-events
     function mintAllNFTs() external onlyOwner nonReentrant {
         require(nftCounter == 1, "NFTs ya han sido minteados");
 
-        // defense-in-depth: mark nftCounter and minting guard before minting to avoid
-        // any reentrancy or callback-based re-entry relying on preconditions.
+        // defense-in-depth: mark nftCounter as final value before minting to avoid
+        // potential reentrancy or callback-based re-entry relying on the precondition.
         nftCounter = 31;
-        _mintingInProgress = true; // mark minting in progress to prevent other sensitive operations
 
         address contractOwner = owner();
 
-        // Prepopulate owners for each intended mint to minimize state writes after external calls.
         for (uint256 i = 1; i <= 30; i++) {
-            if (nftOwners[i] == address(0)) {
-                nftOwners[i] = contractOwner; // ensure state is set before external callbacks
-            }
-        }
-
-        // Now perform minting; state has already been updated to avoid reentrancy windows.
-        for (uint256 i = 1; i <= 30; i++) {
+             // write state BEFORE calling into external/on-receive hooks to avoid
+            // reentrancy windows where a receiver's callback could re-enter.
+            nftOwners[i] = contractOwner;
             _mint(contractOwner, BASHOOD_NFT, 1, "");
+            // nftCounter already set to final value
         }
-
-        _mintingInProgress = false;
     }
  
     function withdrawFunds() external onlyOwner nonReentrant {
-        require(!_mintingInProgress, "Cannot withdraw during mintAllNFTs");
         uint256 balance = address(this).balance;
         require(balance > 0, "No hay fondos");
 

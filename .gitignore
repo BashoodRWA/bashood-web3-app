@@ -24,7 +24,3 @@ snapshots/*.csv
 scripts/generate-merkle-demo.js
 scripts/inspect-hre.cjs
 temp-pr-comment.txt
-
-# Slither artifacts and patches
-slither-run-*.json
-patches/

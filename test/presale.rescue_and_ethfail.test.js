@@ -46,12 +46,9 @@ describe('Presale: ETH transfer failure and rescue delegation', function () {
   const sig = await presaleHelpers.signNonce(deployer, buyer.address, 1);
 
     const nftPrice = await presale.nftPriceETH();
-    // Under pull-pattern a failed immediate forward records a pending withdrawal and the purchase still succeeds
-    await presale.connect(buyer).purchaseWithETH(1, 1, 1, sig, { value: nftPrice });
-
-    const pending = await presale.pendingWithdrawals(await rejecting.getAddress());
-    // pending should be equal to nftPrice since the project wallet rejected the ETH
-    expect(pending).to.equal(nftPrice);
+    await expect(
+      presale.connect(buyer).purchaseWithETH(1, 1, 1, sig, { value: nftPrice })
+    ).to.be.revertedWith('ETH transfer failed');
   });
 
   it('rescue delegates bubble Error(reason) and generic revert appropriately', async function () {

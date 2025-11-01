@@ -60,8 +60,6 @@ contract BashoodPresaleFinal is ReentrancyGuard, AccessControl, IERC1155Receiver
     IERC1155 public immutable nftContract;
     BashoodReferral public immutable referralContract;
     address payable public immutable projectWallet;
-    // fallback ledger if immediate forward to projectWallet fails
-    mapping(address => uint256) public pendingWithdrawals;
     address public immutable deployer;
 
 
@@ -108,46 +106,32 @@ contract BashoodPresaleFinal is ReentrancyGuard, AccessControl, IERC1155Receiver
         require(operationsWallet != address(0), "Ops wallet req");
         require(maxPriceStaleness > 0, "Staleness req");
         require(address(priceFeed) != address(0), "PriceFeed req");
-        // Oráculo: solo para asegurar que está activo y fresco
+        // OrÃ¡culo: solo para asegurar que estÃ¡ activo y fresco
     (uint80 roundId, int256 price, uint256 startedAt, uint256 updatedAt, uint80 answeredInRound) = priceFeed.latestRoundData();
     require(price > 0, "Invalid price");
     require(updatedAt > 0, "Price too stale");
-    // Prefer explicit additive comparison to avoid underflow and make intent clear
-    require(block.timestamp <= updatedAt + maxPriceStaleness, "Price too stale");
+    require(block.timestamp - updatedAt <= maxPriceStaleness, "Price too stale");
     require(answeredInRound >= roundId, "Incomplete round");
 
-        // Create proposal state first (checks-effects-interactions) then collect the deposit.
-        uint256 pid = nextProposalId;
-        proposals[pid] = Proposal({
-            proposer: msg.sender,
-            data: data,
-            depositBHT: 0,
-            finalized: false
-        });
-        // advance counter early so IDs are reserved and deterministic even if transfer reverts
-        nextProposalId = pid + 1;
-
-        // Now collect the deposit from the proposer. We prefer to pull funds into this contract
-        // and then burn/forward as needed. If the external transfer fails the whole tx reverts
-        // and the proposal above will not persist (atomicity).
-        bool burned = false;
-        try IBashoodToken(address(bashoodToken)).burnFrom(msg.sender, depositBHT) {
-            burned = true;
+        // Quema el depÃ³sito
+    try IBashoodToken(address(bashoodToken)).burnFrom(msg.sender, depositBHT) {
             emit Burned(msg.sender, depositBHT);
             emit BHTBurned(msg.sender, depositBHT);
         } catch {
-            // Fallback: attempt to transfer directly to the dead address. This is equivalent
-            // to burning when burnFrom is not available. If this fails the tx will revert.
             bool burnOk = bashoodToken.transferFrom(msg.sender, 0x000000000000000000000000000000000000dEaD, depositBHT);
             require(burnOk, "Burn transfer failed");
-            burned = true;
             emit Burned(msg.sender, depositBHT);
             emit BHTBurned(msg.sender, depositBHT);
         }
 
-        // Record the collected deposit on the proposal (must be done after successful collection)
-        proposals[pid].depositBHT = depositBHT;
-        emit ProposalSubmitted(pid, msg.sender, depositBHT);
+        proposals[nextProposalId] = Proposal({
+            proposer: msg.sender,
+            data: data,
+            depositBHT: depositBHT,
+            finalized: false
+        });
+        emit ProposalSubmitted(nextProposalId, msg.sender, depositBHT);
+        nextProposalId++;
     }
 
     function finalizeProposal(uint256 id) external onlyRole(ADMIN_ROLE) nonReentrant {
@@ -211,8 +195,7 @@ contract BashoodPresaleFinal is ReentrancyGuard, AccessControl, IERC1155Receiver
         (uint80 roundId, int256 answer, uint256 startedAt, uint256 updatedAt, uint80 answeredInRound) = priceFeed.latestRoundData();
     require(answer > 0, "Invalid price");
     require(updatedAt > 0, "Price too stale");
-        // Prefer explicit additive comparison to avoid underflow and make intent clear
-        require(block.timestamp <= updatedAt + maxPriceStaleness, "Price too stale");
+        require(block.timestamp - updatedAt <= maxPriceStaleness, "Price too stale");
         require(answeredInRound >= roundId, "Incomplete round");
         uint8 decimals_ = priceFeed.decimals();
         // fiatQuoteUsd has 18 decimals; answer has decimals_ decimals representing USD per BHT
@@ -379,12 +362,9 @@ contract BashoodPresaleFinal is ReentrancyGuard, AccessControl, IERC1155Receiver
             emit NewBuyer(msg.sender);
         }
 
-        // Record pending withdrawal for the project wallet. This contract uses a
-        // pull-payment model for ETH receipts: funds are recorded on purchase and
-        // must be claimed via `claimPendingWithdrawals`. We intentionally avoid
-        // attempting an immediate forward to external addresses to remove the
-        // optimistic forward pattern and satisfy static analysis checks.
-        pendingWithdrawals[projectWallet] += msg.value;
+        // Interactions
+        (bool sent, ) = projectWallet.call{value: msg.value}("");
+        require(sent, "ETH transfer failed");
         nftContract.safeTransferFrom(address(this), msg.sender, nftId, quantity, "");
 
         address referrer = referralContract.getReferrerOf(msg.sender);
@@ -393,16 +373,6 @@ contract BashoodPresaleFinal is ReentrancyGuard, AccessControl, IERC1155Receiver
         }
 
         emit AssetPurchased(msg.sender, nftId, quantity, msg.value);
-    }
-
-    /// @notice Claim pending withdrawals previously recorded when immediate forward failed
-    function claimPendingWithdrawals() external nonReentrant {
-        uint256 amount = pendingWithdrawals[msg.sender];
-        require(amount > 0, "No pending funds");
-        // zero-out before transfer to follow checks-effects-interactions
-        pendingWithdrawals[msg.sender] = 0;
-        // Use OpenZeppelin Address.sendValue which reverts on failure and documents intent
-        Address.sendValue(payable(msg.sender), amount);
     }
 
     // Compra NFT pagando con BHT
@@ -514,8 +484,7 @@ contract BashoodPresaleFinal is ReentrancyGuard, AccessControl, IERC1155Receiver
         (uint80 roundId, int256 answer, uint256 startedAt, uint256 updatedAt, uint80 answeredInRound) = priceFeed.latestRoundData();
     require(answer > 0, "Invalid price");
     require(updatedAt > 0, "Price too stale");
-        // Prefer explicit additive comparison to avoid underflow and make intent clear
-        require(block.timestamp <= updatedAt + maxPriceStaleness, "Price too stale");
+        require(block.timestamp - updatedAt <= maxPriceStaleness, "Price too stale");
         require(answeredInRound >= roundId, "Incomplete round");
 
         uint256 baseCost = Math.mulDiv(nftPriceBHT, quantity, 1);
