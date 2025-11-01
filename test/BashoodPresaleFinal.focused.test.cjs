@@ -85,8 +85,10 @@ describe('BashoodPresaleFinal - focused branches', function () {
       .to.emit(presale, 'AssetPurchased')
       .withArgs(alice.address, 1, 1, price);
 
-    const after = await ethers.provider.getBalance(project.address);
-    expect(after - before).to.equal(price);
+  const after = await ethers.provider.getBalance(project.address);
+  // With pull-payment the ETH is scheduled for the project wallet and not forwarded immediately
+  expect(after - before).to.equal(0);
+  expect(await presale.pendingWithdrawals(project.address)).to.equal(price);
     expect(await nft.balanceOf(alice.address, 1)).to.equal(1);
   });
 
