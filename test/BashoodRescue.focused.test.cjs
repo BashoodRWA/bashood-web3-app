@@ -69,8 +69,13 @@ describe("BashoodRescue - focused branch coverage", function () {
     // alice was granted EMERGENCY_ROLE in constructor
   // admin must set projectWallet before emergency withdraw
   await rescue.connect(owner).setProjectWallet(await owner.getAddress());
+  // emergencyWithdrawETH now schedules a pull-payment instead of sending immediately
   await expect(rescue.connect(alice).emergencyWithdrawETH())
-      .to.emit(rescue, 'EmergencyEthWithdrawn');
+    .to.emit(rescue, 'EmergencyEthWithdrawalScheduled');
+  const pending = await rescue.pendingWithdrawals(await owner.getAddress());
+  expect(pending).to.be.gt(0);
+  // The project wallet must claim the funds
+  await expect(rescue.connect(owner).claimEmergencyWithdrawal()).to.emit(rescue, 'EmergencyEthWithdrawn');
 
     // unauthorized should revert
   await expect(rescue.connect(bob).emergencyWithdrawETH()).to.be.reverted;

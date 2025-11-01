@@ -9,6 +9,7 @@ Qué cambié
 - `contracts/BashoodRescue.sol`
   - Añadido `pendingWithdrawals` mapping.
   - `emergencyWithdrawETH()` ya no envía ETH directamente; registra el monto a favor de `projectWallet` y emite `EmergencyEthWithdrawalScheduled`.
+  - `setProjectWallet()` ahora es "write-once": solo puede establecer `projectWallet` si no estaba previamente configurado (evita sobrescrituras accidentales/operacionales).
   - Añadida `claimEmergencyWithdrawal()` para que el beneficiario reclame su saldo (protegida con `nonReentrant`).
 - Tests actualizados:
   - `test/poc.bashoodrescue.reentrancy.test.js` — ahora verifica que el retiro se registra en `pendingWithdrawals`.
@@ -30,6 +31,7 @@ Impacto operativo
 ----
 - El `projectWallet` deberá ejecutar `claimEmergencyWithdrawal()` para recibir fondos en caso de emergencia.
 - Si el equipo prefiere un envío "push" (operativa unchanged), considerar una whitelist de wallets o un contrato de escrow separado. Recomiendo revisar y aceptar el cambio por seguridad ante posibles callbacks.
+ - Nota adicional: `projectWallet` es escribible una sola vez. El admin debe coordinar la definición inicial de la wallet antes de producirse una emergencia; si se necesita cambiar la wallet en el futuro, se requerirá una migración/upgrade o un proceso operativo adicional.
 
 Lista de verificación (para reviewers)
 ----
