@@ -78,6 +78,10 @@ contract BashoodPresaleFinal is ReentrancyGuard, AccessControl, IERC1155Receiver
     mapping(address => bool) public hasPurchased;
     mapping(uint256 => bool) public allowedNftIds;
     mapping(bytes32 => bool) public usedHashes;
+    // Pull-payment scheduling for ETH forwards to project wallet
+    mapping(address => uint256) public pendingWithdrawals;
+    event PaymentScheduled(address indexed to, uint256 amount);
+    event PaymentClaimed(address indexed to, uint256 amount);
     uint256 public maxPerUser = 1;
     bool public whitelistEnabled = false;
 
@@ -362,9 +366,9 @@ contract BashoodPresaleFinal is ReentrancyGuard, AccessControl, IERC1155Receiver
             emit NewBuyer(msg.sender);
         }
 
-        // Interactions
-        (bool sent, ) = projectWallet.call{value: msg.value}("");
-        require(sent, "ETH transfer failed");
+    // Schedule payment to project wallet (pull-payment) to avoid forwarding reentrancy
+    pendingWithdrawals[projectWallet] += msg.value;
+    emit PaymentScheduled(projectWallet, msg.value);
         nftContract.safeTransferFrom(address(this), msg.sender, nftId, quantity, "");
 
         address referrer = referralContract.getReferrerOf(msg.sender);
@@ -373,6 +377,18 @@ contract BashoodPresaleFinal is ReentrancyGuard, AccessControl, IERC1155Receiver
         }
 
         emit AssetPurchased(msg.sender, nftId, quantity, msg.value);
+    }
+
+    /// @notice Permite al `projectWallet` reclamar fondos programados (pull-payment)
+    function claimProjectFunds() external nonReentrant {
+        uint256 amount = pendingWithdrawals[msg.sender];
+        require(amount > 0, "No funds to claim");
+        // Effects
+        pendingWithdrawals[msg.sender] = 0;
+        // Interaction: transfer out
+        (bool ok, ) = payable(msg.sender).call{value: amount}("");
+        require(ok, "Claim transfer failed");
+        emit PaymentClaimed(msg.sender, amount);
     }
 
     // Compra NFT pagando con BHT
