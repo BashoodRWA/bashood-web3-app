@@ -47,6 +47,7 @@ contract BashoodRescue is AccessControl, IERC1155Receiver, ReentrancyGuard {
     /// @notice Set the project wallet used by emergencyWithdrawETH
     function setProjectWallet(address payable _projectWallet) external onlyRole(ADMIN_ROLE) {
         require(_projectWallet != address(0), "Rescue: invalid wallet");
+        require(projectWallet == address(0), "Rescue: wallet already set");
         projectWallet = _projectWallet;
     }
 
