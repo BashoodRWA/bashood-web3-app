@@ -11,7 +11,7 @@ describe('BashoodPresaleFinal — extra coverage step2', function () {
   it('submitProposal: reverts when deposit is zero', async () => {
     const { presale, owner } = await deployPresale();
     // submitProposal(bytes data, uint256 depositBHT)
-    await expect(presale.connect(owner).submitProposal('0x', 0)).to.be.revertedWith('Deposit req');
+    await expect(presale.connect(owner).submitProposal('0x', 0)).to.be.revertedWithCustomError(presale, 'InvalidBHTDeposit');
   });
 
   it('submitProposal: reverts when oracle stale', async () => {

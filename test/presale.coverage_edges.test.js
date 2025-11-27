@@ -38,7 +38,7 @@ describe('Presale coverage edge branches', function () {
 
     await expect(
       presale.connect(proposer).submitProposal('0xfeed', ethers.parseUnits('10', 18))
-    ).to.be.revertedWith('Ops wallet req');
+    ).to.be.revertedWithCustomError(presale, 'InvalidWallet');
   });
 
   it('delegateRescueErc20 bubbles revert reason and generic when rescue reverts without reason', async function () {

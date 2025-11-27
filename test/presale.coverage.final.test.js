@@ -24,7 +24,7 @@ describe('BashoodPresaleFinal - targeted coverage', function () {
   await bht.approve(await presale.getAddress(), ethers.parseUnits('1', 18));
 
     // deposit zero should revert early
-    await expect(presale.submitProposal('0x', 0)).to.be.revertedWith('Deposit req');
+    await expect(presale.submitProposal('0x', 0)).to.be.revertedWithCustomError(presale, 'InvalidBHTDeposit');
 
     // operationsWallet required; set it so we reach oracle stale check
     await presale.setOperationsWallet(projectWallet.address);
