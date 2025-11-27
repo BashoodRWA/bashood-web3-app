@@ -54,7 +54,7 @@ describe("PoC: BashoodPresaleFinal - referral contract revert does not break pur
   const mockPrice = await MockPriceFeed.deploy(8, parseUnits('1', 8));
   const mockPriceAddr = mockPrice.getAddress ? await mockPrice.getAddress() : mockPrice.address;
   await presale.setPriceFeed(mockPriceAddr);
-    await presale.setMaxPriceStaleness(100000);
+    await presale.setMaxPriceStaleness(86400); // Max allowed: 1 second to 24 hours (86400 seconds)
 
     // Mock referral to revert by creating a new malicious mock on-the-fly is heavier; instead, call purchase and
     // observe current behavior: since MockReferral.rewardReferrer is permissive, purchase should succeed.
