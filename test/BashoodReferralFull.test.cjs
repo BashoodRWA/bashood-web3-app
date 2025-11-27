@@ -47,7 +47,7 @@ describe("Registro y restricciones adicionales", function () {
   it("7. Debe fallar si el usuario intenta referirse a sí mismo", async function () {
     await expect(
       referral.connect(user1).registerReferral(user1.address) // ✅ CORREGIDO
-    ).to.be.revertedWith("No puedes referirte a ti mismo");
+    ).to.be.revertedWith("Cannot refer yourself");
   });
 
   it("8. Debe fallar si se intenta registrar un usuario ya referido", async function () {
@@ -57,7 +57,7 @@ describe("Registro y restricciones adicionales", function () {
     // ...y al intentar registrarse de nuevo, revierte
     await expect(
       referral.connect(user2).registerReferral(user1.address)
-    ).to.be.revertedWith("Ya has sido referido");
+    ).to.be.revertedWith("Already referred");
   });
 
   it("9. Debe permitir referidos múltiples", async function () {
@@ -71,7 +71,7 @@ describe("Registro y restricciones adicionales", function () {
   it("10. Debe fallar si se intenta reclamar un NFT sin suficientes referidos", async function () {
     await expect(
       referral.connect(user2).claimNFT()
-    ).to.be.revertedWith("No tienes suficientes referidos para reclamar");
+    ).to.be.revertedWith("Not enough referrals to claim");
   });
 
   it("11. Debe distribuir recompensas correctamente", async function () {
@@ -95,7 +95,7 @@ describe("Registro y restricciones adicionales", function () {
   it("14. Debe fallar si se intenta reclamar un NFT sin suficientes referidos", async function () {
     await expect(
       referral.connect(user3).claimNFT()
-    ).to.be.revertedWith("No tienes suficientes referidos para reclamar");
+    ).to.be.revertedWith("Not enough referrals to claim");
   });
 
   it("15. No debe permitir registrar referidos múltiples veces por diferentes usuarios", async function () {
@@ -103,13 +103,13 @@ describe("Registro y restricciones adicionales", function () {
 
     await expect(
       referral.connect(user1).registerReferral(user2.address)
-    ).to.be.revertedWith("Ya has sido referido");
+    ).to.be.revertedWith("Already referred");
   });
 
   it("16. Debe fallar si se usa dirección cero como referido", async function () {
     await expect(
       referral.connect(user1).registerReferral(ethers.ZeroAddress)
-    ).to.be.revertedWith("Direccion del referidor no valida");
+    ).to.be.revertedWith("Invalid referrer address");
   });
 
   it("17. Debe verificar que el NFT fue transferido correctamente al reclamar", async function () {
@@ -128,3 +128,9 @@ describe("Registro y restricciones adicionales", function () {
     expect(await referral.rewarded(user2.address)).to.be.true;
   });
 });
+
+
+
+
+
+

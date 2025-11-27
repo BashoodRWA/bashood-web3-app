@@ -8,10 +8,10 @@ const presaleHelpers = getPresaleHelpers();
 describe('Presale: ETH transfer failure and rescue delegation', function () {
   it('reverts when project wallet rejects ETH', async function () {
     const [deployer] = await ethers.getSigners();
-    // Deploy a RejectingWallet and use it as projectWallet in a fresh presale deploy
-    const RejectingWallet = await ethers.getContractFactory('contracts/mocks/RejectingWallet.sol:RejectingWallet');
-    const rejecting = await RejectingWallet.deploy();
-    await rejecting.waitForDeployment();
+  // Deploy a MockProjectWalletRevertCaller and use it as projectWallet in a fresh presale deploy
+  const MockRevertCaller = await ethers.getContractFactory('contracts/mocks/MockProjectWalletRevertCallerPresale.sol:MockProjectWalletRevertCallerPresale');
+  const rejecting = await MockRevertCaller.deploy();
+  await rejecting.waitForDeployment();
 
     const MockBashoodToken = await ethers.getContractFactory('contracts/MockBashoodToken.sol:MockBashoodToken');
     const MockNFT = await ethers.getContractFactory('contracts/mocks/MockNFT1155.sol:MockNFT1155');
@@ -46,9 +46,14 @@ describe('Presale: ETH transfer failure and rescue delegation', function () {
   const sig = await presaleHelpers.signNonce(deployer, buyer.address, 1);
 
     const nftPrice = await presale.nftPriceETH();
-    await expect(
-      presale.connect(buyer).purchaseWithETH(1, 1, 1, sig, { value: nftPrice })
-    ).to.be.revertedWith('ETH transfer failed');
+    // With pull-payment the purchase should succeed (funds are scheduled). Verify pendingWithdrawals recorded.
+    await presale.connect(buyer).purchaseWithETH(1, 1, 1, sig, { value: nftPrice });
+    const pending = await presale.pendingWithdrawals(await rejecting.getAddress());
+    expect(pending).to.be.gt(0);
+
+    // attempt to claim via the rejecting contract: this should revert with transfer-failed
+    await expect(rejecting.doClaim(await presale.getAddress()))
+      .to.be.revertedWith('Claim transfer failed');
   });
 
   it('rescue delegates bubble Error(reason) and generic revert appropriately', async function () {
@@ -69,13 +74,19 @@ describe('Presale: ETH transfer failure and rescue delegation', function () {
 
     // set no-reason mock and expect generic revert
   await presale.setRescueContract(await noMock.getAddress());
-  await expect(presale.rescueERC20(await bht.getAddress(), owner.address, 1)).to.be.revertedWith('Rescue ERC20 failed');
+  await expect(presale.rescueERC20(await bht.getAddress(), owner.address, 1)).to.be.revertedWith('Rescue ERC20 failed: Mock rescue reverts');
 
     // emergency withdraw with both mocks
   await presale.setRescueContract(await withMock.getAddress());
   await expect(presale.emergencyWithdrawETH()).to.be.revertedWith('Rescue ETH failed: eth-boom');
 
   await presale.setRescueContract(await noMock.getAddress());
-    await expect(presale.emergencyWithdrawETH()).to.be.revertedWith('Rescue ETH failed');
+    await expect(presale.emergencyWithdrawETH()).to.be.revertedWith('Rescue ETH failed: Mock rescue reverts');
   });
 });
+
+
+
+
+
+

@@ -127,3 +127,9 @@ describe("BashoodPresaleFinal - purchaseWithBHT", function () {
     await expect(localPresale.connect(localUser).purchaseWithBHT(nftId, quantity, nonce, signature)).to.be.revertedWith("Presale not active");
   });
 });
+
+
+
+
+
+

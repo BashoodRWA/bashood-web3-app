@@ -81,3 +81,9 @@ describe("BashoodRescue - focused branch coverage", function () {
   await expect(rescue.connect(bob).emergencyWithdrawETH()).to.be.reverted;
   });
 });
+
+
+
+
+
+

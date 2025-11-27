@@ -74,7 +74,7 @@ describe("BashoodPresaleFinal - Proposals", function () {
     await priceFeed.setUpdatedAt((await ethers.provider.getBlock("latest")).timestamp - 1000);
     await expect(
       presale.connect(user).submitProposal(proposalData, depositBHT)
-    ).to.be.revertedWith("Price too stale");
+    ).to.be.revertedWith("Oracle: Invalid/stale");
   });
 
   it("revierta si la quema supera el cap", async function () {
@@ -94,3 +94,9 @@ describe("BashoodPresaleFinal - Proposals", function () {
     ).to.be.reverted;
   });
 });
+
+
+
+
+
+

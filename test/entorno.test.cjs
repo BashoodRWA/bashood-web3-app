@@ -6,3 +6,9 @@ describe('Test mínimo de entorno', function () {
     expect(true).to.be.true;
   });
 });
+
+
+
+
+
+

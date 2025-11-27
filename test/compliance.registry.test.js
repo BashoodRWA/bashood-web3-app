@@ -38,3 +38,9 @@ describe('ComplianceRegistry + TokenWrapper POC', function () {
     expect(await wrapper.balanceOf(user.address)).to.equal(ethers.parseUnits('1',18));
   });
 });
+
+
+
+
+
+

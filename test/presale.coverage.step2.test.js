@@ -27,7 +27,7 @@ describe('BashoodPresaleFinal — extra coverage step2', function () {
     const deposit = ethers.parseUnits('1', 18);
     await bht.mint(owner.address, deposit);
   await bht.connect(owner).approve(await presale.getAddress(), deposit);
-  await expect(presale.connect(owner).submitProposal('0x', deposit)).to.be.revertedWith('Price too stale');
+  await expect(presale.connect(owner).submitProposal('0x', deposit)).to.be.revertedWith('Oracle: Invalid/stale');
   });
 
   it('assignRoles: rejects zero addresses and accepts valid set', async () => {
@@ -92,7 +92,15 @@ describe('BashoodPresaleFinal — extra coverage step2', function () {
   const token = await MockERC20.deploy();
   await token.waitForDeployment();
   // delegateRescueErc20(address tokenAddress, address to, uint256 amount)
-  await expect(presale.connect(owner).delegateRescueErc20(await token.getAddress(), owner.address, 1)).to.be.revertedWith('Delegate rescue ERC20 failed');
+  await expect(presale.connect(owner).delegateRescueErc20(await token.getAddress(), owner.address, 1)).to.be.revertedWith('Delegate rescue ERC20 failed: Mock rescue reverts');
   });
 
 });
+
+
+
+
+
+
+
+

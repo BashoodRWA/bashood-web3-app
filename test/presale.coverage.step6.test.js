@@ -50,12 +50,18 @@ describe('Presale coverage - step6 (targeted branches)', function () {
     // set rescueContract to noMock and expect generic revert
   const noMockAddr = (typeof noMock.getAddress === 'function') ? await noMock.getAddress() : (noMock.address || noMock.target);
   await presale.connect(owner).setRescueContract(noMockAddr);
-    await expect(presale.connect(owner).delegateRescueUnsoldNfts(1, projectWallet.address, 1)).to.be.revertedWith('Delegate rescue NFT failed');
+    await expect(presale.connect(owner).delegateRescueUnsoldNfts(1, projectWallet.address, 1)).to.be.revertedWith('Delegate rescue NFT failed: Mock rescue reverts');
 
     // delegate emergency withdraw and rescue ERC20 similar flows
   await presale.connect(owner).setRescueContract(withMockAddr);
   await expect(presale.connect(owner).delegateEmergencyWithdrawEth()).to.be.revertedWith('Delegate rescue ETH failed: eth-boom');
   await presale.connect(owner).setRescueContract(noMockAddr);
-    await expect(presale.connect(owner).delegateEmergencyWithdrawEth()).to.be.revertedWith('Delegate rescue ETH failed');
+    await expect(presale.connect(owner).delegateEmergencyWithdrawEth()).to.be.revertedWith('Delegate rescue ETH failed: Mock rescue reverts');
   });
 });
+
+
+
+
+
+

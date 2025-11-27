@@ -14,7 +14,7 @@ describe("Coverage: BashoodReferral focused tests", function () {
     await referral.waitForDeployment();
 
     // only owner can set
-    await expect(referral.connect(alice).setPresaleContract(alice.address)).to.be.revertedWith("Only owner can set presale address");
+    await expect(referral.connect(alice).setPresaleContract(alice.address)).to.be.revertedWith("Only owner can set presale");
 
     // invalid zero address
     await expect(referral.connect(owner).setPresaleContract(ethers.ZeroAddress)).to.be.revertedWith("Invalid presale address");
@@ -46,13 +46,13 @@ describe("Coverage: BashoodReferral focused tests", function () {
     expect(await referral.getReferralCount(await bob.getAddress())).to.equal(1);
 
     // zero user
-    await expect(referral.connect(presale).rewardReferrer(ethers.ZeroAddress, await bob.getAddress())).to.be.revertedWith("Direccion del referido no valida");
+    await expect(referral.connect(presale).rewardReferrer(ethers.ZeroAddress, await bob.getAddress())).to.be.revertedWith("Invalid user address");
     // zero referrer
-    await expect(referral.connect(presale).rewardReferrer(await charlie.getAddress(), ethers.ZeroAddress)).to.be.revertedWith("Direccion del referidor no valida");
+    await expect(referral.connect(presale).rewardReferrer(await charlie.getAddress(), ethers.ZeroAddress)).to.be.revertedWith("Invalid referrer address");
     // self refer
-    await expect(referral.connect(presale).rewardReferrer(await bob.getAddress(), await bob.getAddress())).to.be.revertedWith("No puedes referirte a ti mismo");
+    await expect(referral.connect(presale).rewardReferrer(await bob.getAddress(), await bob.getAddress())).to.be.revertedWith("Cannot refer yourself");
     // already referred
-    await expect(referral.connect(presale).rewardReferrer(await alice.getAddress(), await charlie.getAddress())).to.be.revertedWith("Este usuario ya fue referido");
+    await expect(referral.connect(presale).rewardReferrer(await alice.getAddress(), await charlie.getAddress())).to.be.revertedWith("User already referred");
   });
 
   it("covers registerReferral branches and getters", async function () {
@@ -66,9 +66,9 @@ describe("Coverage: BashoodReferral focused tests", function () {
     await referral.waitForDeployment();
 
     // zero referrer
-    await expect(referral.connect(referred).registerReferral(ethers.ZeroAddress)).to.be.revertedWith("Direccion del referidor no valida");
+    await expect(referral.connect(referred).registerReferral(ethers.ZeroAddress)).to.be.revertedWith("Invalid referrer address");
     // self refer
-    await expect(referral.connect(referred).registerReferral(await referred.getAddress())).to.be.revertedWith("No puedes referirte a ti mismo");
+    await expect(referral.connect(referred).registerReferral(await referred.getAddress())).to.be.revertedWith("Cannot refer yourself");
 
     // successful register
     await expect(referral.connect(referred).registerReferral(await referrer.getAddress()))
@@ -76,7 +76,7 @@ describe("Coverage: BashoodReferral focused tests", function () {
       .withArgs(await referred.getAddress(), await referrer.getAddress());
 
     // cannot register twice
-    await expect(referral.connect(referred).registerReferral(await referrer.getAddress())).to.be.revertedWith("Ya has sido referido");
+    await expect(referral.connect(referred).registerReferral(await referrer.getAddress())).to.be.revertedWith("Already referred");
 
     expect(await referral.getReferrerOf(await referred.getAddress())).to.equal(await referrer.getAddress());
     expect(await referral.getReferralCount(await referrer.getAddress())).to.equal(1);
@@ -93,7 +93,7 @@ describe("Coverage: BashoodReferral focused tests", function () {
     await referral.waitForDeployment();
 
     // not enough referrals -> revert
-    await expect(referral.connect(referrer).claimNFT()).to.be.revertedWith("No tienes suficientes referidos para reclamar");
+    await expect(referral.connect(referrer).claimNFT()).to.be.revertedWith("Not enough referrals to claim");
 
     // increase referral count by having three different accounts register referrer
     await referral.connect(ref1).registerReferral(await referrer.getAddress());
@@ -113,3 +113,10 @@ describe("Coverage: BashoodReferral focused tests", function () {
     await expect(referral.connect(referrer).claimNFT()).to.be.revertedWith("Ya reclamaste tu NFT");
   });
 });
+
+
+
+
+
+
+

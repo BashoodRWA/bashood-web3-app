@@ -55,3 +55,9 @@ describe("BashoodPresaleFinal IERC1155Receiver", function () {
     expect(await presale.supportsInterface(IERC1155ReceiverId)).to.equal(true);
   });
 });
+
+
+
+
+
+

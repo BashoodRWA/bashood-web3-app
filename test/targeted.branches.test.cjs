@@ -80,8 +80,8 @@ describe('Targeted branches and edge cases', function () {
   const helpers = await deployPresale({ bhtAddr: mockERCAddr, nftAddr: mockNFTAddr, referralAddr: refAddr, projectWallet: projectWalletAddr });
   const presale = helpers.presale;
 
-    // setMaxPriceStaleness must be > 0
-  await expect(presale.connect(owner).setMaxPriceStaleness(0)).to.be.revertedWith('Staleness must be > 0');
+    // setMaxPriceInvalid staleness: 1s-24h
+  await expect(presale.connect(owner).setMaxPriceStaleness(0)).to.be.revertedWith('Invalid staleness: 1s-24h');
 
     // setOperationsWallet should revert on zero
   await expect(presale.connect(owner).setOperationsWallet(ZERO_ADDRESS)).to.be.revertedWith('Zero address');
@@ -94,3 +94,9 @@ describe('Targeted branches and edge cases', function () {
     expect(await presale.signerAddress()).to.equal(alice.address);
   });
 });
+
+
+
+
+
+

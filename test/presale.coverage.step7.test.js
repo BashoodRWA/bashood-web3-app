@@ -65,3 +65,9 @@ describe('BashoodPresaleFinal - extra critical branches', function () {
     await expect(presale.connect(buyer)['payServiceWithBHT(uint256,uint256)'](1, fiat)).to.be.revertedWith('Ops transfer failed');
   });
 });
+
+
+
+
+
+

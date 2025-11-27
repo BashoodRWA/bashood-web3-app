@@ -157,3 +157,9 @@ function signNonce(signer, userAddress, nonce) {
 }
 
 module.exports = { deployPresale, setPriceFresh, signNonce };
+
+
+
+
+
+

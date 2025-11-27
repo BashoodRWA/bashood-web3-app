@@ -108,14 +108,20 @@ describe('Presale coverage step4 (caller & rescue branches)', function () {
 
     await expect(
       presale.connect(owner).rescueUnsoldNFTs(1, owner.address, 1)
-    ).to.be.revertedWith('Rescue NFT failed');
+    ).to.be.revertedWith('Rescue NFT failed: Mock rescue reverts');
 
     await expect(
       presale.connect(owner).rescueERC20(bht.target, owner.address, 1)
-    ).to.be.revertedWith('Rescue ERC20 failed');
+    ).to.be.revertedWith('Rescue ERC20 failed: Mock rescue reverts');
 
     await expect(
       presale.connect(owner).emergencyWithdrawETH()
-    ).to.be.revertedWith('Rescue ETH failed');
+    ).to.be.revertedWith('Rescue ETH failed: Mock rescue reverts');
   });
 });
+
+
+
+
+
+

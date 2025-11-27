@@ -25,3 +25,9 @@ describe("Deploy BashoodReferral - test mínimo", function () {
     expect(await referral.getAddress()).to.be.properAddress;
   });
 });
+
+
+
+
+
+

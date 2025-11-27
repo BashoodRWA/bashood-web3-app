@@ -27,7 +27,7 @@ describe('BashoodPresaleFinal - delegate rescue and ERC1155 selectors', function
     await presale.connect(owner).setRescueContract(noAddr);
     await expect(
       presale.connect(owner).delegateRescueErc20(owner.address, owner.address, 1)
-    ).to.be.revertedWith('Delegate rescue ERC20 failed');
+    ).to.be.revertedWith('Delegate rescue ERC20 failed: Mock rescue reverts');
   });
 
   it('delegateRescueUnsoldNfts wraps reason and generic', async function () {
@@ -50,7 +50,7 @@ describe('BashoodPresaleFinal - delegate rescue and ERC1155 selectors', function
     await presale.connect(owner).setRescueContract(noAddr);
     await expect(
       presale.connect(owner).delegateRescueUnsoldNfts(1, owner.address, 1)
-    ).to.be.revertedWith('Delegate rescue NFT failed');
+    ).to.be.revertedWith('Delegate rescue NFT failed: Mock rescue reverts');
   });
 
   it('delegateEmergencyWithdrawEth wraps reason and generic', async function () {
@@ -69,7 +69,7 @@ describe('BashoodPresaleFinal - delegate rescue and ERC1155 selectors', function
     await expect(presale.connect(owner).delegateEmergencyWithdrawEth()).to.be.revertedWith('Delegate rescue ETH failed: eth-boom');
 
   await presale.connect(owner).setRescueContract(noAddr);
-    await expect(presale.connect(owner).delegateEmergencyWithdrawEth()).to.be.revertedWith('Delegate rescue ETH failed');
+    await expect(presale.connect(owner).delegateEmergencyWithdrawEth()).to.be.revertedWith('Delegate rescue ETH failed: Mock rescue reverts');
   });
 
   it('onERC1155Received and batch return selectors', async function () {
@@ -85,3 +85,9 @@ describe('BashoodPresaleFinal - delegate rescue and ERC1155 selectors', function
   expect(res2).to.equal(sel2);
   });
 });
+
+
+
+
+
+

@@ -66,3 +66,9 @@ describe('Rescue delegation and authorization', function () {
     ).to.be.revertedWith('Rescue: not authorized');
   });
 });
+
+
+
+
+
+

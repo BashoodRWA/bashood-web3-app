@@ -48,7 +48,7 @@ describe('Coverage fillers: small mocks and helpers', function () {
 
     // cannot transfer to zero address
     await expect(ol.connect(other).transferOwnership('0x0000000000000000000000000000000000000000')).to.be.revertedWith(
-      'Ownable: new owner is the zero address'
+      'Owner cannot be zero address'
     );
   });
 
@@ -123,3 +123,9 @@ describe('Coverage fillers: small mocks and helpers', function () {
   expect((await rescue.calls()).toString()).to.equal('3');
   });
 });
+
+
+
+
+
+

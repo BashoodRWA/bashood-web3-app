@@ -31,7 +31,7 @@ describe('Presale - rescue try/catch coverage', function () {
     await presale.connect(owner).setRescueContract(await noMock.getAddress());
     await expect(
       presale.connect(owner).delegateRescueUnsoldNfts(1, projectWallet.address, 1)
-    ).to.be.revertedWith('Delegate rescue NFT failed');
+    ).to.be.revertedWith('Delegate rescue NFT failed: Mock rescue reverts');
   });
 
   it('delegateEmergencyWithdrawEth handles revert with reason and without', async function () {
@@ -43,7 +43,7 @@ describe('Presale - rescue try/catch coverage', function () {
     const ResNoReason = await ethersRef.getContractFactory('contracts/mocks/MockRescueRevertNoReason.sol:MockRescueRevertNoReason');
     const noMock = await ResNoReason.deploy(); await noMock.waitForDeployment();
     await presale.connect(owner).setRescueContract(await noMock.getAddress());
-    await expect(presale.connect(owner).delegateEmergencyWithdrawEth()).to.be.revertedWith('Delegate rescue ETH failed');
+    await expect(presale.connect(owner).delegateEmergencyWithdrawEth()).to.be.revertedWith('Delegate rescue ETH failed: Mock rescue reverts');
   });
 });
 
@@ -51,7 +51,7 @@ describe('BashoodPresaleFinal - rescue try/catch coverage', function () {
   it('rescueUnsoldNFTs reverts with reason from rescue (catch Error)', async function () {
     const { owner, presale } = await deployPresale();
 
-    const ResWithReason = await ethersRef.getContractFactory('contracts/mocks/MockRescueRevertWithReason.sol:MockRescueRevertWithReason');
+    const ResWithReason = await ethers.getContractFactory('contracts/mocks/MockRescueRevertWithReason.sol:MockRescueRevertWithReason');
     const withMock = await ResWithReason.deploy(); await withMock.waitForDeployment();
     await presale.connect(owner).setRescueContract(await withMock.getAddress());
     await expect(presale.connect(owner).rescueUnsoldNFTs(1, owner.address, 1)).to.be.revertedWith('Rescue NFT failed: boom');
@@ -66,7 +66,7 @@ describe('BashoodPresaleFinal - rescue try/catch coverage', function () {
 
     await presale.connect(owner).setRescueContract(await mockRes.getAddress());
 
-    await expect(presale.connect(owner).rescueUnsoldNFTs(1, owner.address, 1)).to.be.revertedWith('Rescue NFT failed');
+    await expect(presale.connect(owner).rescueUnsoldNFTs(1, owner.address, 1)).to.be.revertedWith('Rescue NFT failed: Mock rescue reverts');
   });
 
   it('delegateRescueErc20 and delegateEmergencyWithdrawEth bubble up reason and no-reason cases', async function () {
@@ -120,3 +120,9 @@ describe('BashoodPresaleFinal - rescue try/catch coverage', function () {
     }
   });
 });
+
+
+
+
+
+

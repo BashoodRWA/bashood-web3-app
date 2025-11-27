@@ -46,3 +46,9 @@ describe("Coverage: AttackerConditional & AttackerLoop", function () {
     expect(successes).to.equal(0);
   });
 });
+
+
+
+
+
+

@@ -125,3 +125,9 @@ describe("BashoodMultiToken", function () {
   expect(await contract.isApprovedForAll(owner.address, owner.address)).to.equal(true);
   });
 });
+
+
+
+
+
+

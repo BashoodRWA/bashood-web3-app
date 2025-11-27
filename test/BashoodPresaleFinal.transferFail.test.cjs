@@ -65,3 +65,9 @@ describe("BashoodPresaleFinal - BHT transfer to projectWallet fails", function (
     await expect(presale.connect(buyer).purchaseWithBHT(1, 1, nonce, signature)).to.be.reverted;
   });
 });
+
+
+
+
+
+

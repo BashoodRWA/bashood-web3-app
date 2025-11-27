@@ -81,7 +81,7 @@ describe("Coverage: BashoodRescue focused tests", function () {
       .withArgs(await token.getAddress(), await alice.getAddress(), 500);
 
     // insufficient balance path
-    await expect(rescue.connect(admin).rescueERC20(await token.getAddress(), await alice.getAddress(), 1000000)).to.be.revertedWith("Rescue: insufficient token balance");
+    await expect(rescue.connect(admin).rescueERC20(await token.getAddress(), await alice.getAddress(), 1000000)).to.be.revertedWith("Insufficient balance");
   });
 
   it("emergencyWithdrawETH covers role and error branches", async function () {
@@ -94,17 +94,32 @@ describe("Coverage: BashoodRescue focused tests", function () {
     await alice.sendTransaction({ to: await rescue.getAddress ? await rescue.getAddress() : rescue.address, value: ethers.parseEther("0.1") });
 
     // only emergency role can call
-  await expect(rescue.connect(admin).emergencyWithdrawETH()).to.be.reverted;
+    await expect(rescue.connect(admin).emergencyWithdrawETH()).to.be.reverted;
 
-    // invalid wallet zero address -> set project wallet then withdraw
+    // invalid wallet zero address -> set project wallet then withdraw should be scheduled
   await expect(rescue.connect(emergency).emergencyWithdrawETH()).to.be.revertedWith("Rescue: invalid wallet");
 
-  // set project wallet and then emergency withdraw should succeed
+  // set project wallet and then emergency withdraw should schedule a pending withdrawal
   await rescue.connect(admin).setProjectWallet(await admin.getAddress());
   await expect(rescue.connect(emergency).emergencyWithdrawETH())
-      .to.emit(rescue, 'EmergencyEthWithdrawn');
+      .to.emit(rescue, 'EmergencyEthWithdrawalScheduled');
 
-    // now contract has no ETH
+  // pending withdrawal must be recorded for the project wallet
+  const pending = await rescue.pendingWithdrawals(await admin.getAddress());
+  expect(pending).to.be.gt(0);
+
+  // now the project wallet (admin) must call claim to receive funds
+  await expect(rescue.connect(admin).claimEmergencyWithdrawal())
+    .to.emit(rescue, 'EmergencyEthWithdrawn')
+    .withArgs(await admin.getAddress(), pending);
+
+  // after claim, contract has no ETH and subsequent emergencyWithdrawETH should revert
   await expect(rescue.connect(emergency).emergencyWithdrawETH()).to.be.revertedWith("Rescue: no ETH");
   });
 });
+
+
+
+
+
+

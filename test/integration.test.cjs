@@ -87,3 +87,9 @@ describe("Integración BashoodPresaleFinal: pagos, propuestas y roles", function
       .to.emit(presale, "BHTBurned").and.to.emit(presale, "MilestonePaid");
   });
 });
+
+
+
+
+
+

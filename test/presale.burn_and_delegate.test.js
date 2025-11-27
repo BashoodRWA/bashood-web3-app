@@ -77,6 +77,12 @@ describe('Presale burn fallback and delegate rescue branches', function () {
 
     await expect(
       presale.connect(projectWallet).delegateEmergencyWithdrawEth()
-    ).to.be.revertedWith('Delegate rescue ETH failed');
+    ).to.be.revertedWith('Delegate rescue ETH failed: Mock rescue reverts');
   });
 });
+
+
+
+
+
+

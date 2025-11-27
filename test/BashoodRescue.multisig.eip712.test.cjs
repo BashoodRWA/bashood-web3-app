@@ -109,7 +109,7 @@ describe("BashoodRescue - multisig EIP712 flow", function () {
     const nonce = await multisig.nonces(rescueAddr);
     const sig1 = await signExecuteClaim(owner, multisigAddr, rescueAddr, nonce);
     // only one signature provided, threshold 2
-    await expect(multisig.connect(executor).executeClaimWithSignatures(rescueAddr, nonce, [sig1])).to.be.revertedWith("Multisig: insufficient valid signatures");
+    await expect(multisig.connect(executor).executeClaimWithSignatures(rescueAddr, nonce, [sig1])).to.be.revertedWith("Insufficient valid signatures");
   });
 
   it("wrong signer: fail", async function () {
@@ -127,7 +127,7 @@ describe("BashoodRescue - multisig EIP712 flow", function () {
     const sig1 = await signExecuteClaim(owner, multisigAddr, rescueAddr, nonce);
     // attacker signs instead of signer2
     const badSig = await signExecuteClaim(attacker, multisigAddr, rescueAddr, nonce);
-    await expect(multisig.connect(executor).executeClaimWithSignatures(rescueAddr, nonce, [sig1, badSig])).to.be.revertedWith("Multisig: insufficient valid signatures");
+    await expect(multisig.connect(executor).executeClaimWithSignatures(rescueAddr, nonce, [sig1, badSig])).to.be.revertedWith("Insufficient valid signatures");
   });
 
   it("duplicate signatures: counted once", async function () {
@@ -144,7 +144,7 @@ describe("BashoodRescue - multisig EIP712 flow", function () {
     const nonce = await multisig.nonces(rescueAddr);
     const sig1 = await signExecuteClaim(owner, multisigAddr, rescueAddr, nonce);
     // pass same signature twice and no other signer -> should be counted once and fail
-    await expect(multisig.connect(executor).executeClaimWithSignatures(rescueAddr, nonce, [sig1, sig1])).to.be.revertedWith("Multisig: insufficient valid signatures");
+    await expect(multisig.connect(executor).executeClaimWithSignatures(rescueAddr, nonce, [sig1, sig1])).to.be.revertedWith("Insufficient valid signatures");
   });
 
   it("replay: same signatures + same nonce fails on second attempt", async function () {
@@ -195,3 +195,9 @@ describe("BashoodRescue - multisig EIP712 flow", function () {
     expect(nonceAfter).to.equal(nonce);
   });
 });
+
+
+
+
+
+

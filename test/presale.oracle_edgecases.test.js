@@ -61,6 +61,14 @@ describe('Presale oracle edge cases', function () {
     const nonce = 4;
     const sig = await signNonce(owner, buyer.address, nonce);
 
-    await expect(presale.connect(buyer).purchaseWithBHT(1, 1, nonce, sig)).to.be.revertedWith('Price too stale');
+    await expect(presale.connect(buyer).purchaseWithBHT(1, 1, nonce, sig)).to.be.revertedWith('Oracle: Invalid/stale');
   });
 });
+
+
+
+
+
+
+
+

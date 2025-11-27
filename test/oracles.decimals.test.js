@@ -16,3 +16,9 @@ describe("ChainlinkPriceFeed - decimals handling", function () {
     expect(res[0].toString()).to.equal("123456789");
   });
 });
+
+
+
+
+
+

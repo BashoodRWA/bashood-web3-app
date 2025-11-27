@@ -101,3 +101,9 @@ describe('Presale burn/ops combinations and proposals', function () {
     ).to.emit(presale, 'ProposalSubmitted');
   });
 });
+
+
+
+
+
+

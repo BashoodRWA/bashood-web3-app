@@ -30,7 +30,7 @@ describe('BashoodPresaleFinal - targeted coverage', function () {
     await presale.setOperationsWallet(projectWallet.address);
 
     // now stale price should revert
-    await expect(presale.submitProposal('0x', ethers.parseUnits('1', 18))).to.be.revertedWith('Price too stale');
+    await expect(presale.submitProposal('0x', ethers.parseUnits('1', 18))).to.be.revertedWith('Oracle: Invalid/stale');
   });
 
   it('assignRoles rejects zero addresses and grants roles on success', async () => {
@@ -110,7 +110,15 @@ describe('BashoodPresaleFinal - targeted coverage', function () {
 
     // set rescue to one that reverts without reason
   await presale.setRescueContract(await mrn.getAddress());
-    await expect(presale.rescueUnsoldNFTs(1, owner.address, 1)).to.be.revertedWith('Rescue NFT failed');
-    await expect(presale.rescueERC20(owner.address, owner.address, 1)).to.be.revertedWith('Rescue ERC20 failed');
+    await expect(presale.rescueUnsoldNFTs(1, owner.address, 1)).to.be.revertedWith('Rescue NFT failed: Mock rescue reverts');
+    await expect(presale.rescueERC20(owner.address, owner.address, 1)).to.be.revertedWith('Rescue ERC20 failed: Mock rescue reverts');
   });
 });
+
+
+
+
+
+
+
+

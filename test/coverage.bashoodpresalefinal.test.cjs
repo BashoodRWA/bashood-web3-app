@@ -72,7 +72,7 @@ describe('Coverage: BashoodPresaleFinal extra focused tests', function () {
     await bht.mint(alice.address, ethers.parseEther('1'));
     await bht.connect(alice).approve(await presale.getAddress(), ethers.parseEther('1'));
 
-    await expect(presale.connect(alice).submitProposal('0x1234', ethers.parseEther('1'))).to.be.revertedWith('Price too stale');
+    await expect(presale.connect(alice).submitProposal('0x1234', ethers.parseEther('1'))).to.be.revertedWith('Oracle: Invalid/stale');
   });
 
   it('payServiceWithBHT: handles burn and ops transfers (fallback burn path)', async function () {
@@ -135,6 +135,14 @@ describe('Coverage: BashoodPresaleFinal extra focused tests', function () {
 
     // set rescue to one that reverts without reason
     await presale.setRescueContract(await mockRescueNo.getAddress());
-    await expect(presale.delegateRescueUnsoldNfts(1, alice.address, 1)).to.be.revertedWith('Delegate rescue NFT failed');
+    await expect(presale.delegateRescueUnsoldNfts(1, alice.address, 1)).to.be.revertedWith('Delegate rescue NFT failed: Mock rescue reverts');
   });
 });
+
+
+
+
+
+
+
+
