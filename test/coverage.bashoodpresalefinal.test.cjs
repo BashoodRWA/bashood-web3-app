@@ -6,6 +6,7 @@ const { deployPresale, setPriceFresh } = getPresaleHelpers();
 
 describe('Coverage: BashoodPresaleFinal extra focused tests', function () {
   it('submitProposal: burns via fallback transferFrom when burnFrom not available', async function () {
+    // Funciones reactivadas para mejorar coverage
     const [owner, alice, project] = await ethers.getSigners();
 
     const MockBHT = await ethers.getContractFactory('contracts/mocks/MockBHT.sol:MockBHT');
@@ -45,6 +46,7 @@ describe('Coverage: BashoodPresaleFinal extra focused tests', function () {
   });
 
   it('submitProposal: reverts when price is stale', async function () {
+    // Funciones reactivadas para mejorar coverage
     const [owner, alice, project] = await ethers.getSigners();
     const MockBHT = await ethers.getContractFactory('contracts/mocks/MockBHT.sol:MockBHT');
     const bht = await MockBHT.deploy(); await bht.waitForDeployment();
@@ -76,6 +78,8 @@ describe('Coverage: BashoodPresaleFinal extra focused tests', function () {
   });
 
   it('payServiceWithBHT: handles burn and ops transfers (fallback burn path)', async function () {
+    // Funciones reactivadas para mejorar coverage
+    this.timeout(5000); // Aumentar timeout para deployment
     const [owner, alice, project] = await ethers.getSigners();
     const MockBHT = await ethers.getContractFactory('contracts/mocks/MockBHT.sol:MockBHT');
     const bht = await MockBHT.deploy(); await bht.waitForDeployment();
@@ -107,6 +111,7 @@ describe('Coverage: BashoodPresaleFinal extra focused tests', function () {
   });
 
   it('delegate rescue: handles success and revert-with-reason and revert-without-reason', async function () {
+    // Funciones reactivadas para mejorar coverage
     const [owner, alice, project] = await ethers.getSigners();
     const MockBHT = await ethers.getContractFactory('contracts/mocks/MockBHT.sol:MockBHT');
     const bht = await MockBHT.deploy(); await bht.waitForDeployment();

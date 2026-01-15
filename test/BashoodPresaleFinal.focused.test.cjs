@@ -145,6 +145,7 @@ describe('BashoodPresaleFinal - focused branches', function () {
   });
 
   it('rescue delegation failures when rescueContract not set or projectWallet reverts', async function () {
+    // Funciones reactivadas para mejorar coverage
     // call delegateRescueUnsoldNfts without rescue set
     await expect(presale.delegateRescueUnsoldNfts(1, alice.address, 1)).to.be.revertedWith('E45');
   });
