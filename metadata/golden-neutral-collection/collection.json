@@ -1,0 +1,50 @@
+{
+  "name": "Golden Neutral Collection",
+  "description": "Segunda serie de la Golden House Collection con diseños neutros y elegantes. Tonos tierra y cobrizos que evocan sofisticación y modernidad en el metaverso Bashood.",
+  "image": "https://cdn.bashood.com/golden-neutral-collection/collection-banner.png",
+  "banner_image": "https://cdn.bashood.com/golden-neutral-collection/collection-banner-large.png",
+  "external_link": "https://bashood.com/golden-neutral-collection",
+  "seller_fee_basis_points": 400,
+  "fee_recipient": "0x742d35Cc6634C0532925a3b8D4D1C8B1B5c45C00",
+  "properties": {
+    "category": "Premium Real Estate",
+    "blockchain": "Ethereum",
+    "total_supply": 4,
+    "series": "Golden Neutral Collection - Series #2",
+    "rarity": "EPIC",
+    "collection_type": "Limited Edition Series",
+    "launch_date": "2025-11-20",
+    "series_number": 2,
+    "parent_collection": "Golden House Collection",
+    "utility_features": [
+      "Metaverse Premium Access",
+      "Neutral Staking Rewards",
+      "Exclusive Community Access",
+      "Tech Integration Benefits",
+      "Heritage Collection Value",
+      "Cross-Series Benefits"
+    ]
+  },
+  "collection_features": {
+    "3D_Design": "Professional Studio Quality",
+    "Animation_Support": "360° Interactive Views",
+    "Rarity_Level": "Epic Premium",
+    "Investment_Potential": "High Growth Series",
+    "Utility_Access": "Full Metaverse Integration",
+    "Community_Benefits": "Neutral Circle Access",
+    "Cross_Series_Benefits": "Golden Collection Synergy"
+  },
+  "design_features": {
+    "Color_Palette": "Neutral & Copper Tones",
+    "Lighting_Effects": "Varied Window Illumination",
+    "Material_Quality": "Premium Copper & Bronze",
+    "Architectural_Style": "Modern Neutral Elegance",
+    "Innovation_Level": "Tech-Enhanced Heritage"
+  },
+  "socials": {
+    "website": "https://bashood.com/golden-neutral-collection",
+    "twitter": "https://twitter.com/BashoodNeutral",
+    "discord": "https://discord.gg/bashood-neutral",
+    "telegram": "https://t.me/bashood_neutral"
+  }
+}

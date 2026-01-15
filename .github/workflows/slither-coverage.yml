@@ -1,0 +1,50 @@
+name: Slither + Coverage
+
+on:
+  push: {}
+  pull_request: {}
+
+jobs:
+  analysis:
+    name: Slither and Coverage
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Install npm dependencies
+        run: npm ci
+
+      - name: Run Hardhat coverage
+        run: npx hardhat coverage --show-stack-traces
+
+      - name: Upload coverage artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report
+          path: |
+            coverage/**
+            coverage-final.json
+            coverage.json
+
+      - name: Run Slither (Docker)
+        # Use the official Crytic/Slither docker image to avoid installing system deps
+        run: |
+          mkdir -p reports
+          docker run --rm -v "${{ github.workspace }}:/src" crytic/slither:latest slither /src --json /src/reports/slither-${{ github.run_id }}.json || true
+        # Do not fail the job if slither returns non-zero; we still want to upload the report
+
+      - name: Upload Slither report
+        uses: actions/upload-artifact@v4
+        with:
+          name: slither-report
+          path: reports/slither-*.json
+
+      - name: Summary
+        run: |
+          echo "Artifacts uploaded: coverage/** and reports/slither-*.json"

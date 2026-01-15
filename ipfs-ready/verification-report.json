@@ -1,0 +1,100 @@
+{
+  "timestamp": "2025-11-20T22:18:28.054Z",
+  "total_tokens": 12,
+  "total_errors": 0,
+  "total_warnings": 0,
+  "collection_stats": {
+    "total_value": 62100000,
+    "avg_value": 5175000,
+    "property_types": {
+      "Villa": 6,
+      "House": 6
+    },
+    "value_range": {
+      "min": 3500000,
+      "max": 7500000,
+      "median": 5000000
+    }
+  },
+  "verification_results": {
+    "erc721_compliant": true,
+    "ready_for_ipfs": true,
+    "provenance_hash": "701ebd7980d06fcf1b0499c70440ad73aed7133d24973cc57cfa52bd865929fe"
+  },
+  "tokens": [
+    {
+      "tokenId": 101,
+      "name": "Golden Classic Manor",
+      "metadataHash": "345b4e5341f879627fd1ca858e5ed829af7a1f263815c5f2978770b1847af97b",
+      "estimatedValue": 5000000
+    },
+    {
+      "tokenId": 102,
+      "name": "Golden Prestige Estate",
+      "metadataHash": "2e3c9c39d27c230fcb23f6ecd5e696d97693594604319a5a2fe3ab7f4c11954b",
+      "estimatedValue": 6000000
+    },
+    {
+      "tokenId": 103,
+      "name": "Golden Heritage Villa",
+      "metadataHash": "ceb7c665051f94730f37ab05f6fc5a4646598d086c6bc109601ac2ea58ba1652",
+      "estimatedValue": 6500000
+    },
+    {
+      "tokenId": 104,
+      "name": "Golden Rustic Retreat",
+      "metadataHash": "bf177e1c906491a4bec4f3502f26eaa6b094899b2a4c9f8dfe496e708e5d3b4d",
+      "estimatedValue": 5500000
+    },
+    {
+      "tokenId": 105,
+      "name": "Neutral Classic Estate",
+      "metadataHash": "83f0e5e91fd2d298c5ab3d0d22e24cbae9800eda2745b3e3ba01aca848f073a8",
+      "estimatedValue": 3500000
+    },
+    {
+      "tokenId": 106,
+      "name": "Copper Elite Manor",
+      "metadataHash": "4da23410a06ed401c04054e73c22ec14f6a3720a74d88e4629a52ba6c1de5452",
+      "estimatedValue": 4500000
+    },
+    {
+      "tokenId": 107,
+      "name": "Copper Tech Residence",
+      "metadataHash": "84914465e9ae4a51d2e057a3a9f832a5cf3929434e22a537e99ce8501e61fd0f",
+      "estimatedValue": 5000000
+    },
+    {
+      "tokenId": 108,
+      "name": "Copper Heritage Mansion",
+      "metadataHash": "bfa640699abcba16a6e1df8067684dbdaa6e9eb880178e50c5e01c57dd89fe2b",
+      "estimatedValue": 4000000
+    },
+    {
+      "tokenId": 109,
+      "name": "Modern Tech Estate",
+      "metadataHash": "4b80d74026a0d6931a4babb34eea0ab9b68d89a76e677b32beaa039420034f36",
+      "estimatedValue": 4800000
+    },
+    {
+      "tokenId": 110,
+      "name": "Purple Innovation House",
+      "metadataHash": "cb598049b80e8016d287435d84a187e7fb657da4db2222b08a50f0200091af0b",
+      "estimatedValue": 5200000
+    },
+    {
+      "tokenId": 111,
+      "name": "Golden Marble Mansion",
+      "metadataHash": "63cc329779b9f79e14f7e1757250c101daf27be0a30704345c7c58a3ecfd25fb",
+      "estimatedValue": 7500000
+    },
+    {
+      "tokenId": 112,
+      "name": "Classic Tech Residence",
+      "metadataHash": "82427751d1577ed9f13adb679945d5b6412d8aea6f90b7be0fd952e6cd6fd301",
+      "estimatedValue": 4600000
+    }
+  ],
+  "errors": [],
+  "warnings": []
+}

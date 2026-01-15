@@ -1,0 +1,156 @@
+{
+  "name": "Neutral Classic Estate",
+  "description": "Elegante residencia con base cobriza y ventanas verdes naturales. Techo de tejas blancas que contrasta perfectamente con el diseño neutro. Un oasis de tranquilidad y sofisticación.",
+  "external_url": "https://bashood.com/nft/golden-neutral-collection/201",
+  "image": "https://cdn.bashood.com/golden-neutral-collection/QmNeutralClassic201.png",
+  "animation_url": "https://cdn.bashood.com/golden-neutral-collection/QmNeutralClassic201_360.mp4",
+  "attributes": [
+    {
+      "trait_type": "Collection",
+      "value": "Golden Neutral Collection"
+    },
+    {
+      "trait_type": "Series",
+      "value": "Golden Neutral Collection #201"
+    },
+    {
+      "trait_type": "Series Number",
+      "value": 2,
+      "display_type": "number"
+    },
+    {
+      "trait_type": "Parent Collection",
+      "value": "Golden House Collection"
+    },
+    {
+      "trait_type": "Rarity",
+      "value": "EPIC"
+    },
+    {
+      "trait_type": "Property Type",
+      "value": "House"
+    },
+    {
+      "trait_type": "Location",
+      "value": "Serenity Gardens, Bashood City"
+    },
+    {
+      "trait_type": "Area",
+      "value": 320,
+      "display_type": "number",
+      "trait_suffix": " sqm"
+    },
+    {
+      "trait_type": "Estimated Value",
+      "value": 3500000,
+      "display_type": "number",
+      "trait_suffix": " USD"
+    },
+    {
+      "trait_type": "Collection Series",
+      "value": "#201"
+    },
+    {
+      "trait_type": "Roof Type",
+      "value": "Classic White Tiles"
+    },
+    {
+      "trait_type": "Base Material",
+      "value": "Copper Bronze"
+    },
+    {
+      "trait_type": "Window Color",
+      "value": "Natural Green"
+    },
+    {
+      "trait_type": "Door Style",
+      "value": "Neutral Arch"
+    },
+    {
+      "trait_type": "Lighting",
+      "value": "Soft Natural"
+    },
+    {
+      "trait_type": "Chimney",
+      "value": "Copper Crown"
+    },
+    {
+      "trait_type": "Design Style",
+      "value": "Neutral Elegance"
+    },
+    {
+      "trait_type": "Color Palette",
+      "value": "Earth Tones"
+    },
+    {
+      "trait_type": "Year Designed",
+      "value": 2025
+    },
+    {
+      "trait_type": "Designer",
+      "value": "Bashood Studios"
+    },
+    {
+      "trait_type": "Copper Base",
+      "value": "Yes"
+    },
+    {
+      "trait_type": "Premium Roof",
+      "value": "No"
+    },
+    {
+      "trait_type": "Smart Integration",
+      "value": "No"
+    },
+    {
+      "trait_type": "Heritage Value",
+      "value": "No"
+    },
+    {
+      "trait_type": "Tech Features",
+      "value": "No"
+    },
+    {
+      "trait_type": "Natural Lighting",
+      "value": "Yes"
+    },
+    {
+      "trait_type": "Elite Access",
+      "value": "No"
+    },
+    {
+      "trait_type": "Neutral Design",
+      "value": "Yes"
+    }
+  ],
+  "properties": {
+    "category": "Premium Real Estate",
+    "collection": "Golden Neutral Collection",
+    "series": "Golden Neutral Collection #201",
+    "series_number": 2,
+    "parent_collection": "Golden House Collection",
+    "rarity": "EPIC",
+    "propertyType": "House",
+    "location": "Serenity Gardens, Bashood City",
+    "area": 320,
+    "estimatedValue": 3500000,
+    "features": {
+      "roofMaterial": "Classic White Tiles",
+      "baseMaterial": "Copper Bronze",
+      "windowStyle": "Natural Green Frame",
+      "lighting": "Soft Natural Glow",
+      "exclusivity": "Neutral Series #201"
+    },
+    "amenities": [
+      "Copper Bronze Base",
+      "White Tile Roof",
+      "Natural Lighting",
+      "Green Window Accent",
+      "Peaceful Environment",
+      "Metaverse Harmony",
+      "Eco-Friendly Design",
+      "Neutral Elegance"
+    ],
+    "generated": "2025-11-20T21:30:17.026Z"
+  }
+}

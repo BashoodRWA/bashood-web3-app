@@ -1,0 +1,13 @@
+// backup of PurchaseWithETH.test.js original
+// backup of original PurchaseWithETH.test.js
+
+const { expect } = require("chai");
+const { ethers } = require("hardhat");
+
+// backup content
+const { expect } = require("chai");
+const { ethers } = require("hardhat");
+
+// Backup of original PurchaseWithETH.test.js
+
+const placeholderBackupETH = true;

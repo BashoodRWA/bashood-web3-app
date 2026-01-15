@@ -1,0 +1,40 @@
+{
+  "name": "Golden House Collection",
+  "description": "Colección unificada de 8 casas premium Bashood. Desde elegantes tonos dorados hasta sofisticados neutros cobrizos, cada NFT representa una propiedad única en el metaverso.",
+  "image": "https://cdn.bashood.com/golden-house-collection/collection-banner.png",
+  "banner_image": "https://cdn.bashood.com/golden-house-collection/collection-banner-large.png",
+  "external_link": "https://bashood.com/golden-house-collection",
+  "seller_fee_basis_points": 500,
+  "fee_recipient": "0x742d35Cc6634C0532925a3b8D4D1C8B1B5c45C00",
+  "properties": {
+    "category": "Premium Real Estate",
+    "blockchain": "Ethereum",
+    "total_supply": 8,
+    "series": "Unified Golden House Collection",
+    "rarity": "LEGENDARY",
+    "collection_type": "Complete Premium Series",
+    "launch_date": "2025-11-20",
+    "subsets": [
+      {
+        "name": "Golden Classic Subset",
+        "description": "4 NFTs con acabados dorados premium",
+        "token_range": "101-104",
+        "avg_value": "$5.75M USD"
+      },
+      {
+        "name": "Neutral Copper Subset",
+        "description": "4 NFTs con diseños neutros y cobrizos",
+        "token_range": "105-108",
+        "avg_value": "$4.25M USD"
+      }
+    ]
+  },
+  "collection_stats": {
+    "total_value": "$40M USD",
+    "avg_property_value": "$5M USD",
+    "rarest_subset": "Golden Heritage (6.5M USD)",
+    "most_innovative": "Copper Tech (Smart Integration)",
+    "total_area": "3220 sqm",
+    "avg_area": "402.5 sqm"
+  }
+}

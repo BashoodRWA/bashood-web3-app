@@ -1,0 +1,104 @@
+{
+  "name": "Copper Heritage Mansion",
+  "description": "Mansión patrimonial con acabados cobrizos y techo oscuro elegante. Ventanas doradas clásicas que mantienen la tradición.",
+  "external_url": "https://bashood.com/nft/golden-house-collection/108",
+  "image": "ipfs://QmPLACEHOLDER_IMAGE_108",
+  "animation_url": "ipfs://QmPLACEHOLDER_ANIMATION_108",
+  "attributes": [
+    {
+      "trait_type": "Collection",
+      "value": "Golden House Collection"
+    },
+    {
+      "trait_type": "Subset",
+      "value": "Copper Heritage"
+    },
+    {
+      "trait_type": "Token ID",
+      "value": 108,
+      "display_type": "number"
+    },
+    {
+      "trait_type": "Rarity",
+      "value": "LEGENDARY"
+    },
+    {
+      "trait_type": "Property Type",
+      "value": "Villa"
+    },
+    {
+      "trait_type": "Location",
+      "value": "Heritage Hills, Bashood City"
+    },
+    {
+      "trait_type": "Area",
+      "value": 390,
+      "display_type": "number",
+      "trait_suffix": " sqm"
+    },
+    {
+      "trait_type": "Estimated Value",
+      "value": 4000000,
+      "display_type": "number",
+      "trait_suffix": " USD"
+    },
+    {
+      "trait_type": "Material",
+      "value": "Copper Heritage"
+    },
+    {
+      "trait_type": "Window Style",
+      "value": "Classic Golden Frame"
+    },
+    {
+      "trait_type": "Roof Type",
+      "value": "Dark Heritage Shingles"
+    },
+    {
+      "trait_type": "Base Type",
+      "value": "Heritage Copper"
+    },
+    {
+      "trait_type": "Heritage Copper",
+      "value": "Yes"
+    },
+    {
+      "trait_type": "Golden Windows",
+      "value": "Yes"
+    },
+    {
+      "trait_type": "Dark Roof",
+      "value": "Yes"
+    },
+    {
+      "trait_type": "Classic Base",
+      "value": "Yes"
+    }
+  ],
+  "properties": {
+    "category": "Premium Real Estate",
+    "collection": "Golden House Collection",
+    "subset": "Copper Heritage",
+    "tokenId": 108,
+    "rarity": "LEGENDARY",
+    "propertyType": "Villa",
+    "location": "Heritage Hills, Bashood City",
+    "area": 390,
+    "estimatedValue": 4000000,
+    "features": {
+      "material": "Copper Heritage",
+      "windows": "Classic Golden Frame",
+      "roof": "Dark Heritage Shingles",
+      "base": "Heritage Copper"
+    },
+    "amenities": [
+      "Heritage Copper",
+      "Golden Windows",
+      "Dark Roof",
+      "Classic Base"
+    ],
+    "generated": "2025-11-20T21:43:25.015Z",
+    "ipfs_prepared": "2025-11-20T22:18:28.049Z",
+    "version": "1.0.0"
+  }
+}

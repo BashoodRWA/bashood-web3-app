@@ -1,0 +1,37 @@
+{
+  "name": "Bashood Property Collection",
+  "description": "Premium real estate NFTs representing tokenized properties in the Bashood ecosystem. Each NFT represents ownership or shares in real-world properties, complete with detailed metadata, valuations, and utility features.",
+  "image": "https://cdn.bashood.com/images/collection-banner.png",
+  "banner_image": "https://cdn.bashood.com/images/collection-banner-large.png",
+  "featured_image": "https://cdn.bashood.com/images/collection-featured.png",
+  "external_link": "https://bashood.com",
+  "seller_fee_basis_points": 250,
+  "fee_recipient": "0x742d35Cc6634C0532925a3b8D4D1C8B1B5c45C00",
+  "properties": {
+    "category": "Real Estate",
+    "blockchain": "Ethereum",
+    "total_supply": 10000,
+    "property_types": [
+      "House",
+      "Apartment",
+      "Commercial",
+      "Land",
+      "Villa",
+      "Townhouse",
+      "Penthouse"
+    ],
+    "utility_features": [
+      "Staking Rewards",
+      "Governance Rights",
+      "Property Revenue Sharing",
+      "Exclusive Community Access"
+    ]
+  },
+  "socials": {
+    "website": "https://bashood.com",
+    "twitter": "https://twitter.com/BashoodOfficial",
+    "discord": "https://discord.gg/bashood",
+    "telegram": "https://t.me/bashood"
+  },
+  "created_date": "2025-11-20T00:00:00Z"
+}

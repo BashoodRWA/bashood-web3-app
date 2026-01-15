@@ -1,0 +1,11 @@
+{
+  "detectors_to_exclude": "naming-convention,solc-version,low-level-calls,external-function,pragma,dead-code",
+  "filter_paths": "node_modules|test|mock|Mock|Attacker|Libra|echidna|foundry",
+  "hardhat_cache_directory": "cache",
+  "exclude_dependencies": true,
+  "exclude_informational": false,
+  "exclude_low": false,
+  "exclude_medium": false,
+  "exclude_high": false,
+  "json": "slither-results.json"
+}

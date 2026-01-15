@@ -1,0 +1,149 @@
+{
+  "name": "Golden Heritage Villa",
+  "description": "Villa de herencia con características clásicas refinadas. Combina tradición y lujo con una base de platino que resalta la elegancia dorada de la estructura principal.",
+  "external_url": "https://bashood.com/nft/golden-collection/103",
+  "image": "https://cdn.bashood.com/golden-collection/QmGoldenHeritage003.png",
+  "animation_url": "https://cdn.bashood.com/golden-collection/QmGoldenHeritage003_360.mp4",
+  "attributes": [
+    {
+      "trait_type": "Collection",
+      "value": "Golden House Collection"
+    },
+    {
+      "trait_type": "Series",
+      "value": "Golden House Collection #003"
+    },
+    {
+      "trait_type": "Rarity",
+      "value": "LEGENDARY"
+    },
+    {
+      "trait_type": "Property Type",
+      "value": "Villa"
+    },
+    {
+      "trait_type": "Location",
+      "value": "Heritage Lane, Bashood City"
+    },
+    {
+      "trait_type": "Area",
+      "value": 425,
+      "display_type": "number",
+      "trait_suffix": " sqm"
+    },
+    {
+      "trait_type": "Estimated Value",
+      "value": 5500000,
+      "display_type": "number",
+      "trait_suffix": " USD"
+    },
+    {
+      "trait_type": "Collection Series",
+      "value": "#003"
+    },
+    {
+      "trait_type": "Roof Type",
+      "value": "Heritage Golden"
+    },
+    {
+      "trait_type": "Base Material",
+      "value": "Classic Platinum"
+    },
+    {
+      "trait_type": "Window Count",
+      "value": 2
+    },
+    {
+      "trait_type": "Door Style",
+      "value": "Heritage Arch"
+    },
+    {
+      "trait_type": "Lighting",
+      "value": "Classic Warm"
+    },
+    {
+      "trait_type": "Chimney",
+      "value": "Traditional Gold"
+    },
+    {
+      "trait_type": "Exclusivity Level",
+      "value": "Heritage Rare"
+    },
+    {
+      "trait_type": "Year Designed",
+      "value": 2025
+    },
+    {
+      "trait_type": "Designer",
+      "value": "Bashood Studios"
+    },
+    {
+      "trait_type": "Golden Roof",
+      "value": "Yes"
+    },
+    {
+      "trait_type": "Premium Base",
+      "value": "No"
+    },
+    {
+      "trait_type": "VIP Access",
+      "value": "No"
+    },
+    {
+      "trait_type": "Metaverse Ready",
+      "value": "Yes"
+    },
+    {
+      "trait_type": "Collectible Series",
+      "value": "Yes"
+    },
+    {
+      "trait_type": "Investment Grade",
+      "value": "No"
+    },
+    {
+      "trait_type": "Luxury Lighting",
+      "value": "No"
+    },
+    {
+      "trait_type": "Premium Windows",
+      "value": "No"
+    },
+    {
+      "trait_type": "Exclusive Design",
+      "value": "No"
+    },
+    {
+      "trait_type": "Heritage Value",
+      "value": "Yes"
+    }
+  ],
+  "properties": {
+    "category": "Premium Real Estate",
+    "collection": "Golden House Collection",
+    "series": "Golden House Collection #003",
+    "rarity": "LEGENDARY",
+    "propertyType": "Villa",
+    "location": "Heritage Lane, Bashood City",
+    "area": 425,
+    "estimatedValue": 5500000,
+    "features": {
+      "roofMaterial": "Heritage Golden Tiles",
+      "baseMaterial": "Classic Platinum",
+      "windowStyle": "Heritage Golden Frame",
+      "lighting": "Classic Golden Warmth",
+      "exclusivity": "Limited Series #003"
+    },
+    "amenities": [
+      "Heritage Design",
+      "Classic Platinum Base",
+      "Golden Warmth",
+      "Traditional Windows",
+      "Heritage Access",
+      "Metaverse Classic",
+      "Collectible Series",
+      "Historical Value"
+    ],
+    "generated": "2025-11-20T21:16:18.198Z"
+  }
+}

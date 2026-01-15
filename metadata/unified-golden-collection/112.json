@@ -1,0 +1,112 @@
+{
+  "name": "Classic Tech Residence",
+  "description": "Residencia clásica tecnológica con perfecta combinación de tradición y modernidad. Ventanas verdes eco-friendly en un diseño atemporal que honra el pasado y abraza el futuro.",
+  "external_url": "https://bashood.com/nft/golden-house-collection/112",
+  "image": "https://cdn.bashood.com/golden-house-collection/QmClassicTech112.png",
+  "animation_url": "https://cdn.bashood.com/golden-house-collection/QmClassicTech112_360.mp4",
+  "attributes": [
+    {
+      "trait_type": "Collection",
+      "value": "Golden House Collection"
+    },
+    {
+      "trait_type": "Subset",
+      "value": "Classic Tech"
+    },
+    {
+      "trait_type": "Token ID",
+      "value": 112,
+      "display_type": "number"
+    },
+    {
+      "trait_type": "Rarity",
+      "value": "LEGENDARY"
+    },
+    {
+      "trait_type": "Property Type",
+      "value": "House"
+    },
+    {
+      "trait_type": "Location",
+      "value": "Classic Tech District, Bashood City"
+    },
+    {
+      "trait_type": "Area",
+      "value": 360,
+      "display_type": "number",
+      "trait_suffix": " sqm"
+    },
+    {
+      "trait_type": "Estimated Value",
+      "value": 4600000,
+      "display_type": "number",
+      "trait_suffix": " USD"
+    },
+    {
+      "trait_type": "Material",
+      "value": "Classic Silver Base"
+    },
+    {
+      "trait_type": "Window Style",
+      "value": "Eco Green Smart Glass"
+    },
+    {
+      "trait_type": "Roof Type",
+      "value": "Classic Tech Tiles"
+    },
+    {
+      "trait_type": "Base Type",
+      "value": "Heritage Silver"
+    },
+    {
+      "trait_type": "Silver Base",
+      "value": "Yes"
+    },
+    {
+      "trait_type": "Eco Green Windows",
+      "value": "Yes"
+    },
+    {
+      "trait_type": "Classic Roof",
+      "value": "Yes"
+    },
+    {
+      "trait_type": "Tech Integration",
+      "value": "Yes"
+    },
+    {
+      "trait_type": "Heritage Value",
+      "value": "Yes"
+    },
+    {
+      "trait_type": "Sustainable Tech",
+      "value": "Yes"
+    }
+  ],
+  "properties": {
+    "category": "Premium Real Estate",
+    "collection": "Golden House Collection",
+    "subset": "Classic Tech",
+    "tokenId": 112,
+    "rarity": "LEGENDARY",
+    "propertyType": "House",
+    "location": "Classic Tech District, Bashood City",
+    "area": 360,
+    "estimatedValue": 4600000,
+    "features": {
+      "material": "Classic Silver Base",
+      "windows": "Eco Green Smart Glass",
+      "roof": "Classic Tech Tiles",
+      "base": "Heritage Silver"
+    },
+    "amenities": [
+      "Silver Base",
+      "Eco Green Windows",
+      "Classic Roof",
+      "Tech Integration",
+      "Heritage Value",
+      "Sustainable Tech"
+    ],
+    "generated": "2025-11-20T21:55:56.978Z"
+  }
+}

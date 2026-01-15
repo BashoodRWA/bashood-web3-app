@@ -1,0 +1,104 @@
+{
+  "name": "Copper Elite Manor",
+  "description": "Mansión de élite con base plateada y espectacular techo cobrizo. Ventanas con iluminación naranja cálida que crea atmósfera lujosa.",
+  "external_url": "https://bashood.com/nft/golden-house-collection/106",
+  "image": "ipfs://QmPLACEHOLDER_IMAGE_106",
+  "animation_url": "ipfs://QmPLACEHOLDER_ANIMATION_106",
+  "attributes": [
+    {
+      "trait_type": "Collection",
+      "value": "Golden House Collection"
+    },
+    {
+      "trait_type": "Subset",
+      "value": "Copper Elite"
+    },
+    {
+      "trait_type": "Token ID",
+      "value": 106,
+      "display_type": "number"
+    },
+    {
+      "trait_type": "Rarity",
+      "value": "LEGENDARY"
+    },
+    {
+      "trait_type": "Property Type",
+      "value": "Villa"
+    },
+    {
+      "trait_type": "Location",
+      "value": "Copper Heights, Bashood City"
+    },
+    {
+      "trait_type": "Area",
+      "value": 420,
+      "display_type": "number",
+      "trait_suffix": " sqm"
+    },
+    {
+      "trait_type": "Estimated Value",
+      "value": 4500000,
+      "display_type": "number",
+      "trait_suffix": " USD"
+    },
+    {
+      "trait_type": "Material",
+      "value": "Platinum Silver Base"
+    },
+    {
+      "trait_type": "Window Style",
+      "value": "Warm Orange Glow"
+    },
+    {
+      "trait_type": "Roof Type",
+      "value": "Premium Copper"
+    },
+    {
+      "trait_type": "Base Type",
+      "value": "Elite Platinum"
+    },
+    {
+      "trait_type": "Platinum Base",
+      "value": "Yes"
+    },
+    {
+      "trait_type": "Orange Windows",
+      "value": "Yes"
+    },
+    {
+      "trait_type": "Copper Roof",
+      "value": "Yes"
+    },
+    {
+      "trait_type": "Elite Finish",
+      "value": "Yes"
+    }
+  ],
+  "properties": {
+    "category": "Premium Real Estate",
+    "collection": "Golden House Collection",
+    "subset": "Copper Elite",
+    "tokenId": 106,
+    "rarity": "LEGENDARY",
+    "propertyType": "Villa",
+    "location": "Copper Heights, Bashood City",
+    "area": 420,
+    "estimatedValue": 4500000,
+    "features": {
+      "material": "Platinum Silver Base",
+      "windows": "Warm Orange Glow",
+      "roof": "Premium Copper",
+      "base": "Elite Platinum"
+    },
+    "amenities": [
+      "Platinum Base",
+      "Orange Windows",
+      "Copper Roof",
+      "Elite Finish"
+    ],
+    "generated": "2025-11-20T21:43:25.013Z",
+    "ipfs_prepared": "2025-11-20T22:18:28.046Z",
+    "version": "1.0.0"
+  }
+}

@@ -1,0 +1,58 @@
+# Echidna Configuration for Bashood Smart Contracts
+# Enhanced security testing with property-based fuzzing
+
+testMode: "property"
+testLimit: 50000
+shrinkLimit: 5000
+seqLen: 100
+contractAddr: "0x00a329c0648769a73afac7f9381e08fb43dbea72"
+
+# Coverage and debugging
+coverage: true
+corpusDir: "echidna-corpus/"
+coverageFormats: ["html", "txt"]
+
+# Solidity compiler settings
+solcOptimization: true
+solcOptimizationRuns: 200
+
+# Gas limits
+gasLimit: 12500000
+gasPrice: 1
+
+# Output settings
+quiet: false
+format: text
+
+# Fuzzing strategies
+shrinkStrategy: true
+corpusStrategy: true
+mutationStrategy: true
+
+# Advanced settings for deeper analysis
+checkAsserts: true
+assertTimeout: 10
+propTimeout: 10
+
+# Worker settings for parallel execution
+workers: 4
+
+# Seed for reproducible runs
+seed: 12345
+
+# Filter specific functions if needed
+# filterBlacklist: ["init", "setup"]
+# filterWhitelist: ["echidna_"]
+
+# Multi-contract support
+allContracts: true
+
+# RPC settings for mainnet forking
+# rpcUrl: "https://eth.llamarpc.com"
+# rpcBlock: "latest"
+
+# Crytic integration
+cryticArgs: ["--solc-version", "0.8.28"]
+
+# Dashboard integration (if available)
+dashboard: false

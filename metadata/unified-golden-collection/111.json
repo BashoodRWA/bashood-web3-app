@@ -1,0 +1,112 @@
+{
+  "name": "Golden Marble Mansion",
+  "description": "Lujosa mansión de mármol blanco con base dorada premium. Ventanas azul real que contrastan elegantemente con el diseño clásico, representando la máxima expresión del lujo.",
+  "external_url": "https://bashood.com/nft/golden-house-collection/111",
+  "image": "https://cdn.bashood.com/golden-house-collection/QmGoldenMarble111.png",
+  "animation_url": "https://cdn.bashood.com/golden-house-collection/QmGoldenMarble111_360.mp4",
+  "attributes": [
+    {
+      "trait_type": "Collection",
+      "value": "Golden House Collection"
+    },
+    {
+      "trait_type": "Subset",
+      "value": "Golden Marble"
+    },
+    {
+      "trait_type": "Token ID",
+      "value": 111,
+      "display_type": "number"
+    },
+    {
+      "trait_type": "Rarity",
+      "value": "LEGENDARY"
+    },
+    {
+      "trait_type": "Property Type",
+      "value": "Villa"
+    },
+    {
+      "trait_type": "Location",
+      "value": "Marble Heights, Bashood City"
+    },
+    {
+      "trait_type": "Area",
+      "value": 520,
+      "display_type": "number",
+      "trait_suffix": " sqm"
+    },
+    {
+      "trait_type": "Estimated Value",
+      "value": 7500000,
+      "display_type": "number",
+      "trait_suffix": " USD"
+    },
+    {
+      "trait_type": "Material",
+      "value": "Golden Premium Base"
+    },
+    {
+      "trait_type": "Window Style",
+      "value": "Royal Blue Crystal"
+    },
+    {
+      "trait_type": "Roof Type",
+      "value": "Golden Marble Crown"
+    },
+    {
+      "trait_type": "Base Type",
+      "value": "Pure Gold Foundation"
+    },
+    {
+      "trait_type": "Golden Base",
+      "value": "Yes"
+    },
+    {
+      "trait_type": "Royal Blue Windows",
+      "value": "Yes"
+    },
+    {
+      "trait_type": "Golden Roof",
+      "value": "Yes"
+    },
+    {
+      "trait_type": "Marble Walls",
+      "value": "Yes"
+    },
+    {
+      "trait_type": "Luxury Finish",
+      "value": "Yes"
+    },
+    {
+      "trait_type": "VIP Access",
+      "value": "Yes"
+    }
+  ],
+  "properties": {
+    "category": "Premium Real Estate",
+    "collection": "Golden House Collection",
+    "subset": "Golden Marble",
+    "tokenId": 111,
+    "rarity": "LEGENDARY",
+    "propertyType": "Villa",
+    "location": "Marble Heights, Bashood City",
+    "area": 520,
+    "estimatedValue": 7500000,
+    "features": {
+      "material": "Golden Premium Base",
+      "windows": "Royal Blue Crystal",
+      "roof": "Golden Marble Crown",
+      "base": "Pure Gold Foundation"
+    },
+    "amenities": [
+      "Golden Base",
+      "Royal Blue Windows",
+      "Golden Roof",
+      "Marble Walls",
+      "Luxury Finish",
+      "VIP Access"
+    ],
+    "generated": "2025-11-20T21:55:56.977Z"
+  }
+}

@@ -1,0 +1,392 @@
+name: 🛡️ Multi-Layer Security Analysis
+
+on:
+  push:
+    branches: [ main, develop, patch/* ]
+    paths:
+      - 'contracts/**'
+      - 'test/**'
+      - 'package.json'
+      - 'hardhat.config.js'
+      - 'foundry.toml'
+      - 'echidna.yaml'
+  pull_request:
+    branches: [ main, develop ]
+    paths:
+      - 'contracts/**'
+      - 'test/**'
+  schedule:
+    - cron: '0 2 * * 1' # Weekly Monday 2 AM UTC
+
+env:
+  FOUNDRY_PROFILE: default
+  ECHIDNA_VERSION: "v2.2.1"
+
+jobs:
+  # ==================== STATIC ANALYSIS LAYER ====================
+  static-analysis:
+    name: 📊 Static Analysis (Slither)
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    
+    steps:
+      - name: 📥 Checkout repository
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: 🐍 Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: ⚙️ Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      - name: 📦 Install dependencies
+        run: |
+          npm ci
+          pip install slither-analyzer crytic-compile
+
+      - name: 🔍 Run Slither Analysis
+        run: |
+          echo "🚀 Starting Slither static analysis..."
+          slither . \
+            --config-file slither.config.json \
+            --sarif slither-results.sarif \
+            --json slither-results.json \
+            --print human-summary,inheritance-graph,call-graph,vars-and-auth \
+            --exclude-dependencies \
+            --filter-paths "node_modules|test|lib" || true
+          
+          echo "📊 Generating detailed reports..."
+          slither . --print contract-summary > slither-contract-summary.txt
+          slither . --print function-summary > slither-function-summary.txt
+
+      - name: 📋 Process Slither Results
+        run: |
+          echo "### 🔍 Slither Analysis Summary" >> $GITHUB_STEP_SUMMARY
+          echo "$(date -u '+%Y-%m-%d %H:%M:%S') UTC" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          
+          if [ -f "slither-results.json" ]; then
+            HIGH_COUNT=$(jq '[.results.detectors[] | select(.impact == "High")] | length' slither-results.json 2>/dev/null || echo "0")
+            MEDIUM_COUNT=$(jq '[.results.detectors[] | select(.impact == "Medium")] | length' slither-results.json 2>/dev/null || echo "0")
+            LOW_COUNT=$(jq '[.results.detectors[] | select(.impact == "Low")] | length' slither-results.json 2>/dev/null || echo "0")
+            
+            echo "- 🔴 High Issues: $HIGH_COUNT" >> $GITHUB_STEP_SUMMARY
+            echo "- 🟡 Medium Issues: $MEDIUM_COUNT" >> $GITHUB_STEP_SUMMARY
+            echo "- 🟢 Low Issues: $LOW_COUNT" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            
+            if [ "$HIGH_COUNT" -gt 0 ]; then
+              echo "⚠️ **High severity issues detected!**" >> $GITHUB_STEP_SUMMARY
+              exit 1
+            fi
+          fi
+
+      - name: 📤 Upload Slither Reports
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: slither-analysis
+          path: |
+            slither-results.*
+            slither-*.txt
+          retention-days: 30
+
+  # ==================== DYNAMIC TESTING LAYER ====================
+  foundry-tests:
+    name: ⚡ Dynamic Testing (Foundry)
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    
+    steps:
+      - name: 📥 Checkout repository
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: ⚙️ Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      - name: 🔨 Install Foundry
+        uses: foundry-rs/foundry-toolchain@v1
+        with:
+          version: nightly
+
+      - name: 📦 Install Node dependencies
+        run: npm ci
+
+      - name: 🏗️ Compile contracts with Foundry
+        run: |
+          echo "🏗️ Compiling contracts with Foundry..."
+          forge build --sizes
+
+      - name: 🧪 Run Foundry tests
+        run: |
+          echo "⚡ Running Foundry test suite..."
+          forge test -vvv --gas-report > foundry-test-results.txt
+          
+          echo "📊 Generating coverage report..."
+          forge coverage --report lcov > foundry-coverage.txt
+
+      - name: 🔥 Run Fuzz Testing Campaign
+        run: |
+          echo "🔥 Starting intensive fuzz testing..."
+          forge test --match-test "testFuzz" -vvv --runs 10000 > foundry-fuzz-results.txt
+
+      - name: 📋 Process Foundry Results
+        run: |
+          echo "### ⚡ Foundry Testing Summary" >> $GITHUB_STEP_SUMMARY
+          echo "$(date -u '+%Y-%m-%d %H:%M:%S') UTC" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          
+          if [ -f "foundry-test-results.txt" ]; then
+            PASSED=$(grep -o "passing" foundry-test-results.txt | wc -l || echo "0")
+            FAILED=$(grep -o "failing" foundry-test-results.txt | wc -l || echo "0")
+            
+            echo "- ✅ Tests Passed: $PASSED" >> $GITHUB_STEP_SUMMARY
+            echo "- ❌ Tests Failed: $FAILED" >> $GITHUB_STEP_SUMMARY
+            
+            if [ "$FAILED" -gt 0 ]; then
+              echo "⚠️ **Test failures detected!**" >> $GITHUB_STEP_SUMMARY
+              exit 1
+            fi
+          fi
+
+      - name: 📤 Upload Foundry Reports
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: foundry-testing
+          path: |
+            foundry-*.txt
+            coverage/
+          retention-days: 30
+
+  # ==================== PROPERTY-BASED TESTING LAYER ====================
+  echidna-fuzzing:
+    name: 🐍 Property Testing (Echidna)
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    
+    steps:
+      - name: 📥 Checkout repository
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: ⚙️ Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      - name: 🐍 Install Echidna
+        run: |
+          wget -q https://github.com/crytic/echidna/releases/download/${{ env.ECHIDNA_VERSION }}/echidna-${{ env.ECHIDNA_VERSION }}-Ubuntu-18.04.tar.gz
+          tar -xzf echidna-${{ env.ECHIDNA_VERSION }}-Ubuntu-18.04.tar.gz
+          sudo mv echidna-test /usr/local/bin/echidna
+          chmod +x /usr/local/bin/echidna
+          echidna --version
+
+      - name: 📦 Install dependencies
+        run: npm ci
+
+      - name: 🐍 Run Echidna Property Testing
+        run: |
+          echo "🐍 Starting Echidna property-based testing..."
+          mkdir -p echidna-reports
+          
+          # Test BashoodToken properties
+          echidna test/echidna/BashoodEchidna.sol \
+            --contract BashoodTokenEchidnaTest \
+            --config echidna.yaml \
+            > echidna-reports/token-results.txt || true
+          
+          # Test BashoodPresale properties  
+          echidna test/echidna/BashoodEchidna.sol \
+            --contract BashoodEchidnaTest \
+            --config echidna.yaml \
+            > echidna-reports/presale-results.txt || true
+
+      - name: 📊 Generate Echidna Coverage
+        run: |
+          echo "📊 Generating Echidna coverage reports..."
+          if [ -d "echidna-corpus" ]; then
+            ls -la echidna-corpus/
+            cp -r echidna-corpus/ echidna-reports/
+          fi
+
+      - name: 📋 Process Echidna Results
+        run: |
+          echo "### 🐍 Echidna Fuzzing Summary" >> $GITHUB_STEP_SUMMARY
+          echo "$(date -u '+%Y-%m-%d %H:%M:%S') UTC" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          
+          if [ -d "echidna-reports" ]; then
+            for file in echidna-reports/*.txt; do
+              if [ -f "$file" ]; then
+                echo "#### $(basename $file)" >> $GITHUB_STEP_SUMMARY
+                PASSED=$(grep -o "PASSED" "$file" | wc -l || echo "0")
+                FAILED=$(grep -o "FAILED" "$file" | wc -l || echo "0")
+                
+                echo "- ✅ Properties Passed: $PASSED" >> $GITHUB_STEP_SUMMARY
+                echo "- ❌ Properties Failed: $FAILED" >> $GITHUB_STEP_SUMMARY
+                echo "" >> $GITHUB_STEP_SUMMARY
+                
+                if [ "$FAILED" -gt 0 ]; then
+                  echo "⚠️ **Property violations detected in $file!**" >> $GITHUB_STEP_SUMMARY
+                fi
+              fi
+            done
+          fi
+
+      - name: 📤 Upload Echidna Reports
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: echidna-fuzzing
+          path: |
+            echidna-reports/
+            echidna-corpus/
+          retention-days: 30
+
+  # ==================== SECURITY SUMMARY ====================
+  security-summary:
+    name: 📊 Security Summary
+    runs-on: ubuntu-latest
+    needs: [static-analysis, foundry-tests, echidna-fuzzing]
+    if: always()
+    
+    steps:
+      - name: 📥 Download All Reports
+        uses: actions/download-artifact@v4
+
+      - name: 📊 Generate Comprehensive Security Report
+        run: |
+          echo "# 🛡️ Comprehensive Security Analysis Report" > SECURITY_REPORT.md
+          echo "**Generated:** $(date -u '+%Y-%m-%d %H:%M:%S') UTC" >> SECURITY_REPORT.md
+          echo "**Commit:** ${{ github.sha }}" >> SECURITY_REPORT.md
+          echo "" >> SECURITY_REPORT.md
+          
+          echo "## 🔍 Analysis Layers" >> SECURITY_REPORT.md
+          echo "" >> SECURITY_REPORT.md
+          
+          # Static Analysis Summary
+          echo "### 📊 Layer 1: Static Analysis (Slither)" >> SECURITY_REPORT.md
+          if [ -d "slither-analysis" ]; then
+            echo "- ✅ Completed successfully" >> SECURITY_REPORT.md
+            echo "- 📄 Reports: slither-results.json, slither-results.sarif" >> SECURITY_REPORT.md
+          else
+            echo "- ❌ Failed or incomplete" >> SECURITY_REPORT.md
+          fi
+          echo "" >> SECURITY_REPORT.md
+          
+          # Dynamic Testing Summary
+          echo "### ⚡ Layer 2: Dynamic Testing (Foundry)" >> SECURITY_REPORT.md
+          if [ -d "foundry-testing" ]; then
+            echo "- ✅ Completed successfully" >> SECURITY_REPORT.md
+            echo "- 📄 Reports: foundry-test-results.txt, foundry-coverage.txt" >> SECURITY_REPORT.md
+          else
+            echo "- ❌ Failed or incomplete" >> SECURITY_REPORT.md
+          fi
+          echo "" >> SECURITY_REPORT.md
+          
+          # Property Testing Summary
+          echo "### 🐍 Layer 3: Property Testing (Echidna)" >> SECURITY_REPORT.md
+          if [ -d "echidna-fuzzing" ]; then
+            echo "- ✅ Completed successfully" >> SECURITY_REPORT.md
+            echo "- 📄 Reports: token-results.txt, presale-results.txt" >> SECURITY_REPORT.md
+          else
+            echo "- ❌ Failed or incomplete" >> SECURITY_REPORT.md
+          fi
+          echo "" >> SECURITY_REPORT.md
+          
+          echo "## 🎯 Recommendations" >> SECURITY_REPORT.md
+          echo "" >> SECURITY_REPORT.md
+          echo "1. Review all HIGH and MEDIUM severity issues from Slither" >> SECURITY_REPORT.md
+          echo "2. Ensure 100% test coverage with Foundry tests" >> SECURITY_REPORT.md
+          echo "3. Verify all Echidna properties pass consistently" >> SECURITY_REPORT.md
+          echo "4. Consider additional manual security review for critical functions" >> SECURITY_REPORT.md
+          echo "5. Run extended fuzzing campaigns before mainnet deployment" >> SECURITY_REPORT.md
+
+      - name: 📤 Upload Security Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: comprehensive-security-report
+          path: SECURITY_REPORT.md
+          retention-days: 90
+
+      - name: 💬 Comment on PR
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            if (fs.existsSync('SECURITY_REPORT.md')) {
+              const report = fs.readFileSync('SECURITY_REPORT.md', 'utf8');
+              github.rest.issues.createComment({
+                issue_number: context.issue.number,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                body: `## 🛡️ Multi-Layer Security Analysis Results\n\n${report}\n\n---\n*This report was automatically generated by the security analysis pipeline.*`
+              });
+            }
+
+  # ==================== EXTENDED FUZZING (WEEKLY) ====================
+  extended-fuzzing:
+    name: 🔥 Extended Fuzzing Campaign
+    runs-on: ubuntu-latest
+    if: github.event_name == 'schedule'
+    timeout-minutes: 120
+    
+    steps:
+      - name: 📥 Checkout repository
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: 🔨 Install Foundry
+        uses: foundry-rs/foundry-toolchain@v1
+
+      - name: 🐍 Install Echidna
+        run: |
+          wget -q https://github.com/crytic/echidna/releases/download/${{ env.ECHIDNA_VERSION }}/echidna-${{ env.ECHIDNA_VERSION }}-Ubuntu-18.04.tar.gz
+          tar -xzf echidna-${{ env.ECHIDNA_VERSION }}-Ubuntu-18.04.tar.gz
+          sudo mv echidna-test /usr/local/bin/echidna
+
+      - name: 📦 Install dependencies
+        run: npm ci
+
+      - name: 🔥 Extended Foundry Fuzzing
+        run: |
+          echo "🔥 Running extended fuzzing campaign..."
+          forge test --match-test "testFuzz" --runs 100000 > extended-fuzz-foundry.txt
+
+      - name: 🐍 Extended Echidna Campaign
+        run: |
+          echo "🐍 Running extended Echidna campaign..."
+          # Create extended config for longer runs
+          sed 's/testLimit: 50000/testLimit: 500000/' echidna.yaml > echidna-extended.yaml
+          
+          echidna test/echidna/BashoodEchidna.sol \
+            --contract BashoodEchidnaTest \
+            --config echidna-extended.yaml \
+            > extended-echidna-results.txt
+
+      - name: 📤 Upload Extended Results
+        uses: actions/upload-artifact@v4
+        with:
+          name: extended-fuzzing-results
+          path: |
+            extended-*.txt
+            echidna-corpus/
+          retention-days: 90

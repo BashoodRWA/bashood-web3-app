@@ -1,0 +1,148 @@
+{
+  "name": "Golden Classic Manor",
+  "description": "Elegante mansión con acabados dorados clásicos sobre base de platino. Diseño atemporal que combina lujo y sofisticación. Ventanas illuminadas que crean un ambiente cálido y acogedor.",
+  "external_url": "https://bashood.com/nft/golden-collection/101",
+  "image": "https://cdn.bashood.com/golden-collection/QmGoldenClassic001.png",
+  "animation_url": "https://cdn.bashood.com/golden-collection/QmGoldenClassic001_360.mp4",
+  "attributes": [
+    {
+      "trait_type": "Collection",
+      "value": "Golden House Collection"
+    },
+    {
+      "trait_type": "Series",
+      "value": "Golden House Collection #001"
+    },
+    {
+      "trait_type": "Rarity",
+      "value": "LEGENDARY"
+    },
+    {
+      "trait_type": "Property Type",
+      "value": "Villa"
+    },
+    {
+      "trait_type": "Location",
+      "value": "Golden District, Bashood City"
+    },
+    {
+      "trait_type": "Area",
+      "value": 450,
+      "display_type": "number",
+      "trait_suffix": " sqm"
+    },
+    {
+      "trait_type": "Estimated Value",
+      "value": 5000000,
+      "display_type": "number",
+      "trait_suffix": " USD"
+    },
+    {
+      "trait_type": "Collection Series",
+      "value": "#001"
+    },
+    {
+      "trait_type": "Roof Type",
+      "value": "Golden Classic"
+    },
+    {
+      "trait_type": "Base Material",
+      "value": "Platinum Silver"
+    },
+    {
+      "trait_type": "Window Count",
+      "value": 2
+    },
+    {
+      "trait_type": "Door Style",
+      "value": "Arched Golden"
+    },
+    {
+      "trait_type": "Lighting",
+      "value": "Warm Ambient"
+    },
+    {
+      "trait_type": "Chimney",
+      "value": "Golden Cap"
+    },
+    {
+      "trait_type": "Exclusivity Level",
+      "value": "Ultra Rare"
+    },
+    {
+      "trait_type": "Year Designed",
+      "value": 2025
+    },
+    {
+      "trait_type": "Designer",
+      "value": "Bashood Studios"
+    },
+    {
+      "trait_type": "Golden Roof",
+      "value": "Yes"
+    },
+    {
+      "trait_type": "Premium Base",
+      "value": "Yes"
+    },
+    {
+      "trait_type": "VIP Access",
+      "value": "Yes"
+    },
+    {
+      "trait_type": "Metaverse Ready",
+      "value": "Yes"
+    },
+    {
+      "trait_type": "Collectible Series",
+      "value": "Yes"
+    },
+    {
+      "trait_type": "Investment Grade",
+      "value": "No"
+    },
+    {
+      "trait_type": "Luxury Lighting",
+      "value": "No"
+    },
+    {
+      "trait_type": "Premium Windows",
+      "value": "Yes"
+    },
+    {
+      "trait_type": "Exclusive Design",
+      "value": "No"
+    },
+    {
+      "trait_type": "Heritage Value",
+      "value": "No"
+    }
+  ],
+  "properties": {
+    "category": "Premium Real Estate",
+    "collection": "Golden House Collection",
+    "series": "Golden House Collection #001",
+    "rarity": "LEGENDARY",
+    "propertyType": "Villa",
+    "location": "Golden District, Bashood City",
+    "area": 450,
+    "estimatedValue": 5000000,
+    "features": {
+      "roofMaterial": "Golden Premium Tiles",
+      "baseMaterial": "Platinum Silver",
+      "windowStyle": "Classic Golden Frame",
+      "lighting": "Warm Golden Glow",
+      "exclusivity": "Limited Series #001"
+    },
+    "amenities": [
+      "Golden Roof Tiles",
+      "Platinum Base",
+      "Premium Lighting",
+      "Classic Windows",
+      "VIP Access",
+      "Metaverse Ready",
+      "Collectible Series"
+    ],
+    "generated": "2025-11-20T21:16:18.196Z"
+  }
+}

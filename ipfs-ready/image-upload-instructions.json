@@ -1,0 +1,226 @@
+{
+  "instructions": "Upload Instructions for Golden House Collection Images",
+  "total_images_needed": 24,
+  "required_images": [
+    {
+      "token_id": 101,
+      "name": "Golden Classic Manor",
+      "required_files": [
+        {
+          "type": "main_image",
+          "filename": "101.png",
+          "description": "Main NFT image (1024x1024 recommended)"
+        },
+        {
+          "type": "animation",
+          "filename": "101_360.mp4",
+          "description": "360° animation (optional)",
+          "required": false
+        }
+      ]
+    },
+    {
+      "token_id": 102,
+      "name": "Golden Prestige Estate",
+      "required_files": [
+        {
+          "type": "main_image",
+          "filename": "102.png",
+          "description": "Main NFT image (1024x1024 recommended)"
+        },
+        {
+          "type": "animation",
+          "filename": "102_360.mp4",
+          "description": "360° animation (optional)",
+          "required": false
+        }
+      ]
+    },
+    {
+      "token_id": 103,
+      "name": "Golden Heritage Villa",
+      "required_files": [
+        {
+          "type": "main_image",
+          "filename": "103.png",
+          "description": "Main NFT image (1024x1024 recommended)"
+        },
+        {
+          "type": "animation",
+          "filename": "103_360.mp4",
+          "description": "360° animation (optional)",
+          "required": false
+        }
+      ]
+    },
+    {
+      "token_id": 104,
+      "name": "Golden Rustic Retreat",
+      "required_files": [
+        {
+          "type": "main_image",
+          "filename": "104.png",
+          "description": "Main NFT image (1024x1024 recommended)"
+        },
+        {
+          "type": "animation",
+          "filename": "104_360.mp4",
+          "description": "360° animation (optional)",
+          "required": false
+        }
+      ]
+    },
+    {
+      "token_id": 105,
+      "name": "Neutral Classic Estate",
+      "required_files": [
+        {
+          "type": "main_image",
+          "filename": "105.png",
+          "description": "Main NFT image (1024x1024 recommended)"
+        },
+        {
+          "type": "animation",
+          "filename": "105_360.mp4",
+          "description": "360° animation (optional)",
+          "required": false
+        }
+      ]
+    },
+    {
+      "token_id": 106,
+      "name": "Copper Elite Manor",
+      "required_files": [
+        {
+          "type": "main_image",
+          "filename": "106.png",
+          "description": "Main NFT image (1024x1024 recommended)"
+        },
+        {
+          "type": "animation",
+          "filename": "106_360.mp4",
+          "description": "360° animation (optional)",
+          "required": false
+        }
+      ]
+    },
+    {
+      "token_id": 107,
+      "name": "Copper Tech Residence",
+      "required_files": [
+        {
+          "type": "main_image",
+          "filename": "107.png",
+          "description": "Main NFT image (1024x1024 recommended)"
+        },
+        {
+          "type": "animation",
+          "filename": "107_360.mp4",
+          "description": "360° animation (optional)",
+          "required": false
+        }
+      ]
+    },
+    {
+      "token_id": 108,
+      "name": "Copper Heritage Mansion",
+      "required_files": [
+        {
+          "type": "main_image",
+          "filename": "108.png",
+          "description": "Main NFT image (1024x1024 recommended)"
+        },
+        {
+          "type": "animation",
+          "filename": "108_360.mp4",
+          "description": "360° animation (optional)",
+          "required": false
+        }
+      ]
+    },
+    {
+      "token_id": 109,
+      "name": "Modern Tech Estate",
+      "required_files": [
+        {
+          "type": "main_image",
+          "filename": "109.png",
+          "description": "Main NFT image (1024x1024 recommended)"
+        },
+        {
+          "type": "animation",
+          "filename": "109_360.mp4",
+          "description": "360° animation (optional)",
+          "required": false
+        }
+      ]
+    },
+    {
+      "token_id": 110,
+      "name": "Purple Innovation House",
+      "required_files": [
+        {
+          "type": "main_image",
+          "filename": "110.png",
+          "description": "Main NFT image (1024x1024 recommended)"
+        },
+        {
+          "type": "animation",
+          "filename": "110_360.mp4",
+          "description": "360° animation (optional)",
+          "required": false
+        }
+      ]
+    },
+    {
+      "token_id": 111,
+      "name": "Golden Marble Mansion",
+      "required_files": [
+        {
+          "type": "main_image",
+          "filename": "111.png",
+          "description": "Main NFT image (1024x1024 recommended)"
+        },
+        {
+          "type": "animation",
+          "filename": "111_360.mp4",
+          "description": "360° animation (optional)",
+          "required": false
+        }
+      ]
+    },
+    {
+      "token_id": 112,
+      "name": "Classic Tech Residence",
+      "required_files": [
+        {
+          "type": "main_image",
+          "filename": "112.png",
+          "description": "Main NFT image (1024x1024 recommended)"
+        },
+        {
+          "type": "animation",
+          "filename": "112_360.mp4",
+          "description": "360° animation (optional)",
+          "required": false
+        }
+      ]
+    }
+  ],
+  "upload_steps": [
+    "1. Create images for each token using the imageHash as reference",
+    "2. Upload all images to IPFS/Pinata",
+    "3. Get CID for each image",
+    "4. Update metadata files with real ipfs:// URIs",
+    "5. Re-upload updated metadata to IPFS",
+    "6. Update contract baseURI with final metadata CID"
+  ],
+  "quality_requirements": {
+    "image_format": "PNG or JPEG",
+    "min_resolution": "512x512",
+    "recommended_resolution": "1024x1024",
+    "max_file_size": "10MB per image",
+    "animation_format": "MP4, GIF, or WebM",
+    "animation_max_size": "50MB"
+  }
+}

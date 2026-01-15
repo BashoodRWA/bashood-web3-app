@@ -1,0 +1,104 @@
+{
+  "name": "Golden Classic Manor",
+  "description": "Majestuosa mansión dorada con elegantes detalles en oro puro. Ventanas de cristal verde esmeralda que reflejan la luz del metaverso.",
+  "external_url": "https://bashood.com/nft/golden-house-collection/101",
+  "image": "ipfs://QmPLACEHOLDER_IMAGE_101",
+  "animation_url": "ipfs://QmPLACEHOLDER_ANIMATION_101",
+  "attributes": [
+    {
+      "trait_type": "Collection",
+      "value": "Golden House Collection"
+    },
+    {
+      "trait_type": "Subset",
+      "value": "Golden Classic"
+    },
+    {
+      "trait_type": "Token ID",
+      "value": 101,
+      "display_type": "number"
+    },
+    {
+      "trait_type": "Rarity",
+      "value": "LEGENDARY"
+    },
+    {
+      "trait_type": "Property Type",
+      "value": "Villa"
+    },
+    {
+      "trait_type": "Location",
+      "value": "Golden District, Bashood City"
+    },
+    {
+      "trait_type": "Area",
+      "value": 450,
+      "display_type": "number",
+      "trait_suffix": " sqm"
+    },
+    {
+      "trait_type": "Estimated Value",
+      "value": 5000000,
+      "display_type": "number",
+      "trait_suffix": " USD"
+    },
+    {
+      "trait_type": "Material",
+      "value": "Pure Gold Finish"
+    },
+    {
+      "trait_type": "Window Style",
+      "value": "Emerald Crystal"
+    },
+    {
+      "trait_type": "Roof Type",
+      "value": "Golden Crown Tiles"
+    },
+    {
+      "trait_type": "Base Type",
+      "value": "Golden Marble"
+    },
+    {
+      "trait_type": "Golden Finish",
+      "value": "Yes"
+    },
+    {
+      "trait_type": "Crystal Windows",
+      "value": "Yes"
+    },
+    {
+      "trait_type": "Crown Roof",
+      "value": "Yes"
+    },
+    {
+      "trait_type": "Marble Base",
+      "value": "Yes"
+    }
+  ],
+  "properties": {
+    "category": "Premium Real Estate",
+    "collection": "Golden House Collection",
+    "subset": "Golden Classic",
+    "tokenId": 101,
+    "rarity": "LEGENDARY",
+    "propertyType": "Villa",
+    "location": "Golden District, Bashood City",
+    "area": 450,
+    "estimatedValue": 5000000,
+    "features": {
+      "material": "Pure Gold Finish",
+      "windows": "Emerald Crystal",
+      "roof": "Golden Crown Tiles",
+      "base": "Golden Marble"
+    },
+    "amenities": [
+      "Golden Finish",
+      "Crystal Windows",
+      "Crown Roof",
+      "Marble Base"
+    ],
+    "generated": "2025-11-20T21:43:24.990Z",
+    "ipfs_prepared": "2025-11-20T22:18:28.010Z",
+    "version": "1.0.0"
+  }
+}

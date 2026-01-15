@@ -1,0 +1,156 @@
+{
+  "name": "Copper Elite Manor",
+  "description": "Mansión de élite con base plateada y espectacular techo cobrizo. Ventanas con iluminación naranja cálida que crea una atmósfera acogedora y lujosa.",
+  "external_url": "https://bashood.com/nft/golden-neutral-collection/202",
+  "image": "https://cdn.bashood.com/golden-neutral-collection/QmCopperElite202.png",
+  "animation_url": "https://cdn.bashood.com/golden-neutral-collection/QmCopperElite202_360.mp4",
+  "attributes": [
+    {
+      "trait_type": "Collection",
+      "value": "Golden Neutral Collection"
+    },
+    {
+      "trait_type": "Series",
+      "value": "Golden Neutral Collection #202"
+    },
+    {
+      "trait_type": "Series Number",
+      "value": 2,
+      "display_type": "number"
+    },
+    {
+      "trait_type": "Parent Collection",
+      "value": "Golden House Collection"
+    },
+    {
+      "trait_type": "Rarity",
+      "value": "EPIC"
+    },
+    {
+      "trait_type": "Property Type",
+      "value": "Villa"
+    },
+    {
+      "trait_type": "Location",
+      "value": "Copper Heights, Bashood City"
+    },
+    {
+      "trait_type": "Area",
+      "value": 420,
+      "display_type": "number",
+      "trait_suffix": " sqm"
+    },
+    {
+      "trait_type": "Estimated Value",
+      "value": 4550000,
+      "display_type": "number",
+      "trait_suffix": " USD"
+    },
+    {
+      "trait_type": "Collection Series",
+      "value": "#202"
+    },
+    {
+      "trait_type": "Roof Type",
+      "value": "Premium Copper"
+    },
+    {
+      "trait_type": "Base Material",
+      "value": "Platinum Silver"
+    },
+    {
+      "trait_type": "Window Color",
+      "value": "Warm Orange"
+    },
+    {
+      "trait_type": "Door Style",
+      "value": "Elite Arch"
+    },
+    {
+      "trait_type": "Lighting",
+      "value": "Elite Copper Aura"
+    },
+    {
+      "trait_type": "Chimney",
+      "value": "Copper Elite"
+    },
+    {
+      "trait_type": "Design Style",
+      "value": "Copper Luxury"
+    },
+    {
+      "trait_type": "Color Palette",
+      "value": "Copper & Silver"
+    },
+    {
+      "trait_type": "Year Designed",
+      "value": 2025
+    },
+    {
+      "trait_type": "Designer",
+      "value": "Bashood Studios"
+    },
+    {
+      "trait_type": "Copper Base",
+      "value": "Yes"
+    },
+    {
+      "trait_type": "Premium Roof",
+      "value": "Yes"
+    },
+    {
+      "trait_type": "Smart Integration",
+      "value": "No"
+    },
+    {
+      "trait_type": "Heritage Value",
+      "value": "No"
+    },
+    {
+      "trait_type": "Tech Features",
+      "value": "No"
+    },
+    {
+      "trait_type": "Natural Lighting",
+      "value": "No"
+    },
+    {
+      "trait_type": "Elite Access",
+      "value": "Yes"
+    },
+    {
+      "trait_type": "Neutral Design",
+      "value": "No"
+    }
+  ],
+  "properties": {
+    "category": "Premium Real Estate",
+    "collection": "Golden Neutral Collection",
+    "series": "Golden Neutral Collection #202",
+    "series_number": 2,
+    "parent_collection": "Golden House Collection",
+    "rarity": "EPIC",
+    "propertyType": "Villa",
+    "location": "Copper Heights, Bashood City",
+    "area": 420,
+    "estimatedValue": 4550000,
+    "features": {
+      "roofMaterial": "Premium Copper",
+      "baseMaterial": "Platinum Silver",
+      "windowStyle": "Warm Orange Glow",
+      "lighting": "Elite Copper Aura",
+      "exclusivity": "Elite Series #202"
+    },
+    "amenities": [
+      "Platinum Silver Base",
+      "Premium Copper Roof",
+      "Elite Lighting",
+      "Warm Orange Windows",
+      "Luxury Access",
+      "Metaverse Elite",
+      "Premium Materials",
+      "Copper Elegance"
+    ],
+    "generated": "2025-11-20T21:30:17.029Z"
+  }
+}

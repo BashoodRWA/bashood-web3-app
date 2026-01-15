@@ -1,0 +1,164 @@
+{
+  "name": "Copper Tech Residence",
+  "description": "Residencia tecnológica con impresionantes ventanas azul neón que simbolizan innovación. Base cobriza que fusiona tradición con futurismo en un diseño único.",
+  "external_url": "https://bashood.com/nft/golden-neutral-collection/203",
+  "image": "https://cdn.bashood.com/golden-neutral-collection/QmCopperTech203.png",
+  "animation_url": "https://cdn.bashood.com/golden-neutral-collection/QmCopperTech203_360.mp4",
+  "attributes": [
+    {
+      "trait_type": "Collection",
+      "value": "Golden Neutral Collection"
+    },
+    {
+      "trait_type": "Series",
+      "value": "Golden Neutral Collection #203"
+    },
+    {
+      "trait_type": "Series Number",
+      "value": 2,
+      "display_type": "number"
+    },
+    {
+      "trait_type": "Parent Collection",
+      "value": "Golden House Collection"
+    },
+    {
+      "trait_type": "Rarity",
+      "value": "EPIC"
+    },
+    {
+      "trait_type": "Property Type",
+      "value": "House"
+    },
+    {
+      "trait_type": "Location",
+      "value": "Innovation District, Bashood City"
+    },
+    {
+      "trait_type": "Area",
+      "value": 380,
+      "display_type": "number",
+      "trait_suffix": " sqm"
+    },
+    {
+      "trait_type": "Estimated Value",
+      "value": 4900000,
+      "display_type": "number",
+      "trait_suffix": " USD"
+    },
+    {
+      "trait_type": "Collection Series",
+      "value": "#203"
+    },
+    {
+      "trait_type": "Roof Type",
+      "value": "Copper Tech"
+    },
+    {
+      "trait_type": "Base Material",
+      "value": "Copper Bronze Premium"
+    },
+    {
+      "trait_type": "Window Color",
+      "value": "Tech Blue Neon"
+    },
+    {
+      "trait_type": "Door Style",
+      "value": "Tech Portal"
+    },
+    {
+      "trait_type": "Lighting",
+      "value": "Futuristic Blue"
+    },
+    {
+      "trait_type": "Chimney",
+      "value": "Tech Copper"
+    },
+    {
+      "trait_type": "Design Style",
+      "value": "Copper Tech Fusion"
+    },
+    {
+      "trait_type": "Color Palette",
+      "value": "Copper & Neon Blue"
+    },
+    {
+      "trait_type": "Tech Level",
+      "value": "Advanced"
+    },
+    {
+      "trait_type": "Smart Features",
+      "value": "Integrated"
+    },
+    {
+      "trait_type": "Year Designed",
+      "value": 2025
+    },
+    {
+      "trait_type": "Designer",
+      "value": "Bashood Studios"
+    },
+    {
+      "trait_type": "Copper Base",
+      "value": "Yes"
+    },
+    {
+      "trait_type": "Premium Roof",
+      "value": "No"
+    },
+    {
+      "trait_type": "Smart Integration",
+      "value": "Yes"
+    },
+    {
+      "trait_type": "Heritage Value",
+      "value": "No"
+    },
+    {
+      "trait_type": "Tech Features",
+      "value": "Yes"
+    },
+    {
+      "trait_type": "Natural Lighting",
+      "value": "No"
+    },
+    {
+      "trait_type": "Elite Access",
+      "value": "No"
+    },
+    {
+      "trait_type": "Neutral Design",
+      "value": "No"
+    }
+  ],
+  "properties": {
+    "category": "Premium Real Estate",
+    "collection": "Golden Neutral Collection",
+    "series": "Golden Neutral Collection #203",
+    "series_number": 2,
+    "parent_collection": "Golden House Collection",
+    "rarity": "EPIC",
+    "propertyType": "House",
+    "location": "Innovation District, Bashood City",
+    "area": 380,
+    "estimatedValue": 4900000,
+    "features": {
+      "roofMaterial": "Copper Tech",
+      "baseMaterial": "Copper Bronze Premium",
+      "windowStyle": "Tech Blue Neon",
+      "lighting": "Futuristic Blue Aura",
+      "exclusivity": "Tech Innovation Series #203"
+    },
+    "amenities": [
+      "Copper Bronze Base",
+      "Tech Copper Roof",
+      "Neon Blue Windows",
+      "Smart Home Integration",
+      "Innovation Access",
+      "Metaverse Tech",
+      "Future-Ready Design",
+      "Digital Integration"
+    ],
+    "generated": "2025-11-20T21:30:17.048Z"
+  }
+}
