@@ -6,13 +6,25 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
 import "@openzeppelin/contracts/utils/Pausable.sol";
  
+// Custom Errors para optimización de gas
+error InvalidTreasuryWallet();
+error InvalidAmount();
+error ExceededBurnRate();
+error ExceededTreasuryFee();
+error InvalidStakingContract();
+
 /**
- * @title BashoodToken (BHT) - VersiÃ³n Personalizada con Pausable
+ * @title BashoodToken (BHT) - Versión Personalizada con Pausable
  */
 contract BashoodToken is ERC20, Ownable, ReentrancyGuard, Pausable {
-    uint256 public burnRate = 10;         // 0.1% (en basis points, 10/10000)
-    uint256 public treasuryFee = 50;      // 0.5% (en basis points, 50/10000)
+    // Constantes optimizadas
+    uint256 private constant _MAX_BURN_RATE = 100;     // 1% max
+    uint256 private constant _MAX_TREASURY_FEE = 200;  // 2% max
     uint256 public constant DENOMINATOR = 10000;
+    
+    // Variables optimizadas sin inicialización innecesaria
+    uint256 public burnRate;         // 0.1% (en basis points, 10/10000)
+    uint256 public treasuryFee;      // 0.5% (en basis points, 50/10000)
  
     address public treasuryWallet;
     address public stakingContract;
@@ -29,9 +41,14 @@ contract BashoodToken is ERC20, Ownable, ReentrancyGuard, Pausable {
     event BurnRateChanged(uint256 oldRate, uint256 newRate);
     event TreasuryFeeChanged(uint256 oldFee, uint256 newFee);
  
-    constructor(address _treasuryWallet) ERC20("Bashood Token", "BHT") Ownable(msg.sender) {
+    constructor(address _treasuryWallet) ERC20("BashoodToken", "BHT") Ownable(msg.sender) {
         require(_treasuryWallet != address(0), "Treasury required");
         treasuryWallet = _treasuryWallet;
+        
+        // Inicializar valores optimizados
+        burnRate = 10;    // 0.1%
+        treasuryFee = 50; // 0.5%
+        
         _mint(msg.sender, 1_000_000_000 * 10 ** decimals());
     }
  
@@ -39,13 +56,13 @@ contract BashoodToken is ERC20, Ownable, ReentrancyGuard, Pausable {
     // Implement transfer logic with burn and fee in the public transfer methods
     function transfer(address recipient, uint256 amount) public override whenNotPaused returns (bool) {
         address sender = _msgSender();
-        require(amount > 0, "Transfer amount must be greater than zero");
+        require(amount > 0, "Amount must be > 0");
 
         uint256 burnAmount = (amount * burnRate) / DENOMINATOR;
         uint256 feeAmount = (amount * treasuryFee) / DENOMINATOR;
         uint256 sendAmount = amount - burnAmount - feeAmount;
 
-        require(sendAmount > 0, "Send amount must be greater than zero");
+        require(sendAmount > 0, "Send amount must be > 0");
 
         if (burnAmount > 0) {
             super._burn(sender, burnAmount);
@@ -67,12 +84,12 @@ contract BashoodToken is ERC20, Ownable, ReentrancyGuard, Pausable {
         address spender = _msgSender();
         _spendAllowance(sender, spender, amount);
 
-        require(amount > 0, "Transfer amount must be greater than zero");
+        require(amount > 0, "Amount must be > 0");
         uint256 burnAmount = (amount * burnRate) / DENOMINATOR;
         uint256 feeAmount = (amount * treasuryFee) / DENOMINATOR;
         uint256 sendAmount = amount - burnAmount - feeAmount;
 
-        require(sendAmount > 0, "Send amount must be greater than zero");
+        require(sendAmount > 0, "Send must be > 0");
 
         if (burnAmount > 0) {
             super._burn(sender, burnAmount);
@@ -140,18 +157,16 @@ contract BashoodToken is ERC20, Ownable, ReentrancyGuard, Pausable {
  
  
     function setBurnRate(uint256 newRate) external onlyOwner {
-        require(newRate <= 100, "Max 1% burn");
+        require(newRate <= _MAX_BURN_RATE, "Max 1% burn");
         emit BurnRateChanged(burnRate, newRate);
         burnRate = newRate;
     }
- 
+
     function setTreasuryFee(uint256 newFee) external onlyOwner {
-        require(newFee <= 200, "Max 2% fee");
+        require(newFee <= _MAX_TREASURY_FEE, "Max 2% fee");
         emit TreasuryFeeChanged(treasuryFee, newFee);
         treasuryFee = newFee;
-    }
- 
-    // --- Funciones de pausa ---
+    }    // --- Funciones de pausa ---
     function pause() external onlyOwner {
         _pause();
     }

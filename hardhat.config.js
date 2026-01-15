@@ -1,5 +1,8 @@
 ﻿require("@nomicfoundation/hardhat-toolbox");
 require('@openzeppelin/hardhat-upgrades');
+require('hardhat-contract-sizer');
+require('hardhat-gas-reporter');
+require('dotenv').config();
 // enable solidity-coverage plugin (used to generate coverage/coverage-final.json)
 try {
   require('solidity-coverage');
@@ -39,7 +42,27 @@ module.exports = {
           }
         ]
       }
-    : "0.8.28",
+    : process.env.DEBUG_ORACLE
+    ? {
+        version: "0.8.28",
+        settings: {
+          optimizer: {
+            enabled: false  // Disable optimizer for debugging oracle validation issue
+          }
+        }
+      }
+    : {
+        version: "0.8.28",
+        settings: {
+          optimizer: {
+            enabled: true,
+            runs: 200, // Balance entre tamaño y gas de ejecución
+          },
+          metadata: {
+            bytecodeHash: "none"  // Remove metadata hash to reduce contract size
+          }
+        }
+      },
   paths: {
     sources: "./contracts",
     tests: "./test",
@@ -61,7 +84,60 @@ module.exports = {
   networks: {
     hardhat: {
       allowUnlimitedContractSize: true
+    },
+    // Base Sepolia Testnet
+    "base-sepolia": {
+      url: process.env.BASE_SEPOLIA_RPC || "https://sepolia.base.org",
+      accounts: process.env.BASE_SEPOLIA_PRIVATE_KEY 
+        ? [process.env.BASE_SEPOLIA_PRIVATE_KEY]
+        : [],
+      chainId: 84532,
+      gasPrice: 1000000000, // 1 gwei (Base has low gas)
+    },
+    // Base Mainnet (Production)
+    "base-mainnet": {
+      url: process.env.BASE_MAINNET_RPC || "https://mainnet.base.org",
+      accounts: process.env.BASE_MAINNET_PRIVATE_KEY 
+        ? [process.env.BASE_MAINNET_PRIVATE_KEY]
+        : [],
+      chainId: 8453,
+      gasPrice: 1000000000, // 1 gwei (Base has low gas)
     }
+  },
+  etherscan: {
+    apiKey: {
+      base: process.env.BASESCAN_API_KEY || "",
+      baseSepolia: process.env.BASESCAN_API_KEY || "",
+    },
+    customChains: [
+      {
+        network: "base-sepolia",
+        chainId: 84532,
+        urls: {
+          apiURL: "https://api-sepolia.basescan.org/api",
+          browserURL: "https://sepolia.basescan.org"
+        }
+      },
+      {
+        network: "base-mainnet",
+        chainId: 8453,
+        urls: {
+          apiURL: "https://api.basescan.org/api",
+          browserURL: "https://basescan.org"
+        }
+      }
+    ]
+  },
+  contractSizer: {
+    alphaSort: true,
+    runOnCompile: true,
+    disambiguatePaths: false,
+  },
+  gasReporter: {
+    enabled: process.env.REPORT_GAS === 'true',
+    currency: 'USD',
+    gasPrice: 20,
+    coinmarketcap: process.env.COINMARKETCAP_API_KEY
   }
 };
 
