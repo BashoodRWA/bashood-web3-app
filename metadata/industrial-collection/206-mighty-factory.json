@@ -1,0 +1,491 @@
+{
+  "standard": "BASHOOD-RWA-1",
+  "version": "1.0.0",
+  "name": "Mighty Buildings Modular UV-Cure Panel Factory #001",
+  "description": "Revolutionary UV-cure thermoset resin 3D printing factory. Zero-waste manufacturing process with instant UV light curing. Produces modular building panels with the lowest carbon footprint in the industry. Eligible for green bonds and ESG investment vehicles.",
+  "external_url": "https://bashood.com/assets/206",
+  "image": "ipfs://QmMIGHTY001MainImage",
+  "animation_url": "ipfs://QmMIGHTY001_360Video",
+  
+  "asset": {
+    "name": "Mighty Buildings UV-Cure Modular Factory #001",
+    "category": "MODULAR_FACTORY_UV",
+    "subcategory": "UV_THERMOSET_RESIN_PLANT",
+    "manufacturer": "Mighty Buildings",
+    "model": "Mighty Modular Factory",
+    "tags": ["UV_CURE", "ZERO_WASTE", "SUSTAINABLE", "MODULAR", "ESG"]
+  },
+  
+  "identification": {
+    "serialNumber": "MIGHTY-FACTORY-2024-USA-001",
+    "yearManufactured": 2024,
+    "countryOfOrigin": "USA",
+    "internalAssetId": "BSH-206",
+    "previousOwners": []
+  },
+  
+  "specifications": {
+    "dimensions": {
+      "length": 30000,
+      "width": 20000,
+      "height": 8000,
+      "unit": "mm",
+      "note": "Complete factory installation"
+    },
+    "weight": {
+      "value": 45000,
+      "unit": "kg"
+    },
+    "power": {
+      "consumption": 180,
+      "unit": "kW",
+      "note": "Full factory operation"
+    },
+    "panelOutputPerDay": 24,
+    "uvCureEfficiency": {
+      "value": 98.5,
+      "unit": "percentage"
+    },
+    "materialType": "UV_RESIN",
+    "wasteReduction": {
+      "value": 0,
+      "unit": "percentage",
+      "note": "True zero-waste manufacturing"
+    },
+    "features": [
+      "UV light-cured thermoset resin",
+      "Zero waste manufacturing (0%)",
+      "Modular panel production",
+      "IoT sustainability tracking",
+      "Automated quality control",
+      "Carbon offset reporting"
+    ]
+  },
+  
+  "financials": {
+    "purchasePrice": {
+      "value": 5200000,
+      "currency": "USD",
+      "date": "2024-04-12",
+      "note": "Complete factory: $5M+"
+    },
+    "currentValue": {
+      "value": 5096000,
+      "currency": "USD",
+      "lastAppraisal": "2026-01-11",
+      "appraisalMethod": "LINEAR_TIME_BASED"
+    },
+    "depreciationModel": "LINEAR",
+    "residualValue": {
+      "percentage": 25,
+      "estimatedValue": 1300000,
+      "currency": "USD",
+      "note": "High residual: UV systems, robotics, and facility infrastructure"
+    },
+    "insuranceValue": {
+      "value": 5100000,
+      "currency": "USD",
+      "annualPremium": 52000,
+      "premiumPercentage": 1.0,
+      "note": "1% for stationary factory with advanced fire suppression"
+    },
+    "maintenanceReserve": {
+      "percentage": 5,
+      "currentBalance": 180000,
+      "currency": "USD"
+    }
+  },
+  
+  "operational": {
+    "status": "OPERATIONAL",
+    "operatingHours": 4800,
+    "maxLifetimeHours": 175200,
+    "usageMetrics": {
+      "panelsProduced": 41000,
+      "squareMetersProduced": 98400,
+      "homesCompleted": 45,
+      "uvCureEfficiency": {
+        "current": 98.5,
+        "target": 98,
+        "trend": "STABLE"
+      },
+      "energyPerPanel": {
+        "value": 12.5,
+        "unit": "kWh"
+      }
+    },
+    "lastMaintenance": "2026-01-05",
+    "nextMaintenanceRequired": "2026-04-05",
+    "maintenanceIntervalHours": 2000,
+    "maintenanceCostPercentage": 1.8,
+    "maintenanceHistory": [
+      {
+        "date": "2026-01-05",
+        "type": "PREVENTIVE",
+        "cost": 35000,
+        "provider": "Mighty Buildings Service Team",
+        "notes": "Quarterly maintenance: UV lamp replacement, robotics calibration, resin system inspection"
+      },
+      {
+        "date": "2025-10-08",
+        "type": "PREVENTIVE",
+        "cost": 32000,
+        "provider": "Mighty Buildings Service Team",
+        "notes": "UV system optimization, quality control software update"
+      }
+    ],
+    "location": {
+      "facility": "Mighty Buildings Oakland Factory",
+      "address": "5000 Coliseum Way, Oakland, CA",
+      "city": "Oakland",
+      "country": "USA",
+      "gps": {
+        "latitude": 37.7518,
+        "longitude": -122.1987
+      },
+      "mobile": false
+    }
+  },
+  
+  "certifications": {
+    "required": [
+      {
+        "name": "UL_3401",
+        "issueDate": "2024-04-01",
+        "expiryDate": "2029-04-01",
+        "issuingBody": "Underwriters Laboratories",
+        "documentHash": "QmCertMIGHTY_UL3401"
+      },
+      {
+        "name": "IBC",
+        "issueDate": "2024-03-20",
+        "expiryDate": "2027-03-20",
+        "issuingBody": "International Code Council",
+        "documentHash": "QmCertMIGHTY_IBC"
+      },
+      {
+        "name": "ISO_9001",
+        "issueDate": "2024-03-15",
+        "expiryDate": "2027-03-15",
+        "issuingBody": "ISO",
+        "documentHash": "QmCertMIGHTY_ISO9001"
+      },
+      {
+        "name": "ISO_14001",
+        "issueDate": "2024-03-15",
+        "expiryDate": "2027-03-15",
+        "issuingBody": "ISO Environmental",
+        "documentHash": "QmCertMIGHTY_ISO14001"
+      }
+    ],
+    "optional": [
+      "LEED Platinum",
+      "B Corporation Certification",
+      "California Green Building Standard"
+    ]
+  },
+  
+  "insurance": {
+    "provider": "FM Global Industrial Property Insurance",
+    "policyNumber": "FMG-CA-2024-03892",
+    "type": "COMPREHENSIVE",
+    "coverage": {
+      "value": 5100000,
+      "currency": "USD"
+    },
+    "annualPremium": {
+      "value": 52000,
+      "currency": "USD",
+      "percentageOfCAPEX": 1.0
+    },
+    "expiryDate": "2026-04-11",
+    "coverageDetails": [
+      "Property damage",
+      "Equipment breakdown",
+      "Business interruption",
+      "Environmental liability",
+      "Product liability"
+    ]
+  },
+  
+  "telemetry": {
+    "provider": "MIGHTY_IOT",
+    "apiEndpoint": "https://api.mightybuildings.com/iot/MIGHTY-FACTORY-2024-USA-001",
+    "apiKeyEncrypted": "encrypted_mighty_iot_key_001",
+    "metrics": [
+      {
+        "name": "panelsProduced",
+        "updateFrequency": "REALTIME",
+        "lastValue": 41000,
+        "lastUpdate": "2026-01-16T09:30:00Z"
+      },
+      {
+        "name": "uvCureEfficiency",
+        "updateFrequency": "HOURLY",
+        "lastValue": 98.5,
+        "lastUpdate": "2026-01-16T09:00:00Z",
+        "unit": "percentage"
+      },
+      {
+        "name": "carbonSaved",
+        "updateFrequency": "DAILY",
+        "lastValue": 1250,
+        "lastUpdate": "2026-01-16T00:00:00Z",
+        "unit": "tonsCO2"
+      },
+      {
+        "name": "wasteGenerated",
+        "updateFrequency": "DAILY",
+        "lastValue": 0,
+        "lastUpdate": "2026-01-16T00:00:00Z",
+        "unit": "kg"
+      },
+      {
+        "name": "operatingHours",
+        "updateFrequency": "HOURLY",
+        "lastValue": 4800,
+        "lastUpdate": "2026-01-16T09:00:00Z"
+      }
+    ],
+    "oracleIntegration": {
+      "chainlinkNode": true,
+      "oracleAddress": "0x742d35Cc6634C0532925a3b844c0112c8c7d6012",
+      "verificationMethod": "IOT_CERTIFIED_DATA",
+      "updateFrequency": "DAILY"
+    }
+  },
+  
+  "tokenization": {
+    "strategy": "FRACTIONAL",
+    "fractional": {
+      "totalShares": 5200,
+      "minInvestment": {
+        "value": 1000,
+        "currency": "USD",
+        "note": "$5.2M / 5200 shares"
+      },
+      "revenueSharePercentage": 88,
+      "note": "88% to investors, 7% maintenance, 5% protocol"
+    },
+    "revenueModel": {
+      "panelPrice": {
+        "value": 450,
+        "currency": "USD",
+        "unit": "per_panel"
+      },
+      "panelsPerMonth": 700,
+      "monthlyRevenue": {
+        "estimated": 315000,
+        "currency": "USD",
+        "note": "$450/panel * 700 panels/month"
+      },
+      "annualRevenue": {
+        "estimated": 3780000,
+        "currency": "USD"
+      },
+      "distributionFrequency": "QUARTERLY",
+      "nextDistribution": "2026-04-01"
+    },
+    "maintenanceReservePct": 7
+  },
+  
+  "esg": {
+    "carbonFootprint": {
+      "annualTonsCO2": -1250,
+      "offsetPercentage": 100,
+      "note": "NEGATIVE EMISSIONS: Carbon-neutral materials + renewable energy = net carbon removal"
+    },
+    "wasteReduction": 100,
+    "energyEfficiency": "A+",
+    "greenBondEligible": true,
+    "sustainabilityCertifications": [
+      "B Corporation Certified",
+      "LEED Platinum Facility",
+      "ISO 14001",
+      "Carbon Neutral Certified"
+    ],
+    "socialImpact": {
+      "affordableHomesBuilt": 45,
+      "jobsCreated": 62,
+      "communityInvestment": 180000,
+      "diversityScore": 95
+    },
+    "environmentalImpact": {
+      "carbonSaved": 1250,
+      "wasteEliminated": "100%",
+      "waterSaved": 45000,
+      "recyclableContent": 92
+    }
+  },
+  
+  "secondaryMarket": {
+    "marketExists": false,
+    "averageRetentionRate": 75,
+    "liquidityScore": 5,
+    "comparableSales": [],
+    "demandIndicators": {
+      "note": "Limited secondary market - typically long-term holds due to high ESG value and stable returns"
+    }
+  },
+  
+  "documentation": {
+    "images": [
+      "ipfs://QmMIGHTY001_FactoryExterior",
+      "ipfs://QmMIGHTY001_UVCureProcess",
+      "ipfs://QmMIGHTY001_PanelProduction",
+      "ipfs://QmMIGHTY001_CompletedHome"
+    ],
+    "manuals": [
+      "ipfs://QmMIGHTY_FactoryOperationsManual",
+      "ipfs://QmMIGHTY_UVSystemTechDoc",
+      "ipfs://QmMIGHTY_SustainabilityReport"
+    ],
+    "certificates": [
+      "ipfs://QmCertMIGHTY_UL3401",
+      "ipfs://QmCertMIGHTY_IBC",
+      "ipfs://QmCertMIGHTY_ISO9001",
+      "ipfs://QmCertMIGHTY_ISO14001",
+      "ipfs://QmCertMIGHTY_BCorp",
+      "ipfs://QmCertMIGHTY_LEED_Platinum"
+    ],
+    "inspectionReports": [
+      {
+        "date": "2026-01-07",
+        "inspector": "Sarah Martinez, UL Chief Inspector",
+        "result": "PASS",
+        "documentHash": "QmInspection_MIGHTY001_2026Q1",
+        "notes": "Exceptional compliance. UV systems optimal. Zero safety incidents."
+      }
+    ],
+    "sustainabilityReports": [
+      {
+        "period": "Q4 2025",
+        "carbonSaved": 310,
+        "wasteGenerated": 0,
+        "documentHash": "QmSustainability_MIGHTY_Q42025"
+      }
+    ],
+    "videos": [
+      {
+        "title": "Mighty Buildings - Zero Waste Manufacturing",
+        "url": "ipfs://QmMIGHTY_ZeroWaste_Documentary",
+        "duration": 600
+      },
+      {
+        "title": "UV-Cure Technology Explained",
+        "url": "ipfs://QmMIGHTY_UVCure_Explainer",
+        "duration": 240
+      }
+    ]
+  },
+  
+  "ownership": {
+    "legalOwner": "Bashood Protocol DAO",
+    "custodian": "Mighty Buildings Inc.",
+    "tokenized": true,
+    "tokenContract": "0x742d35Cc6634C0532925a3b844c0112c8c7d6008",
+    "tokenId": 206,
+    "blockchain": "BASE",
+    "chainId": 8453
+  },
+  
+  "attributes": [
+    {
+      "trait_type": "Manufacturer",
+      "value": "Mighty Buildings"
+    },
+    {
+      "trait_type": "Model",
+      "value": "Modular UV-Cure Factory"
+    },
+    {
+      "trait_type": "Category",
+      "value": "Modular Factory (UV Thermoset)"
+    },
+    {
+      "trait_type": "Year Manufactured",
+      "value": 2024,
+      "display_type": "number"
+    },
+    {
+      "trait_type": "Purchase Price",
+      "value": 5200000,
+      "display_type": "number",
+      "trait_suffix": " USD"
+    },
+    {
+      "trait_type": "Current Value",
+      "value": 5096000,
+      "display_type": "number",
+      "trait_suffix": " USD"
+    },
+    {
+      "trait_type": "Panels Produced",
+      "value": 41000,
+      "display_type": "number"
+    },
+    {
+      "trait_type": "Homes Completed",
+      "value": 45,
+      "display_type": "number"
+    },
+    {
+      "trait_type": "UV Cure Efficiency",
+      "value": 98.5,
+      "display_type": "number",
+      "trait_suffix": " %"
+    },
+    {
+      "trait_type": "Waste Reduction",
+      "value": 100,
+      "display_type": "number",
+      "trait_suffix": " %"
+    },
+    {
+      "trait_type": "Carbon Impact",
+      "value": -1250,
+      "display_type": "number",
+      "trait_suffix": " tons CO2 (NEGATIVE)"
+    },
+    {
+      "trait_type": "Remaining Life",
+      "value": 97.3,
+      "display_type": "number",
+      "trait_suffix": " % (20 years)"
+    },
+    {
+      "trait_type": "Depreciation Model",
+      "value": "Linear (20 years)"
+    },
+    {
+      "trait_type": "Zero Waste",
+      "value": "Yes (0%)"
+    },
+    {
+      "trait_type": "Tokenization Strategy",
+      "value": "Fractional (5200 shares)"
+    },
+    {
+      "trait_type": "Annual Revenue (Estimated)",
+      "value": 3780000,
+      "display_type": "number",
+      "trait_suffix": " USD"
+    },
+    {
+      "trait_type": "Green Bond Eligible",
+      "value": "Yes"
+    },
+    {
+      "trait_type": "B Corporation",
+      "value": "Yes"
+    },
+    {
+      "trait_type": "LEED Certification",
+      "value": "Platinum"
+    },
+    {
+      "trait_type": "Rarity",
+      "value": "MYTHIC"
+    }
+  ]
+}
