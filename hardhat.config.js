@@ -56,7 +56,7 @@ module.exports = {
         settings: {
           optimizer: {
             enabled: true,
-            runs: 200, // Balance entre tamaño y gas de ejecución
+            runs: 10, // Low runs for large contracts (BashoodRWAReference = 28KB)
           },
           metadata: {
             bytecodeHash: "none"  // Remove metadata hash to reduce contract size
