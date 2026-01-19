@@ -641,6 +641,170 @@ Integración con **Chainlink BUILD Program** que provee:
 
 ---
 
+#### G. Advanced Oracle Architecture (Roadmap v2.0)
+
+**Nota:** Este documento presenta la arquitectura de resiliencia de oráculos a largo plazo. Para la versión completa, ver [ORACLE_RESILIENCE_ARCHITECTURE.md](ORACLE_RESILIENCE_ARCHITECTURE.md).
+
+**Visión a 18 meses:** Sistema de oráculos de **5 capas** para activos industriales de alto valor ($1M-$100M+):
+
+**1. Multi-Oracle Aggregation (v1.2 - 6-12 meses)**
+
+En lugar de un solo oracle, usar **agregación 3-tier**:
+
+```
+Layer 1: Chainlink Network (primary)
+Layer 2: Chainlink Functions (custom external APIs)
+Layer 3: Manufacturer Direct API (EVOCONS, ICON, CyBe)
+
+Consensus: 2 of 3 must agree (±5% tolerance)
+```
+
+**Ejemplo de consenso:**
+- Chainlink reporta: 72,000 tons
+- Chainlink Functions (EVOCONS API): 72,100 tons
+- EVOCONS Direct API: 71,950 tons
+- **Mediana:** 72,000 tons → valor aceptado ✅
+
+**Por qué no Pyth Network:**
+Pyth optimiza para **financial price feeds** (BTC/USD, stocks), NO para telemetría industrial (tons lifted, meters extruded). Solución: Chainlink Functions permite custom API calls.
+
+**2. ZK-Proof of Execution (v2.0 - 12-18 meses)**
+
+Máquinas industriales modernas tienen computadoras embebidas. Pueden generar **pruebas criptográficas** de su estado:
+
+```solidity
+// Machine generates ZK-proof locally
+zkProof = prove("I lifted 72,000 tons as of timestamp T");
+
+// Smart contract receives:
+- zkProof from machine (ground truth)
+- oracleValue from Chainlink
+- If mismatch → DISPUTE STATE
+```
+
+**Ventaja:** Prueba que la máquina física misma generó, imposible de falsificar (asumiendo firmware no comprometido).
+
+**Requisitos:**
+- Hardware: Trusted Execution Environment (Intel SGX, ARM TrustZone)
+- Software: RISC Zero, SP1, o zkWasm
+- Cooperación: Firmware updates con fabricante (EVOCONS, ICON)
+
+**Precedentes:** Filecoin (storage proofs), RISC Zero (verifiable computation)
+
+**3. Circuit Breaker Avanzado (v1.1 - 3-6 meses)**
+
+Inspirado en MakerDAO y Aave:
+
+```solidity
+// Detectar cambios sospechosos
+if (newValue > oldValue * 1.2) {
+    // Cambio >20% → flash attack suspected
+    revert("Circuit breaker: change too large");
+}
+
+// Detectar anomalías estadísticas
+if (abs(newValue - mean) > 3 * stdDev) {
+    // Valor fuera de 3σ (99.7% confidence) → anomalía
+    pauseTelemetry(tokenId);
+}
+
+// Grace period mode
+if (block.timestamp - lastUpdate > 7 days) {
+    // Pausar liquidaciones durante downtime del oracle
+    pauseLiquidations(tokenId);
+}
+```
+
+**Protección:** Asset owner no puede ser liquidado por oracle failure (no es su culpa).
+
+**4. UMA Optimistic Oracle (v1.2 - 6-12 meses)**
+
+Dispute resolution con humanos:
+
+```
+Oracle dice: "100,000 tons lifted"
+Machine ZK-proof dice: "72,000 tons lifted"
+¿Quién tiene razón?
+
+→ Asset Manager disputa (stake 10,000 tokens)
+→ UMA voters deciden con evidencia off-chain (photos, logs)
+→ Si Asset Manager gana: gets stake back + reward, oracle slashed
+→ Si Oracle gana: Asset Manager pierde stake
+```
+
+**Game theory:** Disputar frivolamente cuesta $10k, attack profit $0 → incentivos alineados.
+
+**Precedentes:** Polymarket (prediction markets), Across Bridge (cross-chain verification)
+
+**5. Multi-Sig Governance (v1.0 - IMPLEMENTADO)**
+
+Emergency guardians con **5 of 9 multi-sig**:
+
+```
+Signers:
+1-2. Bashood Protocol Team
+3. EVOCONS representative
+4. ICON representative
+5. Base/Coinbase ecosystem
+6. Security auditor (OpenZeppelin)
+7. Legal counsel
+8. Independent DeFi researcher
+9. Community-elected
+```
+
+**Powers:**
+- ✅ Emergency pause (instant)
+- ✅ Change oracle provider (48-hour timelock)
+- ❌ Steal funds (impossible)
+
+**Precedentes:** Uniswap (Timelock governance), Aave (Guardian multi-sig)
+
+---
+
+**Roadmap de Implementación:**
+
+| Versión | Timeline | Budget | Features |
+|---------|----------|--------|----------|
+| v1.0 | Actual (grant) | $12.5k | Multi-sig, manual fallback, stale detection |
+| v1.1 | 3-6 meses | $40k | Circuit breaker, grace period, anomaly detection |
+| v1.2 | 6-12 meses | $80k | Multi-oracle aggregation, UMA disputes |
+| v2.0 | 12-18 meses | $150k | ZK-proofs, edge validation, DAO governance |
+
+**Total investment:** $282.5k over 18 months
+
+**Target TVL:** $100M+ with institutional-grade reliability (99.99% uptime)
+
+---
+
+**Métricas de Éxito (v2.0):**
+
+- **Uptime:** 99.99% (downtime: 52 minutes/year)
+- **False positives:** <0.1%
+- **Dispute resolution:** <24 hours
+- **Oracle failure recovery:** <2 hours
+- **Security:** Protected against oracle cartel (>51% attack)
+
+---
+
+**Funding Strategy:**
+
+- v1.0: Base Builder Grant ($12.5k) ✅
+- v1.1: Base ecosystem grants or Series Seed ($40k)
+- v1.2: Chainlink BUILD program partnership ($80k)
+- v2.0: Series A + manufacturer partnerships (EVOCONS, ICON) ($150k)
+
+**Por qué Base debería apoyar esto:**
+
+1. **Diferenciación:** Ningún otro L2 tiene oracle infrastructure tan robusta para RWA
+2. **TVL magnético:** $100M+ TVL justifica el desarrollo
+3. **Case study:** Demostrar que Base puede manejar industrial-grade DeFi
+4. **Precedente:** Chainlink BUILD program ya existe, Base puede co-sponsor
+5. **Ecosystem value:** Otros protocolos RWA pueden usar esta infraestructura
+
+**Documentación completa:** Ver [ORACLE_RESILIENCE_ARCHITECTURE.md](../ORACLE_RESILIENCE_ARCHITECTURE.md) para análisis técnico detallado, code samples, precedentes, y cost breakdown.
+
+---
+
 ### 3. ¿Quién responde legalmente?
 
 **Pregunta:** Si un inversor pierde dinero porque el contrato tiene un bug, o porque los datos del oracle eran incorrectos, o porque el asset físico fue mal representado, ¿quién es legalmente responsable? ¿El protocolo, el asset manager, el fabricante, los desarrolladores?
