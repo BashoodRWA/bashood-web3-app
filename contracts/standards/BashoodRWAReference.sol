@@ -350,8 +350,8 @@ contract BashoodRWAReference is
             // Standard time-based (age-based) depreciation
             // Assume 10% per year for simplicity
             uint256 age = block.timestamp - operational.lastMaintenanceDate;
-            uint256 elapsedYears = age / SECONDS_PER_YEAR;
-            uint256 depPct = elapsedYears * 1000; // 10% per year
+            // Fix: Multiply before divide to avoid precision loss
+            uint256 depPct = (age * 1000) / SECONDS_PER_YEAR; // 10% per year
             return depPct > BASIS_POINTS ? BASIS_POINTS : depPct;
         }
         
@@ -422,7 +422,8 @@ contract BashoodRWAReference is
     ) external onlyRole(ORACLE_ROLE) {
         _requireOwned(tokenId);
         
-        uint256 oldValue;
+        // Fix: Initialize oldValue to 0 to avoid uninitialized variable warning
+        uint256 oldValue = 0;
         
         // Update based on metric type
         if (keccak256(bytes(metricType)) == keccak256(bytes("LOAD"))) {
