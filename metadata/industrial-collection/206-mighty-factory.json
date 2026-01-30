@@ -1,23 +1,23 @@
 {
   "standard": "BASHOOD-RWA-1",
   "version": "1.0.0",
-  "name": "Mighty Buildings Modular UV-Cure Panel Factory #001",
-  "description": "Revolutionary UV-cure thermoset resin 3D printing factory. Zero-waste manufacturing process with instant UV light curing. Produces modular building panels with the lowest carbon footprint in the industry. Eligible for green bonds and ESG investment vehicles.",
+  "name": "Modular Panel Production Unit MPU-8000 #001",
+  "description": "Advanced UV-cure thermoset resin 3D printing factory. Low-waste manufacturing process with rapid UV light curing. Produces modular building panels with reduced carbon footprint. Suitable for sustainable construction projects and ESG investment portfolios. This is a fictional representative asset for technical demonstration.",
   "external_url": "https://bashood.com/assets/206",
-  "image": "ipfs://QmMIGHTY001MainImage",
-  "animation_url": "ipfs://QmMIGHTY001_360Video",
+  "image": "ipfs://bafybeifcdgrpqrl6qy5sexkllrxjixdqpgsyelgrg64st7xtbpalsbenhy",
+  "animation_url": "ipfs://QmMODULARFACTORY001_360Video",
   
   "asset": {
-    "name": "Mighty Buildings UV-Cure Modular Factory #001",
+    "name": "Modular Panel Production Unit MPU-8000 #001",
     "category": "MODULAR_FACTORY_UV",
     "subcategory": "UV_THERMOSET_RESIN_PLANT",
-    "manufacturer": "Mighty Buildings",
-    "model": "Mighty Modular Factory",
-    "tags": ["UV_CURE", "ZERO_WASTE", "SUSTAINABLE", "MODULAR", "ESG"]
+    "manufacturer": "Modular Factory Systems",
+    "model": "MPU-8000",
+    "tags": ["UV_CURE", "LOW_WASTE", "SUSTAINABLE", "MODULAR", "ESG"]
   },
   
   "identification": {
-    "serialNumber": "MIGHTY-FACTORY-2024-USA-001",
+    "serialNumber": "MPU8000-2024-GEN-001",
     "yearManufactured": 2024,
     "countryOfOrigin": "USA",
     "internalAssetId": "BSH-206",
@@ -42,6 +42,40 @@
       "note": "Full factory operation"
     },
     "panelOutputPerDay": 24,
+    "printSpeed": {
+      "value": 500,
+      "unit": "mm/s",
+      "description": "Factory-grade high-speed production"
+    },
+    "positioningAccuracy": {
+      "value": 0.3,
+      "unit": "mm",
+      "description": "Stationary system ultra-precision"
+    },
+    "layerHeight": {
+      "min": 8,
+      "max": 20,
+      "typical": 12,
+      "unit": "mm"
+    },
+    "outputCapacity": {
+      "value": 2.0,
+      "unit": "m3/h",
+      "description": "Maximum factory throughput"
+    },
+    "productionShifts": {
+      "shiftsPerDay": 3,
+      "daysPerWeek": 6,
+      "description": "Continuous operation capability"
+    },
+    "operatingCost": {
+      "perCubicMeter": 520,
+      "traditionalMethod": 750,
+      "savingsPercent": 30.7,
+      "currency": "USD",
+      "unit": "per m3",
+      "note": "Includes UV curing efficiency gains"
+    },
     "uvCureEfficiency": {
       "value": 98.5,
       "unit": "percentage"

@@ -1,23 +1,23 @@
 {
   "standard": "BASHOOD-RWA-1",
   "version": "1.0.0",
-  "name": "Apis Cor Mobile 3D Construction Robot #001",
-  "description": "World's most mobile 3D construction printer. Transported in standard truck, 60-minute setup time. Built the world's largest 3D-printed structure in Dubai. Features GPS tracking and cloud-based telemetry for micro-leasing operations.",
+  "name": "Mobile Robotic Arm Portable Edition MRA-500 #001",
+  "description": "Highly mobile 3D construction printer with compact design. Transported in standard truck, 60-minute setup time. Suitable for remote locations and rapid deployment projects. Features GPS tracking and cloud-based telemetry for flexible leasing operations. This is a fictional representative asset for technical demonstration.",
   "external_url": "https://bashood.com/assets/204",
-  "image": "ipfs://QmAPISCOR001MainImage",
-  "animation_url": "ipfs://QmAPISCOR001_360Video",
+  "image": "ipfs://bafybeifpg6cinfo364jm5myuq6td5wbtzpyob2ldxlws5orsm57b3lbhka",
+  "animation_url": "ipfs://QmMOBILEARM001_360Video",
   
   "asset": {
-    "name": "Apis Cor Mobile 3D Construction Robot #001",
+    "name": "Mobile Robotic Arm Portable Edition MRA-500 #001",
     "category": "CONSTRUCTION_3D_PRINTER_MOBILE",
     "subcategory": "ROBOTIC_ARM_PORTABLE",
-    "manufacturer": "Apis Cor",
-    "model": "Apis Cor Mobile Robot",
+    "manufacturer": "Mobile Automation Ltd.",
+    "model": "MRA-500 Portable",
     "tags": ["3D_PRINTING", "MOBILE", "PORTABLE", "GPS", "MICRO_LEASING"]
   },
   
   "identification": {
-    "serialNumber": "APISCOR-2024-UAE-001",
+    "serialNumber": "MRA500-2024-GEN-001",
     "yearManufactured": 2024,
     "countryOfOrigin": "UAE",
     "internalAssetId": "BSH-204",
@@ -45,6 +45,44 @@
       "height": 3.3,
       "unit": "m",
       "description": "Radial printing area"
+    },
+    "printSpeed": {
+      "value": 280,
+      "unit": "mm/s",
+      "description": "Standard extrusion rate"
+    },
+    "positioningAccuracy": {
+      "value": 1.2,
+      "unit": "mm",
+      "description": "6-axis articulated precision"
+    },
+    "layerHeight": {
+      "min": 15,
+      "max": 25,
+      "typical": 20,
+      "unit": "mm"
+    },
+    "outputCapacity": {
+      "value": 0.8,
+      "unit": "m3/h",
+      "description": "Compact system output"
+    },
+    "setupTime": {
+      "value": 45,
+      "unit": "minutes",
+      "description": "Rapid deployment for remote sites"
+    },
+    "transportable": {
+      "truckSize": "standard",
+      "setupCrew": 2,
+      "description": "Fits in 20ft container or pickup truck"
+    },
+    "operatingCost": {
+      "perCubicMeter": 620,
+      "traditionalMethod": 750,
+      "savingsPercent": 17.3,
+      "currency": "USD",
+      "unit": "per m3"
     },
     "materialType": "CONCRETE",
     "setupTime": {

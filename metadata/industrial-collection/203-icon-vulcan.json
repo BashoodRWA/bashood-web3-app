@@ -1,23 +1,23 @@
 {
   "standard": "BASHOOD-RWA-1",
   "version": "1.0.0",
-  "name": "ICON VULCAN 3D Construction Printer #001",
-  "description": "Industrial-scale 3D construction printer using proprietary Lavacrete material (6,000 PSI). Building the world's largest 3D-printed neighborhood in collaboration with NASA. Features Magware software integration and real-time structural integrity monitoring.",
+  "name": "High-Capacity Gantry Printer HG-3000 #001",
+  "description": "Industrial-scale 3D construction printer using high-strength concrete material (6,000 PSI). Large-format gantry system for residential and commercial construction. Features advanced software integration and real-time structural integrity monitoring. This is a fictional representative asset for technical demonstration.",
   "external_url": "https://bashood.com/assets/203",
-  "image": "ipfs://QmICONVULCAN001MainImage",
-  "animation_url": "ipfs://QmICONVULCAN001_360Video",
+  "image": "ipfs://bafybeigy23o5zi7bktl36kc77ufpjq4bi3wvwqwwwqdtn6khimxiwxrgwm",
+  "animation_url": "ipfs://QmGANTRYPRINTER001_360Video",
   
   "asset": {
-    "name": "ICON VULCAN 3D Construction Printer #001",
+    "name": "High-Capacity Gantry Printer HG-3000 #001",
     "category": "CONSTRUCTION_3D_PRINTER_GANTRY",
-    "subcategory": "LAVACRETE_EXTRUSION_SYSTEM",
-    "manufacturer": "ICON",
-    "model": "VULCAN",
-    "tags": ["3D_PRINTING", "CONSTRUCTION", "LAVACRETE", "NASA", "RESIDENTIAL"]
+    "subcategory": "HIGH_STRENGTH_EXTRUSION_SYSTEM",
+    "manufacturer": "Industrial Print Systems",
+    "model": "HG-3000",
+    "tags": ["3D_PRINTING", "CONSTRUCTION", "HIGH_CAPACITY", "GANTRY", "RESIDENTIAL"]
   },
   
   "identification": {
-    "serialNumber": "VULCAN-2024-USA-001",
+    "serialNumber": "HG3000-2024-GEN-001",
     "yearManufactured": 2024,
     "countryOfOrigin": "USA",
     "internalAssetId": "BSH-203",
@@ -45,6 +45,39 @@
       "z": 4,
       "unit": "m",
       "description": "Single-pass print width capability"
+    },
+    "printSpeed": {
+      "value": 450,
+      "unit": "mm/s",
+      "description": "High-capacity extrusion mode"
+    },
+    "positioningAccuracy": {
+      "value": 0.5,
+      "unit": "mm",
+      "description": "Laser-guided precision system"
+    },
+    "layerHeight": {
+      "min": 10,
+      "max": 30,
+      "typical": 18,
+      "unit": "mm"
+    },
+    "outputCapacity": {
+      "value": 1.5,
+      "unit": "m3/h",
+      "description": "Peak concrete output"
+    },
+    "setupTime": {
+      "value": 180,
+      "unit": "minutes",
+      "description": "Gantry assembly and leveling"
+    },
+    "operatingCost": {
+      "perCubicMeter": 550,
+      "traditionalMethod": 750,
+      "savingsPercent": 26.7,
+      "currency": "USD",
+      "unit": "per m3"
     },
     "materialType": "LAVACRETE",
     "materialPSI": 6000,

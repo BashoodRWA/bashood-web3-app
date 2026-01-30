@@ -1,0 +1,834 @@
+{
+  "manifestVersion": "3.2",
+  "proxies": [
+    {
+      "address": "0x25e686Ccd10846C1Da16e204D1334640F07d4d96",
+      "txHash": "0x6d75466914f3a9f93c61ed7c2f654b4cb3f7870688c8c4b9352915a996e2c673",
+      "kind": "uups"
+    }
+  ],
+  "impls": {
+    "c0e407bfdec7623ff68000aff0e2e685f881d2a599ba62743c96d82471936a8f": {
+      "address": "0x5Df48417683F09eDCa395056299A10B757920C5e",
+      "txHash": "0x3eb1bbd0c169213c7c7cc912c610f648397ac7f1bb73d2f4b10ed58185095c1e",
+      "layout": {
+        "solcVersion": "0.8.28",
+        "storage": [
+          {
+            "label": "_nextTokenId",
+            "offset": 0,
+            "slot": "0",
+            "type": "t_uint256",
+            "contract": "BashoodRWAReference",
+            "src": "contracts\\standards\\BashoodRWAReference.sol:52"
+          },
+          {
+            "label": "_assetIdentification",
+            "offset": 0,
+            "slot": "1",
+            "type": "t_mapping(t_uint256,t_struct(AssetIdentification)30843_storage)",
+            "contract": "BashoodRWAReference",
+            "src": "contracts\\standards\\BashoodRWAReference.sol:55"
+          },
+          {
+            "label": "_technicalSpecs",
+            "offset": 0,
+            "slot": "2",
+            "type": "t_mapping(t_uint256,t_struct(TechnicalSpecs)30865_storage)",
+            "contract": "BashoodRWAReference",
+            "src": "contracts\\standards\\BashoodRWAReference.sol:58"
+          },
+          {
+            "label": "_financialData",
+            "offset": 0,
+            "slot": "3",
+            "type": "t_mapping(t_uint256,t_struct(FinancialData)30882_storage)",
+            "contract": "BashoodRWAReference",
+            "src": "contracts\\standards\\BashoodRWAReference.sol:61"
+          },
+          {
+            "label": "_operationalMetrics",
+            "offset": 0,
+            "slot": "4",
+            "type": "t_mapping(t_uint256,t_struct(OperationalMetrics)30911_storage)",
+            "contract": "BashoodRWAReference",
+            "src": "contracts\\standards\\BashoodRWAReference.sol:64"
+          },
+          {
+            "label": "_certificationData",
+            "offset": 0,
+            "slot": "5",
+            "type": "t_mapping(t_uint256,t_struct(CertificationData)30928_storage)",
+            "contract": "BashoodRWAReference",
+            "src": "contracts\\standards\\BashoodRWAReference.sol:67"
+          },
+          {
+            "label": "_telemetryConfig",
+            "offset": 0,
+            "slot": "6",
+            "type": "t_mapping(t_uint256,t_struct(TelemetryConfig)30940_storage)",
+            "contract": "BashoodRWAReference",
+            "src": "contracts\\standards\\BashoodRWAReference.sol:70"
+          },
+          {
+            "label": "_tokenizationConfig",
+            "offset": 0,
+            "slot": "7",
+            "type": "t_mapping(t_uint256,t_struct(TokenizationConfig)30957_storage)",
+            "contract": "BashoodRWAReference",
+            "src": "contracts\\standards\\BashoodRWAReference.sol:73"
+          },
+          {
+            "label": "_insuranceData",
+            "offset": 0,
+            "slot": "8",
+            "type": "t_mapping(t_uint256,t_struct(InsuranceData)30969_storage)",
+            "contract": "BashoodRWAReference",
+            "src": "contracts\\standards\\BashoodRWAReference.sol:76"
+          },
+          {
+            "label": "_tokenURIs",
+            "offset": 0,
+            "slot": "9",
+            "type": "t_mapping(t_uint256,t_string_storage)",
+            "contract": "BashoodRWAReference",
+            "src": "contracts\\standards\\BashoodRWAReference.sol:79"
+          },
+          {
+            "label": "_baseTokenURI",
+            "offset": 0,
+            "slot": "10",
+            "type": "t_string_storage",
+            "contract": "BashoodRWAReference",
+            "src": "contracts\\standards\\BashoodRWAReference.sol:82"
+          }
+        ],
+        "types": {
+          "t_address": {
+            "label": "address",
+            "numberOfBytes": "20"
+          },
+          "t_bool": {
+            "label": "bool",
+            "numberOfBytes": "1"
+          },
+          "t_bytes32": {
+            "label": "bytes32",
+            "numberOfBytes": "32"
+          },
+          "t_mapping(t_address,t_bool)": {
+            "label": "mapping(address => bool)",
+            "numberOfBytes": "32"
+          },
+          "t_mapping(t_address,t_mapping(t_address,t_bool))": {
+            "label": "mapping(address => mapping(address => bool))",
+            "numberOfBytes": "32"
+          },
+          "t_mapping(t_address,t_uint256)": {
+            "label": "mapping(address => uint256)",
+            "numberOfBytes": "32"
+          },
+          "t_mapping(t_bytes32,t_struct(RoleData)26_storage)": {
+            "label": "mapping(bytes32 => struct AccessControlUpgradeable.RoleData)",
+            "numberOfBytes": "32"
+          },
+          "t_mapping(t_uint256,t_address)": {
+            "label": "mapping(uint256 => address)",
+            "numberOfBytes": "32"
+          },
+          "t_string_storage": {
+            "label": "string",
+            "numberOfBytes": "32"
+          },
+          "t_struct(AccessControlStorage)36_storage": {
+            "label": "struct AccessControlUpgradeable.AccessControlStorage",
+            "members": [
+              {
+                "label": "_roles",
+                "type": "t_mapping(t_bytes32,t_struct(RoleData)26_storage)",
+                "offset": 0,
+                "slot": "0"
+              }
+            ],
+            "numberOfBytes": "32"
+          },
+          "t_struct(ERC721Storage)380_storage": {
+            "label": "struct ERC721Upgradeable.ERC721Storage",
+            "members": [
+              {
+                "label": "_name",
+                "type": "t_string_storage",
+                "offset": 0,
+                "slot": "0"
+              },
+              {
+                "label": "_symbol",
+                "type": "t_string_storage",
+                "offset": 0,
+                "slot": "1"
+              },
+              {
+                "label": "_owners",
+                "type": "t_mapping(t_uint256,t_address)",
+                "offset": 0,
+                "slot": "2"
+              },
+              {
+                "label": "_balances",
+                "type": "t_mapping(t_address,t_uint256)",
+                "offset": 0,
+                "slot": "3"
+              },
+              {
+                "label": "_tokenApprovals",
+                "type": "t_mapping(t_uint256,t_address)",
+                "offset": 0,
+                "slot": "4"
+              },
+              {
+                "label": "_operatorApprovals",
+                "type": "t_mapping(t_address,t_mapping(t_address,t_bool))",
+                "offset": 0,
+                "slot": "5"
+              }
+            ],
+            "numberOfBytes": "192"
+          },
+          "t_struct(InitializableStorage)213_storage": {
+            "label": "struct Initializable.InitializableStorage",
+            "members": [
+              {
+                "label": "_initialized",
+                "type": "t_uint64",
+                "offset": 0,
+                "slot": "0"
+              },
+              {
+                "label": "_initializing",
+                "type": "t_bool",
+                "offset": 8,
+                "slot": "0"
+              }
+            ],
+            "numberOfBytes": "32"
+          },
+          "t_struct(RoleData)26_storage": {
+            "label": "struct AccessControlUpgradeable.RoleData",
+            "members": [
+              {
+                "label": "hasRole",
+                "type": "t_mapping(t_address,t_bool)",
+                "offset": 0,
+                "slot": "0"
+              },
+              {
+                "label": "adminRole",
+                "type": "t_bytes32",
+                "offset": 0,
+                "slot": "1"
+              }
+            ],
+            "numberOfBytes": "64"
+          },
+          "t_uint256": {
+            "label": "uint256",
+            "numberOfBytes": "32"
+          },
+          "t_uint64": {
+            "label": "uint64",
+            "numberOfBytes": "8"
+          },
+          "t_array(t_string_storage)dyn_storage": {
+            "label": "string[]",
+            "numberOfBytes": "32"
+          },
+          "t_enum(AssetCategory)30805": {
+            "label": "enum IBashoodRWA.AssetCategory",
+            "members": [
+              "CONSTRUCTION_3D_PRINTER_GANTRY",
+              "CONSTRUCTION_3D_PRINTER_MOBILE",
+              "MODULAR_FACTORY_UV",
+              "HEAVY_VEHICLE",
+              "ENERGY_EQUIPMENT",
+              "LOGISTICS_INFRASTRUCTURE",
+              "RAW_MATERIALS",
+              "REAL_ESTATE"
+            ],
+            "numberOfBytes": "1"
+          },
+          "t_enum(DepreciationModel)30813": {
+            "label": "enum IBashoodRWA.DepreciationModel",
+            "members": [
+              "LOAD_BASED",
+              "EXTRUSION_BASED",
+              "SETUP_BASED",
+              "TIME_BASED",
+              "EFFICIENCY_BASED",
+              "LINEAR"
+            ],
+            "numberOfBytes": "1"
+          },
+          "t_enum(OperationalStatus)30819": {
+            "label": "enum IBashoodRWA.OperationalStatus",
+            "members": [
+              "OPERATIONAL",
+              "MAINTENANCE",
+              "INACTIVE",
+              "DECOMMISSIONED"
+            ],
+            "numberOfBytes": "1"
+          },
+          "t_enum(TokenizationStrategy)30826": {
+            "label": "enum IBashoodRWA.TokenizationStrategy",
+            "members": [
+              "FULL_OWNERSHIP",
+              "FRACTIONAL",
+              "MICRO_LEASING",
+              "PERFORMANCE_BOND",
+              "REVENUE_SHARE"
+            ],
+            "numberOfBytes": "1"
+          },
+          "t_mapping(t_uint256,t_string_storage)": {
+            "label": "mapping(uint256 => string)",
+            "numberOfBytes": "32"
+          },
+          "t_mapping(t_uint256,t_struct(AssetIdentification)30843_storage)": {
+            "label": "mapping(uint256 => struct IBashoodRWA.AssetIdentification)",
+            "numberOfBytes": "32"
+          },
+          "t_mapping(t_uint256,t_struct(CertificationData)30928_storage)": {
+            "label": "mapping(uint256 => struct IBashoodRWA.CertificationData)",
+            "numberOfBytes": "32"
+          },
+          "t_mapping(t_uint256,t_struct(FinancialData)30882_storage)": {
+            "label": "mapping(uint256 => struct IBashoodRWA.FinancialData)",
+            "numberOfBytes": "32"
+          },
+          "t_mapping(t_uint256,t_struct(InsuranceData)30969_storage)": {
+            "label": "mapping(uint256 => struct IBashoodRWA.InsuranceData)",
+            "numberOfBytes": "32"
+          },
+          "t_mapping(t_uint256,t_struct(OperationalMetrics)30911_storage)": {
+            "label": "mapping(uint256 => struct IBashoodRWA.OperationalMetrics)",
+            "numberOfBytes": "32"
+          },
+          "t_mapping(t_uint256,t_struct(TechnicalSpecs)30865_storage)": {
+            "label": "mapping(uint256 => struct IBashoodRWA.TechnicalSpecs)",
+            "numberOfBytes": "32"
+          },
+          "t_mapping(t_uint256,t_struct(TelemetryConfig)30940_storage)": {
+            "label": "mapping(uint256 => struct IBashoodRWA.TelemetryConfig)",
+            "numberOfBytes": "32"
+          },
+          "t_mapping(t_uint256,t_struct(TokenizationConfig)30957_storage)": {
+            "label": "mapping(uint256 => struct IBashoodRWA.TokenizationConfig)",
+            "numberOfBytes": "32"
+          },
+          "t_struct(AssetIdentification)30843_storage": {
+            "label": "struct IBashoodRWA.AssetIdentification",
+            "members": [
+              {
+                "label": "name",
+                "type": "t_string_storage",
+                "offset": 0,
+                "slot": "0"
+              },
+              {
+                "label": "category",
+                "type": "t_enum(AssetCategory)30805",
+                "offset": 0,
+                "slot": "1"
+              },
+              {
+                "label": "manufacturer",
+                "type": "t_string_storage",
+                "offset": 0,
+                "slot": "2"
+              },
+              {
+                "label": "model",
+                "type": "t_string_storage",
+                "offset": 0,
+                "slot": "3"
+              },
+              {
+                "label": "serialNumber",
+                "type": "t_string_storage",
+                "offset": 0,
+                "slot": "4"
+              },
+              {
+                "label": "yearManufactured",
+                "type": "t_uint16",
+                "offset": 0,
+                "slot": "5"
+              },
+              {
+                "label": "countryOfOrigin",
+                "type": "t_string_storage",
+                "offset": 0,
+                "slot": "6"
+              }
+            ],
+            "numberOfBytes": "224"
+          },
+          "t_struct(CertificationData)30928_storage": {
+            "label": "struct IBashoodRWA.CertificationData",
+            "members": [
+              {
+                "label": "ceMark",
+                "type": "t_bool",
+                "offset": 0,
+                "slot": "0"
+              },
+              {
+                "label": "ul3401",
+                "type": "t_bool",
+                "offset": 1,
+                "slot": "0"
+              },
+              {
+                "label": "iso9001",
+                "type": "t_bool",
+                "offset": 2,
+                "slot": "0"
+              },
+              {
+                "label": "iso14001",
+                "type": "t_bool",
+                "offset": 3,
+                "slot": "0"
+              },
+              {
+                "label": "ibcCompliant",
+                "type": "t_bool",
+                "offset": 4,
+                "slot": "0"
+              },
+              {
+                "label": "oshaCompliant",
+                "type": "t_bool",
+                "offset": 5,
+                "slot": "0"
+              },
+              {
+                "label": "customCerts",
+                "type": "t_array(t_string_storage)dyn_storage",
+                "offset": 0,
+                "slot": "1"
+              }
+            ],
+            "numberOfBytes": "64"
+          },
+          "t_struct(FinancialData)30882_storage": {
+            "label": "struct IBashoodRWA.FinancialData",
+            "members": [
+              {
+                "label": "purchasePrice",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "0"
+              },
+              {
+                "label": "currentValue",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "1"
+              },
+              {
+                "label": "residualValuePct",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "2"
+              },
+              {
+                "label": "lastAppraisalDate",
+                "type": "t_uint32",
+                "offset": 0,
+                "slot": "3"
+              },
+              {
+                "label": "depModel",
+                "type": "t_enum(DepreciationModel)30813",
+                "offset": 4,
+                "slot": "3"
+              },
+              {
+                "label": "annualMaintenancePct",
+                "type": "t_uint16",
+                "offset": 5,
+                "slot": "3"
+              },
+              {
+                "label": "insurancePremiumPct",
+                "type": "t_uint16",
+                "offset": 7,
+                "slot": "3"
+              }
+            ],
+            "numberOfBytes": "128"
+          },
+          "t_struct(InsuranceData)30969_storage": {
+            "label": "struct IBashoodRWA.InsuranceData",
+            "members": [
+              {
+                "label": "provider",
+                "type": "t_string_storage",
+                "offset": 0,
+                "slot": "0"
+              },
+              {
+                "label": "policyNumber",
+                "type": "t_string_storage",
+                "offset": 0,
+                "slot": "1"
+              },
+              {
+                "label": "coverageAmount",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "2"
+              },
+              {
+                "label": "annualPremium",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "3"
+              },
+              {
+                "label": "expiryDate",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "4"
+              }
+            ],
+            "numberOfBytes": "160"
+          },
+          "t_struct(OperationalMetrics)30911_storage": {
+            "label": "struct IBashoodRWA.OperationalMetrics",
+            "members": [
+              {
+                "label": "status",
+                "type": "t_enum(OperationalStatus)30819",
+                "offset": 0,
+                "slot": "0"
+              },
+              {
+                "label": "operatingHours",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "1"
+              },
+              {
+                "label": "maxLifetimeHours",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "2"
+              },
+              {
+                "label": "totalLoadLifted",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "3"
+              },
+              {
+                "label": "maxLoadLifetime",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "4"
+              },
+              {
+                "label": "metersExtruded",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "5"
+              },
+              {
+                "label": "maxMetersLifetime",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "6"
+              },
+              {
+                "label": "setupCount",
+                "type": "t_uint32",
+                "offset": 0,
+                "slot": "7"
+              },
+              {
+                "label": "maxSetups",
+                "type": "t_uint32",
+                "offset": 4,
+                "slot": "7"
+              },
+              {
+                "label": "cubicMetersPerDay",
+                "type": "t_uint16",
+                "offset": 8,
+                "slot": "7"
+              },
+              {
+                "label": "lastMaintenanceDate",
+                "type": "t_uint32",
+                "offset": 10,
+                "slot": "7"
+              },
+              {
+                "label": "nextMaintenanceDate",
+                "type": "t_uint32",
+                "offset": 14,
+                "slot": "7"
+              },
+              {
+                "label": "maintenanceIntervalHours",
+                "type": "t_uint16",
+                "offset": 18,
+                "slot": "7"
+              }
+            ],
+            "numberOfBytes": "256"
+          },
+          "t_struct(TechnicalSpecs)30865_storage": {
+            "label": "struct IBashoodRWA.TechnicalSpecs",
+            "members": [
+              {
+                "label": "loadCapacity",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "0"
+              },
+              {
+                "label": "displacementSpeed",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "1"
+              },
+              {
+                "label": "powerConsumption",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "2"
+              },
+              {
+                "label": "printVolumeX",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "3"
+              },
+              {
+                "label": "printVolumeY",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "4"
+              },
+              {
+                "label": "printVolumeZ",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "5"
+              },
+              {
+                "label": "materialPSI",
+                "type": "t_uint16",
+                "offset": 0,
+                "slot": "6"
+              },
+              {
+                "label": "setupTimeMinutes",
+                "type": "t_uint16",
+                "offset": 2,
+                "slot": "6"
+              },
+              {
+                "label": "autoLubrication",
+                "type": "t_bool",
+                "offset": 4,
+                "slot": "6"
+              },
+              {
+                "label": "gpsTracking",
+                "type": "t_bool",
+                "offset": 5,
+                "slot": "6"
+              }
+            ],
+            "numberOfBytes": "224"
+          },
+          "t_struct(TelemetryConfig)30940_storage": {
+            "label": "struct IBashoodRWA.TelemetryConfig",
+            "members": [
+              {
+                "label": "hasRealTimeAPI",
+                "type": "t_bool",
+                "offset": 0,
+                "slot": "0"
+              },
+              {
+                "label": "oracleAddress",
+                "type": "t_address",
+                "offset": 1,
+                "slot": "0"
+              },
+              {
+                "label": "apiProvider",
+                "type": "t_string_storage",
+                "offset": 0,
+                "slot": "1"
+              },
+              {
+                "label": "apiKeyHash",
+                "type": "t_bytes32",
+                "offset": 0,
+                "slot": "2"
+              },
+              {
+                "label": "lastTelemetryUpdate",
+                "type": "t_uint32",
+                "offset": 0,
+                "slot": "3"
+              }
+            ],
+            "numberOfBytes": "128"
+          },
+          "t_struct(TokenizationConfig)30957_storage": {
+            "label": "struct IBashoodRWA.TokenizationConfig",
+            "members": [
+              {
+                "label": "strategy",
+                "type": "t_enum(TokenizationStrategy)30826",
+                "offset": 0,
+                "slot": "0"
+              },
+              {
+                "label": "isFractional",
+                "type": "t_bool",
+                "offset": 1,
+                "slot": "0"
+              },
+              {
+                "label": "totalShares",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "1"
+              },
+              {
+                "label": "dailyLeaseRate",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "2"
+              },
+              {
+                "label": "performanceBonusPct",
+                "type": "t_uint16",
+                "offset": 0,
+                "slot": "3"
+              },
+              {
+                "label": "revenueSharePct",
+                "type": "t_uint16",
+                "offset": 2,
+                "slot": "3"
+              },
+              {
+                "label": "maintenanceReservePct",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "4"
+              }
+            ],
+            "numberOfBytes": "160"
+          },
+          "t_uint16": {
+            "label": "uint16",
+            "numberOfBytes": "2"
+          },
+          "t_uint32": {
+            "label": "uint32",
+            "numberOfBytes": "4"
+          }
+        },
+        "namespaces": {
+          "erc7201:openzeppelin.storage.AccessControl": [
+            {
+              "contract": "AccessControlUpgradeable",
+              "label": "_roles",
+              "type": "t_mapping(t_bytes32,t_struct(RoleData)26_storage)",
+              "src": "@openzeppelin\\contracts-upgradeable\\access\\AccessControlUpgradeable.sol:62",
+              "offset": 0,
+              "slot": "0"
+            }
+          ],
+          "erc7201:openzeppelin.storage.ERC721": [
+            {
+              "contract": "ERC721Upgradeable",
+              "label": "_name",
+              "type": "t_string_storage",
+              "src": "@openzeppelin\\contracts-upgradeable\\token\\ERC721\\ERC721Upgradeable.sol:27",
+              "offset": 0,
+              "slot": "0"
+            },
+            {
+              "contract": "ERC721Upgradeable",
+              "label": "_symbol",
+              "type": "t_string_storage",
+              "src": "@openzeppelin\\contracts-upgradeable\\token\\ERC721\\ERC721Upgradeable.sol:30",
+              "offset": 0,
+              "slot": "1"
+            },
+            {
+              "contract": "ERC721Upgradeable",
+              "label": "_owners",
+              "type": "t_mapping(t_uint256,t_address)",
+              "src": "@openzeppelin\\contracts-upgradeable\\token\\ERC721\\ERC721Upgradeable.sol:32",
+              "offset": 0,
+              "slot": "2"
+            },
+            {
+              "contract": "ERC721Upgradeable",
+              "label": "_balances",
+              "type": "t_mapping(t_address,t_uint256)",
+              "src": "@openzeppelin\\contracts-upgradeable\\token\\ERC721\\ERC721Upgradeable.sol:34",
+              "offset": 0,
+              "slot": "3"
+            },
+            {
+              "contract": "ERC721Upgradeable",
+              "label": "_tokenApprovals",
+              "type": "t_mapping(t_uint256,t_address)",
+              "src": "@openzeppelin\\contracts-upgradeable\\token\\ERC721\\ERC721Upgradeable.sol:36",
+              "offset": 0,
+              "slot": "4"
+            },
+            {
+              "contract": "ERC721Upgradeable",
+              "label": "_operatorApprovals",
+              "type": "t_mapping(t_address,t_mapping(t_address,t_bool))",
+              "src": "@openzeppelin\\contracts-upgradeable\\token\\ERC721\\ERC721Upgradeable.sol:38",
+              "offset": 0,
+              "slot": "5"
+            }
+          ],
+          "erc7201:openzeppelin.storage.Initializable": [
+            {
+              "contract": "Initializable",
+              "label": "_initialized",
+              "type": "t_uint64",
+              "src": "@openzeppelin\\contracts-upgradeable\\proxy\\utils\\Initializable.sol:69",
+              "offset": 0,
+              "slot": "0"
+            },
+            {
+              "contract": "Initializable",
+              "label": "_initializing",
+              "type": "t_bool",
+              "src": "@openzeppelin\\contracts-upgradeable\\proxy\\utils\\Initializable.sol:73",
+              "offset": 8,
+              "slot": "0"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

@@ -1,23 +1,23 @@
 {
   "standard": "BASHOOD-RWA-1",
   "version": "1.0.0",
-  "name": "EVOCONS EVOBLOCK System #001",
-  "description": "High-velocity motorized gantry system for advanced construction. The 'Swiss Army knife' of robotic construction, capable of concrete printing, block placement, and prefabricated component installation with integrated elevation system.",
+  "name": "EVOCONS EvoConstructor System #001",
+  "description": "2nd generation multifunctional modular robot for advanced construction. Modular 12×18×9m (scalable 3×3×4m to 24×40×40m). Built Spain's first 3D-printed building. 60% automation, 30% cost reduction, 50% time savings, 80% CO₂ reduction. 3 operators vs 10-15 traditional.",
   "external_url": "https://bashood.com/assets/202",
-  "image": "ipfs://QmEVOBLOCK001MainImage",
-  "animation_url": "ipfs://QmEVOBLOCK001_360Video",
+  "image": "ipfs://bafybeieolrebdrbanl2fdxmlzyrd7zfte22vavzkjpxk24yfvoxdzc7zji",
+  "animation_url": "ipfs://QmEVOCONSTRUCTOR001_360Video",
   
   "asset": {
-    "name": "EVOCONS EVOBLOCK System #001",
+    "name": "EVOCONS EvoConstructor System #001",
     "category": "CONSTRUCTION_3D_PRINTER_GANTRY",
     "subcategory": "MOTORIZED_GANTRY_MULTIFUNCTION",
     "manufacturer": "EVOCONS",
-    "model": "EVOBLOCK",
-    "tags": ["3D_PRINTING", "CONSTRUCTION", "ROBOTICS", "GANTRY", "MULTI_PURPOSE"]
+    "model": "EvoConstructor",
+    "tags": ["3D_PRINTING", "CONSTRUCTION", "ROBOTICS", "GANTRY", "MULTI_PURPOSE", "MODULAR"]
   },
   
   "identification": {
-    "serialNumber": "EVOBLOCK-2024-ES-001",
+    "serialNumber": "EVOCONSTRUCTOR-2024-ES-001",
     "yearManufactured": 2024,
     "countryOfOrigin": "ESP",
     "internalAssetId": "BSH-202",
@@ -49,6 +49,22 @@
       "unit": "m/min",
       "description": "High-velocity positioning speed"
     },
+    "printSpeed": {
+      "value": 350,
+      "unit": "mm/s",
+      "description": "Typical concrete extrusion speed"
+    },
+    "positioningAccuracy": {
+      "value": 0.8,
+      "unit": "mm",
+      "description": "XYZ axis positioning precision"
+    },
+    "layerHeight": {
+      "min": 12,
+      "max": 28,
+      "typical": 20,
+      "unit": "mm"
+    },
     "printVolume": {
       "x": 10,
       "y": 10,
@@ -56,7 +72,24 @@
       "unit": "m",
       "description": "Maximum construction envelope"
     },
+    "outputCapacity": {
+      "value": 1.1,
+      "unit": "m3/h",
+      "description": "Typical concrete output rate"
+    },
+    "setupTime": {
+      "value": 90,
+      "unit": "minutes",
+      "description": "Deployment and calibration time"
+    },
     "materialType": "CONCRETE",
+    "operatingCost": {
+      "perCubicMeter": 580,
+      "traditionalMethod": 750,
+      "savingsPercent": 22.7,
+      "currency": "USD",
+      "unit": "per m3"
+    },
     "autoLubrication": true,
     "features": [
       "Automated block placement",
@@ -207,7 +240,7 @@
   
   "telemetry": {
     "provider": "EVOCONS_REALTIME",
-    "apiEndpoint": "https://api.evocons.com/realtime/EVOBLOCK-2024-ES-001",
+    "apiEndpoint": "https://api.evocons.com/realtime/EVOCONSTRUCTOR-2024-ES-001",
     "apiKeyEncrypted": "encrypted_evocons_api_key_bashood_001",
     "metrics": [
       {
@@ -307,7 +340,7 @@
         "salePrice": 720000,
         "age": 2.5,
         "condition": "GOOD",
-        "note": "EVOBLOCK Standard sold in secondary market after 2.5 years"
+        "note": "EvoConstructor Standard sold in secondary market after 2.5 years"
       }
     ],
     "demandIndicators": {
@@ -319,15 +352,15 @@
   
   "documentation": {
     "images": [
-      "ipfs://QmEVOBLOCK001_Front",
-      "ipfs://QmEVOBLOCK001_Side",
-      "ipfs://QmEVOBLOCK001_Control",
-      "ipfs://QmEVOBLOCK001_InOperation"
+      "ipfs://QmEVOCONSTRUCTOR001_Front",
+      "ipfs://QmEVOCONSTRUCTOR001_Side",
+      "ipfs://QmEVOCONSTRUCTOR001_Control",
+      "ipfs://QmEVOCONSTRUCTOR001_InOperation"
     ],
     "manuals": [
-      "ipfs://QmEVOBLOCK_UserManual_EN",
-      "ipfs://QmEVOBLOCK_UserManual_ES",
-      "ipfs://QmEVOBLOCK_MaintenanceGuide"
+      "ipfs://QmEVOCONSTRUCTOR_UserManual_EN",
+      "ipfs://QmEVOCONSTRUCTOR_UserManual_ES",
+      "ipfs://QmEVOCONSTRUCTOR_MaintenanceGuide"
     ],
     "certificates": [
       "ipfs://QmCertEVOCONS_CE_2024",
@@ -339,29 +372,29 @@
         "date": "2026-01-05",
         "inspector": "Juan Rodríguez, EVOCONS Certified Technician",
         "result": "PASS",
-        "documentHash": "QmInspection_EVOBLOCK001_2026Q1",
+        "documentHash": "QmInspection_EVOCONSTRUCTOR001_2026Q1",
         "notes": "All systems operational. Load sensors calibrated. Lubrication system functioning optimally."
       },
       {
         "date": "2025-10-12",
         "inspector": "María López, Independent Engineer",
         "result": "PASS",
-        "documentHash": "QmInspection_EVOBLOCK001_2025Q4"
+        "documentHash": "QmInspection_EVOCONSTRUCTOR001_2025Q4"
       }
     ],
     "technicalDrawings": [
-      "ipfs://QmEVOBLOCK_ElectricalSchematic",
-      "ipfs://QmEVOBLOCK_HydraulicDiagram"
+      "ipfs://QmEVOCONSTRUCTOR_ElectricalSchematic",
+      "ipfs://QmEVOCONSTRUCTOR_HydraulicDiagram"
     ],
     "videos": [
       {
-        "title": "EVOBLOCK in Action - Block Placement",
-        "url": "ipfs://QmEVOBLOCK_Demo_Blocks",
+        "title": "EvoConstructor in Action - Modular Construction",
+        "url": "ipfs://QmEVOCONSTRUCTOR_Demo_Modular",
         "duration": 180
       },
       {
-        "title": "EVOBLOCK - Concrete Extrusion Demo",
-        "url": "ipfs://QmEVOBLOCK_Demo_Concrete",
+        "title": "EvoConstructor - Spain First 3D Building",
+        "url": "ipfs://QmEVOCONSTRUCTOR_Demo_Spain",
         "duration": 240
       }
     ]
@@ -384,7 +417,7 @@
     },
     {
       "trait_type": "Model",
-      "value": "EVOBLOCK"
+      "value": "EvoConstructor"
     },
     {
       "trait_type": "Category",

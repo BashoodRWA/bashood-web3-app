@@ -1,23 +1,23 @@
 {
   "standard": "BASHOOD-RWA-1",
   "version": "1.0.0",
-  "name": "CyBe RC Track Robot - Fast-Cure Mortar System #001",
-  "description": "Track-based mobile 3D construction printer specialized in fast-cure CyBe Mortar technology. Mortar sets in minutes, enabling rapid vertical construction. Automated m³/day measurement with performance bonus system for efficiency rewards.",
+  "name": "Track-Mounted Fast-Cure System TM-2400 #001",
+  "description": "Track-based mobile 3D construction printer specialized in fast-cure mortar technology. Material sets in minutes, enabling rapid vertical construction. Automated volume measurement with performance metrics for efficiency optimization. This is a fictional representative asset for technical demonstration.",
   "external_url": "https://bashood.com/assets/205",
-  "image": "ipfs://QmCYBE001MainImage",
-  "animation_url": "ipfs://QmCYBE001_360Video",
+  "image": "ipfs://bafybeidqgnuflrx3gfbantapv66novouioaopkvxnypamuro6h664f2axm",
+  "animation_url": "ipfs://QmTRACKMOUNTED001_360Video",
   
   "asset": {
-    "name": "CyBe RC Track Robot #001",
+    "name": "Track-Mounted Fast-Cure System TM-2400 #001",
     "category": "CONSTRUCTION_3D_PRINTER_MOBILE",
     "subcategory": "TRACK_MOUNTED_FAST_CURE",
-    "manufacturer": "CyBe Construction",
-    "model": "CyBe RC",
-    "tags": ["3D_PRINTING", "MOBILE", "FAST_CURE", "PERFORMANCE_BASED", "NETHERLANDS"]
+    "manufacturer": "FastBuild Technologies",
+    "model": "TM-2400",
+    "tags": ["3D_PRINTING", "MOBILE", "FAST_CURE", "PERFORMANCE_BASED", "TRACK_SYSTEM"]
   },
   
   "identification": {
-    "serialNumber": "CYBERC-2024-NL-001",
+    "serialNumber": "TM2400-2024-GEN-001",
     "yearManufactured": 2024,
     "countryOfOrigin": "NLD",
     "internalAssetId": "BSH-205",
@@ -44,6 +44,45 @@
       "y": 2.7,
       "z": 2.8,
       "unit": "m"
+    },
+    "printSpeed": {
+      "value": 320,
+      "unit": "mm/s",
+      "description": "Fast-cure optimized speed"
+    },
+    "positioningAccuracy": {
+      "value": 1.0,
+      "unit": "mm",
+      "description": "Track-stabilized precision"
+    },
+    "layerHeight": {
+      "min": 12,
+      "max": 22,
+      "typical": 16,
+      "unit": "mm"
+    },
+    "outputCapacity": {
+      "value": 0.9,
+      "unit": "m3/h",
+      "description": "Fast-cure material throughput"
+    },
+    "setupTime": {
+      "value": 60,
+      "unit": "minutes",
+      "description": "Track positioning and system check"
+    },
+    "terrain": {
+      "capability": "rough terrain",
+      "maxSlope": 15,
+      "unit": "degrees",
+      "description": "All-terrain tracked mobility"
+    },
+    "operatingCost": {
+      "perCubicMeter": 590,
+      "traditionalMethod": 750,
+      "savingsPercent": 21.3,
+      "currency": "USD",
+      "unit": "per m3"
     },
     "materialType": "CYBE_MORTAR",
     "mortarCureTime": {
