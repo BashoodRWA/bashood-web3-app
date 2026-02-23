@@ -84,6 +84,7 @@ interface IBashoodRWA is IERC721 {
         uint16 setupTimeMinutes;     // Apis Cor: <60
         bool autoLubrication;        // EVOCONS feature
         bool gpsTracking;            // Apis Cor feature
+        uint256 cubicMetersPerDay;   // Added field for production capacity
     }
     
     /// @notice Financial data with real-world depreciation
@@ -325,17 +326,19 @@ interface IBashoodRWA is IERC721 {
     /// @param certificationType Type of certification
     /// @param expiryDate Expiry date (unix timestamp)
     /// @param documentHash IPFS hash of certificate document
-    function updateCertification(
-        uint256 tokenId,
-        string calldata certificationType,
-        uint32 expiryDate,
-        string calldata documentHash
-    ) external;
+    // REMOVED FOR SIZE OPTIMIZATION - Moved to off-chain validation
+    // function updateCertification(
+    //     uint256 tokenId,
+    //     string calldata certificationType,
+    //     uint32 expiryDate,
+    //     string calldata documentHash
+    // ) external;
     
     /// @notice Check if asset is compliant with all required certifications
     /// @param tokenId Token ID
     /// @return isCompliant True if all required certs are valid
-    function isCompliant(uint256 tokenId) external view returns (bool isCompliant);
+    // REMOVED FOR SIZE OPTIMIZATION - Moved to off-chain validation
+    // function isCompliant(uint256 tokenId) external view returns (bool isCompliant);
     
     // ==================== TELEMETRY FUNCTIONS ====================
     
@@ -365,17 +368,19 @@ interface IBashoodRWA is IERC721 {
     /// @param tokenId Token ID
     /// @param duration Number of days to lease
     /// @return leaseId Lease identifier
-    function leaseAsset(uint256 tokenId, uint32 duration) external payable returns (uint256 leaseId);
+    // REMOVED FOR SIZE OPTIMIZATION - Tokenization strategy simplified
+    // function leaseAsset(uint256 tokenId, uint32 duration) external payable returns (uint256 leaseId);
     
     /// @notice Trigger performance bonus (for PERFORMANCE_BOND strategy)
     /// @param tokenId Token ID
     /// @param achieved Actual performance achieved
     /// @param baseline Expected baseline performance
-    function triggerPerformanceBonus(
-        uint256 tokenId,
-        uint256 achieved,
-        uint256 baseline
-    ) external;
+    // REMOVED FOR SIZE OPTIMIZATION - Tokenization strategy simplified
+    // function triggerPerformanceBonus(
+    //     uint256 tokenId,
+    //     uint256 achieved,
+    //     uint256 baseline
+    // ) external;
     
     // ==================== INSURANCE FUNCTIONS ====================
     
@@ -385,13 +390,14 @@ interface IBashoodRWA is IERC721 {
     /// @param coverageAmount Coverage amount
     /// @param annualPremium Annual premium
     /// @param expiryDate Policy expiry date
-    function updateInsurance(
-        uint256 tokenId,
-        string calldata provider,
-        uint256 coverageAmount,
-        uint256 annualPremium,
-        uint32 expiryDate
-    ) external;
+    // REMOVED FOR SIZE OPTIMIZATION - Moved to off-chain tracking
+    // function updateInsurance(
+    //     uint256 tokenId,
+    //     string calldata provider,
+    //     uint256 coverageAmount,
+    //     uint256 annualPremium,
+    //     uint32 expiryDate
+    // ) external;
     
     // ==================== VIEW FUNCTIONS ====================
     

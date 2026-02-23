@@ -1,0 +1,101 @@
+{
+  "timestamp": "2026-02-02T03:05:12.303Z",
+  "network": {
+    "name": "base-sepolia",
+    "chainId": "84532"
+  },
+  "deployer": "0x6d0E714Ae688a5545A814952Bb54DbfFD9F2f217",
+  "tests": [
+    {
+      "category": "Oracle:ETH/USD",
+      "test": "Feed Description",
+      "status": "PASS",
+      "details": "ETH / USD"
+    },
+    {
+      "category": "Oracle:ETH/USD",
+      "test": "answeredInRound >= roundId",
+      "status": "PASS",
+      "details": "18446744073709775169 >= 18446744073709775169"
+    },
+    {
+      "category": "Oracle:ETH/USD",
+      "test": "updatedAt != 0",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "Oracle:ETH/USD",
+      "test": "answer > 0",
+      "status": "PASS",
+      "details": "$2258.72606594 USD"
+    },
+    {
+      "category": "Oracle:ETH/USD",
+      "test": "answeredInRound != 0",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "Oracle:ETH/USD",
+      "test": "Staleness Check",
+      "status": "PASS",
+      "details": "201s < 300s threshold"
+    },
+    {
+      "category": "Wrapper:ETH/USD",
+      "test": "getLatestPrice() execution",
+      "status": "PASS",
+      "details": "0xdd0d1e62be652e6e197f33fb3798704a8b7e73430dcd7d80d4c7097fee771173"
+    },
+    {
+      "category": "Wrapper:ETH/USD",
+      "test": "Price consistency (wrapper vs aggregator)",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "category": "Wrapper:ETH/USD",
+      "test": "lastValidAnswer updated",
+      "status": "FAIL",
+      "details": "expected=225872606594, got=0"
+    },
+    {
+      "category": "Historical:ETH/USD",
+      "test": "Historical rounds validation",
+      "status": "PASS",
+      "details": "10 rounds validated"
+    },
+    {
+      "category": "Thresholds:ETH/USD",
+      "test": "Staleness threshold reasonable",
+      "status": "PASS",
+      "details": "300s (60s-86400s range)"
+    },
+    {
+      "category": "Thresholds:ETH/USD",
+      "test": "Max change percentage reasonable",
+      "status": "PASS",
+      "details": "50% (1%-100% range)"
+    },
+    {
+      "category": "Consistency:ETH/USD",
+      "test": "State consistency - multiple calls",
+      "status": "PASS",
+      "details": "All calls returned same price"
+    }
+  ],
+  "oracles": {
+    "ETH/USD": {
+      "address": "0x4aDC67696bA383F43DD60A9e78F2C97Fbbfc7cb1",
+      "wrapper": "0x5967b35a9D7F0C8DBA4A1c0F03692F25a0857E94",
+      "tests": []
+    }
+  },
+  "summary": {
+    "total": 13,
+    "passed": 12,
+    "failed": 1,
+    "warnings": 0
+  }
+}

@@ -1,0 +1,1058 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modelo Económico para Inversores - Bashood RWA</title>
+  <style>
+    @page { size: A4; margin: 20mm; }
+    * { box-sizing: border-box; }
+    body { 
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+      font-size: 11pt; 
+      line-height: 1.6; 
+      color: #333; 
+      max-width: 210mm; 
+      margin: 0 auto; 
+      padding: 20px; 
+      background: white; 
+    }
+    
+    .cover-page { 
+      display: flex; 
+      flex-direction: column; 
+      justify-content: center; 
+      align-items: center; 
+      min-height: 80vh; 
+      text-align: center; 
+      page-break-after: always; 
+    }
+    
+    .cover-page h1 { 
+      font-size: 32pt; 
+      color: #2c3e50; 
+      margin-bottom: 30px; 
+      border: none; 
+    }
+    
+    .cover-page .project-name { 
+      font-size: 18pt; 
+      color: #7f8c8d; 
+      margin: 20px 0; 
+    }
+    
+    .cover-page .date { 
+      font-size: 14pt; 
+      color: #bdc3c7; 
+      margin-top: 60px; 
+    }
+    
+    h1 { 
+      color: #2c3e50; 
+      border-bottom: 3px solid #3498db; 
+      padding-bottom: 10px; 
+      margin-top: 40px; 
+      page-break-after: avoid; 
+    }
+    
+    h2 { 
+      color: #34495e; 
+      border-bottom: 2px solid #95a5a6; 
+      padding-bottom: 5px; 
+      margin-top: 30px; 
+      page-break-after: avoid; 
+    }
+    
+    h3 { 
+      color: #555; 
+      margin-top: 25px; 
+      page-break-after: avoid; 
+    }
+    
+    h4 { 
+      color: #666; 
+      margin-top: 20px; 
+    }
+    
+    table { 
+      border-collapse: collapse; 
+      width: 100%; 
+      margin: 20px 0; 
+      page-break-inside: avoid; 
+      font-size: 10pt;
+    }
+    
+    th, td { 
+      border: 1px solid #ddd; 
+      padding: 8px; 
+      text-align: left; 
+    }
+    
+    th { 
+      background-color: #3498db; 
+      color: white; 
+      font-weight: bold; 
+    }
+    
+    tr:nth-child(even) { 
+      background-color: #f9f9f9; 
+    }
+    
+    code { 
+      background-color: #f4f4f4; 
+      padding: 2px 6px; 
+      border-radius: 3px; 
+      font-family: 'Courier New', monospace; 
+      font-size: 9pt; 
+      color: #c7254e; 
+    }
+    
+    pre { 
+      background-color: #f4f4f4; 
+      padding: 15px; 
+      border-radius: 5px; 
+      overflow-x: auto; 
+      border-left: 4px solid #3498db; 
+      page-break-inside: avoid; 
+      font-size: 9pt;
+    }
+    
+    pre code { 
+      background: none; 
+      padding: 0; 
+      color: #333; 
+    }
+    
+    blockquote { 
+      border-left: 4px solid #3498db; 
+      padding-left: 15px; 
+      margin-left: 0; 
+      color: #555; 
+      font-style: italic; 
+      page-break-inside: avoid; 
+    }
+    
+    ul, ol { 
+      margin: 15px 0; 
+      padding-left: 30px; 
+    }
+    
+    li { 
+      margin: 8px 0; 
+    }
+    
+    a { 
+      color: #3498db; 
+      text-decoration: none; 
+    }
+    
+    hr { 
+      border: none; 
+      border-top: 2px solid #ecf0f1; 
+      margin: 30px 0; 
+    }
+    
+    @media print { 
+      body { padding: 0; } 
+      h1, h2, h3 { page-break-after: avoid; } 
+      table, pre, blockquote { page-break-inside: avoid; } 
+      .print-instructions { display: none; }
+    }
+    
+    .print-instructions { 
+      background: #fff3cd; 
+      border: 2px solid #ffc107; 
+      border-radius: 5px; 
+      padding: 15px; 
+      margin: 20px 0; 
+      position: fixed; 
+      top: 20px; 
+      right: 20px; 
+      max-width: 300px; 
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1); 
+      z-index: 1000; 
+    }
+  </style>
+</head>
+<body>
+  <div class="print-instructions">
+    <h4 style="margin-top:0; color:#856404">📄 Para generar PDF:</h4>
+    <ol style="margin:0; padding-left:20px; color:#856404">
+      <li>Presiona <strong>Ctrl+P</strong></li>
+      <li>Selecciona "Guardar como PDF"</li>
+      <li>Fondo gráficos: ✅ ACTIVADO</li>
+      <li>Guarda el archivo</li>
+    </ol>
+  </div>
+  
+  <div class="cover-page">
+    <h1>💰 Modelo Económico para Inversores</h1>
+    <div class="project-name">Proyecto Bashood RWA</div>
+    <div class="project-name">Guía Completa de Retornos</div>
+    <div class="date">20 de febrero de 2026</div>
+  </div>
+  
+  <div class="content">
+    <h1 id="💰-modelo-económico-para-inversores">💰 MODELO ECONÓMICO PARA INVERSORES</h1>
+<h2 id="guía-completa-de-retornos-en-bashood-rwa">Guía Completa de Retornos en Bashood RWA</h2>
+<hr>
+<h2 id="📌-resumen-ejecutivo">📌 Resumen Ejecutivo</h2>
+<p><strong>¿Qué recibes como inversor/holder de tokens Bashood?</strong></p>
+<p>Cuando compras tokens que representan un activo industrial real, recibes una <strong>participación proporcional en las ganancias operativas</strong> generadas por ese activo.</p>
+<ul>
+<li>✅ <strong>Dividendos mensuales</strong> automáticos vía smart contract</li>
+<li>✅ <strong>Transparencia total</strong> (reportes operativos blockchain)</li>
+<li>✅ <strong>Liquidez</strong> (puedes vender tokens en mercado secundario)</li>
+<li>✅ <strong>Activo real</strong> respaldado (no especulación)</li>
+<li>✅ <strong>ROI predecible</strong> basado en operación industrial</li>
+</ul>
+<hr>
+<h2 id="🏗️-cómo-funciona-el-modelo">🏗️ Cómo Funciona el Modelo</h2>
+<h3 id="1-tokenización-del-activo">1. Tokenización del Activo</h3>
+<p>El propietario del activo decide tokenizar un <strong>porcentaje</strong> de su valor:</p>
+<p><strong>OPCIÓN A: Tokenización Parcial</strong> (propietario retiene control)</p>
+<ul>
+<li>Ejemplo: 40% tokenizado → inversores</li>
+<li>60% retenido → propietario (mantiene control operativo)</li>
+</ul>
+<p><strong>OPCIÓN B: Tokenización Total</strong> (fractional ownership)</p>
+<ul>
+<li>Ejemplo: 100% tokenizado en 1,000 shares</li>
+<li>Cada share = 0.1% del activo</li>
+</ul>
+<h3 id="2-distribución-de-ganancias">2. Distribución de Ganancias</h3>
+<p>El activo genera <strong>ingresos operativos</strong> (alquiler, contratos, servicios).</p>
+<p>Cada mes:</p>
+<pre><code>INGRESOS BRUTOS
+  - Costos operativos (combustible, mantenimiento, seguro)
+  - Fondo de reserva (2-5% para emergencias)
+  ──────────────────────────────────
+  = GANANCIA NETA
+
+DISTRIBUCIÓN:
+  → % Propietario (si retiene participación)
+  → % Holders (según % tokenizado)
+  → Treasury Fee (0.5% para protocolo)
+</code></pre>
+<h3 id="3-pago-automático-mensual">3. Pago Automático Mensual</h3>
+<p>Los smart contracts distribuyen automáticamente:</p>
+<pre><code class="language-javascript">TU PAGO MENSUAL = (Ganancia Neta × % Holders) × (Tus tokens / Total tokens)
+</code></pre>
+<p><strong>Ejemplo:</strong></p>
+<ul>
+<li>Ganancia neta: €10,000</li>
+<li>% Holders: 40%</li>
+<li>Tienes: 500 tokens de 100,000 totales</li>
+<li>Tu pago: €10,000 × 40% × (500/100,000) = <strong>€20</strong></li>
+</ul>
+<hr>
+<h2 id="📊-ejemplo-1-doosan-dx360-excavadora-hidráulica">📊 EJEMPLO 1: Doosan DX360 (Excavadora Hidráulica)</h2>
+<h3 id="ficha-del-activo">Ficha del Activo</h3>
+<table>
+<thead>
+<tr>
+<th>Concepto</th>
+<th>Valor</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Tipo</strong></td>
+<td>Excavadora hidráulica pesada</td>
+</tr>
+<tr>
+<td><strong>Modelo</strong></td>
+<td>Doosan DX360LC</td>
+</tr>
+<tr>
+<td><strong>Valor mercado</strong></td>
+<td>€150,000</td>
+</tr>
+<tr>
+<td><strong>Tokenización</strong></td>
+<td>40% (€60,000)</td>
+</tr>
+<tr>
+<td><strong>Propietario retiene</strong></td>
+<td>60% (€90,000)</td>
+</tr>
+<tr>
+<td><strong>Tokens totales</strong></td>
+<td>100,000 BHT-DX360</td>
+</tr>
+<tr>
+<td><strong>Precio token</strong></td>
+<td>€0.60 cada uno</td>
+</tr>
+</tbody></table>
+<h3 id="operación-del-activo">Operación del Activo</h3>
+<pre><code>Uso: 11 horas/día, 220 días/año
+Producción: 264 camiones/día × 25m³ = 6,600 m³/día
+Cliente principal: Obra pública (contratos 6-12 meses)
+</code></pre>
+<h3 id="costos-operativos-anuales">Costos Operativos Anuales</h3>
+<table>
+<thead>
+<tr>
+<th>Concepto</th>
+<th>Costo Anual</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Combustible</strong> (330L/día × €1.45)</td>
+<td>€105,270</td>
+</tr>
+<tr>
+<td><strong>Seguro</strong></td>
+<td>€3,000</td>
+</tr>
+<tr>
+<td><strong>Mantenimiento</strong></td>
+<td>€10,000</td>
+</tr>
+<tr>
+<td><strong>TOTAL COSTOS</strong></td>
+<td><strong>€118,270</strong></td>
+</tr>
+</tbody></table>
+<h3 id="escenarios-de-ingresos">Escenarios de Ingresos</h3>
+<h4 id="📈-escenario-conservador-€12000mes">📈 ESCENARIO CONSERVADOR (€12,000/mes)</h4>
+<pre><code>INGRESOS ANUALES:    €144,000
+- Costos operativos: €118,270
+- Fondo reserva 5%:  €7,200
+──────────────────────────────
+GANANCIA NETA:       €18,530
+
+DISTRIBUCIÓN:
+├─ Propietario (60%): €11,118
+├─ Holders (40%):     €7,412
+└─ Treasury (0.5%):   €93
+
+ROI ANUAL HOLDERS:    12.35% 
+Pago mensual/holder:  €617.67
+</code></pre>
+<p><strong>Si tienes 1,000 tokens (1% del total):</strong></p>
+<ul>
+<li>Inversión: €600</li>
+<li>Ganancia anual: €74.12</li>
+<li>ROI: 12.35%</li>
+<li>Pago mensual: <strong>€6.18</strong></li>
+</ul>
+<h4 id="📈-escenario-realista-€15000mes">📈 ESCENARIO REALISTA (€15,000/mes)</h4>
+<pre><code>INGRESOS ANUALES:    €180,000
+- Costos operativos: €118,270
+- Fondo reserva 5%:  €9,000
+──────────────────────────────
+GANANCIA NETA:       €52,730
+
+ROI ANUAL HOLDERS:    35.15%
+</code></pre>
+<p><strong>Si tienes 1,000 tokens:</strong></p>
+<ul>
+<li>Ganancia anual: €210.92</li>
+<li>Pago mensual: <strong>€17.58</strong></li>
+</ul>
+<h4 id="📈-escenario-óptimo-€18000mes">📈 ESCENARIO ÓPTIMO (€18,000/mes)</h4>
+<pre><code>INGRESOS ANUALES:    €216,000
+- Costos operativos: €118,270
+- Fondo reserva 5%:  €10,800
+──────────────────────────────
+GANANCIA NETA:       €86,930
+
+ROI ANUAL HOLDERS:    57.95%
+</code></pre>
+<p><strong>Si tienes 1,000 tokens:</strong></p>
+<ul>
+<li>Ganancia anual: €347.72</li>
+<li>Pago mensual: <strong>€28.98</strong></li>
+</ul>
+<h3 id="📅-calendario-de-pagos-ejemplo-mes-1-3">📅 Calendario de Pagos (Ejemplo Mes 1-3)</h3>
+<table>
+<thead>
+<tr>
+<th>Mes</th>
+<th>Ingresos</th>
+<th>Costos</th>
+<th>Ganancia</th>
+<th>Pago Holders (40%)</th>
+<th>Tu Pago (1,000 tokens)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Mes 1</strong></td>
+<td>€15,000</td>
+<td>€9,856</td>
+<td>€5,144</td>
+<td>€2,058</td>
+<td>€20.58</td>
+</tr>
+<tr>
+<td><strong>Mes 2</strong></td>
+<td>€18,000</td>
+<td>€9,856</td>
+<td>€8,144</td>
+<td>€3,258</td>
+<td>€32.58</td>
+</tr>
+<tr>
+<td><strong>Mes 3</strong></td>
+<td>€12,000</td>
+<td>€9,856</td>
+<td>€2,144</td>
+<td>€858</td>
+<td>€8.58</td>
+</tr>
+<tr>
+<td><strong>TOTAL Q1</strong></td>
+<td>€45,000</td>
+<td>€29,568</td>
+<td>€15,432</td>
+<td>€6,173</td>
+<td><strong>€61.73</strong></td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="📊-ejemplo-2-evocons-evoblock-grúa-construcción-3d">📊 EJEMPLO 2: EVOCONS EVOBLOCK (Grúa Construcción 3D)</h2>
+<h3 id="ficha-del-activo-1">Ficha del Activo</h3>
+<table>
+<thead>
+<tr>
+<th>Concepto</th>
+<th>Valor</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Tipo</strong></td>
+<td>Grúa pórtico Gantry para construcción 3D</td>
+</tr>
+<tr>
+<td><strong>Modelo</strong></td>
+<td>EVOCONS EVOBLOCK System</td>
+</tr>
+<tr>
+<td><strong>Valor mercado</strong></td>
+<td>$1,200,000 (€1,100,000)</td>
+</tr>
+<tr>
+<td><strong>Tokenización</strong></td>
+<td>100% (fractional ownership)</td>
+</tr>
+<tr>
+<td><strong>Tokens totales</strong></td>
+<td>1,000 shares</td>
+</tr>
+<tr>
+<td><strong>Precio por share</strong></td>
+<td>$1,200 (€1,100)</td>
+</tr>
+</tbody></table>
+<h3 id="operación-del-activo-1">Operación del Activo</h3>
+<pre><code>Uso: Construcción edificios residenciales con impresión 3D
+Capacidad: 3,000 kg carga, 40 m/min desplazamiento
+Vida útil: 500,000 toneladas levantadas
+Depreciation: Basada en carga (load-based)
+</code></pre>
+<h3 id="modelo-de-ingresos">Modelo de Ingresos</h3>
+<p><strong>Modelo: Alquiler a promotoras inmobiliarias</strong></p>
+<pre><code>Alquiler mensual: $50,000
+Contratos típicos: 6-18 meses (proyectos multi-edificio)
+Tasa ocupación: 80% anual (9.6 meses operando)
+</code></pre>
+<h3 id="costos-operativos-anuales-1">Costos Operativos Anuales</h3>
+<table>
+<thead>
+<tr>
+<th>Concepto</th>
+<th>Costo Anual</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Operador certificado</strong></td>
+<td>$72,000</td>
+</tr>
+<tr>
+<td><strong>Mantenimiento</strong></td>
+<td>$24,000</td>
+</tr>
+<tr>
+<td><strong>Seguro industrial</strong></td>
+<td>$18,000</td>
+</tr>
+<tr>
+<td><strong>Electricidad</strong></td>
+<td>$12,000</td>
+</tr>
+<tr>
+<td><strong>Transporte/setup</strong></td>
+<td>$15,000</td>
+</tr>
+<tr>
+<td><strong>TOTAL COSTOS</strong></td>
+<td><strong>$141,000</strong></td>
+</tr>
+</tbody></table>
+<h3 id="proyección-anual">Proyección Anual</h3>
+<pre><code>INGRESOS (9.6 meses × $50,000):  $480,000
+- Costos operativos:             $141,000
+- Fondo reserva 5%:              $24,000
+────────────────────────────────────────
+GANANCIA NETA:                   $315,000
+
+DISTRIBUCIÓN:
+├─ Holders (100%):     $314,425 (después de treasury)
+└─ Treasury (0.5%):    $575
+
+ROI ANUAL HOLDERS:     26.20%
+Ganancia por share:    $314.43
+Pago mensual/share:    $26.20
+</code></pre>
+<p><strong>Si tienes 10 shares (1% del total):</strong></p>
+<ul>
+<li>Inversión: $12,000 (€11,000)</li>
+<li>Ganancia anual: $3,144</li>
+<li>ROI: 26.20%</li>
+<li>Pago mensual: <strong>$262</strong> (€240)</li>
+</ul>
+<h3 id="📅-calendario-de-pagos-ejemplo-trimestre">📅 Calendario de Pagos (Ejemplo Trimestre)</h3>
+<table>
+<thead>
+<tr>
+<th>Mes</th>
+<th>Status</th>
+<th>Ingresos</th>
+<th>Costos</th>
+<th>Ganancia</th>
+<th>Pago 10 shares</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Mes 1</strong></td>
+<td>✅ Alquilado</td>
+<td>$50,000</td>
+<td>$11,750</td>
+<td>$38,250</td>
+<td>$382.50</td>
+</tr>
+<tr>
+<td><strong>Mes 2</strong></td>
+<td>✅ Alquilado</td>
+<td>$50,000</td>
+<td>$11,750</td>
+<td>$38,250</td>
+<td>$382.50</td>
+</tr>
+<tr>
+<td><strong>Mes 3</strong></td>
+<td>❌ Sin alquilar</td>
+<td>$0</td>
+<td>$2,000</td>
+<td>-$2,000</td>
+<td>-$20.00*</td>
+</tr>
+<tr>
+<td><strong>TOTAL Q1</strong></td>
+<td>-</td>
+<td>$100,000</td>
+<td>$25,500</td>
+<td>$74,500</td>
+<td><strong>$745.00</strong></td>
+</tr>
+</tbody></table>
+<p><em>Nota: Los meses sin ingresos, el fondo de reserva cubre costos mínimos. Holders no pierden dinero si el fondo está capitalizado.</em></p>
+<hr>
+<h2 id="🔄-comparativa-de-modelos">🔄 Comparativa de Modelos</h2>
+<h3 id="doosan-dx360-vs-evocons-evoblock">Doosan DX360 vs EVOCONS EVOBLOCK</h3>
+<table>
+<thead>
+<tr>
+<th>Concepto</th>
+<th>Doosan DX360</th>
+<th>EVOCONS EVOBLOCK</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Inversión mínima</strong></td>
+<td>€600 (1,000 tokens)</td>
+<td>$1,200 (1 share)</td>
+</tr>
+<tr>
+<td><strong>ROI esperado</strong></td>
+<td>12-35% anual</td>
+<td>20-30% anual</td>
+</tr>
+<tr>
+<td><strong>Riesgo</strong></td>
+<td>Medio (depende contratos)</td>
+<td>Medio-Alto (depende mercado inmobiliario)</td>
+</tr>
+<tr>
+<td><strong>Liquidez</strong></td>
+<td>Alta (100k tokens)</td>
+<td>Media (1k shares)</td>
+</tr>
+<tr>
+<td><strong>Pago mensual</strong></td>
+<td>€6-30 por 1000 tokens</td>
+<td>$262 por 10 shares</td>
+</tr>
+<tr>
+<td><strong>Volatilidad ingresos</strong></td>
+<td>Baja (contratos 6-12m)</td>
+<td>Media (alquiler proyecto)</td>
+</tr>
+<tr>
+<td><strong>Control propietario</strong></td>
+<td>Propietario 60%</td>
+<td>Gestión SPV</td>
+</tr>
+<tr>
+<td><strong>Complejidad legal</strong></td>
+<td>Simple (contrato directo)</td>
+<td>Compleja (SPV + compliance)</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="💡-ventajas-para-inversores">💡 Ventajas para Inversores</h2>
+<h3 id="1-activos-reales-no-especulación">1. <strong>Activos Reales (No Especulación)</strong></h3>
+<p>❌ <strong>Criptomonedas tradicionales:</strong></p>
+<ul>
+<li>Precio especulativo</li>
+<li>Sin respaldo real</li>
+<li>Volatilidad extrema</li>
+</ul>
+<p>✅ <strong>Bashood RWA:</strong></p>
+<ul>
+<li>Activo físico verificable</li>
+<li>Ingresos operativos reales</li>
+<li>ROI predecible</li>
+</ul>
+<h3 id="2-transparencia-total-blockchain">2. <strong>Transparencia Total Blockchain</strong></h3>
+<p>Cada mes recibes <strong>reporte operativo</strong> on-chain:</p>
+<ul>
+<li>Horas trabajadas (odómetro)</li>
+<li>Ingresos verificados (facturas hash)</li>
+<li>Costos deducibles (combustible, mantenimiento)</li>
+<li>Ganancia neta calculada</li>
+<li>Distribución ejecutada</li>
+</ul>
+<p><strong>Ejemplo reporte mensual Doosan DX360:</strong></p>
+<pre><code class="language-json">{
+  &quot;month&quot;: &quot;2026-02&quot;,
+  &quot;hoursWorked&quot;: 242,
+  &quot;odometerReading&quot;: 6842,
+  &quot;revenue&quot;: 15000,
+  &quot;costs&quot;: {
+    &quot;fuel&quot;: 7260,
+    &quot;maintenance&quot;: 833,
+    &quot;insurance&quot;: 250,
+    &quot;total&quot;: 8343
+  },
+  &quot;netProfit&quot;: 6657,
+  &quot;distributions&quot;: {
+    &quot;owner&quot;: 3994,
+    &quot;holders&quot;: 2663,
+    &quot;treasury&quot;: 13
+  },
+  &quot;proofHash&quot;: &quot;0x7a3d...&quot;
+}
+</code></pre>
+<h3 id="3-liquidez-secundaria">3. <strong>Liquidez Secundaria</strong></h3>
+<p>Puedes <strong>vender tus tokens</strong> en cualquier momento:</p>
+<ul>
+<li><strong>DEX (Uniswap/Base):</strong> Venta peer-to-peer 24/7</li>
+<li><strong>Mercado Bashood:</strong> Matching orders holders</li>
+<li><strong>Precio mercado:</strong> Basado en ROI real + demanda</li>
+</ul>
+<p><strong>Ejemplo:</strong></p>
+<ul>
+<li>Compraste 1,000 tokens Doosan a €0.60 = €600</li>
+<li>Activo genera ROI 30% anual (validated 6 meses)</li>
+<li>Mercado valora tokens a €0.75 (+25% premium)</li>
+<li>Vendes por €750 → <strong>€150 ganancia + dividendos acumulados</strong></li>
+</ul>
+<h3 id="4-diversificación-industrial">4. <strong>Diversificación Industrial</strong></h3>
+<p>Portfolio ejemplo con €10,000:</p>
+<pre><code>€3,000 → Doosan DX360 (construcción)
+€3,000 → EVOCONS EVOBLOCK (construcción 3D)
+€2,000 → Bomba hormigón (infraestructura)
+€2,000 → Impresora 3D robótica (manufactura)
+
+ROI esperado portfolio: 18-25% anual
+Risk mitigation: 4 sectores diferentes
+</code></pre>
+<h3 id="5-entrada-accesible">5. <strong>Entrada Accesible</strong></h3>
+<table>
+<thead>
+<tr>
+<th>Activo Tradicional</th>
+<th>Mínimo</th>
+<th>Bashood Token</th>
+<th>Mínimo</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Excavadora completa</td>
+<td>€150,000</td>
+<td>Doosan tokens</td>
+<td>€60</td>
+</tr>
+<tr>
+<td>Grúa construcción</td>
+<td>$1.2M</td>
+<td>EVOCONS share</td>
+<td>$1,200</td>
+</tr>
+<tr>
+<td>Propiedad inmobiliaria</td>
+<td>€50,000</td>
+<td>Real Estate NFT</td>
+<td>€500</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="⚠️-riesgos-y-consideraciones">⚠️ Riesgos y Consideraciones</h2>
+<h3 id="riesgos-operativos">Riesgos Operativos</h3>
+<ol>
+<li><p><strong>Baja demanda del activo</strong></p>
+<ul>
+<li><strong>Ejemplo:</strong> Doosan sin contratos 3+ meses consecutivos</li>
+<li><strong>Mitigación:</strong> Fondo reserva cubre costos básicos</li>
+<li><strong>Impacto:</strong> ROI 0% ese trimestre (no pérdida capital)</li>
+</ul>
+</li>
+<li><p><strong>Daños/accidente al activo</strong></p>
+<ul>
+<li><strong>Ejemplo:</strong> Motor fundido, reparación €30k</li>
+<li><strong>Mitigación:</strong> Seguro comprehensive + fondo reserva</li>
+<li><strong>Impacto:</strong> Costos cubiertos, pausan pagos 1-2 meses</li>
+</ul>
+</li>
+<li><p><strong>Incumplimiento propietario</strong></p>
+<ul>
+<li><strong>Ejemplo:</strong> No reporta ingresos, desvía fondos</li>
+<li><strong>Mitigación:</strong> Smart contract con escrow, oracle verification</li>
+<li><strong>Impacto:</strong> Suspensión distribuciones, proceso legal</li>
+</ul>
+</li>
+</ol>
+<h3 id="riesgos-de-mercado">Riesgos de Mercado</h3>
+<ol start="4">
+<li><p><strong>Liquidez secundaria limitada</strong></p>
+<ul>
+<li><strong>Ejemplo:</strong> Quieres vender 10,000 tokens, no hay compradores</li>
+<li><strong>Realidad:</strong> Tokens industriales menos líquidos que ETH/BTC</li>
+<li><strong>Mitigación:</strong> Market making protocol (futuro)</li>
+</ul>
+</li>
+<li><p><strong>Depreciación activo</strong></p>
+<ul>
+<li><strong>Ejemplo:</strong> Doosan pierde valor €150k → €120k en 3 años</li>
+<li><strong>Realidad:</strong> Normal en activos industriales (10-15% anual)</li>
+<li><strong>Mitigación:</strong> ROI operativo supera depreciación</li>
+</ul>
+</li>
+</ol>
+<h3 id="riesgos-regulatorios">Riesgos Regulatorios</h3>
+<ol start="6">
+<li><strong>Clasificación securities</strong><ul>
+<li><strong>Situación:</strong> España/UE consideran tokens utility, NO securities</li>
+<li><strong>Riesgo:</strong> Cambio regulación → requisitos compliance</li>
+<li><strong>Mitigación:</strong> Estructura SPV lista para conversion</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h2 id="📋-ejemplo-completo-tu-primer-mes-como-holder">📋 Ejemplo Completo: Tu Primer Mes como Holder</h2>
+<h3 id="escenario-inviertes-€3000-en-doosan-dx360">Escenario: Inviertes €3,000 en Doosan DX360</h3>
+<p><strong>Día 1: Compra Tokens</strong></p>
+<pre><code>Inversión: €3,000
+Precio token: €0.60
+Tokens adquiridos: 5,000 BHT-DX360
+% del total: 5% (de los 100,000 tokens holders)
+</code></pre>
+<p><strong>Día 15: Reporte Operativo Publicado</strong></p>
+<pre><code>Blockchain muestra:
+├─ Horas trabajadas: 242h
+├─ Ingresos mes: €15,000
+├─ Costos: €9,856
+└─ Ganancia neta: €5,144
+</code></pre>
+<p><strong>Día 30: Distribución Automática</strong></p>
+<pre><code>Ganancia neta: €5,144
+└─ Holders 40%: €2,058
+
+TU PAGO:
+€2,058 × (5,000 tokens / 100,000 total) = €102.90
+
+🎉 Recibes €102.90 en tu wallet (USDC/ETH)
+📊 ROI mensual: 3.43%
+📈 Proyección anual: 41.16% APY
+</code></pre>
+<p><strong>Día 31-365: Repite cada mes</strong></p>
+<pre><code>Si mantiene rendimiento €15k/mes:
+├─ Mes 2: €102.90
+├─ Mes 3: €102.90
+├─ ...
+└─ Mes 12: €102.90
+
+TOTAL AÑO 1: €1,234.80
+ROI: 41.16% sobre €3,000 invertidos
+</code></pre>
+<hr>
+<h2 id="🎯-preguntas-frecuentes-faq">🎯 Preguntas Frecuentes (FAQ)</h2>
+<h3 id="¿cuándo-recibo-pagos">¿Cuándo recibo pagos?</h3>
+<p><strong>Distribución:</strong> Primeros 5 días de cada mes siguiente.</p>
+<ul>
+<li>Enero operado → Pago 1-5 Febrero</li>
+<li>Automático vía smart contract</li>
+<li>Recibido en wallet (USDC, ETH, o stablecoin configurada)</li>
+</ul>
+<h3 id="¿qué-pasa-si-el-activo-tiene-pérdidas-un-mes">¿Qué pasa si el activo tiene pérdidas un mes?</h3>
+<p><strong>Fondo de Reserva:</strong></p>
+<ul>
+<li>Cada activo tiene fondo 5-10% capitalizado</li>
+<li>Cubre meses con pérdidas temporales</li>
+<li>Si pérdida &gt; reserva: holders NO reciben ese mes (pero NO pierden capital)</li>
+</ul>
+<p><strong>Ejemplo:</strong></p>
+<ul>
+<li>Mes 1: +€5,000 (pagas)</li>
+<li>Mes 2: -€2,000 (reserva cubre, NO pagas pero tampoco pierdes)</li>
+<li>Mes 3: +€8,000 (pagas + se recapitaliza reserva)</li>
+</ul>
+<h3 id="¿puedo-vender-mis-tokens-antes-de-1-año">¿Puedo vender mis tokens antes de 1 año?</h3>
+<p><strong>SÍ, liquidez continua:</strong></p>
+<ul>
+<li>Venta en DEX (Uniswap Base) 24/7</li>
+<li>Venta en mercado Bashood (matching orders)</li>
+<li>Precio determinado por oferta/demanda</li>
+</ul>
+<p><strong>Importante:</strong> Burn fee 0.1% en transferencias secundarias (minimiza especulación).</p>
+<h3 id="¿cómo-verifico-que-los-ingresos-son-reales">¿Cómo verifico que los ingresos son reales?</h3>
+<p><strong>3 capas de verificación:</strong></p>
+<ol>
+<li><strong>Oracle Chainlink:</strong> Datos operativos (horas, odómetro) automáticos</li>
+<li><strong>Hash de facturas:</strong> Propietario sube hash de facturas clientes (verificable sin exponer datos sensibles)</li>
+<li><strong>Auditoría trimestral:</strong> Auditor independiente verifica reportes vs realidad</li>
+</ol>
+<p><strong>Transparencia total:</strong> Todos los reportes públicos en blockchain (etherscan Base).</p>
+<h3 id="¿qué-pasa-si-el-propietario-quiere-vender-el-activo">¿Qué pasa si el propietario quiere vender el activo?</h3>
+<p><strong>Derecho de preferencia holders:</strong></p>
+<ol>
+<li>Propietario notifica intención venta (precio, condiciones)</li>
+<li>Holders tienen 30 días para:<ul>
+<li><strong>OPCIÓN A:</strong> Comprar participación propietario (60% Doosan = €90k)</li>
+<li><strong>OPCIÓN B:</strong> Ser comprados por nuevo propietario (al precio justo mercado)</li>
+<li><strong>OPCIÓN C:</strong> Rechazar y terminar tokenización (liquidación proporcional)</li>
+</ul>
+</li>
+</ol>
+<p><strong>Protección:</strong> No pueden &quot;desaparecer&quot; tus tokens sin compensación.</p>
+<h3 id="¿cómo-se-calcula-el-roi-esperado">¿Cómo se calcula el ROI esperado?</h3>
+<p><strong>Fórmula:</strong></p>
+<pre><code>ROI anual = (Ganancia neta anual × % holders) / Capital tokenizado
+</code></pre>
+<p><strong>Ejemplo Doosan:</strong></p>
+<ul>
+<li>Ganancia neta: €52,730 (escenario €15k/mes)</li>
+<li>% Holders: 40%</li>
+<li>Holders reciben: €21,092</li>
+<li>Capital tokenizado: €60,000</li>
+<li><strong>ROI = €21,092 / €60,000 = 35.15%</strong></li>
+</ul>
+<p><strong>Variable:</strong> ROI depende ingresos operativos reales (por eso hay escenarios conservador/óptimo).</p>
+<h3 id="¿pago-impuestos-sobre-los-dividendos">¿Pago impuestos sobre los dividendos?</h3>
+<p><strong>⚠️ SÍ (consulta asesor fiscal):</strong></p>
+<p><strong>España:</strong></p>
+<ul>
+<li>Dividendos = Rendimientos capital mobiliario (19-28%)</li>
+<li>Declaración anual (IRPF)</li>
+<li>Retención automática NO aplicable (protocolo descentralizado)</li>
+</ul>
+<p><strong>Recomendación:</strong> Guardar 25% de cada pago para impuestos anuales.</p>
+<h3 id="¿qué-pasa-si-el-smart-contract-tiene-un-bug">¿Qué pasa si el smart contract tiene un bug?</h3>
+<p><strong>Seguridad multicapa:</strong></p>
+<ol>
+<li>✅ <strong>Auditoría profesional:</strong> Solidproof/CertiK previo a mainnet</li>
+<li>✅ <strong>Bug bounty:</strong> $50k reward para vulnerabilidades críticas</li>
+<li>✅ <strong>Upgradeable contracts:</strong> Proxy pattern para fixes de emergencia</li>
+<li>✅ <strong>Multisig treasury:</strong> 3/5 signers requieren aprobar distribuciones grandes</li>
+<li>✅ <strong>Pause button:</strong> Emergencia detiene todo el protocolo (multisig controlado)</li>
+</ol>
+<p><strong>Riesgo:</strong> Existe (como en todo software), pero mitigado al máximo nivel industria.</p>
+<hr>
+<h2 id="📈-roi-comparado-con-otras-inversiones">📈 ROI Comparado con Otras Inversiones</h2>
+<h3 id="comparativa-anual-2026">Comparativa Anual (2026)</h3>
+<table>
+<thead>
+<tr>
+<th>Inversión</th>
+<th>ROI Medio</th>
+<th>Liquidez</th>
+<th>Riesgo</th>
+<th>Entrada Mínima</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Bashood RWA</strong></td>
+<td><strong>15-35%</strong></td>
+<td>Media</td>
+<td>Medio</td>
+<td>€500</td>
+</tr>
+<tr>
+<td>Cuenta ahorro (banco)</td>
+<td>0.5-2%</td>
+<td>Alta</td>
+<td>Muy Bajo</td>
+<td>€0</td>
+</tr>
+<tr>
+<td>Bonos estado (España)</td>
+<td>2-4%</td>
+<td>Alta</td>
+<td>Bajo</td>
+<td>€1,000</td>
+</tr>
+<tr>
+<td>S&amp;P 500 (acciones)</td>
+<td>8-12%</td>
+<td>Alta</td>
+<td>Medio</td>
+<td>€100</td>
+</tr>
+<tr>
+<td>Real Estate (físico)</td>
+<td>5-8%</td>
+<td>Muy Baja</td>
+<td>Medio-Alto</td>
+<td>€30,000</td>
+</tr>
+<tr>
+<td>Criptomonedas (BTC/ETH)</td>
+<td>-30% a +150%</td>
+<td>Alta</td>
+<td>Muy Alto</td>
+<td>€10</td>
+</tr>
+<tr>
+<td>Crowdlending (P2P)</td>
+<td>4-7%</td>
+<td>Baja</td>
+<td>Alto</td>
+<td>€50</td>
+</tr>
+<tr>
+<td>Private Equity</td>
+<td>15-25%</td>
+<td>Muy Baja</td>
+<td>Alto</td>
+<td>€50,000</td>
+</tr>
+</tbody></table>
+<p><strong>Posicionamiento Bashood:</strong></p>
+<ul>
+<li>ROI superior a inversiones tradicionales (bonos, inmobiliario)</li>
+<li>Riesgo controlado (activo real, no especulación)</li>
+<li>Entrada accesible (vs private equity, real estate)</li>
+<li>Liquidez mejor que inmobiliario físico</li>
+</ul>
+<hr>
+<h2 id="✅-checklist-¿es-para-mí">✅ Checklist: ¿Es para mí?</h2>
+<p><strong>Bashood RWA es buena opción si:</strong></p>
+<ul>
+<li>✅ Buscas ROI 15-35% anual (superior a bonos/ahorro)</li>
+<li>✅ Prefieres activos reales vs criptos especulativas</li>
+<li>✅ Estás cómodo con riesgo medio (no garantizado)</li>
+<li>✅ Entiendes que liquidez es menor que acciones (pero mayor que inmobiliario)</li>
+<li>✅ Puedes invertir €500+ que NO necesitas a corto plazo</li>
+<li>✅ Te interesa diversificar en activos industriales/construcción</li>
+<li>✅ Confías en transparencia blockchain</li>
+</ul>
+<p><strong>NO es para ti si:</strong></p>
+<ul>
+<li>❌ Buscas &quot;hacerte rico rápido&quot; (esto NO es especulación)</li>
+<li>❌ Necesitas liquidez inmediata 24/7 (como con USDC/ETH)</li>
+<li>❌ Esperas ROI 100%+ como memecoins (esto es industrial, ROI predecible)</li>
+<li>❌ No entiendes riesgos operativos (activo puede tener meses malos)</li>
+<li>❌ Te molesta volatilidad mensual (pagos varían según operación)</li>
+<li>❌ No puedes asumir riesgo de perder parte de inversión</li>
+</ul>
+<hr>
+<h2 id="🚀-próximos-pasos">🚀 Próximos Pasos</h2>
+<h3 id="1-piloto-actual-doosan-dx360">1. Piloto Actual: Doosan DX360</h3>
+<p><strong>Status:</strong> En fase de negociación con propietario
+<strong>Próximo:</strong> Due diligence (30-45 días)
+<strong>Launch:</strong> Testnet Base Sepolia (Q2 2026), Mainnet (Q3 2026)</p>
+<p><strong>Sé de los primeros inversores:</strong></p>
+<ul>
+<li>📧 Early access list: <a href="mailto:&#x69;&#x6e;&#x76;&#x65;&#115;&#116;&#x6f;&#x72;&#115;&#64;&#98;&#x61;&#115;&#104;&#111;&#x6f;&#x64;&#x2e;&#105;&#111;">&#x69;&#x6e;&#x76;&#x65;&#115;&#116;&#x6f;&#x72;&#115;&#64;&#98;&#x61;&#115;&#104;&#111;&#x6f;&#x64;&#x2e;&#105;&#111;</a></li>
+<li>🎁 Bonus primer piloto: 5% descuento tokens + 2x recompensas treasury</li>
+</ul>
+<h3 id="2-pipeline-2026-2027">2. Pipeline 2026-2027</h3>
+<p><strong>Q2 2026:</strong></p>
+<ul>
+<li>Doosan DX360 (España) - €60k tokenizado</li>
+</ul>
+<p><strong>Q3 2026:</strong></p>
+<ul>
+<li>EVOCONS EVOBLOCK (España) - $1.2M tokenizado</li>
+<li>Bomba hormigón Schwing (España) - €80k tokenizado</li>
+</ul>
+<p><strong>Q4 2026:</strong></p>
+<ul>
+<li>Impresora 3D ICON (USA) - $800k tokenizado</li>
+<li>Grúa torre Liebherr (Alemania) - €500k tokenizado</li>
+</ul>
+<p><strong>2027:</strong></p>
+<ul>
+<li>Portfolio objetivo: €5-10M activos tokenizados</li>
+<li>50-100 holders/activo</li>
+<li>Mercado secundario líquido</li>
+</ul>
+<h3 id="3-regístrate">3. Regístrate</h3>
+<p><strong>Formulario Early Access:</strong>
+<a href="https://bashood.io/early-access">https://bashood.io/early-access</a></p>
+<p><strong>Información requerida:</strong></p>
+<ul>
+<li>Email + wallet address</li>
+<li>País/jurisdicción (compliance KYC)</li>
+<li>Interés inversión (€500-1k, €1-5k, €5-10k, €10k+)</li>
+<li>Sector preferido (construcción, manufactura, logística, energía)</li>
+</ul>
+<p><strong>Beneficios early access:</strong></p>
+<ul>
+<li>Priority allocation tokens piloto Doosan</li>
+<li>5% discount precio tokens</li>
+<li>Acceso beta plataforma</li>
+<li>Direct communication updates</li>
+</ul>
+<hr>
+<h2 id="📞-contacto-e-información">📞 Contacto e Información</h2>
+<p><strong>Website:</strong> <a href="https://bashood.io">https://bashood.io</a><br><strong>Email Inversores:</strong> <a href="mailto:&#105;&#x6e;&#118;&#x65;&#x73;&#116;&#x6f;&#x72;&#x73;&#64;&#x62;&#x61;&#x73;&#x68;&#x6f;&#111;&#x64;&#x2e;&#x69;&#111;">&#105;&#x6e;&#118;&#x65;&#x73;&#116;&#x6f;&#x72;&#x73;&#64;&#x62;&#x61;&#x73;&#x68;&#x6f;&#111;&#x64;&#x2e;&#x69;&#111;</a><br><strong>Telegram Holders:</strong> @BashoodHolders<br><strong>Twitter:</strong> @BashoodRWA  </p>
+<p><strong>Blockchain:</strong> Base (Ethereum L2)<br><strong>Contratos Audited:</strong> Solidproof (Q2 2026)<br><strong>Legal:</strong> SPV España (cumplimiento normativa UE)  </p>
+<hr>
+<h2 id="⚖️-disclaimer-legal">⚖️ Disclaimer Legal</h2>
+<p><strong>Aviso Importante:</strong></p>
+<ol>
+<li><p><strong>No es asesoramiento financiero:</strong> Este documento es informativo. Consulta asesor profesional antes de invertir.</p>
+</li>
+<li><p><strong>Riesgo de pérdida:</strong> Los activos industriales pueden perder valor y tener pérdidas operativas. No inviertas dinero que no puedas permitirte perder.</p>
+</li>
+<li><p><strong>No garantía de rentabilidad:</strong> ROI proyectados son estimaciones basadas en operación histórica/esperada. Resultados reales pueden variar (mejor o peor).</p>
+</li>
+<li><p><strong>Regulación en evolución:</strong> Tokens RWA son nueva clase de activo. Regulación puede cambiar y requerir adaptaciones.</p>
+</li>
+<li><p><strong>Riesgo tecnológico:</strong> Smart contracts pueden tener bugs. Aunque auditados, no hay garantía 100%.</p>
+</li>
+<li><p><strong>Jurisdicción:</strong> Producto regulado bajo normativa española/UE. Disponibilidad sujeta a país del inversor.</p>
+</li>
+</ol>
+<hr>
+<p><strong>Versión:</strong> 1.0<br><strong>Fecha:</strong> Febrero 2026<br><strong>Preparado por:</strong> Bashood Team<br><strong>Revisión Legal:</strong> Pendiente (asesoría en Q2 2026)</p>
+<hr>
+<p><em>¿Listo para invertir en activos industriales reales con blockchain?</em></p>
+<p><strong>👉 Únete a la lista early access:</strong> <a href="mailto:&#105;&#x6e;&#x76;&#101;&#x73;&#x74;&#111;&#x72;&#115;&#64;&#98;&#97;&#x73;&#x68;&#111;&#x6f;&#100;&#x2e;&#x69;&#x6f;">&#105;&#x6e;&#x76;&#101;&#x73;&#x74;&#111;&#x72;&#115;&#64;&#98;&#97;&#x73;&#x68;&#111;&#x6f;&#100;&#x2e;&#x69;&#x6f;</a></p>
+
+  </div>
+</body>
+</html>

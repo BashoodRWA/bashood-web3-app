@@ -1,0 +1,25 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Run Hardhat tests",
+			"type": "shell",
+			"command": "npx hardhat test test/DepreciationEngine.test.js",
+			"isBackground": false,
+			"problemMatcher": [
+				"$mocha"
+			],
+			"group": "test"
+		},
+		{
+			"label": "Coverage BashoodRWAReference",
+			"type": "shell",
+			"command": "npx hardhat coverage --testfiles test/integration.bashoodrwa.depreciation.test.js",
+			"isBackground": false,
+			"problemMatcher": [
+				"$mocha"
+			],
+			"group": "test"
+		}
+	]
+}

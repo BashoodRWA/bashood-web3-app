@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modelo Económico Resumen - Bashood RWA</title>
+  <style>
+    @page { size: A4; margin: 20mm; }
+    * { box-sizing: border-box; }
+    body { 
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+      font-size: 11pt; 
+      line-height: 1.6; 
+      color: #333; 
+      max-width: 210mm; 
+      margin: 0 auto; 
+      padding: 20px; 
+      background: white; 
+    }
+    
+    .cover-page { 
+      display: flex; 
+      flex-direction: column; 
+      justify-content: center; 
+      align-items: center; 
+      min-height: 80vh; 
+      text-align: center; 
+      page-break-after: always; 
+    }
+    
+    .cover-page h1 { 
+      font-size: 32pt; 
+      color: #2c3e50; 
+      margin-bottom: 30px; 
+      border: none; 
+    }
+    
+    .cover-page .project-name { 
+      font-size: 18pt; 
+      color: #7f8c8d; 
+      margin: 20px 0; 
+    }
+    
+    .cover-page .date { 
+      font-size: 14pt; 
+      color: #bdc3c7; 
+      margin-top: 60px; 
+    }
+    
+    h1 { 
+      color: #2c3e50; 
+      border-bottom: 3px solid #3498db; 
+      padding-bottom: 10px; 
+      margin-top: 40px; 
+      page-break-after: avoid; 
+    }
+    
+    h2 { 
+      color: #34495e; 
+      border-bottom: 2px solid #95a5a6; 
+      padding-bottom: 5px; 
+      margin-top: 30px; 
+      page-break-after: avoid; 
+    }
+    
+    h3 { 
+      color: #555; 
+      margin-top: 25px; 
+      page-break-after: avoid; 
+    }
+    
+    h4 { 
+      color: #666; 
+      margin-top: 20px; 
+    }
+    
+    table { 
+      border-collapse: collapse; 
+      width: 100%; 
+      margin: 20px 0; 
+      page-break-inside: avoid; 
+      font-size: 10pt;
+    }
+    
+    th, td { 
+      border: 1px solid #ddd; 
+      padding: 8px; 
+      text-align: left; 
+    }
+    
+    th { 
+      background-color: #3498db; 
+      color: white; 
+      font-weight: bold; 
+    }
+    
+    tr:nth-child(even) { 
+      background-color: #f9f9f9; 
+    }
+    
+    code { 
+      background-color: #f4f4f4; 
+      padding: 2px 6px; 
+      border-radius: 3px; 
+      font-family: 'Courier New', monospace; 
+      font-size: 9pt; 
+      color: #c7254e; 
+    }
+    
+    pre { 
+      background-color: #f4f4f4; 
+      padding: 15px; 
+      border-radius: 5px; 
+      overflow-x: auto; 
+      border-left: 4px solid #3498db; 
+      page-break-inside: avoid; 
+      font-size: 9pt;
+    }
+    
+    pre code { 
+      background: none; 
+      padding: 0; 
+      color: #333; 
+    }
+    
+    blockquote { 
+      border-left: 4px solid #3498db; 
+      padding-left: 15px; 
+      margin-left: 0; 
+      color: #555; 
+      font-style: italic; 
+      page-break-inside: avoid; 
+    }
+    
+    ul, ol { 
+      margin: 15px 0; 
+      padding-left: 30px; 
+    }
+    
+    li { 
+      margin: 8px 0; 
+    }
+    
+    a { 
+      color: #3498db; 
+      text-decoration: none; 
+    }
+    
+    hr { 
+      border: none; 
+      border-top: 2px solid #ecf0f1; 
+      margin: 30px 0; 
+    }
+    
+    @media print { 
+      body { padding: 0; } 
+      h1, h2, h3 { page-break-after: avoid; } 
+      table, pre, blockquote { page-break-inside: avoid; } 
+      .print-instructions { display: none; }
+    }
+    
+    .print-instructions { 
+      background: #fff3cd; 
+      border: 2px solid #ffc107; 
+      border-radius: 5px; 
+      padding: 15px; 
+      margin: 20px 0; 
+      position: fixed; 
+      top: 20px; 
+      right: 20px; 
+      max-width: 300px; 
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1); 
+      z-index: 1000; 
+    }
+  </style>
+</head>
+<body>
+  <div class="print-instructions">
+    <h4 style="margin-top:0; color:#856404">📄 Para generar PDF:</h4>
+    <ol style="margin:0; padding-left:20px; color:#856404">
+      <li>Presiona <strong>Ctrl+P</strong></li>
+      <li>Selecciona "Guardar como PDF"</li>
+      <li>Fondo gráficos: ✅ ACTIVADO</li>
+      <li>Guarda el archivo</li>
+    </ol>
+  </div>
+  
+  <div class="cover-page">
+    <h1>📚 Modelo Económico</h1>
+    <div class="project-name">Resumen Ejecutivo</div>
+    <div class="project-name">Proyecto Bashood RWA</div>
+    <div class="date">20 de febrero de 2026</div>
+  </div>
+  
+  <div class="content">
+    <h1 id="📚-modelo-económico-para-inversores">📚 MODELO ECONÓMICO PARA INVERSORES</h1>
+<h2 id="✅-documento-creado">✅ Documento Creado</h2>
+<p><strong>Archivo:</strong> <a href="MODELO_ECONOMICO_INVERSORES.md">MODELO_ECONOMICO_INVERSORES.md</a><br><strong>HTML generado:</strong> <a href="html/05_MODELO_ECONOMICO_INVERSORES.html">html/05_MODELO_ECONOMICO_INVERSORES.html</a><br><strong>Páginas:</strong> ~50 páginas<br><strong>Tamaño:</strong> 33 KB</p>
+<hr>
+<h2 id="📋-contenido-del-documento">📋 Contenido del Documento</h2>
+<h3 id="1-resumen-ejecutivo">1. <strong>Resumen Ejecutivo</strong></h3>
+<ul>
+<li>Qué reciben los inversores</li>
+<li>Dividendos mensuales automáticos</li>
+<li>ROI predecible basado en operación real</li>
+</ul>
+<h3 id="2-cómo-funciona-el-modelo">2. <strong>Cómo Funciona el Modelo</strong></h3>
+<ul>
+<li>Tokenización parcial vs total</li>
+<li>Distribución de ganancias</li>
+<li>Pagos automáticos mensuales</li>
+<li>Fórmulas de cálculo</li>
+</ul>
+<h3 id="3-ejemplo-1-doosan-dx360-excavadora">3. <strong>EJEMPLO 1: Doosan DX360</strong> (Excavadora)</h3>
+<ul>
+<li>Ficha técnica completa</li>
+<li>Costos operativos €118,270/año</li>
+<li>3 escenarios financieros:<ul>
+<li>CONSERVADOR (€12k/mes): ROI 12.35%</li>
+<li>REALISTA (€15k/mes): ROI 35.15%</li>
+<li>ÓPTIMO (€18k/mes): ROI 57.95%</li>
+</ul>
+</li>
+<li>Calendario pagos mensuales ejemplo</li>
+<li>Casos reales: &quot;Si inviertes €3,000...&quot;</li>
+</ul>
+<h3 id="4-ejemplo-2-evocons-evoblock-grúa-construcción-3d">4. <strong>EJEMPLO 2: EVOCONS EVOBLOCK</strong> (Grúa Construcción 3D)</h3>
+<ul>
+<li>Ficha técnica completa</li>
+<li>Valor $1.2M, fractional 1,000 shares</li>
+<li>Modelo alquiler ($50k/mes a promotoras)</li>
+<li>Costos operativos $141k/año</li>
+<li>ROI anual: 26.20%</li>
+<li>Ganancia por share: $314/año ($26/mes)</li>
+<li>Casos reales: &quot;Si tienes 10 shares...&quot;</li>
+</ul>
+<h3 id="5-comparativa-doosan-vs-evocons">5. <strong>Comparativa Doosan vs EVOCONS</strong></h3>
+<ul>
+<li>Tabla comparativa completa</li>
+<li>Inversión mínima (€600 vs $1,200)</li>
+<li>ROI esperado</li>
+<li>Riesgo y liquidez</li>
+<li>Complejidad legal</li>
+</ul>
+<h3 id="6-ventajas-para-inversores">6. <strong>Ventajas para Inversores</strong></h3>
+<ul>
+<li>Activos reales (no especulación)</li>
+<li>Transparencia blockchain (reportes on-chain)</li>
+<li>Liquidez secundaria (DEX/mercado Bashood)</li>
+<li>Diversificación industrial</li>
+<li>Entrada accesible (desde €60)</li>
+</ul>
+<h3 id="7-riesgos-y-consideraciones">7. <strong>Riesgos y Consideraciones</strong></h3>
+<ul>
+<li>Riesgos operativos (baja demanda, daños)</li>
+<li>Riesgos de mercado (liquidez limitada, depreciación)</li>
+<li>Riesgos regulatorios (clasificación securities)</li>
+<li>Mitigaciones explicadas</li>
+</ul>
+<h3 id="8-ejemplo-completo-tu-primer-mes">8. <strong>Ejemplo Completo: Tu Primer Mes</strong></h3>
+<ul>
+<li>Inversión €3,000 en Doosan</li>
+<li>Día 1: Compra 5,000 tokens</li>
+<li>Día 15: Reporte operativo publicado</li>
+<li>Día 30: Recibes €102.90 automático</li>
+<li>Proyección año 1: €1,234.80 (ROI 41.16%)</li>
+</ul>
+<h3 id="9-faq---8-preguntas-frecuentes">9. <strong>FAQ - 8 Preguntas Frecuentes</strong></h3>
+<ul>
+<li>¿Cuándo recibo pagos?</li>
+<li>¿Qué pasa si hay pérdidas?</li>
+<li>¿Puedo vender antes de 1 año?</li>
+<li>¿Cómo verifico ingresos reales?</li>
+<li>¿Qué pasa si venden el activo?</li>
+<li>¿Cómo se calcula ROI?</li>
+<li>¿Pago impuestos? (España 19-28%)</li>
+<li>¿Qué pasa si hay bug en smart contract?</li>
+</ul>
+<h3 id="10-roi-comparado">10. <strong>ROI Comparado</strong></h3>
+<ul>
+<li>Tabla comparativa con otras inversiones:<ul>
+<li>Cuenta ahorro: 0.5-2%</li>
+<li>Bonos estado: 2-4%</li>
+<li>S&amp;P 500: 8-12%</li>
+<li>Real Estate: 5-8%</li>
+<li>Bashood RWA: <strong>15-35%</strong> ⭐</li>
+<li>Criptos: -30% a +150% (volátil)</li>
+<li>Private Equity: 15-25%</li>
+</ul>
+</li>
+</ul>
+<h3 id="11-checklist-¿es-para-mí">11. <strong>Checklist: ¿Es para mí?</strong></h3>
+<ul>
+<li>7 motivos SÍ ✅</li>
+<li>7 motivos NO ❌</li>
+<li>Autoevaluación inversores</li>
+</ul>
+<h3 id="12-próximos-pasos">12. <strong>Próximos Pasos</strong></h3>
+<ul>
+<li>Piloto Doosan DX360 (Q2-Q3 2026)</li>
+<li>Pipeline 2026-2027 (5 activos)</li>
+<li>Formulario early access</li>
+<li>Beneficios inversores tempranos</li>
+</ul>
+<hr>
+<h2 id="🎯-uso-del-documento">🎯 Uso del Documento</h2>
+<h3 id="para-inversores-potenciales-público">Para INVERSORES POTENCIALES (público):</h3>
+<ul>
+<li>✅ <strong>ENVIAR</strong> a lista early access</li>
+<li>✅ <strong>PUBLICAR</strong> en website Bashood (sección inversores)</li>
+<li>✅ <strong>COMPARTIR</strong> en Telegram/Twitter</li>
+<li>✅ Pitch deck completo modelo económico</li>
+<li>✅ Responde todas las dudas sobre retornos/riesgos</li>
+</ul>
+<h3 id="para-propietarios-activos-privado">Para PROPIETARIOS ACTIVOS (privado):</h3>
+<ul>
+<li>🟡 <strong>Puede incluirse</strong> como anexo en propuesta</li>
+<li>🟡 Muestra al propietario qué atrae a inversores</li>
+<li>🟡 Demuestra viabilidad modelo (hay demanda inversión)</li>
+</ul>
+<h3 id="para-equipo-bashood-interno">Para EQUIPO BASHOOD (interno):</h3>
+<ul>
+<li>✅ Documento de referencia ventas/marketing</li>
+<li>✅ Base argumentos pitch inversores institucionales</li>
+<li>✅ Template para futuros activos (cambiar números)</li>
+</ul>
+<hr>
+<h2 id="💰-datos-clave-del-documento">💰 Datos Clave del Documento</h2>
+<h3 id="doosan-dx360-excavadora---españa">Doosan DX360 (Excavadora - España)</h3>
+<pre><code>Valor: €150,000
+Tokenizado: 40% (€60,000)
+Tokens: 100,000 BHT-DX360
+Precio: €0.60/token
+
+ROI ANUAL:
+- Conservador (€12k/mes): 12.35%
+- Realista (€15k/mes):    35.15% ⭐
+- Óptimo (€18k/mes):      57.95%
+
+INVERSIÓN €3,000 (5,000 tokens):
+→ Pago mensual: €51-€145
+→ Ganancia anual: €617-€1,737
+</code></pre>
+<h3 id="evocons-evoblock-grúa-3d---españa">EVOCONS EVOBLOCK (Grúa 3D - España)</h3>
+<pre><code>Valor: $1,200,000 (€1,100,000)
+Tokenizado: 100% (fractional)
+Shares: 1,000
+Precio: $1,200/share
+
+ROI ANUAL: 26.20%
+
+INVERSIÓN $12,000 (10 shares):
+→ Pago mensual: $262
+→ Ganancia anual: $3,144
+</code></pre>
+<hr>
+<h2 id="📄-formato-del-documento">📄 Formato del Documento</h2>
+<p><strong>Características:</strong></p>
+<ul>
+<li>✅ 50 páginas completas</li>
+<li>✅ 12 tablas comparativas</li>
+<li>✅ Ejemplos numéricos reales</li>
+<li>✅ Casos de uso &quot;Si inviertes €X...&quot;</li>
+<li>✅ FAQ con respuestas completas</li>
+<li>✅ Disclaimers legales incluidos</li>
+<li>✅ Contactos y próximos pasos</li>
+</ul>
+<p><strong>Estilo:</strong></p>
+<ul>
+<li>Profesional pero accesible</li>
+<li>No requiere conocimientos blockchain avanzados</li>
+<li>Ejemplos concretos (no genéricos)</li>
+<li>Transparencia total (riesgos explicados)</li>
+</ul>
+<hr>
+<h2 id="✅-próximos-pasos">✅ Próximos Pasos</h2>
+<ol>
+<li><p><strong>Convertir a PDF:</strong></p>
+<ul>
+<li>Ya abierto en navegador</li>
+<li>Ctrl+P → Guardar como PDF</li>
+<li>Nombre: <code>05_MODELO_ECONOMICO_INVERSORES.pdf</code></li>
+</ul>
+</li>
+<li><p><strong>Revisar Contenido:</strong></p>
+<ul>
+<li>Verificar números (costos, ROI, proyecciones)</li>
+<li>Confirmar datos EVOCONS correctos</li>
+<li>Ajustar si necesario antes de publicar</li>
+</ul>
+</li>
+<li><p><strong>Decisión Difusión:</strong></p>
+<ul>
+<li>¿Publicar en website ahora o esperar piloto Doosan validado?</li>
+<li>¿Compartir en early access list?</li>
+<li>¿Usar en pitch inversores institucionales?</li>
+</ul>
+</li>
+</ol>
+<hr>
+<p><strong>Documento preparado y listo para convertir a PDF</strong> ✅</p>
+
+  </div>
+</body>
+</html>

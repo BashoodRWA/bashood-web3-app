@@ -1,0 +1,1287 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Due Diligence Checklist</title>
+  <style>
+    @page {
+      size: A4;
+      margin: 20mm;
+    }
+    
+    * {
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-size: 11pt;
+      line-height: 1.6;
+      color: #333;
+      max-width: 210mm;
+      margin: 0 auto;
+      padding: 20px;
+      background: white;
+    }
+    
+    /* Portada */
+    .cover-page {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 80vh;
+      text-align: center;
+      page-break-after: always;
+    }
+    
+    .cover-page h1 {
+      font-size: 32pt;
+      color: #2c3e50;
+      margin-bottom: 30px;
+      border: none;
+    }
+    
+    .cover-page .project-name {
+      font-size: 18pt;
+      color: #7f8c8d;
+      margin: 20px 0;
+    }
+    
+    .cover-page .asset-name {
+      font-size: 16pt;
+      color: #95a5a6;
+      margin: 20px 0;
+    }
+    
+    .cover-page .date {
+      font-size: 14pt;
+      color: #bdc3c7;
+      margin-top: 60px;
+    }
+    
+    .cover-page .confidential {
+      font-size: 12pt;
+      color: #e74c3c;
+      margin-top: 40px;
+      font-weight: bold;
+    }
+    
+    /* Encabezados */
+    h1 {
+      color: #2c3e50;
+      border-bottom: 3px solid #3498db;
+      padding-bottom: 10px;
+      margin-top: 40px;
+      page-break-after: avoid;
+    }
+    
+    h2 {
+      color: #34495e;
+      border-bottom: 2px solid #95a5a6;
+      padding-bottom: 5px;
+      margin-top: 30px;
+      page-break-after: avoid;
+    }
+    
+    h3 {
+      color: #555;
+      margin-top: 25px;
+      page-break-after: avoid;
+    }
+    
+    h4 {
+      color: #666;
+      margin-top: 20px;
+    }
+    
+    /* Tablas */
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      margin: 20px 0;
+      page-break-inside: avoid;
+    }
+    
+    th, td {
+      border: 1px solid #ddd;
+      padding: 10px;
+      text-align: left;
+    }
+    
+    th {
+      background-color: #3498db;
+      color: white;
+      font-weight: bold;
+    }
+    
+    tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+    
+    /* Código */
+    code {
+      background-color: #f4f4f4;
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-family: 'Courier New', monospace;
+      font-size: 10pt;
+      color: #c7254e;
+    }
+    
+    pre {
+      background-color: #f4f4f4;
+      padding: 15px;
+      border-radius: 5px;
+      overflow-x: auto;
+      border-left: 4px solid #3498db;
+      page-break-inside: avoid;
+    }
+    
+    pre code {
+      background: none;
+      padding: 0;
+      color: #333;
+    }
+    
+    /* Blockquotes */
+    blockquote {
+      border-left: 4px solid #3498db;
+      padding-left: 15px;
+      margin-left: 0;
+      color: #555;
+      font-style: italic;
+      page-break-inside: avoid;
+    }
+    
+    /* Listas */
+    ul, ol {
+      margin: 15px 0;
+      padding-left: 30px;
+    }
+    
+    li {
+      margin: 8px 0;
+    }
+    
+    /* Checkboxes (tareas) */
+    input[type="checkbox"] {
+      margin-right: 8px;
+    }
+    
+    /* Enlaces */
+    a {
+      color: #3498db;
+      text-decoration: none;
+    }
+    
+    a:hover {
+      text-decoration: underline;
+    }
+    
+    /* Separadores */
+    hr {
+      border: none;
+      border-top: 2px solid #ecf0f1;
+      margin: 30px 0;
+    }
+    
+    /* Emojis y símbolos */
+    .emoji {
+      font-size: 1.2em;
+    }
+    
+    /* Page breaks */
+    .page-break {
+      page-break-after: always;
+    }
+    
+    /* Header y footer para impresión */
+    @media print {
+      body {
+        padding: 0;
+      }
+      
+      .no-print {
+        display: none;
+      }
+      
+      h1, h2, h3 {
+        page-break-after: avoid;
+      }
+      
+      table, pre, blockquote {
+        page-break-inside: avoid;
+      }
+      
+      /* Footer */
+      @page {
+        @bottom-right {
+          content: "Bashood RWA - 2026";
+          font-size: 9pt;
+          color: #bdc3c7;
+        }
+        
+        @bottom-left {
+          content: "Due Diligence Checklist";
+          font-size: 9pt;
+          color: #bdc3c7;
+        }
+      }
+    }
+    
+    /* Instrucciones imprimir (solo pantalla) */
+    .print-instructions {
+      background: #fff3cd;
+      border: 2px solid #ffc107;
+      border-radius: 5px;
+      padding: 15px;
+      margin: 20px 0;
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      max-width: 300px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      z-index: 1000;
+    }
+    
+    @media print {
+      .print-instructions {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="print-instructions no-print">
+    <h4 style="margin-top:0; color:#856404">📄 Para generar PDF:</h4>
+    <ol style="margin:0; padding-left:20px; color:#856404">
+      <li>Presiona <strong>Ctrl+P</strong></li>
+      <li>Selecciona "Guardar como PDF"</li>
+      <li>Ajusta márgenes si es necesario</li>
+      <li>Guarda el archivo</li>
+    </ol>
+  </div>
+  
+  <div class="cover-page">
+    <h1>Due Diligence Checklist</h1>
+    <div class="project-name">Proyecto Bashood RWA</div>
+    <div class="asset-name">Activo Piloto: Doosan DX360</div>
+    <div class="date">20 de febrero de 2026</div>
+    <div class="confidential">☑️ CONFIDENCIAL - Solo para uso del destinatario</div>
+  </div>
+  
+  <div class="content">
+    <h1 id="📋-due-diligence-checklist---doosan-dx360">📋 Due Diligence Checklist - Doosan DX360</h1>
+<p><strong>Activo:</strong> Doosan DX360LC Excavadora Hidráulica<br><strong>Fecha:</strong> 20 Febrero 2026<br><strong>Fase:</strong> Validación Pre-Tokenización<br><strong>Owner:</strong> [Por confirmar]</p>
+<hr>
+<h2 id="🎯-objetivo-de-este-documento">🎯 Objetivo de Este Documento</h2>
+<p>Identificar TODOS los datos necesarios antes de proceder con tokenización.<br><strong>Regla:</strong> Si no está verificado aquí, NO proceder a mainnet.</p>
+<hr>
+<h2 id="📊-sección-1-datos-del-activo-técnicos">📊 SECCIÓN 1: DATOS DEL ACTIVO (Técnicos)</h2>
+<h3 id="11-identificación-del-activo">1.1 Identificación del Activo</h3>
+<table>
+<thead>
+<tr>
+<th>Dato</th>
+<th>Status</th>
+<th>Valor Actual</th>
+<th>Notas</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Marca</strong></td>
+<td>✅ Confirmado</td>
+<td>Doosan</td>
+<td>-</td>
+</tr>
+<tr>
+<td><strong>Modelo exacto</strong></td>
+<td>⚠️ Por confirmar</td>
+<td>DX360LC (¿estándar?)</td>
+<td>¿Existe variante DX360LC-3, DX360LC-5?</td>
+</tr>
+<tr>
+<td><strong>Año de fabricación</strong></td>
+<td>❌ Falta</td>
+<td>-</td>
+<td>CRÍTICO para valoración</td>
+</tr>
+<tr>
+<td><strong>Número de serie</strong></td>
+<td>❌ Falta</td>
+<td>-</td>
+<td>CRÍTICO para identificación legal</td>
+</tr>
+<tr>
+<td><strong>Número de bastidor/VIN</strong></td>
+<td>❌ Falta</td>
+<td>-</td>
+<td>Equivalente a matrícula</td>
+</tr>
+<tr>
+<td><strong>País de origen</strong></td>
+<td>⚠️ Asumir España</td>
+<td>España</td>
+<td>Confirmar</td>
+</tr>
+<tr>
+<td><strong>Ubicación actual</strong></td>
+<td>❌ Falta</td>
+<td>-</td>
+<td>¿Provincia? ¿Obra específica?</td>
+</tr>
+</tbody></table>
+<p><strong>Documentos a solicitar:</strong></p>
+<ul>
+<li><input disabled="" type="checkbox"> Ficha técnica fabricante</li>
+<li><input disabled="" type="checkbox"> Certificado de origen/compra</li>
+<li><input disabled="" type="checkbox"> Documentación ITV/inspección (si aplica)</li>
+</ul>
+<hr>
+<h3 id="12-especificaciones-técnicas-confirmadas">1.2 Especificaciones Técnicas Confirmadas</h3>
+<table>
+<thead>
+<tr>
+<th>Especificación</th>
+<th>Status</th>
+<th>Valor Actual</th>
+<th>Fuente</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Motor HP</strong></td>
+<td>✅ Estimado</td>
+<td>~300 HP</td>
+<td>Especificación modelo</td>
+</tr>
+<tr>
+<td><strong>Peso operativo</strong></td>
+<td>✅ Estimado</td>
+<td>~36 ton</td>
+<td>Especificación modelo</td>
+</tr>
+<tr>
+<td><strong>Capacidad cuchara</strong></td>
+<td>✅ Estimado</td>
+<td>1.6-2.1 m³</td>
+<td>Especificación modelo</td>
+</tr>
+<tr>
+<td><strong>Alcance máximo</strong></td>
+<td>❌ Falta</td>
+<td>-</td>
+<td>Validar con ficha técnica</td>
+</tr>
+<tr>
+<td><strong>Profundidad excavación</strong></td>
+<td>❌ Falta</td>
+<td>-</td>
+<td>Validar con ficha técnica</td>
+</tr>
+<tr>
+<td><strong>Fuerza de excavación</strong></td>
+<td>❌ Falta</td>
+<td>-</td>
+<td>Validar con ficha técnica</td>
+</tr>
+</tbody></table>
+<p><strong>Acción:</strong> Solicitar ficha técnica oficial Doosan DX360LC.</p>
+<hr>
+<h3 id="13-condición-física-del-activo">1.3 Condición Física del Activo</h3>
+<table>
+<thead>
+<tr>
+<th>Ítem</th>
+<th>Status</th>
+<th>Valor/Respuesta</th>
+<th>Validación Requerida</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Horas operativas totales</strong></td>
+<td>❌ CRÍTICO</td>
+<td>&quot;Por confirmar&quot;</td>
+<td>Lectura horómetro + foto</td>
+</tr>
+<tr>
+<td><strong>Estado general (1-10)</strong></td>
+<td>❌ Falta</td>
+<td>-</td>
+<td>Inspección visual documentada</td>
+</tr>
+<tr>
+<td><strong>Última revisión técnica</strong></td>
+<td>❌ Falta</td>
+<td>-</td>
+<td>Fecha + informe técnico</td>
+</tr>
+<tr>
+<td><strong>Historial averías</strong></td>
+<td>❌ Falta</td>
+<td>-</td>
+<td>Listado problemas últimos 2 años</td>
+</tr>
+<tr>
+<td><strong>Reparaciones mayores</strong></td>
+<td>❌ Falta</td>
+<td>-</td>
+<td>¿Motor? ¿Hidráulica? ¿Estructura?</td>
+</tr>
+<tr>
+<td><strong>Modificaciones</strong></td>
+<td>❌ Falta</td>
+<td>-</td>
+<td>¿Equipamiento adicional?</td>
+</tr>
+<tr>
+<td><strong>Estado neumáticos/cadena</strong></td>
+<td>❌ Falta</td>
+<td>-</td>
+<td>% desgaste</td>
+</tr>
+<tr>
+<td><strong>Estado hidráulica</strong></td>
+<td>❌ Falta</td>
+<td>-</td>
+<td>¿Fugas? ¿Presión OK?</td>
+</tr>
+<tr>
+<td><strong>Estado motor</strong></td>
+<td>❌ Falta</td>
+<td>-</td>
+<td>¿Humos? ¿Consumo aceite?</td>
+</tr>
+</tbody></table>
+<p><strong>Documentos a solicitar:</strong></p>
+<ul>
+<li><input disabled="" type="checkbox"> Libro de mantenimiento (maintenance log)</li>
+<li><input disabled="" type="checkbox"> Facturas reparaciones últimos 2 años</li>
+<li><input disabled="" type="checkbox"> Informe inspección técnica reciente (&lt; 6 meses)</li>
+<li><input disabled="" type="checkbox"> Fotos actuales (mínimo 20 fotos: exterior, motor, hidráulica, cabina, desgaste)</li>
+</ul>
+<p><strong>Opcional pero MUY recomendado:</strong></p>
+<ul>
+<li><input disabled="" type="checkbox"> Informe perito tasador independiente (€500-1,000)</li>
+<li><input disabled="" type="checkbox"> Análisis aceite motor (indica desgaste interno)</li>
+</ul>
+<hr>
+<h2 id="💰-sección-2-datos-financieros">💰 SECCIÓN 2: DATOS FINANCIEROS</h2>
+<h3 id="21-valoración-del-activo">2.1 Valoración del Activo</h3>
+<table>
+<thead>
+<tr>
+<th>Concepto</th>
+<th>Status</th>
+<th>Valor</th>
+<th>Fuente/Método</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Precio compra original</strong></td>
+<td>❌ Falta</td>
+<td>-</td>
+<td>Factura compra</td>
+</tr>
+<tr>
+<td><strong>Año de compra</strong></td>
+<td>❌ Falta</td>
+<td>-</td>
+<td>Factura compra</td>
+</tr>
+<tr>
+<td><strong>Valoración actual estimada</strong></td>
+<td>✅ Estimado</td>
+<td>€150,000</td>
+<td>Mercado secundario</td>
+</tr>
+<tr>
+<td><strong>Método valoración</strong></td>
+<td>⚠️ Por confirmar</td>
+<td>Comparativa mercado</td>
+<td>¿Tasación profesional?</td>
+</tr>
+<tr>
+<td><strong>Valor residual proyectado</strong></td>
+<td>❌ Falta</td>
+<td>-</td>
+<td>Valor en 5/10 años</td>
+</tr>
+<tr>
+<td><strong>Depreciación anual</strong></td>
+<td>⚠️ Estimar</td>
+<td>10-15%/año</td>
+<td>Confirmar con contador</td>
+</tr>
+</tbody></table>
+<p><strong>Fuentes de valoración a validar:</strong></p>
+<ul>
+<li><input disabled="" type="checkbox"> Maquinaria.net / InfoAgro / Mascus (plataformas venta usados)</li>
+<li><input disabled="" type="checkbox"> Tasador oficial (recomendado antes de tokenizar)</li>
+<li><input disabled="" type="checkbox"> Dealer Doosan (cotización trade-in)</li>
+</ul>
+<p><strong>Comparativas mercado necesarias:</strong></p>
+<ul>
+<li><input disabled="" type="checkbox"> Doosan DX360LC similar (mismo año, similares horas): 3+ ejemplos</li>
+<li><input disabled="" type="checkbox"> Competencia (CAT 336, Volvo EC380, Komatsu PC360): 3+ ejemplos</li>
+</ul>
+<hr>
+<h3 id="22-historial-operativo-ingresos">2.2 Historial Operativo (Ingresos)</h3>
+<table>
+<thead>
+<tr>
+<th>Periodo</th>
+<th>Ingresos Reales</th>
+<th>Documentación</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Últimos 6 meses</strong></td>
+<td>❌ CRÍTICO</td>
+<td>Facturas emitidas</td>
+<td>FALTA</td>
+</tr>
+<tr>
+<td><strong>Mes actual</strong></td>
+<td>❌ CRÍTICO</td>
+<td>Contrato vigente</td>
+<td>FALTA</td>
+</tr>
+<tr>
+<td><strong>Proyección próximos 3 meses</strong></td>
+<td>❌ CRÍTICO</td>
+<td>Contratos firmados</td>
+<td>FALTA</td>
+</tr>
+</tbody></table>
+<p><strong>Desglose necesario:</strong></p>
+<pre><code>Mes 1 (Agosto 2025):    €______ (factura #_____)
+Mes 2 (Septiembre 2025): €______ (factura #_____)
+Mes 3 (Octubre 2025):    €______ (factura #_____)
+Mes 4 (Noviembre 2025):  €______ (factura #_____)
+Mes 5 (Diciembre 2025):  €______ (factura #_____)
+Mes 6 (Enero 2026):      €______ (factura #_____)
+
+PROMEDIO MENSUAL: €______
+</code></pre>
+<p><strong>Documentos a solicitar:</strong></p>
+<ul>
+<li><input disabled="" type="checkbox"> Facturas completas últimos 6 meses (PDFs)</li>
+<li><input disabled="" type="checkbox"> Contratos vigentes (nombre cliente, duración, tarifa)</li>
+<li><input disabled="" type="checkbox"> Pipeline comercial (proyectos futuros comprometidos)</li>
+</ul>
+<p><strong>Preguntas críticas:</strong></p>
+<ul>
+<li>¿Contratos recurrentes o puntuales?</li>
+<li>¿Cliente único o múltiples clientes?</li>
+<li>¿Estacionalidad? (¿Verano vs invierno?)</li>
+<li>¿Tarifa diaria o mensual flat?</li>
+<li>¿Quién paga combustible? (owner o cliente)</li>
+<li>¿Quién paga operador? (owner o cliente)</li>
+<li>¿Quién paga transporte? (owner o cliente)</li>
+</ul>
+<hr>
+<h3 id="23-estructura-de-costes-reales">2.3 Estructura de Costes Reales</h3>
+<h4 id="231-combustible">2.3.1 COMBUSTIBLE</h4>
+<table>
+<thead>
+<tr>
+<th>Dato</th>
+<th>Status</th>
+<th>Valor Actual</th>
+<th>Validación</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Consumo L/hora</strong></td>
+<td>✅ Estimado</td>
+<td>30 L/h</td>
+<td>Confirmar con facturas</td>
+</tr>
+<tr>
+<td><strong>Horas operativas/día</strong></td>
+<td>✅ Estimado</td>
+<td>11h</td>
+<td>Confirmar con horómetro</td>
+</tr>
+<tr>
+<td><strong>Precio gasoil actual</strong></td>
+<td>✅ Estimado</td>
+<td>€1.45/L</td>
+<td>Confirmar con proveedor</td>
+</tr>
+<tr>
+<td><strong>Consumo mensual real</strong></td>
+<td>❌ CRÍTICO</td>
+<td>-</td>
+<td>Facturas gasoil últimos 6 meses</td>
+</tr>
+<tr>
+<td><strong>Coste mensual real</strong></td>
+<td>❌ CRÍTICO</td>
+<td>-</td>
+<td>Suma facturas</td>
+</tr>
+</tbody></table>
+<p><strong>Documentos a solicitar:</strong></p>
+<ul>
+<li><input disabled="" type="checkbox"> Facturas gasoil últimos 6 meses</li>
+<li><input disabled="" type="checkbox"> Contrato proveedor gasoil (¿precio fijo? ¿variable?)</li>
+<li><input disabled="" type="checkbox"> Registro horómetro mensual (validar 11h/día)</li>
+</ul>
+<hr>
+<h4 id="232-mantenimiento">2.3.2 MANTENIMIENTO</h4>
+<table>
+<thead>
+<tr>
+<th>Concepto</th>
+<th>Status</th>
+<th>Coste Anual</th>
+<th>Documentación</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Mantenimiento preventivo</strong></td>
+<td>⚠️ Estimado</td>
+<td>€10,000/año</td>
+<td>Facturas reales</td>
+</tr>
+<tr>
+<td><strong>Aceite motor + filtros</strong></td>
+<td>❌ Falta</td>
+<td>-</td>
+<td>Frecuencia cambios</td>
+</tr>
+<tr>
+<td><strong>Filtros hidráulicos</strong></td>
+<td>❌ Falta</td>
+<td>-</td>
+<td>Frecuencia cambios</td>
+</tr>
+<tr>
+<td><strong>Grasas/lubricantes</strong></td>
+<td>❌ Falta</td>
+<td>-</td>
+<td>Coste mensual</td>
+</tr>
+<tr>
+<td><strong>Revisión 500h</strong></td>
+<td>❌ Falta</td>
+<td>-</td>
+<td>Coste + frecuencia</td>
+</tr>
+<tr>
+<td><strong>Revisión 1000h</strong></td>
+<td>❌ Falta</td>
+<td>-</td>
+<td>Coste + frecuencia</td>
+</tr>
+<tr>
+<td><strong>Revisión 2000h</strong></td>
+<td>❌ Falta</td>
+<td>-</td>
+<td>Coste + frecuencia</td>
+</tr>
+<tr>
+<td><strong>Reparaciones imprevistas (promedio)</strong></td>
+<td>❌ Falta</td>
+<td>-</td>
+<td>Historial últimos 2 años</td>
+</tr>
+</tbody></table>
+<p><strong>Documentos a solicitar:</strong></p>
+<ul>
+<li><input disabled="" type="checkbox"> Facturas taller/mecánico últimos 2 años</li>
+<li><input disabled="" type="checkbox"> Plan mantenimiento preventivo (calendario)</li>
+<li><input disabled="" type="checkbox"> Garantías vigentes (¿motor? ¿hidráulica?)</li>
+</ul>
+<p><strong>Preguntas:</strong></p>
+<ul>
+<li>¿Taller oficial Doosan o independiente?</li>
+<li>¿Contrato mantenimiento flat o pago por servicio?</li>
+<li>¿Piezas originales o compatibles?</li>
+</ul>
+<hr>
+<h4 id="233-seguro">2.3.3 SEGURO</h4>
+<table>
+<thead>
+<tr>
+<th>Dato</th>
+<th>Status</th>
+<th>Valor</th>
+<th>Documentación</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Prima anual</strong></td>
+<td>⚠️ Estimado</td>
+<td>€3,000/año (2% valor)</td>
+<td>Póliza actual</td>
+</tr>
+<tr>
+<td><strong>Compañía seguro</strong></td>
+<td>❌ Falta</td>
+<td>-</td>
+<td>Nombre aseguradora</td>
+</tr>
+<tr>
+<td><strong>Número póliza</strong></td>
+<td>❌ Falta</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td><strong>Cobertura</strong></td>
+<td>❌ Falta</td>
+<td>-</td>
+<td>¿Todo riesgo? ¿RC?</td>
+</tr>
+<tr>
+<td><strong>Franquicia</strong></td>
+<td>❌ Falta</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td><strong>Fecha renovación</strong></td>
+<td>❌ Falta</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td><strong>Historial siniestros</strong></td>
+<td>❌ Falta</td>
+<td>-</td>
+<td>Últimos 3 años</td>
+</tr>
+</tbody></table>
+<p><strong>Documentos a solicitar:</strong></p>
+<ul>
+<li><input disabled="" type="checkbox"> Póliza seguro vigente (PDF completo)</li>
+<li><input disabled="" type="checkbox"> Historial siniestros (si hay)</li>
+<li><input disabled="" type="checkbox"> Cotizaciones alternativas (para validar precio)</li>
+</ul>
+<p><strong>Crítico para tokenización:</strong></p>
+<ul>
+<li>¿Póliza permite cesión parcial (40% tokenizado)?</li>
+<li>¿Beneficiario debe ser SPV o puede ser token holders?</li>
+<li>¿Cobertura incluye lucro cesante?</li>
+</ul>
+<hr>
+<h4 id="234-otros-costes">2.3.4 OTROS COSTES</h4>
+<table>
+<thead>
+<tr>
+<th>Concepto</th>
+<th>Status</th>
+<th>Coste</th>
+<th>Frecuencia</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Almacenamiento/parking</strong></td>
+<td>❌ Falta</td>
+<td>-</td>
+<td>¿Mensual? ¿Incluido en obra?</td>
+</tr>
+<tr>
+<td><strong>Transporte movimientos</strong></td>
+<td>❌ Falta</td>
+<td>-</td>
+<td>€/km o flat</td>
+</tr>
+<tr>
+<td><strong>Permisos/licencias</strong></td>
+<td>❌ Falta</td>
+<td>-</td>
+<td>¿Circulación? ¿Operación?</td>
+</tr>
+<tr>
+<td><strong>Impuestos específicos</strong></td>
+<td>❌ Falta</td>
+<td>-</td>
+<td>¿IBI? ¿Circulación?</td>
+</tr>
+<tr>
+<td><strong>Operador (si incluido)</strong></td>
+<td>⚠️ Excluido</td>
+<td>€0 (asumido cliente)</td>
+<td>Confirmar</td>
+</tr>
+</tbody></table>
+<p><strong>Documentos a solicitar:</strong></p>
+<ul>
+<li><input disabled="" type="checkbox"> Facturas transporte últimos 6 meses</li>
+<li><input disabled="" type="checkbox"> Licencias/permisos vigentes</li>
+<li><input disabled="" type="checkbox"> Liquidaciones impuestos (IBI, circulación)</li>
+</ul>
+<hr>
+<h2 id="📄-sección-3-documentación-legal">📄 SECCIÓN 3: DOCUMENTACIÓN LEGAL</h2>
+<h3 id="31-propiedad-y-titularidad">3.1 Propiedad y Titularidad</h3>
+<table>
+<thead>
+<tr>
+<th>Documento</th>
+<th>Status</th>
+<th>Observaciones</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Factura compra original</strong></td>
+<td>❌ Falta</td>
+<td>Prueba propiedad</td>
+</tr>
+<tr>
+<td><strong>Baja/transferencia previa</strong></td>
+<td>❌ Falta</td>
+<td>Si segunda mano</td>
+</tr>
+<tr>
+<td><strong>Registro propiedad</strong></td>
+<td>❌ Falta</td>
+<td>¿Existe registro maquinaria?</td>
+</tr>
+<tr>
+<td><strong>Cargas/embargos</strong></td>
+<td>❌ CRÍTICO</td>
+<td>Certificado libre cargas</td>
+</tr>
+<tr>
+<td><strong>Préstamos/leasing</strong></td>
+<td>❌ CRÍTICO</td>
+<td>¿Activo financiado?</td>
+</tr>
+<tr>
+<td><strong>Seguros de crédito</strong></td>
+<td>❌ Falta</td>
+<td>¿Prenda sobre activo?</td>
+</tr>
+</tbody></table>
+<p><strong>Documentos a solicitar:</strong></p>
+<ul>
+<li><input disabled="" type="checkbox"> Factura de compra o contrato de compraventa</li>
+<li><input disabled="" type="checkbox"> Certificado titularidad (si existe registro)</li>
+<li><input disabled="" type="checkbox"> Declaración jurada libre cargas/embargos</li>
+<li><input disabled="" type="checkbox"> Saldo pendiente si hay financiación</li>
+</ul>
+<p><strong>CRÍTICO:</strong></p>
+<ul>
+<li>Si hay préstamo activo → NO se puede tokenizar hasta liquidarlo</li>
+<li>Si hay cargas/embargos → BLOQUEAR negociación</li>
+</ul>
+<hr>
+<h3 id="32-situación-fiscal-del-propietario">3.2 Situación Fiscal del Propietario</h3>
+<table>
+<thead>
+<tr>
+<th>Concepto</th>
+<th>Status</th>
+<th>Información</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Tipo entidad</strong></td>
+<td>❌ Falta</td>
+<td>¿Persona física? ¿SL? ¿Autónomo?</td>
+</tr>
+<tr>
+<td><strong>NIF/CIF</strong></td>
+<td>❌ Falta</td>
+<td>-</td>
+</tr>
+<tr>
+<td><strong>Residencia fiscal</strong></td>
+<td>❌ Falta</td>
+<td>España (asumir)</td>
+</tr>
+<tr>
+<td><strong>IVA deducible</strong></td>
+<td>❌ Falta</td>
+<td>¿Activo en balance con IVA?</td>
+</tr>
+<tr>
+<td><strong>Último año fiscal declarado</strong></td>
+<td>❌ Falta</td>
+<td>¿2024? ¿2025?</td>
+</tr>
+<tr>
+<td><strong>Deuda tributaria</strong></td>
+<td>❌ CRÍTICO</td>
+<td>Certificado Hacienda</td>
+</tr>
+</tbody></table>
+<p><strong>Documentos a solicitar:</strong></p>
+<ul>
+<li><input disabled="" type="checkbox"> CIF/NIF (fotocopia)</li>
+<li><input disabled="" type="checkbox"> Última declaración IVA (trimestral)</li>
+<li><input disabled="" type="checkbox"> Certificado estar al corriente obligaciones fiscales</li>
+</ul>
+<hr>
+<h3 id="33-licencias-y-autorizaciones">3.3 Licencias y Autorizaciones</h3>
+<table>
+<thead>
+<tr>
+<th>Licencia/Permiso</th>
+<th>Status</th>
+<th>Observaciones</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Licencia actividad</strong></td>
+<td>❌ Falta</td>
+<td>Si empresa constructora</td>
+</tr>
+<tr>
+<td><strong>Seguro RC operaciones</strong></td>
+<td>❌ Falta</td>
+<td>Responsabilidad civil</td>
+</tr>
+<tr>
+<td><strong>Certificado operador</strong></td>
+<td>❌ Falta</td>
+<td>¿Quién opera? ¿Certificado?</td>
+</tr>
+<tr>
+<td><strong>Permisos obras actuales</strong></td>
+<td>❌ Falta</td>
+<td>Si trabajo en obras</td>
+</tr>
+<tr>
+<td><strong>Autorización transporte especial</strong></td>
+<td>❌ Falta</td>
+<td>Si movimientos frecuentes</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="🤝-sección-4-datos-del-propietario">🤝 SECCIÓN 4: DATOS DEL PROPIETARIO</h2>
+<h3 id="41-información-contacto">4.1 Información Contacto</h3>
+<table>
+<thead>
+<tr>
+<th>Dato</th>
+<th>Valor</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Nombre completo / Razón social</strong></td>
+<td>_________________</td>
+</tr>
+<tr>
+<td><strong>NIF/CIF</strong></td>
+<td>_________________</td>
+</tr>
+<tr>
+<td><strong>Dirección fiscal</strong></td>
+<td>_________________</td>
+</tr>
+<tr>
+<td><strong>Teléfono</strong></td>
+<td>_________________</td>
+</tr>
+<tr>
+<td><strong>Email</strong></td>
+<td>_________________</td>
+</tr>
+<tr>
+<td><strong>Persona contacto</strong></td>
+<td>_________________</td>
+</tr>
+<tr>
+<td><strong>Rol</strong></td>
+<td>_________________</td>
+</tr>
+</tbody></table>
+<hr>
+<h3 id="42-motivación-y-expectativas">4.2 Motivación y Expectativas</h3>
+<p><strong>Preguntas a realizar en la llamada:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Pregunta</th>
+<th>Respuesta</th>
+<th>Notas</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>¿Por qué considera tokenizar?</strong></td>
+<td>-</td>
+<td>¿Liquidez? ¿Expansión? ¿Diversificación?</td>
+</tr>
+<tr>
+<td><strong>¿Qué % dispuesto a tokenizar?</strong></td>
+<td>-</td>
+<td>Recomendado 30-50%</td>
+</tr>
+<tr>
+<td><strong>¿Mantendría gestión operativa?</strong></td>
+<td>-</td>
+<td>CRÍTICO: Debe seguir gestionando</td>
+</tr>
+<tr>
+<td><strong>¿Acepta reporting mensual?</strong></td>
+<td>-</td>
+<td>Obligatorio transparencia</td>
+</tr>
+<tr>
+<td><strong>¿Plazo mínimo compromiso?</strong></td>
+<td>-</td>
+<td>Sugerido 2-3 años</td>
+</tr>
+<tr>
+<td><strong>¿Experiencia previa crypto/blockchain?</strong></td>
+<td>-</td>
+<td>Educación necesaria</td>
+</tr>
+<tr>
+<td><strong>¿Entiende riesgos tokenización?</strong></td>
+<td>-</td>
+<td>Validar comprensión</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="📊-sección-5-análisis-de-viabilidad-post-recolección">📊 SECCIÓN 5: ANÁLISIS DE VIABILIDAD (Post-Recolección)</h2>
+<h3 id="51-checklist-mínima-para-aprobar-tokenización">5.1 Checklist Mínima para APROBAR Tokenización</h3>
+<p><strong>REQUISITOS OBLIGATORIOS (todos deben cumplirse):</strong></p>
+<ul>
+<li><input disabled="" type="checkbox"> <strong>Historial ingresos ≥ 6 meses validado</strong></li>
+<li><input disabled="" type="checkbox"> <strong>Ingresos promedio ≥ €12,000/mes</strong></li>
+<li><input disabled="" type="checkbox"> <strong>Activo libre de cargas/embargos</strong></li>
+<li><input disabled="" type="checkbox"> <strong>Horas operativas &lt; 8,000h</strong> (vida útil restante)</li>
+<li><input disabled="" type="checkbox"> <strong>Condición física ≥ 7/10</strong> (inspección)</li>
+<li><input disabled="" type="checkbox"> <strong>Propietario al corriente pagos fiscales</strong></li>
+<li><input disabled="" type="checkbox"> <strong>Seguro vigente y transferible</strong></li>
+<li><input disabled="" type="checkbox"> <strong>Documentación propiedad verificada</strong></li>
+<li><input disabled="" type="checkbox"> <strong>Propietario acepta reporting mensual</strong></li>
+<li><input disabled="" type="checkbox"> <strong>Propietario comprende modelo tokenización</strong></li>
+</ul>
+<p><strong>REQUISITOS RECOMENDADOS (al menos 3/5):</strong></p>
+<ul>
+<li><input disabled="" type="checkbox"> Contratos recurrentes (no puntuales)</li>
+<li><input disabled="" type="checkbox"> Múltiples clientes (no dependencia 1 cliente)</li>
+<li><input disabled="" type="checkbox"> Mantenimiento preventivo documentado</li>
+<li><input disabled="" type="checkbox"> Tasación profesional reciente (&lt; 1 año)</li>
+<li><input disabled="" type="checkbox"> Reserve fund para reparaciones (€5,000+)</li>
+</ul>
+<hr>
+<h3 id="52-red-flags---motivos-de-rechazo-inmediato">5.2 Red Flags - Motivos de RECHAZO Inmediato</h3>
+<p><strong>🚩 RECHAZAR si alguno de estos se cumple:</strong></p>
+<ul>
+<li>❌ Activo con deuda/financiación no liquidable</li>
+<li>❌ Cargas, embargos o litigios pendientes</li>
+<li>❌ Propietario con deuda tributaria</li>
+<li>❌ Horas operativas &gt; 10,000h (fin vida útil)</li>
+<li>❌ Historial ingresos &lt; €10,000/mes promedio</li>
+<li>❌ Condición física &lt; 5/10</li>
+<li>❌ Sin seguro vigente o no renovable</li>
+<li>❌ Documentación propiedad dudosa</li>
+<li>❌ Propietario no acepta transparencia</li>
+<li>❌ Historial averías graves recurrentes</li>
+</ul>
+<hr>
+<h2 id="📞-sección-6-guión-llamada-inicial">📞 SECCIÓN 6: GUIÓN LLAMADA INICIAL</h2>
+<h3 id="estructura-recomendada-60-90-minutos">Estructura Recomendada (60-90 minutos)</h3>
+<p><strong>FASE 1: Introducción (10 min)</strong></p>
+<pre><code>- Presentación Bashood/RWA
+- Explicar concepto tokenización activos reales
+- Beneficios para propietario (liquidez, acceso capital, diversificación)
+- Expectativas realistas (no es venta, es participación)
+</code></pre>
+<p><strong>FASE 2: Validación Activo (20 min)</strong></p>
+<pre><code>- Solicitar datos Sección 1.1, 1.2, 1.3
+- Preguntar por documentación disponible
+- Identificar gaps críticos
+- Acordar envío documentación (deadline)
+</code></pre>
+<p><strong>FASE 3: Validación Financiera (20 min)</strong></p>
+<pre><code>- Solicitar datos Sección 2.2, 2.3
+- Revisar historial ingresos/costes
+- Validar proyecciones futuras
+- Identificar estacionalidad/riesgos
+</code></pre>
+<p><strong>FASE 4: Legal y Fiscal (10 min)</strong></p>
+<pre><code>- Confirmar titularidad clara
+- Verificar libre cargas
+- Situación fiscal propietario
+- Licencias vigentes
+</code></pre>
+<p><strong>FASE 5: Expectativas y Términos (10 min)</strong></p>
+<pre><code>- % tokenización propuesto (40% inicial)
+- Frecuencia reporting (mensual)
+- Duración compromiso (2-3 años)
+- Modelo distribución beneficios
+- Estructura legal (SPV)
+</code></pre>
+<p><strong>FASE 6: Próximos Pasos (10 min)</strong></p>
+<pre><code>- Acordar entrega documentación (7 días)
+- Programar inspección física activo
+- Definir timeline decisión (30 días)
+- Aclarar dudas
+</code></pre>
+<hr>
+<h2 id="✅-sección-7-documentación-a-entregar">✅ SECCIÓN 7: DOCUMENTACIÓN A ENTREGAR</h2>
+<h3 id="71-documentos-que-propietario-debe-enviar-antes-de-7-días">7.1 Documentos que PROPIETARIO debe enviar (antes de 7 días)</h3>
+<p><strong>CRÍTICOS (sin estos, no proceder):</strong></p>
+<ul>
+<li><input disabled="" type="checkbox"> Factura compra / Contrato compraventa</li>
+<li><input disabled="" type="checkbox"> Ficha técnica fabricante (Doosan DX360LC)</li>
+<li><input disabled="" type="checkbox"> Foto lectura horómetro actual</li>
+<li><input disabled="" type="checkbox"> Facturas ingresos últimos 6 meses (PDF)</li>
+<li><input disabled="" type="checkbox"> Póliza seguro vigente (PDF completo)</li>
+<li><input disabled="" type="checkbox"> Declaración jurada libre cargas</li>
+<li><input disabled="" type="checkbox"> CIF/NIF + certificado estar al corriente Hacienda</li>
+</ul>
+<p><strong>IMPORTANTES (retrasar decisión si faltan):</strong></p>
+<ul>
+<li><input disabled="" type="checkbox"> Libro mantenimiento últimos 2 años</li>
+<li><input disabled="" type="checkbox"> Facturas gasoil últimos 6 meses</li>
+<li><input disabled="" type="checkbox"> Facturas taller/reparaciones últimos 2 años</li>
+<li><input disabled="" type="checkbox"> Contratos clientes vigentes</li>
+<li><input disabled="" type="checkbox"> Fotos activo (mínimo 20 fotos detalladas)</li>
+</ul>
+<p><strong>OPCIONALES (mejoraría análisis):</strong></p>
+<ul>
+<li><input disabled="" type="checkbox"> Tasación profesional (si existe)</li>
+<li><input disabled="" type="checkbox"> Historial horómetro mensual (Excel)</li>
+<li><input disabled="" type="checkbox"> Análisis aceite motor reciente</li>
+<li><input disabled="" type="checkbox"> Certificados operador maquinaria</li>
+</ul>
+<hr>
+<h3 id="72-documentos-que-bashood-debe-preparar-para-enviar-a-propietario">7.2 Documentos que BASHOOD debe preparar (para enviar a propietario)</h3>
+<ul>
+<li><input disabled="" type="checkbox"> <strong>Propuesta tokenización</strong> (este documento)</li>
+<li><input disabled="" type="checkbox"> <strong>Simulación financiera</strong> (resultados escenarios)</li>
+<li><input disabled="" type="checkbox"> <strong>Términos contrato tokenización</strong> (borrador)</li>
+<li><input disabled="" type="checkbox"> <strong>NDA (acuerdo confidencialidad)</strong> - FIRMAR PRIMERO</li>
+<li><input disabled="" type="checkbox"> <strong>FAQ tokenización RWA</strong> (educación)</li>
+<li><input disabled="" type="checkbox"> <strong>Roadmap proyecto</strong> (timeline estimado)</li>
+</ul>
+<hr>
+<h2 id="🎯-scoring-final">🎯 SCORING FINAL</h2>
+<h3 id="puntuación-viabilidad-max-100-puntos">Puntuación Viabilidad (max 100 puntos)</h3>
+<table>
+<thead>
+<tr>
+<th>Categoría</th>
+<th>Peso</th>
+<th>Puntos</th>
+<th>Criterio</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Ingresos validados</strong></td>
+<td>30</td>
+<td>___/30</td>
+<td>≥€15k=30, €12-15k=20, &lt;€12k=0</td>
+</tr>
+<tr>
+<td><strong>Condición activo</strong></td>
+<td>20</td>
+<td>___/20</td>
+<td>≥8/10=20, 6-8/10=15, &lt;6/10=0</td>
+</tr>
+<tr>
+<td><strong>Documentación completa</strong></td>
+<td>15</td>
+<td>___/15</td>
+<td>100%=15, 80%=10, &lt;80%=0</td>
+</tr>
+<tr>
+<td><strong>Propietario confiable</strong></td>
+<td>15</td>
+<td>___/15</td>
+<td>Transparente=15, Parcial=8, No=0</td>
+</tr>
+<tr>
+<td><strong>Situación legal</strong></td>
+<td>10</td>
+<td>___/10</td>
+<td>Limpia=10, Dudas=5, Problemas=0</td>
+</tr>
+<tr>
+<td><strong>Historial operativo</strong></td>
+<td>10</td>
+<td>___/10</td>
+<td>&gt;1año=10, 6-12m=7, &lt;6m=3</td>
+</tr>
+<tr>
+<td><strong>TOTAL</strong></td>
+<td>100</td>
+<td><strong>___/100</strong></td>
+<td></td>
+</tr>
+</tbody></table>
+<p><strong>Decisión:</strong></p>
+<ul>
+<li><strong>≥ 80 puntos:</strong> ✅ APROBAR - Proceder a piloto testnet</li>
+<li><strong>60-79 puntos:</strong> 🟡 CONDICIONAL - Resolver gaps y re-evaluar</li>
+<li><strong>&lt; 60 puntos:</strong> ❌ RECHAZAR - No viable para tokenización</li>
+</ul>
+<hr>
+<h2 id="📅-timeline-propuesto">📅 TIMELINE PROPUESTO</h2>
+<table>
+<thead>
+<tr>
+<th>Fase</th>
+<th>Duración</th>
+<th>Actividades</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Due Diligence</strong></td>
+<td>7-14 días</td>
+<td>Recolección documentación</td>
+</tr>
+<tr>
+<td><strong>Análisis</strong></td>
+<td>7 días</td>
+<td>Validación datos + scoring</td>
+</tr>
+<tr>
+<td><strong>Inspección física</strong></td>
+<td>1 día</td>
+<td>Perito/técnico revisa activo</td>
+</tr>
+<tr>
+<td><strong>Negociación términos</strong></td>
+<td>7-14 días</td>
+<td>Definir contrato tokenización</td>
+</tr>
+<tr>
+<td><strong>Estructura legal</strong></td>
+<td>30-60 días</td>
+<td>Setup SPV (si aprobado)</td>
+</tr>
+<tr>
+<td><strong>Piloto testnet</strong></td>
+<td>30 días</td>
+<td>Simulación 1 mes operación</td>
+</tr>
+<tr>
+<td><strong>Decisión mainnet</strong></td>
+<td>7 días</td>
+<td>GO/NO-GO mainnet</td>
+</tr>
+</tbody></table>
+<p><strong>Total estimado:</strong> 3-4 meses desde llamada inicial hasta posible mainnet.</p>
+<hr>
+<h2 id="📝-notas-y-observaciones">📝 NOTAS Y OBSERVACIONES</h2>
+<p><strong>Espacio para anotar durante la llamada:</strong></p>
+<pre><code>[Escribe aquí notas importantes de la conversación]
+
+
+
+
+
+
+
+
+</code></pre>
+<hr>
+<p><strong>Preparado por:</strong> Bashood RWA Team<br><strong>Versión:</strong> 1.0<br><strong>Última actualización:</strong> 20 Febrero 2026<br><strong>Modo:</strong> Due Diligence Pre-Tokenización<br><strong>Activo:</strong> Doosan DX360LC Pilot</p>
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,452 @@
+{
+  "standard": "BASHOOD-RWA-1",
+  "version": "1.0.0",
+  "name": "CyBe RC Track Robot - Fast-Cure Mortar System #001",
+  "description": "Track-based mobile 3D construction printer specialized in fast-cure CyBe Mortar technology. Mortar sets in minutes, enabling rapid vertical construction. Automated m³/day measurement with performance bonus system for efficiency rewards.",
+  "external_url": "https://bashood.com/assets/205",
+  "image": "ipfs://QmCYBE001MainImage",
+  "animation_url": "ipfs://QmCYBE001_360Video",
+  
+  "asset": {
+    "name": "CyBe RC Track Robot #001",
+    "category": "CONSTRUCTION_3D_PRINTER_MOBILE",
+    "subcategory": "TRACK_MOUNTED_FAST_CURE",
+    "manufacturer": "CyBe Construction",
+    "model": "CyBe RC",
+    "tags": ["3D_PRINTING", "MOBILE", "FAST_CURE", "PERFORMANCE_BASED", "NETHERLANDS"]
+  },
+  
+  "identification": {
+    "serialNumber": "CYBERC-2024-NL-001",
+    "yearManufactured": 2024,
+    "countryOfOrigin": "NLD",
+    "internalAssetId": "BSH-205",
+    "previousOwners": []
+  },
+  
+  "specifications": {
+    "dimensions": {
+      "length": 3800,
+      "width": 1900,
+      "height": 2200,
+      "unit": "mm"
+    },
+    "weight": {
+      "value": 2800,
+      "unit": "kg"
+    },
+    "power": {
+      "consumption": 12,
+      "unit": "kW"
+    },
+    "printVolume": {
+      "x": 2.7,
+      "y": 2.7,
+      "z": 2.8,
+      "unit": "m"
+    },
+    "materialType": "CYBE_MORTAR",
+    "mortarCureTime": {
+      "value": 3,
+      "unit": "min",
+      "note": "Fast-setting proprietary mortar"
+    },
+    "extrusionRate": {
+      "value": 10,
+      "unit": "m³/day",
+      "baseline": 10,
+      "bonusThreshold": 12
+    },
+    "features": [
+      "Track-mounted for rough terrain",
+      "Fast-cure CyBe Mortar (3-min set time)",
+      "Automated m³/day measurement",
+      "Performance bonus system",
+      "Vertical speed advantage"
+    ]
+  },
+  
+  "financials": {
+    "purchasePrice": {
+      "value": 240000,
+      "currency": "USD",
+      "date": "2024-09-05",
+      "note": "Mid-range: $180k-$300k"
+    },
+    "currentValue": {
+      "value": 225600,
+      "currency": "USD",
+      "lastAppraisal": "2026-01-13",
+      "appraisalMethod": "EFFICIENCY_BASED_DEPRECIATION"
+    },
+    "depreciationModel": "EFFICIENCY_BASED",
+    "residualValue": {
+      "percentage": 18,
+      "estimatedValue": 43200,
+      "currency": "USD",
+      "note": "Strong European secondary market retention"
+    },
+    "insuranceValue": {
+      "value": 235000,
+      "currency": "USD",
+      "annualPremium": 4800,
+      "premiumPercentage": 2.0,
+      "note": "2% for mobile equipment with track system"
+    },
+    "maintenanceReserve": {
+      "percentage": 7,
+      "currentBalance": 18200,
+      "currency": "USD"
+    }
+  },
+  
+  "operational": {
+    "status": "OPERATIONAL",
+    "operatingHours": 1920,
+    "maxLifetimeHours": 12000,
+    "usageMetrics": {
+      "cubicMetersPerDay": {
+        "current": 11.2,
+        "baseline": 10,
+        "bonusThreshold": 12,
+        "description": "Primary efficiency metric - triggers performance bonus"
+      },
+      "totalCubicMeters": 380,
+      "projectsCompleted": 28,
+      "avgDailyEfficiency": 112,
+      "pumpPressure": {
+        "avg": 45,
+        "unit": "bar",
+        "critical": true
+      }
+    },
+    "lastMaintenance": "2025-11-30",
+    "nextMaintenanceRequired": "2026-02-28",
+    "maintenanceIntervalHours": 1200,
+    "maintenanceCostPercentage": 3.0,
+    "maintenanceHistory": [
+      {
+        "date": "2025-11-30",
+        "type": "PREVENTIVE",
+        "cost": 3600,
+        "provider": "CyBe Service Netherlands",
+        "notes": "Track maintenance, pump inspection, mortar mixing system calibration"
+      }
+    ],
+    "location": {
+      "facility": "Rotterdam Construction Hub",
+      "address": "Waalhaven Zuid 123, Rotterdam",
+      "city": "Rotterdam",
+      "country": "Netherlands",
+      "gps": {
+        "latitude": 51.8894,
+        "longitude": 4.4644
+      },
+      "mobile": true
+    }
+  },
+  
+  "certifications": {
+    "required": [
+      {
+        "name": "CE_MARK",
+        "issueDate": "2024-08-20",
+        "expiryDate": "2029-08-20",
+        "issuingBody": "CE Certification NL",
+        "documentHash": "QmCertCYBE_CE_2024"
+      },
+      {
+        "name": "ISO_14001",
+        "issueDate": "2024-08-15",
+        "expiryDate": "2027-08-15",
+        "issuingBody": "ISO Environmental",
+        "documentHash": "QmCertCYBE_ISO14001"
+      },
+      {
+        "name": "ISO_9001",
+        "issueDate": "2024-08-15",
+        "expiryDate": "2027-08-15",
+        "issuingBody": "ISO Quality",
+        "documentHash": "QmCertCYBE_ISO9001"
+      }
+    ],
+    "optional": [
+      "Dutch Building Code Compliance"
+    ]
+  },
+  
+  "insurance": {
+    "provider": "Allianz Equipment Insurance Europe",
+    "policyNumber": "ALL-EUR-NL-2024-01245",
+    "type": "EQUIPMENT_BREAKDOWN",
+    "coverage": {
+      "value": 235000,
+      "currency": "USD"
+    },
+    "annualPremium": {
+      "value": 4800,
+      "currency": "USD",
+      "percentageOfCAPEX": 2.0
+    },
+    "expiryDate": "2026-09-04",
+    "coverageDetails": [
+      "Equipment breakdown",
+      "Track system damage",
+      "Pump malfunction",
+      "Material defects"
+    ]
+  },
+  
+  "telemetry": {
+    "provider": "CYBE_AUTO",
+    "apiEndpoint": "https://api.cybe.eu/telemetry/CYBERC-2024-NL-001",
+    "apiKeyEncrypted": "encrypted_cybe_api_key_001",
+    "metrics": [
+      {
+        "name": "cubicMetersPerDay",
+        "updateFrequency": "DAILY",
+        "lastValue": 11.2,
+        "lastUpdate": "2026-01-16T06:00:00Z",
+        "unit": "m³"
+      },
+      {
+        "name": "pumpPressure",
+        "updateFrequency": "REALTIME",
+        "lastValue": 46,
+        "lastUpdate": "2026-01-16T09:20:00Z",
+        "unit": "bar"
+      },
+      {
+        "name": "mortarMixQuality",
+        "updateFrequency": "HOURLY",
+        "lastValue": 98.5,
+        "lastUpdate": "2026-01-16T09:00:00Z",
+        "unit": "percentage"
+      },
+      {
+        "name": "operatingHours",
+        "updateFrequency": "HOURLY",
+        "lastValue": 1920,
+        "lastUpdate": "2026-01-16T09:00:00Z"
+      }
+    ],
+    "oracleIntegration": {
+      "chainlinkNode": true,
+      "oracleAddress": "0x742d35Cc6634C0532925a3b844c0112c8c7d6011",
+      "verificationMethod": "AUTO_METER_SIGNED",
+      "updateFrequency": "DAILY"
+    }
+  },
+  
+  "tokenization": {
+    "strategy": "PERFORMANCE_BOND",
+    "performanceBonus": {
+      "trigger": "PROJECT_COMPLETION_EARLY",
+      "bonusRate": 0.05,
+      "measurement": "m3PerDay",
+      "baseline": 10,
+      "bonusThreshold": 12,
+      "note": "5% bonus to investors if output exceeds 12 m³/day"
+    },
+    "fractional": {
+      "totalShares": 240,
+      "minInvestment": {
+        "value": 1000,
+        "currency": "USD"
+      },
+      "revenueSharePercentage": 83,
+      "note": "83% to investors (+ bonuses), 12% maintenance, 5% protocol"
+    },
+    "revenueModel": {
+      "dailyRentalRate": {
+        "value": 1200,
+        "currency": "USD"
+      },
+      "avgProjectDays": 22,
+      "projectsPerMonth": 1.8,
+      "monthlyRevenue": {
+        "estimated": 47520,
+        "currency": "USD",
+        "note": "$1,200/day * 22 days * 1.8 projects"
+      },
+      "bonusRevenue": {
+        "monthly": 2376,
+        "note": "5% bonus when efficiency > 120%"
+      },
+      "annualRevenue": {
+        "estimated": 599000,
+        "currency": "USD",
+        "note": "Including performance bonuses"
+      },
+      "distributionFrequency": "MONTHLY",
+      "nextDistribution": "2026-02-01"
+    },
+    "maintenanceReservePct": 12
+  },
+  
+  "esg": {
+    "carbonFootprint": {
+      "annualTonsCO2": 11.5,
+      "offsetPercentage": 100,
+      "note": "12 kW * 1920 hours/year * 0.5 kg CO2/kWh Netherlands grid"
+    },
+    "wasteReduction": 45,
+    "energyEfficiency": "A",
+    "greenBondEligible": true,
+    "sustainabilityCertifications": [
+      "ISO 14001",
+      "Dutch Green Building Council Member"
+    ],
+    "socialImpact": {
+      "affordableHousingUnits": 18,
+      "jobsCreated": 6,
+      "trainingPrograms": 4
+    }
+  },
+  
+  "secondaryMarket": {
+    "marketExists": true,
+    "averageRetentionRate": 60,
+    "liquidityScore": 8,
+    "comparableSales": [
+      {
+        "saleDate": "2025-08-12",
+        "salePrice": 165000,
+        "age": 3,
+        "condition": "GOOD",
+        "note": "Strong European secondary market"
+      }
+    ],
+    "demandIndicators": {
+      "europeMarket": "HIGH",
+      "emergingMarkets": "MEDIUM",
+      "typicalTimeToSale": "2-4 months"
+    }
+  },
+  
+  "documentation": {
+    "images": [
+      "ipfs://QmCYBE001_TrackSystem",
+      "ipfs://QmCYBE001_Printing",
+      "ipfs://QmCYBE001_FastCure",
+      "ipfs://QmCYBE001_Dashboard"
+    ],
+    "manuals": [
+      "ipfs://QmCYBE_OperatorManual",
+      "ipfs://QmCYBE_MortarSpecifications",
+      "ipfs://QmCYBE_MaintenanceGuide"
+    ],
+    "certificates": [
+      "ipfs://QmCertCYBE_CE_2024",
+      "ipfs://QmCertCYBE_ISO14001",
+      "ipfs://QmCertCYBE_ISO9001"
+    ],
+    "inspectionReports": [
+      {
+        "date": "2026-01-09",
+        "inspector": "Hans van der Berg, CyBe Certified Inspector",
+        "result": "PASS",
+        "documentHash": "QmInspection_CYBE001_2026Q1"
+      }
+    ],
+    "videos": [
+      {
+        "title": "CyBe Fast-Cure Technology Demo",
+        "url": "ipfs://QmCYBE_FastCure_Demo",
+        "duration": 180
+      }
+    ]
+  },
+  
+  "ownership": {
+    "legalOwner": "Bashood Protocol DAO",
+    "custodian": "Rotterdam Construction Hub B.V.",
+    "tokenized": true,
+    "tokenContract": "0x742d35Cc6634C0532925a3b844c0112c8c7d6008",
+    "tokenId": 205,
+    "blockchain": "BASE",
+    "chainId": 8453
+  },
+  
+  "attributes": [
+    {
+      "trait_type": "Manufacturer",
+      "value": "CyBe Construction"
+    },
+    {
+      "trait_type": "Model",
+      "value": "CyBe RC"
+    },
+    {
+      "trait_type": "Category",
+      "value": "Mobile 3D Printer (Track-Mounted)"
+    },
+    {
+      "trait_type": "Year Manufactured",
+      "value": 2024,
+      "display_type": "number"
+    },
+    {
+      "trait_type": "Mortar Cure Time",
+      "value": 3,
+      "display_type": "number",
+      "trait_suffix": " min"
+    },
+    {
+      "trait_type": "Purchase Price",
+      "value": 240000,
+      "display_type": "number",
+      "trait_suffix": " USD"
+    },
+    {
+      "trait_type": "Current Value",
+      "value": 225600,
+      "display_type": "number",
+      "trait_suffix": " USD"
+    },
+    {
+      "trait_type": "Daily Efficiency",
+      "value": 11.2,
+      "display_type": "number",
+      "trait_suffix": " m³/day"
+    },
+    {
+      "trait_type": "Efficiency Rate",
+      "value": 112,
+      "display_type": "number",
+      "trait_suffix": " %"
+    },
+    {
+      "trait_type": "Remaining Life",
+      "value": 84,
+      "display_type": "number",
+      "trait_suffix": " %"
+    },
+    {
+      "trait_type": "Depreciation Model",
+      "value": "Efficiency-Based"
+    },
+    {
+      "trait_type": "Performance Bonus System",
+      "value": "Yes (5% when > 12 m³/day)"
+    },
+    {
+      "trait_type": "Tokenization Strategy",
+      "value": "Performance Bond (240 shares)"
+    },
+    {
+      "trait_type": "Annual Revenue (With Bonuses)",
+      "value": 599000,
+      "display_type": "number",
+      "trait_suffix": " USD"
+    },
+    {
+      "trait_type": "Fast-Cure Technology",
+      "value": "Yes"
+    },
+    {
+      "trait_type": "Rarity",
+      "value": "EPIC"
+    }
+  ]
+}

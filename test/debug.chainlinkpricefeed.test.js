@@ -33,24 +33,9 @@ describe("Debug: ChainlinkPriceFeed Validation Order", function () {
         console.log(`  answeredInRound != 0? ${retAnsweredInRound != 0n}`);
         console.log(`  answeredInRound >= roundId? ${retAnsweredInRound >= retRoundId} (${retAnsweredInRound} >= ${retRoundId})`);
         
-        try {
-            const tx = await priceFeed.getLatestPrice();
-            const receipt = await tx.wait();
-            console.log("❌ getLatestPrice() did NOT revert!");
-            console.log(`Transaction emitted ${receipt.logs.length} events`);
-            for (const log of receipt.logs) {
-                try {
-                    const parsed = priceFeed.interface.parseLog(log);
-                    if (parsed) {
-                        console.log(`  Event: ${parsed.name}`, parsed.args);
-                    }
-                } catch (e) {
-                    // Not from this contract
-                }
-            }
-        } catch (err) {
-            console.log(`✅ getLatestPrice() reverted with: ${err.message}`);
-            throw err; // Re-throw to let test framework know it reverted
-        }
+        // Should revert because answeredInRound < roundId (stale data)
+        await expect(
+            priceFeed.getLatestPrice()
+        ).to.be.revertedWith("stale: answeredInRound < roundId");
     });
 });

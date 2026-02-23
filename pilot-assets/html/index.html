@@ -1,0 +1,318 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Índice - Documentación Doosan DX360</title>
+  <style>
+    @page {
+      size: A4;
+      margin: 20mm;
+    }
+    
+    * {
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-size: 11pt;
+      line-height: 1.6;
+      color: #333;
+      max-width: 210mm;
+      margin: 0 auto;
+      padding: 20px;
+      background: white;
+    }
+    
+    /* Portada */
+    .cover-page {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 80vh;
+      text-align: center;
+      page-break-after: always;
+    }
+    
+    .cover-page h1 {
+      font-size: 32pt;
+      color: #2c3e50;
+      margin-bottom: 30px;
+      border: none;
+    }
+    
+    .cover-page .project-name {
+      font-size: 18pt;
+      color: #7f8c8d;
+      margin: 20px 0;
+    }
+    
+    .cover-page .asset-name {
+      font-size: 16pt;
+      color: #95a5a6;
+      margin: 20px 0;
+    }
+    
+    .cover-page .date {
+      font-size: 14pt;
+      color: #bdc3c7;
+      margin-top: 60px;
+    }
+    
+    .cover-page .confidential {
+      font-size: 12pt;
+      color: #e74c3c;
+      margin-top: 40px;
+      font-weight: bold;
+    }
+    
+    /* Encabezados */
+    h1 {
+      color: #2c3e50;
+      border-bottom: 3px solid #3498db;
+      padding-bottom: 10px;
+      margin-top: 40px;
+      page-break-after: avoid;
+    }
+    
+    h2 {
+      color: #34495e;
+      border-bottom: 2px solid #95a5a6;
+      padding-bottom: 5px;
+      margin-top: 30px;
+      page-break-after: avoid;
+    }
+    
+    h3 {
+      color: #555;
+      margin-top: 25px;
+      page-break-after: avoid;
+    }
+    
+    h4 {
+      color: #666;
+      margin-top: 20px;
+    }
+    
+    /* Tablas */
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      margin: 20px 0;
+      page-break-inside: avoid;
+    }
+    
+    th, td {
+      border: 1px solid #ddd;
+      padding: 10px;
+      text-align: left;
+    }
+    
+    th {
+      background-color: #3498db;
+      color: white;
+      font-weight: bold;
+    }
+    
+    tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+    
+    /* Código */
+    code {
+      background-color: #f4f4f4;
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-family: 'Courier New', monospace;
+      font-size: 10pt;
+      color: #c7254e;
+    }
+    
+    pre {
+      background-color: #f4f4f4;
+      padding: 15px;
+      border-radius: 5px;
+      overflow-x: auto;
+      border-left: 4px solid #3498db;
+      page-break-inside: avoid;
+    }
+    
+    pre code {
+      background: none;
+      padding: 0;
+      color: #333;
+    }
+    
+    /* Blockquotes */
+    blockquote {
+      border-left: 4px solid #3498db;
+      padding-left: 15px;
+      margin-left: 0;
+      color: #555;
+      font-style: italic;
+      page-break-inside: avoid;
+    }
+    
+    /* Listas */
+    ul, ol {
+      margin: 15px 0;
+      padding-left: 30px;
+    }
+    
+    li {
+      margin: 8px 0;
+    }
+    
+    /* Checkboxes (tareas) */
+    input[type="checkbox"] {
+      margin-right: 8px;
+    }
+    
+    /* Enlaces */
+    a {
+      color: #3498db;
+      text-decoration: none;
+    }
+    
+    a:hover {
+      text-decoration: underline;
+    }
+    
+    /* Separadores */
+    hr {
+      border: none;
+      border-top: 2px solid #ecf0f1;
+      margin: 30px 0;
+    }
+    
+    /* Emojis y símbolos */
+    .emoji {
+      font-size: 1.2em;
+    }
+    
+    /* Page breaks */
+    .page-break {
+      page-break-after: always;
+    }
+    
+    /* Header y footer para impresión */
+    @media print {
+      body {
+        padding: 0;
+      }
+      
+      .no-print {
+        display: none;
+      }
+      
+      h1, h2, h3 {
+        page-break-after: avoid;
+      }
+      
+      table, pre, blockquote {
+        page-break-inside: avoid;
+      }
+      
+      /* Footer */
+      @page {
+        @bottom-right {
+          content: "Bashood RWA - 2026";
+          font-size: 9pt;
+          color: #bdc3c7;
+        }
+        
+        @bottom-left {
+          content: "Índice Documentación";
+          font-size: 9pt;
+          color: #bdc3c7;
+        }
+      }
+    }
+    
+    /* Instrucciones imprimir (solo pantalla) */
+    .print-instructions {
+      background: #fff3cd;
+      border: 2px solid #ffc107;
+      border-radius: 5px;
+      padding: 15px;
+      margin: 20px 0;
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      max-width: 300px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      z-index: 1000;
+    }
+    
+    @media print {
+      .print-instructions {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="print-instructions no-print">
+    <h4 style="margin-top:0; color:#856404">📄 Para generar PDF:</h4>
+    <ol style="margin:0; padding-left:20px; color:#856404">
+      <li>Presiona <strong>Ctrl+P</strong></li>
+      <li>Selecciona "Guardar como PDF"</li>
+      <li>Ajusta márgenes si es necesario</li>
+      <li>Guarda el archivo</li>
+    </ol>
+  </div>
+  
+  <div class="cover-page">
+    <h1>Índice Documentación</h1>
+    <div class="project-name">Proyecto Bashood RWA</div>
+    <div class="asset-name">Activo Piloto: Doosan DX360</div>
+    <div class="date">20 de febrero de 2026</div>
+    <div class="confidential">☑️ CONFIDENCIAL - Solo para uso del destinatario</div>
+  </div>
+  
+  <div class="content">
+    <h1 id="📁-documentación-piloto-doosan-dx360">📁 Documentación Piloto Doosan DX360</h1>
+<p><strong>Proyecto:</strong> Bashood RWA<br><strong>Fecha:</strong> 20 de febrero de 2026<br><strong>Status:</strong> Preparado para negociación</p>
+<hr>
+<h2 id="📄-documentos-disponibles">📄 Documentos Disponibles</h2>
+<ol>
+<li><strong><a href="00_INDICE_MAESTRO.html">Índice Maestro</a></strong></li>
+<li><strong><a href="01_PROPUESTA_TOKENIZACION.html">Propuesta de Tokenización</a></strong></li>
+<li><strong><a href="02_DUE_DILIGENCE_CHECKLIST.html">Due Diligence Checklist</a></strong></li>
+<li><strong><a href="03_GUION_LLAMADA.html">Guion de Llamada</a></strong></li>
+<li><strong><a href="04_TERMINOS_CONTRACTUALES_BORRADOR.html">Términos Contractuales (Borrador)</a></strong></li>
+</ol>
+<hr>
+<h2 id="📌-instrucciones">📌 Instrucciones</h2>
+<h3 id="para-generar-pdfs">Para generar PDFs:</h3>
+<ol>
+<li><strong>Abrir cada archivo HTML</strong> en tu navegador (Chrome, Edge, Firefox)</li>
+<li><strong>Presionar Ctrl+P</strong> (o Cmd+P en Mac)</li>
+<li><strong>Seleccionar &quot;Guardar como PDF&quot;</strong> en destino/impresora</li>
+<li><strong>Ajustar configuración:</strong><ul>
+<li>Márgenes: Predeterminados</li>
+<li>Escala: 100%</li>
+<li>Fondo de gráficos: Activado</li>
+</ul>
+</li>
+<li><strong>Guardar</strong> con el mismo nombre del archivo HTML</li>
+</ol>
+<h3 id="archivos-recomendados-para-enviar-al-propietario">Archivos recomendados para enviar al propietario:</h3>
+<p>✅ <strong>01_PROPUESTA_TOKENIZACION.pdf</strong> - Documento comercial principal<br>✅ <strong>02_DUE_DILIGENCE_CHECKLIST.pdf</strong> - Lista de documentación requerida<br>⚠️ <strong>03_GUION_LLAMADA.pdf</strong> - Solo para uso interno (NO enviar)<br>⚠️ <strong>04_TERMINOS_CONTRACTUALES_BORRADOR.pdf</strong> - Enviar solo tras aprobación inicial</p>
+<hr>
+<h2 id="🎯-flujo-recomendado">🎯 Flujo Recomendado</h2>
+<ol>
+<li><strong>Antes de la llamada:</strong> Imprimir/revisar 02_DUE_DILIGENCE_CHECKLIST y 03_GUION_LLAMADA</li>
+<li><strong>Durante la llamada:</strong> Seguir guion y anotar respuestas</li>
+<li><strong>Después de la llamada:</strong> Enviar 01_PROPUESTA_TOKENIZACION + NDA por email</li>
+<li><strong>Si aprobado:</strong> Enviar 04_TERMINOS_CONTRACTUALES_BORRADOR para negociación</li>
+</ol>
+<hr>
+<p><strong>Preparado por:</strong> Bashood Team<br><strong>Contacto:</strong> <a href="mailto:contacto@bashood.io">contacto@bashood.io</a></p>
+
+  </div>
+</body>
+</html>

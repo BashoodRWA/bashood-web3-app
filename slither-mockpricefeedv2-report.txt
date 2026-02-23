@@ -1,0 +1,563 @@
+﻿slither : 'npx hardhat clean' running (wd: C:\Users\Franchu\Desktop\bashood-hardhat-tests)
+En línea: 1 Carácter: 1
++ slither . --compile-force-framework hardhat --filter-paths "node_modu ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: ('npx hardhat cl...-hardhat-tests):String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+'npx hardhat clean --global' running (wd: C:\Users\Franchu\Desktop\bashood-hardhat-tests)
+'npx hardhat compile --force' running (wd: C:\Users\Franchu\Desktop\bashood-hardhat-tests)
+
+AttackerReentrancy.collect() (contracts/AttackerReentrancy.sol#38-40) sends eth to arbitrary user
+	Dangerous calls:
+	- address(owner).transfer(address(this).balance) (contracts/AttackerReentrancy.sol#39)
+MaximalDangerAttacker._attemptSecondPurchase() (contracts/mocks/MaximalDangerAttacker.sol#184-191) sends eth to arbitrary user
+	Dangerous calls:
+	- target.purchaseWithETH{value: address(this).balance / 2}(1,1,0,) (contracts/mocks/MaximalDangerAttacker.sol#185-190)
+MaximalDangerAttacker._attemptPriceManipulation(uint256) (contracts/mocks/MaximalDangerAttacker.sol#228-239) sends eth to arbitrary user
+	Dangerous calls:
+	- target.purchaseWithETH{value: amount / 50}(1,1,i,) (contracts/mocks/MaximalDangerAttacker.sol#232-236)
+MaximalDangerAttacker._frontRunPurchase() (contracts/mocks/MaximalDangerAttacker.sol#272-277) sends eth to arbitrary user
+	Dangerous calls:
+	- target.purchaseWithETH{value: 10000000000000000}(1,1,0,) (contracts/mocks/MaximalDangerAttacker.sol#275)
+MaximalDangerAttacker._exploitManipulatedPrice() (contracts/mocks/MaximalDangerAttacker.sol#423-428) sends eth to arbitrary user
+	Dangerous calls:
+	- target.purchaseWithETH{value: 1000000000000000}(1,10,0,) (contracts/mocks/MaximalDangerAttacker.sol#426)
+MockPresaleTarget.emergencyWithdrawETH() (contracts/mocks/MockPresaleTarget.sol#46-50) sends eth to arbitrary user
+	Dangerous calls:
+	- address(msg.sender).transfer(address(this).balance / 2) (contracts/mocks/MockPresaleTarget.sol#49)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#functions-that-send-ether-to-arbitrary-destinations
+
+Reentrancy in LibraVulnerable.withdraw(uint256) (contracts/LibraVulnerable.sol#20-32):
+	External calls:
+	- (ok,None) = address(msg.sender).call{value: amount}() (contracts/LibraVulnerable.sol#25)
+	State variables written after the call(s):
+	- balances[msg.sender] = bal - amount (contracts/LibraVulnerable.sol#29)
+	LibraVulnerable.balances (contracts/LibraVulnerable.sol#6) can be used in cross function reentrancies:
+	- LibraVulnerable.balances (contracts/LibraVulnerable.sol#6)
+	- LibraVulnerable.deposit() (contracts/LibraVulnerable.sol#13-17)
+	- LibraVulnerable.withdraw(uint256) (contracts/LibraVulnerable.sol#20-32)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#reentrancy-vulnerabilities
+
+BashoodPropertyNFT.emergencyTokenRecovery(address,uint256) (contracts/BashoodPropertyNFT.sol#393-396) ignores return value by 
+IERC20(tokenAddress).transfer(owner(),amount) (contracts/BashoodPropertyNFT.sol#395)
+MockPresaleTarget.purchaseWithBHT(uint256,uint256,uint256,bytes) (contracts/MockPresaleTarget.sol#56-63) ignores return value by 
+bashoodToken.transferFrom(msg.sender,address(this),amount) (contracts/MockPresaleTarget.sol#60)
+BashoodNFTIntegration._claimStakingRewards(address) (contracts/deprecated/BashoodNFTIntegration.sol#207-222) ignores return value by 
+bashoodToken.transfer(_user,reward) (contracts/deprecated/BashoodNFTIntegration.sol#217)
+BashoodNFTIntegration.emergencyWithdrawTokens(address,uint256) (contracts/deprecated/BashoodNFTIntegration.sol#362-364) ignores return value by 
+IERC20(_token).transfer(owner(),_amount) (contracts/deprecated/BashoodNFTIntegration.sol#363)
+MaximalDangerAttacker._attackTokenContract() (contracts/mocks/MaximalDangerAttacker.sol#378-387) ignores return value by token.transfer(address(this),balance) 
+(contracts/mocks/MaximalDangerAttacker.sol#382)
+MaximalDangerAttacker.extractTokens(address) (contracts/mocks/MaximalDangerAttacker.sol#451-457) ignores return value by tokenContract.transfer(owner,balance) 
+(contracts/mocks/MaximalDangerAttacker.sol#455)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#unchecked-transfer
+
+BashoodRWAReference._certificationData (contracts/standards/BashoodRWAReference.sol#67) is never initialized. It is used in:
+	- BashoodRWAReference.getCertificationData(uint256) (contracts/standards/BashoodRWAReference.sol#219-226)
+BashoodRWAReference._insuranceData (contracts/standards/BashoodRWAReference.sol#76) is never initialized. It is used in:
+	- BashoodRWAReference.getInsuranceData(uint256) (contracts/standards/BashoodRWAReference.sol#246-253)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#uninitialized-state-variables
+
+BashoodNFTIntegration.calculateStakingRewards(address) (contracts/deprecated/BashoodNFTIntegration.sol#224-234) performs a multiplication on the result of a division:
+	- daysStaked = stakingDuration / 86400 (contracts/deprecated/BashoodNFTIntegration.sol#231)
+	- userStake.tokenIds.length * stakingRewardPerDay * daysStaked (contracts/deprecated/BashoodNFTIntegration.sol#233)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#divide-before-multiply
+
+BashoodPropertyNFT.getPropertiesByType(uint256) (contracts/BashoodPropertyNFT.sol#271-284) uses a dangerous strict equality:
+	- properties[i].propertyType == propertyType (contracts/BashoodPropertyNFT.sol#277)
+BashoodNFTIntegration.calculateStakingRewards(address) (contracts/deprecated/BashoodNFTIntegration.sol#224-234) uses a dangerous strict equality:
+	- userStake.tokenIds.length == 0 || userStake.lastClaimTime == 0 (contracts/deprecated/BashoodNFTIntegration.sol#226)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#dangerous-strict-equalities
+
+Contract locking ether found:
+	Contract BadReceiver (contracts/BadReceiver.sol#4-8) has payable functions:
+	 - BadReceiver.fallback() (contracts/BadReceiver.sol#7)
+	But does not have a function to withdraw the ether
+Contract locking ether found:
+	Contract BadReceiver721 (contracts/BadReceiver721.sol#4-7) has payable functions:
+	 - BadReceiver721.fallback() (contracts/BadReceiver721.sol#6)
+	But does not have a function to withdraw the ether
+Contract locking ether found:
+	Contract MockAttackerProjectWallet (contracts/mocks/MockAttackerProjectWallet.sol#4-19) has payable functions:
+	 - MockAttackerProjectWallet.receive() (contracts/mocks/MockAttackerProjectWallet.sol#9-13)
+	 - MockAttackerProjectWallet.fallback() (contracts/mocks/MockAttackerProjectWallet.sol#15-18)
+	But does not have a function to withdraw the ether
+Contract locking ether found:
+	Contract MockProjectWalletClaimCaller (contracts/mocks/MockProjectWalletClaimCaller.sol#9-25) has payable functions:
+	 - MockProjectWalletClaimCaller.receive() (contracts/mocks/MockProjectWalletClaimCaller.sol#24)
+	But does not have a function to withdraw the ether
+Contract locking ether found:
+	Contract MockProjectWalletMultiSigEIP712 (contracts/mocks/MockProjectWalletMultiSigEIP712.sol#17-116) has payable functions:
+	 - MockProjectWalletMultiSigEIP712.receive() (contracts/mocks/MockProjectWalletMultiSigEIP712.sol#113-115)
+	But does not have a function to withdraw the ether
+Contract locking ether found:
+	Contract MockProjectWalletReentrant (contracts/mocks/MockProjectWalletReentrant.sol#9-28) has payable functions:
+	 - MockProjectWalletReentrant.receive() (contracts/mocks/MockProjectWalletReentrant.sol#24-27)
+	But does not have a function to withdraw the ether
+Contract locking ether found:
+	Contract MockProjectWalletRevert (contracts/mocks/MockProjectWalletRevert.sol#4-12) has payable functions:
+	 - MockProjectWalletRevert.receive() (contracts/mocks/MockProjectWalletRevert.sol#5-7)
+	 - MockProjectWalletRevert.fallback() (contracts/mocks/MockProjectWalletRevert.sol#9-11)
+	But does not have a function to withdraw the ether
+Contract locking ether found:
+	Contract MockProjectWalletRevertCaller (contracts/mocks/MockProjectWalletRevertCaller.sol#9-20) has payable functions:
+	 - MockProjectWalletRevertCaller.receive() (contracts/mocks/MockProjectWalletRevertCaller.sol#17-19)
+	But does not have a function to withdraw the ether
+Contract locking ether found:
+	Contract MockProjectWalletRevertCallerPresale (contracts/mocks/MockProjectWalletRevertCallerPresale.sol#9-20) has payable functions:
+	 - MockProjectWalletRevertCallerPresale.receive() (contracts/mocks/MockProjectWalletRevertCallerPresale.sol#17-19)
+	But does not have a function to withdraw the ether
+Contract locking ether found:
+	Contract RejectingWallet (contracts/mocks/RejectingWallet.sol#5-29) has payable functions:
+	 - RejectingWallet.receive() (contracts/mocks/RejectingWallet.sol#6-8)
+	 - RejectingWallet.fallback() (contracts/mocks/RejectingWallet.sol#10-12)
+	But does not have a function to withdraw the ether
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#contracts-that-lock-ether
+
+Reentrancy in MockProjectWalletMultiSigEIP712.executeClaimWithSignatures(address,uint256,bytes[]) (contracts/mocks/MockProjectWalletMultiSigEIP712.sol#63-105):
+	External calls:
+	- IRescueClaim(rescue).claimEmergencyWithdrawal() (contracts/mocks/MockProjectWalletMultiSigEIP712.sol#99)
+	State variables written after the call(s):
+	- nonces[rescue] = nonces[rescue] + 1 (contracts/mocks/MockProjectWalletMultiSigEIP712.sol#102)
+	MockProjectWalletMultiSigEIP712.nonces (contracts/mocks/MockProjectWalletMultiSigEIP712.sol#27) can be used in cross function reentrancies:
+	- MockProjectWalletMultiSigEIP712.executeClaimWithSignatures(address,uint256,bytes[]) (contracts/mocks/MockProjectWalletMultiSigEIP712.sol#63-105)
+	- MockProjectWalletMultiSigEIP712.getNonce(address) (contracts/mocks/MockProjectWalletMultiSigEIP712.sol#53-55)
+	- MockProjectWalletMultiSigEIP712.nonces (contracts/mocks/MockProjectWalletMultiSigEIP712.sol#27)
+	- MockProjectWalletMultiSigEIP712.resetNonce(address) (contracts/mocks/MockProjectWalletMultiSigEIP712.sol#108-111)
+Reentrancy in AttackerLoop.onERC1155Received(address,address,uint256,uint256,bytes) (contracts/AttackerLoop.sol#27-43):
+	External calls:
+	- target.withdrawFunds() (contracts/AttackerLoop.sol#36-40)
+	State variables written after the call(s):
+	- attempts ++ (contracts/AttackerLoop.sol#35)
+	AttackerLoop.attempts (contracts/AttackerLoop.sol#14) can be used in cross function reentrancies:
+	- AttackerLoop.attempts (contracts/AttackerLoop.sol#14)
+	- AttackerLoop.onERC1155Received(address,address,uint256,uint256,bytes) (contracts/AttackerLoop.sol#27-43)
+	- successes ++ (contracts/AttackerLoop.sol#37)
+	AttackerLoop.successes (contracts/AttackerLoop.sol#15) can be used in cross function reentrancies:
+	- AttackerLoop.onERC1155Received(address,address,uint256,uint256,bytes) (contracts/AttackerLoop.sol#27-43)
+	- AttackerLoop.successes (contracts/AttackerLoop.sol#15)
+Reentrancy in BashoodNFTIntegration.stakeNFTs(uint256[]) (contracts/deprecated/BashoodNFTIntegration.sol#146-175):
+	External calls:
+	- _claimStakingRewards(msg.sender) (contracts/deprecated/BashoodNFTIntegration.sol#154)
+		- bashoodToken.transfer(_user,reward) (contracts/deprecated/BashoodNFTIntegration.sol#217)
+	- propertyNFT.transferFrom(msg.sender,address(this),tokenId) (contracts/deprecated/BashoodNFTIntegration.sol#163)
+	State variables written after the call(s):
+	- userStake.tokenIds.push(tokenId) (contracts/deprecated/BashoodNFTIntegration.sol#166)
+	BashoodNFTIntegration.stakes (contracts/deprecated/BashoodNFTIntegration.sol#43) can be used in cross function reentrancies:
+	- BashoodNFTIntegration.calculateStakingRewards(address) (contracts/deprecated/BashoodNFTIntegration.sol#224-234)
+	- BashoodNFTIntegration.getUserStakeInfo(address) (contracts/deprecated/BashoodNFTIntegration.sol#367-382)
+	- BashoodNFTIntegration.stakes (contracts/deprecated/BashoodNFTIntegration.sol#43)
+	- userStake.startTime = block.timestamp (contracts/deprecated/BashoodNFTIntegration.sol#170)
+	BashoodNFTIntegration.stakes (contracts/deprecated/BashoodNFTIntegration.sol#43) can be used in cross function reentrancies:
+	- BashoodNFTIntegration.calculateStakingRewards(address) (contracts/deprecated/BashoodNFTIntegration.sol#224-234)
+	- BashoodNFTIntegration.getUserStakeInfo(address) (contracts/deprecated/BashoodNFTIntegration.sol#367-382)
+	- BashoodNFTIntegration.stakes (contracts/deprecated/BashoodNFTIntegration.sol#43)
+	- userStake.lastClaimTime = block.timestamp (contracts/deprecated/BashoodNFTIntegration.sol#172)
+	BashoodNFTIntegration.stakes (contracts/deprecated/BashoodNFTIntegration.sol#43) can be used in cross function reentrancies:
+	- BashoodNFTIntegration.calculateStakingRewards(address) (contracts/deprecated/BashoodNFTIntegration.sol#224-234)
+	- BashoodNFTIntegration.getUserStakeInfo(address) (contracts/deprecated/BashoodNFTIntegration.sol#367-382)
+	- BashoodNFTIntegration.stakes (contracts/deprecated/BashoodNFTIntegration.sol#43)
+	- tokenStaker[tokenId] = msg.sender (contracts/deprecated/BashoodNFTIntegration.sol#165)
+	BashoodNFTIntegration.tokenStaker (contracts/deprecated/BashoodNFTIntegration.sol#44) can be used in cross function reentrancies:
+	- BashoodNFTIntegration.isTokenStaked(uint256) (contracts/deprecated/BashoodNFTIntegration.sol#392-394)
+	- BashoodNFTIntegration.tokenStaker (contracts/deprecated/BashoodNFTIntegration.sol#44)
+Reentrancy in BashoodNFTIntegration.unstakeNFTs(uint256[]) (contracts/deprecated/BashoodNFTIntegration.sol#177-201):
+	External calls:
+	- _claimStakingRewards(msg.sender) (contracts/deprecated/BashoodNFTIntegration.sol#184)
+		- bashoodToken.transfer(_user,reward) (contracts/deprecated/BashoodNFTIntegration.sol#217)
+	- propertyNFT.transferFrom(address(this),msg.sender,tokenId) (contracts/deprecated/BashoodNFTIntegration.sol#197)
+	State variables written after the call(s):
+	- _removeFromStakedTokens(msg.sender,tokenId) (contracts/deprecated/BashoodNFTIntegration.sol#191)
+		- userStake.tokenIds[i] = userStake.tokenIds[userStake.tokenIds.length - 1] (contracts/deprecated/BashoodNFTIntegration.sol#240)
+		- userStake.tokenIds.pop() (contracts/deprecated/BashoodNFTIntegration.sol#241)
+	BashoodNFTIntegration.stakes (contracts/deprecated/BashoodNFTIntegration.sol#43) can be used in cross function reentrancies:
+	- BashoodNFTIntegration.calculateStakingRewards(address) (contracts/deprecated/BashoodNFTIntegration.sol#224-234)
+	- BashoodNFTIntegration.getUserStakeInfo(address) (contracts/deprecated/BashoodNFTIntegration.sol#367-382)
+	- BashoodNFTIntegration.stakes (contracts/deprecated/BashoodNFTIntegration.sol#43)
+	- tokenStaker[tokenId] = address(0) (contracts/deprecated/BashoodNFTIntegration.sol#194)
+	BashoodNFTIntegration.tokenStaker (contracts/deprecated/BashoodNFTIntegration.sol#44) can be used in cross function reentrancies:
+	- BashoodNFTIntegration.isTokenStaked(uint256) (contracts/deprecated/BashoodNFTIntegration.sol#392-394)
+	- BashoodNFTIntegration.tokenStaker (contracts/deprecated/BashoodNFTIntegration.sol#44)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#reentrancy-vulnerabilities-1
+
+BashoodPresaleFinal._getFreshPrice() (contracts/BashoodPresaleFinal.sol#199-208) ignores return value by (None,answer,None,updatedAt,None) = 
+priceFeed.latestRoundData() (contracts/BashoodPresaleFinal.sol#202)
+BashoodPresaleFinal._bhtFromFiat(uint256) (contracts/BashoodPresaleFinal.sol#235-248) ignores return value by (roundId,answer,None,updatedAt,answeredInRound) = 
+priceFeed.latestRoundData() (contracts/BashoodPresaleFinal.sol#238)
+BashoodPresaleFinal._calculateBhtAmounts(uint256) (contracts/BashoodPresaleFinal.sol#542-560) ignores return value by (roundId,answer,None,updatedAt,answeredInRound) 
+= priceFeed.latestRoundData() (contracts/BashoodPresaleFinal.sol#549)
+MockPresaleTarget.purchaseWithETH(uint256,uint256,uint256,bytes) (contracts/MockPresaleTarget.sol#29-53) ignores return value by 
+IERC1155Receiver(msg.sender).onERC1155Received(address(this),msg.sender,nftId,amount,data) (contracts/MockPresaleTarget.sol#39-49)
+MaximalDangerAttacker._attemptTokenPurchase() (contracts/mocks/MaximalDangerAttacker.sol#193-202) ignores return value by token.approve(address(target),tokenBalance) 
+(contracts/mocks/MaximalDangerAttacker.sol#196-200)
+MaximalDangerAttacker._attackTokenContract() (contracts/mocks/MaximalDangerAttacker.sol#378-387) ignores return value by token.approve(address(this),balance) 
+(contracts/mocks/MaximalDangerAttacker.sol#385)
+MockPresaleTarget.purchaseWithETH(uint256,uint256,uint256,bytes) (contracts/mocks/MockPresaleTarget.sol#23-39) ignores return value by 
+IERC1155Receiver(msg.sender).onERC1155Received(address(this),msg.sender,1,quantity,) (contracts/mocks/MockPresaleTarget.sol#29-35)
+MockPriceFeedV2.setAnswerWithTimestamp(int256,uint256) (contracts/mocks/MockPriceFeedV2.sol#64-72) ignores return value by (currentRound,None,None,None,None) = 
+aggregator.latestRoundData() (contracts/mocks/MockPriceFeedV2.sol#66)
+MockPriceFeedV2.setUpdatedAt(uint256) (contracts/mocks/MockPriceFeedV2.sol#102-105) ignores return value by (currentRound,currentAnswer,None,None,None) = 
+aggregator.latestRoundData() (contracts/mocks/MockPriceFeedV2.sol#103)
+MockPriceFeedV2.latestRoundData() (contracts/mocks/MockPriceFeedV2.sol#112-135) ignores return value by (roundId,answer,startedAt,updatedAt,None) = 
+aggregator.latestRoundData() (contracts/mocks/MockPriceFeedV2.sol#124)
+MockPriceFeedV2.getRoundData(uint80) (contracts/mocks/MockPriceFeedV2.sol#140-152) ignores return value by aggregator.getRoundData(_roundId) 
+(contracts/mocks/MockPriceFeedV2.sol#151)
+ChainlinkPriceFeed.getLatestPrice() (contracts/oracles/ChainlinkPriceFeed.sol#40-63) ignores return value by (None,answer,None,uAt,answeredInRound) = 
+feed.latestRoundData() (contracts/oracles/ChainlinkPriceFeed.sol#41)
+ChainlinkPriceFeed.peekLatestPrice() (contracts/oracles/ChainlinkPriceFeed.sol#66-74) ignores return value by (None,answer,None,uAt,answeredInRound) = 
+feed.latestRoundData() (contracts/oracles/ChainlinkPriceFeed.sol#67)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#unused-return
+
+MaximalDangerAttacker.gasGriefingMode (contracts/mocks/MaximalDangerAttacker.sol#48) is written in both
+	gasGriefingMode = true (contracts/mocks/MaximalDangerAttacker.sol#281)
+	gasGriefingMode = false (contracts/mocks/MaximalDangerAttacker.sol#288)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#write-after-write
+
+IBashoodRWA.requiresMaintenance(uint256).requiresMaintenance (contracts/standards/IBashoodRWA.sol#421) shadows:
+	- IBashoodRWA.requiresMaintenance(uint256) (contracts/standards/IBashoodRWA.sol#421) (function)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#local-variable-shadowing
+
+TaxHandler.initialize(address,uint256) (contracts/TaxHandler.sol#14-20) should emit an event for: 
+	- taxRate = _taxRate (contracts/TaxHandler.sol#19) 
+BashoodNFTIntegration.setStakingReward(uint256) (contracts/deprecated/BashoodNFTIntegration.sol#331-333) should emit an event for: 
+	- stakingRewardPerDay = _stakingRewardPerDay (contracts/deprecated/BashoodNFTIntegration.sol#332) 
+BashoodNFTIntegration.setMarketplaceFee(uint256) (contracts/deprecated/BashoodNFTIntegration.sol#343-346) should emit an event for: 
+	- marketplaceFeePercent = _feePercent (contracts/deprecated/BashoodNFTIntegration.sol#345) 
+MaximalDangerAttacker.configureAttack(bool,bool,bool,bool,uint256) (contracts/mocks/MaximalDangerAttacker.sol#100-112) should emit an event for: 
+	- maxReentries = _maxReentries (contracts/mocks/MaximalDangerAttacker.sol#111) 
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#missing-events-arithmetic
+
+MockPresale.setRescueContract(address)._rescue (contracts/MockPresale.sol#14) lacks a zero-check on :
+		- rescue = _rescue (contracts/MockPresale.sol#16)
+MockPresaleTarget.constructor(address,address)._nft (contracts/MockPresaleTarget.sol#22) lacks a zero-check on :
+		- nftContract = _nft (contracts/MockPresaleTarget.sol#23)
+MockTreasuryHandler.initialize(address)._treasury (contracts/MockTreasuryHandler.sol#9) lacks a zero-check on :
+		- treasury = _treasury (contracts/MockTreasuryHandler.sol#11)
+MockTreasuryHandler.updateTreasuryWallet(address)._treasury (contracts/MockTreasuryHandler.sol#14) lacks a zero-check on :
+		- treasury = _treasury (contracts/MockTreasuryHandler.sol#16)
+TokenWrapperERC20.constructor(address,address,address,string,string).issuer_ (contracts/TokenWrapperERC20.sol#18) lacks a zero-check on :
+		- issuer = issuer_ (contracts/TokenWrapperERC20.sol#21)
+BashoodNFTIntegration.constructor(address,address,address)._presaleContract (contracts/deprecated/BashoodNFTIntegration.sol#79) lacks a zero-check on :
+		- presaleContract = _presaleContract (contracts/deprecated/BashoodNFTIntegration.sol#85)
+BashoodNFTIntegration.setPresaleContract(address)._presaleContract (contracts/deprecated/BashoodNFTIntegration.sol#323) lacks a zero-check on :
+		- presaleContract = _presaleContract (contracts/deprecated/BashoodNFTIntegration.sol#324)
+MockBHTRejecting.constructor(string,string,address)._rejectTo (contracts/mocks/MockBHTRejecting.sol#9) lacks a zero-check on :
+		- rejectTo = _rejectTo (contracts/mocks/MockBHTRejecting.sol#10)
+MockBHTRejecting.setRejectTo(address)._addr (contracts/mocks/MockBHTRejecting.sol#17) lacks a zero-check on :
+		- rejectTo = _addr (contracts/mocks/MockBHTRejecting.sol#18)
+MockBHTReturnFalse.constructor(string,string,address)._rejectTo (contracts/mocks/MockBHTReturnFalse.sol#9) lacks a zero-check on :
+		- rejectTo = _rejectTo (contracts/mocks/MockBHTReturnFalse.sol#10)
+MockBHTReturnFalse.setRejectTo(address)._addr (contracts/mocks/MockBHTReturnFalse.sol#17) lacks a zero-check on :
+		- rejectTo = _addr (contracts/mocks/MockBHTReturnFalse.sol#18)
+MockPresale.setRescueContract(address)._rescue (contracts/mocks/MockPresale.sol#14) lacks a zero-check on :
+		- rescue = _rescue (contracts/mocks/MockPresale.sol#16)
+MockPresaleTarget.constructor(address,address)._nftContract (contracts/mocks/MockPresaleTarget.sol#18) lacks a zero-check on :
+		- nftContract = _nftContract (contracts/mocks/MockPresaleTarget.sol#19)
+MockPresaleTarget.constructor(address,address)._tokenContract (contracts/mocks/MockPresaleTarget.sol#18) lacks a zero-check on :
+		- tokenContract = _tokenContract (contracts/mocks/MockPresaleTarget.sol#20)
+MockProjectWalletClaimCaller.doClaim(address)._rescue (contracts/mocks/MockProjectWalletClaimCaller.sol#18) lacks a zero-check on :
+		- rescue = _rescue (contracts/mocks/MockProjectWalletClaimCaller.sol#19)
+MockProjectWalletMultiSig.withdrawTo(address,uint256).to (contracts/mocks/MockProjectWalletMultiSig.sol#58) lacks a zero-check on :
+		- (ok,None) = to.call{value: amount}() (contracts/mocks/MockProjectWalletMultiSig.sol#60)
+MockProjectWalletReentrant.constructor(address)._rescue (contracts/mocks/MockProjectWalletReentrant.sol#13) lacks a zero-check on :
+		- rescue = _rescue (contracts/mocks/MockProjectWalletReentrant.sol#14)
+MockProjectWalletRevertCaller.doClaim(address)._rescue (contracts/mocks/MockProjectWalletRevertCaller.sol#12) lacks a zero-check on :
+		- rescue = _rescue (contracts/mocks/MockProjectWalletRevertCaller.sol#13)
+MockProjectWalletRevertCallerPresale.doClaim(address)._presale (contracts/mocks/MockProjectWalletRevertCallerPresale.sol#12) lacks a zero-check on :
+		- presale = _presale (contracts/mocks/MockProjectWalletRevertCallerPresale.sol#13)
+MockTreasuryHandler.initialize(address)._treasury (contracts/mocks/MockTreasuryHandler.sol#7) lacks a zero-check on :
+		- treasury = _treasury (contracts/mocks/MockTreasuryHandler.sol#8)
+RejectingWallet.callWithdraw(address).target (contracts/mocks/RejectingWallet.sol#16) lacks a zero-check on :
+		- (ok,data) = target.call(abi.encodeWithSignature(withdrawFunds())) (contracts/mocks/RejectingWallet.sol#17)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#missing-zero-address-validation
+
+AttackerLoop.onERC1155Received(address,address,uint256,uint256,bytes) (contracts/AttackerLoop.sol#27-43) has external calls inside a loop: target.withdrawFunds() 
+(contracts/AttackerLoop.sol#36-40)
+BashoodNFTIntegration.stakeNFTs(uint256[]) (contracts/deprecated/BashoodNFTIntegration.sol#146-175) has external calls inside a loop: 
+require(bool,string)(propertyNFT.ownerOf(tokenId) == msg.sender,Not token owner) (contracts/deprecated/BashoodNFTIntegration.sol#159)
+BashoodNFTIntegration.stakeNFTs(uint256[]) (contracts/deprecated/BashoodNFTIntegration.sol#146-175) has external calls inside a loop: 
+propertyNFT.transferFrom(msg.sender,address(this),tokenId) (contracts/deprecated/BashoodNFTIntegration.sol#163)
+BashoodNFTIntegration.unstakeNFTs(uint256[]) (contracts/deprecated/BashoodNFTIntegration.sol#177-201) has external calls inside a loop: 
+propertyNFT.transferFrom(address(this),msg.sender,tokenId) (contracts/deprecated/BashoodNFTIntegration.sol#197)
+MaximalDangerAttacker._attemptPriceManipulation(uint256) (contracts/mocks/MaximalDangerAttacker.sol#228-239) has external calls inside a loop: 
+target.purchaseWithETH{value: amount / 50}(1,1,i,) (contracts/mocks/MaximalDangerAttacker.sol#232-236)
+	Calls stack containing the loop:
+		MaximalDangerAttacker.simulateFlashLoanAttack(uint256)
+		MaximalDangerAttacker._executeFlashLoanStrategy(uint256)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation/#calls-inside-a-loop
+
+Reentrancy in MaximalDangerAttacker.executeFrontRunningAttack(bytes,uint256) (contracts/mocks/MaximalDangerAttacker.sol#242-254):
+	External calls:
+	- _attemptFrontRun(targetTx,targetGasPrice) (contracts/mocks/MaximalDangerAttacker.sol#251)
+		- target.emergencyWithdrawETH() (contracts/mocks/MaximalDangerAttacker.sol#420)
+		- target.purchaseWithETH{value: 10000000000000000}(1,1,0,) (contracts/mocks/MaximalDangerAttacker.sol#275)
+	External calls sending eth:
+	- _attemptFrontRun(targetTx,targetGasPrice) (contracts/mocks/MaximalDangerAttacker.sol#251)
+		- target.purchaseWithETH{value: 10000000000000000}(1,1,0,) (contracts/mocks/MaximalDangerAttacker.sol#275)
+	State variables written after the call(s):
+	- frontRunningMode = false (contracts/mocks/MaximalDangerAttacker.sol#253)
+Reentrancy in BashoodNFTIntegration.listProperty(uint256,uint256) (contracts/deprecated/BashoodNFTIntegration.sol#248-265):
+	External calls:
+	- propertyNFT.transferFrom(msg.sender,address(this),_tokenId) (contracts/deprecated/BashoodNFTIntegration.sol#255)
+	State variables written after the call(s):
+	- listings[_tokenId] = Listing({seller:msg.sender,price:_price,active:true,listedAt:block.timestamp}) (contracts/deprecated/BashoodNFTIntegration.sol#257-262)
+Reentrancy in AttackerBatch.onERC1155BatchReceived(address,address,uint256[],uint256[],bytes) (contracts/AttackerBatch.sol#29-45):
+	External calls:
+	- target.withdrawFunds() (contracts/AttackerBatch.sol#39-43)
+	State variables written after the call(s):
+	- withdrawSucceeded = true (contracts/AttackerBatch.sol#40)
+	- withdrawSucceeded = false (contracts/AttackerBatch.sol#42)
+Reentrancy in AttackerConditional.onERC1155Received(address,address,uint256,uint256,bytes) (contracts/AttackerConditional.sol#26-41):
+	External calls:
+	- target.withdrawFunds() (contracts/AttackerConditional.sol#34-38)
+	State variables written after the call(s):
+	- withdrew = true (contracts/AttackerConditional.sol#35)
+	- withdrew = false (contracts/AttackerConditional.sol#37)
+Reentrancy in AttackerReceiver.onERC1155Received(address,address,uint256,uint256,bytes) (contracts/AttackerReceiver.sol#35-52):
+	External calls:
+	- target.withdrawFunds() (contracts/AttackerReceiver.sol#45-49)
+	State variables written after the call(s):
+	- withdrawSucceeded = true (contracts/AttackerReceiver.sol#46)
+	- withdrawSucceeded = false (contracts/AttackerReceiver.sol#48)
+Reentrancy in AttackerOwner.onERC1155Received(address,address,uint256,uint256,bytes) (contracts/mocks/AttackerOwner.sol#23-32):
+	External calls:
+	- target.withdrawFunds() (contracts/mocks/AttackerOwner.sol#26-30)
+	State variables written after the call(s):
+	- attemptedWithdraw = true (contracts/mocks/AttackerOwner.sol#27)
+	- attemptedWithdraw = false (contracts/mocks/AttackerOwner.sol#29)
+Reentrancy in MockPriceFeedV2.setAnswer(int256) (contracts/mocks/MockPriceFeedV2.sol#55-58):
+	External calls:
+	- aggregator.updateAnswer(_answer) (contracts/mocks/MockPriceFeedV2.sol#56)
+	State variables written after the call(s):
+	- useCustomAnsweredInRound = false (contracts/mocks/MockPriceFeedV2.sol#57)
+Reentrancy in MockPriceFeedV2.setAnswerWithTimestamp(int256,uint256) (contracts/mocks/MockPriceFeedV2.sol#64-72):
+	External calls:
+	- aggregator.updateRoundData(nextRound,_answer,_updatedAt,_updatedAt) (contracts/mocks/MockPriceFeedV2.sol#70)
+	State variables written after the call(s):
+	- useCustomAnsweredInRound = false (contracts/mocks/MockPriceFeedV2.sol#71)
+Reentrancy in MaximalDangerAttacker.simulateFlashLoanAttack(uint256) (contracts/mocks/MaximalDangerAttacker.sol#205-215):
+	External calls:
+	- _executeFlashLoanStrategy(loanAmount) (contracts/mocks/MaximalDangerAttacker.sol#212)
+		- target.purchaseWithETH{value: 1000000000000000}(1,10,0,) (contracts/mocks/MaximalDangerAttacker.sol#426)
+		- target.purchaseWithETH{value: amount / 50}(1,1,i,) (contracts/mocks/MaximalDangerAttacker.sol#232-236)
+	State variables written after the call(s):
+	- flashLoanMode = false (contracts/mocks/MaximalDangerAttacker.sol#214)
+Reentrancy in BashoodPresaleFinal.submitProposal(bytes,uint256) (contracts/BashoodPresaleFinal.sol#131-161):
+	External calls:
+	- IBashoodToken(address(bashoodToken)).burnFrom(msg.sender,depositBHT) (contracts/BashoodPresaleFinal.sol#143-151)
+	- burnOk = bashoodToken.transferFrom(msg.sender,0x000000000000000000000000000000000000dEaD,depositBHT) (contracts/BashoodPresaleFinal.sol#147)
+	State variables written after the call(s):
+	- nextProposalId ++ (contracts/BashoodPresaleFinal.sol#160)
+	- proposals[nextProposalId] = Proposal({proposer:msg.sender,data:data,depositBHT:depositBHT,finalized:false}) (contracts/BashoodPresaleFinal.sol#153-158)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#reentrancy-vulnerabilities-2
+
+Reentrancy in MaximalDangerAttacker._attemptSecondPurchase() (contracts/mocks/MaximalDangerAttacker.sol#184-191):
+	External calls:
+	- target.purchaseWithETH{value: address(this).balance / 2}(1,1,0,) (contracts/mocks/MaximalDangerAttacker.sol#185-190)
+	Event emitted after the call(s):
+	- AttackInitiated(Nested Purchase,address(target),address(this).balance / 2) (contracts/mocks/MaximalDangerAttacker.sol#186)
+Reentrancy in MaximalDangerAttacker._attemptSecondPurchase() (contracts/mocks/MaximalDangerAttacker.sol#184-191):
+	External calls:
+	- target.purchaseWithETH{value: address(this).balance / 2}(1,1,0,) (contracts/mocks/MaximalDangerAttacker.sol#185-190)
+	- _attemptTokenPurchase() (contracts/mocks/MaximalDangerAttacker.sol#189)
+		- token.approve(address(target),tokenBalance) (contracts/mocks/MaximalDangerAttacker.sol#196-200)
+		- target.purchaseWithBHT(1,1,0,) (contracts/mocks/MaximalDangerAttacker.sol#197-199)
+	External calls sending eth:
+	- target.purchaseWithETH{value: address(this).balance / 2}(1,1,0,) (contracts/mocks/MaximalDangerAttacker.sol#185-190)
+	Event emitted after the call(s):
+	- AttackInitiated(Token Purchase,address(target),tokenBalance) (contracts/mocks/MaximalDangerAttacker.sol#198)
+		- _attemptTokenPurchase() (contracts/mocks/MaximalDangerAttacker.sol#189)
+Reentrancy in MaximalDangerAttacker._attemptTokenPurchase() (contracts/mocks/MaximalDangerAttacker.sol#193-202):
+	External calls:
+	- token.approve(address(target),tokenBalance) (contracts/mocks/MaximalDangerAttacker.sol#196-200)
+	- target.purchaseWithBHT(1,1,0,) (contracts/mocks/MaximalDangerAttacker.sol#197-199)
+	Event emitted after the call(s):
+	- AttackInitiated(Token Purchase,address(target),tokenBalance) (contracts/mocks/MaximalDangerAttacker.sol#198)
+Reentrancy in MaximalDangerAttacker._executeFlashLoanStrategy(uint256) (contracts/mocks/MaximalDangerAttacker.sol#217-226):
+	External calls:
+	- _attemptPriceManipulation(amount) (contracts/mocks/MaximalDangerAttacker.sol#219)
+		- target.purchaseWithETH{value: amount / 50}(1,1,i,) (contracts/mocks/MaximalDangerAttacker.sol#232-236)
+	- _exploitManipulatedPrice() (contracts/mocks/MaximalDangerAttacker.sol#222)
+		- target.purchaseWithETH{value: 1000000000000000}(1,10,0,) (contracts/mocks/MaximalDangerAttacker.sol#426)
+	Event emitted after the call(s):
+	- FlashLoanExecuted(amount,true) (contracts/mocks/MaximalDangerAttacker.sol#225)
+Reentrancy in MockProjectWalletMultiSigEIP712.executeClaimWithSignatures(address,uint256,bytes[]) (contracts/mocks/MockProjectWalletMultiSigEIP712.sol#63-105):
+	External calls:
+	- IRescueClaim(rescue).claimEmergencyWithdrawal() (contracts/mocks/MockProjectWalletMultiSigEIP712.sol#99)
+	Event emitted after the call(s):
+	- EmergencyClaimed(rescue,address(this)) (contracts/mocks/MockProjectWalletMultiSigEIP712.sol#104)
+	- MultisigExecuted(rescue,msg.sender,valid,nonce) (contracts/mocks/MockProjectWalletMultiSigEIP712.sol#103)
+Reentrancy in MockPresaleTarget.purchaseWithBHT(uint256,uint256,uint256,bytes) (contracts/MockPresaleTarget.sol#56-63):
+	External calls:
+	- bashoodToken.transferFrom(msg.sender,address(this),amount) (contracts/MockPresaleTarget.sol#60)
+	Event emitted after the call(s):
+	- Purchase(msg.sender,amount) (contracts/MockPresaleTarget.sol#62)
+Reentrancy in MockPresaleTarget.purchaseWithETH(uint256,uint256,uint256,bytes) (contracts/MockPresaleTarget.sol#29-53):
+	External calls:
+	- IERC1155Receiver(msg.sender).onERC1155Received(address(this),msg.sender,nftId,amount,data) (contracts/MockPresaleTarget.sol#39-49)
+	Event emitted after the call(s):
+	- Purchase(msg.sender,amount) (contracts/MockPresaleTarget.sol#52)
+Reentrancy in MockPresaleTarget.purchaseWithETH(uint256,uint256,uint256,bytes) (contracts/mocks/MockPresaleTarget.sol#23-39):
+	External calls:
+	- IERC1155Receiver(msg.sender).onERC1155Received(address(this),msg.sender,1,quantity,) (contracts/mocks/MockPresaleTarget.sol#29-35)
+	Event emitted after the call(s):
+	- Purchase(msg.sender,quantity) (contracts/mocks/MockPresaleTarget.sol#38)
+Reentrancy in BashoodRescue.rescueUnsoldNFTs(address,uint256,address,uint256) (contracts/BashoodRescue.sol#56-72):
+	External calls:
+	- nft.safeTransferFrom(address(this),to,nftId,amount,) (contracts/BashoodRescue.sol#70)
+	Event emitted after the call(s):
+	- ERC1155Rescued(nftContract,nftId,to,amount) (contracts/BashoodRescue.sol#71)
+Reentrancy in TokenWrapperERC20.unwrap(uint256) (contracts/TokenWrapperERC20.sol#34-38):
+	External calls:
+	- require(bool,string)(legacy.transfer(msg.sender,amount),transfer failed) (contracts/TokenWrapperERC20.sol#36)
+	Event emitted after the call(s):
+	- Unwrapped(msg.sender,amount) (contracts/TokenWrapperERC20.sol#37)
+Reentrancy in LibraVulnerable.withdraw(uint256) (contracts/LibraVulnerable.sol#20-32):
+	External calls:
+	- (ok,None) = address(msg.sender).call{value: amount}() (contracts/LibraVulnerable.sol#25)
+	Event emitted after the call(s):
+	- Withdrawn(msg.sender,amount) (contracts/LibraVulnerable.sol#31)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#reentrancy-vulnerabilities-3
+
+BashoodPresaleFinal._getFreshPrice() (contracts/BashoodPresaleFinal.sol#199-208) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool,string)(answer > 0 && updatedAt > 0 && block.timestamp - updatedAt <= maxPriceStaleness,Oracle: Invalid/stale) (contracts/BashoodPresaleFinal.sol#205)
+BashoodPresaleFinal._bhtFromFiat(uint256) (contracts/BashoodPresaleFinal.sol#235-248) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool,string)(block.timestamp - updatedAt <= maxPriceStaleness,Price too stale) (contracts/BashoodPresaleFinal.sol#241)
+BashoodPresaleFinal._calculateBhtAmounts(uint256) (contracts/BashoodPresaleFinal.sol#542-560) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool,string)(block.timestamp - updatedAt <= maxPriceStaleness,Price too stale) (contracts/BashoodPresaleFinal.sol#552)
+BashoodPropertyNFT.mintProperty(address,BashoodPropertyNFT.PropertyData,string) (contracts/BashoodPropertyNFT.sol#133-166) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool,string)(bytes(propertyData.name).length > 0,Property name required) (contracts/BashoodPropertyNFT.sol#140)
+	- require(bool,string)(propertyData.propertyType > 0 && propertyData.propertyType <= uint256(PropertyType.PENTHOUSE),Invalid property type) 
+(contracts/BashoodPropertyNFT.sol#141)
+BashoodPropertyNFT.getPropertiesByType(uint256) (contracts/BashoodPropertyNFT.sol#271-284) uses timestamp for comparisons
+	Dangerous comparisons:
+	- properties[i].propertyType == propertyType (contracts/BashoodPropertyNFT.sol#277)
+ComplianceRegistry.isValidProof(address,bytes32,bytes32[]) (contracts/ComplianceRegistry.sol#25-37) uses timestamp for comparisons
+	Dangerous comparisons:
+	- r.expiry != 0 && block.timestamp > r.expiry (contracts/ComplianceRegistry.sol#28)
+Lock.constructor(uint256) (contracts/Lock.sol#13-21) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool,string)(block.timestamp < _unlockTime,Unlock time must be future) (contracts/Lock.sol#14-17)
+Lock.withdraw() (contracts/Lock.sol#23-33) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool,string)(block.timestamp >= unlockTime,You can't withdraw yet) (contracts/Lock.sol#27)
+BashoodNFTIntegration.unstakeNFTs(uint256[]) (contracts/deprecated/BashoodNFTIntegration.sol#177-201) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool,string)(userStake.tokenIds.length > 0,No staked tokens) (contracts/deprecated/BashoodNFTIntegration.sol#181)
+BashoodNFTIntegration._claimStakingRewards(address) (contracts/deprecated/BashoodNFTIntegration.sol#207-222) uses timestamp for comparisons
+	Dangerous comparisons:
+	- reward > 0 (contracts/deprecated/BashoodNFTIntegration.sol#211)
+BashoodNFTIntegration.calculateStakingRewards(address) (contracts/deprecated/BashoodNFTIntegration.sol#224-234) uses timestamp for comparisons
+	Dangerous comparisons:
+	- userStake.tokenIds.length == 0 || userStake.lastClaimTime == 0 (contracts/deprecated/BashoodNFTIntegration.sol#226)
+BashoodNFTIntegration.buyProperty(uint256) (contracts/deprecated/BashoodNFTIntegration.sol#267-296) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool,string)(listing.active,Not listed) (contracts/deprecated/BashoodNFTIntegration.sol#271)
+	- require(bool,string)(msg.value == listing.price,Incorrect payment) (contracts/deprecated/BashoodNFTIntegration.sol#272)
+BashoodNFTIntegration.cancelListing(uint256) (contracts/deprecated/BashoodNFTIntegration.sol#298-307) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool,string)(listing.seller == msg.sender,Not your listing) (contracts/deprecated/BashoodNFTIntegration.sol#300)
+	- require(bool,string)(listing.active,Not active) (contracts/deprecated/BashoodNFTIntegration.sol#301)
+ChainlinkPriceFeed.getLatestPrice() (contracts/oracles/ChainlinkPriceFeed.sol#40-63) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool,string)(block.timestamp - uAt <= stalenessThreshold,stale) (contracts/oracles/ChainlinkPriceFeed.sol#46)
+ChainlinkPriceFeed.peekLatestPrice() (contracts/oracles/ChainlinkPriceFeed.sol#66-74) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool,string)(block.timestamp - uAt <= stalenessThreshold,stale) (contracts/oracles/ChainlinkPriceFeed.sol#71)
+BashoodRWAReference.calculateCurrentValue(uint256) (contracts/standards/BashoodRWAReference.sol#280-297) uses timestamp for comparisons
+	Dangerous comparisons:
+	- depreciatedValue > residualValue (contracts/standards/BashoodRWAReference.sol#296)
+BashoodRWAReference.getDepreciationPercentage(uint256) (contracts/standards/BashoodRWAReference.sol#304-359) uses timestamp for comparisons
+	Dangerous comparisons:
+	- depPct > BASIS_POINTS (contracts/standards/BashoodRWAReference.sol#355)
+BashoodRWAReference.requiresMaintenance(uint256) (contracts/standards/BashoodRWAReference.sol#469-483) uses timestamp for comparisons
+	Dangerous comparisons:
+	- hoursSinceLastMaintenance >= metrics.maintenanceIntervalHours (contracts/standards/BashoodRWAReference.sol#482)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#block-timestamp
+
+BashoodPresaleFinal._isContract(address) (contracts/BashoodPresaleFinal.sol#579-583) uses assembly
+	- INLINE ASM (contracts/BashoodPresaleFinal.sol#581)
+MaximalDangerAttacker._performGasGriefing() (contracts/mocks/MaximalDangerAttacker.sol#291-302) uses assembly
+	- INLINE ASM (contracts/mocks/MaximalDangerAttacker.sol#294-297)
+MaximalDangerAttacker._manipulateInternalState() (contracts/mocks/MaximalDangerAttacker.sol#324-331) uses assembly
+	- INLINE ASM (contracts/mocks/MaximalDangerAttacker.sol#326-330)
+RejectingWallet.callWithdraw(address) (contracts/mocks/RejectingWallet.sol#16-28) uses assembly
+	- INLINE ASM (contracts/mocks/RejectingWallet.sol#21-24)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#assembly-usage
+
+AttackerLoop.onERC1155Received(address,address,uint256,uint256,bytes) (contracts/AttackerLoop.sol#27-43) has costly operations inside a loop:
+	- attempts ++ (contracts/AttackerLoop.sol#35)
+AttackerLoop.onERC1155Received(address,address,uint256,uint256,bytes) (contracts/AttackerLoop.sol#27-43) has costly operations inside a loop:
+	- successes ++ (contracts/AttackerLoop.sol#37)
+MaximalDangerAttacker.prepareBatchAttack(address[],uint256[]) (contracts/mocks/MaximalDangerAttacker.sol#334-348) has costly operations inside a loop:
+	- targets = new address[](1) (contracts/mocks/MaximalDangerAttacker.sol#343)
+MaximalDangerAttacker.prepareBatchAttack(address[],uint256[]) (contracts/mocks/MaximalDangerAttacker.sol#334-348) has costly operations inside a loop:
+	- amounts = new uint256[](1) (contracts/mocks/MaximalDangerAttacker.sol#344)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#costly-operations-inside-a-loop
+
+BashoodMultiToken (contracts/BashoodMultiToken.sol#10-112) should inherit from IBashoodMultiToken (contracts/AttackerBatch.sol#6-10)
+BashoodMultiToken (contracts/BashoodMultiToken.sol#10-112) should inherit from IERC1155Mintable (contracts/IERC1155Mintable.sol#6-8)
+BashoodPresaleFinal (contracts/BashoodPresaleFinal.sol#50-732) should inherit from IPresale (contracts/mocks/Caller.sol#4-6)
+BashoodPresaleFinal (contracts/BashoodPresaleFinal.sol#50-732) should inherit from IPresaleClaim (contracts/mocks/MockProjectWalletRevertCallerPresale.sol#4-6)
+BashoodRescue (contracts/BashoodRescue.sol#15-169) should inherit from IBashoodRescue (contracts/IBashoodRescue.sol#4-8)
+BashoodRescue (contracts/BashoodRescue.sol#15-169) should inherit from IRescueClaim (contracts/mocks/MockProjectWalletClaimCaller.sol#4-6)
+Libra (contracts/Libra.sol#6-63) should inherit from ILibraVulnerable (contracts/AttackerReentrancy.sol#4-7)
+LibraVulnerable (contracts/LibraVulnerable.sol#5-37) should inherit from ILibraVulnerable (contracts/AttackerReentrancy.sol#4-7)
+MockNFT1155 (contracts/MockNFT1155.sol#6-17) should inherit from IERC1155Mintable (contracts/IERC1155Mintable.sol#6-8)
+MockPresaleTarget (contracts/MockPresaleTarget.sol#7-95) should inherit from IPresale (contracts/mocks/Caller.sol#4-6)
+MockPriceFeed (contracts/MockPriceFeed.sol#4-42) should inherit from IPriceFeed (contracts/oracles/IPriceFeed.sol#4-17)
+MockBHTWithBurn (contracts/mocks/MockBHTWithBurn.sol#6-18) should inherit from IBashoodToken (contracts/BashoodPresaleFinal.sol#26-28)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#missing-inheritance
+
+Redundant expression "gasPrice (contracts/mocks/MaximalDangerAttacker.sol#258)" inMaximalDangerAttacker (contracts/mocks/MaximalDangerAttacker.sol#30-503)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#redundant-statements
+
+Reentrancy in BashoodNFTIntegration.buyProperty(uint256) (contracts/deprecated/BashoodNFTIntegration.sol#267-296):
+	External calls:
+	- address(seller).transfer(sellerAmount) (contracts/deprecated/BashoodNFTIntegration.sol#289)
+	Event emitted after the call(s):
+	- PropertySold(_tokenId,seller,msg.sender,price) (contracts/deprecated/BashoodNFTIntegration.sol#295)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#reentrancy-vulnerabilities-4
+
+BashoodPresaleFinal._PRECISION (contracts/BashoodPresaleFinal.sol#75) is never used in BashoodPresaleFinal (contracts/BashoodPresaleFinal.sol#50-732)
+BashoodPresaleFinal._DEFAULT_DECIMALS (contracts/BashoodPresaleFinal.sol#76) is never used in BashoodPresaleFinal (contracts/BashoodPresaleFinal.sol#50-732)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#unused-state-variable
+
+Loop condition i < owners.length (contracts/mocks/MockProjectWalletMultiSig.sol#42) should use cached array length instead of referencing `length` member of the 
+storage array.
+ Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#cache-array-length
+
+AttackerBatch.deployer (contracts/AttackerBatch.sol#14) should be immutable 
+AttackerConditional.deployer (contracts/AttackerConditional.sol#13) should be immutable 
+AttackerLoop.deployer (contracts/AttackerLoop.sol#13) should be immutable 
+AttackerOwner.target (contracts/mocks/AttackerOwner.sol#10) should be immutable 
+AttackerReceiver.deployer (contracts/AttackerReceiver.sol#15) should be immutable 
+AttackerReentrancy.owner (contracts/AttackerReentrancy.sol#11) should be immutable 
+AttackerReentrancy.target (contracts/AttackerReentrancy.sol#10) should be immutable 
+BashoodMultiToken.rate (contracts/BashoodMultiToken.sol#18) should be immutable 
+ERC1155ReentrantReceiver.attacker (contracts/mocks/ERC1155ReentrantReceiver.sol#13) should be immutable 
+ERC1155ReentrantReceiver.target (contracts/mocks/ERC1155ReentrantReceiver.sol#12) should be immutable 
+Lock.owner (contracts/Lock.sol#9) should be immutable 
+Lock.unlockTime (contracts/Lock.sol#8) should be immutable 
+MaximalDangerAttacker.owner (contracts/mocks/MaximalDangerAttacker.sol#38) should be immutable 
+MockPresale.owner (contracts/mocks/MockPresale.sol#8) should be immutable 
+MockPresaleTarget.owner (contracts/MockPresaleTarget.sol#10) should be immutable 
+MockPriceFeed._decimals (contracts/MockPriceFeed.sol#6) should be immutable 
+MockProjectWalletClaimCaller.owner (contracts/mocks/MockProjectWalletClaimCaller.sol#11) should be immutable 
+MockProjectWalletMultiSig.threshold (contracts/mocks/MockProjectWalletMultiSig.sol#15) should be immutable 
+MockProjectWalletMultiSigEIP712.revertOnReceive (contracts/mocks/MockProjectWalletMultiSigEIP712.sol#30) should be immutable 
+MockProjectWalletMultiSigEIP712.threshold (contracts/mocks/MockProjectWalletMultiSigEIP712.sol#24) should be immutable 
+MockProjectWalletReentrant.owner (contracts/mocks/MockProjectWalletReentrant.sol#11) should be immutable 
+MockProjectWalletReentrant.rescue (contracts/mocks/MockProjectWalletReentrant.sol#10) should be immutable 
+MockReferral.owner (contracts/mocks/MockReferral.sol#7) should be immutable 
+TokenWrapperERC20.issuer (contracts/TokenWrapperERC20.sol#13) should be immutable 
+TokenWrapperERC20.legacy (contracts/TokenWrapperERC20.sol#11) should be immutable 
+TokenWrapperERC20.registry (contracts/TokenWrapperERC20.sol#12) should be immutable 
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#state-variables-that-could-be-declared-immutable
+. analyzed (153 contracts with 94 detectors), 167 result(s) found
+INFO:Slither:slither-results.json exists already, the overwrite is prevented

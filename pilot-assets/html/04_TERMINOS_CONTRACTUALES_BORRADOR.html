@@ -1,0 +1,928 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Términos Contractuales (Borrador)</title>
+  <style>
+    @page {
+      size: A4;
+      margin: 20mm;
+    }
+    
+    * {
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-size: 11pt;
+      line-height: 1.6;
+      color: #333;
+      max-width: 210mm;
+      margin: 0 auto;
+      padding: 20px;
+      background: white;
+    }
+    
+    /* Portada */
+    .cover-page {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 80vh;
+      text-align: center;
+      page-break-after: always;
+    }
+    
+    .cover-page h1 {
+      font-size: 32pt;
+      color: #2c3e50;
+      margin-bottom: 30px;
+      border: none;
+    }
+    
+    .cover-page .project-name {
+      font-size: 18pt;
+      color: #7f8c8d;
+      margin: 20px 0;
+    }
+    
+    .cover-page .asset-name {
+      font-size: 16pt;
+      color: #95a5a6;
+      margin: 20px 0;
+    }
+    
+    .cover-page .date {
+      font-size: 14pt;
+      color: #bdc3c7;
+      margin-top: 60px;
+    }
+    
+    .cover-page .confidential {
+      font-size: 12pt;
+      color: #e74c3c;
+      margin-top: 40px;
+      font-weight: bold;
+    }
+    
+    /* Encabezados */
+    h1 {
+      color: #2c3e50;
+      border-bottom: 3px solid #3498db;
+      padding-bottom: 10px;
+      margin-top: 40px;
+      page-break-after: avoid;
+    }
+    
+    h2 {
+      color: #34495e;
+      border-bottom: 2px solid #95a5a6;
+      padding-bottom: 5px;
+      margin-top: 30px;
+      page-break-after: avoid;
+    }
+    
+    h3 {
+      color: #555;
+      margin-top: 25px;
+      page-break-after: avoid;
+    }
+    
+    h4 {
+      color: #666;
+      margin-top: 20px;
+    }
+    
+    /* Tablas */
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      margin: 20px 0;
+      page-break-inside: avoid;
+    }
+    
+    th, td {
+      border: 1px solid #ddd;
+      padding: 10px;
+      text-align: left;
+    }
+    
+    th {
+      background-color: #3498db;
+      color: white;
+      font-weight: bold;
+    }
+    
+    tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+    
+    /* Código */
+    code {
+      background-color: #f4f4f4;
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-family: 'Courier New', monospace;
+      font-size: 10pt;
+      color: #c7254e;
+    }
+    
+    pre {
+      background-color: #f4f4f4;
+      padding: 15px;
+      border-radius: 5px;
+      overflow-x: auto;
+      border-left: 4px solid #3498db;
+      page-break-inside: avoid;
+    }
+    
+    pre code {
+      background: none;
+      padding: 0;
+      color: #333;
+    }
+    
+    /* Blockquotes */
+    blockquote {
+      border-left: 4px solid #3498db;
+      padding-left: 15px;
+      margin-left: 0;
+      color: #555;
+      font-style: italic;
+      page-break-inside: avoid;
+    }
+    
+    /* Listas */
+    ul, ol {
+      margin: 15px 0;
+      padding-left: 30px;
+    }
+    
+    li {
+      margin: 8px 0;
+    }
+    
+    /* Checkboxes (tareas) */
+    input[type="checkbox"] {
+      margin-right: 8px;
+    }
+    
+    /* Enlaces */
+    a {
+      color: #3498db;
+      text-decoration: none;
+    }
+    
+    a:hover {
+      text-decoration: underline;
+    }
+    
+    /* Separadores */
+    hr {
+      border: none;
+      border-top: 2px solid #ecf0f1;
+      margin: 30px 0;
+    }
+    
+    /* Emojis y símbolos */
+    .emoji {
+      font-size: 1.2em;
+    }
+    
+    /* Page breaks */
+    .page-break {
+      page-break-after: always;
+    }
+    
+    /* Header y footer para impresión */
+    @media print {
+      body {
+        padding: 0;
+      }
+      
+      .no-print {
+        display: none;
+      }
+      
+      h1, h2, h3 {
+        page-break-after: avoid;
+      }
+      
+      table, pre, blockquote {
+        page-break-inside: avoid;
+      }
+      
+      /* Footer */
+      @page {
+        @bottom-right {
+          content: "Bashood RWA - 2026";
+          font-size: 9pt;
+          color: #bdc3c7;
+        }
+        
+        @bottom-left {
+          content: "Términos Contractuales (Borrador)";
+          font-size: 9pt;
+          color: #bdc3c7;
+        }
+      }
+    }
+    
+    /* Instrucciones imprimir (solo pantalla) */
+    .print-instructions {
+      background: #fff3cd;
+      border: 2px solid #ffc107;
+      border-radius: 5px;
+      padding: 15px;
+      margin: 20px 0;
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      max-width: 300px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      z-index: 1000;
+    }
+    
+    @media print {
+      .print-instructions {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="print-instructions no-print">
+    <h4 style="margin-top:0; color:#856404">📄 Para generar PDF:</h4>
+    <ol style="margin:0; padding-left:20px; color:#856404">
+      <li>Presiona <strong>Ctrl+P</strong></li>
+      <li>Selecciona "Guardar como PDF"</li>
+      <li>Ajusta márgenes si es necesario</li>
+      <li>Guarda el archivo</li>
+    </ol>
+  </div>
+  
+  <div class="cover-page">
+    <h1>Términos Contractuales (Borrador)</h1>
+    <div class="project-name">Proyecto Bashood RWA</div>
+    <div class="asset-name">Activo Piloto: Doosan DX360</div>
+    <div class="date">20 de febrero de 2026</div>
+    <div class="confidential">☑️ CONFIDENCIAL - Solo para uso del destinatario</div>
+  </div>
+  
+  <div class="content">
+    <h1 id="📄-términos-contractuales---tokenización-rwa-borrador">📄 Términos Contractuales - Tokenización RWA (BORRADOR)</h1>
+<p><strong>Activo:</strong> Doosan DX360LC Excavadora Hidráulica<br><strong>Proyecto:</strong> Bashood - Real World Assets Tokenization<br><strong>Fecha:</strong> 20 Febrero 2026<br><strong>Versión:</strong> 1.0 BORRADOR (sujeto a negociación)</p>
+<hr>
+<h2 id="⚠️-advertencia-legal">⚠️ ADVERTENCIA LEGAL</h2>
+<p><strong>Este es un BORRADOR de términos comerciales, NO un contrato legal vinculante.</strong></p>
+<p>Antes de proceder con tokenización real, se requiere:</p>
+<ul>
+<li>✅ Redacción por abogado especializado (blockchain + mercantil)</li>
+<li>✅ Revisión compliance (regulación MiCA, CNMV si aplica)</li>
+<li>✅ Adaptación a jurisdicción específica (España, Malta, etc.)</li>
+<li>✅ Due diligence completa aprobada</li>
+</ul>
+<p><strong>NO FIRMAR hasta revisión legal profesional.</strong></p>
+<hr>
+<h2 id="📋-sección-1-partes-contractuales">📋 SECCIÓN 1: PARTES CONTRACTUALES</h2>
+<h3 id="11-parte-a-propietario-activo">1.1 PARTE A (Propietario Activo)</h3>
+<p><strong>Nombre/Razón Social:</strong> ___________________________________<br><strong>NIF/CIF:</strong> _______________________________________________<br><strong>Dirección Fiscal:</strong> _______________________________________<br><strong>Representante Legal:</strong> ____________________________________<br><strong>Email Contacto:</strong> _________________________________________<br><strong>Teléfono:</strong> _______________________________________________</p>
+<p><strong>En adelante: &quot;PROPIETARIO&quot;</strong></p>
+<hr>
+<h3 id="12-parte-b-proyecto-tokenización">1.2 PARTE B (Proyecto Tokenización)</h3>
+<p><strong>Entidad:</strong> Bashood RWA SPV / [Estructura legal a definir]<br><strong>CIF:</strong> [Pendiente establecimiento entidad]<br><strong>Domicilio:</strong> [Por definir - España/Malta]<br><strong>Representante Legal:</strong> [Por definir]<br><strong>Email:</strong> <a href="mailto:contacto@bashood.io">contacto@bashood.io</a><br><strong>Blockchain:</strong> Base Network (Ethereum L2)</p>
+<p><strong>En adelante: &quot;TOKENIZADOR&quot;</strong></p>
+<hr>
+<h3 id="13-token-holders-inversionistas">1.3 TOKEN HOLDERS (Inversionistas)</h3>
+<p><strong>Colectivo de:</strong> Titulares de tokens BHT (Bashood Token)<br><strong>Representación:</strong> A través de smart contracts blockchain<br><strong>Derechos:</strong> Económicos proporcionales (NO propiedad física)</p>
+<p><strong>En adelante: &quot;HOLDERS&quot;</strong></p>
+<hr>
+<h2 id="📋-sección-2-objeto-del-contrato">📋 SECCIÓN 2: OBJETO DEL CONTRATO</h2>
+<h3 id="21-activo-a-tokenizar">2.1 Activo a Tokenizar</h3>
+<p><strong>Identificación:</strong></p>
+<ul>
+<li>Marca: Doosan</li>
+<li>Modelo: DX360LC</li>
+<li>Año: ___________</li>
+<li>Número de serie: _______________________</li>
+<li>Bastidor/VIN: __________________________</li>
+<li>Horas operativas actuales: _____________ h</li>
+<li>Ubicación: ____________________________</li>
+</ul>
+<p><strong>Valoración:</strong></p>
+<ul>
+<li>Método: [Tasación profesional / Comparativa mercado]</li>
+<li>Valor acordado: €150,000 (CIENTO CINCUENTA MIL EUROS)</li>
+<li>Fecha valoración: 20 Febrero 2026</li>
+<li>Tasador: [Nombre empresa/profesional]</li>
+</ul>
+<hr>
+<h3 id="22-porcentaje-tokenizado">2.2 Porcentaje Tokenizado</h3>
+<p><strong>Estructura propiedad:</strong></p>
+<ul>
+<li>PROPIETARIO retiene: <strong>60%</strong> (control mayoritario)</li>
+<li>TOKENIZADO (HOLDERS): <strong>40%</strong> (derechos económicos)</li>
+</ul>
+<p><strong>Tokens emitidos:</strong></p>
+<ul>
+<li>Símbolo: BHT-DX360</li>
+<li>Supply total: 100,000 tokens</li>
+<li>Tokens retenidos por PROPIETARIO: 60,000 tokens (60%)</li>
+<li>Tokens en circulación (HOLDERS): 40,000 tokens (40%)</li>
+<li>Blockchain: Base Network</li>
+<li>Estándar: ERC-20</li>
+</ul>
+<p><strong>IMPORTANTE:</strong> </p>
+<ul>
+<li>PROPIETARIO mantiene control operativo 100% del activo físico</li>
+<li>TOKEN HOLDERS solo tienen derechos económicos proporcionales</li>
+<li>Propiedad física NO cambia (PROPIETARIO sigue siendo dueño legal)</li>
+</ul>
+<hr>
+<h2 id="📋-sección-3-derechos-y-obligaciones">📋 SECCIÓN 3: DERECHOS Y OBLIGACIONES</h2>
+<h3 id="31-derechos-del-propietario">3.1 Derechos del PROPIETARIO</h3>
+<p>El PROPIETARIO mantiene:</p>
+<p>✅ <strong>Control operativo total:</strong></p>
+<ul>
+<li>Decidir contratos/clientes</li>
+<li>Fijar tarifas cobro</li>
+<li>Programar mantenimiento</li>
+<li>Ubicar activo donde considere</li>
+<li>Operar sin interferencia HOLDERS</li>
+</ul>
+<p>✅ <strong>Propiedad legal:</strong></p>
+<ul>
+<li>Titularidad 100% activo físico</li>
+<li>Inscripción registro (si aplica)</li>
+<li>Capacidad vender/traspasar (con condiciones - ver 5.3)</li>
+</ul>
+<p>✅ <strong>Derecho liquidez:</strong></p>
+<ul>
+<li>Recibir [€60,000] al tokenizar (precio negociable)</li>
+<li>Recibir 60% beneficios netos mensuales</li>
+<li>Prioridad en financiación adicional (si proyecto exitoso)</li>
+</ul>
+<p>✅ <strong>Derecho información:</strong></p>
+<ul>
+<li>Acceso completo datos blockchain</li>
+<li>Reportes HOLDERS (qué dicen de operación)</li>
+<li>Propuestas mejora comunidad</li>
+</ul>
+<p>✅ <strong>Derecho salida:</strong></p>
+<ul>
+<li>Compra de vuelta tokens (derecho preferente)</li>
+<li>Rescisión contrato primeros 6 meses (con condiciones)</li>
+<li>Migración activo (reemplazo por superior - ver 5.4)</li>
+</ul>
+<hr>
+<h3 id="32-obligaciones-del-propietario">3.2 Obligaciones del PROPIETARIO</h3>
+<p>El PROPIETARIO se compromete a:</p>
+<p>📋 <strong>Reporting mensual (obligatorio):</strong></p>
+<ul>
+<li>Presentar antes día 5 de cada mes:<ul>
+<li>Lectura horómetro (foto con fecha)</li>
+<li>Ingresos del mes (factura o resumen)</li>
+<li>Costes principales (gasoil, mantenimiento)</li>
+<li>Horas operadas</li>
+<li>Incidencias relevantes</li>
+</ul>
+</li>
+</ul>
+<p>📋 <strong>Mantenimiento preventivo:</strong></p>
+<ul>
+<li>Seguir plan mantenimiento fabricante</li>
+<li>Cambios aceite/filtros según schedule</li>
+<li>Reparar averías en plazo razonable (&lt;30 días críticas)</li>
+<li>Mantener libro mantenimiento actualizado</li>
+</ul>
+<p>📋 <strong>Seguros vigentes:</strong></p>
+<ul>
+<li>Póliza todo riesgo mínimo €100,000 cobertura</li>
+<li>Responsabilidad civil mínimo €500,000</li>
+<li>Beneficiario: [PROPIETARIO / SPV - acordar]</li>
+<li>Renovación automática (no dejar caducar)</li>
+</ul>
+<p>📋 <strong>Transparencia financiera:</strong></p>
+<ul>
+<li>Demostrar ingresos con facturas (si requerido)</li>
+<li>Justificar costes extraordinarios &gt;€2,000</li>
+<li>Permitir inspección física anual (con aviso 30 días)</li>
+<li>No ocultar información relevante operación</li>
+</ul>
+<p>📋 <strong>Buena fe operativa:</strong></p>
+<ul>
+<li>No subutilizar activo intencionadamente</li>
+<li>No transferir activo sin consentimiento HOLDERS (ver 5.3)</li>
+<li>No modificar/alterar activo sin notificar</li>
+<li>Operar diligentemente (maximizar beneficios)</li>
+</ul>
+<hr>
+<h3 id="33-derechos-de-token-holders">3.3 Derechos de TOKEN HOLDERS</h3>
+<p>Los HOLDERS tienen derecho a:</p>
+<p>✅ <strong>Beneficios proporcionales:</strong></p>
+<ul>
+<li>Recibir 40% beneficios netos mensuales</li>
+<li>Distribución automática vía smart contract</li>
+<li>Treasury fee deducida: 0.5% (financiar proyecto)</li>
+<li>Sin intervención manual (descentralizado)</li>
+</ul>
+<p>✅ <strong>Información transparente:</strong></p>
+<ul>
+<li>Reportes mensuales on-chain</li>
+<li>Dashboards públicos (horas, ingresos, estado)</li>
+<li>Histórico completo operación</li>
+<li>Alertas si problemas críticos</li>
+</ul>
+<p>✅ <strong>Gobernanza limitada:</strong></p>
+<ul>
+<li>Votar sobre:<ul>
+<li>Cambios reporting (frecuencia, formato)</li>
+<li>Auditorías extraordinarias (si mayoría &gt;66%)</li>
+<li>Reemplazo activo (si PROPIETARIO propone)</li>
+</ul>
+</li>
+<li>NO votar sobre:<ul>
+<li>Operación diaria</li>
+<li>Contratos/clientes</li>
+<li>Ubicación activo</li>
+</ul>
+</li>
+</ul>
+<p>✅ <strong>Liquidez secundaria:</strong></p>
+<ul>
+<li>Tokens negociables 24/7</li>
+<li>Compra/venta entre HOLDERS sin restricción</li>
+<li>DEX integrado (descentralizado exchange)</li>
+<li>Precio mercado (oferta/demanda)</li>
+</ul>
+<p>✅ <strong>Protección inversión:</strong></p>
+<ul>
+<li>Auditoría smart contracts (pre-lanzamiento)</li>
+<li>Seguro activo validado (póliza vigente)</li>
+<li>Derecho inspección física (1x año, coordinado)</li>
+<li>Derecho reclamar transparencia (si incumplimiento)</li>
+</ul>
+<hr>
+<h3 id="34-obligaciones-de-token-holders">3.4 Obligaciones de TOKEN HOLDERS</h3>
+<p>Los HOLDERS aceptan:</p>
+<p>📋 <strong>Asumir riesgo operativo:</strong></p>
+<ul>
+<li>Si mes sin beneficios → no cobran</li>
+<li>Si avería grave → pérdida temporal ingresos</li>
+<li>Si mercado baja → valorización token disminuye</li>
+<li><strong>NO hay garantía retorno fijo</strong> (no es renta fija)</li>
+</ul>
+<p>📋 <strong>No interferir operación:</strong></p>
+<ul>
+<li>No contactar PROPIETARIO directamente (excepto canal oficial)</li>
+<li>No exigir cambios operativos arbitrarios</li>
+<li>No difundir información confidencial</li>
+<li>Respetar autonomía PROPIETARIO</li>
+</ul>
+<p>📋 <strong>Compliance individual:</strong></p>
+<ul>
+<li>Cumplir regulación local (impuestos, reportes)</li>
+<li>KYC si requerido por jurisdicción</li>
+<li>No lavar dinero ni financiar terrorismo (obvio)</li>
+</ul>
+<hr>
+<h3 id="35-responsabilidades-del-tokenizador">3.5 Responsabilidades del TOKENIZADOR</h3>
+<p>TOKENIZADOR (Bashood) se compromete a:</p>
+<p>📋 <strong>Infraestructura técnica:</strong></p>
+<ul>
+<li>Mantener smart contracts operativos</li>
+<li>Hosting dashboards/reportes</li>
+<li>Soporte técnico HOLDERS</li>
+<li>Auditorías periódicas (anual mínimo)</li>
+</ul>
+<p>📋 <strong>Mediación:</strong></p>
+<ul>
+<li>Facilitar comunicación PROPIETARIO ↔ HOLDERS</li>
+<li>Resolver disputas (mediador neutral)</li>
+<li>Validar reportes mensuales (no alterados)</li>
+<li>Notificar incumplimientos graves</li>
+</ul>
+<p>📋 <strong>Compliance:</strong></p>
+<ul>
+<li>Asesorar estructura legal adecuada</li>
+<li>Monitorear regulación aplicable</li>
+<li>Adaptar proyecto si ley cambia</li>
+<li>Proteger datos personales (GDPR)</li>
+</ul>
+<hr>
+<h2 id="📋-sección-4-distribución-económica">📋 SECCIÓN 4: DISTRIBUCIÓN ECONÓMICA</h2>
+<h3 id="41-modelo-distribución">4.1 Modelo Distribución</h3>
+<p><strong>Frecuencia:</strong> Mensual (dentro primeros 10 días mes siguiente)</p>
+<p><strong>Cálculo:</strong></p>
+<pre><code>INGRESOS BRUTOS MES:           €_______
+ - Costes operativos:          €_______
+   (gasoil, mantenimiento, seguros, otros)
+───────────────────────────────────────
+= BENEFICIO NETO MES:          €_______
+
+DISTRIBUCIÓN:
+ → PROPIETARIO (60%):          €_______
+ → HOLDERS pool (40%):         €_______
+    - Treasury fee (0.5%):     €_______
+    - Burn (si transfers):     €_______
+    ─────────────────────────────────
+    = HOLDERS final:           €_______
+
+DISTRIBUCIÓN POR TOKEN:
+ 40,000 tokens × porcentaje propiedad
+</code></pre>
+<p><strong>Ejemplo con €12,000 ingresos / €9,856 costes:</strong></p>
+<pre><code>Beneficio neto:     €2,144
+PROPIETARIO (60%):  €1,286
+HOLDERS (40%):       €858
+  - Treasury (0.5%):   €4
+  = HOLDERS final:   €854
+
+Por token (40k): €0.02135/token
+</code></pre>
+<hr>
+<h3 id="42-costes-deducibles">4.2 Costes Deducibles</h3>
+<p><strong>Permitidos deducir ANTES de distribución:</strong></p>
+<p>✅ <strong>Costes operativos directos:</strong></p>
+<ul>
+<li>Combustible (facturas)</li>
+<li>Mantenimiento preventivo (facturas)</li>
+<li>Reparaciones necesarias (facturas)</li>
+<li>Seguros (póliza)</li>
+<li>Transporte movimientos (facturas)</li>
+<li>Permisos/licencias (comprobantes)</li>
+</ul>
+<p>❌ <strong>NO deducibles:</strong></p>
+<ul>
+<li>Salarios personal administrativo</li>
+<li>Marketing/publicidad</li>
+<li>Costes personales PROPIETARIO</li>
+<li>Amortización contable (solo flujo caja real)</li>
+<li>Intereses préstamos personales</li>
+<li>Impuestos sobre beneficios (responsabilidad individual)</li>
+</ul>
+<p><strong>Validación:</strong></p>
+<ul>
+<li>Costes &lt;€500/mes: automático (reporting simple)</li>
+<li>Costes €500-2,000: requiere factura</li>
+<li>Costes &gt;€2,000: requiere aprobación HOLDERS (votación)</li>
+</ul>
+<hr>
+<h3 id="43-fondo-reserva">4.3 Fondo Reserva</h3>
+<p><strong>Obligatorio antes tokenizar:</strong></p>
+<ul>
+<li>PROPIETARIO debe tener €5,000 reserva</li>
+<li>Para reparaciones imprevistas</li>
+<li>No se distribuye como beneficio</li>
+<li>Se repone si se usa (20% beneficios hasta alcanzar €5k)</li>
+</ul>
+<p><strong>Ejemplo:</strong></p>
+<pre><code>Mes 1: Avería grave €3,000
+Reserva: €5,000 → €2,000
+Beneficio neto mes: €2,500
+  - 20% a reserva: €500 → Reserva sube €2,500
+  - Distribución: €2,000 (PROPIETARIO 60% / HOLDERS 40%)
+
+Mes 2: Sin averías
+Beneficio neto: €2,500
+  - 20% a reserva: €500 → Reserva sube €3,000
+  - Distribución: €2,000
+
+Mes 3: Reserva alcanza €5,000
+Beneficio neto: €2,500
+  - Distribución completa: €2,500 (sin retención)
+</code></pre>
+<hr>
+<h2 id="📋-sección-5-condiciones-especiales">📋 SECCIÓN 5: CONDICIONES ESPECIALES</h2>
+<h3 id="51-duración-contrato">5.1 Duración Contrato</h3>
+<p><strong>Plazo inicial:</strong> 3 años (desde firma)<br><strong>Renovación:</strong> Automática por periodos 1 año<br><strong>Terminación anticipada:</strong></p>
+<ul>
+<li>PROPIETARIO puede comprar tokens (ver 5.2)</li>
+<li>HOLDERS pueden vender mercado secundario (siempre)</li>
+<li>Mutuo acuerdo ambas partes</li>
+</ul>
+<p><strong>Clausula piloto (primeros 6 meses):</strong></p>
+<ul>
+<li>Cualquier parte puede rescindir sin penalización</li>
+<li>PROPIETARIO devuelve liquidez recibida (€60k) - 10% comisión</li>
+<li>HOLDERS recuperan inversión + beneficios proporcionales acumulados</li>
+</ul>
+<hr>
+<h3 id="52-derecho-preferente-compra-propietario">5.2 Derecho Preferente Compra (PROPIETARIO)</h3>
+<p>PROPIETARIO puede comprar de vuelta tokens:</p>
+<p><strong>Proceso:</strong></p>
+<ol>
+<li>Notificar intención compra (30 días antelación)</li>
+<li>Ofrecer precio: [Valoración inicial × (1 + appreciation)]</li>
+<li>HOLDERS votan aceptar/rechazar (mayoría &gt;50%)</li>
+<li>Si aceptan: PROPIETARIO paga + contrato finaliza</li>
+<li>Si rechazan: PROPIETARIO puede repetir oferta 6 meses después</li>
+</ol>
+<p><strong>Appreciation calculation:</strong></p>
+<pre><code>Valoración inicial: €60,000 (40% de €150k)
+Beneficios acumulados pagados: €_____
+Appreciation: (Beneficios / Valoración) × 100
+Precio compra: €60,000 × (1 + appreciation%)
+
+Ejemplo:
+Si holders recibieron €10,000 en 1 año:
+Appreciation: (10k / 60k) = 16.67%
+Precio compra: €60,000 × 1.1667 = €70,000
+</code></pre>
+<hr>
+<h3 id="53-transferencia-activo-físico">5.3 Transferencia Activo Físico</h3>
+<p><strong>Si PROPIETARIO quiere vender excavadora:</strong></p>
+<p><strong>OPCIÓN A: Venta total (liquidación)</strong></p>
+<ol>
+<li>Notificar HOLDERS (60 días antelación)</li>
+<li>Obtener tasación independiente actual</li>
+<li>PROPIETARIO retiene 60% precio venta</li>
+<li>HOLDERS reciben 40% precio venta</li>
+<li>Contrato finaliza</li>
+</ol>
+<p><strong>OPCIÓN B: Reemplazo activo (upgrade)</strong></p>
+<ol>
+<li>PROPIETARIO propone reemplazar con activo superior</li>
+<li>Ejemplo: Vender DX360 → Comprar DX380 nueva</li>
+<li>HOLDERS votan aprobar (mayoría &gt;66%)</li>
+<li>Si aprobado: Tokens migran a nuevo activo</li>
+<li>Contrato continúa (mismo % tokenizado)</li>
+</ol>
+<p><strong>PROHIBIDO:</strong></p>
+<ul>
+<li>Vender sin notificar HOLDERS (breach contrato)</li>
+<li>Regalar/donar activo (evasión distribución)</li>
+<li>Transferir a empresa relacionada (evasión)</li>
+</ul>
+<hr>
+<h3 id="54-siniestro-total--pérdida-activo">5.4 Siniestro Total / Pérdida Activo</h3>
+<p><strong>Si excavadora destruida (incendio, accidente grave, robo):</strong></p>
+<ol>
+<li><strong>Activar seguro inmediatamente</strong></li>
+<li><strong>Distribución indemnización:</strong><ul>
+<li>PROPIETARIO: 60% indemnización</li>
+<li>HOLDERS: 40% indemnización</li>
+</ul>
+</li>
+<li><strong>Contrato finaliza automáticamente</strong></li>
+<li><strong>Tokens quedan sin valor (burn)</strong></li>
+</ol>
+<p><strong>Ejemplo:</strong></p>
+<pre><code>Excavadora valorada €150,000
+Incendio total → Seguro paga €120,000
+PROPIETARIO recibe: €72,000 (60%)
+HOLDERS reciben: €48,000 (40%)
+[Distribuido proporcionalmente por tokens]
+</code></pre>
+<p><strong>CRÍTICO:</strong></p>
+<ul>
+<li>Seguro DEBE cubrir valor tokenizado mínimo</li>
+<li>Beneficiario seguro: validar cláusula favorece HOLDERS</li>
+<li>Póliza no puede caducar (renovación obligatoria)</li>
+</ul>
+<hr>
+<h3 id="55-incumplimiento-contrato">5.5 Incumplimiento Contrato</h3>
+<p><strong>Incumplimientos graves PROPIETARIO:</strong></p>
+<ul>
+<li>No presentar reporting 3 meses consecutivos</li>
+<li>Operar negligentemente (ingresos &lt;50% histórico sin causa)</li>
+<li>Vender/transferir activo sin autorización</li>
+<li>Falsificar datos reportes</li>
+<li>Dejar caducar seguro</li>
+</ul>
+<p><strong>Consecuencias:</strong></p>
+<ol>
+<li>Advertencia formal (15 días subsanar)</li>
+<li>Si no subsana: HOLDERS pueden forzar venta activo</li>
+<li>PROPIETARIO paga penalización 10% valor tokenizado</li>
+<li>Distribución según 5.3 OPCIÓN A</li>
+</ol>
+<p><strong>Incumplimientos graves HOLDERS:</strong></p>
+<ul>
+<li>Acosar/amenazar PROPIETARIO</li>
+<li>Difundir información confidencial</li>
+<li>Manipular mercado tokens (pump &amp; dump)</li>
+<li>Exigir cambios operativos irrazonables</li>
+</ul>
+<p><strong>Consecuencias:</strong></p>
+<ol>
+<li>TOKENIZADOR puede blacklist holder individual</li>
+<li>Holder pierde derechos gobernanza (mantiene económicos)</li>
+<li>Si mayoría HOLDERS incumple: PROPIETARIO rescinde contrato</li>
+</ol>
+<hr>
+<h2 id="📋-sección-6-aspectos-técnicos-blockchain">📋 SECCIÓN 6: ASPECTOS TÉCNICOS BLOCKCHAIN</h2>
+<h3 id="61-smart-contracts">6.1 Smart Contracts</h3>
+<p><strong>Contratos desplegados:</strong></p>
+<ul>
+<li>BashoodToken.sol (ERC-20)</li>
+<li>BashoodPresaleFinal.sol (distribución)</li>
+<li>BashoodReferral.sol (opcional)</li>
+<li>BashoodRescue.sol (emergencias)</li>
+</ul>
+<p><strong>Dirección contratos:</strong></p>
+<ul>
+<li>Network: Base Mainnet (chainId 8453)</li>
+<li>BashoodToken: [Dirección tras deploy]</li>
+<li>Verificados en: BaseScan.org</li>
+</ul>
+<p><strong>Auditoría:</strong></p>
+<ul>
+<li>Auditor: [Firma/Profesional a contratar]</li>
+<li>Fecha: [Pre-mainnet]</li>
+<li>Informe público: [Link IPFS/GitHub]</li>
+</ul>
+<hr>
+<h3 id="62-treasury-fee">6.2 Treasury Fee</h3>
+<p><strong>Destinación 0.5% retenido:</strong></p>
+<ul>
+<li>40% Desarrollo (mantenimiento contratos, upgrades)</li>
+<li>30% Compliance (legal, auditorías)</li>
+<li>20% Marketing (promoción proyecto)</li>
+<li>10% Reserva emergencias</li>
+</ul>
+<p><strong>Transparencia:</strong></p>
+<ul>
+<li>Wallet treasury: [Multisig 3/5]</li>
+<li>Gastos publicados trimestralmente</li>
+<li>Auditables on-chain</li>
+</ul>
+<hr>
+<h3 id="63-burn-mechanism">6.3 Burn Mechanism</h3>
+<p><strong>Aplicación:</strong></p>
+<ul>
+<li>NO se quema en distribuciones beneficios</li>
+<li>SÍ se quema en transfers secundarios (0.1%)</li>
+<li>Reduce supply gradualmente</li>
+<li>Aumenta valor relativo tokens restantes</li>
+</ul>
+<p><strong>Ejemplo transfer secundario:</strong></p>
+<pre><code>Holder A vende 1,000 tokens a Holder B
+Precio: €1.50/token = €1,500
+Burn (0.1%): 1 token destruido
+Holder B recibe: 999 tokens
+Supply total: 100,000 → 99,999 tokens
+</code></pre>
+<hr>
+<h2 id="📋-sección-7-regulación-y-compliance">📋 SECCIÓN 7: REGULACIÓN Y COMPLIANCE</h2>
+<h3 id="71-clasificación-token">7.1 Clasificación Token</h3>
+<p><strong>Tipo:</strong> Utility Token con derechos económicos<br><strong>NO ES:</strong></p>
+<ul>
+<li>Security (shareholding tradicional)</li>
+<li>Currency (medio pago)</li>
+<li>NFT (único/indivisible)</li>
+</ul>
+<p><strong>Justificación:</strong></p>
+<ul>
+<li>Representa acceso proporcional a flujo efectivo activo real</li>
+<li>No otorga propiedad física ni control corporativo</li>
+<li>Negociable pero no registrado mercado regulado</li>
+<li>Estructura utility evita prospecto CNMV (España)</li>
+</ul>
+<p><strong>ADVERTENCIA:</strong></p>
+<ul>
+<li>Regulación evoluciona (MiCA 2024-2026)</li>
+<li>Puede requerir reclasificación futura</li>
+<li>TOKENIZADOR monitorea y adapta</li>
+</ul>
+<hr>
+<h3 id="72-kycaml">7.2 KYC/AML</h3>
+<p><strong>Requerimientos HOLDERS:</strong></p>
+<ul>
+<li>KYC opcional inicio (fase piloto)</li>
+<li>KYC obligatorio si &gt;€5,000 inversión individual</li>
+<li>Proveedor: [Sumsub / Onfido / Jumio]</li>
+</ul>
+<p><strong>Listado prohibido:</strong></p>
+<ul>
+<li>Jurisdicciones FATF blacklist</li>
+<li>Personas sancionadas</li>
+<li>Origen fondos ilícito</li>
+</ul>
+<p><strong>Responsabilidad:</strong></p>
+<ul>
+<li>TOKENIZADOR implementa KYC</li>
+<li>HOLDERS proporcionan datos veraces</li>
+<li>PROPIETARIO exento (no invierte, recibe liquidez)</li>
+</ul>
+<hr>
+<h3 id="73-fiscal">7.3 Fiscal</h3>
+<p><strong>Imputación fiscal:</strong></p>
+<ul>
+<li><strong>PROPIETARIO:</strong> Declara 60% beneficios como ingresos actividad</li>
+<li><strong>HOLDERS:</strong> Declaran beneficios recibidos según jurisdicción:<ul>
+<li>España: Rendimientos capital mobiliario (19-26%)</li>
+<li>Otros: Según regulación local</li>
+</ul>
+</li>
+</ul>
+<p><strong>NO ES responsabilidad TOKENIZADOR:</strong></p>
+<ul>
+<li>Retener impuestos HOLDERS</li>
+<li>Emitir certificados fiscales (opcional)</li>
+<li>Asesorar fiscal individual</li>
+</ul>
+<p><strong>Recomendación:</strong> Consultar asesor fiscal propio.</p>
+<hr>
+<h2 id="📋-sección-8-resolución-disputas">📋 SECCIÓN 8: RESOLUCIÓN DISPUTAS</h2>
+<h3 id="81-mediación">8.1 Mediación</h3>
+<p><strong>Primera instancia:</strong> TOKENIZADOR actúa como mediador neutral</p>
+<p><strong>Proceso:</strong></p>
+<ol>
+<li>Parte afectada notifica disputa (escrito)</li>
+<li>TOKENIZADOR convoca reunión 15 días</li>
+<li>Propone solución vinculante (si partes acuerdan)</li>
+<li>Si no acuerdo: escalar arbitraje</li>
+</ol>
+<hr>
+<h3 id="82-arbitraje">8.2 Arbitraje</h3>
+<p><strong>Jurisdicción:</strong> [Madrid/España / Malta - Acordar]<br><strong>Árbitro:</strong> [Cámara Comercio / Corte Arbitraje Blockchain]<br><strong>Idioma:</strong> Español / Inglés<br><strong>Decisión:</strong> Vinculante e inapelable</p>
+<p><strong>Costes:</strong></p>
+<ul>
+<li>Parte perdedora paga arbitraje</li>
+<li>Máximo €5,000 (primeros 3 años)</li>
+</ul>
+<hr>
+<h3 id="83-rescisión-por-causa-mayor">8.3 Rescisión por Causa Mayor</h3>
+<p><strong>Eventos fuerza mayor:</strong></p>
+<ul>
+<li>Guerra, terrorismo, catástrofe natural</li>
+<li>Prohibición legal tokenización (cambio regulación)</li>
+<li>Quiebra TOKENIZADOR</li>
+<li>Fallo blockchain irreparable (improbable)</li>
+</ul>
+<p><strong>Procedimiento liquidación:</strong></p>
+<ol>
+<li>Suspender operaciones</li>
+<li>Valoración activo (tasador independiente)</li>
+<li>Distribución proporcional (60/40)</li>
+<li>Finalización contrato</li>
+</ol>
+<hr>
+<h2 id="📋-sección-9-firma-y-aceptación">📋 SECCIÓN 9: FIRMA Y ACEPTACIÓN</h2>
+<h3 id="declaraciones-partes">Declaraciones Partes</h3>
+<p><strong>PROPIETARIO declara:</strong></p>
+<ul>
+<li>Ser propietario legal 100% activo descrito</li>
+<li>Activo libre cargas, embargos, gravámenes</li>
+<li>Datos proporcionados veraces y completos</li>
+<li>Capacidad legal contratar (mayor edad, no incapacitado)</li>
+<li>Comprende riesgos y términos contrato</li>
+</ul>
+<p><strong>HOLDERS declaran (al comprar tokens):</strong></p>
+<ul>
+<li>Comprenden riesgo inversión (pérdida parcial/total)</li>
+<li>No garantía retorno fijo</li>
+<li>Obligación compliance fiscal propio</li>
+<li>Activo físico NO es de su propiedad</li>
+</ul>
+<p><strong>TOKENIZADOR declara:</strong></p>
+<ul>
+<li>Actuar buena fe como facilitador</li>
+<li>Smart contracts auditados y funcionales</li>
+<li>No garantizar rentabilidad proyecto</li>
+<li>Compliance con regulación aplicable</li>
+</ul>
+<hr>
+<h3 id="anexos">Anexos</h3>
+<p><strong>Anexo A:</strong> Ficha técnica activo (Doosan DX360LC)<br><strong>Anexo B:</strong> Tasación valoración €150,000<br><strong>Anexo C:</strong> Póliza seguro vigente<br><strong>Anexo D:</strong> Factura compra original<br><strong>Anexo E:</strong> Smart contracts código (GitHub)<br><strong>Anexo F:</strong> Informe auditoría contratos<br><strong>Anexo G:</strong> Simulación financiera 3 escenarios  </p>
+<hr>
+<h3 id="firmas">Firmas</h3>
+<p><strong>PROPIETARIO:</strong></p>
+<p>Nombre: _______________________________<br>DNI/CIF: ______________________________<br>Firma: ________________________________<br>Fecha: <em><strong>/</strong></em>/______</p>
+<hr>
+<p><strong>TOKENIZADOR (Bashood RWA):</strong></p>
+<p>Representante: _________________________<br>Cargo: ________________________________<br>Firma: ________________________________<br>Fecha: <em><strong>/</strong></em>/______</p>
+<hr>
+<p><strong>HOLDERS:</strong></p>
+<p>Aceptación mediante compra tokens (smart contract autoejecutado)<br>Términos disponibles públicamente: [IPFS hash / GitHub link]</p>
+<hr>
+<h2 id="⚠️-disclaimer-final">⚠️ DISCLAIMER FINAL</h2>
+<p><strong>ESTE DOCUMENTO ES UN BORRADOR DE TÉRMINOS COMERCIALES.</strong></p>
+<p>Antes de proceder:</p>
+<ol>
+<li>✅ Revisar con abogado especializado blockchain</li>
+<li>✅ Validar compliance jurisdicción (España/Malta)</li>
+<li>✅ Auditar smart contracts (firma profesional)</li>
+<li>✅ Completar due diligence exhaustiva</li>
+<li>✅ Estructurar entidad legal (SPV/Trust)</li>
+</ol>
+<p><strong>NO constituye:</strong></p>
+<ul>
+<li>❌ Asesoramiento legal</li>
+<li>❌ Asesoramiento fiscal</li>
+<li>❌ Asesoramiento inversión</li>
+<li>❌ Garantía rentabilidad</li>
+<li>❌ Prospecto inversión</li>
+</ul>
+<p><strong>Contacto legal:</strong> <a href="mailto:legal@bashood.io">legal@bashood.io</a></p>
+<hr>
+<p><strong>Preparado por:</strong> Bashood Legal Team<br><strong>Versión:</strong> 1.0 BORRADOR<br><strong>Fecha:</strong> 20 Febrero 2026<br><strong>Próxima revisión:</strong> Post due diligence aprobada</p>
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,760 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Propuesta de Tokenización</title>
+  <style>
+    @page {
+      size: A4;
+      margin: 20mm;
+    }
+    
+    * {
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-size: 11pt;
+      line-height: 1.6;
+      color: #333;
+      max-width: 210mm;
+      margin: 0 auto;
+      padding: 20px;
+      background: white;
+    }
+    
+    /* Portada */
+    .cover-page {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 80vh;
+      text-align: center;
+      page-break-after: always;
+    }
+    
+    .cover-page h1 {
+      font-size: 32pt;
+      color: #2c3e50;
+      margin-bottom: 30px;
+      border: none;
+    }
+    
+    .cover-page .project-name {
+      font-size: 18pt;
+      color: #7f8c8d;
+      margin: 20px 0;
+    }
+    
+    .cover-page .asset-name {
+      font-size: 16pt;
+      color: #95a5a6;
+      margin: 20px 0;
+    }
+    
+    .cover-page .date {
+      font-size: 14pt;
+      color: #bdc3c7;
+      margin-top: 60px;
+    }
+    
+    .cover-page .confidential {
+      font-size: 12pt;
+      color: #e74c3c;
+      margin-top: 40px;
+      font-weight: bold;
+    }
+    
+    /* Encabezados */
+    h1 {
+      color: #2c3e50;
+      border-bottom: 3px solid #3498db;
+      padding-bottom: 10px;
+      margin-top: 40px;
+      page-break-after: avoid;
+    }
+    
+    h2 {
+      color: #34495e;
+      border-bottom: 2px solid #95a5a6;
+      padding-bottom: 5px;
+      margin-top: 30px;
+      page-break-after: avoid;
+    }
+    
+    h3 {
+      color: #555;
+      margin-top: 25px;
+      page-break-after: avoid;
+    }
+    
+    h4 {
+      color: #666;
+      margin-top: 20px;
+    }
+    
+    /* Tablas */
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      margin: 20px 0;
+      page-break-inside: avoid;
+    }
+    
+    th, td {
+      border: 1px solid #ddd;
+      padding: 10px;
+      text-align: left;
+    }
+    
+    th {
+      background-color: #3498db;
+      color: white;
+      font-weight: bold;
+    }
+    
+    tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+    
+    /* Código */
+    code {
+      background-color: #f4f4f4;
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-family: 'Courier New', monospace;
+      font-size: 10pt;
+      color: #c7254e;
+    }
+    
+    pre {
+      background-color: #f4f4f4;
+      padding: 15px;
+      border-radius: 5px;
+      overflow-x: auto;
+      border-left: 4px solid #3498db;
+      page-break-inside: avoid;
+    }
+    
+    pre code {
+      background: none;
+      padding: 0;
+      color: #333;
+    }
+    
+    /* Blockquotes */
+    blockquote {
+      border-left: 4px solid #3498db;
+      padding-left: 15px;
+      margin-left: 0;
+      color: #555;
+      font-style: italic;
+      page-break-inside: avoid;
+    }
+    
+    /* Listas */
+    ul, ol {
+      margin: 15px 0;
+      padding-left: 30px;
+    }
+    
+    li {
+      margin: 8px 0;
+    }
+    
+    /* Checkboxes (tareas) */
+    input[type="checkbox"] {
+      margin-right: 8px;
+    }
+    
+    /* Enlaces */
+    a {
+      color: #3498db;
+      text-decoration: none;
+    }
+    
+    a:hover {
+      text-decoration: underline;
+    }
+    
+    /* Separadores */
+    hr {
+      border: none;
+      border-top: 2px solid #ecf0f1;
+      margin: 30px 0;
+    }
+    
+    /* Emojis y símbolos */
+    .emoji {
+      font-size: 1.2em;
+    }
+    
+    /* Page breaks */
+    .page-break {
+      page-break-after: always;
+    }
+    
+    /* Header y footer para impresión */
+    @media print {
+      body {
+        padding: 0;
+      }
+      
+      .no-print {
+        display: none;
+      }
+      
+      h1, h2, h3 {
+        page-break-after: avoid;
+      }
+      
+      table, pre, blockquote {
+        page-break-inside: avoid;
+      }
+      
+      /* Footer */
+      @page {
+        @bottom-right {
+          content: "Bashood RWA - 2026";
+          font-size: 9pt;
+          color: #bdc3c7;
+        }
+        
+        @bottom-left {
+          content: "Propuesta de Tokenización";
+          font-size: 9pt;
+          color: #bdc3c7;
+        }
+      }
+    }
+    
+    /* Instrucciones imprimir (solo pantalla) */
+    .print-instructions {
+      background: #fff3cd;
+      border: 2px solid #ffc107;
+      border-radius: 5px;
+      padding: 15px;
+      margin: 20px 0;
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      max-width: 300px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      z-index: 1000;
+    }
+    
+    @media print {
+      .print-instructions {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="print-instructions no-print">
+    <h4 style="margin-top:0; color:#856404">📄 Para generar PDF:</h4>
+    <ol style="margin:0; padding-left:20px; color:#856404">
+      <li>Presiona <strong>Ctrl+P</strong></li>
+      <li>Selecciona "Guardar como PDF"</li>
+      <li>Ajusta márgenes si es necesario</li>
+      <li>Guarda el archivo</li>
+    </ol>
+  </div>
+  
+  <div class="cover-page">
+    <h1>Propuesta de Tokenización</h1>
+    <div class="project-name">Proyecto Bashood RWA</div>
+    <div class="asset-name">Activo Piloto: Doosan DX360</div>
+    <div class="date">20 de febrero de 2026</div>
+    <div class="confidential">☑️ CONFIDENCIAL - Solo para uso del destinatario</div>
+  </div>
+  
+  <div class="content">
+    <h1 id="🏗️-propuesta-de-tokenización---doosan-dx360">🏗️ Propuesta de Tokenización - Doosan DX360</h1>
+<p><strong>Proyecto:</strong> Bashood RWA - Activo Piloto<br><strong>Fecha:</strong> 20 Febrero 2026<br><strong>Destinatario:</strong> [Propietario Activo]<br><strong>Activo:</strong> Doosan DX360LC Excavadora Hidráulica</p>
+<hr>
+<h2 id="📄-resumen-ejecutivo">📄 Resumen Ejecutivo</h2>
+<p>Bashood propone <strong>tokenizar el 40% de su excavadora Doosan DX360</strong> mediante tecnología blockchain, permitiéndole:</p>
+<p>✅ <strong>Mantener control mayoritario</strong> (usted retiene 60%)<br>✅ <strong>Obtener liquidez inmediata</strong> sin vender el activo<br>✅ <strong>Acceder a capital adicional</strong> para expansión<br>✅ <strong>Reducir riesgo concentración</strong> (inversionistas comparten riesgo operativo)<br>✅ <strong>Mantener gestión operativa</strong> (usted sigue operando normalmente)<br>✅ <strong>Transparencia y confianza</strong> (reportes on-chain verificables)</p>
+<p><strong>Usted sigue siendo dueño, operando y gestionando la máquina exactamente igual que ahora.</strong></p>
+<hr>
+<h2 id="🎯-¿qué-es-la-tokenización-rwa">🎯 ¿Qué es la Tokenización RWA?</h2>
+<p><strong>RWA = Real World Assets (Activos del Mundo Real)</strong></p>
+<p>Tokenizar significa <strong>dividir digitalmente la propiedad económica</strong> de un activo físico en tokens blockchain.</p>
+<p><strong>Analogía simple:</strong></p>
+<ul>
+<li>En vez de vender 40% de la excavadora a UN comprador (complejo, lento, caro)</li>
+<li>Dividimos ese 40% en tokens digitales que MÚLTIPLES inversionistas pueden comprar</li>
+<li>Cada token representa una fracción proporcional de los beneficios del activo</li>
+</ul>
+<p><strong>Lo que NO cambia:</strong></p>
+<ul>
+<li>❌ La excavadora sigue siendo suya físicamente</li>
+<li>❌ Usted sigue operando y decidiendo contratos</li>
+<li>❌ Nadie puede tocar, mover o vender la máquina excepto usted</li>
+<li>❌ No pierde control operativo</li>
+</ul>
+<p><strong>Lo que SÍ cambia:</strong></p>
+<ul>
+<li>✅ 40% de los beneficios netos se distribuyen automáticamente a token holders</li>
+<li>✅ Usted recibe liquidez inmediata al tokenizar (40% valoración activo)</li>
+<li>✅ Token holders comparten riesgo operativo (si no hay beneficios, no cobran)</li>
+<li>✅ Reportes mensuales transparentes (ingresos, costes, horas operadas)</li>
+</ul>
+<hr>
+<h2 id="💰-modelo-financiero-propuesto">💰 Modelo Financiero Propuesto</h2>
+<h3 id="valoración-del-activo">Valoración del Activo</h3>
+<table>
+<thead>
+<tr>
+<th>Concepto</th>
+<th>Valor</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Valor mercado estimado</strong></td>
+<td>€150,000</td>
+</tr>
+<tr>
+<td><strong>% Tokenizado</strong></td>
+<td>40%</td>
+</tr>
+<tr>
+<td><strong>Valor tokenizado</strong></td>
+<td>€60,000</td>
+</tr>
+<tr>
+<td><strong>% Retenido por propietario</strong></td>
+<td>60%</td>
+</tr>
+<tr>
+<td><strong>Valor retenido</strong></td>
+<td>€90,000</td>
+</tr>
+</tbody></table>
+<hr>
+<h3 id="distribución-de-beneficios-mensual">Distribución de Beneficios (Mensual)</h3>
+<p><strong>Ejemplo con escenario MEDIO (€12,000/mes ingresos):</strong></p>
+<pre><code>💵 INGRESOS MENSUALES:              €12,000
+
+➖ COSTES OPERATIVOS:
+   - Combustible (330L/día × 22 días): €10,395
+   - Mantenimiento:                      €833
+   - Seguro:                             €250
+   - Otros:                              €378
+   ─────────────────────────────────────────
+   TOTAL COSTES:                      €11,856
+
+💰 BENEFICIO NETO MENSUAL:          €2,144
+
+📊 DISTRIBUCIÓN:
+   ✅ Propietario (60%):              €1,286  ← Usted recibe
+   ✅ Token Holders (40%):             €858  ← Inversionistas reciben
+      - Treasury fee (0.5%):             €4
+      - Distribución final:            €854
+</code></pre>
+<p><strong>Anualmente:</strong></p>
+<ul>
+<li>Usted recibe: <strong>€15,438</strong> (60% beneficios)</li>
+<li>Token holders: <strong>€10,241</strong> (40% beneficios)</li>
+<li><strong>Su parte NO cambia vs operación actual</strong> (sigue recibiendo lo mismo)</li>
+</ul>
+<hr>
+<h3 id="simulación-3-escenarios-anual">Simulación 3 Escenarios (Anual)</h3>
+<table>
+<thead>
+<tr>
+<th>Escenario</th>
+<th>Ingresos/mes</th>
+<th>Beneficio neto/año</th>
+<th>Usted recibe</th>
+<th>Holders reciben</th>
+<th>ROI Holders</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>BAJO</strong></td>
+<td>€8,000</td>
+<td>-€22,270 ❌</td>
+<td>€0</td>
+<td>€0</td>
+<td>0%</td>
+</tr>
+<tr>
+<td><strong>MEDIO</strong></td>
+<td>€12,000</td>
+<td>€25,730 ✅</td>
+<td>€15,438</td>
+<td>€10,241</td>
+<td>17%</td>
+</tr>
+<tr>
+<td><strong>ALTO</strong></td>
+<td>€15,000</td>
+<td>€61,730 ✅</td>
+<td>€37,038</td>
+<td>€24,569</td>
+<td>41%</td>
+</tr>
+</tbody></table>
+<p><strong>Interpretación:</strong></p>
+<ul>
+<li>Si ingresos &lt; €10,000/mes → Pérdidas (no tokenizar)</li>
+<li>Si ingresos €12,000-15,000/mes → ✅ Tokenización viable</li>
+<li>Si ingresos &gt; €15,000/mes → ✅ Tokenización muy atractiva</li>
+</ul>
+<hr>
+<h2 id="🔐-estructura-legal-y-seguridad">🔐 Estructura Legal y Seguridad</h2>
+<h3 id="propiedad-del-activo">Propiedad del Activo</h3>
+<p><strong>¿Quién es dueño de la excavadora?</strong></p>
+<p><strong>OPCIÓN A: Propiedad directa (más simple)</strong></p>
+<ul>
+<li>Usted sigue siendo propietario legal 100%</li>
+<li>Contrato privado establece distribución 60/40 beneficios</li>
+<li>Token holders tienen derecho económico (NO propiedad física)</li>
+<li>Más rápido, menos costes legales (~€2,000)</li>
+<li><strong>Riesgo:</strong> Depende confianza mutua</li>
+</ul>
+<p><strong>OPCIÓN B: SPV (Special Purpose Vehicle) - RECOMENDADO</strong></p>
+<ul>
+<li>Crear empresa nueva (SPV) que compra la excavadora</li>
+<li>SPV emite tokens representando 40% equity</li>
+<li>Usted retiene 60% equity SPV + gestión operativa</li>
+<li>Más profesional, más transparente (~€10,000-15,000 setup)</li>
+<li><strong>Ventaja:</strong> Estructura clara, separación patrimonial</li>
+</ul>
+<p><strong>Nuestra recomendación:</strong> Empezar con OPCIÓN A (piloto), migrar a SPV si funciona bien.</p>
+<hr>
+<h3 id="garantías-y-protección">Garantías y Protección</h3>
+<p><strong>Para el propietario:</strong></p>
+<ul>
+<li>✅ Control operativo 100% (nadie puede obligarle a vender/mover máquina)</li>
+<li>✅ Seguros a su nombre (usted decide aseguradora)</li>
+<li>✅ Puede &quot;deshacer&quot; tokenización comprando de vuelta el 40% (derecho preferente)</li>
+<li>✅ Clausula salida si proyecto no funciona (primeros 6 meses)</li>
+</ul>
+<p><strong>Para token holders:</strong></p>
+<ul>
+<li>✅ Reportes mensuales auditables (ingresos, costes, horas)</li>
+<li>✅ Smart contracts inmutables (distribución automática)</li>
+<li>✅ Seguro vigente validado (protege inversión)</li>
+<li>✅ Derecho información (inspecciones anuales permitidas)</li>
+</ul>
+<hr>
+<h2 id="📊-transparencia-y-reporting">📊 Transparencia y Reporting</h2>
+<h3 id="reportes-mensuales-obligatorios">Reportes Mensuales Obligatorios</h3>
+<p><strong>Usted debe proporcionar (máximo 10 minutos/mes):</strong></p>
+<ol>
+<li><strong>Horómetro actual</strong> (foto)</li>
+<li><strong>Ingresos del mes</strong> (factura o resumen)</li>
+<li><strong>Costes principales:</strong><ul>
+<li>Litros gasoil consumidos</li>
+<li>Mantenimiento realizado (si hubo)</li>
+<li>Averías/reparaciones (si hubo)</li>
+</ul>
+</li>
+<li><strong>Estado general</strong> (cualquier incidente relevante)</li>
+</ol>
+<p><strong>Bashood procesa y publica on-chain:</strong></p>
+<ul>
+<li>Beneficio neto del mes</li>
+<li>Distribución proporcional</li>
+<li>Horas acumuladas</li>
+<li>Estadísticas operativas</li>
+</ul>
+<p><strong>Frecuencia:</strong> Dentro primeros 5 días de cada mes.</p>
+<hr>
+<h2 id="🕒-timeline-propuesto">🕒 Timeline Propuesto</h2>
+<h3 id="fase-1-due-diligence-2-3-semanas">Fase 1: Due Diligence (2-3 semanas)</h3>
+<p><strong>Usted proporciona:</strong></p>
+<ul>
+<li>Documentación propiedad (factura compra, ficha técnica)</li>
+<li>Historial ingresos últimos 6 meses (facturas)</li>
+<li>Historial costes últimos 6 meses (gasoil, mantenimiento)</li>
+<li>Póliza seguro vigente</li>
+<li>Foto horómetro actual</li>
+<li>Fotos estado actual máquina</li>
+</ul>
+<p><strong>Nosotros validamos:</strong></p>
+<ul>
+<li>Viabilidad financiera</li>
+<li>Estado activo (inspección física opcional)</li>
+<li>Documentación legal correcta</li>
+</ul>
+<p><strong>Resultado:</strong> Decisión GO/NO-GO tokenización.</p>
+<hr>
+<h3 id="fase-2-estructura-legal-3-4-semanas-si-aprobado">Fase 2: Estructura Legal (3-4 semanas, si aprobado)</h3>
+<ul>
+<li>Firma NDA (confidencialidad)</li>
+<li>Redacción contrato tokenización</li>
+<li>Setup estructura legal (SPV o contrato directo)</li>
+<li>Definición términos finales (% exacto, duración, clausulas)</li>
+</ul>
+<hr>
+<h3 id="fase-3-piloto-testnet-1-mes">Fase 3: Piloto Testnet (1 mes)</h3>
+<ul>
+<li>Deploy contratos en blockchain testnet (red de pruebas)</li>
+<li>Simulación 1 mes operación real</li>
+<li>Validar distribuciones funcionan correctamente</li>
+<li><strong>IMPORTANTE:</strong> Esto NO involucra dinero real aún</li>
+</ul>
+<hr>
+<h3 id="fase-4-mainnet-si-piloto-exitoso">Fase 4: Mainnet (si piloto exitoso)</h3>
+<ul>
+<li>Deploy contratos blockchain mainnet (red producción)</li>
+<li>Emisión tokens (40% valor activo)</li>
+<li>Primera tokenización exitosa Bashood 🎉</li>
+</ul>
+<p><strong>Total estimado:</strong> 2-3 meses desde llamada inicial hasta tokenización real.</p>
+<hr>
+<h2 id="💵-beneficios-inmediatos-para-usted">💵 Beneficios Inmediatos para Usted</h2>
+<h3 id="1-liquidez-sin-venta">1. Liquidez Sin Venta</h3>
+<p><strong>Problema actual:</strong></p>
+<ul>
+<li>Si necesita capital, debe vender la excavadora (pierdes ingresos futuros)</li>
+<li>O pedir préstamo (intereses, aval, riesgo)</li>
+</ul>
+<p><strong>Con tokenización:</strong></p>
+<ul>
+<li>Libera €60,000 (40% valoración) SIN vender</li>
+<li>Sigue operando y ganando con la máquina</li>
+<li>Usa ese capital para comprar otra máquina, expandir negocio, etc.</li>
+</ul>
+<hr>
+<h3 id="2-reducción-riesgo-concentrado">2. Reducción Riesgo Concentrado</h3>
+<p><strong>Problema actual:</strong></p>
+<ul>
+<li>Si excavadora se avería gravemente → pérdida 100% suya</li>
+<li>Si contrato cliente se cancela → impacto 100% suyo</li>
+</ul>
+<p><strong>Con tokenización:</strong></p>
+<ul>
+<li>Token holders asumen 40% del riesgo</li>
+<li>Usted diversifica capital (puede invertir en otros activos)</li>
+<li>Riesgo compartido = más tranquilidad</li>
+</ul>
+<hr>
+<h3 id="3-valorización-potencial">3. Valorización Potencial</h3>
+<p><strong>Problema actual:</strong></p>
+<ul>
+<li>Excavadora solo vale lo que alguien pague (mercado secundario limitado)</li>
+<li>Difícil vender rápido sin descuento</li>
+</ul>
+<p><strong>Con tokenización:</strong></p>
+<ul>
+<li>Tokens negociables 24/7 en mercado secundario</li>
+<li>Liquidez continua (token holders pueden comprar/vender entre ellos)</li>
+<li>Si activo funciona bien → valorización token aumenta</li>
+</ul>
+<hr>
+<h3 id="4-marca-y-credibilidad">4. Marca y Credibilidad</h3>
+<p><strong>Problema actual:</strong></p>
+<ul>
+<li>Difícil demostrar rentabilidad/seriedad a posibles clientes</li>
+</ul>
+<p><strong>Con tokenización:</strong></p>
+<ul>
+<li>Transparencia pública (reportes verificables on-chain)</li>
+<li>Sello de calidad (Bashood valida tu activo)</li>
+<li>Diferenciación (&quot;primer excavadora tokenizada en España&quot;)</li>
+<li>Marketing gratuito (Bashood promociona caso éxito)</li>
+</ul>
+<hr>
+<h2 id="❓-preguntas-frecuentes-faq">❓ Preguntas Frecuentes (FAQ)</h2>
+<h3 id="1-¿pierdo-control-de-mi-excavadora">1. &quot;¿Pierdo control de mi excavadora?&quot;</h3>
+<p><strong>NO.</strong> Usted mantiene control operativo 100%.</p>
+<ul>
+<li>Decide contratos, clientes, ubicación, mantenimiento</li>
+<li>Token holders solo tienen derecho económico (beneficios)</li>
+<li>Nadie puede obligarle a vender, mover o cambiar uso de la máquina</li>
+</ul>
+<hr>
+<h3 id="2-¿qué-pasa-si-la-máquina-se-avería">2. &quot;¿Qué pasa si la máquina se avería?&quot;</h3>
+<p><strong>Protocolo normal:</strong></p>
+<ul>
+<li>Usted repara como siempre</li>
+<li>Coste reparación se deduce de beneficios ese mes</li>
+<li>Si no hay beneficios ese mes → nadie cobra (ni usted ni holders)</li>
+<li>Token holders entienden riesgo operativo (está en contrato)</li>
+</ul>
+<p><strong>Recomendación:</strong> Reserve €5,000-10,000 fondo emergencias (antes de tokenizar).</p>
+<hr>
+<h3 id="3-¿puedo-deshacer-la-tokenización">3. &quot;¿Puedo &#39;deshacer&#39; la tokenización?&quot;</h3>
+<p><strong>SÍ, con condiciones:</strong></p>
+<p><strong>Opción 1: Comprar de vuelta tokens</strong></p>
+<ul>
+<li>Usted ofrece comprar el 40% tokenizado</li>
+<li>Precio negociado (valor mercado tokens en ese momento)</li>
+<li>Token holders deciden si venden</li>
+</ul>
+<p><strong>Opción 2: Cláusula salida (primeros 6 meses)</strong></p>
+<ul>
+<li>Si proyecto no funciona bien en piloto</li>
+<li>Usted puede rescindir contrato</li>
+<li>Devuelve capital recibido + compensación proporcional</li>
+</ul>
+<hr>
+<h3 id="4-¿qué-pasa-si-vendo-la-excavadora">4. &quot;¿Qué pasa si vendo la excavadora?&quot;</h3>
+<p><strong>Dos escenarios:</strong></p>
+<p><strong>A) Venta total (retirar activo):</strong></p>
+<ul>
+<li>Debe comprar de vuelta el 40% tokenizado primero</li>
+<li>O acordar con token holders distribución precio venta</li>
+<li>Contrato incluye derecho preferente compra</li>
+</ul>
+<p><strong>B) Venta y reemplazo (upgrade):</strong></p>
+<ul>
+<li>Vende excavadora actual</li>
+<li>Compra nueva con mismo uso</li>
+<li>Token se &quot;migra&quot; a nueva máquina (mismo contrato)</li>
+<li><strong>Ejemplo:</strong> Cambias DX360 por DX380 más moderna</li>
+</ul>
+<hr>
+<h3 id="5-¿cuánto-cuesta-tokenizar">5. &quot;¿Cuánto cuesta tokenizar?&quot;</h3>
+<p><strong>Costes estimados:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Concepto</th>
+<th>Coste</th>
+<th>Quién paga</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Due diligence</strong></td>
+<td>€500</td>
+<td>Bashood (gratis para usted)</td>
+</tr>
+<tr>
+<td><strong>Contrato tokenización</strong></td>
+<td>€1,000-2,000</td>
+<td>Compartido 50/50</td>
+</tr>
+<tr>
+<td><strong>Setup blockchain</strong></td>
+<td>€2,000</td>
+<td>Bashood (gratis para usted)</td>
+</tr>
+<tr>
+<td><strong>SPV (opcional)</strong></td>
+<td>€10,000-15,000</td>
+<td>Usted (si elige esta opción)</td>
+</tr>
+<tr>
+<td><strong>Inspección técnica (opcional)</strong></td>
+<td>€500-1,000</td>
+<td>Recomendado (opcional)</td>
+</tr>
+</tbody></table>
+<p><strong>Total para usted:</strong> €500-1,000 (opción simple) o €10,000-15,000 (opción SPV).</p>
+<p><strong>ROI:</strong> Si tokeniza €60,000 a coste €1,000 → ROI 6,000%.</p>
+<hr>
+<h3 id="6-¿es-legal-en-españa">6. &quot;¿Es legal en España?&quot;</h3>
+<p><strong>SÍ, pero regulación evoluciona.</strong></p>
+<p><strong>Estado actual (2026):</strong></p>
+<ul>
+<li>✅ Tokenización activos reales es legal</li>
+<li>✅ MiCA (regulación EU) establece marco claro</li>
+<li>⚠️ Depende estructura: security token vs utility token</li>
+</ul>
+<p><strong>Nuestra recomendación:</strong></p>
+<ul>
+<li>Estructura como <strong>utility token</strong> (acceso a beneficios, no shareholding)</li>
+<li>Evita complejidades prospecto/CNMV</li>
+<li>Más flexible, menos burocracia</li>
+</ul>
+<p><strong>Garantía:</strong> Bashood asume riesgo legal/compliance (no usted).</p>
+<hr>
+<h3 id="7-¿qué-pasa-si-bashood-desaparece">7. &quot;¿Qué pasa si Bashood desaparece?&quot;</h3>
+<p><strong>Smart contracts son inmutables:</strong></p>
+<ul>
+<li>Contratos blockchain funcionan independientemente de Bashood</li>
+<li>Distribuciones automáticas (no requieren Bashood operando)</li>
+<li>Código open-source auditado</li>
+<li>Token holders pueden contratar a otro operador si Bashood falla</li>
+</ul>
+<p><strong>Garantía técnica:</strong> Blockchain es permanente, Bashood es solo facilitador inicial.</p>
+<hr>
+<h2 id="🎯-próximos-pasos">🎯 Próximos Pasos</h2>
+<h3 id="si-está-interesado">Si está interesado:</h3>
+<p><strong>1. Llamada inicial (60-90 min)</strong></p>
+<ul>
+<li>Revisamos su activo en detalle</li>
+<li>Respondemos todas sus dudas</li>
+<li>Validamos viabilidad preliminar</li>
+</ul>
+<p><strong>2. Firma NDA (confidencialidad)</strong></p>
+<ul>
+<li>Protegemos información sensible mutua</li>
+<li>Requisito antes de intercambiar documentación</li>
+</ul>
+<p><strong>3. Due diligence (2 semanas)</strong></p>
+<ul>
+<li>Usted envía documentación solicitada</li>
+<li>Nosotros validamos viabilidad financiera</li>
+<li>Decisión GO/NO-GO conjunta</li>
+</ul>
+<p><strong>4. Negociación términos finales (1 semana)</strong></p>
+<ul>
+<li>Definir % exacto (40% sugerido, negociable)</li>
+<li>Definir duración compromiso (2-3 años sugerido)</li>
+<li>Clausulas específicas</li>
+</ul>
+<p><strong>5. Piloto testnet (1 mes)</strong></p>
+<ul>
+<li>Simulación sin dinero real</li>
+<li>Validar todo funciona correctamente</li>
+</ul>
+<p><strong>6. Mainnet (si exitoso)</strong></p>
+<ul>
+<li>Tokenización real</li>
+<li>Usted recibe liquidez (€60,000)</li>
+<li>Comienza reporting mensual</li>
+</ul>
+<hr>
+<h2 id="📞-contacto">📞 Contacto</h2>
+<p><strong>Proyecto:</strong> Bashood - Real World Assets on Blockchain<br><strong>Email:</strong> [<a href="mailto:contacto@bashood.io">contacto@bashood.io</a>]<br><strong>Telegram:</strong> [@BashoodRWA]<br><strong>Website:</strong> [<a href="https://bashood.io%5D">https://bashood.io]</a></p>
+<p><strong>Persona contacto:</strong> [Nombre]<br><strong>Rol:</strong> RWA Asset Manager<br><strong>Disponibilidad:</strong> Lunes-Viernes 9:00-18:00 CET</p>
+<hr>
+<h2 id="📎-anexos">📎 Anexos</h2>
+<h3 id="anexo-a-documentación-requerida">Anexo A: Documentación Requerida</h3>
+<p><strong>Críticos (enviar en 7 días):</strong></p>
+<ul>
+<li><input disabled="" type="checkbox"> Factura compra / Contrato compraventa</li>
+<li><input disabled="" type="checkbox"> Ficha técnica Doosan DX360LC</li>
+<li><input disabled="" type="checkbox"> Facturas ingresos últimos 6 meses</li>
+<li><input disabled="" type="checkbox"> Póliza seguro vigente</li>
+<li><input disabled="" type="checkbox"> Foto horómetro actual</li>
+<li><input disabled="" type="checkbox"> Fotos estado actual (mínimo 20 fotos)</li>
+</ul>
+<p><strong>Importantes (enviar en 14 días):</strong></p>
+<ul>
+<li><input disabled="" type="checkbox"> Facturas gasoil últimos 6 meses</li>
+<li><input disabled="" type="checkbox"> Facturas taller/mantenimiento últimos 2 años</li>
+<li><input disabled="" type="checkbox"> Contratos clientes vigentes</li>
+<li><input disabled="" type="checkbox"> Libro mantenimiento</li>
+</ul>
+<hr>
+<h3 id="anexo-b-simulación-financiera-completa">Anexo B: Simulación Financiera Completa</h3>
+<p><strong>Ver documento adjunto:</strong></p>
+<ul>
+<li><code>doosan-dx360-simulation-results.json</code></li>
+<li>3 escenarios (bajo, medio, alto)</li>
+<li>12 meses simulados</li>
+<li>Distribuciones mensuales detalladas</li>
+</ul>
+<hr>
+<h3 id="anexo-c-glosario-términos">Anexo C: Glosario Términos</h3>
+<p><strong>Blockchain:</strong> Base de datos descentralizada e inmutable<br><strong>Smart Contract:</strong> Programa autoejecutabe en blockchain<br><strong>Token:</strong> Activo digital representando valor/propiedad<br><strong>RWA:</strong> Real World Assets (activos del mundo real)<br><strong>SPV:</strong> Special Purpose Vehicle (vehículo propósito especial)<br><strong>Treasury:</strong> Fondo reserva para gastos proyecto<br><strong>Burn:</strong> Destrucción tokens (reducción supply)<br><strong>Mainnet:</strong> Red blockchain producción (dinero real)<br><strong>Testnet:</strong> Red blockchain pruebas (dinero falso)</p>
+<hr>
+<p><strong>Esta propuesta es confidencial y solo para el destinatario indicado.</strong><br><strong>Prohibida distribución sin autorización Bashood.</strong></p>
+<hr>
+<p><strong>Preparado por:</strong> Bashood RWA Team<br><strong>Fecha:</strong> 20 Febrero 2026<br><strong>Versión:</strong> 1.0<br><strong>Válido hasta:</strong> 20 Marzo 2026 (30 días)</p>
+
+  </div>
+</body>
+</html>

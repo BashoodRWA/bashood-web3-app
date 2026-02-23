@@ -1,0 +1,1609 @@
+﻿
+Version
+=======
+> solidity-coverage: v0.8.16
+
+Instrumenting for coverage...
+=============================
+
+> AggregatorV3Interface.sol
+> AttackerBatch.sol
+> AttackerConditional.sol
+> AttackerLoop.sol
+> AttackerReceiver.sol
+> AttackerReentrancy.sol
+> BadReceiver.sol
+> BadReceiver721.sol
+> BashoodMultiToken.sol
+> BashoodNFT.sol
+> BashoodPaymentSplitter.sol
+> BashoodPresaleFinal.sol
+> BashoodPropertyNFT.sol
+> BashoodReferral.sol
+> BashoodRescue.sol
+> BashoodToken.sol
+> BashoodTokenUpgradeable.sol
+> ComplianceRegistry.sol
+> deprecated\BashoodNFTIntegration.sol
+> IBashoodRescue.sol
+> IERC1155Mintable.sol
+> InterfaceIdResolver.sol
+> interfaces\IBashoodRescue.sol
+> Libra.sol
+> LibraVulnerable.sol
+> libs\OwnableLocal.sol
+> Lock.sol
+> MockBashoodToken.sol
+> MockBHT.sol
+> MockERC20.sol
+> MockNFT1155.sol
+> MockPresale.sol
+> MockPresaleTarget.sol
+> MockPriceFeed.sol
+> MockRescue.sol
+> mocks\AttackerOwner.sol
+> mocks\Caller.sol
+> mocks\ERC1155ReentrantReceiver.sol
+> mocks\MaliciousBHT.sol
+> mocks\MaliciousRescue.sol
+> mocks\MaximalDangerAttacker.sol
+> mocks\MockAttackerProjectWallet.sol
+> mocks\MockBashoodToken.sol
+> mocks\MockBHT.sol
+> mocks\MockBHTRejecting.sol
+> mocks\MockBHTReturnFalse.sol
+> mocks\MockBHTWithBurn.sol
+> mocks\MockERC20.sol
+> mocks\MockNFT1155.sol
+> mocks\MockPresale.sol
+> mocks\MockPresaleTarget.sol
+> mocks\MockPriceFeed.sol
+> mocks\MockPriceFeedV2.sol
+> mocks\MockProjectWalletClaimCaller.sol
+> mocks\MockProjectWalletMultiSig.sol
+> mocks\MockProjectWalletMultiSigEIP712.sol
+> mocks\MockProjectWalletReentrant.sol
+> mocks\MockProjectWalletRevert.sol
+> mocks\MockProjectWalletRevertCaller.sol
+> mocks\MockProjectWalletRevertCallerPresale.sol
+> mocks\MockReferral.sol
+> mocks\MockRescue.sol
+> mocks\MockRescueRecorder.sol
+> mocks\MockRescueRevertNoReason.sol
+> mocks\MockRescueRevertWithReason.sol
+> mocks\MockTreasuryHandler.sol
+> mocks\ProtectedPresaleMock.sol
+> mocks\RejectingWallet.sol
+> mocks\VulnerablePresaleMock.sol
+> MockTreasuryHandler.sol
+> NotRescue.sol
+> oracles\ChainlinkPriceFeed.sol
+> oracles\IPriceFeed.sol
+> ReferralValidator.sol
+> standards\BashoodRWAReference.sol
+> standards\IBashoodRWA.sol
+> TaxHandler.sol
+> TokenWrapperERC20.sol
+
+Compilation:
+============
+
+Compiled 140 Solidity files successfully (evm target: paris).
+
+Network Info
+============
+> HardhatEVM: v2.26.3
+> network:    hardhat
+
+
+
+  BashoodMultiToken
+    Ô£ö Deber├¡a permitir al minter crear nuevos tokens
+    Ô£ö Deber├¡a fallar si un usuario no autorizado intenta mintear
+    Ô£ö Deber├¡a permitir transferencias seguras de tokens
+    Ô£ö Deber├¡a revertir si se intenta transferir sin balance
+    Ô£ö Deber├¡a manejar setApprovalForAll y isApprovedForAll correctamente
+    Ô£ö Deber├¡a devolver la URI correctamente
+    Ô£ö Deber├¡a manejar m├║ltiples roles correctamente
+    Ô£ö Deber├¡a permitir revocar roles y bloquear funciones
+    Ô£ö Deber├¡a permitir renunciar a un rol
+    Ô£ö Deber├¡a soportar interfaces ERC1155 y AccessControl
+    Ô£ö Deber├¡a revertir si se transfiere a un contrato que no acepta ERC1155 (38ms)
+    Ô£ö Deber├¡a fallar al hacer mint a address(0)
+    Ô£ö Deber├¡a fallar al hacer transfer a address(0)
+    Ô£ö Deber├¡a fallar safeBatchTransfer con arrays desbalanceados
+    Ô£ö Deber├¡a fallar setApprovalForAll con uno mismo como operador
+
+  BashoodNFT
+    Ô£ö 1. Deber├¡a permitir al owner mintear un NFT correctamente
+    Ô£ö 2. Deber├¡a fallar si un usuario no autorizado intenta mintear
+    Ô£ö 3. Deber├¡a fallar si se intenta mintear a la direcci├│n cero
+    Ô£ö 4. Deber├¡a asignar correctamente la URI personalizada (si no es ID 1)
+    Ô£ö 5. Deber├¡a devolver la URI fija si tokenId es 1 (Runa)
+    Ô£ö 6. Deber├¡a transferir el NFT correctamente
+    Ô£ö 7. Deber├¡a fallar si no es el owner o approved al transferir
+    Ô£ö 8. Deber├¡a permitir approve y transferFrom
+    Ô£ö 9. Deber├¡a devolver correctamente el balance del owner
+    Ô£ö 10. Deber├¡a fallar si se consulta URI de un token inexistente
+    Ô£ö 11. Deber├¡a devolver correctamente el nombre del token
+    Ô£ö 12. Deber├¡a devolver correctamente el s├¡mbolo del token
+    Ô£ö 13. Deber├¡a permitir setApprovalForAll y reconocer isApprovedForAll
+    Ô£ö 14. Deber├¡a permitir revocar setApprovalForAll
+    Ô£ö 15. Deber├¡a permitir transferencias seguras (safeTransferFrom)
+    Ô£ö 16. Deber├¡a fallar transferFrom a direcci├│n cero
+    Ô£ö 17. Deber├¡a soportar la interfaz ERC721
+    Ô£ö 18. Deber├¡a soportar la interfaz ERC165
+    Ô£ö 19. Deber├¡a fallar safeTransferFrom hacia un contrato no ERC721Receiver
+
+  BashoodPresaleFinal - Additional Coverage to 70%
+    Ô£à Verificaci├│n de Firma
+      Ô£ö PRUEBA: generateSignature debe crear firma v├ílida (309ms)
+    ­ƒöº Oracle Edge Cases
+      - Debe revertir _getFreshPrice si priceFeed no est├í configurado
+      - Debe revertir _bhtFromFiat si maxPriceStaleness es 0
+      - Debe revertir _bhtFromFiat si priceFeed es address(0)
+      Ô£ö Debe revertir si oracle answer <= 0 (50ms)
+      Ô£ö Debe revertir si oracle updatedAt = 0 (52ms)
+      Ô£ö Debe revertir si precio est├í stale (supera maxPriceStaleness) (47ms)
+      - Debe revertir si answeredInRound < roundId
+    ÔÜÖ´©Å Configuraci├│n - BurnBps Edge Cases
+      Ô£ö Debe permitir setBurnBps = 0 (210ms)
+      Ô£ö Debe permitir setBurnBps = 1500 (m├íximo)
+      Ô£ö Debe revertir setBurnBps > 1500
+      Ô£ö Debe revertir setBurnBps si no es admin
+    ÔÜÖ´©Å Configuraci├│n - DiscountBps Edge Cases
+      Ô£ö Debe permitir setDiscountBps = 0
+      Ô£ö Debe permitir setDiscountBps = 2000 (m├íximo)
+      Ô£ö Debe revertir setDiscountBps > 2000
+      Ô£ö Debe revertir setDiscountBps si no es admin
+    ­ƒöä PurchaseWithBHT - Discount Edge Cases
+      Ô£ö Debe aplicar discount con bhtDiscountBps > 0 (83ms)
+      Ô£ö Debe funcionar con bhtDiscountBps = 0 (sin descuento) (84ms)
+      Ô£ö Debe aplicar burn con burnBps > 0 (100ms)
+      Ô£ö Debe funcionar con burnBps = 0 (sin burn) (87ms)
+    ­ƒöÆ Whitelist Edge Cases
+      Ô£ö Debe permitir compra cuando whitelist est├í deshabilitado (42ms)
+      Ô£ö Debe revertir compra cuando whitelist est├í habilitado sin signature v├ílida (224ms)
+    ­ƒôè MaxPerUser Edge Cases
+      Ô£ö Debe permitir compra cuando maxPerUser es alto (sin l├¡mite efectivo) (45ms)
+      Ô£ö Debe revertir cuando se excede maxPerUser (74ms)
+    ­ƒÄ» StartPresale Edge Cases
+      Ô£ö Debe revertir startPresale si ya est├í activo (206ms)
+      Ô£ö Debe revertir startPresale si no es admin
+    ­ƒÄ» OnlyWhilePresaleActive Edge Cases
+      Ô£ö Debe revertir purchaseWithETH si presale no est├í activo
+      Ô£ö Debe revertir purchaseWithBHT si presale no est├í activo
+    ­ƒÆ░ ClaimProjectFunds Edge Cases
+      - Debe permitir claimProjectFunds con balance > 0 - DEPRECATED: ETH handling changed
+      - Debe revertir claimProjectFunds si no es admin - DEPRECATED: function removed
+    ­ƒöä Integraci├│n - M├║ltiples Configuraciones
+      Ô£ö Debe manejar correctamente burnBps=1500 y discountBps=2000 juntos (102ms)
+      Ô£ö Debe manejar precio de oracle con diferentes decimales (83ms)
+
+  BashoodPresaleFinal - BHT edge cases
+    Ô£ö reverts E30 when allowance is insufficient (BHT) (285ms)
+    Ô£ö reverts when price oracle is stale (BHT) (284ms)
+    Ô£ö reverts ETH purchase when project wallet rejects ETH transfer (213ms)
+
+  BashoodPresaleFinal - BHT happy path and role checks
+    Ô£ö happy path BHT purchase updates totals and balances (329ms)
+    Ô£ö reverts E22 when buyer is the signer (214ms)
+    Ô£ö reverts E23 when buyer is the deployer (214ms)
+
+  BashoodPresaleFinal - edge cases
+    Ô£ö reverts E14 when nftId not allowed (ETH) (174ms)
+    Ô£ö reverts E17 when maxPerUser exceeded (ETH) (199ms)
+    Ô£ö reverts E16 when presale lacks NFT stock (ETH) (175ms)
+    Ô£ö reverts E13 when reusing nonce (ETH) (249ms)
+
+  BashoodPresaleFinal - exhaustive suite
+    Ô£ö ETH happy path: purchase transfers NFT and ETH (228ms)
+    Ô£ö BHT happy path: balances and totals updated (313ms)
+    Ô£ö signature validation: invalid signature reverts E24 (BHT) (238ms)
+    Ô£ö nonce reuse prevented (E25/E13) across ETH/BHT (309ms)
+
+  BashoodPresaleFinal - focused branches
+    - purchaseWithETH: success happy path and project wallet receive - TODO: ETH forwarding not implemented
+    Ô£ö purchaseWithETH: reverts when msg.value incorrect and when not allowed nftId or out of stock (74ms)
+    Ô£ö purchaseWithBHT: success and failure paths for allowance and nonce reuse (191ms)
+    - rescue delegation failures when rescueContract not set or projectWallet reverts - DEPRECATED: delegateRescue* removed
+
+  BashoodPresaleFinal - focused2
+    Ô£ö should allow purchaseWithBHT happy path and increment totals (129ms)
+    Ô£ö purchaseWithETH should revert on missing signature or invalid allowed id
+
+  BashoodPresaleFinal - purchaseWithBHT
+    Ô£ö setupPresaleActivo deja la preventa activa dentro del rango esperado (244ms)
+    Ô£ö rechaza compra fuera de la ventana de preventa (262ms)
+
+  BashoodPresaleFinal - BHT transfer to projectWallet fails
+    Ô£ö reverts when projectWallet rejects token transfers (322ms)
+
+  BashoodPresaleFinal IERC1155Receiver
+    Ô£ö acepta onERC1155Received y onERC1155BatchReceived (59ms)
+    Ô£ö supports IERC1155Receiver interface
+
+  Scaffold: BashoodPresaleFinal_IERC1155Receiver
+    Ô£ö placeholder: test file present
+
+  ­ƒÅá BashoodPropertyNFT
+    ­ƒôï Deployment & Initial State
+­ƒÅù´©Å Deploying BashoodPropertyNFT...
+Ô£à BashoodPropertyNFT deployed at: 0x2b639Cc84e1Ad3aA92D4Ee7d2755A6ABEf300D72
+      Ô£ö Should set the correct name and symbol
+­ƒÅù´©Å Deploying BashoodPropertyNFT...
+Ô£à BashoodPropertyNFT deployed at: 0x0b27a79cb9C0B38eE06Ca3d94DAA68e0Ed17F953
+      Ô£ö Should set the correct base URI (54ms)
+­ƒÅù´©Å Deploying BashoodPropertyNFT...
+Ô£à BashoodPropertyNFT deployed at: 0xB468647B04bF657C9ee2de65252037d781eABafD
+      Ô£ö Should have owner as authorized minter
+­ƒÅù´©Å Deploying BashoodPropertyNFT...
+Ô£à BashoodPropertyNFT deployed at: 0x408F924BAEC71cC3968614Cb2c58E155A35e6890
+      Ô£ö Should start with token counter at 1
+    ­ƒÅá Property Minting
+­ƒÅù´©Å Deploying BashoodPropertyNFT...
+Ô£à BashoodPropertyNFT deployed at: 0x52173b6ac069619c206b9A0e75609fC92860AB2A
+      Ô£ö Should mint property NFT successfully (97ms)
+­ƒÅù´©Å Deploying BashoodPropertyNFT...
+Ô£à BashoodPropertyNFT deployed at: 0x532802f2F9E0e3EE9d5Ba70C35E1F43C0498772D
+      Ô£ö Should fail if not authorized minter
+­ƒÅù´©Å Deploying BashoodPropertyNFT...
+Ô£à BashoodPropertyNFT deployed at: 0xd977422c9eE9B646f64A4C4389a6C98ad356d8C4
+      Ô£ö Should fail with invalid property type
+­ƒÅù´©Å Deploying BashoodPropertyNFT...
+Ô£à BashoodPropertyNFT deployed at: 0x6e0a5725dD4071e46356bD974E13F35DbF9ef367
+      Ô£ö Should fail with empty property name
+­ƒÅù´©Å Deploying BashoodPropertyNFT...
+Ô£à BashoodPropertyNFT deployed at: 0x6B21b3ae41f818Fc91e322b53f8D0773d31eCB75
+      Ô£ö Should update property type counters (59ms)
+    ­ƒîƒ Public Minting
+­ƒÅù´©Å Deploying BashoodPropertyNFT...
+Ô£à BashoodPropertyNFT deployed at: 0xa31F4c0eF2935Af25370D9AE275169CCd9793DA3
+      Ô£ö Should fail if public minting not enabled
+­ƒÅù´©Å Deploying BashoodPropertyNFT...
+Ô£à BashoodPropertyNFT deployed at: 0xb830887eE23d3f9Ed8c27dbF7DcFe63037765475
+      Ô£ö Should mint successfully when public minting enabled (50ms)
+­ƒÅù´©Å Deploying BashoodPropertyNFT...
+Ô£à BashoodPropertyNFT deployed at: 0x25A1DF485cFBb93117f12fc673D87D1cddEb845a
+      Ô£ö Should fail with insufficient fee
+­ƒÅù´©Å Deploying BashoodPropertyNFT...
+Ô£à BashoodPropertyNFT deployed at: 0x22b1c5C2C9251622f7eFb76E356104E5aF0e996A
+      Ô£ö Should refund excess payment (39ms)
+    ­ƒôØ Property Management
+­ƒÅù´©Å Deploying BashoodPropertyNFT...
+Ô£à BashoodPropertyNFT deployed at: 0x7036124464A2d2447516309169322c8498ac51e3
+      Ô£ö Should update property data by owner
+­ƒÅù´©Å Deploying BashoodPropertyNFT...
+Ô£à BashoodPropertyNFT deployed at: 0x5c932424AcBfab036969b3B9D94bA9eCbae7565D
+      Ô£ö Should fail to update if not owner
+­ƒÅù´©Å Deploying BashoodPropertyNFT...
+Ô£à BashoodPropertyNFT deployed at: 0x9e7F7d0E8b8F38e3CF2b3F7dd362ba2e9E82baa4
+      Ô£ö Should add amenities (46ms)
+­ƒÅù´©Å Deploying BashoodPropertyNFT...
+Ô£à BashoodPropertyNFT deployed at: 0xE7FF84Df24A9a252B6E8A5BB093aC52B1d8bEEdf
+      Ô£ö Should toggle property status by contract owner
+    ­ƒöì Query Functions
+­ƒÅù´©Å Deploying BashoodPropertyNFT...
+Ô£à BashoodPropertyNFT deployed at: 0x3de00f44ce68FC56DB0e0E33aD4015C6e78eCB39
+      Ô£ö Should get properties by type
+­ƒÅù´©Å Deploying BashoodPropertyNFT...
+Ô£à BashoodPropertyNFT deployed at: 0xB1c05b498Cb58568B2470369FEB98B00702063dA
+      Ô£ö Should get properties by owner
+­ƒÅù´©Å Deploying BashoodPropertyNFT...
+Ô£à BashoodPropertyNFT deployed at: 0x2f8D338360D095a72680A943A22fE6a0d398a0B4
+      Ô£ö Should calculate total value by owner
+­ƒÅù´©Å Deploying BashoodPropertyNFT...
+Ô£à BashoodPropertyNFT deployed at: 0x44863F234b137A395e5c98359d16057A9A1fAc55
+      Ô£ö Should return collection statistics
+    ­ƒææ Admin Functions
+­ƒÅù´©Å Deploying BashoodPropertyNFT...
+Ô£à BashoodPropertyNFT deployed at: 0x1c39BA375faB6a9f6E0c01B9F49d488e101C2011
+      Ô£ö Should add and remove minters
+­ƒÅù´©Å Deploying BashoodPropertyNFT...
+Ô£à BashoodPropertyNFT deployed at: 0x6212cb549De37c25071cF506aB7E115D140D9e42
+      Ô£ö Should toggle public minting
+­ƒÅù´©Å Deploying BashoodPropertyNFT...
+Ô£à BashoodPropertyNFT deployed at: 0x0bF7dE8d71820840063D4B8653Fd3F0618986faF
+      Ô£ö Should update minting fee
+­ƒÅù´©Å Deploying BashoodPropertyNFT...
+Ô£à BashoodPropertyNFT deployed at: 0x97fd63D049089cd70D9D139ccf9338c81372DE68
+      Ô£ö Should update base URI
+­ƒÅù´©Å Deploying BashoodPropertyNFT...
+Ô£à BashoodPropertyNFT deployed at: 0x9D3DA37d36BB0B825CD319ed129c2872b893f538
+      Ô£ö Should pause and unpause
+­ƒÅù´©Å Deploying BashoodPropertyNFT...
+Ô£à BashoodPropertyNFT deployed at: 0x49149a233de6E4cD6835971506F47EE5862289c1
+      Ô£ö Should withdraw contract balance (42ms)
+    ­ƒÜ½ Edge Cases & Security
+­ƒÅù´©Å Deploying BashoodPropertyNFT...
+Ô£à BashoodPropertyNFT deployed at: 0x3abBB0D6ad848d64c8956edC9Bf6f18aC22E1485
+      Ô£ö Should fail to mint to zero address
+­ƒÅù´©Å Deploying BashoodPropertyNFT...
+Ô£à BashoodPropertyNFT deployed at: 0x4CF4dd3f71B67a7622ac250f8b10d266Dc5aEbcE
+      Ô£ö Should fail to query non-existent token
+­ƒÅù´©Å Deploying BashoodPropertyNFT...
+Ô£à BashoodPropertyNFT deployed at: 0x447786d977Ea11Ad0600E193b2d07A06EfB53e5F
+      Ô£ö Should respect MAX_SUPPLY limit
+­ƒÅù´©Å Deploying BashoodPropertyNFT...
+Ô£à BashoodPropertyNFT deployed at: 0x245e77E56b1514D77910c9303e4b44dDb44B788c
+      Ô£ö Should fail admin functions if not owner
+
+  Registro y restricciones adicionales
+    Ô£ö 1. Deber├¡a iniciar sin referidos ni NFTs reclamados
+    Ô£ö 6. Debe registrar exitosamente si el usuario posee el NFT permitido
+    Ô£ö 7. Debe fallar si el usuario intenta referirse a s├¡ mismo
+    Ô£ö 8. Debe fallar si se intenta registrar un usuario ya referido
+    Ô£ö 9. Debe permitir referidos m├║ltiples
+    Ô£ö 10. Debe fallar si se intenta reclamar un NFT sin suficientes referidos
+    Ô£ö 11. Debe distribuir recompensas correctamente
+    Ô£ö 12. Debe permitir reclamar NFT si se tienen suficientes referidos
+    Ô£ö 13. Debe distribuir recompensas correctamente despu├®s de m├║ltiples referidos
+    Ô£ö 14. Debe fallar si se intenta reclamar un NFT sin suficientes referidos
+    Ô£ö 15. No debe permitir registrar referidos m├║ltiples veces por diferentes usuarios
+    Ô£ö 16. Debe fallar si se usa direcci├│n cero como referido
+    Ô£ö 17. Debe verificar que el NFT fue transferido correctamente al reclamar
+    Ô£ö 24. Debe permitir verificar el n├║mero de referidos de un usuario
+    Ô£ö 25. Debe permitir verificar si un usuario ha reclamado su NFT
+
+  Scaffold: BashoodReferralFull
+    Ô£ö placeholder: test file present
+
+  BashoodRescue - claim edge cases (reentrancy / revert / duplicate)
+    Ô£ö claim resists reentrancy: reentrant contract attempt fails and leaves pending intact
+    Ô£ö claim reverts when project wallet rejects ETH
+    Ô£ö duplicate claims are prevented: second claim fails with no pending
+
+  BashoodRescue - focused branch coverage
+    Ô£ö authorize and revoke caller flows and events
+    Ô£ö rescueERC20 succeeds only for authorized caller and reverts otherwise
+    Ô£ö rescueUnsoldNFTs handles success and rejects zero address and unauthorized
+    Ô£ö emergencyWithdrawETH only with role and emits event
+
+  BashoodRescue - multisig EIP712 flow
+    Ô£ö happy path: N owners sign, executor calls claim -> multisig receives funds and pending zeroed (85ms)
+    Ô£ö insufficient signatures: fail (62ms)
+    Ô£ö wrong signer: fail (69ms)
+    Ô£ö duplicate signatures: counted once (70ms)
+    Ô£ö replay: same signatures + same nonce fails on second attempt (96ms)
+    Ô£ö revert on transfer: ensure state preserved when claim reverts (78ms)
+
+  BashoodRescue - multisig project wallet flow
+    Ô£ö multisig requires approvals then can execute claim and withdraw (60ms)
+
+  BashoodToken - Comprehensive Coverage Tests
+    ­ƒöÑ Configuraci├│n Inicial
+      Ô£ö Debe deployar con par├ímetros correctos (64ms)
+      Ô£ö Debe revertir si treasury es address(0)
+      Ô£ö Debe mintear supply inicial al owner
+    ­ƒÆ© Transfer con Fees y Burn
+      Ô£ö Debe aplicar burnRate y treasuryFee en transfer (40ms)
+      Ô£ö Debe revertir transfer con amount = 0
+      Ô£ö Debe aplicar fees en transferFrom (46ms)
+      Ô£ö Debe revertir transferFrom con amount = 0
+      Ô£ö Debe manejar transferFrom sin allowance suficiente
+    ­ƒÄü Donaciones
+      Ô£ö Debe aceptar donaciones y actualizar totalDonated
+      Ô£ö Debe revertir donaci├│n con amount = 0
+      Ô£ö Debe revertir donaci├│n sin balance suficiente
+    ­ƒöÑ Burn Manual
+      Ô£ö Debe permitir burn manual y actualizar totalBurned
+      Ô£ö Debe revertir burn sin balance suficiente
+    ­ƒÅª Periodic Burn (Owner Only)
+      Ô£ö Debe permitir periodicBurn al owner con balance suficiente
+      Ô£ö Debe revertir periodicBurn si no hay balance suficiente
+      Ô£ö Debe revertir periodicBurn si no es owner
+    ­ƒÆ░ Send to Treasury/Staking
+      Ô£ö Debe permitir sendToTreasury con balance suficiente
+      Ô£ö Debe revertir sendToTreasury sin balance suficiente
+      Ô£ö Debe revertir sendToStaking si staking no est├í configurado
+      Ô£ö Debe permitir sendToStaking despu├®s de configurar staking
+      Ô£ö Debe revertir sendToStaking sin balance suficiente
+      Ô£ö Debe revertir sendToTreasury si no es owner
+      Ô£ö Debe revertir sendToStaking si no es owner
+    ÔÜÖ´©Å Configuraci├│n - Treasury Wallet
+      Ô£ö Debe actualizar treasuryWallet correctamente
+      Ô£ö Debe revertir setTreasuryWallet con address(0)
+      Ô£ö Debe revertir setTreasuryWallet si no es owner
+    ÔÜÖ´©Å Configuraci├│n - Staking Contract
+      Ô£ö Debe actualizar stakingContract correctamente
+      Ô£ö Debe revertir setStakingContract con address(0)
+      Ô£ö Debe revertir setStakingContract si no es owner
+    ÔÜÖ´©Å Configuraci├│n - Burn Rate
+      Ô£ö Debe actualizar burnRate correctamente
+      Ô£ö Debe revertir setBurnRate si excede MAX_BURN_RATE
+      Ô£ö Debe permitir burnRate = 0
+      Ô£ö Debe permitir burnRate = 100 (m├íximo)
+      Ô£ö Debe revertir setBurnRate si no es owner
+    ÔÜÖ´©Å Configuraci├│n - Treasury Fee
+      Ô£ö Debe actualizar treasuryFee correctamente
+      Ô£ö Debe revertir setTreasuryFee si excede MAX_TREASURY_FEE
+      Ô£ö Debe permitir treasuryFee = 0
+      Ô£ö Debe permitir treasuryFee = 200 (m├íximo)
+      Ô£ö Debe revertir setTreasuryFee si no es owner
+    ÔÅ©´©Å Pause/Unpause
+      1) Debe pausar el contrato correctamente
+      2) Debe revertir operaciones cuando est├í pausado
+      3) Debe despausar el contrato correctamente
+      4) Debe revertir pause si no es owner
+      5) Debe revertir unpause si no es owner
+    ­ƒº« Edge Cases - Fees con BurnRate Extremo
+      Ô£ö Debe manejar burnRate=100 (1%) correctamente
+      Ô£ö Debe manejar treasuryFee=200 (2%) correctamente
+      Ô£ö Debe manejar burnRate=0 y treasuryFee=0
+    ­ƒöä Integraci├│n - M├║ltiples Operaciones
+      Ô£ö Debe acumular totalBurned correctamente en m├║ltiples operaciones (45ms)
+      Ô£ö Debe acumular totalToTreasury correctamente
+
+  BashoodToken - Pause Timelock Security
+    Pause Timelock Mechanism
+      Ô£ö Ô£à Debe permitir requestPause y emitir evento con executeTime
+      Ô£ö ÔØî No debe permitir executePause antes de 24h
+      Ô£ö Ô£à Debe permitir executePause despu├®s de 24h
+      Ô£ö Ô£à Debe permitir cancelar pauseRequest
+      Ô£ö ÔØî No debe permitir requestPause si ya est├í paused
+    Unpause Timelock Mechanism
+      Ô£ö Ô£à Debe permitir requestUnpause y emitir evento
+      Ô£ö ÔØî No debe permitir executeUnpause antes de 24h
+      Ô£ö Ô£à Debe permitir executeUnpause despu├®s de 24h
+      Ô£ö Ô£à Debe permitir cancelar unpauseRequest
+    Security - User Protection During Timelock
+      Ô£ö Ô£à Usuarios pueden transferir durante los 24h despu├®s de requestPause (52ms)
+      Ô£ö Ô£à Owner puede cancelar si comunidad rechaza la pausa
+    Edge Cases & Access Control
+      Ô£ö ÔØî No-owner no puede requestPause
+      Ô£ö ÔØî No puede executePause sin requestPause previo
+      Ô£ö ÔØî No puede cancelar si no hay request pendiente
+      Ô£ö Ô£à M├║ltiples requests resetean el timer
+    Gas Optimization Check
+     Ôø¢ requestPause gas: 49546
+     Ôø¢ executePause gas: 49269
+     Ôø¢ requestUnpause gas: 49609
+     Ôø¢ executeUnpause gas: 29272
+      Ô£ö ­ƒôè Medici├│n de gas para operaciones de timelock
+
+  ComplianceRegistry + TokenWrapper POC
+    Ô£ö denies wrap if no root set
+    Ô£ö allows wrap when merkle root matches
+
+  ­ƒÄ» SURGICAL: 6 L├¡neas Exactas - 90% Coverage Push
+    BashoodPresaleFinal L147
+      - Ô£à L147: return uint256(answer) en _getFreshPrice() - DEAD CODE
+    BashoodPresaleFinal L434
+      Ô£ö Ô£à L434: catch generic (sin Error) en rescueUnsoldNFTs (166ms)
+    BashoodPresaleFinal L447
+      Ô£ö Ô£à L447: catch generic (sin Error) en rescueERC20 (181ms)
+    BashoodRescue L152
+      Ô£ö Ô£à L152: onERC1155BatchReceived return selector
+    ChainlinkPriceFeed L28-32, L36-37
+      Ô£ö Ô£à L28-32: setFeed con address v├ílido (50ms)
+      Ô£ö Ô£à L36-37: setStalenessThreshold
+      Ô£ö Ô£à L40-41: setMaxChangePct (38ms)
+
+  Coverage: AttackerBatch
+    Ô£ö covers setTarget, attack revert, hooks, supportsInterface (78ms)
+
+  Coverage: AttackerConditional & AttackerLoop
+    Ô£ö AttackerConditional acts only on data flag (74ms)
+    Ô£ö AttackerConditional: covers onERC1155BatchReceived
+    Ô£ö AttackerConditional: covers supportsInterface returning false
+    Ô£ö AttackerConditional: attack() reverts when target not set
+    Ô£ö AttackerConditional: attack() calls mintAllNFTs when target set (51ms)
+    Ô£ö AttackerConditional: setTarget only by deployer (48ms)
+    Ô£ö AttackerLoop attempts multiple withdraws but none succeed (63ms)
+
+  Coverage: AttackerReceiver
+    Ô£ö covers attack and hook withdraw attempt (573ms)
+
+  Coverage: BashoodMultiToken focused tests
+    Ô£ö mintAllNFTs onlyOwner and nftCounter behavior + withdrawFunds transfer failure (306ms)
+    Ô£ö approveMarketplace emits correct events and buyTokens mints BASHOOD_TOKEN (88ms)
+
+  Coverage: BashoodPresaleFinal extra focused tests
+    - submitProposal: burns via fallback transferFrom when burnFrom not available - DEPRECATED: function removed
+    - submitProposal: reverts when price is stale - DEPRECATED: function removed
+    Ô£ö payServiceWithBHT: handles burn and ops transfers (fallback burn path) (269ms)
+    - delegate rescue: handles success and revert-with-reason and revert-without-reason - DEPRECATED: delegate* removed
+
+  Coverage: BashoodReferral focused tests
+    Ô£ö covers setPresaleContract owner and failure cases (60ms)
+    Ô£ö covers rewardReferrer happy path and revert branches (94ms)
+    Ô£ö covers registerReferral branches and getters (76ms)
+    Ô£ö covers claimNFT success and failure paths (85ms)
+
+  Coverage: BashoodRescue focused tests
+    Ô£ö constructor rejects zero addresses and grants roles (55ms)
+DEBUG: alice call reverted as expected VM Exception while processing transaction: reverted with reason string 'Rescue: not authorized'
+    Ô£ö authorize/revoke caller and rescueUnsoldNFTs happy and revert paths (143ms)
+    Ô£ö rescueERC20 happy and error flows (94ms)
+    Ô£ö emergencyWithdrawETH covers role and error branches (72ms)
+
+  Coverage extras
+DBG addrs {
+  ownerAddr: '0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266',
+  aliceAddr: '0x70997970C51812dc3A010C7d01b50e0d17dc79C8',
+  bobAddr: '0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC'
+}
+STEP: deploy MockBHT
+STEP: deploy BashoodToken
+STEP: before transfers
+STEP: before approve/transferFrom
+STEP: before donate
+OK: transfer to alice.address
+OK: transfer to aliceAddr
+DEBUG: bht address for approve 0x53DaB165b879542E9aDFC41c6474A9d797B9b042
+OK: approve bht.address
+OK: donate
+STEP: before burn
+STEP: before periodicBurn
+STEP: before setStakingContract/sendToStaking
+    Ô£ö BashoodToken: transfer, fee, burn, donate, burn and treasury/staking flows (264ms)
+    Ô£ö MockBHT and MockRescue basic behaviors (67ms)
+    Ô£ö TaxHandler: initialize, updates and calculateTax (440ms)
+DBG mint balance 2
+OK: two buyTokens
+DEBUG: m.address 0xA343B1FC2897b8C49A72A9A0B2675cB9c7664e8c owner.address 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266
+OK: owner bought tokens twice to fund contract
+    Ô£ö BashoodMultiToken: minting, buyTokens, withdrawFunds (123ms)
+
+  Coverage fillers: small mocks and helpers
+    Ô£ö ChainlinkPriceFeed: success and failure paths (98ms)
+    Ô£ö OwnableLocal: transfer ownership and restrictions
+    Ô£ö Mock tokens: mint and balances (62ms)
+    Ô£ö TokenWrapperERC20: wrap and unwrap happy path (114ms)
+    - MockPresale delegates to rescue
+
+  ­ƒÄ» Coverage Final Push: Missing 6 Lines
+    Ô£ö Ô£à BashoodRescue L152: emergencyWithdrawETH when balance=0 (41ms)
+    - Ô£à BashoodPresaleFinal L434: rescueUnsoldNFTs catch Error block
+    Ô£ö Ô£à BashoodPresaleFinal L447: rescueERC20 catch Error block (206ms)
+    Ô£ö Ô£à BashoodPresaleFinal L459: emergencyWithdrawETH catch Error block (191ms)
+    Ô£ö Ô£à ChainlinkPriceFeed L26-27: setFeed success path (48ms)
+
+  Debug: ChainlinkPriceFeed Validation Order
+=== latestRoundData() returns ===
+roundId: 2
+answer: 200000000000
+updatedAt: 1772239725
+answeredInRound: 1
+===
+Validation checks:
+  updatedAt != 0? true
+  answer > 0? true
+  answeredInRound != 0? true
+  answeredInRound >= roundId? false (1 >= 2)
+ÔØî getLatestPrice() did NOT revert!
+Transaction emitted 0 events
+    Ô£ö should show exact validation order and values
+
+  Deploy BashoodReferral - test m├¡nimo
+    Ô£ö deber├¡a desplegar BashoodReferral con argumentos v├ílidos (90ms)
+
+  BashoodPresaleFinal - Edge Cases
+    Ô£ö revierta si el usuario no tiene suficiente BHT
+    Ô£ö revierta si el or├ículo devuelve precio cero
+    - revierta si se intenta finalizar una propuesta inexistente - DEPRECATED: finalizeProposal removed
+    Ô£ö revierta si un usuario intenta pagar con cantidad cero
+
+  Test m├¡nimo de entorno
+    Ô£ö deber├¡a pasar siempre
+
+  Integraci├│n BashoodPresaleFinal: pagos, propuestas y roles
+    - flujo completo: pago de servicio, propuesta y finalizaci├│n - DEPRECATED: submitProposal/finalizeProposal removed
+    - bloquea todo si el contrato est├í pausado - DEPRECATED: submitProposal removed
+    Ô£ö flujo: pago de milestone y chequeo de eventos (43ms)
+
+  Libra - ReentrancyGuard example
+    Ô£ö allows deposit and withdraw normally (71ms)
+
+  Scaffold: Lock
+    Ô£ö placeholder: test file present
+
+  Lock
+    Deployment
+      Ô£ö Should set the right unlockTime
+      Ô£ö Should set the right owner
+      Ô£ö Should receive and store the funds to lock
+      Ô£ö Should fail if the unlockTime is not in the future
+    Withdrawals
+      Validations
+        Ô£ö Should revert with the right error if called too soon
+        Ô£ö Should revert with the right error if called from another account
+        Ô£ö Shouldn't fail if the unlockTime has arrived and the owner calls it
+      Events
+        Ô£ö Should emit an event on withdrawals
+      Transfers
+        Ô£ö Should transfer the funds to the owner
+
+  ­ƒöÑ MAXIMAL DANGER ATTACKER TEST ­ƒöÑ
+    ­ƒÄ» ATTACK VECTOR 1: Advanced Reentrancy
+­ƒÜÇ Deploying target contracts...
+­ƒÆÇ Deploying MAXIMAL DANGER ATTACKER...
+ÔÜí Setup complete - Ready for WAR!
+      - Should attempt sophisticated reentrancy attack
+­ƒÜÇ Deploying target contracts...
+­ƒÆÇ Deploying MAXIMAL DANGER ATTACKER...
+ÔÜí Setup complete - Ready for WAR!
+­ƒö┤ TESTING ERC1155 CALLBACK REENTRANCY...
+Ô£à CALLBACK ATTACK BLOCKED: no matching fragment (operation="fragment", info={ "args": [ "0x97186594dA62AF0FCdf266E9eAc4736dcA6E6EAE", 1, 1, "0x" ], "key": "mint" }, code=UNSUPPORTED_OPERATION, version=6.15.0)
+      Ô£ö Should test ERC1155 callback reentrancy
+    ­ƒÄ» ATTACK VECTOR 2: Flash Loan Simulation
+­ƒÜÇ Deploying target contracts...
+­ƒÆÇ Deploying MAXIMAL DANGER ATTACKER...
+ÔÜí Setup complete - Ready for WAR!
+­ƒö┤ LAUNCHING FLASH LOAN ATTACK...
+­ƒôè Flash loan attack attempted
+      Ô£ö Should attempt flash loan price manipulation attack
+    ­ƒÄ» ATTACK VECTOR 3: Front-Running & MEV
+­ƒÜÇ Deploying target contracts...
+­ƒÆÇ Deploying MAXIMAL DANGER ATTACKER...
+ÔÜí Setup complete - Ready for WAR!
+­ƒö┤ LAUNCHING FRONT-RUNNING ATTACK...
+­ƒôè Front-running attack attempted
+      Ô£ö Should attempt front-running attack
+    ­ƒÄ» ATTACK VECTOR 4: Gas Griefing
+­ƒÜÇ Deploying target contracts...
+­ƒÆÇ Deploying MAXIMAL DANGER ATTACKER...
+ÔÜí Setup complete - Ready for WAR!
+­ƒö┤ LAUNCHING GAS GRIEFING ATTACK...
+Ôø¢ Gas griefing used: 31323484 gas
+      Ô£ö Should attempt gas griefing attack (59148ms)
+    ­ƒÄ» ATTACK VECTOR 5: Batch Attack Coordination
+­ƒÜÇ Deploying target contracts...
+­ƒÆÇ Deploying MAXIMAL DANGER ATTACKER...
+ÔÜí Setup complete - Ready for WAR!
+­ƒö┤ LAUNCHING BATCH COORDINATION ATTACK...
+­ƒôè Batch attack completed
+      Ô£ö Should attempt coordinated batch attack (39ms)
+    ­ƒøí´©Å DEFENSE VERIFICATION
+­ƒÜÇ Deploying target contracts...
+­ƒÆÇ Deploying MAXIMAL DANGER ATTACKER...
+ÔÜí Setup complete - Ready for WAR!
+      - Should verify all defenses are working
+­ƒÜÇ Deploying target contracts...
+­ƒÆÇ Deploying MAXIMAL DANGER ATTACKER...
+ÔÜí Setup complete - Ready for WAR!
+­ƒÜ¿ TESTING EMERGENCY STOP...
+Ô£à Emergency stop successful
+      Ô£ö Should test emergency stop functionality
+    ­ƒôè ATTACK SUMMARY & REPORT
+­ƒÜÇ Deploying target contracts...
+­ƒÆÇ Deploying MAXIMAL DANGER ATTACKER...
+ÔÜí Setup complete - Ready for WAR!
+
+============================================================
+­ƒöÑ MAXIMAL DANGER ATTACK REPORT ­ƒöÑ
+============================================================
+­ƒôì Attacker Address: 0xADcb9331bfB37dC1b0db12d73c5aFeC3a6c99ce5
+­ƒÄ» Target Contracts:
+   - Presale: 0x5b85493c5dF5718E0458d998D87e7caa76F69503
+   - Token: 0x8AAFC28174bb6c3BDc7BE92f18c2F134E876c05E
+   - MultiToken: 0x8EB5A8B9732022F20ab4d3128DDf3a50a6dAa7A2
+
+­ƒôè Attack Statistics:
+   - Currently Attacking: false
+   - Final Attack Step: 0
+   - Total Reentry Attempts: 0
+   - Funds Stolen: 0.0 ETH
+
+­ƒøí´©Å Defense Status:
+   - Reentrancy Guards: Ô£à ACTIVE
+   - Access Controls: Ô£à ACTIVE
+   - State Integrity: Ô£à MAINTAINED
+
+­ƒÆ░ Final Contract States:
+   - Presale Balance: 2.0 ETH
+   - Token Supply: 999999985.0 BHT
+
+­ƒÄë CONCLUSION: ALL ATTACKS SUCCESSFULLY MITIGATED! ­ƒÄë
+============================================================
+
+      Ô£ö Should generate complete attack report
+
+  Minimal: answeredInRound >= roundId validation
+    - Should revert when answeredInRound < roundId - DEPRECATED: ChainLink validation not currently in use
+
+  Mock: RejectingWallet helper and receive/fallback behavior
+    Ô£ö reverts on plain ether receive
+    Ô£ö callWithdraw bubbles revert reason from target (68ms)
+
+  MockBHT basic behaviors
+    Ô£ö mint and approve behave as expected (46ms)
+
+  MockERC20 basic behaviors
+    Ô£ö mint, transfer and approve work (50ms)
+
+  MockPriceFeed basic behaviors
+    Ô£ö returns and updates price and timestamp (42ms)
+
+  MockPriceFeed Test
+MockPriceFeed constructor args: 8 decimals, 100e8 price
+    Ô£ö Should deploy successfully
+MockPriceFeed constructor args: 8 decimals, 100e8 price
+Latest round data: Result(5) [ 1n, 10000000000n, 1803776009n, 1803776009n, 1n ]
+    Ô£ö Should return latest round data
+
+  MockPriceFeedV2 - Backward Compatibility & Improvements
+    Ô£à Constructor Compatibility
+      Ô£ö should initialize with same parameters
+    Ô£à setAnswer() Compatibility
+      Ô£ö should update price identically
+      Ô£ö should increment roundId on both
+    Ô£à setAnswerWithTimestamp() Compatibility
+      Ô£ö should allow custom timestamps
+    Ô£à setAnsweredInRound() Compatibility
+      Ô£ö should allow custom answeredInRound (stale data testing)
+    Ô£à Legacy Method Compatibility
+      Ô£ö setPrice() should work (alias for setAnswer)
+      Ô£ö setUpdatedAt() should work
+    ­ƒÄ» CRITICAL: answeredInRound >= roundId Validation
+      Ô£ö V2 should PASS validation with valid data (improvement over custom mock)
+      - V2 should REVERT with stale data (when setAnsweredInRound used) - KNOWN ISSUE
+      - OLD mock should also revert with stale data (same behavior) - KNOWN ISSUE
+    ­ƒÜÇ Improvements Over Custom MockPriceFeed
+      Ô£ö should properly handle getRoundData() for historical rounds
+      Ô£ö should maintain Chainlink-compliant behavior by default
+    ­ƒôè Performance & Gas Comparison
+      OLD gas: 47617
+      V2 gas:  109803
+      Ô£ö should have reasonable gas costs (composition pattern trades gas for correctness)
+
+  MockTreasuryHandler
+    Ô£ö 1. Inicializa sin revertir
+    Ô£ö 2. Inicializa con address(0)
+    Ô£ö 3. updateTreasuryWallet con address v├ílida
+    Ô£ö 4. updateTreasuryWallet con address(0)
+    Ô£ö 5. getTreasury retorna address(this)
+    Ô£ö 6. handleTreasuryTransfer con datos v├ílidos
+    Ô£ö 7. handleTreasuryTransfer con from=address(0)
+    Ô£ö 8. handleTreasuryTransfer con to=address(0)
+    Ô£ö 9. handleTreasuryTransfer con amount=0
+    Ô£ö 10. Emite FeeTransferred correctamente
+    Ô£ö 11. Emite FeeTransferred varias veces
+    Ô£ö 12. updateTreasuryWallet varias veces
+    Ô£ö 13. initialize varias veces
+    Ô£ö 14. handleTreasuryTransfer desde diferentes cuentas
+    Ô£ö 15. updateTreasuryWallet desde diferentes cuentas
+    Ô£ö 16. No almacena balances
+    Ô£ö 39. handleTreasuryTransfer en paralelo (Promise.all)
+    Ô£ö 40. No cambia storage tras m├║ltiples llamadas (53ms)
+
+  Scaffold: MockTreasuryHandler
+    Ô£ö placeholder: test file present
+
+  Oracle Debug Tests
+Operations wallet set to: 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266
+Minted 1000 BHT to owner
+Setting fresh price...
+Round data: {
+  roundId: 2n,
+  answer: '15000000000',
+  startedAt: 1803776137n,
+  updatedAt: 1803776137n,
+  answeredInRound: 2n
+}
+Current block timestamp: 1803776137
+Price age: 0
+Max staleness: 3600n
+Attempting submitProposal...
+ERROR details: TypeError: bashoodPresale.connect(...).submitProposal is not a function
+    at Context.<anonymous> (C:\Users\Franchu\Desktop\bashood-hardhat-tests\test\oracle.debug.DEPRECATED.SKIP.js:58:60)
+ERROR reason: bashoodPresale.connect(...).submitProposal is not a function
+PriceFeed address: 0x9Be48cB9Eb443E850316DD09cdF1c2E150b09245
+MockPriceFeed address: 0x9Be48cB9Eb443E850316DD09cdF1c2E150b09245
+Operations wallet: 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266
+Is paused: false
+    Ô£ö Debug oracle call (219ms)
+
+  BashoodPresaleFinal - Oracle Functions Tests
+    Oracle Configuration
+Using mock deployment for oracle tests
+      - Should set max price staleness correctly
+Using mock deployment for oracle tests
+      - Should emit MaxPriceStalenessChanged event
+Using mock deployment for oracle tests
+      - Should reject staleness outside valid range
+Using mock deployment for oracle tests
+      - Should only allow admin to set staleness
+    Price Feed Configuration
+Using mock deployment for oracle tests
+      - Should set price feed correctly
+Using mock deployment for oracle tests
+      - Should emit PriceFeedChanged event
+Using mock deployment for oracle tests
+      - Should reject zero address for price feed
+    Mock Oracle Price Updates
+Using mock deployment for oracle tests
+      - Should update price correctly
+Using mock deployment for oracle tests
+      - Should handle price staleness simulation
+
+  BashoodPresaleFinal - Oracle Validation Tests
+    Oracle Configuration
+      - Should set max price staleness correctly
+      - Should emit MaxPriceStalenesChanged event
+      - Should reject staleness outside valid range
+      - Should only allow admin to set staleness
+    Oracle Price Validation
+      - Should accept fresh price data
+      - Should reject stale price data
+      - Should reject zero price data
+      - Should reject negative price data
+      - Should reject when priceFeed is not set
+    Oracle Edge Cases
+      - Should handle multiple rapid price updates correctly
+      - Should handle price at staleness boundary
+      - Should reject price one second past staleness limit
+    Integration with Proposal System
+      - Should validate oracle before burning tokens
+
+  BashoodPresaleFinal - Oracle Validation Tests
+    Oracle Configuration
+      Ô£ö Should set max price staleness correctly
+      Ô£ö Should emit MaxPriceStalenessChanged event
+      Ô£ö Should reject staleness outside valid range
+      Ô£ö Should only allow admin to set staleness
+    Oracle Price Validation
+      6) Should accept fresh price data
+      7) Should reject stale price data
+      8) Should reject zero price data
+      9) Should reject negative price data
+      10) Should reject when priceFeed is not set
+    Oracle Edge Cases
+      11) Should handle multiple rapid price updates correctly
+      12) Should handle price at staleness boundary
+      13) Should reject price one second past staleness limit
+    Integration with Proposal System
+      14) Should validate oracle before burning tokens
+
+  ChainlinkPriceFeed - decimals handling
+    Ô£ö returns correct decimals and price from mock (48ms)
+
+  ChainlinkPriceFeed - max change rejection
+    Ô£ö reverts when change is larger than maxChangePct (62ms)
+
+  ChainlinkPriceFeed - permissions
+    Ô£ö setFeed onlyOwner (44ms)
+
+  ChainlinkPriceFeed wrapper
+    Ô£ö compiles and returns latest price from mock (46ms)
+
+  ChainlinkPriceFeed - stale handling
+    Ô£ö reverts when feed updatedAt == 0 (47ms)
+
+  ­ƒÆ░ BashoodPaymentSplitter - Complete Coverage
+    ­ƒÅù´©Å Constructor & Initialization
+      Ô£ö Should deploy with correct 4-wallet distribution (45/25/20/10) (60ms)
+      Ô£ö Should emit PayeeAdded events for all payees (43ms)
+      Ô£ö Should revert if payees and shares length mismatch
+      Ô£ö Should revert if no payees provided
+      Ô£ö Should revert if payee is zero address
+      Ô£ö Should revert if shares are 0
+      Ô£ö Should revert if account already has shares
+    ­ƒÆ© Receive & Release Functions
+      Ô£ö Should receive ETH and emit FundsReceived event
+      Ô£ö Should calculate correct releasable amounts (45/25/20/10 split)
+      Ô£ö Should release funds to development wallet
+      Ô£ö Should emit PaymentReleased and FundsDistributed events
+      Ô£ö Should update _released and _totalReleased after release
+      Ô£ö Should revert if account has no shares
+      Ô£ö Should revert if account is not due payment
+      Ô£ö Should revert if trying to release twice without new funds
+    ­ƒöä releaseAll Function
+      Ô£ö Should release to all 4 wallets at once (46ms)
+      Ô£ö Should emit events for each wallet during releaseAll (51ms)
+      Ô£ö Should skip wallets with 0 pending payment (64ms)
+      Ô£ö Should handle multiple funding rounds correctly (40ms)
+    ­ƒôè Getter Functions & Info
+      Ô£ö Should return correct shares for each account
+      Ô£ö Should return totalShares = 10000
+      Ô£ö Should return payee by index
+      Ô£ö Should return getDistributionInfo with all details (49ms)
+      Ô£ö Should show updated released amounts after distribution (55ms)
+    ­ƒÜ½ Edge Cases & Security
+      Ô£ö Should handle very small amounts (1 wei)
+      Ô£ö Should handle maximum ETH amounts
+      Ô£ö Should maintain accuracy with multiple small releases
+      Ô£ö Should not allow arbitrary address to claim funds (91ms)
+    ­ƒÆí Real-World Scenarios
+      Ô£ö Should simulate presale distribution scenario (296ms)
+      Ô£ö Should handle partial releases correctly (458ms)
+
+  BashoodPresaleFinal - payMilestoneWithBHT
+    Ô£ö permite pagar un milestone con BHT y emite BHTBurned (45ms)
+    Ô£ö revierta si el or├ículo est├í stale
+    - revierta si el descuento supera el cap
+    - revierta si la quema supera el cap
+
+  BashoodPresaleFinal - payServiceWithBHT
+    Ô£ö permite pagar un servicio con BHT y emite BHTBurned (40ms)
+    Ô£ö revierta si el or├ículo est├í stale
+    - revierta si el descuento supera el cap
+    - revierta si la quema supera el cap
+
+  PoC: BashoodMultiToken - mintAllNFTs reentrancy checks
+    Ô£ö should not allow withdrawFunds during mintAllNFTs (ReentrancyGuard PoC) (232ms)
+
+  PoC: BashoodPresaleFinal - referral contract revert does not break purchases
+    Ô£ö should swallow referral revert if we implement try/catch (test shows current behavior) (198ms)
+
+  PoC: BashoodRescue emergencyWithdrawETH reentrancy and reject tests
+    Ô£ö should revert when project wallet rejects ETH (MockProjectWalletRevert) (50ms)
+    Ô£ö PoC: ensure EMERGENCY_ROLE check prevents reentry attempts from project wallet callback
+
+  PoC: ChainlinkPriceFeed - Stale Round Detection - DEPRECATED
+    - should REVERT when answeredInRound < roundId (stale oracle data) - DEPRECATED
+    - should ACCEPT when answeredInRound >= roundId (fresh oracle data) - DEPRECATED
+    - should REVERT in peekLatestPrice when answeredInRound < roundId - DEPRECATED
+
+  PoC: BashoodMultiToken attacker-owner reentrancy attempt
+    Ô£ö attacker owner tries to trigger withdrawFunds from onERC1155Received (597ms)
+
+  PoC: BashoodMultiToken mintAllNFTs reentrancy
+    Ô£ö attempt to reenter via ERC1155 receiver callback (282ms)
+
+  PoC: BashoodMultiToken mintAllNFTs reentrancy attempt
+multi.address undefined
+multiAddr 0x4A425525a8823301C5d8b660517e9402e32BA44F
+att.address undefined
+attAddr 0x2D2c64cC0d2f194FAD74bbE453edAA181d8FBd1f
+    Ô£ö should NOT allow withdrawFunds to succeed during mintAllNFTs (ReentrancyGuard) (800ms)
+
+  PoC variants: BashoodMultiToken attacker receiver patterns
+post-mint bal 1
+    Ô£ö variant: batch attacker should attempt but not succeed (107ms)
+    Ô£ö variant: loop attacker should attempt multiple calls but not succeed (954ms)
+    Ô£ö variant: conditional attacker should only act on calldata flag and fail to withdraw (82ms)
+
+  PoC: BashoodRescue.emergencyWithdrawETH -> recipient rejects ETH
+    Ô£ö reverts when project wallet rejects plain ETH (simulate transfer failure) (57ms)
+
+  PoC: BashoodRescue emergencyWithdrawETH revert path
+    Ô£ö should revert when projectWallet rejects ETH (50ms)
+
+  PoC: BashoodRescue emergencyWithdrawETH
+    Ô£ö should send ETH to projectWallet and record reception (PoC) (49ms)
+
+  Presale burn fallback and delegate rescue branches
+    Ô£ö reverts when burnFrom reverts and transfer to dead returns false (240ms)
+    15) delegateRescueUnsoldNfts reverts with reason from rescue
+    16) delegateEmergencyWithdrawEth reverts with generic message when rescue reverts without reason
+
+  Presale burn fallback and ops transfer failure
+    Ô£ö falls back to transfer to dead when burnFrom reverts and ops transfer succeeds (427ms)
+    Ô£ö reverts when ops transfer fails (401ms)
+
+  Presale burn/ops combinations and proposals
+    - payServiceWithBHT reverts when burnBps > 1500
+    Ô£ö setBurnBps enforces burn cap (<=1500) (168ms)
+    17) submitProposal uses burnFrom when available and falls back correctly
+    18) submitProposal falls back to transfer to dead when burnFrom absent
+
+  BashoodPresaleFinal - targeted coverage
+    19) submitProposal: reverts when price is stale and when deposit is zero
+    Ô£ö assignRoles rejects zero addresses and grants roles on success (186ms)
+    Ô£ö pause/unpause and finalizePresale emit expected behavior (165ms)
+    Ô£ö payServiceWithBHT: fails on ops wallet unset and on zero fiat; and payMilestone burn fallback (364ms)
+    Ô£ö rescue functions bubble reason and generic catch (290ms)
+
+  Presale - rescue try/catch coverage
+    20) delegateRescueUnsoldNfts reverts with reason from rescue contract
+    21) delegateRescueUnsoldNfts reverts without reason (generic path)
+    22) delegateEmergencyWithdrawEth handles revert with reason and without
+
+  BashoodPresaleFinal - rescue try/catch coverage
+    Ô£ö rescueUnsoldNFTs reverts with reason from rescue (catch Error) (185ms)
+    Ô£ö rescueUnsoldNFTs reverts generic when rescue reverts without reason (179ms)
+    Ô£ö delegateRescueErc20 and delegateEmergencyWithdrawEth bubble up reason and no-reason cases (266ms)
+
+  BashoodPresaleFinal ÔÇö extra coverage step2
+    23) submitProposal: reverts when deposit is zero
+    24) submitProposal: reverts when oracle stale
+    Ô£ö assignRoles: rejects zero addresses and accepts valid set (199ms)
+    Ô£ö payServiceWithBHT: operations wallet unset -> revert (222ms)
+    Ô£ö payServiceWithBHT: fiat zero -> revert (195ms)
+    Ô£ö payServiceWithBHT: transferFrom reverting mock -> bubbled revert (219ms)
+    25) rescue wrapper: revert-with-reason caught path
+    26) rescue wrapper: revert-without-reason caught path
+
+  BashoodPresaleFinal - cover remaining branches
+    Ô£ö payServiceWithBHT: successful burn branch (emit Burned/BHTBurned) (225ms)
+    Ô£ö payMilestoneWithBHT: successful burn branch (emit BHTBurned and MilestonePaid) (249ms)
+    Ô£ö purchaseWithETH: calls referral.rewardReferrer when referrer exists (247ms)
+    Ô£ö endPresale: sets presaleActive false and presaleEnded true (175ms)
+    Ô£ö purchaseWithBHT: successful burn branch and referral.rewardReferrer invoked (304ms)
+
+  Presale coverage step4 (caller & rescue branches)
+    Ô£ö purchaseWithBHT should revert when called from contract (tx.origin check) (234ms)
+    Ô£ö purchaseWithBHT should revert when msg.sender == signerAddress (E22) (205ms)
+    Ô£ö rescueUnsoldNFTs should bubble Error(reason) from rescue (with reason) (202ms)
+    Ô£ö rescueUnsoldNFTs should bubble no-reason revert from rescue (no reason) (200ms)
+
+  BashoodPresaleFinal coverage - step5
+    Ô£ö purchaseWithBHT uses burnFrom when BHT exposes burnFrom (270ms)
+    Ô£ö purchaseWithBHT falls back to transferFrom when burnFrom not available (275ms)
+    Ô£ö payServiceWithBHT executes full flow emitting ServicePaid (222ms)
+
+  Presale coverage - step6 (targeted branches)
+    Ô£ö falls back to transferFrom when burnFrom not available and ops transfer fails (249ms)
+    27) delegate rescue functions propagate revert reasons and no-reason branches
+
+  BashoodPresaleFinal - extra critical branches
+    28) submitProposal reverts when burnFrom absent and transfer to dead returns false
+    Ô£ö payServiceWithBHT reverts when ops transfer fails after burn fallback (222ms)
+
+  Presale coverage edge branches
+    29) submitProposal reverts when operationsWallet not set (Ops wallet req)
+    30) delegateRescueErc20 bubbles revert reason and generic when rescue reverts without reason
+
+  ­ƒÄ» BashoodPresaleFinal - Critical Branch Coverage (Excellence 90%+)
+    ­ƒôè CRITICAL Branch: Oracle Validations (_bhtFromFiat)
+      Ô£ö Should revert when oracle price = 0 (40ms)
+      Ô£ö Should revert when oracle updatedAt = 0 (40ms)
+      Ô£ö Should revert when price is stale (block.timestamp - updatedAt > maxPriceStaleness) (40ms)
+      - Should revert when answeredInRound < roundId (incomplete round) - MockPriceFeed doesn't support setRoundId
+      Ô£ö Should succeed when oracle data is valid and fresh (64ms)
+    ­ƒôè CRITICAL Branch: Burn Logic (if burnAmount > 0)
+      Ô£ö Should SKIP burn branch when burnBps = 0 (burnAmount = 0) (47ms)
+      Ô£ö Should EXECUTE burn branch when burnBps > 0 (147ms)
+      - Should SKIP ops transfer branch when opsAmount = 0 - burnBps 10000 exceeds cap
+      Ô£ö Should EXECUTE ops transfer branch when opsAmount > 0 (57ms)
+    ­ƒôè CRITICAL Branch: Referral Reward (if referrer != address(0))
+      31) Should SKIP referral reward when referrer = address(0)
+      - Should EXECUTE referral reward when referrer != address(0) - BashoodReferral API different
+      - Should NOT revert purchase even when referral reward fails (catch block) - BashoodReferral API different
+    ­ƒôè CRITICAL Branch: hasPurchased Check (NewBuyer event)
+      32) Should emit NewBuyer for first-time buyer (hasPurchased = false)
+      33) Should NOT emit NewBuyer for repeat buyer (hasPurchased = true)
+    ­ƒôè CRITICAL Branch: Rescue Functions Try/Catch - BashoodRescue constructor issues
+      - Should succeed in rescueUnsoldNFTs when valid
+      - Should succeed in rescueERC20 when tokens available
+      - Should succeed in emergencyWithdrawETH when ETH available
+
+  BashoodPresaleFinal - delegate rescue and ERC1155 selectors
+    34) delegateRescueErc20 wraps revert reason and generic when no reason
+    35) delegateRescueUnsoldNfts wraps reason and generic
+    36) delegateEmergencyWithdrawEth wraps reason and generic
+    Ô£ö onERC1155Received and batch return selectors (154ms)
+
+  BashoodPresaleFinal - Edge Cases & Branch Coverage
+    Edge Cases - Purchase Limits
+      Ô£ö should handle purchase at exact maxPerUser limit (80ms)
+    Edge Cases - Admin Function Boundaries
+      Ô£ö should accept setBurnBps at exact limit (1500)
+      Ô£ö should revert setBurnBps above limit (1501)
+      Ô£ö should accept setDiscountBps at exact limit (2000)
+      Ô£ö should revert setDiscountBps above limit (2001)
+      Ô£ö should accept setMaxPriceStaleness at lower boundary (1)
+      Ô£ö should accept setMaxPriceStaleness at upper boundary (86400)
+      Ô£ö should revert setMaxPriceStaleness with 0
+      Ô£ö should revert setMaxPriceStaleness above 86400
+    Edge Cases - Zero Address Validations
+      Ô£ö should revert setOperationsWallet with zero address
+      Ô£ö should revert setPriceFeed with zero address
+      Ô£ö should revert setRescueContract with zero address
+    Edge Cases - Whitelist
+      Ô£ö should block non-whitelisted user when enabled
+      Ô£ö should allow whitelisted user (68ms)
+    Edge Cases - Pause/Unpause
+      Ô£ö should allow purchases after unpause (73ms)
+    Edge Cases - Invalid NFT IDs
+      Ô£ö should revert purchase with non-allowed NFT ID
+    Edge Cases - BHT Purchase
+      Ô£ö should succeed with exact BHT balance and allowance (104ms)
+      Ô£ö should revert with insufficient BHT balance (41ms)
+    Edge Cases - Timestamps
+      Ô£ö should revert when presale ended
+    Edge Cases - ETH Values
+      Ô£ö should revert on insufficient ETH (off by 1 wei)
+
+  BashoodPresaleFinal - Oracle & Price Feed Edge Cases
+    Price Feed Edge Cases
+      Ô£ö should reject zero price from oracle in BHT purchase (50ms)
+      Ô£ö should reject stale price (updatedAt too old) in BHT purchase (55ms)
+      Ô£ö should reject when updatedAt is 0 in BHT purchase (50ms)
+      Ô£ö should accept fresh price within staleness window for BHT purchase (88ms)
+    BHT Price Calculation Edge Cases
+      Ô£ö should handle very high BHT price (approaching fiat value) (92ms)
+      Ô£ö should handle very low BHT price (requires many tokens) (88ms)
+      Ô£ö should reject when BHT price is zero (54ms)
+      Ô£ö should handle ETH price volatility ($10,000/ETH) (90ms)
+      Ô£ö should handle ETH price volatility ($100/ETH) (85ms)
+
+  Presale oracle edge cases
+    Ô£ö reverts when oracle price is zero (223ms)
+    Ô£ö reverts when oracle price is stale (223ms)
+
+  Presale: ETH transfer failure and rescue delegation
+    - reverts when project wallet rejects ETH - DEPRECATED: claimProjectFunds removed
+    Ô£ö rescue delegates bubble Error(reason) and generic revert appropriately (249ms)
+
+  Presale targeted branches
+    Ô£ö reverts when operations transferFrom returns false (payServiceWithBHT) (269ms)
+    Ô£ö purchaseWithBHT reverts when ops transfer returns false in _transferAndBurnBHT (272ms)
+
+  BashoodPresaleFinal - Additional Transfer & Burn Edge Cases
+    Burn Configuration Edge Cases
+      Ô£ö should handle burnAmount=0 when burnBps=0 (all to operations) (89ms)
+      37) should handle max burn (1500 bps = 15%) leaving 85% for operations
+      38) should handle minimum burn (1 bps = 0.01%)
+    BHT Balance & Approval Edge Cases
+      Ô£ö should revert when insufficient BHT balance for purchase (62ms)
+      Ô£ö should revert when insufficient BHT allowance (53ms)
+      Ô£ö should succeed when BHT balance equals exact required amount (82ms)
+    Operations Wallet Configuration
+      Ô£ö should allow setting operations wallet multiple times
+      Ô£ö should use operations wallet set in contract (80ms)
+    Multiple Purchases with Different Burn Configurations
+      39) should handle multiple purchases with changing burnBps
+    Quantity Edge Cases
+      Ô£ö should handle quantity=1 (minimum purchase) (85ms)
+      Ô£ö should handle quantity=10 (bulk purchase) (90ms)
+      Ô£ö should handle quantity at maxPerUser limit (83ms)
+
+  Presale: whitelist and signature/nonce edge cases
+    Ô£ö blocks purchases when whitelist enabled and buyer not whitelisted, allows after grant (251ms)
+    Ô£ö reverts if signer not set (E31) when verifying signature (229ms)
+    Ô£ö prevents nonce reuse across ETH -> BHT and BHT -> ETH (365ms)
+
+  BashoodPresaleFinal - Proposals
+    - permite enviar propuesta y emite BHTBurned y ProposalSubmitted - DEPRECATED: submitProposal removed
+    - revierta si el or├ículo est├í stale - DEPRECATED: submitProposal removed
+    - revierta si la quema supera el cap
+    - permite finalizar propuesta solo a ADMIN_ROLE - DEPRECATED: submitProposal/finalizeProposal removed
+
+  PurchaseWithBHT integration
+    Ô£ö allows purchaseWithBHT when allowances and params correct (happy path) (143ms)
+
+  PurchaseWithETH integration
+    Ô£ö allows purchaseWithETH and transfers NFT and funds (50ms)
+
+  Reentrancy demo: vulnerable vs protected
+    Ô£ö attacker can drain vulnerable contract but not protected one (89ms)
+
+  Rescue delegation and authorization
+    - authorized presale can call rescue functions - DEPRECATED: delegateRescueUnsoldNfts removed
+    - unauthorized caller cannot invoke rescue direct methods - DEPRECATED: delegateRescueUnsoldNfts removed
+
+  Presale rescue interface enforcement
+    Ô£ö setRescueContract reverts if target does not support IBashoodRescue (200ms)
+
+  BashoodRescue interface checks
+    Ô£ö supportsInterface for IBashoodRescue should be true (42ms)
+
+  rolesAndPause (cjs)
+    Ô£ö placeholder
+
+  Scaffold: rolesAndPause
+    Ô£ö placeholder: test file present
+
+  BashoodRWAReference - Core Functionality
+    Deployment
+      Ô£ö Should deploy with correct name and symbol (173ms)
+      Ô£ö Should grant roles correctly
+    Asset Minting
+      40) Should mint EVOCONS asset correctly
+      41) Should emit AssetMinted event
+      42) Should revert if not ASSET_MANAGER_ROLE
+
+  Targeted branches and edge cases
+    Ô£ö ReferralValidator: constructor and isValid
+    Ô£ö BashoodMultiToken: mint/mintBatch edge cases, mintAllNFTs and withdraw (287ms)
+    Ô£ö BashoodPresaleFinal: admin setters and validation reverts (180ms)
+
+  Presale focused coverage
+    Ô£ö should exercise _bhtFromFiat and burn fallback when burnFrom is missing (234ms)
+    Ô£ö should revert when price is stale (197ms)
+
+  Scaffold: TestBashoodMultiToken
+    Ô£ö placeholder: test file present
+
+  TestBashoodMultiToken (cjs)
+    Ô£ö placeholder
+
+  Scaffold: TestBashoodNFT
+    Ô£ö placeholder: test file present
+
+  TestBashoodNFT (cjs)
+    Ô£ö placeholder
+
+  Scaffold: TestBashoodPresaleFinal
+    Ô£ö placeholder: test file present
+
+  BashoodPresaleFinal
+    Ô£ö Should set the right unlockTime
+
+  Scaffold: TestBashoodPresaleFinalMinimal
+    Ô£ö placeholder: test file present
+
+  Scaffold: TestBashoodReferralFull
+    Ô£ö placeholder: test file present
+
+  Scaffold: TestBashoodTokenUpgradeable
+    Ô£ö placeholder: test file present
+
+
+  470 passing (2m)
+  66 pending
+  42 failing
+
+  1) BashoodToken - Comprehensive Coverage Tests
+       ÔÅ©´©Å Pause/Unpause
+         Debe pausar el contrato correctamente:
+     TypeError: token.pause is not a function
+      at Context.<anonymous> (test\bashoodToken.comprehensive.test.cjs:408:19)
+
+  2) BashoodToken - Comprehensive Coverage Tests
+       ÔÅ©´©Å Pause/Unpause
+         Debe revertir operaciones cuando est├í pausado:
+     TypeError: token.pause is not a function
+      at Context.<anonymous> (test\bashoodToken.comprehensive.test.cjs:414:19)
+
+  3) BashoodToken - Comprehensive Coverage Tests
+       ÔÅ©´©Å Pause/Unpause
+         Debe despausar el contrato correctamente:
+     TypeError: token.pause is not a function
+      at Context.<anonymous> (test\bashoodToken.comprehensive.test.cjs:431:19)
+
+  4) BashoodToken - Comprehensive Coverage Tests
+       ÔÅ©´©Å Pause/Unpause
+         Debe revertir pause si no es owner:
+     TypeError: token.connect(...).pause is not a function
+      at Context.<anonymous> (test\bashoodToken.comprehensive.test.cjs:444:30)
+
+  5) BashoodToken - Comprehensive Coverage Tests
+       ÔÅ©´©Å Pause/Unpause
+         Debe revertir unpause si no es owner:
+     TypeError: token.pause is not a function
+      at Context.<anonymous> (test\bashoodToken.comprehensive.test.cjs:450:19)
+
+  6) BashoodPresaleFinal - Oracle Validation Tests
+       Oracle Price Validation
+         Should accept fresh price data:
+     TypeError: bashoodPresale.connect(...).submitProposal is not a function
+      at Context.<anonymous> (test\oracle.validation.fixed.DEPRECATED.SKIP.js:70:47)
+
+  7) BashoodPresaleFinal - Oracle Validation Tests
+       Oracle Price Validation
+         Should reject stale price data:
+     TypeError: bashoodPresale.connect(...).submitProposal is not a function
+      at Context.<anonymous> (test\oracle.validation.fixed.DEPRECATED.SKIP.js:86:47)
+
+  8) BashoodPresaleFinal - Oracle Validation Tests
+       Oracle Price Validation
+         Should reject zero price data:
+     TypeError: bashoodPresale.connect(...).submitProposal is not a function
+      at Context.<anonymous> (test\oracle.validation.fixed.DEPRECATED.SKIP.js:98:47)
+
+  9) BashoodPresaleFinal - Oracle Validation Tests
+       Oracle Price Validation
+         Should reject negative price data:
+     TypeError: bashoodPresale.connect(...).submitProposal is not a function
+      at Context.<anonymous> (test\oracle.validation.fixed.DEPRECATED.SKIP.js:110:47)
+
+  10) BashoodPresaleFinal - Oracle Validation Tests
+       Oracle Price Validation
+         Should reject when priceFeed is not set:
+     TypeError: presaleNoPriceFeed.connect(...).submitProposal is not a function
+      at Context.<anonymous> (test\oracle.validation.fixed.DEPRECATED.SKIP.js:138:51)
+
+  11) BashoodPresaleFinal - Oracle Validation Tests
+       Oracle Edge Cases
+         Should handle multiple rapid price updates correctly:
+     TypeError: bashoodPresale.connect(...).submitProposal is not a function
+      at Context.<anonymous> (test\oracle.validation.fixed.DEPRECATED.SKIP.js:155:47)
+
+  12) BashoodPresaleFinal - Oracle Validation Tests
+       Oracle Edge Cases
+         Should handle price at staleness boundary:
+     TypeError: bashoodPresale.connect(...).submitProposal is not a function
+      at Context.<anonymous> (test\oracle.validation.fixed.DEPRECATED.SKIP.js:172:47)
+
+  13) BashoodPresaleFinal - Oracle Validation Tests
+       Oracle Edge Cases
+         Should reject price one second past staleness limit:
+     TypeError: bashoodPresale.connect(...).submitProposal is not a function
+      at Context.<anonymous> (test\oracle.validation.fixed.DEPRECATED.SKIP.js:189:47)
+
+  14) BashoodPresaleFinal - Oracle Validation Tests
+       Integration with Proposal System
+         Should validate oracle before burning tokens:
+     TypeError: bashoodPresale.connect(...).submitProposal is not a function
+      at Context.<anonymous> (test\oracle.validation.fixed.DEPRECATED.SKIP.js:206:47)
+
+  15) Presale burn fallback and delegate rescue branches
+       delegateRescueUnsoldNfts reverts with reason from rescue:
+     TypeError: presale.connect(...).delegateRescueUnsoldNfts is not a function
+      at Context.<anonymous> (test\presale.burn_and_delegate.DEPRECATED.SKIP.js:63:38)
+
+  16) Presale burn fallback and delegate rescue branches
+       delegateEmergencyWithdrawEth reverts with generic message when rescue reverts without reason:
+     TypeError: presale.connect(...).delegateEmergencyWithdrawEth is not a function
+      at Context.<anonymous> (test\presale.burn_and_delegate.DEPRECATED.SKIP.js:79:38)
+
+  17) Presale burn/ops combinations and proposals
+       submitProposal uses burnFrom when available and falls back correctly:
+     TypeError: presale.connect(...).submitProposal is not a function
+      at Context.<anonymous> (test\presale.burn_ops_proposals.DEPRECATED.SKIP.js:60:33)
+
+  18) Presale burn/ops combinations and proposals
+       submitProposal falls back to transfer to dead when burnFrom absent:
+     TypeError: presale.connect(...).submitProposal is not a function
+      at Context.<anonymous> (test\presale.burn_ops_proposals.DEPRECATED.SKIP.js:87:33)
+
+  19) BashoodPresaleFinal - targeted coverage
+       submitProposal: reverts when price is stale and when deposit is zero:
+     TypeError: presale.submitProposal is not a function
+      at Context.<anonymous> (test\presale.coverage.final.DEPRECATED.SKIP.js:27:26)
+
+  20) Presale - rescue try/catch coverage
+       delegateRescueUnsoldNfts reverts with reason from rescue contract:
+     TypeError: presale.connect(...).delegateRescueUnsoldNfts is not a function
+      at Context.<anonymous> (test\presale.coverage.rescue.DEPRECATED.SKIP.js:24:30)
+
+  21) Presale - rescue try/catch coverage
+       delegateRescueUnsoldNfts reverts without reason (generic path):
+     TypeError: presale.connect(...).delegateRescueUnsoldNfts is not a function
+      at Context.<anonymous> (test\presale.coverage.rescue.DEPRECATED.SKIP.js:33:30)
+
+  22) Presale - rescue try/catch coverage
+       delegateEmergencyWithdrawEth handles revert with reason and without:
+     TypeError: presale.connect(...).delegateEmergencyWithdrawEth is not a function
+      at Context.<anonymous> (test\presale.coverage.rescue.DEPRECATED.SKIP.js:41:41)
+
+  23) BashoodPresaleFinal ÔÇö extra coverage step2
+       submitProposal: reverts when deposit is zero:
+     TypeError: presale.connect(...).submitProposal is not a function
+      at Context.<anonymous> (test\presale.coverage.step2.DEPRECATED.SKIP.js:14:41)
+
+  24) BashoodPresaleFinal ÔÇö extra coverage step2
+       submitProposal: reverts when oracle stale:
+     TypeError: presale.connect(...).submitProposal is not a function
+      at Context.<anonymous> (test\presale.coverage.step2.DEPRECATED.SKIP.js:30:39)
+
+  25) BashoodPresaleFinal ÔÇö extra coverage step2
+       rescue wrapper: revert-with-reason caught path:
+     TypeError: presale.connect(...).delegateRescueUnsoldNfts is not a function
+      at Context.<anonymous> (test\presale.coverage.step2.DEPRECATED.SKIP.js:81:41)
+
+  26) BashoodPresaleFinal ÔÇö extra coverage step2
+       rescue wrapper: revert-without-reason caught path:
+     TypeError: presale.connect(...).delegateRescueErc20 is not a function
+      at Context.<anonymous> (test\presale.coverage.step2.DEPRECATED.SKIP.js:95:39)
+
+  27) Presale coverage - step6 (targeted branches)
+       delegate rescue functions propagate revert reasons and no-reason branches:
+     TypeError: presale.connect(...).delegateRescueUnsoldNfts is not a function
+      at Context.<anonymous> (test\presale.coverage.step6.DEPRECATED.SKIP.js:48:39)
+
+  28) BashoodPresaleFinal - extra critical branches
+       submitProposal reverts when burnFrom absent and transfer to dead returns false:
+     TypeError: presale.connect(...).submitProposal is not a function
+      at Context.<anonymous> (test\presale.coverage.step7.DEPRECATED.SKIP.js:39:41)
+
+  29) Presale coverage edge branches
+       submitProposal reverts when operationsWallet not set (Ops wallet req):
+     TypeError: presale.connect(...).submitProposal is not a function
+      at Context.<anonymous> (test\presale.coverage_edges.DEPRECATED.SKIP.js:40:33)
+
+  30) Presale coverage edge branches
+       delegateRescueErc20 bubbles revert reason and generic when rescue reverts without reason:
+     TypeError: presale.connect(...).delegateRescueErc20 is not a function
+      at Context.<anonymous> (test\presale.coverage_edges.DEPRECATED.SKIP.js:79:38)
+
+  31) ­ƒÄ» BashoodPresaleFinal - Critical Branch Coverage (Excellence 90%+)
+       ­ƒôè CRITICAL Branch: Referral Reward (if referrer != address(0))
+         Should SKIP referral reward when referrer = address(0):
+     Error: VM Exception while processing transaction: reverted with reason string 'Presale not active'
+    at BashoodPresaleFinal.onlyWhilePresaleActive (contracts/BashoodPresaleFinal.sol:638)
+    at BashoodPresaleFinal.purchaseWithETH (contracts/BashoodPresaleFinal.sol:735)
+    at EdrProviderWrapper.request (node_modules\hardhat\src\internal\hardhat-network\provider\provider.ts:359:41)
+    at HardhatEthersSigner.sendTransaction (node_modules\@nomicfoundation\hardhat-ethers\src\signers.ts:181:18)
+    at send (node_modules\ethers\src.ts\contract\contract.ts:313:20)
+    at Proxy.purchaseWithETH (node_modules\ethers\src.ts\contract\contract.ts:352:16)
+    at waitForPendingTransaction (node_modules\@nomicfoundation\hardhat-chai-matchers\src\internal\emit.ts:28:17)
+    at Context.<anonymous> (test\presale.critical.branches.test.cjs:246:13)
+  
+
+  32) ­ƒÄ» BashoodPresaleFinal - Critical Branch Coverage (Excellence 90%+)
+       ­ƒôè CRITICAL Branch: hasPurchased Check (NewBuyer event)
+         Should emit NewBuyer for first-time buyer (hasPurchased = false):
+     Error: VM Exception while processing transaction: reverted with reason string 'Presale not active'
+    at BashoodPresaleFinal.onlyWhilePresaleActive (contracts/BashoodPresaleFinal.sol:638)
+    at BashoodPresaleFinal.purchaseWithETH (contracts/BashoodPresaleFinal.sol:735)
+    at EdrProviderWrapper.request (node_modules\hardhat\src\internal\hardhat-network\provider\provider.ts:359:41)
+    at HardhatEthersSigner.sendTransaction (node_modules\@nomicfoundation\hardhat-ethers\src\signers.ts:181:18)
+    at send (node_modules\ethers\src.ts\contract\contract.ts:313:20)
+    at Proxy.purchaseWithETH (node_modules\ethers\src.ts\contract\contract.ts:352:16)
+    at waitForPendingTransaction (node_modules\@nomicfoundation\hardhat-chai-matchers\src\internal\emit.ts:28:17)
+    at Context.<anonymous> (test\presale.critical.branches.test.cjs:299:13)
+  
+
+  33) ­ƒÄ» BashoodPresaleFinal - Critical Branch Coverage (Excellence 90%+)
+       ­ƒôè CRITICAL Branch: hasPurchased Check (NewBuyer event)
+         Should NOT emit NewBuyer for repeat buyer (hasPurchased = true):
+     Error: VM Exception while processing transaction: reverted with reason string 'Presale not active'
+    at BashoodPresaleFinal.onlyWhilePresaleActive (contracts/BashoodPresaleFinal.sol:638)
+    at BashoodPresaleFinal.purchaseWithETH (contracts/BashoodPresaleFinal.sol:735)
+    at EdrProviderWrapper.request (node_modules\hardhat\src\internal\hardhat-network\provider\provider.ts:359:41)
+    at HardhatEthersSigner.sendTransaction (node_modules\@nomicfoundation\hardhat-ethers\src\signers.ts:181:18)
+    at send (node_modules\ethers\src.ts\contract\contract.ts:313:20)
+    at Proxy.purchaseWithETH (node_modules\ethers\src.ts\contract\contract.ts:352:16)
+    at Context.<anonymous> (test\presale.critical.branches.test.cjs:311:13)
+  
+
+  34) BashoodPresaleFinal - delegate rescue and ERC1155 selectors
+       delegateRescueErc20 wraps revert reason and generic when no reason:
+     TypeError: presale.connect(...).delegateRescueErc20 is not a function
+      at Context.<anonymous> (test\presale.delegate_rescue_batch.DEPRECATED.SKIP.js:24:30)
+
+  35) BashoodPresaleFinal - delegate rescue and ERC1155 selectors
+       delegateRescueUnsoldNfts wraps reason and generic:
+     TypeError: presale.connect(...).delegateRescueUnsoldNfts is not a function
+      at Context.<anonymous> (test\presale.delegate_rescue_batch.DEPRECATED.SKIP.js:47:30)
+
+  36) BashoodPresaleFinal - delegate rescue and ERC1155 selectors
+       delegateEmergencyWithdrawEth wraps reason and generic:
+     TypeError: presale.connect(...).delegateEmergencyWithdrawEth is not a function
+      at Context.<anonymous> (test\presale.delegate_rescue_batch.DEPRECATED.SKIP.js:69:41)
+
+  37) BashoodPresaleFinal - Additional Transfer & Burn Edge Cases
+       Burn Configuration Edge Cases
+         should handle max burn (1500 bps = 15%) leaving 85% for operations:
+     AssertionError: Expected event "BHTBurned" to be emitted, but it wasn't
+      at C:\Users\Franchu\Desktop\bashood-hardhat-tests\node_modules\@nomicfoundation\hardhat-chai-matchers\src\internal\emit.ts:130:20
+      at Context.<anonymous> (test\presale.transferFailures.test.js:59:7)
+
+  38) BashoodPresaleFinal - Additional Transfer & Burn Edge Cases
+       Burn Configuration Edge Cases
+         should handle minimum burn (1 bps = 0.01%):
+     AssertionError: Expected event "BHTBurned" to be emitted, but it wasn't
+      at C:\Users\Franchu\Desktop\bashood-hardhat-tests\node_modules\@nomicfoundation\hardhat-chai-matchers\src\internal\emit.ts:130:20
+      at Context.<anonymous> (test\presale.transferFailures.test.js:77:7)
+
+  39) BashoodPresaleFinal - Additional Transfer & Burn Edge Cases
+       Multiple Purchases with Different Burn Configurations
+         should handle multiple purchases with changing burnBps:
+     AssertionError: Expected event "BHTBurned" to be emitted, but it wasn't
+      at C:\Users\Franchu\Desktop\bashood-hardhat-tests\node_modules\@nomicfoundation\hardhat-chai-matchers\src\internal\emit.ts:130:20
+      at Context.<anonymous> (test\presale.transferFailures.test.js:175:7)
+
+  40) BashoodRWAReference - Core Functionality
+       Asset Minting
+         Should mint EVOCONS asset correctly:
+     Error: missing value for component name
+      at C:\Users\Franchu\Desktop\bashood-hardhat-tests\node_modules\ethers\src.ts\abi\fragments.ts:760:31
+      at Array.map (<anonymous>)
+      at ParamType.#walkAsync (node_modules\ethers\src.ts\abi\fragments.ts:757:37)
+      at ParamType.walkAsync (node_modules\ethers\src.ts\abi\fragments.ts:797:24)
+      at C:\Users\Franchu\Desktop\bashood-hardhat-tests\node_modules\ethers\src.ts\contract\contract.ts:170:22
+      at Array.map (<anonymous>)
+      at resolveArgs (node_modules\ethers\src.ts\contract\contract.ts:169:37)
+      at populateTransaction (node_modules\ethers\src.ts\contract\contract.ts:294:36)
+      at send (node_modules\ethers\src.ts\contract\contract.ts:313:55)
+      at Proxy.mintAsset (node_modules\ethers\src.ts\contract\contract.ts:352:22)
+
+  41) BashoodRWAReference - Core Functionality
+       Asset Minting
+         Should emit AssetMinted event:
+     Error: missing value for component name
+      at C:\Users\Franchu\Desktop\bashood-hardhat-tests\node_modules\ethers\src.ts\abi\fragments.ts:760:31
+      at Array.map (<anonymous>)
+      at ParamType.#walkAsync (node_modules\ethers\src.ts\abi\fragments.ts:757:37)
+      at ParamType.walkAsync (node_modules\ethers\src.ts\abi\fragments.ts:797:24)
+      at C:\Users\Franchu\Desktop\bashood-hardhat-tests\node_modules\ethers\src.ts\contract\contract.ts:170:22
+      at Array.map (<anonymous>)
+      at resolveArgs (node_modules\ethers\src.ts\contract\contract.ts:169:37)
+      at populateTransaction (node_modules\ethers\src.ts\contract\contract.ts:294:36)
+      at send (node_modules\ethers\src.ts\contract\contract.ts:313:55)
+      at Proxy.mintAsset (node_modules\ethers\src.ts\contract\contract.ts:352:22)
+
+  42) BashoodRWAReference - Core Functionality
+       Asset Minting
+         Should revert if not ASSET_MANAGER_ROLE:
+     Error: missing value for component name
+      at C:\Users\Franchu\Desktop\bashood-hardhat-tests\node_modules\ethers\src.ts\abi\fragments.ts:760:31
+      at Array.map (<anonymous>)
+      at ParamType.#walkAsync (node_modules\ethers\src.ts\abi\fragments.ts:757:37)
+      at ParamType.walkAsync (node_modules\ethers\src.ts\abi\fragments.ts:797:24)
+      at C:\Users\Franchu\Desktop\bashood-hardhat-tests\node_modules\ethers\src.ts\contract\contract.ts:170:22
+      at Array.map (<anonymous>)
+      at resolveArgs (node_modules\ethers\src.ts\contract\contract.ts:169:37)
+      at populateTransaction (node_modules\ethers\src.ts\contract\contract.ts:294:36)
+      at send (node_modules\ethers\src.ts\contract\contract.ts:313:55)
+      at Proxy.mintAsset (node_modules\ethers\src.ts\contract\contract.ts:352:22)
+
+
+
+-------------------------------------------|----------|----------|----------|----------|----------------|
+File                                       |  % Stmts | % Branch |  % Funcs |  % Lines |Uncovered Lines |
+-------------------------------------------|----------|----------|----------|----------|----------------|
+ contracts\                                |     91.9 |    70.11 |    85.25 |    92.19 |                |
+  AggregatorV3Interface.sol                |      100 |      100 |      100 |      100 |                |
+  AttackerBatch.sol                        |       75 |       75 |    83.33 |    76.92 |       40,54,64 |
+  AttackerConditional.sol                  |      100 |      100 |      100 |    91.67 |             35 |
+  AttackerLoop.sol                         |       75 |       50 |    66.67 |       75 |       37,52,56 |
+  AttackerReceiver.sol                     |    66.67 |       50 |    66.67 |    72.73 |       46,61,65 |
+  AttackerReentrancy.sol                   |       75 |       75 |    66.67 |       90 |             39 |
+  BadReceiver.sol                          |      100 |      100 |      100 |      100 |                |
+  BadReceiver721.sol                       |      100 |      100 |      100 |      100 |                |
+  BashoodMultiToken.sol                    |       92 |       75 |       80 |    93.55 |          43,47 |
+  BashoodNFT.sol                           |      100 |      100 |      100 |      100 |                |
+  BashoodPaymentSplitter.sol               |      100 |       90 |      100 |      100 |                |
+  BashoodPresaleFinal.sol                  |    97.73 |    70.08 |    97.37 |     98.2 |140,142,145,147 |
+  BashoodPropertyNFT.sol                   |    92.96 |    67.05 |    89.29 |    95.28 |... 395,416,434 |
+  BashoodReferral.sol                      |    95.65 |    82.35 |    88.89 |    97.14 |             97 |
+  BashoodRescue.sol                        |      100 |    68.33 |      100 |      100 |                |
+  BashoodToken.sol                         |      100 |    78.57 |      100 |      100 |                |
+  BashoodTokenUpgradeable.sol              |      100 |      100 |      100 |      100 |                |
+  ComplianceRegistry.sol                   |    66.67 |       40 |       75 |    66.67 |    21,22,32,33 |
+  IBashoodRescue.sol                       |      100 |      100 |      100 |      100 |                |
+  IERC1155Mintable.sol                     |      100 |      100 |      100 |      100 |                |
+  InterfaceIdResolver.sol                  |      100 |      100 |      100 |      100 |                |
+  Libra.sol                                |      100 |       75 |      100 |      100 |                |
+  LibraVulnerable.sol                      |      100 |       50 |      100 |      100 |                |
+  Lock.sol                                 |      100 |      100 |      100 |      100 |                |
+  MockBHT.sol                              |        0 |      100 |        0 |        0 |           8,12 |
+  MockBashoodToken.sol                     |      100 |      100 |      100 |      100 |                |
+  MockERC20.sol                            |        0 |      100 |       50 |        0 |             10 |
+  MockNFT1155.sol                          |      100 |      100 |      100 |      100 |                |
+  MockPresale.sol                          |    14.29 |     12.5 |       40 |    33.33 |... 25,26,30,31 |
+  MockPresaleTarget.sol                    |    31.25 |    16.67 |    28.57 |    39.13 |... 76,77,87,92 |
+  MockPriceFeed.sol                        |        0 |      100 |        0 |        0 |... 22,26,36,40 |
+  MockRescue.sol                           |        0 |      100 |        0 |        0 |              7 |
+  MockTreasuryHandler.sol                  |      100 |       50 |      100 |      100 |                |
+  NotRescue.sol                            |      100 |      100 |      100 |      100 |                |
+  ReferralValidator.sol                    |      100 |      100 |      100 |      100 |                |
+  TaxHandler.sol                           |      100 |    64.29 |      100 |      100 |                |
+  TokenWrapperERC20.sol                    |      100 |    66.67 |      100 |      100 |                |
+ contracts\deprecated\                     |        0 |        0 |        0 |        0 |                |
+  BashoodNFTIntegration.sol                |        0 |        0 |        0 |        0 |... 393,402,407 |
+ contracts\interfaces\                     |      100 |      100 |      100 |      100 |                |
+  IBashoodRescue.sol                       |      100 |      100 |      100 |      100 |                |
+ contracts\libs\                           |      100 |    83.33 |      100 |      100 |                |
+  OwnableLocal.sol                         |      100 |    83.33 |      100 |      100 |                |
+ contracts\mocks\                          |    53.74 |    35.71 |     62.5 |    57.98 |                |
+  AttackerOwner.sol                        |       75 |      100 |       75 |       75 |          27,35 |
+  Caller.sol                               |      100 |      100 |      100 |      100 |                |
+  ERC1155ReentrantReceiver.sol             |        0 |        0 |    33.33 |    28.57 | 30,31,34,40,44 |
+  MaliciousBHT.sol                         |      100 |      100 |      100 |      100 |                |
+  MaliciousRescue.sol                      |    33.33 |       25 |       50 |       50 |       30,37,42 |
+  MaximalDangerAttacker.sol                |    36.45 |       25 |    45.24 |    39.74 |... 483,484,489 |
+  MockAttackerProjectWallet.sol            |        0 |      100 |        0 |        0 |    10,11,16,17 |
+  MockBHT.sol                              |      100 |      100 |      100 |      100 |                |
+  MockBHTRejecting.sol                     |      100 |      100 |      100 |      100 |                |
+  MockBHTReturnFalse.sol                   |      100 |      100 |      100 |      100 |                |
+  MockBHTWithBurn.sol                      |      100 |      100 |      100 |      100 |                |
+  MockBashoodToken.sol                     |      100 |      100 |      100 |      100 |                |
+  MockERC20.sol                            |      100 |      100 |      100 |      100 |                |
+  MockNFT1155.sol                          |      100 |      100 |      100 |      100 |                |
+  MockPresale.sol                          |        0 |        0 |        0 |        0 |... 25,26,30,31 |
+  MockPresaleTarget.sol                    |        0 |        0 |        0 |        0 |... 42,43,47,49 |
+  MockPriceFeed.sol                        |      100 |      100 |      100 |      100 |                |
+  MockPriceFeedV2.sol                      |    81.82 |      100 |    81.82 |    88.89 |         89,158 |
+  MockProjectWalletClaimCaller.sol         |      100 |      100 |      100 |      100 |                |
+  MockProjectWalletMultiSig.sol            |    83.33 |    45.45 |    83.33 |       80 |    42,43,44,47 |
+  MockProjectWalletMultiSigEIP712.sol      |    95.45 |    88.89 |       50 |    93.94 |         54,110 |
+  MockProjectWalletReentrant.sol           |      100 |      100 |      100 |      100 |                |
+  MockProjectWalletRevert.sol              |        0 |      100 |        0 |        0 |           6,10 |
+  MockProjectWalletRevertCaller.sol        |      100 |      100 |      100 |      100 |                |
+  MockProjectWalletRevertCallerPresale.sol |        0 |      100 |        0 |        0 |       13,14,18 |
+  MockReferral.sol                         |      100 |      100 |      100 |      100 |                |
+  MockRescue.sol                           |      100 |      100 |      100 |      100 |                |
+  MockRescueRecorder.sol                   |        0 |        0 |        0 |        0 |... 21,22,26,27 |
+  MockRescueRevertNoReason.sol             |      100 |       50 |      100 |      100 |                |
+  MockRescueRevertWithReason.sol           |      100 |       50 |      100 |      100 |                |
+  MockTreasuryHandler.sol                  |        0 |      100 |        0 |        0 |        8,12,18 |
+  ProtectedPresaleMock.sol                 |      100 |      100 |      100 |      100 |                |
+  RejectingWallet.sol                      |       60 |       50 |       50 |    71.43 |          11,26 |
+  VulnerablePresaleMock.sol                |      100 |      100 |      100 |      100 |                |
+ contracts\oracles\                        |      100 |       70 |      100 |      100 |                |
+  ChainlinkPriceFeed.sol                   |      100 |       70 |      100 |      100 |                |
+  IPriceFeed.sol                           |      100 |      100 |      100 |      100 |                |
+ contracts\standards\                      |     5.04 |     1.11 |     6.06 |     5.52 |                |
+  BashoodRWAReference.sol                  |     5.04 |     1.11 |     6.06 |     5.52 |... 646,648,667 |
+  IBashoodRWA.sol                          |      100 |      100 |      100 |      100 |                |
+-------------------------------------------|----------|----------|----------|----------|----------------|
+All files                                  |    64.58 |    52.15 |    65.83 |    66.14 |                |
+-------------------------------------------|----------|----------|----------|----------|----------------|
+
+> Istanbul reports written to ./coverage/ and ./coverage.json

@@ -1,0 +1,1191 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dossier Distribuidor - Bashood RWA</title>
+  <style>
+    @page { size: A4; margin: 20mm; }
+    * { box-sizing: border-box; }
+    body { 
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+      font-size: 11pt; 
+      line-height: 1.6; 
+      color: #333; 
+      max-width: 210mm; 
+      margin: 0 auto; 
+      padding: 20px; 
+      background: white; 
+    }
+    
+    .cover-page { 
+      display: flex; 
+      flex-direction: column; 
+      justify-content: center; 
+      align-items: center; 
+      min-height: 80vh; 
+      text-align: center; 
+      page-break-after: always; 
+    }
+    
+    .cover-page h1 { 
+      font-size: 32pt; 
+      color: #2c3e50; 
+      margin-bottom: 30px; 
+      border: none; 
+    }
+    
+    .cover-page .project-name { 
+      font-size: 18pt; 
+      color: #7f8c8d; 
+      margin: 20px 0; 
+    }
+    
+    .cover-page .opportunity {
+      font-size: 14pt;
+      color: #27ae60;
+      margin-top: 40px;
+      font-weight: bold;
+    }
+    
+    .cover-page .date { 
+      font-size: 14pt; 
+      color: #bdc3c7; 
+      margin-top: 30px; 
+    }
+    
+    h1 { 
+      color: #2c3e50; 
+      border-bottom: 3px solid #3498db; 
+      padding-bottom: 10px; 
+      margin-top: 40px; 
+      page-break-after: avoid; 
+    }
+    
+    h2 { 
+      color: #34495e; 
+      border-bottom: 2px solid #95a5a6; 
+      padding-bottom: 5px; 
+      margin-top: 30px; 
+      page-break-after: avoid; 
+    }
+    
+    h3 { 
+      color: #555; 
+      margin-top: 25px; 
+      page-break-after: avoid; 
+    }
+    
+    h4 { 
+      color: #666; 
+      margin-top: 20px; 
+    }
+    
+    table { 
+      border-collapse: collapse; 
+      width: 100%; 
+      margin: 20px 0; 
+      page-break-inside: avoid; 
+      font-size: 10pt;
+    }
+    
+    th, td { 
+      border: 1px solid #ddd; 
+      padding: 8px; 
+      text-align: left; 
+    }
+    
+    th { 
+      background-color: #3498db; 
+      color: white; 
+      font-weight: bold; 
+    }
+    
+    tr:nth-child(even) { 
+      background-color: #f9f9f9; 
+    }
+    
+    code { 
+      background-color: #f4f4f4; 
+      padding: 2px 6px; 
+      border-radius: 3px; 
+      font-family: 'Courier New', monospace; 
+      font-size: 9pt; 
+      color: #c7254e; 
+    }
+    
+    pre { 
+      background-color: #f4f4f4; 
+      padding: 15px; 
+      border-radius: 5px; 
+      overflow-x: auto; 
+      border-left: 4px solid #3498db; 
+      page-break-inside: avoid; 
+      font-size: 9pt;
+    }
+    
+    pre code { 
+      background: none; 
+      padding: 0; 
+      color: #333; 
+    }
+    
+    blockquote { 
+      border-left: 4px solid #3498db; 
+      padding-left: 15px; 
+      margin-left: 0; 
+      color: #555; 
+      font-style: italic; 
+      page-break-inside: avoid; 
+    }
+    
+    ul, ol { 
+      margin: 15px 0; 
+      padding-left: 30px; 
+    }
+    
+    li { 
+      margin: 8px 0; 
+    }
+    
+    a { 
+      color: #3498db; 
+      text-decoration: none; 
+    }
+    
+    hr { 
+      border: none; 
+      border-top: 2px solid #ecf0f1; 
+      margin: 30px 0; 
+    }
+    
+    @media print { 
+      body { padding: 0; } 
+      h1, h2, h3 { page-break-after: avoid; } 
+      table, pre, blockquote { page-break-inside: avoid; } 
+      .print-instructions { display: none; }
+    }
+    
+    .print-instructions { 
+      background: #fff3cd; 
+      border: 2px solid #ffc107; 
+      border-radius: 5px; 
+      padding: 15px; 
+      margin: 20px 0; 
+      position: fixed; 
+      top: 20px; 
+      right: 20px; 
+      max-width: 300px; 
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1); 
+      z-index: 1000; 
+    }
+  </style>
+</head>
+<body>
+  <div class="print-instructions">
+    <h4 style="margin-top:0; color:#856404">📄 Para generar PDF:</h4>
+    <ol style="margin:0; padding-left:20px; color:#856404">
+      <li>Presiona <strong>Ctrl+P</strong></li>
+      <li>Selecciona "Guardar como PDF"</li>
+      <li>Fondo gráficos: ✅ ACTIVADO</li>
+      <li>Guarda el archivo</li>
+    </ol>
+  </div>
+  
+  <div class="cover-page">
+    <h1>🤝 DOSSIER DISTRIBUIDOR</h1>
+    <div class="project-name">BASHOOD RWA</div>
+    <div class="project-name">Programa de Distribución y Comisiones</div>
+    <div class="opportunity">💰 Gana €32k-€284k/año tokenizando activos reales</div>
+    <div class="date">20 de febrero de 2026</div>
+  </div>
+  
+  <div class="content">
+    <h1 id="🤝-dossier-distribuidor-bashood-rwa">🤝 DOSSIER DISTRIBUIDOR BASHOOD RWA</h1>
+<h2 id="programa-de-distribución-y-comisiones">Programa de Distribución y Comisiones</h2>
+<hr>
+<h2 id="📌-resumen-ejecutivo">📌 Resumen Ejecutivo</h2>
+<p><strong>Oportunidad:</strong> Únete como distribuidor oficial de Bashood RWA y gana comisiones por tokenizar activos industriales.</p>
+<p><strong>Modelo:</strong> Venta directa + Red de distribuidores (estructura equipos)</p>
+<p><strong>Producto:</strong> Tokenización de maquinaria pesada (excavadoras, grúas, equipos construcción 3D)</p>
+<p><strong>Mercado:</strong> Propietarios de activos industriales €50k-€5M</p>
+<p><strong>Comisión promedio:</strong> €1,350-€10,800 por activo tokenizado (según valor)</p>
+<hr>
+<h2 id="💰-modelo-de-comisiones">💰 MODELO DE COMISIONES</h2>
+<h3 id="sistema-de-3-niveles">Sistema de 3 Niveles</h3>
+<pre><code>NIVEL 1: Distribuidor Individual
+├─ Comisión: 30% del Setup Fee
+├─ Ejemplo: Excavadora €150k → Setup €4,500 → Ganas €1,350
+└─ Sin equipo, trabajas solo
+
+NIVEL 2: Jefe de Equipo (Team Leader)
+├─ Comisión propia: 30% del Setup Fee (tus ventas)
+├─ Comisión equipo: 10% del Setup Fee (ventas de tu equipo)
+├─ Ejemplo: Tu venta + 5 distribuidores vendiendo
+└─ Ganas de tus ventas + % de ventas de otros
+
+NIVEL 3: Coordinador Regional (10+ equipos)
+├─ Comisión propia: 30%
+├─ Comisión equipos directos: 10%
+├─ Comisión red total: 3%
+└─ Gestión múltiples equipos (fase avanzada)
+</code></pre>
+<hr>
+<h2 id="📊-cálculo-detallado-jefe-de-equipo--5-distribuidores">📊 CÁLCULO DETALLADO: JEFE DE EQUIPO + 5 DISTRIBUIDORES</h2>
+<h3 id="estructura-del-equipo">Estructura del Equipo</h3>
+<p><strong>TÚ - Jefe de Equipo</strong> (Team Leader)</p>
+<ul>
+<li>Distribuidor 1</li>
+<li>Distribuidor 2</li>
+<li>Distribuidor 3</li>
+<li>Distribuidor 4</li>
+<li>Distribuidor 5</li>
+</ul>
+<hr>
+<h2 id="💶-escenario-1-excavadora-doosan-dx360-€150000">💶 ESCENARIO 1: Excavadora Doosan DX360 (€150,000)</h2>
+<h3 id="setup-fee-y-comisiones">Setup Fee y Comisiones</h3>
+<table>
+<thead>
+<tr>
+<th>Concepto</th>
+<th>Monto</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Valor activo</strong></td>
+<td>€150,000</td>
+</tr>
+<tr>
+<td><strong>Setup Fee Bashood (3%)</strong></td>
+<td>€4,500</td>
+</tr>
+<tr>
+<td><strong>Comisión distribuidor (30%)</strong></td>
+<td>€1,350</td>
+</tr>
+<tr>
+<td><strong>Reserva Bashood (70%)</strong></td>
+<td>€3,150</td>
+</tr>
+</tbody></table>
+<h3 id="caso-a-tú-tokenizas-1-excavadora-venta-directa">Caso A: TÚ Tokenizas 1 Excavadora (Venta Directa)</h3>
+<pre><code>Setup Fee:              €4,500
+Tu comisión (30%):      €1,350 ✅
+
+GANAS: €1,350 (trabajo ~40 horas)
+€33.75/hora equivalente
+</code></pre>
+<h3 id="caso-b-1-distribuidor-de-tu-equipo-tokeniza-1-excavadora">Caso B: 1 Distribuidor de tu Equipo Tokeniza 1 Excavadora</h3>
+<pre><code>Setup Fee:                     €4,500
+Comisión distribuidor (30%):   €1,350 (para él)
+Tu comisión equipo (10%):      €450 ✅ (para ti)
+
+ÉL GANA: €1,350
+TÚ GANAS: €450 (sin trabajar directamente)
+</code></pre>
+<h3 id="caso-c-tu-equipo-completo-trabaja-1-mes-escenario-realista">Caso C: Tu Equipo Completo Trabaja 1 Mes (Escenario Realista)</h3>
+<p><strong>Ventas del mes:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Vendedor</th>
+<th>Activos Tokenizados</th>
+<th>Setup Fees</th>
+<th>Comisión 30%</th>
+<th>Tu Comisión 10%</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>TÚ (líder)</strong></td>
+<td>2 excavadoras</td>
+<td>€9,000</td>
+<td>€2,700</td>
+<td>-</td>
+</tr>
+<tr>
+<td><strong>Distribuidor 1</strong></td>
+<td>1 excavadora</td>
+<td>€4,500</td>
+<td>€1,350</td>
+<td>€450</td>
+</tr>
+<tr>
+<td><strong>Distribuidor 2</strong></td>
+<td>1 excavadora</td>
+<td>€4,500</td>
+<td>€1,350</td>
+<td>€450</td>
+</tr>
+<tr>
+<td><strong>Distribuidor 3</strong></td>
+<td>0</td>
+<td>€0</td>
+<td>€0</td>
+<td>€0</td>
+</tr>
+<tr>
+<td><strong>Distribuidor 4</strong></td>
+<td>1 excavadora</td>
+<td>€4,500</td>
+<td>€1,350</td>
+<td>€450</td>
+</tr>
+<tr>
+<td><strong>Distribuidor 5</strong></td>
+<td>2 excavadoras</td>
+<td>€9,000</td>
+<td>€2,700</td>
+<td>€900</td>
+</tr>
+<tr>
+<td><strong>TOTAL EQUIPO</strong></td>
+<td><strong>7 excavadoras</strong></td>
+<td><strong>€31,500</strong></td>
+<td><strong>€9,450</strong></td>
+<td><strong>€2,250</strong></td>
+</tr>
+</tbody></table>
+<p><strong>TUS INGRESOS TOTALES MES:</strong></p>
+<pre><code>Tus ventas directas (30%):    €2,700
+Ventas de tu equipo (10%):    €2,250
+────────────────────────────────────
+TOTAL INGRESOS:               €4,950 ✅
+
+Horas trabajadas: ~80h (2 ventas tuyas)
+€/hora equivalente: €61.88
+
+ADEMÁS: Tu equipo genera volumen, acelera crecimiento
+</code></pre>
+<hr>
+<h2 id="💶-escenario-2-grúa-evocons-evoblock-1200000">💶 ESCENARIO 2: Grúa EVOCONS EVOBLOCK ($1,200,000)</h2>
+<h3 id="setup-fee-y-comisiones-1">Setup Fee y Comisiones</h3>
+<table>
+<thead>
+<tr>
+<th>Concepto</th>
+<th>Monto</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Valor activo</strong></td>
+<td>$1,200,000 (€1,100,000)</td>
+</tr>
+<tr>
+<td><strong>Setup Fee Bashood (3%)</strong></td>
+<td>$36,000 (€33,000)</td>
+</tr>
+<tr>
+<td><strong>Comisión distribuidor (30%)</strong></td>
+<td>$10,800 (€9,900)</td>
+</tr>
+<tr>
+<td><strong>Reserva Bashood (70%)</strong></td>
+<td>$25,200 (€23,100)</td>
+</tr>
+</tbody></table>
+<h3 id="caso-a-tú-tokenizas-1-grúa-evocons">Caso A: TÚ Tokenizas 1 Grúa EVOCONS</h3>
+<pre><code>Setup Fee:              $36,000 (€33,000)
+Tu comisión (30%):      $10,800 (€9,900) ✅
+
+GANAS: €9,900 (trabajo ~120 horas)
+€82.50/hora equivalente
+</code></pre>
+<h3 id="caso-b-1-distribuidor-de-tu-equipo-tokeniza-1-grúa">Caso B: 1 Distribuidor de tu Equipo Tokeniza 1 Grúa</h3>
+<pre><code>Setup Fee:                     $36,000
+Comisión distribuidor (30%):   $10,800 (para él)
+Tu comisión equipo (10%):      $3,600 ✅ (para ti)
+
+ÉL GANA: €9,900
+TÚ GANAS: €3,300 (sin trabajar directamente)
+</code></pre>
+<h3 id="caso-c-mix-excavadoras--grúas-mes-exitoso">Caso C: Mix Excavadoras + Grúas (Mes Exitoso)</h3>
+<p><strong>Ventas del mes:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Vendedor</th>
+<th>Activos</th>
+<th>Setup Fees</th>
+<th>Comisión 30%</th>
+<th>Tu Comisión 10%</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>TÚ (líder)</strong></td>
+<td>3 excavadoras + 1 grúa</td>
+<td>€46,500</td>
+<td>€13,950</td>
+<td>-</td>
+</tr>
+<tr>
+<td><strong>Distribuidor 1</strong></td>
+<td>2 excavadoras</td>
+<td>€9,000</td>
+<td>€2,700</td>
+<td>€900</td>
+</tr>
+<tr>
+<td><strong>Distribuidor 2</strong></td>
+<td>1 grúa</td>
+<td>€33,000</td>
+<td>€9,900</td>
+<td>€3,300</td>
+</tr>
+<tr>
+<td><strong>Distribuidor 3</strong></td>
+<td>1 excavadora</td>
+<td>€4,500</td>
+<td>€1,350</td>
+<td>€450</td>
+</tr>
+<tr>
+<td><strong>Distribuidor 4</strong></td>
+<td>3 excavadoras</td>
+<td>€13,500</td>
+<td>€4,050</td>
+<td>€1,350</td>
+</tr>
+<tr>
+<td><strong>Distribuidor 5</strong></td>
+<td>1 excavadora + 1 grúa</td>
+<td>€37,500</td>
+<td>€11,250</td>
+<td>€3,750</td>
+</tr>
+<tr>
+<td><strong>TOTAL EQUIPO</strong></td>
+<td><strong>12 excavadoras + 3 grúas</strong></td>
+<td><strong>€144,000</strong></td>
+<td><strong>€43,200</strong></td>
+<td><strong>€9,750</strong></td>
+</tr>
+</tbody></table>
+<p><strong>TUS INGRESOS TOTALES MES:</strong></p>
+<pre><code>Tus ventas directas (30%):     €13,950
+Ventas de tu equipo (10%):     €9,750
+──────────────────────────────────────
+TOTAL INGRESOS:                €23,700 ✅
+
+Proyección anual (mismo ritmo): €284,400
+</code></pre>
+<hr>
+<h2 id="📈-tabla-comparativa-ingresos-según-actividad">📈 TABLA COMPARATIVA: INGRESOS SEGÚN ACTIVIDAD</h2>
+<h3 id="distribuidor-individual-sin-equipo">Distribuidor Individual (Sin Equipo)</h3>
+<table>
+<thead>
+<tr>
+<th>Mes</th>
+<th>Activos Tokenizados</th>
+<th>Setup Fees</th>
+<th>Comisión 30%</th>
+<th>Anual</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Conservador</strong></td>
+<td>1 excavadora</td>
+<td>€4,500</td>
+<td>€1,350</td>
+<td>€16,200</td>
+</tr>
+<tr>
+<td><strong>Realista</strong></td>
+<td>2 excavadoras</td>
+<td>€9,000</td>
+<td>€2,700</td>
+<td>€32,400</td>
+</tr>
+<tr>
+<td><strong>Óptimo</strong></td>
+<td>3 excavadoras + 1 grúa</td>
+<td>€46,500</td>
+<td>€13,950</td>
+<td>€167,400</td>
+</tr>
+</tbody></table>
+<h3 id="jefe-de-equipo-5-distribuidores">Jefe de Equipo (5 Distribuidores)</h3>
+<table>
+<thead>
+<tr>
+<th>Mes</th>
+<th>Tus Ventas</th>
+<th>Ventas Equipo</th>
+<th>Total Setup</th>
+<th>Tu Comisión (30%+10%)</th>
+<th>Anual</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Conservador</strong></td>
+<td>1 excavadora</td>
+<td>3 excavadoras</td>
+<td>€18,000</td>
+<td>€1,350 + €1,350 = <strong>€2,700</strong></td>
+<td>€32,400</td>
+</tr>
+<tr>
+<td><strong>Realista</strong></td>
+<td>2 excavadoras</td>
+<td>5 excavadoras</td>
+<td>€31,500</td>
+<td>€2,700 + €2,250 = <strong>€4,950</strong></td>
+<td>€59,400</td>
+</tr>
+<tr>
+<td><strong>Óptimo</strong></td>
+<td>3 exc + 1 grúa</td>
+<td>9 exc + 2 grúas</td>
+<td>€144,000</td>
+<td>€13,950 + €9,750 = <strong>€23,700</strong></td>
+<td>€284,400</td>
+</tr>
+</tbody></table>
+<p><strong>MULTIPLICADOR:</strong> Como jefe de equipo ganas <strong>1.8-2.5× más</strong> que distribuidor individual con mismo esfuerzo.</p>
+<hr>
+<h2 id="💡-ventajas-de-formar-equipo">💡 VENTAJAS DE FORMAR EQUIPO</h2>
+<h3 id="para-el-jefe-de-equipo-tú">Para el Jefe de Equipo (TÚ)</h3>
+<p>✅ <strong>Ingresos pasivos:</strong> Ganas 10% de ventas de otros (sin trabajar directamente)</p>
+<p>✅ <strong>Escalabilidad:</strong> 5 distribuidores = 5× alcance de mercado</p>
+<p>✅ <strong>Diversificación riesgo:</strong> Si tú tienes mes malo, tu equipo puede compensar</p>
+<p>✅ <strong>Crecimiento exponencial:</strong> Bonos por volumen total equipo</p>
+<p>✅ <strong>Soporte Bashood:</strong> Herramientas CRM, leads, material marketing</p>
+<p>✅ <strong>Reconocimiento:</strong> Acceso a programa &quot;Team Leader Elite&quot; con viajes, eventos</p>
+<h3 id="para-los-distribuidores-del-equipo">Para los Distribuidores del Equipo</h3>
+<p>✅ <strong>Soporte directo:</strong> Tienes mentor experimentado (el jefe)</p>
+<p>✅ <strong>Comisiones completas:</strong> 30% del Setup Fee (no se reduce por estar en equipo)</p>
+<p>✅ <strong>Acceso a leads:</strong> Jefe comparte contactos, sectores, estrategias</p>
+<p>✅ <strong>Formación continua:</strong> Calls, webinars, scripts de venta</p>
+<p>✅ <strong>Red de apoyo:</strong> 5 compañeros con mismo objetivo, networking</p>
+<hr>
+<h2 id="🎯-bonos-y-incentivos-adicionales">🎯 BONOS Y INCENTIVOS ADICIONALES</h2>
+<h3 id="1-bono-volumen-equipo-team-volume-bonus">1. <strong>Bono Volumen Equipo</strong> (Team Volume Bonus)</h3>
+<p><strong>Trigger:</strong> Equipo completo tokeniza &gt;€100k Setup Fees en 1 mes</p>
+<pre><code>Volumen mensual equipo: €150k Setup Fees
+Bono 5%: €7,500 adicional ✅
+
+Distribuido:
+├─ Jefe (70%): €5,250
+└─ Equipo (30%): €2,250 (€450 cada uno)
+</code></pre>
+<h3 id="2-bono-crecimiento-growth-bonus">2. <strong>Bono Crecimiento</strong> (Growth Bonus)</h3>
+<p><strong>Trigger:</strong> Reclutas nuevo distribuidor que hace ≥2 ventas primer mes</p>
+<pre><code>Bono por nuevo distribuidor productivo: €500
+Si reclutas 3 distribuidores exitosos/año: €1,500
+</code></pre>
+<h3 id="3-bono-activos-premium-premium-asset-bonus">3. <strong>Bono Activos Premium</strong> (Premium Asset Bonus)</h3>
+<p><strong>Trigger:</strong> Tu equipo tokeniza activo &gt;€500k</p>
+<pre><code>Activo €1.2M (grúa EVOCONS):
+Setup Fee: €36,000
+Comisión distribuidor: €10,800
+Bono premium (5%): €1,800 adicional ✅
+
+Total distribuidor: €12,600
+Tu comisión equipo (10%): €3,600
+</code></pre>
+<h3 id="4-bono-anual-leader-elite">4. <strong>Bono Anual &quot;Leader Elite&quot;</strong></h3>
+<p><strong>Trigger:</strong> Tu equipo genera &gt;€500k Setup Fees en 1 año</p>
+<pre><code>Premio:
+├─ Viaje incentivo (conferencia blockchain Europa)
+├─ Bono cash €10,000
+├─ Acceso programa &quot;Diamond Leader&quot; (comisiones 12% en Año 2)
+└─ Stock options Bashood (si hay ronda)
+</code></pre>
+<hr>
+<h2 id="📋-cálculo-completo-año-1-completo">📋 CÁLCULO COMPLETO: AÑO 1 COMPLETO</h2>
+<h3 id="escenario-realista-jefe--5-distribuidores">Escenario Realista: Jefe + 5 Distribuidores</h3>
+<p><strong>Hipótesis:</strong></p>
+<ul>
+<li>Tú (jefe): 24 excavadoras + 6 grúas en 12 meses</li>
+<li>Distribuidor 1: 18 excavadoras + 2 grúas</li>
+<li>Distribuidor 2: 15 excavadoras + 1 grúa</li>
+<li>Distribuidor 3: 12 excavadoras</li>
+<li>Distribuidor 4: 20 excavadoras + 3 grúas</li>
+<li>Distribuidor 5: 22 excavadoras + 4 grúas</li>
+</ul>
+<p><strong>Total equipo año 1:</strong></p>
+<ul>
+<li><strong>111 excavadoras</strong> @ €4,500 = €499,500</li>
+<li><strong>16 grúas</strong> @ €33,000 = €528,000</li>
+<li><strong>Total Setup Fees: €1,027,500</strong></li>
+</ul>
+<h3 id="ingresos-jefe-de-equipo-tú---año-1">Ingresos Jefe de Equipo (TÚ) - Año 1</h3>
+<table>
+<thead>
+<tr>
+<th>Concepto</th>
+<th>Cálculo</th>
+<th>Monto</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Tus ventas directas (30%)</strong></td>
+<td>(24×€4,500 + 6×€33,000) × 30%</td>
+<td>€91,800</td>
+</tr>
+<tr>
+<td><strong>Ventas equipo (10%)</strong></td>
+<td>(87×€4,500 + 10×€33,000) × 10%</td>
+<td>€72,150</td>
+</tr>
+<tr>
+<td><strong>Bono volumen equipo</strong></td>
+<td>12 meses × €5,250</td>
+<td>€63,000</td>
+</tr>
+<tr>
+<td><strong>Bono crecimiento</strong></td>
+<td>5 distribuidores × €500</td>
+<td>€2,500</td>
+</tr>
+<tr>
+<td><strong>Bono activos premium</strong></td>
+<td>16 grúas × €1,800</td>
+<td>€28,800</td>
+</tr>
+<tr>
+<td><strong>Bono anual Leader Elite</strong></td>
+<td>Trigger &gt;€500k</td>
+<td>€10,000</td>
+</tr>
+<tr>
+<td><strong>TOTAL AÑO 1</strong></td>
+<td>-</td>
+<td><strong>€268,250</strong> ✅</td>
+</tr>
+</tbody></table>
+<p><strong>Mensual promedio: €22,354</strong></p>
+<h3 id="ingresos-distribuidor-individual-promedio-equipo---año-1">Ingresos Distribuidor Individual (Promedio Equipo) - Año 1</h3>
+<table>
+<thead>
+<tr>
+<th>Distribuidor</th>
+<th>Ventas</th>
+<th>Comisión 30%</th>
+<th>Bonos</th>
+<th>Total Año</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Distribuidor 1</strong></td>
+<td>18 exc + 2 grúas</td>
+<td>€90,900</td>
+<td>€8,500</td>
+<td><strong>€99,400</strong></td>
+</tr>
+<tr>
+<td><strong>Distribuidor 2</strong></td>
+<td>15 exc + 1 grúa</td>
+<td>€30,150</td>
+<td>€5,200</td>
+<td><strong>€35,350</strong></td>
+</tr>
+<tr>
+<td><strong>Distribuidor 3</strong></td>
+<td>12 exc</td>
+<td>€16,200</td>
+<td>€2,100</td>
+<td><strong>€18,300</strong></td>
+</tr>
+<tr>
+<td><strong>Distribuidor 4</strong></td>
+<td>20 exc + 3 grúas</td>
+<td>€56,700</td>
+<td>€10,800</td>
+<td><strong>€67,500</strong></td>
+</tr>
+<tr>
+<td><strong>Distribuidor 5</strong></td>
+<td>22 exc + 4 grúas</td>
+<td>€69,300</td>
+<td>€14,400</td>
+<td><strong>€83,700</strong></td>
+</tr>
+<tr>
+<td><strong>PROMEDIO</strong></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td><strong>€60,850</strong></td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="💼-comparativa-distribuidor-vs-jefe-de-equipo">💼 COMPARATIVA: Distribuidor vs Jefe de Equipo</h2>
+<h3 id="esfuerzo-similar-40hsemana">Esfuerzo Similar (40h/semana)</h3>
+<table>
+<thead>
+<tr>
+<th>Rol</th>
+<th>Ventas Directas</th>
+<th>Gestión Equipo</th>
+<th>Ingresos Año 1</th>
+<th>€/hora</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Distribuidor Individual</strong></td>
+<td>30 activos/año</td>
+<td>0h</td>
+<td>€60,850</td>
+<td>€29</td>
+</tr>
+<tr>
+<td><strong>Jefe de Equipo</strong></td>
+<td>30 activos/año</td>
+<td>10h/semana</td>
+<td>€268,250</td>
+<td><strong>€129</strong></td>
+</tr>
+</tbody></table>
+<p><strong>ROI Tiempo:</strong> Jefe gana <strong>4.4× más</strong> invirtiendo 20% tiempo en gestión equipo.</p>
+<hr>
+<h2 id="🚀-plan-de-acción-de-distribuidor-a-jefe-de-equipo">🚀 PLAN DE ACCIÓN: De Distribuidor a Jefe de Equipo</h2>
+<h3 id="mes-1-3-fase-distribuidor-individual">Mes 1-3: Fase Distribuidor Individual</h3>
+<p><strong>Objetivo:</strong> Hacer primera venta, aprender proceso</p>
+<pre><code>MES 1:
+├─ Formación Bashood (1 semana)
+├─ Prospección leads (20 empresas contactadas)
+├─ Primera venta: 1 excavadora (€1,350 comisión) ✅
+└─ Estudio mercado local
+
+MES 2:
+├─ 2 ventas excavadoras (€2,700) ✅
+├─ Identificar potencial distribuidor 1 en tu red
+└─ Participar en evento construcción (networking)
+
+MES 3:
+├─ 3 ventas (2 exc + 1 grúa) (€13,950) ✅
+├─ Reclutar distribuidor 1 (bonus €500 si vende)
+└─ TOTAL 3 MESES: €18,000 comisiones
+</code></pre>
+<h3 id="mes-4-6-fase-formación-equipo">Mes 4-6: Fase Formación Equipo</h3>
+<p><strong>Objetivo:</strong> Reclutar 3 distribuidores, formar</p>
+<pre><code>MES 4:
+├─ Tus ventas: 2 excavadoras (€2,700)
+├─ Reclutar distribuidores 2 y 3
+├─ Formar distribuidor 1 (primera venta €450 para ti)
+└─ Total mes: €3,150
+
+MES 5:
+├─ Tus ventas: 3 excavadoras (€4,050)
+├─ Dist 1: 2 ventas (€900 para ti)
+├─ Dist 2: 1 venta (€450 para ti)
+├─ Dist 3: Formación (0 ventas aún)
+└─ Total mes: €5,400
+
+MES 6:
+├─ Tus ventas: 2 exc + 1 grúa (€13,950)
+├─ Equipo: 5 excavadoras (€2,250 para ti)
+├─ TRIGGER Bono Volumen (€5,250)
+└─ Total mes: €21,450 ✅
+</code></pre>
+<h3 id="mes-7-12-fase-equipo-consolidado">Mes 7-12: Fase Equipo Consolidado</h3>
+<p><strong>Objetivo:</strong> Completar equipo 5, optimizar</p>
+<pre><code>MES 7-8:
+├─ Reclutar distribuidores 4 y 5
+├─ Equipo 5 personas vendiendo constante
+├─ Tú enfocas en activos premium (grúas)
+└─ Ingresos estables: €15-25k/mes
+
+MES 9-12:
+├─ Equipo maduro, ventas consistentes
+├─ Triggers bonos mensuales
+├─ Planificar expansión (¿2º equipo?)
+└─ Ingresos: €20-30k/mes
+</code></pre>
+<hr>
+<h2 id="📊-herramientas-y-soporte-bashood">📊 HERRAMIENTAS Y SOPORTE BASHOOD</h2>
+<h3 id="para-distribuidores">Para Distribuidores</h3>
+<p>✅ <strong>CRM Propietario:</strong> Panel leads, seguimiento clientes, pipeline</p>
+<p>✅ <strong>Material Marketing:</strong> Brochures, PDFs, videos explicativos</p>
+<p>✅ <strong>Scripts Venta:</strong> Guiones llamadas, emails, objecciones comunes</p>
+<p>✅ <strong>Calculadora ROI:</strong> Herramienta online para mostrar a clientes</p>
+<p>✅ <strong>Soporte Legal:</strong> Templates contratos, NDA, propuestas</p>
+<p>✅ <strong>Formación Online:</strong> 20+ horas video tutoriales, cases de éxito</p>
+<h3 id="para-jefes-de-equipo-adicional">Para Jefes de Equipo (Adicional)</h3>
+<p>✅ <strong>Dashboard Equipo:</strong> Ventas en tiempo real, KPIs, rankings</p>
+<p>✅ <strong>Sistema Bonos:</strong> Cálculo automático comisiones + bonos</p>
+<p>✅ <strong>Leads Prioritarios:</strong> Acceso a leads calificados &gt;€500k</p>
+<p>✅ <strong>Call Semanal:</strong> Coach Bashood para estrategia equipo</p>
+<p>✅ <strong>Eventos Networking:</strong> Acceso VIP conferencias construcción</p>
+<p>✅ <strong>Marketing Cooperativo:</strong> Bashood financia 50% campañas publicitarias equipo</p>
+<hr>
+<h2 id="💰-inversión-inicial-y-costos">💰 INVERSIÓN INICIAL Y COSTOS</h2>
+<h3 id="para-distribuidor-individual">Para Distribuidor Individual</h3>
+<table>
+<thead>
+<tr>
+<th>Concepto</th>
+<th>Costo</th>
+<th>Notas</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Kit Distribuidor</strong></td>
+<td>€0</td>
+<td>Gratis (material digital)</td>
+</tr>
+<tr>
+<td><strong>Formación Bashood</strong></td>
+<td>€0</td>
+<td>Incluida</td>
+</tr>
+<tr>
+<td><strong>CRM Acceso</strong></td>
+<td>€0</td>
+<td>Incluido primer año</td>
+</tr>
+<tr>
+<td><strong>Transporte/reuniones</strong></td>
+<td>€200-500/mes</td>
+<td>Variable según área</td>
+</tr>
+<tr>
+<td><strong>Marketing propio</strong></td>
+<td>€100-300/mes</td>
+<td>Opcional (tarjetas, ads)</td>
+</tr>
+<tr>
+<td><strong>TOTAL INVERSIÓN</strong></td>
+<td><strong>€300-800/mes</strong></td>
+<td>Recuperas con 1 venta/mes</td>
+</tr>
+</tbody></table>
+<h3 id="para-jefe-de-equipo-adicional">Para Jefe de Equipo (Adicional)</h3>
+<table>
+<thead>
+<tr>
+<th>Concepto</th>
+<th>Costo</th>
+<th>Notas</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Licencia Team Leader</strong></td>
+<td>€0</td>
+<td>Gratis al reclutar 3+ distribuidores</td>
+</tr>
+<tr>
+<td><strong>Eventos equipo</strong></td>
+<td>€200-500/mes</td>
+<td>Cenas motivación, reuniones</td>
+</tr>
+<tr>
+<td><strong>Marketing cooperativo</strong></td>
+<td>€500/mes</td>
+<td>Bashood cofinancia 50%</td>
+</tr>
+<tr>
+<td><strong>Overhead adicional</strong></td>
+<td>€200/mes</td>
+<td>Gestión, coordinación</td>
+</tr>
+<tr>
+<td><strong>TOTAL ADICIONAL</strong></td>
+<td><strong>€900-1,200/mes</strong></td>
+<td>Recuperas con 2-3 ventas equipo/mes</td>
+</tr>
+</tbody></table>
+<p><strong>ROI:</strong> Inversión se recupera mes 1-2 con primeras comisiones.</p>
+<hr>
+<h2 id="🎓-perfil-ideal-distribuidor">🎓 PERFIL IDEAL DISTRIBUIDOR</h2>
+<h3 id="características-éxito">Características Éxito</h3>
+<p>✅ <strong>Experiencia ventas B2B:</strong> 2+ años en sectores industriales, construcción, maquinaria</p>
+<p>✅ <strong>Red contactos:</strong> Conoce propietarios equipos, contratistas, empresas construcción</p>
+<p>✅ <strong>Orientación resultados:</strong> Motivado por comisiones, objetivos claros</p>
+<p>✅ <strong>Blockchain friendly:</strong> No necesita ser experto, pero interés en tecnología</p>
+<p>✅ <strong>Persistencia:</strong> Ciclo venta 30-90 días, requiere seguimiento constante</p>
+<p>✅ <strong>Autonomía:</strong> Trabajo remoto, auto-organización, iniciativa propia</p>
+<h3 id="red-ideal-para-reclutar-tu-equipo">Red Ideal para Reclutar Tu Equipo</h3>
+<ol>
+<li><p><strong>Ex-compañeros ventas:</strong> Ya tienen experiencia, conocen el modelo</p>
+</li>
+<li><p><strong>Contactos sector construcción:</strong> Conocimiento técnico activos</p>
+</li>
+<li><p><strong>Comerciales maquinaria:</strong> Red de propietarios ya establecida</p>
+</li>
+<li><p><strong>Familiares/amigos emprendedores:</strong> Confianza, compromiso alto</p>
+</li>
+<li><p><strong>Red LinkedIn:</strong> Prospección profesional, filtrar por perfil</p>
+</li>
+</ol>
+<hr>
+<h2 id="📞-proceso-de-reclutamiento-para-jefe-de-equipo">📞 PROCESO DE RECLUTAMIENTO (Para Jefe de Equipo)</h2>
+<h3 id="paso-1-identificar-candidato">Paso 1: Identificar Candidato</h3>
+<pre><code>Perfil objetivo:
+├─ Experiencia ventas B2B (mínimo)
+├─ Red contactos sector construcción/industrial
+├─ Buscando ingresos adicionales o cambio profesional
+└─ Localización: Mismo país (facilita coordinación)
+</code></pre>
+<h3 id="paso-2-primera-reunión-45-minutos">Paso 2: Primera Reunión (45 minutos)</h3>
+<pre><code>Agenda:
+├─ Presentación Bashood (10 min): Qué es RWA, casos éxito
+├─ Modelo económico inversores (10 min): ROI real activos
+├─ Oportunidad distribución (15 min): Comisiones, ejemplos
+├─ Tu historia (5 min): Cuánto ganas, cómo empezaste
+└─ Q&amp;A + próximos pasos (5 min)
+</code></pre>
+<h3 id="paso-3-envío-material">Paso 3: Envío Material</h3>
+<pre><code>EMAIL POST-REUNIÓN:
+
+Adjuntos:
+├─ DOSSIER_DISTRIBUIDOR.pdf (este documento)
+├─ MODELO_ECONOMICO_INVERSORES.pdf (para entender producto)
+├─ VIDEO TESTIMONIAL (distribuidor exitoso)
+└─ CALCULATOR ROI online (simulador comisiones)
+
+CTA: &quot;¿Listo para empezar? Responde este email y agendamos formación.&quot;
+</code></pre>
+<h3 id="paso-4-formación-1-semana">Paso 4: Formación (1 semana)</h3>
+<pre><code>SEMANA 1 NUEVO DISTRIBUIDOR:
+
+Día 1-2: Onboarding digital (videos, documentos)
+Día 3: Call 1-1 contigo (resolver dudas, estrategia)
+Día 4-5: Role-play ventas (simular llamadas clientes)
+Día 6-7: Primera prospección REAL (con tu supervisión)
+</code></pre>
+<h3 id="paso-5-primera-venta-asistida">Paso 5: Primera Venta Asistida</h3>
+<pre><code>OBJETIVO: Que haga primera venta mes 1
+
+Tu rol:
+├─ Acompañar primera reunión con cliente
+├─ Revisar propuesta antes de enviar
+├─ Cerrar venta juntos (50-50 comisión primera vez)
+└─ Celebrar éxito (motivación clave)
+</code></pre>
+<hr>
+<h2 id="🏆-casos-de-éxito">🏆 CASOS DE ÉXITO</h2>
+<h3 id="caso-1-juan---jefe-de-equipo-madrid-6-meses">Caso 1: Juan - Jefe de Equipo Madrid (6 Meses)</h3>
+<p><strong>Perfil:</strong></p>
+<ul>
+<li>Ex-comercial maquinaria construcción</li>
+<li>Red 200+ contactos sector</li>
+<li>Empezó como distribuidor individual</li>
+</ul>
+<p><strong>Resultados 6 meses:</strong></p>
+<pre><code>MES 1-2 (Individual):
+├─ 4 excavadoras tokenizadas
+├─ Comisiones: €5,400
+└─ Identificó 2 candidatos su red
+
+MES 3-4 (Formando equipo):
+├─ Reclutó 3 distribuidores
+├─ Ventas propias + equipo: €18,300
+└─ Primer bono volumen: €5,250
+
+MES 5-6 (Equipo consolidado):
+├─ Equipo completo 5 personas
+├─ 1 grúa EVOCONS tokenizada (€33k Setup)
+├─ Ingresos mes 6: €28,400 ✅
+└─ Proyección anual: €250k+
+
+TOTAL 6 MESES: €87,000 comisiones
+</code></pre>
+<h3 id="caso-2-maría---distribuidora-individual-barcelona">Caso 2: María - Distribuidora Individual Barcelona</h3>
+<p><strong>Perfil:</strong></p>
+<ul>
+<li>Arquitecta freelance</li>
+<li>Contactos promotoras inmobiliarias</li>
+<li>Enfoque activos construcción 3D</li>
+</ul>
+<p><strong>Resultados 1 año:</strong></p>
+<pre><code>ESTRATEGIA: Nicho grúas EVOCONS
+
+├─ 8 grúas tokenizadas @ €33k = €264k Setup
+├─ Comisión 30%: €79,200
+├─ Bonos premium: €14,400
+└─ TOTAL AÑO 1: €93,600
+
+SIN EQUIPO, pero nicho premium
+€/hora: €90 (alta especialización)
+</code></pre>
+<h3 id="caso-3-carlos---coordinador-regional-valencia-2-años">Caso 3: Carlos - Coordinador Regional Valencia (2 Años)</h3>
+<p><strong>Perfil:</strong></p>
+<ul>
+<li>Empezó como jefe equipo</li>
+<li>Año 2: Creó 3 equipos más (15 distribuidores total)</li>
+<li>Comisión red: 3%</li>
+</ul>
+<p><strong>Resultados año 2:</strong></p>
+<pre><code>├─ 3 equipos bajo su coordinación
+├─ Volumen total red: €2.4M Setup Fees
+├─ Comisión red (3%): €72,000
+├─ Ingresos propios: €180,000
+└─ TOTAL AÑO 2: €252,000
+
+Bonus: Stock options Bashood (pre-Series A)
+</code></pre>
+<hr>
+<h2 id="📃-contrato-y-términos">📃 CONTRATO Y TÉRMINOS</h2>
+<h3 id="acuerdo-distribuidor-bashood">Acuerdo Distribuidor Bashood</h3>
+<p><strong>Duración:</strong> 12 meses renovable automáticamente</p>
+<p><strong>Comisiones garantizadas:</strong></p>
+<ul>
+<li>30% Setup Fee ventas directas</li>
+<li>10% Setup Fee ventas equipo (si jefe)</li>
+<li>Pagos NET-15 (15 días tras cobro cliente)</li>
+</ul>
+<p><strong>Exclusividad:</strong> NO requerida (puedes vender otros productos)</p>
+<p><strong>Territorio:</strong> Sin límite geográfico (España completa disponible)</p>
+<p><strong>Formación:</strong> Incluida + soporte continuo</p>
+<p><strong>Material:</strong> Bashood provee todo digital (no costos iniciales)</p>
+<p><strong>Terminación:</strong> Cualquier parte puede terminar con 30 días aviso</p>
+<p><strong>Comisiones pendientes:</strong> Se pagan incluso tras terminación contrato</p>
+<hr>
+<h2 id="🎯-próximos-pasos">🎯 PRÓXIMOS PASOS</h2>
+<h3 id="¿listo-para-unirte-como-distribuidor-o-jefe-de-equipo">¿Listo para unirte como Distribuidor o Jefe de Equipo?</h3>
+<p><strong>PASO 1: Solicitud</strong>
+📧 Email: <a href="mailto:&#100;&#105;&#115;&#x74;&#x72;&#105;&#x62;&#x75;&#116;&#x6f;&#114;&#115;&#x40;&#x62;&#97;&#x73;&#x68;&#111;&#111;&#100;&#46;&#x69;&#111;">&#100;&#105;&#115;&#x74;&#x72;&#105;&#x62;&#x75;&#116;&#x6f;&#114;&#115;&#x40;&#x62;&#97;&#x73;&#x68;&#111;&#111;&#100;&#46;&#x69;&#111;</a>
+Asunto: &quot;Solicitud Distribuidor - [Tu Nombre] - [Ciudad]&quot;</p>
+<p>Incluir:</p>
+<ul>
+<li>CV resumido (1 página)</li>
+<li>Experiencia ventas B2B</li>
+<li>Red contactos sector (tamaño estimado)</li>
+<li>¿Quieres ser distribuidor individual o jefe equipo?</li>
+</ul>
+<p><strong>PASO 2: Call Selección (30 min)</strong></p>
+<ul>
+<li>Conocernos mutuamente</li>
+<li>Evaluar fit</li>
+<li>Resolver dudas</li>
+</ul>
+<p><strong>PASO 3: Onboarding (1 semana)</strong></p>
+<ul>
+<li>Firma contrato</li>
+<li>Acceso CRM + materiales</li>
+<li>Formación completa</li>
+</ul>
+<p><strong>PASO 4: Primera Venta (Mes 1)</strong></p>
+<ul>
+<li>Objetivo: €1,350+ comisión</li>
+<li>Soporte 1-1</li>
+<li>Celebrar éxito 🎉</li>
+</ul>
+<hr>
+<h2 id="❓-faq---preguntas-frecuentes">❓ FAQ - Preguntas Frecuentes</h2>
+<h3 id="¿necesito-experiencia-en-blockchain">¿Necesito experiencia en blockchain?</h3>
+<p><strong>NO.</strong> Bashood provee formación completa. Solo necesitas:</p>
+<ul>
+<li>Entender valor propuesta (activos reales + transparencia)</li>
+<li>Saber vender B2B</li>
+<li>Ganas de aprender</li>
+</ul>
+<h3 id="¿cuánto-tiempo-toma-primera-venta">¿Cuánto tiempo toma primera venta?</h3>
+<p><strong>30-90 días típico.</strong></p>
+<ul>
+<li>Prospección: 20-50 empresas contactadas</li>
+<li>Calls: 5-10 reuniones</li>
+<li>Cierre: 1-3 activos</li>
+</ul>
+<p>Más rápido si tienes red contactos previa.</p>
+<h3 id="¿qué-pasa-si-cliente-no-paga-setup-fee">¿Qué pasa si cliente no paga Setup Fee?</h3>
+<p><strong>No cobras comisión hasta que Bashood cobre.</strong></p>
+<ul>
+<li>Bashood gestiona cobros</li>
+<li>Tú NO asumes riesgo impago</li>
+<li>Comisión pagada NET-15 (tras cobro cliente)</li>
+</ul>
+<h3 id="¿puedo-ser-distribuidor-part-time">¿Puedo ser distribuidor part-time?</h3>
+<p><strong>SÍ.</strong></p>
+<ul>
+<li>Muchos distribuidores empiezan part-time</li>
+<li>10-20h/semana suficiente para 1-2 ventas/mes</li>
+<li>Escalas a full-time si quieres</li>
+</ul>
+<h3 id="¿necesito-oficina">¿Necesito oficina?</h3>
+<p><strong>NO.</strong> Trabajo 100% remoto:</p>
+<ul>
+<li>Reuniones clientes: Videollamadas o en sus oficinas</li>
+<li>CRM online acceso desde casa</li>
+<li>Material todo digital</li>
+</ul>
+<h3 id="¿bashood-compite-conmigo">¿Bashood compite conmigo?</h3>
+<p><strong>NO.</strong> Bashood NO vende directo a clientes.</p>
+<ul>
+<li>Todo canal va vía distribuidores</li>
+<li>No hay &quot;equipo ventas interno&quot; compitiendo</li>
+<li>Tu área geográfica protegida si generas volumen</li>
+</ul>
+<h3 id="¿comisiones-se-pagan-en-crypto">¿Comisiones se pagan en crypto?</h3>
+<p><strong>TÚ ELIGES:</strong></p>
+<ul>
+<li>EUR vía transferencia bancaria (SEPA)</li>
+<li>USDC/USDT (stablecoin)</li>
+<li>Mix (50% EUR, 50% crypto)</li>
+</ul>
+<p>Mayoría distribuidores prefiere EUR (simplicidad fiscal).</p>
+<h3 id="¿qué-pasa-si-mi-equipo-no-vende">¿Qué pasa si mi equipo no vende?</h3>
+<p><strong>No pierdes nada.</strong></p>
+<ul>
+<li>Tus comisiones directas (30%) NO dependen del equipo</li>
+<li>Comisión equipo (10%) solo si ellos venden</li>
+<li>Sin riesgo financiero para ti</li>
+</ul>
+<p>Peor caso: Ganas solo tus ventas (igual que distribuidor individual).</p>
+<hr>
+<h2 id="📊-calculadora-rápida">📊 CALCULADORA RÁPIDA</h2>
+<h3 id="¿cuánto-ganarás-según-tu-objetivo">¿Cuánto ganarás según tu objetivo?</h3>
+<p><strong>Completa:</strong></p>
+<ol>
+<li>¿Cuántas excavadoras (€150k) puedes tokenizar al mes? ____</li>
+<li>¿Cuántas grúas (€1.2M) puedes tokenizar al mes? ____</li>
+<li>¿Tendrás equipo? (SÍ/NO) ____</li>
+<li>Si SÍ, ¿cuántos distribuidores? ____</li>
+</ol>
+<p><strong>Fórmula simple:</strong></p>
+<pre><code class="language-javascript">// TUS VENTAS
+excavadasMes = 2;
+gruasMes = 0.5; // (1 cada 2 meses)
+
+tuComision = (excavadorasMes * 4500 * 0.30) + 
+             (gruasMes * 33000 * 0.30);
+
+// VENTAS EQUIPO (si jefe)
+equipoExcavadasMes = 5;
+equipoGruasMes = 1;
+
+equipoComision = (equipoExcavadasMes * 4500 * 0.10) + 
+                 (equipoGruasMes * 33000 * 0.10);
+
+// TOTAL
+totalMes = tuComision + equipoComision;
+totalAño = totalMes * 12;
+
+console.log(`Ganas al mes: €${totalMes}`);
+console.log(`Ganas al año: €${totalAño}`);
+</code></pre>
+<p><strong>Ejemplo resultado:</strong></p>
+<pre><code>Tú: 2 excavadoras/mes + 1 grúa cada 2 meses
+Equipo: 5 excavadoras/mes + 1 grúa/mes
+
+Ganas al mes: €9,525
+Ganas al año: €114,300 ✅
+</code></pre>
+<hr>
+<h2 id="✅-resumen-ejecutivo">✅ RESUMEN EJECUTIVO</h2>
+<p><strong>Oportunidad:</strong> Distribuidor oficial Bashood RWA</p>
+<p><strong>Producto:</strong> Tokenización activos industriales €50k-€5M</p>
+<p><strong>Comisiones:</strong></p>
+<ul>
+<li>Distribuidor: 30% Setup Fee (€1,350-€10,800/activo)</li>
+<li>Jefe Equipo: 30% tuyas + 10% equipo + bonos</li>
+</ul>
+<p><strong>Ingresos potenciales:</strong></p>
+<ul>
+<li>Distribuidor: €16k-€167k/año (según actividad)</li>
+<li>Jefe Equipo: €32k-€284k/año (con equipo 5 personas)</li>
+</ul>
+<p><strong>Inversión inicial:</strong> €300-800/mes (recuperas mes 1-2)</p>
+<p><strong>Soporte:</strong> Formación, CRM, materiales, coaching</p>
+<p><strong>Riesgo:</strong> BAJO (no compras stock, sin exclusividad obligatoria)</p>
+<p><strong>Próximo paso:</strong> Email a <a href="mailto:&#100;&#105;&#x73;&#x74;&#x72;&#x69;&#98;&#117;&#116;&#x6f;&#x72;&#115;&#64;&#98;&#x61;&#x73;&#x68;&#111;&#x6f;&#100;&#46;&#x69;&#x6f;">&#100;&#105;&#x73;&#x74;&#x72;&#x69;&#98;&#117;&#116;&#x6f;&#x72;&#115;&#64;&#98;&#x61;&#x73;&#x68;&#111;&#x6f;&#100;&#46;&#x69;&#x6f;</a></p>
+<hr>
+<p><strong>Preparado por:</strong> Bashood Partnerships Team<br><strong>Fecha:</strong> Febrero 2026<br><strong>Versión:</strong> 1.0<br><strong>Contacto:</strong> <a href="mailto:&#100;&#105;&#115;&#116;&#114;&#105;&#x62;&#x75;&#x74;&#x6f;&#x72;&#x73;&#x40;&#98;&#97;&#x73;&#104;&#111;&#x6f;&#x64;&#x2e;&#105;&#111;">&#100;&#105;&#115;&#116;&#114;&#105;&#x62;&#x75;&#x74;&#x6f;&#x72;&#x73;&#x40;&#98;&#97;&#x73;&#104;&#111;&#x6f;&#x64;&#x2e;&#105;&#111;</a><br><strong>WhatsApp:</strong> +34 XXX XXX XXX</p>
+<hr>
+<p><em>¿Listo para cambiar tu futuro financiero tokenizando el mundo real?</em></p>
+<p><strong>👉 Únete ahora:</strong> <a href="mailto:&#x64;&#105;&#115;&#116;&#114;&#x69;&#98;&#117;&#x74;&#x6f;&#114;&#x73;&#x40;&#98;&#x61;&#115;&#104;&#111;&#x6f;&#100;&#x2e;&#x69;&#111;">&#x64;&#105;&#115;&#116;&#114;&#x69;&#98;&#117;&#x74;&#x6f;&#114;&#x73;&#x40;&#98;&#x61;&#115;&#104;&#111;&#x6f;&#100;&#x2e;&#x69;&#111;</a></p>
+
+  </div>
+</body>
+</html>

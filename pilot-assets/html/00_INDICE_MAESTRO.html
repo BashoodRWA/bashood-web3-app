@@ -1,0 +1,804 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Índice Maestro</title>
+  <style>
+    @page {
+      size: A4;
+      margin: 20mm;
+    }
+    
+    * {
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-size: 11pt;
+      line-height: 1.6;
+      color: #333;
+      max-width: 210mm;
+      margin: 0 auto;
+      padding: 20px;
+      background: white;
+    }
+    
+    /* Portada */
+    .cover-page {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 80vh;
+      text-align: center;
+      page-break-after: always;
+    }
+    
+    .cover-page h1 {
+      font-size: 32pt;
+      color: #2c3e50;
+      margin-bottom: 30px;
+      border: none;
+    }
+    
+    .cover-page .project-name {
+      font-size: 18pt;
+      color: #7f8c8d;
+      margin: 20px 0;
+    }
+    
+    .cover-page .asset-name {
+      font-size: 16pt;
+      color: #95a5a6;
+      margin: 20px 0;
+    }
+    
+    .cover-page .date {
+      font-size: 14pt;
+      color: #bdc3c7;
+      margin-top: 60px;
+    }
+    
+    .cover-page .confidential {
+      font-size: 12pt;
+      color: #e74c3c;
+      margin-top: 40px;
+      font-weight: bold;
+    }
+    
+    /* Encabezados */
+    h1 {
+      color: #2c3e50;
+      border-bottom: 3px solid #3498db;
+      padding-bottom: 10px;
+      margin-top: 40px;
+      page-break-after: avoid;
+    }
+    
+    h2 {
+      color: #34495e;
+      border-bottom: 2px solid #95a5a6;
+      padding-bottom: 5px;
+      margin-top: 30px;
+      page-break-after: avoid;
+    }
+    
+    h3 {
+      color: #555;
+      margin-top: 25px;
+      page-break-after: avoid;
+    }
+    
+    h4 {
+      color: #666;
+      margin-top: 20px;
+    }
+    
+    /* Tablas */
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      margin: 20px 0;
+      page-break-inside: avoid;
+    }
+    
+    th, td {
+      border: 1px solid #ddd;
+      padding: 10px;
+      text-align: left;
+    }
+    
+    th {
+      background-color: #3498db;
+      color: white;
+      font-weight: bold;
+    }
+    
+    tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+    
+    /* Código */
+    code {
+      background-color: #f4f4f4;
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-family: 'Courier New', monospace;
+      font-size: 10pt;
+      color: #c7254e;
+    }
+    
+    pre {
+      background-color: #f4f4f4;
+      padding: 15px;
+      border-radius: 5px;
+      overflow-x: auto;
+      border-left: 4px solid #3498db;
+      page-break-inside: avoid;
+    }
+    
+    pre code {
+      background: none;
+      padding: 0;
+      color: #333;
+    }
+    
+    /* Blockquotes */
+    blockquote {
+      border-left: 4px solid #3498db;
+      padding-left: 15px;
+      margin-left: 0;
+      color: #555;
+      font-style: italic;
+      page-break-inside: avoid;
+    }
+    
+    /* Listas */
+    ul, ol {
+      margin: 15px 0;
+      padding-left: 30px;
+    }
+    
+    li {
+      margin: 8px 0;
+    }
+    
+    /* Checkboxes (tareas) */
+    input[type="checkbox"] {
+      margin-right: 8px;
+    }
+    
+    /* Enlaces */
+    a {
+      color: #3498db;
+      text-decoration: none;
+    }
+    
+    a:hover {
+      text-decoration: underline;
+    }
+    
+    /* Separadores */
+    hr {
+      border: none;
+      border-top: 2px solid #ecf0f1;
+      margin: 30px 0;
+    }
+    
+    /* Emojis y símbolos */
+    .emoji {
+      font-size: 1.2em;
+    }
+    
+    /* Page breaks */
+    .page-break {
+      page-break-after: always;
+    }
+    
+    /* Header y footer para impresión */
+    @media print {
+      body {
+        padding: 0;
+      }
+      
+      .no-print {
+        display: none;
+      }
+      
+      h1, h2, h3 {
+        page-break-after: avoid;
+      }
+      
+      table, pre, blockquote {
+        page-break-inside: avoid;
+      }
+      
+      /* Footer */
+      @page {
+        @bottom-right {
+          content: "Bashood RWA - 2026";
+          font-size: 9pt;
+          color: #bdc3c7;
+        }
+        
+        @bottom-left {
+          content: "Índice Maestro";
+          font-size: 9pt;
+          color: #bdc3c7;
+        }
+      }
+    }
+    
+    /* Instrucciones imprimir (solo pantalla) */
+    .print-instructions {
+      background: #fff3cd;
+      border: 2px solid #ffc107;
+      border-radius: 5px;
+      padding: 15px;
+      margin: 20px 0;
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      max-width: 300px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      z-index: 1000;
+    }
+    
+    @media print {
+      .print-instructions {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="print-instructions no-print">
+    <h4 style="margin-top:0; color:#856404">📄 Para generar PDF:</h4>
+    <ol style="margin:0; padding-left:20px; color:#856404">
+      <li>Presiona <strong>Ctrl+P</strong></li>
+      <li>Selecciona "Guardar como PDF"</li>
+      <li>Ajusta márgenes si es necesario</li>
+      <li>Guarda el archivo</li>
+    </ol>
+  </div>
+  
+  <div class="cover-page">
+    <h1>Índice Maestro</h1>
+    <div class="project-name">Proyecto Bashood RWA</div>
+    <div class="asset-name">Activo Piloto: Doosan DX360</div>
+    <div class="date">20 de febrero de 2026</div>
+    <div class="confidential">☑️ CONFIDENCIAL - Solo para uso del destinatario</div>
+  </div>
+  
+  <div class="content">
+    <h1 id="📁-documentación-piloto-doosan-dx360---índice-maestro">📁 Documentación Piloto Doosan DX360 - Índice Maestro</h1>
+<p><strong>Fecha creación:</strong> 20 Febrero 2026<br><strong>Proyecto:</strong> Bashood RWA - Activo Piloto<br><strong>Status:</strong> Fase preparación negociación</p>
+<hr>
+<h2 id="📊-resumen-ejecutivo">📊 Resumen Ejecutivo</h2>
+<p>Se ha preparado documentación completa para negociar tokenización de excavadora Doosan DX360 como activo piloto del proyecto Bashood RWA.</p>
+<p><strong>Objetivo:</strong> Validar modelo tokenización RWA con activo industrial real antes de escalar a múltiples activos.</p>
+<p><strong>Enfoque:</strong> Profesional, transparente, basado en datos reales (no especulación).</p>
+<hr>
+<h2 id="📄-documentos-creados">📄 Documentos Creados</h2>
+<h3 id="1-doosan-dx360-configjson">1. <a href="doosan-dx360-config.json">doosan-dx360-config.json</a></h3>
+<p><strong>Tipo:</strong> Configuración técnica (JSON)<br><strong>Contenido:</strong></p>
+<ul>
+<li>Especificaciones técnicas completas</li>
+<li>Datos operativos (horas, consumo, producción)</li>
+<li>Estructura costes detallada</li>
+<li>Escenarios ingresos (bajo/medio/alto)</li>
+<li>Parámetros tokenización (40%)</li>
+<li>Objetivos validación</li>
+</ul>
+<p><strong>Uso:</strong> Base de datos técnica para simulaciones y contratos.</p>
+<hr>
+<h3 id="2-scriptssimulate-doosan-dx360cjs">2. <a href="../scripts/simulate-doosan-dx360.cjs">scripts/simulate-doosan-dx360.cjs</a></h3>
+<p><strong>Tipo:</strong> Script simulación financiera (Node.js)<br><strong>Contenido:</strong></p>
+<ul>
+<li>Simulación 12 meses operación</li>
+<li>3 escenarios: bajo/medio/alto</li>
+<li>Cálculo ROI holders</li>
+<li>Distribución 60/40 (propietario/holders)</li>
+<li>Análisis breakeven</li>
+<li>Evaluación riesgo</li>
+</ul>
+<p><strong>Ejecución:</strong></p>
+<pre><code class="language-bash">node scripts/simulate-doosan-dx360.cjs
+</code></pre>
+<p><strong>Resultados clave:</strong></p>
+<ul>
+<li>Escenario MEDIO (€12k/mes): ROI 17% → VIABLE</li>
+<li>Escenario ALTO (€15k/mes): ROI 41% → ÓPTIMO</li>
+<li>Escenario BAJO (€8k/mes): Pérdida → NO VIABLE</li>
+</ul>
+<hr>
+<h3 id="3-due_diligence_checklistmd-⭐">3. <a href="DUE_DILIGENCE_CHECKLIST.md">DUE_DILIGENCE_CHECKLIST.md</a> ⭐</h3>
+<p><strong>Tipo:</strong> Checklist exhaustivo<br><strong>Longitud:</strong> 45 páginas<br><strong>Contenido:</strong></p>
+<h4 id="secciones-principales">Secciones principales:</h4>
+<ol>
+<li><p><strong>Datos del Activo (Técnicos)</strong></p>
+<ul>
+<li>Identificación (modelo, año, serie)</li>
+<li>Especificaciones técnicas</li>
+<li>Condición física (horas, estado, averías)</li>
+<li>Combustible (consumo, precio)</li>
+</ul>
+</li>
+<li><p><strong>Datos Financieros</strong></p>
+<ul>
+<li>Valoración activo</li>
+<li>Historial operativo ingresos (6 meses)</li>
+<li>Estructura costes reales</li>
+<li>Breakeven analysis</li>
+</ul>
+</li>
+<li><p><strong>Documentación Legal</strong></p>
+<ul>
+<li>Propiedad y titularidad</li>
+<li>Situación fiscal propietario</li>
+<li>Licencias y autorizaciones</li>
+<li>Seguros</li>
+</ul>
+</li>
+<li><p><strong>Datos del Propietario</strong></p>
+<ul>
+<li>Información contacto</li>
+<li>Motivación y expectativas</li>
+</ul>
+</li>
+<li><p><strong>Análisis Viabilidad</strong></p>
+<ul>
+<li>Checklist mínima aprobar (10 items)</li>
+<li>Red flags rechazo inmediato</li>
+<li>Scoring final (max 100 puntos)</li>
+</ul>
+</li>
+<li><p><strong>Guión Llamada Inicial</strong></p>
+<ul>
+<li>Estructura 60-90 min</li>
+<li>Preguntas específicas por sección</li>
+<li>Plantillas respuestas</li>
+</ul>
+</li>
+</ol>
+<p><strong>Uso crítico:</strong> </p>
+<ul>
+<li>Llevar IMPRESO en llamada con propietario</li>
+<li>Ir marcando respuestas en tiempo real</li>
+<li>NO proceder si &lt;80 puntos scoring</li>
+</ul>
+<hr>
+<h3 id="4-propuesta_tokenizacionmd-⭐">4. <a href="PROPUESTA_TOKENIZACION.md">PROPUESTA_TOKENIZACION.md</a> ⭐</h3>
+<p><strong>Tipo:</strong> Documento comercial para propietario<br><strong>Longitud:</strong> 30 páginas<br><strong>Contenido:</strong></p>
+<h4 id="secciones">Secciones:</h4>
+<ol>
+<li><p><strong>Resumen Ejecutivo</strong></p>
+<ul>
+<li>Qué es tokenización RWA (analogías simples)</li>
+<li>Beneficios para propietario</li>
+<li>Qué cambia vs qué NO cambia</li>
+</ul>
+</li>
+<li><p><strong>Modelo Financiero Propuesto</strong></p>
+<ul>
+<li>Valoración activo (€150k)</li>
+<li>Tokenización 40%</li>
+<li>Distribución beneficios 60/40</li>
+<li>Simulación 3 escenarios</li>
+</ul>
+</li>
+<li><p><strong>Estructura Legal y Seguridad</strong></p>
+<ul>
+<li>OPCIÓN A: Propiedad directa (simple)</li>
+<li>OPCIÓN B: SPV (profesional)</li>
+<li>Garantías mutuas</li>
+<li>Protecciones legales</li>
+</ul>
+</li>
+<li><p><strong>Transparencia y Reporting</strong></p>
+<ul>
+<li>Reportes mensuales (10 min/mes)</li>
+<li>Datos requeridos</li>
+<li>Publicación on-chain</li>
+</ul>
+</li>
+<li><p><strong>Timeline Propuesto</strong></p>
+<ul>
+<li>Fase 1: Due diligence (2-3 semanas)</li>
+<li>Fase 2: Estructura legal (3-4 semanas)</li>
+<li>Fase 3: Piloto testnet (1 mes)</li>
+<li>Fase 4: Mainnet (si exitoso)</li>
+</ul>
+</li>
+<li><p><strong>Beneficios Inmediatos</strong></p>
+<ul>
+<li>Liquidez sin venta (€60k)</li>
+<li>Reducción riesgo concentrado</li>
+<li>Valorización potencial</li>
+<li>Marca y credibilidad</li>
+</ul>
+</li>
+<li><p><strong>FAQ (14 preguntas)</strong></p>
+<ul>
+<li>¿Pierdo control? NO</li>
+<li>¿Qué pasa si avería? Protocolo</li>
+<li>¿Puedo deshacer? SÍ (condiciones)</li>
+<li>¿Es legal España? SÍ (MiCA)</li>
+<li>Etc.</li>
+</ul>
+</li>
+</ol>
+<p><strong>Uso:</strong> </p>
+<ul>
+<li>Enviar por email POST-llamada</li>
+<li>Acompañar con simulación financiera</li>
+<li>Base educación propietario</li>
+</ul>
+<hr>
+<h3 id="5-guion_llamadamd-⭐⭐⭐">5. <a href="GUION_LLAMADA.md">GUION_LLAMADA.md</a> ⭐⭐⭐</h3>
+<p><strong>Tipo:</strong> Guion detallado llamada<br><strong>Longitud:</strong> 40 páginas<br><strong>Contenido:</strong></p>
+<h4 id="estructura-llamada-90-minutos">Estructura llamada (90 minutos):</h4>
+<p><strong>FASE 0: Pre-Llamada (Preparación)</strong></p>
+<ul>
+<li>Checklist antes de llamar</li>
+<li>Investigación previa propietario</li>
+</ul>
+<p><strong>FASE 1: Introducción (10 min)</strong></p>
+<ul>
+<li>Saludo y contexto</li>
+<li>Explicación rápida tokenización (30 seg)</li>
+<li>Estructura llamada</li>
+</ul>
+<p><strong>FASE 2: Validación Técnica (20 min)</strong></p>
+<ul>
+<li>15 preguntas específicas:<ul>
+<li>P1-P5: Identificación activo</li>
+<li>P6-P10: Estado operativo</li>
+<li>P11-P15: Estado técnico</li>
+<li>P16-P19: Combustible</li>
+</ul>
+</li>
+</ul>
+<p><strong>FASE 3: Validación Financiera (25 min)</strong></p>
+<ul>
+<li>20 preguntas específicas:<ul>
+<li>P20-P25: Ingresos históricos</li>
+<li>P26-P28: Estructura costes</li>
+<li>Cálculo rentabilidad en vivo</li>
+</ul>
+</li>
+</ul>
+<p><strong>FASE 4: Documentación Legal (10 min)</strong></p>
+<ul>
+<li>11 preguntas específicas:<ul>
+<li>P29-P31: Propiedad</li>
+<li>P32-P35: Seguros y permisos</li>
+<li>P36-P38: Situación fiscal</li>
+</ul>
+</li>
+</ul>
+<p><strong>FASE 5: Expectativas (10 min)</strong></p>
+<ul>
+<li>8 preguntas específicas:<ul>
+<li>P39-P42: Motivación</li>
+<li>P43-P46: Comprensión modelo</li>
+</ul>
+</li>
+</ul>
+<p><strong>FASE 6: Simulación Financiera (10 min)</strong></p>
+<ul>
+<li>Mostrar números reales</li>
+<li>Tabla con distribución</li>
+</ul>
+<p><strong>FASE 7: Próximos Pasos (10 min)</strong></p>
+<ul>
+<li>Decisión: APROBAR / CONDICIONAL / RECHAZAR</li>
+<li>Templates comunicación según decisión</li>
+<li>Documentación enviar post-llamada</li>
+</ul>
+<p><strong>Extras:</strong></p>
+<ul>
+<li>Scorecard viabilidad (100 puntos)</li>
+<li>Red flags checklist</li>
+<li>Plantilla notas durante llamada</li>
+</ul>
+<p><strong>Uso crítico:</strong></p>
+<ul>
+<li>Seguir PASO A PASO durante llamada</li>
+<li>Ir anotando respuestas (numeradas P1-P46)</li>
+<li>NO improvisar (guion probado)</li>
+</ul>
+<hr>
+<h3 id="6-terminos_contractuales_borradormd">6. <a href="TERMINOS_CONTRACTUALES_BORRADOR.md">TERMINOS_CONTRACTUALES_BORRADOR.md</a></h3>
+<p><strong>Tipo:</strong> Borrador contrato<br><strong>Longitud:</strong> 35 páginas<br><strong>⚠️ ADVERTENCIA:</strong> NO vinculante, requiere revisión legal profesional</p>
+<h4 id="secciones-1">Secciones:</h4>
+<ol>
+<li><p><strong>Partes Contractuales</strong></p>
+<ul>
+<li>PROPIETARIO</li>
+<li>TOKENIZADOR (Bashood)</li>
+<li>HOLDERS (inversionistas)</li>
+</ul>
+</li>
+<li><p><strong>Objeto del Contrato</strong></p>
+<ul>
+<li>Activo a tokenizar (identificación)</li>
+<li>Porcentaje tokenizado (40%)</li>
+<li>Tokens emitidos (100k BHT-DX360)</li>
+</ul>
+</li>
+<li><p><strong>Derechos y Obligaciones</strong></p>
+<ul>
+<li>Derechos PROPIETARIO (5 categorías)</li>
+<li>Obligaciones PROPIETARIO (5 categorías)</li>
+<li>Derechos HOLDERS (4 categorías)</li>
+<li>Obligaciones HOLDERS (3 categorías)</li>
+<li>Responsabilidades TOKENIZADOR (3 categorías)</li>
+</ul>
+</li>
+<li><p><strong>Distribución Económica</strong></p>
+<ul>
+<li>Modelo distribución mensual</li>
+<li>Costes deducibles (✅ permitidos / ❌ prohibidos)</li>
+<li>Fondo reserva obligatorio (€5k)</li>
+</ul>
+</li>
+<li><p><strong>Condiciones Especiales</strong></p>
+<ul>
+<li>Duración contrato (3 años + renovación)</li>
+<li>Derecho preferente compra</li>
+<li>Transferencia activo físico</li>
+<li>Siniestro total / pérdida activo</li>
+<li>Incumplimiento contrato</li>
+</ul>
+</li>
+<li><p><strong>Aspectos Técnicos Blockchain</strong></p>
+<ul>
+<li>Smart contracts</li>
+<li>Treasury fee (0.5%)</li>
+<li>Burn mechanism (0.1%)</li>
+</ul>
+</li>
+<li><p><strong>Regulación y Compliance</strong></p>
+<ul>
+<li>Clasificación token (utility)</li>
+<li>KYC/AML</li>
+<li>Fiscal</li>
+</ul>
+</li>
+<li><p><strong>Resolución Disputas</strong></p>
+<ul>
+<li>Mediación</li>
+<li>Arbitraje</li>
+<li>Rescisión fuerza mayor</li>
+</ul>
+</li>
+</ol>
+<p><strong>Uso:</strong> </p>
+<ul>
+<li>Base negociación términos finales</li>
+<li>Enviar a abogado para redacción legal</li>
+<li>NO firmar sin revisión profesional</li>
+</ul>
+<hr>
+<h3 id="7-doosan-dx360-simulation-resultsjson">7. <a href="doosan-dx360-simulation-results.json">doosan-dx360-simulation-results.json</a></h3>
+<p><strong>Tipo:</strong> Resultados simulación (JSON)<br><strong>Contenido:</strong></p>
+<ul>
+<li>3 escenarios completos</li>
+<li>12 meses detallados por escenario</li>
+<li>ROI, yields, distribuciones</li>
+<li>Configuración usada</li>
+</ul>
+<p><strong>Uso:</strong> Adjuntar en email propietario (datos técnicos).</p>
+<hr>
+<h2 id="🎯-flujo-de-trabajo-recomendado">🎯 Flujo de Trabajo Recomendado</h2>
+<h3 id="antes-de-la-llamada-2-3-días">Antes de la Llamada (2-3 días):</h3>
+<ol>
+<li><p>✅ <strong>Investigar propietario</strong></p>
+<ul>
+<li>LinkedIn, web empresa</li>
+<li>Google nombre + &quot;excavadora&quot; / &quot;construcción&quot;</li>
+<li>Identificar tipo negocio</li>
+</ul>
+</li>
+<li><p>✅ <strong>Preparar materiales</strong></p>
+<ul>
+<li>Imprimir DUE_DILIGENCE_CHECKLIST.md</li>
+<li>Tener GUION_LLAMADA.md abierto</li>
+<li>Preparar simulador Excel (opcional)</li>
+</ul>
+</li>
+<li><p>✅ <strong>Revisar documentos</strong></p>
+<ul>
+<li>Leer PROPUESTA_TOKENIZACION.md completo</li>
+<li>Memorizar FAQ principales</li>
+<li>Practicar explicación tokenización (30 seg)</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h3 id="durante-la-llamada-90-min">Durante la Llamada (90 min):</h3>
+<ol>
+<li>✅ <strong>Seguir GUION_LLAMADA.md</strong> (fases 1-7)</li>
+<li>✅ <strong>Anotar respuestas P1-P46</strong> en checklist</li>
+<li>✅ <strong>Calcular scoring final</strong> (sección 7)</li>
+<li>✅ <strong>Decidir:</strong> APROBAR / CONDICIONAL / RECHAZAR</li>
+</ol>
+<hr>
+<h3 id="post-llamada-24-horas">Post-Llamada (24 horas):</h3>
+<ol>
+<li><p>✅ <strong>Enviar email resumen</strong> con:</p>
+<ul>
+<li>Puntos clave discutidos</li>
+<li>NDA para firma</li>
+<li>PROPUESTA_TOKENIZACION.md (PDF)</li>
+<li>DUE_DILIGENCE_CHECKLIST.md (lista docs)</li>
+<li>doosan-dx360-simulation-results.json</li>
+</ul>
+</li>
+<li><p>✅ <strong>Deadline:</strong> 7 días para envío documentación</p>
+</li>
+<li><p>✅ <strong>Programar reunión seguimiento:</strong> 14 días</p>
+</li>
+</ol>
+<hr>
+<h3 id="due-diligence-14-días">Due Diligence (14 días):</h3>
+<ol>
+<li><p>✅ <strong>Recibir documentación</strong></p>
+<ul>
+<li>Facturas 6 meses</li>
+<li>Póliza seguro</li>
+<li>Factura compra</li>
+<li>Fotos activo</li>
+<li>Otros (ver checklist 7.1)</li>
+</ul>
+</li>
+<li><p>✅ <strong>Validar scoring final</strong> (≥80 aprobar)</p>
+</li>
+<li><p>✅ <strong>Decisión GO/NO-GO</strong></p>
+</li>
+</ol>
+<hr>
+<h3 id="si-aprobado-30-60-días">Si APROBADO (30-60 días):</h3>
+<ol>
+<li><p>✅ <strong>Redacción contrato legal</strong></p>
+<ul>
+<li>Base: TERMINOS_CONTRACTUALES_BORRADOR.md</li>
+<li>Contratar abogado especializado</li>
+<li>Negociar términos finales</li>
+</ul>
+</li>
+<li><p>✅ <strong>Estructura legal</strong></p>
+<ul>
+<li>Setup SPV (si opción B)</li>
+<li>O contrato directo (si opción A)</li>
+</ul>
+</li>
+<li><p>✅ <strong>Piloto testnet</strong></p>
+<ul>
+<li>Deploy contratos testnet</li>
+<li>Simular 1 mes operación real</li>
+<li>Validar distribuciones</li>
+</ul>
+</li>
+<li><p>✅ <strong>Mainnet</strong> (si exitoso)</p>
+<ul>
+<li>Deploy contratos mainnet</li>
+<li>Tokenización real</li>
+<li>Primera distribución beneficios</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h2 id="📊-datos-críticos-que-faltan">📊 Datos Críticos que FALTAN</h2>
+<p><strong>Según due diligence checklist, necesitamos:</strong></p>
+<h3 id="críticos-sin-estos-no-proceder">CRÍTICOS (sin estos NO proceder):</h3>
+<ul>
+<li><input disabled="" type="checkbox"> Año fabricación excavadora</li>
+<li><input disabled="" type="checkbox"> Número serie / bastidor</li>
+<li><input disabled="" type="checkbox"> Horas operativas actuales (horómetro)</li>
+<li><input disabled="" type="checkbox"> Facturas ingresos últimos 6 meses</li>
+<li><input disabled="" type="checkbox"> Factura compra original</li>
+<li><input disabled="" type="checkbox"> Póliza seguro vigente</li>
+<li><input disabled="" type="checkbox"> Certificado libre cargas/embargos</li>
+</ul>
+<h3 id="importantes-afectan-decisión">IMPORTANTES (afectan decisión):</h3>
+<ul>
+<li><input disabled="" type="checkbox"> Consumo combustible real (facturas)</li>
+<li><input disabled="" type="checkbox"> Historial mantenimiento (facturas taller)</li>
+<li><input disabled="" type="checkbox"> Estado físico validado (inspección o fotos)</li>
+<li><input disabled="" type="checkbox"> Contratos clientes vigentes/futuros</li>
+<li><input disabled="" type="checkbox"> Costes reales vs estimados</li>
+<li><input disabled="" type="checkbox"> Situación fiscal propietario</li>
+</ul>
+<h3 id="deseables-mejoran-análisis">DESEABLES (mejoran análisis):</h3>
+<ul>
+<li><input disabled="" type="checkbox"> Tasación profesional reciente</li>
+<li><input disabled="" type="checkbox"> Análisis aceite motor</li>
+<li><input disabled="" type="checkbox"> Historial horómetro mensual</li>
+<li><input disabled="" type="checkbox"> Certificado operador</li>
+</ul>
+<hr>
+<h2 id="✅-checklist-pre-negociación-completada">✅ Checklist Pre-Negociación Completada</h2>
+<table>
+<thead>
+<tr>
+<th>Documento</th>
+<th>Status</th>
+<th>Uso</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Configuración técnica</strong></td>
+<td>✅ Creado</td>
+<td>Base datos simulaciones</td>
+</tr>
+<tr>
+<td><strong>Script simulación</strong></td>
+<td>✅ Creado + Ejecutado</td>
+<td>Validar viabilidad financiera</td>
+</tr>
+<tr>
+<td><strong>Due diligence checklist</strong></td>
+<td>✅ Creado</td>
+<td>Recolectar datos llamada</td>
+</tr>
+<tr>
+<td><strong>Propuesta tokenización</strong></td>
+<td>✅ Creado</td>
+<td>Educar propietario</td>
+</tr>
+<tr>
+<td><strong>Guion llamada</strong></td>
+<td>✅ Creado</td>
+<td>Conducir negociación</td>
+</tr>
+<tr>
+<td><strong>Términos contractuales</strong></td>
+<td>✅ Borrador</td>
+<td>Base contrato legal</td>
+</tr>
+<tr>
+<td><strong>Resultados simulación</strong></td>
+<td>✅ Generados</td>
+<td>Adjuntar propuesta</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="🎯-próximos-pasos-inmediatos">🎯 Próximos Pasos Inmediatos</h2>
+<h3 id="ahora">AHORA:</h3>
+<ol>
+<li>✅ Revisar GUION_LLAMADA.md completo</li>
+<li>✅ Imprimir DUE_DILIGENCE_CHECKLIST.md</li>
+<li>✅ Practicar explicación tokenización (30 seg)</li>
+</ol>
+<h3 id="antes-de-llamar">ANTES DE LLAMAR:</h3>
+<ol start="4">
+<li>⏳ Investigar propietario (LinkedIn, web)</li>
+<li>⏳ Preparar simulador Excel (opcional)</li>
+<li>⏳ Revisar FAQ PROPUESTA_TOKENIZACION.md</li>
+</ol>
+<h3 id="durante-llamada">DURANTE LLAMADA:</h3>
+<ol start="7">
+<li>⏳ Seguir guion fase por fase</li>
+<li>⏳ Anotar respuestas P1-P46</li>
+<li>⏳ Calcular scoring final</li>
+</ol>
+<h3 id="post-llamada">POST-LLAMADA:</h3>
+<ol start="10">
+<li>⏳ Enviar email con materiales</li>
+<li>⏳ Seguimiento recepción documentación</li>
+<li>⏳ Decisión final GO/NO-GO</li>
+</ol>
+<hr>
+<h2 id="📞-información-de-contacto">📞 Información de Contacto</h2>
+<p><strong>Proyecto:</strong> Bashood RWA<br><strong>Email:</strong> <a href="mailto:contacto@bashood.io">contacto@bashood.io</a><br><strong>Documentación:</strong> GitHub/IPFS (post-mainnet)</p>
+<hr>
+<p><strong>Preparado por:</strong> Bashood Team<br><strong>Fecha:</strong> 20 Febrero 2026<br><strong>Versión:</strong> 1.0<br><strong>Status:</strong> Listo para negociación</p>
+
+  </div>
+</body>
+</html>

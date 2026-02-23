@@ -1,0 +1,938 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guion de Llamada</title>
+  <style>
+    @page {
+      size: A4;
+      margin: 20mm;
+    }
+    
+    * {
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-size: 11pt;
+      line-height: 1.6;
+      color: #333;
+      max-width: 210mm;
+      margin: 0 auto;
+      padding: 20px;
+      background: white;
+    }
+    
+    /* Portada */
+    .cover-page {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 80vh;
+      text-align: center;
+      page-break-after: always;
+    }
+    
+    .cover-page h1 {
+      font-size: 32pt;
+      color: #2c3e50;
+      margin-bottom: 30px;
+      border: none;
+    }
+    
+    .cover-page .project-name {
+      font-size: 18pt;
+      color: #7f8c8d;
+      margin: 20px 0;
+    }
+    
+    .cover-page .asset-name {
+      font-size: 16pt;
+      color: #95a5a6;
+      margin: 20px 0;
+    }
+    
+    .cover-page .date {
+      font-size: 14pt;
+      color: #bdc3c7;
+      margin-top: 60px;
+    }
+    
+    .cover-page .confidential {
+      font-size: 12pt;
+      color: #e74c3c;
+      margin-top: 40px;
+      font-weight: bold;
+    }
+    
+    /* Encabezados */
+    h1 {
+      color: #2c3e50;
+      border-bottom: 3px solid #3498db;
+      padding-bottom: 10px;
+      margin-top: 40px;
+      page-break-after: avoid;
+    }
+    
+    h2 {
+      color: #34495e;
+      border-bottom: 2px solid #95a5a6;
+      padding-bottom: 5px;
+      margin-top: 30px;
+      page-break-after: avoid;
+    }
+    
+    h3 {
+      color: #555;
+      margin-top: 25px;
+      page-break-after: avoid;
+    }
+    
+    h4 {
+      color: #666;
+      margin-top: 20px;
+    }
+    
+    /* Tablas */
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      margin: 20px 0;
+      page-break-inside: avoid;
+    }
+    
+    th, td {
+      border: 1px solid #ddd;
+      padding: 10px;
+      text-align: left;
+    }
+    
+    th {
+      background-color: #3498db;
+      color: white;
+      font-weight: bold;
+    }
+    
+    tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+    
+    /* Código */
+    code {
+      background-color: #f4f4f4;
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-family: 'Courier New', monospace;
+      font-size: 10pt;
+      color: #c7254e;
+    }
+    
+    pre {
+      background-color: #f4f4f4;
+      padding: 15px;
+      border-radius: 5px;
+      overflow-x: auto;
+      border-left: 4px solid #3498db;
+      page-break-inside: avoid;
+    }
+    
+    pre code {
+      background: none;
+      padding: 0;
+      color: #333;
+    }
+    
+    /* Blockquotes */
+    blockquote {
+      border-left: 4px solid #3498db;
+      padding-left: 15px;
+      margin-left: 0;
+      color: #555;
+      font-style: italic;
+      page-break-inside: avoid;
+    }
+    
+    /* Listas */
+    ul, ol {
+      margin: 15px 0;
+      padding-left: 30px;
+    }
+    
+    li {
+      margin: 8px 0;
+    }
+    
+    /* Checkboxes (tareas) */
+    input[type="checkbox"] {
+      margin-right: 8px;
+    }
+    
+    /* Enlaces */
+    a {
+      color: #3498db;
+      text-decoration: none;
+    }
+    
+    a:hover {
+      text-decoration: underline;
+    }
+    
+    /* Separadores */
+    hr {
+      border: none;
+      border-top: 2px solid #ecf0f1;
+      margin: 30px 0;
+    }
+    
+    /* Emojis y símbolos */
+    .emoji {
+      font-size: 1.2em;
+    }
+    
+    /* Page breaks */
+    .page-break {
+      page-break-after: always;
+    }
+    
+    /* Header y footer para impresión */
+    @media print {
+      body {
+        padding: 0;
+      }
+      
+      .no-print {
+        display: none;
+      }
+      
+      h1, h2, h3 {
+        page-break-after: avoid;
+      }
+      
+      table, pre, blockquote {
+        page-break-inside: avoid;
+      }
+      
+      /* Footer */
+      @page {
+        @bottom-right {
+          content: "Bashood RWA - 2026";
+          font-size: 9pt;
+          color: #bdc3c7;
+        }
+        
+        @bottom-left {
+          content: "Guion de Llamada";
+          font-size: 9pt;
+          color: #bdc3c7;
+        }
+      }
+    }
+    
+    /* Instrucciones imprimir (solo pantalla) */
+    .print-instructions {
+      background: #fff3cd;
+      border: 2px solid #ffc107;
+      border-radius: 5px;
+      padding: 15px;
+      margin: 20px 0;
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      max-width: 300px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      z-index: 1000;
+    }
+    
+    @media print {
+      .print-instructions {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="print-instructions no-print">
+    <h4 style="margin-top:0; color:#856404">📄 Para generar PDF:</h4>
+    <ol style="margin:0; padding-left:20px; color:#856404">
+      <li>Presiona <strong>Ctrl+P</strong></li>
+      <li>Selecciona "Guardar como PDF"</li>
+      <li>Ajusta márgenes si es necesario</li>
+      <li>Guarda el archivo</li>
+    </ol>
+  </div>
+  
+  <div class="cover-page">
+    <h1>Guion de Llamada</h1>
+    <div class="project-name">Proyecto Bashood RWA</div>
+    <div class="asset-name">Activo Piloto: Doosan DX360</div>
+    <div class="date">20 de febrero de 2026</div>
+    <div class="confidential">☑️ CONFIDENCIAL - Solo para uso del destinatario</div>
+  </div>
+  
+  <div class="content">
+    <h1 id="📋-guion-de-llamada-inicial---tokenización-doosan-dx360">📋 Guion de Llamada Inicial - Tokenización Doosan DX360</h1>
+<p><strong>Duración estimada:</strong> 60-90 minutos<br><strong>Objetivo:</strong> Recolectar información crítica + evaluar viabilidad + despertar interés</p>
+<hr>
+<h2 id="🎯-objetivos-de-la-llamada">🎯 Objetivos de la Llamada</h2>
+<p><strong>Primarios:</strong></p>
+<ol>
+<li>✅ Recolectar TODOS los datos del checklist due diligence</li>
+<li>✅ Evaluar disposición/comprensión propietario</li>
+<li>✅ Identificar red flags (motivos rechazo)</li>
+<li>✅ Acordar envío documentación (deadline 7 días)</li>
+</ol>
+<p><strong>Secundarios:</strong></p>
+<ul>
+<li>Educar sobre tokenización RWA</li>
+<li>Generar entusiasmo (pero expectativas realistas)</li>
+<li>Establecer confianza mutua</li>
+<li>Programar próxima reunión</li>
+</ul>
+<hr>
+<h2 id="🗣️-fase-0-pre-llamada-preparación">🗣️ FASE 0: Pre-Llamada (Preparación)</h2>
+<h3 id="checklist-antes-de-llamar">Checklist antes de llamar:</h3>
+<ul>
+<li><input disabled="" type="checkbox"> Leer propuesta tokenización completa</li>
+<li><input disabled="" type="checkbox"> Tener checklist due diligence impreso/abierto</li>
+<li><input disabled="" type="checkbox"> Tener simulación financiera lista</li>
+<li><input disabled="" type="checkbox"> Preparar NDA para enviar post-llamada</li>
+<li><input disabled="" type="checkbox"> Silenciar notificaciones (enfoque 100% llamada)</li>
+<li><input disabled="" type="checkbox"> Tener lápiz/papel para notas rápidas</li>
+<li><input disabled="" type="checkbox"> Grabar llamada (CON PERMISO previo)</li>
+</ul>
+<h3 id="datos-que-ya-debes-saber-investigar-antes">Datos que YA debes saber (investigar antes):</h3>
+<ul>
+<li><input disabled="" type="checkbox"> Nombre completo propietario/empresa</li>
+<li><input disabled="" type="checkbox"> Ubicación aproximada (ciudad/provincia)</li>
+<li><input disabled="" type="checkbox"> Tipo negocio (¿constructora? ¿alquiler maquinaria? ¿obras públicas?)</li>
+<li><input disabled="" type="checkbox"> LinkedIn/web empresa (si existe)</li>
+</ul>
+<hr>
+<h2 id="🗣️-fase-1-introducción-5-10-min">🗣️ FASE 1: Introducción (5-10 min)</h2>
+<h3 id="11-saludo-y-contexto">1.1 Saludo y Contexto</h3>
+<p><strong>GUION SUGERIDO:</strong></p>
+<pre><code>Buenos días/tardes [Nombre], soy [Tu Nombre] del proyecto Bashood.
+
+Gracias por aceptar esta llamada. Como te comenté por [email/WhatsApp], 
+estamos desarrollando un proyecto de tokenización de activos industriales 
+mediante blockchain, y creemos que tu excavadora Doosan DX360 podría ser 
+un excelente activo piloto.
+
+¿Te va bien que dediquemos unos 60-90 minutos a revisar esto en detalle?
+Voy a grabarlo para no perder información, ¿te parece bien?
+
+[ESPERAR CONFIRMACIÓN]
+
+Perfecto. Antes de empezar, ¿tienes alguna experiencia previa con 
+blockchain, criptomonedas o tokenización?
+
+[EVALUAR NIVEL CONOCIMIENTO]
+→ Si NO: &quot;Perfecto, te lo explico con ejemplos simples&quot;
+→ Si SÍ: &quot;Genial, eso facilitará la conversación&quot;
+</code></pre>
+<hr>
+<h3 id="12-explicación-rápida-tokenización-3-min">1.2 Explicación Rápida Tokenización (3 min)</h3>
+<p><strong>GUION SUGERIDO (usar analogía simple):</strong></p>
+<pre><code>Te explico el concepto en 30 segundos:
+
+Imagina que tu excavadora es un edificio de apartamentos.
+- Tú eres dueño del 100% → recibes 100% alquileres
+- Si vendes un apartamento (20%), sigues cobrando 80% alquileres
+- Pero ahora tienes liquidez (dinero del apartamento vendido)
+
+Tokenización es exactamente eso, pero con dos diferencias:
+1. En vez de vender a UNA persona, vendes a MUCHAS (tokens)
+2. Usamos blockchain (tecnología segura e inmutable)
+
+En tu caso, proponemos:
+- Tokenizar 40% de la excavadora (tú retienes 60%)
+- Tú sigues operándola 100% como siempre
+- 40% de beneficios van a inversionistas (token holders)
+- Tú recibes liquidez inmediata (~€60,000)
+
+¿Te suena interesante? ¿Alguna duda de entrada?
+
+[RESPONDER DUDAS BÁSICAS - MÁXIMO 2 MIN]
+</code></pre>
+<hr>
+<h3 id="13-estructura-de-la-llamada">1.3 Estructura de la Llamada</h3>
+<p><strong>GUION:</strong></p>
+<pre><code>Perfecto. La llamada tiene 4 partes:
+1. (20 min) Validar datos técnicos de tu excavadora
+2. (20 min) Revisar historial financiero (ingresos/costes)
+3. (10 min) Documentación legal necesaria
+4. (10 min) Tus expectativas y dudas
+
+Al final te muestro una simulación financiera con números reales 
+de cuánto ganarías tú y cuánto ganarían los inversionistas.
+
+¿Listo? Empecemos.
+</code></pre>
+<hr>
+<h2 id="🗣️-fase-2-validación-técnica-del-activo-15-20-min">🗣️ FASE 2: Validación Técnica del Activo (15-20 min)</h2>
+<h3 id="21-identificación-básica">2.1 Identificación Básica</h3>
+<p><strong>PREGUNTAS (ir anotando respuestas):</strong></p>
+<pre><code>P1: ¿Confirmas que es una Doosan DX360? ¿LC estándar o hay variante?
+    R: _______________________________________
+
+P2: ¿De qué año es? ¿La compraste nueva o usada?
+    R: Año ______ | Nueva/Usada: _______
+
+P3: ¿Tienes el número de serie o bastidor a mano?
+    R: _______________________________________
+    [Si no lo sabe: &quot;No hay problema, lo buscamos luego&quot;]
+
+P4: ¿Dónde está ubicada actualmente? ¿Obra fija o se mueve?
+    R: _______________________________________
+
+P5: ¿Es 100% tuya o hay financiación pendiente?
+    R: _______________________________________
+    [🚩 RED FLAG si hay préstamo activo]
+</code></pre>
+<hr>
+<h3 id="22-estado-operativo">2.2 Estado Operativo</h3>
+<p><strong>PREGUNTAS:</strong></p>
+<pre><code>P6: ¿Cuántas horas operativas tiene actualmente? (horómetro)
+    R: ________ horas
+    [🚩 RED FLAG si &gt;10,000 horas]
+
+P7: ¿Cuántos días al mes trabaja aproximadamente?
+    R: ________ días/mes (estimado _____ días/año)
+    [OBJETIVO: ~220 días/año = viable]
+
+P8: Horario típico de trabajo, ¿de cuántas horas?
+    R: De ___:___ a ___:___ (_____ horas efectivas)
+    [OBJETIVO: ~11h/día]
+
+P9: ¿Qué tipo de trabajo hace? ¿Movimiento tierras? ¿Canteras? ¿Carga camiones?
+    R: _______________________________________
+
+P10: En un día típico, ¿cuántas cargas hace? ¿Cuántos camiones?
+     R: ________ camiones/día × _____ m³/camión = _____ m³/día
+     [VALIDAR: ~264 camiones/día con 25m³ carga = 6,600m³]
+</code></pre>
+<hr>
+<h3 id="23-estado-técnico">2.3 Estado Técnico</h3>
+<p><strong>PREGUNTAS:</strong></p>
+<pre><code>P11: Del 1 al 10, ¿cómo calificarías el estado general de la máquina?
+     R: _____/10
+     [🚩 RED FLAG si &lt;5]
+
+P12: ¿Cuándo fue la última revisión técnica/mantenimiento grande?
+     R: Fecha __________ | Qué se hizo: _______________
+
+P13: ¿Ha tenido averías importantes en los últimos 2 años?
+     R: SÍ/NO | Si SÍ: Detalle __________________________
+     [🚩 RED FLAG si averías recurrentes motor/hidráulica]
+
+P14: ¿Cambio de aceite/filtros al día? ¿Cada cuánto lo haces?
+     R: Cada _______ horas | Último cambio: __________
+
+P15: ¿Alguna fuga hidráulica, problema motor, o estructural?
+     R: _______________________________________
+     [🚩 RED FLAG si problemas estructurales]
+</code></pre>
+<hr>
+<h3 id="24-combustible">2.4 Combustible</h3>
+<p><strong>PREGUNTAS:</strong></p>
+<pre><code>P16: ¿Cuántos litros de gasoil consume en un día típico?
+     R: ________ litros/día
+     [OBJETIVO: ~330L/día = 30L/h × 11h]
+
+P17: ¿A qué precio compras el gasoil actualmente?
+     R: €_____ /litro
+     [REFERENCIA: €1.45/L España 2026]
+
+P18: ¿Tienes contrato fijo con proveedor o compras suelto?
+     R: _______________________________________
+
+P19: ¿Quién paga el gasoil, tú o el cliente?
+     R: _______________________________________
+     [CRÍTICO: Si cliente paga → restar de costes]
+</code></pre>
+<hr>
+<h2 id="🗣️-fase-3-validación-financiera-20-25-min">🗣️ FASE 3: Validación Financiera (20-25 min)</h2>
+<h3 id="31-ingresos-históricos">3.1 Ingresos Históricos</h3>
+<p><strong>INTRODUCCIÓN:</strong></p>
+<pre><code>Ahora vamos con la parte financiera. 
+Necesito entender cuánto generas con esta excavadora.
+No te preocupes, todo es confidencial (firmaremos NDA).
+
+La idea es validar que tokenizar tiene sentido para ti económicamente.
+</code></pre>
+<p><strong>PREGUNTAS:</strong></p>
+<pre><code>P20: ¿Cuánto cobras aproximadamente AL MES con esta excavadora?
+     R: €________ /mes (bruto)
+     [🎯 OBJETIVO: ≥€12,000/mes = viable]
+     [🚩 RED FLAG: &lt;€10,000/mes = insostenible]
+
+P21: ¿Eso es estable o varía mucho mes a mes?
+     R: Estable / Variable
+     Si variable: Rango €_______ a €_______
+
+P22: ¿Tienes facturas de los últimos 6 meses a mano? ¿Me las podrías enviar?
+     R: SÍ/NO | Si SÍ: Confirmar envío en 7 días
+     [CRÍTICO: Sin facturas = rechazar tokenización]
+
+P23: ¿Trabajas con un cliente fijo o múltiples clientes?
+     R: _______________________________________
+     [RIESGO: Si cliente único → dependencia alta]
+
+P24: ¿Tienes contratos firmados para los próximos 3-6 meses?
+     R: SÍ/NO | Hasta _________ (fecha)
+     [🎯 IDEAL: Contratos ≥3 meses comprometidos]
+
+P25: ¿Cómo cobras? ¿Tarifa diaria? ¿Mensual? ¿Por producción?
+     R: _______________________________________
+</code></pre>
+<hr>
+<h3 id="32-estructura-de-costes">3.2 Estructura de Costes</h3>
+<p><strong>PREGUNTAS:</strong></p>
+<pre><code>P26: Aparte del gasoil, ¿qué otros costes fijos tienes?
+     
+     Seguro anual: €________ /año
+     [REFERENCIA: €3,000/año]
+     
+     Mantenimiento preventivo: €________ /año
+     [REFERENCIA: €10,000/año]
+     
+     Parking/almacenamiento: €________ /mes
+     [Si aplica]
+     
+     Transporte movimientos: €________ /año
+     [Si aplica]
+     
+     Otros: _______________________
+
+P27: ¿El operador lo pagas tú o lo paga el cliente?
+     R: _______________________________________
+     [Si TÚ pagas: €_______/mes → AÑADIR a costes]
+
+P28: ¿Tienes algún fondo de reserva para reparaciones imprevistas?
+     R: SÍ/NO | Monto: €_______
+     [🎯 RECOMENDADO: ≥€5,000 reserva]
+</code></pre>
+<hr>
+<h3 id="33-validación-rentabilidad">3.3 Validación Rentabilidad</h3>
+<p><strong>HACER CÁLCULO RÁPIDO EN VIVO:</strong></p>
+<pre><code>Perfecto [Nombre], déjame hacer un cálculo rápido...
+
+Ingresos mensuales:        €________ (P20)
+Combustible:              -€________ (P16 × P17)
+Mantenimiento (mensual):  -€________ (P26 / 12)
+Seguro (mensual):         -€________ (P26 / 12)
+Otros costes:             -€________
+─────────────────────────────────────
+BENEFICIO NETO:           €________
+
+Si tokenizamos 40%:
+- Tú recibes (60%):       €________  [valor × 0.6]
+- Token holders (40%):    €________  [valor × 0.4]
+
+[VALIDAR REACCIÓN]
+
+¿Esto tiene sentido para ti? ¿Es rentable actualmente?
+</code></pre>
+<p><strong>INTERPRETACIÓN:</strong></p>
+<ul>
+<li>✅ Si beneficio neto &gt;€2,000/mes: &quot;Excelente, esto es muy tokenizable&quot;</li>
+<li>🟡 Si beneficio €1,000-2,000/mes: &quot;Está justo, necesitamos validar&quot;</li>
+<li>❌ Si beneficio &lt;€1,000/mes: &quot;Honestamente, tal vez no sea momento de tokenizar&quot;</li>
+</ul>
+<hr>
+<h2 id="🗣️-fase-4-documentación-legal-10-min">🗣️ FASE 4: Documentación Legal (10 min)</h2>
+<h3 id="41-propiedad">4.1 Propiedad</h3>
+<p><strong>PREGUNTAS:</strong></p>
+<pre><code>P29: ¿Tienes la factura de compra original o contrato de compraventa?
+     R: SÍ/NO
+     [CRÍTICO: Sin esto, no proceder]
+
+P30: ¿Hay alguna carga, embargo o problema legal sobre la máquina?
+     R: _______________________________________
+     [🚩 RED FLAG: Si hay problema legal]
+
+P31: Si la compraste con financiación, ¿está totalmente pagada?
+     R: SÍ/NO | Si NO: Deuda pendiente €________
+     [🚩 RED FLAG: Si deuda activa]
+</code></pre>
+<hr>
+<h3 id="42-seguros-y-permisos">4.2 Seguros y Permisos</h3>
+<p><strong>PREGUNTAS:</strong></p>
+<pre><code>P32: ¿Tienes seguro vigente? ¿Con qué compañía?
+     R: Compañía _____________ | Póliza #_______
+     [CRÍTICO: Sin seguro = no tokenizar]
+
+P33: ¿El seguro cubre todo riesgo o solo responsabilidad civil?
+     R: _______________________________________
+
+P34: ¿Fecha de renovación del seguro?
+     R: ___/___/______
+     [Validar: no vence en próximos 3 meses]
+
+P35: ¿Necesitas algún permiso especial para operar? ¿Licencias?
+     R: _______________________________________
+</code></pre>
+<hr>
+<h3 id="43-situación-fiscal">4.3 Situación Fiscal</h3>
+<p><strong>PREGUNTAS (con tacto):</strong></p>
+<pre><code>P36: ¿Eres autónomo, empresa (SL), o persona física?
+     R: _______________________________________
+
+P37: ¿Estás al corriente de pagos con Hacienda y Seguridad Social?
+     R: SÍ/NO
+     [🚩 RED FLAG: Si deuda tributaria]
+     [EXPLICAR: &quot;No te preocupes, solo necesitamos validar que no hay problemas que bloqueen el proceso legal&quot;]
+
+P38: ¿La excavadora está en tu balance fiscal? ¿Declaras ingresos de ella?
+     R: _______________________________________
+</code></pre>
+<hr>
+<h2 id="🗣️-fase-5-expectativas-y-motivación-10-min">🗣️ FASE 5: Expectativas y Motivación (10 min)</h2>
+<h3 id="51-motivación">5.1 Motivación</h3>
+<p><strong>PREGUNTAS:</strong></p>
+<pre><code>P39: ¿Qué te motivaría a tokenizar? ¿Qué esperas conseguir?
+     R: _______________________________________
+     
+     [RESPUESTAS COMUNES Y TU REACCIÓN]
+     → &quot;Necesito liquidez&quot;: ✅ Buen motivo
+     → &quot;Quiero expandir negocio&quot;: ✅ Buen motivo
+     → &quot;Curiosidad blockchain&quot;: 🟡 OK pero educar
+     → &quot;Vender rápido&quot;: 🚩 Tokenización NO es venta
+
+P40: ¿Qué porcentaje estarías dispuesto a tokenizar?
+     R: _______%
+     [RECOMENDADO: 30-50%]
+     [🚩 RED FLAG: &gt;70% = pierde control]
+
+P41: ¿Por cuánto tiempo estarías comprometido? ¿2 años? ¿5 años?
+     R: _______ años
+     [MÍNIMO RECOMENDADO: 2 años]
+
+P42: ¿Te sientes cómodo con reporting mensual transparente?
+     R: SÍ/NO | Dudas: _______________________
+     [CRÍTICO: Si NO transparencia = no tokenizar]
+</code></pre>
+<hr>
+<h3 id="52-comprensión-del-modelo">5.2 Comprensión del Modelo</h3>
+<p><strong>VALIDAR ENTENDIMIENTO:</strong></p>
+<pre><code>Para asegurarme de que estamos en la misma página...
+
+P43: ¿Entiendes que seguirías operando la excavadora normalmente?
+     R: SÍ/NO
+
+P44: ¿Entiendes que solo compartes BENEFICIOS, no la máquina física?
+     R: SÍ/NO
+
+P45: ¿Entiendes que si un mes no hay beneficios, nadie cobra (ni tú ni holders)?
+     R: SÍ/NO
+
+P46: ¿Tienes alguna duda o preocupación específica?
+     R: _______________________________________
+</code></pre>
+<hr>
+<h2 id="🗣️-fase-6-simulación-financiera-10-min">🗣️ FASE 6: Simulación Financiera (10 min)</h2>
+<h3 id="mostrar-números-reales">Mostrar Números Reales</h3>
+<p><strong>GUION:</strong></p>
+<pre><code>Perfecto [Nombre]. Déjame mostrarte una simulación con TUS números reales.
+
+[ABRIR: doosan-dx360-simulation-results.json o Excel]
+
+Basándome en lo que me comentaste:
+- Ingresos: €______/mes
+- Costes: €______/mes
+- Beneficio neto: €______/mes
+
+Si tokenizamos 40%:
+
+ESCENARIO ANUAL:
+┌──────────────────────────────────────┐
+│ Ingresos anuales:      €_________   │
+│ Costes anuales:       -€_________   │
+│ Beneficio neto:        €_________   │
+│                                      │
+│ TÚ RECIBES (60%):      €_________   │
+│ HOLDERS (40%):         €_________   │
+│                                      │
+│ ROI HOLDERS:           _____%       │
+│ (muy competitivo si &gt;15%)            │
+└──────────────────────────────────────┘
+
+Además, al tokenizar recibes liquidez inmediata:
+→ 40% de €150,000 = €60,000
+
+Ese dinero lo puedes usar para:
+- Comprar segunda excavadora
+- Diversificar negocio
+- Reserva emergencias
+- Lo que tú decidas
+
+¿Cómo lo ves? ¿Tiene sentido para ti?
+</code></pre>
+<hr>
+<h2 id="🗣️-fase-7-próximos-pasos-10-min">🗣️ FASE 7: Próximos Pasos (10 min)</h2>
+<h3 id="71-resumen-de-viabilidad">7.1 Resumen de Viabilidad</h3>
+<p><strong>EVALUACIÓN RÁPIDA (mental):</strong></p>
+<pre><code>[REVISAR MENTALMENTE:]
+✅/❌ Ingresos ≥€12,000/mes
+✅/❌ Activo en buen estado (≥7/10)
+✅/❌ Libre de cargas/problemas legales
+✅/❌ Documentación disponible
+✅/❌ Propietario comprende modelo
+✅/❌ Propietario transparente/confiable
+
+DECISIÓN:
+→ Si 5-6 ✅: &quot;Proceder a due diligence&quot;
+→ Si 3-4 ✅: &quot;Condicional - resolver gaps&quot;
+→ Si &lt;3 ✅: &quot;Rechazar educadamente&quot;
+</code></pre>
+<hr>
+<h3 id="72-comunicar-decisión-preliminar">7.2 Comunicar Decisión Preliminar</h3>
+<p><strong>OPCIÓN A: VIABLE (5-6 ✅)</strong></p>
+<pre><code>[Nombre], esto se ve muy bien. 
+Creo que tu excavadora es perfecta para nuestro programa piloto.
+
+Los próximos pasos serían:
+
+1. (HOY) Te envío por email:
+   - NDA (acuerdo confidencialidad) para firmar
+   - Listado documentación necesaria
+   - Propuesta formal tokenización
+
+2. (7 DÍAS) Tú me envías:
+   - Facturas últimos 6 meses
+   - Póliza seguro
+   - Factura compra
+   - Fotos excavadora
+   - [otros docs críticos]
+
+3. (14 DÍAS) Nosotros:
+   - Validamos documentación
+   - Hacemos análisis viabilidad final
+   - Te damos respuesta GO/NO-GO
+
+4. (30 DÍAS) Si aprobado:
+   - Redactamos contrato tokenización
+   - Setup piloto testnet (simulación)
+   - Validamos todo funciona
+
+5. (60-90 DÍAS) Si piloto exitoso:
+   - Mainnet (tokenización real)
+   - Tú recibes €60,000 liquidez
+   - Comienza operación formal
+
+¿Te funciona este timeline?
+</code></pre>
+<hr>
+<p><strong>OPCIÓN B: CONDICIONAL (3-4 ✅)</strong></p>
+<pre><code>[Nombre], me gusta el proyecto, pero necesitamos resolver algunos puntos:
+
+GAPS IDENTIFICADOS:
+- [Listar 2-3 problemas específicos]
+  Ejemplo: &quot;Necesitamos ver facturas reales&quot;
+  Ejemplo: &quot;Ingresos están justo en el límite mínimo&quot;
+  Ejemplo: &quot;Falta validar estado técnico con inspección&quot;
+
+PROPUESTA:
+- Tú me envías documentación crítica (7 días)
+- Nosotros hacemos análisis detallado
+- Programamos segunda llamada en 2 semanas
+- Decidimos si proceder o no
+
+¿Te parece razonable?
+</code></pre>
+<hr>
+<p><strong>OPCIÓN C: NO VIABLE (&lt;3 ✅)</strong></p>
+<pre><code>[Nombre], te agradezco mucho el tiempo.
+
+Honestamente, después de revisar los números, creo que 
+AHORA NO es el mejor momento para tokenizar.
+
+[EXPLICAR RAZÓN ESPECÍFICA - SER HONESTO]
+Ejemplo: &quot;Tus ingresos actuales (€8k/mes) están por debajo 
+del mínimo viable (€12k/mes). Si tokenizamos ahora, ni tú 
+ni los inversionistas ganarían lo suficiente.&quot;
+
+SUGERENCIA:
+- [Dar consejo constructivo]
+  Ejemplo: &quot;Si consigues subir ingresos a €12-15k/mes, 
+  hablemos de nuevo en 6 meses&quot;
+  Ejemplo: &quot;Considera resolver [problema X] primero&quot;
+
+¿Tiene sentido para ti? ¿Alguna duda?
+
+[MANTENER PUERTA ABIERTA - NO QUEMAR PUENTE]
+&quot;Si la situación cambia, no dudes en contactarme de nuevo.&quot;
+</code></pre>
+<hr>
+<h3 id="73-documentación-a-enviar-post-llamada">7.3 Documentación a Enviar (Post-Llamada)</h3>
+<p><strong>ENVIAR en las siguientes 24 horas:</strong></p>
+<ul>
+<li><input disabled="" type="checkbox"> Email resumen llamada (puntos clave discutidos)</li>
+<li><input disabled="" type="checkbox"> NDA para firma (PDF)</li>
+<li><input disabled="" type="checkbox"> Propuesta tokenización formal (PDF)</li>
+<li><input disabled="" type="checkbox"> Checklist documentación requerida</li>
+<li><input disabled="" type="checkbox"> Simulación financiera (Excel o JSON)</li>
+<li><input disabled="" type="checkbox"> Calendario próximos pasos</li>
+</ul>
+<p><strong>TEMPLATE EMAIL:</strong></p>
+<pre><code>Asunto: Resumen llamada - Tokenización Doosan DX360
+
+Hola [Nombre],
+
+Gracias por la excelente llamada de hoy. 
+Adjunto encuentras:
+
+1. NDA (firmar y devolver antes de enviar docs)
+2. Propuesta formal tokenización
+3. Checklist documentación (deadline: [fecha])
+4. Simulación financiera con tus números
+
+Próximos pasos:
+- Tú: Firmar NDA + enviar docs (7 días)
+- Nosotros: Análisis viabilidad (7 días después)
+- Segunda reunión: [fecha propuesta]
+
+Cualquier duda, escríbeme.
+
+Saludos,
+[Tu nombre]
+Bashood RWA
+</code></pre>
+<hr>
+<h2 id="📊-post-llamada-scoring-y-decisión">📊 POST-LLAMADA: Scoring y Decisión</h2>
+<h3 id="scorecard-viabilidad">Scorecard Viabilidad</h3>
+<table>
+<thead>
+<tr>
+<th>Criterio</th>
+<th>Peso</th>
+<th>Puntos</th>
+<th>Notas</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Ingresos (≥€12k/mes)</strong></td>
+<td>30</td>
+<td>___/30</td>
+<td>P20</td>
+</tr>
+<tr>
+<td><strong>Estado activo (≥7/10)</strong></td>
+<td>20</td>
+<td>___/20</td>
+<td>P11</td>
+</tr>
+<tr>
+<td><strong>Horas operativas (&lt;8k)</strong></td>
+<td>10</td>
+<td>___/10</td>
+<td>P6</td>
+</tr>
+<tr>
+<td><strong>Documentación disponible</strong></td>
+<td>15</td>
+<td>___/15</td>
+<td>P22, P29, P32</td>
+</tr>
+<tr>
+<td><strong>Libre cargas/deudas</strong></td>
+<td>10</td>
+<td>___/10</td>
+<td>P30, P31</td>
+</tr>
+<tr>
+<td><strong>Propietario transparente</strong></td>
+<td>10</td>
+<td>___/10</td>
+<td>General</td>
+</tr>
+<tr>
+<td><strong>Comprensión modelo</strong></td>
+<td>5</td>
+<td>___/5</td>
+<td>P43-45</td>
+</tr>
+<tr>
+<td><strong>TOTAL</strong></td>
+<td>100</td>
+<td><strong>___/100</strong></td>
+<td></td>
+</tr>
+</tbody></table>
+<p><strong>Decisión:</strong></p>
+<ul>
+<li>✅ <strong>≥80 puntos:</strong> APROBAR - Proceder due diligence completa</li>
+<li>🟡 <strong>60-79 puntos:</strong> CONDICIONAL - Resolver gaps críticos</li>
+<li>❌ <strong>&lt;60 puntos:</strong> RECHAZAR - No viable para tokenización</li>
+</ul>
+<hr>
+<h2 id="🚩-red-flags-checklist">🚩 Red Flags Checklist</h2>
+<p><strong>RECHAZAR INMEDIATAMENTE si:</strong></p>
+<ul>
+<li><input disabled="" type="checkbox"> Activo con deuda/financiación no liquida (P31)</li>
+<li><input disabled="" type="checkbox"> Cargas, embargos o litigios (P30)</li>
+<li><input disabled="" type="checkbox"> Ingresos &lt;€8,000/mes (P20)</li>
+<li><input disabled="" type="checkbox"> Horas &gt;10,000 (fin vida útil) (P6)</li>
+<li><input disabled="" type="checkbox"> Sin seguro vigente (P32)</li>
+<li><input disabled="" type="checkbox"> Propietario con deuda fiscal (P37)</li>
+<li><input disabled="" type="checkbox"> Documentación propiedad dudosa (P29)</li>
+<li><input disabled="" type="checkbox"> Averías graves recurrentes (P13)</li>
+<li><input disabled="" type="checkbox"> Propietario no acepta transparencia (P42)</li>
+<li><input disabled="" type="checkbox"> Condición física &lt;5/10 (P11)</li>
+</ul>
+<p><strong>PAUSA/INVESTIGAR si:</strong></p>
+<ul>
+<li><input disabled="" type="checkbox"> Ingresos €10-12k/mes (límite mínimo)</li>
+<li><input disabled="" type="checkbox"> Cliente único (riesgo concentración)</li>
+<li><input disabled="" type="checkbox"> Sin historial &gt;6 meses validable</li>
+<li><input disabled="" type="checkbox"> Propietario no entiende bien el modelo</li>
+<li><input disabled="" type="checkbox"> Estacionalidad extrema (&gt;50% variación)</li>
+</ul>
+<hr>
+<h2 id="📝-notas-durante-llamada">📝 Notas Durante Llamada</h2>
+<p><strong>Template para anotar mientras hablas:</strong></p>
+<pre><code>LLAMADA: [Fecha] [Hora]
+DURACIÓN: _____ minutos
+
+DATOS PROPIETARIO:
+Nombre: _______________________________
+Empresa: ______________________________
+CIF/NIF: ______________________________
+Teléfono: _____________________________
+Email: ________________________________
+
+IMPRESIÓN GENERAL (1-10): _____/10
+
+VIBES:
+□ Transparente y confiable
+□ Profesional
+□ Conoce su negocio bien
+□ Abierto a innovación
+□ Escéptico pero educable
+□ Red flags detectados: _______________
+
+DECISIÓN PRELIMINAR:
+□ PROCEDER (go)
+□ CONDICIONAL (revisar gaps)
+□ RECHAZAR (no viable)
+
+PRÓXIMO PASO:
+________________________________
+
+DEADLINE DOCUMENTACIÓN: ___/___/____
+
+NOTAS ADICIONALES:
+_____________________________________
+_____________________________________
+_____________________________________
+</code></pre>
+<hr>
+<p><strong>Preparado por:</strong> Bashood RWA Team<br><strong>Versión:</strong> 1.0<br><strong>Fecha:</strong> 20 Febrero 2026</p>
+
+  </div>
+</body>
+</html>

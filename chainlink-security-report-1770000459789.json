@@ -1,0 +1,139 @@
+{
+  "timestamp": "2026-02-02T02:47:22.370Z",
+  "network": {
+    "name": "base-sepolia",
+    "chainId": 84532
+  },
+  "deployer": "0x6d0E714Ae688a5545A814952Bb54DbfFD9F2f217",
+  "tests": [
+    {
+      "category": "Oracle:ETH/USD",
+      "test": "Feed Description",
+      "status": "PASS",
+      "details": {
+        "description": "ETH / USD"
+      },
+      "timestamp": "2026-02-02T02:47:28.736Z"
+    },
+    {
+      "category": "Oracle:ETH/USD",
+      "test": "answeredInRound >= roundId",
+      "status": "PASS",
+      "details": {
+        "answeredInRound": "18446744073709775164",
+        "roundId": "18446744073709775164"
+      },
+      "timestamp": "2026-02-02T02:47:28.973Z"
+    },
+    {
+      "category": "Oracle:ETH/USD",
+      "test": "updatedAt != 0",
+      "status": "PASS",
+      "details": {
+        "updatedAt": "1770000356"
+      },
+      "timestamp": "2026-02-02T02:47:28.973Z"
+    },
+    {
+      "category": "Oracle:ETH/USD",
+      "test": "answer > 0",
+      "status": "PASS",
+      "details": {
+        "answer": "226738273332",
+        "priceUSD": "2267.38273332"
+      },
+      "timestamp": "2026-02-02T02:47:28.974Z"
+    },
+    {
+      "category": "Oracle:ETH/USD",
+      "test": "answeredInRound != 0",
+      "status": "PASS",
+      "details": {
+        "answeredInRound": "18446744073709775164"
+      },
+      "timestamp": "2026-02-02T02:47:28.974Z"
+    },
+    {
+      "category": "Oracle:ETH/USD",
+      "test": "Staleness Check (300s threshold)",
+      "status": "PASS",
+      "details": {
+        "dataAge": 92,
+        "threshold": 300
+      },
+      "timestamp": "2026-02-02T02:47:29.087Z"
+    },
+    {
+      "category": "Oracle:ETH/USD",
+      "test": "getLatestPrice() execution",
+      "status": "PASS",
+      "details": {
+        "txHash": "0x93dcf37626a573e76496f1635a89cdad1bfc14d3d4b52e0855876e9bdc3187d2"
+      },
+      "timestamp": "2026-02-02T02:47:35.512Z"
+    },
+    {
+      "category": "Oracle:ETH/USD",
+      "test": "Price consistency (wrapper vs aggregator)",
+      "status": "PASS",
+      "details": {
+        "wrapperPrice": "226738273332",
+        "aggregatorPrice": "226738273332"
+      },
+      "timestamp": "2026-02-02T02:47:35.627Z"
+    },
+    {
+      "category": "Oracle:ETH/USD",
+      "test": "lastValidAnswer updated",
+      "status": "PASS",
+      "details": {
+        "lastValidAnswer": "226738273332"
+      },
+      "timestamp": "2026-02-02T02:47:35.739Z"
+    },
+    {
+      "category": "Oracle:ETH/USD",
+      "test": "Historical rounds validation",
+      "status": "PASS",
+      "details": {
+        "validRounds": 10,
+        "invalidRounds": 0
+      },
+      "timestamp": "2026-02-02T02:47:36.911Z"
+    },
+    {
+      "category": "Oracle:ETH/USD",
+      "test": "Staleness threshold modification",
+      "status": "FAIL",
+      "details": {
+        "error": "replacement transaction underpriced"
+      },
+      "timestamp": "2026-02-02T02:47:38.280Z"
+    },
+    {
+      "category": "Oracle:ETH/USD",
+      "test": "Max change percentage modification",
+      "status": "FAIL",
+      "details": {
+        "error": "replacement transaction underpriced"
+      },
+      "timestamp": "2026-02-02T02:47:38.842Z"
+    },
+    {
+      "category": "Oracle:ETH/USD",
+      "test": "State consistency - multiple calls",
+      "status": "WARN",
+      "details": {
+        "callsCount": 0,
+        "pricesMatch": false
+      },
+      "timestamp": "2026-02-02T02:47:39.785Z"
+    }
+  ],
+  "summary": {
+    "total": 13,
+    "passed": 10,
+    "failed": 2,
+    "warnings": 1
+  }
+}

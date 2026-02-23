@@ -1,0 +1,39 @@
+WALLET ACTUALIZADA - BASE SEPOLIA TESTNET
+==========================================
+
+Fecha: 4 de Febrero 2026
+Estado: ✅ Configurada y lista
+
+NUEVA CONFIGURACIÓN:
+--------------------
+Clave Privada: 0xa2d6f1aa6249d9589239eba7a9624ac9245a50c4330f1555192909237accdab3
+Dirección Pública: 0x51023F043EAB1F4784128278cEA5a57ed98F5a68
+
+Balance actual en Base Sepolia: 0.0002 ETH
+Balance necesario: ~0.3 ETH
+
+FAUCETS PARA OBTENER MÁS ETH:
+------------------------------
+1. Superchain Faucet: https://app.optimism.io/faucet
+2. Bware Labs: https://bwarelabs.com/faucets/base-sepolia  
+3. LearnWeb3: https://learnweb3.io/faucets/base_sepolia
+
+NOTA IMPORTANTE:
+----------------
+Esta wallet es SOLO para testnet (Base Sepolia).
+Cuando pasemos a mainnet, crearemos wallets nuevas con multi-sig.
+
+DISTRIBUCIÓN DE FONDOS (PaymentSplitter):
+------------------------------------------
+Development (45%): 0x51023F043EAB1F4784128278cEA5a57ed98F5a68
+Operations  (25%): 0x70997970C51812dc3A010C7d01b50e0d17dc79C8
+Marketing   (20%): 0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC
+Treasury    (10%): 0xE4dE660B6EfD0241f827c0f17CEe721aC5F44afE
+
+VERIFICAR SALDO:
+----------------
+node -e "const ethers = require('ethers'); const provider = new ethers.JsonRpcProvider('https://sepolia.base.org'); provider.getBalance('0x51023F043EAB1F4784128278cEA5a57ed98F5a68').then(b => console.log('Balance:', ethers.formatEther(b), 'ETH'));"
+
+DESPLEGAR CUANDO TENGAS >= 0.3 ETH:
+------------------------------------
+npx hardhat run scripts/deploy-bashood-complete.js --network base-sepolia

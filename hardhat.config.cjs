@@ -24,17 +24,35 @@ module.exports = {
     hardhat: {
       allowUnlimitedContractSize: true
     },
+    // Fork de Base Mainnet para testing local con estado real
+    "base-fork": {
+      url: "http://127.0.0.1:8545",
+      forking: {
+        url: process.env.BASE_MAINNET_RPC || "https://mainnet.base.org",
+        enabled: true
+      },
+      chainId: 8453,
+      allowUnlimitedContractSize: true
+    },
     // Base Sepolia Testnet
     "base-sepolia": {
       url: process.env.BASE_SEPOLIA_RPC_URL || "https://sepolia.base.org",
       accounts: process.env.PRIVATE_KEY ? [process.env.PRIVATE_KEY] : [],
       chainId: 84532,
       gasPrice: 1000000000, // 1 gwei
+    },
+    // Base Mainnet (Production)
+    "base-mainnet": {
+      url: process.env.BASE_MAINNET_RPC || "https://mainnet.base.org",
+      accounts: process.env.BASE_MAINNET_PRIVATE_KEY ? [process.env.BASE_MAINNET_PRIVATE_KEY] : [],
+      chainId: 8453,
+      gasPrice: 1000000000, // 1 gwei
     }
   },
   etherscan: {
     apiKey: {
       baseSepolia: process.env.BASESCAN_API_KEY || "",
+      base: process.env.BASESCAN_API_KEY || "",
     },
     customChains: [
       {
@@ -43,6 +61,14 @@ module.exports = {
         urls: {
           apiURL: "https://api-sepolia.basescan.org/api",
           browserURL: "https://sepolia.basescan.org"
+        }
+      },
+      {
+        network: "base-mainnet",
+        chainId: 8453,
+        urls: {
+          apiURL: "https://api.basescan.org/api",
+          browserURL: "https://basescan.org"
         }
       }
     ]

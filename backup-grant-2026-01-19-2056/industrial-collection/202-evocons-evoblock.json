@@ -1,0 +1,470 @@
+{
+  "standard": "BASHOOD-RWA-1",
+  "version": "1.0.0",
+  "name": "EVOCONS EVOBLOCK System #001",
+  "description": "High-velocity motorized gantry system for advanced construction. The 'Swiss Army knife' of robotic construction, capable of concrete printing, block placement, and prefabricated component installation with integrated elevation system.",
+  "external_url": "https://bashood.com/assets/202",
+  "image": "ipfs://QmEVOBLOCK001MainImage",
+  "animation_url": "ipfs://QmEVOBLOCK001_360Video",
+  
+  "asset": {
+    "name": "EVOCONS EVOBLOCK System #001",
+    "category": "CONSTRUCTION_3D_PRINTER_GANTRY",
+    "subcategory": "MOTORIZED_GANTRY_MULTIFUNCTION",
+    "manufacturer": "EVOCONS",
+    "model": "EVOBLOCK",
+    "tags": ["3D_PRINTING", "CONSTRUCTION", "ROBOTICS", "GANTRY", "MULTI_PURPOSE"]
+  },
+  
+  "identification": {
+    "serialNumber": "EVOBLOCK-2024-ES-001",
+    "yearManufactured": 2024,
+    "countryOfOrigin": "ESP",
+    "internalAssetId": "BSH-202",
+    "previousOwners": []
+  },
+  
+  "specifications": {
+    "dimensions": {
+      "length": 12000,
+      "width": 10000,
+      "height": 3500,
+      "unit": "mm"
+    },
+    "weight": {
+      "value": 4500,
+      "unit": "kg"
+    },
+    "power": {
+      "consumption": 25,
+      "unit": "kW"
+    },
+    "loadCapacity": {
+      "value": 3000,
+      "unit": "kg",
+      "description": "Maximum load for integrated elevation system"
+    },
+    "displacementSpeed": {
+      "value": 40,
+      "unit": "m/min",
+      "description": "High-velocity positioning speed"
+    },
+    "printVolume": {
+      "x": 10,
+      "y": 10,
+      "z": 3,
+      "unit": "m",
+      "description": "Maximum construction envelope"
+    },
+    "materialType": "CONCRETE",
+    "autoLubrication": true,
+    "features": [
+      "Automated block placement",
+      "Concrete extrusion",
+      "Prefab component handling",
+      "Self-lubricating system",
+      "Real-time load monitoring"
+    ]
+  },
+  
+  "financials": {
+    "purchasePrice": {
+      "value": 1200000,
+      "currency": "USD",
+      "date": "2024-03-15",
+      "note": "Mid-range configuration: $750k-$1.5M"
+    },
+    "currentValue": {
+      "value": 1110000,
+      "currency": "USD",
+      "lastAppraisal": "2026-01-10",
+      "appraisalMethod": "LOAD_BASED_DEPRECIATION"
+    },
+    "depreciationModel": "LOAD_BASED",
+    "residualValue": {
+      "percentage": 15,
+      "estimatedValue": 180000,
+      "currency": "USD",
+      "note": "Salvage value after reaching 500k tons lifetime: motors, servos, recyclable metals"
+    },
+    "insuranceValue": {
+      "value": 1150000,
+      "currency": "USD",
+      "annualPremium": 30000,
+      "premiumPercentage": 2.5,
+      "note": "2-3% of CAPEX annually for equipment breakdown coverage"
+    },
+    "maintenanceReserve": {
+      "percentage": 7,
+      "currentBalance": 84000,
+      "currency": "USD",
+      "note": "7% of annual rental income ($1.2M) reserved for maintenance"
+    }
+  },
+  
+  "operational": {
+    "status": "OPERATIONAL",
+    "operatingHours": 3200,
+    "maxLifetimeHours": 30000,
+    "usageMetrics": {
+      "totalLoadLifted": {
+        "current": 72000,
+        "max": 500000,
+        "unit": "ton",
+        "description": "Primary depreciation metric: tons elevated"
+      },
+      "blocksPlaced": 12500,
+      "concreteExtruded": {
+        "value": 450,
+        "unit": "m3"
+      },
+      "prefabComponentsHandled": 380
+    },
+    "lastMaintenance": "2025-12-20",
+    "nextMaintenanceRequired": "2026-03-15",
+    "maintenanceIntervalHours": 2500,
+    "maintenanceCostPercentage": 2.5,
+    "maintenanceHistory": [
+      {
+        "date": "2025-12-20",
+        "type": "PREVENTIVE",
+        "cost": 8500,
+        "provider": "EVOCONS Service España",
+        "notes": "Routine 2,500-hour service: lubrication system check, sensor calibration, actuator inspection"
+      },
+      {
+        "date": "2025-06-10",
+        "type": "CORRECTIVE",
+        "cost": 3200,
+        "provider": "EVOCONS Service España",
+        "notes": "Replaced nozzle assembly due to wear"
+      }
+    ],
+    "location": {
+      "facility": "Barcelona Construction Hub",
+      "address": "Polígon Industrial Gran Via Sud, Barcelona",
+      "city": "Barcelona",
+      "country": "Spain",
+      "gps": {
+        "latitude": 41.3486,
+        "longitude": 2.1147
+      },
+      "mobile": false
+    }
+  },
+  
+  "certifications": {
+    "required": [
+      {
+        "name": "CE_MARK",
+        "issueDate": "2024-03-01",
+        "expiryDate": "2029-03-01",
+        "issuingBody": "TÜV Rheinland",
+        "documentHash": "QmCertEVOCONS_CE_2024"
+      },
+      {
+        "name": "ISO_9001",
+        "issueDate": "2024-02-15",
+        "expiryDate": "2027-02-15",
+        "issuingBody": "AENOR",
+        "documentHash": "QmCertEVOCONS_ISO9001"
+      },
+      {
+        "name": "ISO_14001",
+        "issueDate": "2024-02-15",
+        "expiryDate": "2027-02-15",
+        "issuingBody": "AENOR",
+        "documentHash": "QmCertEVOCONS_ISO14001"
+      }
+    ],
+    "optional": [
+      "EN 1090 (Structural steel certification)",
+      "UNE-EN 13670 (Concrete execution)"
+    ]
+  },
+  
+  "insurance": {
+    "provider": "AXA Industrial Equipment Insurance",
+    "policyNumber": "AXA-IND-ESP-2024-00182",
+    "type": "EQUIPMENT_BREAKDOWN",
+    "coverage": {
+      "value": 1150000,
+      "currency": "USD"
+    },
+    "annualPremium": {
+      "value": 30000,
+      "currency": "USD",
+      "percentageOfCAPEX": 2.5
+    },
+    "expiryDate": "2026-03-14",
+    "coverageDetails": [
+      "Equipment breakdown",
+      "Software malfunction",
+      "Structural failure liability",
+      "Third-party property damage"
+    ]
+  },
+  
+  "telemetry": {
+    "provider": "EVOCONS_REALTIME",
+    "apiEndpoint": "https://api.evocons.com/realtime/EVOBLOCK-2024-ES-001",
+    "apiKeyEncrypted": "encrypted_evocons_api_key_bashood_001",
+    "metrics": [
+      {
+        "name": "currentLoad",
+        "updateFrequency": "REALTIME",
+        "lastValue": 1850,
+        "lastUpdate": "2026-01-16T09:30:00Z",
+        "unit": "kg"
+      },
+      {
+        "name": "totalLoadLifted",
+        "updateFrequency": "REALTIME",
+        "lastValue": 72000,
+        "lastUpdate": "2026-01-16T09:30:00Z",
+        "unit": "ton"
+      },
+      {
+        "name": "positioningCycles",
+        "updateFrequency": "HOURLY",
+        "lastValue": 15800,
+        "lastUpdate": "2026-01-16T09:00:00Z"
+      },
+      {
+        "name": "operatingHours",
+        "updateFrequency": "REALTIME",
+        "lastValue": 3200,
+        "lastUpdate": "2026-01-16T09:30:00Z"
+      }
+    ],
+    "oracleIntegration": {
+      "chainlinkNode": true,
+      "oracleAddress": "0x742d35Cc6634C0532925a3b844c0112c8c7d6008",
+      "verificationMethod": "SIGNED_DATA_FEED",
+      "updateFrequency": "DAILY"
+    }
+  },
+  
+  "tokenization": {
+    "strategy": "FRACTIONAL",
+    "fractional": {
+      "totalShares": 1000,
+      "minInvestment": {
+        "value": 1200,
+        "currency": "USD",
+        "note": "$1.2M / 1000 shares"
+      },
+      "revenueSharePercentage": 85,
+      "note": "85% of rental income distributed to token holders, 15% to maintenance reserve"
+    },
+    "revenueModel": {
+      "dailyRentalRate": {
+        "value": 3500,
+        "currency": "USD"
+      },
+      "monthlyRentalRate": {
+        "value": 95000,
+        "currency": "USD"
+      },
+      "utilizationRate": 75,
+      "annualRevenue": {
+        "estimated": 855000,
+        "currency": "USD",
+        "note": "$95k/month * 12 * 0.75 utilization"
+      },
+      "distributionFrequency": "MONTHLY",
+      "nextDistribution": "2026-02-01"
+    },
+    "maintenanceReservePct": 7
+  },
+  
+  "esg": {
+    "carbonFootprint": {
+      "annualTonsCO2": 18.5,
+      "offsetPercentage": 100,
+      "note": "25 kW * 3200 hours/year * 0.5 kg CO2/kWh grid mix Spain"
+    },
+    "wasteReduction": 35,
+    "energyEfficiency": "B",
+    "greenBondEligible": false,
+    "sustainabilityCertifications": [
+      "ISO 14001 (Environmental Management)"
+    ],
+    "socialImpact": {
+      "jobsCreated": 8,
+      "safetyScore": 98,
+      "trainingHoursProvided": 240
+    }
+  },
+  
+  "secondaryMarket": {
+    "marketExists": true,
+    "averageRetentionRate": 62,
+    "liquidityScore": 7,
+    "comparableSales": [
+      {
+        "saleDate": "2025-09-15",
+        "salePrice": 720000,
+        "age": 2.5,
+        "condition": "GOOD",
+        "note": "EVOBLOCK Standard sold in secondary market after 2.5 years"
+      }
+    ],
+    "demandIndicators": {
+      "europeMarket": "HIGH",
+      "emergingMarkets": "MEDIUM",
+      "typicalTimeToSale": "3-6 months"
+    }
+  },
+  
+  "documentation": {
+    "images": [
+      "ipfs://QmEVOBLOCK001_Front",
+      "ipfs://QmEVOBLOCK001_Side",
+      "ipfs://QmEVOBLOCK001_Control",
+      "ipfs://QmEVOBLOCK001_InOperation"
+    ],
+    "manuals": [
+      "ipfs://QmEVOBLOCK_UserManual_EN",
+      "ipfs://QmEVOBLOCK_UserManual_ES",
+      "ipfs://QmEVOBLOCK_MaintenanceGuide"
+    ],
+    "certificates": [
+      "ipfs://QmCertEVOCONS_CE_2024",
+      "ipfs://QmCertEVOCONS_ISO9001",
+      "ipfs://QmCertEVOCONS_ISO14001"
+    ],
+    "inspectionReports": [
+      {
+        "date": "2026-01-05",
+        "inspector": "Juan Rodríguez, EVOCONS Certified Technician",
+        "result": "PASS",
+        "documentHash": "QmInspection_EVOBLOCK001_2026Q1",
+        "notes": "All systems operational. Load sensors calibrated. Lubrication system functioning optimally."
+      },
+      {
+        "date": "2025-10-12",
+        "inspector": "María López, Independent Engineer",
+        "result": "PASS",
+        "documentHash": "QmInspection_EVOBLOCK001_2025Q4"
+      }
+    ],
+    "technicalDrawings": [
+      "ipfs://QmEVOBLOCK_ElectricalSchematic",
+      "ipfs://QmEVOBLOCK_HydraulicDiagram"
+    ],
+    "videos": [
+      {
+        "title": "EVOBLOCK in Action - Block Placement",
+        "url": "ipfs://QmEVOBLOCK_Demo_Blocks",
+        "duration": 180
+      },
+      {
+        "title": "EVOBLOCK - Concrete Extrusion Demo",
+        "url": "ipfs://QmEVOBLOCK_Demo_Concrete",
+        "duration": 240
+      }
+    ]
+  },
+  
+  "ownership": {
+    "legalOwner": "Bashood Protocol DAO",
+    "custodian": "Barcelona Construction Hub S.L.",
+    "tokenized": true,
+    "tokenContract": "0x742d35Cc6634C0532925a3b844c0112c8c7d6008",
+    "tokenId": 202,
+    "blockchain": "BASE",
+    "chainId": 8453
+  },
+  
+  "attributes": [
+    {
+      "trait_type": "Manufacturer",
+      "value": "EVOCONS"
+    },
+    {
+      "trait_type": "Model",
+      "value": "EVOBLOCK"
+    },
+    {
+      "trait_type": "Category",
+      "value": "Construction 3D Printer (Gantry)"
+    },
+    {
+      "trait_type": "Year Manufactured",
+      "value": 2024,
+      "display_type": "number"
+    },
+    {
+      "trait_type": "Load Capacity",
+      "value": 3000,
+      "display_type": "number",
+      "trait_suffix": " kg"
+    },
+    {
+      "trait_type": "Displacement Speed",
+      "value": 40,
+      "display_type": "number",
+      "trait_suffix": " m/min"
+    },
+    {
+      "trait_type": "Purchase Price",
+      "value": 1200000,
+      "display_type": "number",
+      "trait_suffix": " USD"
+    },
+    {
+      "trait_type": "Current Value",
+      "value": 1110000,
+      "display_type": "number",
+      "trait_suffix": " USD"
+    },
+    {
+      "trait_type": "Operating Hours",
+      "value": 3200,
+      "display_type": "number"
+    },
+    {
+      "trait_type": "Total Load Lifted",
+      "value": 72000,
+      "display_type": "number",
+      "trait_suffix": " tons"
+    },
+    {
+      "trait_type": "Remaining Life",
+      "value": 85.6,
+      "display_type": "number",
+      "trait_suffix": " %"
+    },
+    {
+      "trait_type": "Depreciation Model",
+      "value": "Load-Based"
+    },
+    {
+      "trait_type": "Auto Lubrication",
+      "value": "Yes"
+    },
+    {
+      "trait_type": "Real-Time Telemetry",
+      "value": "Yes"
+    },
+    {
+      "trait_type": "Tokenization Strategy",
+      "value": "Fractional (1000 shares)"
+    },
+    {
+      "trait_type": "Annual Revenue (Estimated)",
+      "value": 855000,
+      "display_type": "number",
+      "trait_suffix": " USD"
+    },
+    {
+      "trait_type": "Certifications",
+      "value": "CE Mark, ISO 9001, ISO 14001"
+    },
+    {
+      "trait_type": "Rarity",
+      "value": "LEGENDARY"
+    }
+  ]
+}

@@ -1,0 +1,2078 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BASHOOD - Programa Profesional Comercialización - Completo v2.1</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 2cm;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #1f2937;
+            background: #ffffff;
+            max-width: 210mm;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Portada */
+        .cover-header {
+            text-align: center;
+            padding: 60px 0;
+            border-bottom: 4px solid #16a34a;
+            margin-bottom: 40px;
+        }
+
+        .cover-title {
+            font-size: 32px;
+            font-weight: bold;
+            color: #16a34a;
+            margin-bottom: 20px;
+        }
+
+        .cover-subtitle {
+            font-size: 20px;
+            color: #15803d;
+            margin-bottom: 30px;
+        }
+
+        .cover-meta {
+            font-size: 14px;
+            color: #6b7280;
+        }
+
+        /* Headings */
+        h1 {
+            color: #16a34a;
+            font-size: 28px;
+            margin: 40px 0 20px 0;
+            padding-bottom: 10px;
+            border-bottom: 4px solid #22c55e;
+            page-break-after: avoid;
+        }
+
+        h2 {
+            color: #15803d;
+            font-size: 22px;
+            margin: 35px 0 15px 0;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #86efac;
+            page-break-after: avoid;
+        }
+
+        h3 {
+            color: #166534;
+            font-size: 18px;
+            margin: 25px 0 12px 0;
+            page-break-after: avoid;
+        }
+
+        h4 {
+            color: #14532d;
+            font-size: 16px;
+            margin: 20px 0 10px 0;
+            page-break-after: avoid;
+        }
+
+        /* Párrafos */
+        p {
+            margin: 12px 0;
+            text-align: justify;
+        }
+
+        /* Listas */
+        ul, ol {
+            margin: 15px 0;
+            padding-left: 30px;
+        }
+
+        li {
+            margin: 8px 0;
+        }
+
+        /* Tablas */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 13px;
+            page-break-inside: avoid;
+        }
+
+        thead {
+            background: linear-gradient(135deg, #16a34a 0%, #22c55e 100%);
+            color: white;
+        }
+
+        th {
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+            border: 1px solid #16a34a;
+        }
+
+        td {
+            padding: 10px 12px;
+            border: 1px solid #d1d5db;
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: #f0fdf4;
+        }
+
+        tbody tr:hover {
+            background-color: #dcfce7;
+        }
+
+        /* Código */
+        code {
+            background: #f3f4f6;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            color: #dc2626;
+        }
+
+        pre {
+            background: #1f2937;
+            color: #f9fafb;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 20px 0;
+            page-break-inside: avoid;
+        }
+
+        pre code {
+            background: transparent;
+            color: #f9fafb;
+            padding: 0;
+        }
+
+        /* Blockquotes */
+        blockquote {
+            border-left: 4px solid #16a34a;
+            padding-left: 20px;
+            margin: 20px 0;
+            font-style: italic;
+            color: #4b5563;
+        }
+
+        /* Líneas horizontales */
+        hr {
+            border: none;
+            border-top: 2px solid #e5e7eb;
+            margin: 30px 0;
+        }
+
+        /* Cajas de advertencia */
+        .warning-box {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border-left: 6px solid #f59e0b;
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 4px;
+            page-break-inside: avoid;
+        }
+
+        .warning-box strong {
+            color: #92400e;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        /* Emojis en encabezados */
+        h1::before,
+        h2::before,
+        h3::before {
+            margin-right: 8px;
+        }
+
+        /* Links */
+        a {
+            color: #16a34a;
+            text-decoration: none;
+            border-bottom: 1px dotted #16a34a;
+        }
+
+        a:hover {
+            color: #15803d;
+            border-bottom: 1px solid #15803d;
+        }
+
+        /* Strong y emphasis */
+        strong {
+            color: #166534;
+            font-weight: 600;
+        }
+
+        em {
+            font-style: italic;
+            color: #374151;
+        }
+
+        /* Checkbox items */
+        li:has(input[type="checkbox"]) {
+            list-style: none;
+            margin-left: -20px;
+        }
+
+        input[type="checkbox"] {
+            margin-right: 8px;
+        }
+
+        /* Success boxes */
+        .success-box {
+            background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+            border-left: 6px solid #16a34a;
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 4px;
+            page-break-inside: avoid;
+        }
+
+        /* Imágenes */
+        img {
+            max-width: 100%;
+            height: auto;
+            margin: 20px 0;
+        }
+
+        /* Footer página */
+        .page-footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 50px;
+            background: #f9fafb;
+            border-top: 2px solid #16a34a;
+            text-align: center;
+            padding: 15px;
+            font-size: 12px;
+            color: #6b7280;
+        }
+
+        /* Print styles */
+        @media print {
+            body {
+                max-width: 100%;
+                padding: 0;
+            }
+
+            .page-footer {
+                position: fixed;
+                bottom: 0;
+            }
+
+            h1, h2, h3, h4, h5, h6 {
+                page-break-after: avoid;
+            }
+
+            table, figure, pre, blockquote {
+                page-break-inside: avoid;
+            }
+
+            .warning-box,
+            .success-box {
+                page-break-inside: avoid;
+            }
+
+            /* Asegurar que las advertencias se impriman con fondo */
+            * {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+        }
+
+        /* Detección de advertencias para styling especial */
+        p:has(strong:first-child) {
+            font-weight: 500;
+        }
+
+        /* Secciones especiales */
+        .index-section {
+            background: #f0fdf4;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        /* Dividers de partes */
+        h1[id*="parte"] {
+            background: linear-gradient(135deg, #16a34a 0%, #22c55e 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            border: none;
+            margin: 50px 0 30px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="cover-header">
+        <div class="cover-title">🤝 PROGRAMA PROFESIONAL DE COMERCIALIZACIÓN BASHOOD RWA</div>
+        <div class="cover-subtitle">Distribución de Servicios de Tokenización de Activos Industriales</div>
+        <div class="cover-meta">
+            <p><strong>Versión:</strong> 2.1 (Completa - Revisión Legal y Regulatoria)</p>
+            <p><strong>Fecha:</strong> Febrero 2026</p>
+            <p><strong>Contacto:</strong> distributors@bashood.io</p>
+        </div>
+    </div>
+
+    <h1 id="🤝-programa-profesional-de-comercialización-bashood-rwa">🤝 PROGRAMA PROFESIONAL DE COMERCIALIZACIÓN BASHOOD RWA</h1>
+<h2 id="distribución-de-servicios-de-tokenización-de-activos-industriales">Distribución de Servicios de Tokenización de Activos Industriales</h2>
+<p><strong>Versión:</strong> 2.1 (Completa - Revisión Legal y Regulatoria)<br><strong>Fecha:</strong> Febrero 2026<br><strong>Contacto:</strong> <a href="mailto:&#x64;&#x69;&#115;&#x74;&#114;&#x69;&#98;&#x75;&#116;&#111;&#114;&#x73;&#x40;&#98;&#x61;&#115;&#104;&#x6f;&#111;&#100;&#x2e;&#x69;&#111;">&#x64;&#x69;&#115;&#x74;&#114;&#x69;&#98;&#x75;&#116;&#111;&#114;&#x73;&#x40;&#98;&#x61;&#115;&#104;&#x6f;&#111;&#100;&#x2e;&#x69;&#111;</a></p>
+<hr>
+<h2 id="📋-índice-ejecutivo">📋 ÍNDICE EJECUTIVO</h2>
+<h3 id="parte-1-bashood---plataforma-y-servicios">PARTE 1: BASHOOD - PLATAFORMA Y SERVICIOS</h3>
+<ol>
+<li>Elevator Pitch y Propuesta de Valor</li>
+<li>¿Qué es BASHOOD?</li>
+<li>Problema que Resolvemos</li>
+<li>Servicios de Tokenización Ofrecidos</li>
+<li>Activos Objetivo y Roadmap</li>
+<li>Modelos de Financiación</li>
+<li>Tecnología y Plataforma Técnica</li>
+<li>Casos de Uso Reales</li>
+<li>Información para Inversores</li>
+<li>Información para Constructoras</li>
+<li>Información para Fabricantes</li>
+</ol>
+<h3 id="parte-2-programa-distribuidor">PARTE 2: PROGRAMA DISTRIBUIDOR</h3>
+<ol start="12">
+<li>Resumen Ejecutivo Programa Distribuidor</li>
+<li>Marco Legal y Responsabilidades</li>
+<li>Estructura de Comisiones (2 Niveles)</li>
+<li>Escenarios de Ingresos Ilustrativos</li>
+<li>Herramientas y Soporte</li>
+<li>Proceso de Incorporación</li>
+<li>Preguntas Frecuentes</li>
+<li>Próximos Pasos</li>
+</ol>
+<hr>
+<h1 id="parte-1-bashood---plataforma-y-servicios-1">PARTE 1: BASHOOD - PLATAFORMA Y SERVICIOS</h1>
+<h2 id="🚀-1-elevator-pitch-30-segundos">🚀 1. ELEVATOR PITCH (30 SEGUNDOS)</h2>
+<p>BASHOOD democratiza el acceso a maquinaria industrial de construcción avanzada mediante tokenización en blockchain. </p>
+<p><strong>Convertimos robots de construcción 3D de $1.2M en activos digitales fraccionables, permitiendo que:</strong></p>
+<ul>
+<li><strong>Inversores</strong> accedan desde $100 a equipos que antes requerían $1M+</li>
+<li><strong>Constructoras PyME</strong> alquilen por proyecto o compren fracciones sin deuda bancaria</li>
+<li><strong>Fabricantes</strong> amplíen mercado 10x sin asumir riesgo crediticio</li>
+</ul>
+<p><strong>Ya desplegado:</strong> Base Blockchain (Coinbase) con $10.485M en activos tokenizados en testnet.</p>
+<hr>
+<h2 id="🏗️-2-¿qué-es-bashood">🏗️ 2. ¿QUÉ ES BASHOOD?</h2>
+<h3 id="plataforma-de-tokenización-de-activos-industriales">Plataforma de Tokenización de Activos Industriales</h3>
+<p>BASHOOD es una plataforma de tokenización de activos industriales que utiliza blockchain para crear un mercado eficiente, transparente y accesible de maquinaria de construcción avanzada.</p>
+<p><strong>Nuestra Misión:</strong><br>Democratizar el acceso a tecnología de construcción sostenible (impresoras 3D industriales, robots multifuncionales, fábricas modulares) eliminando barreras financieras tradicionales.</p>
+<p><strong>Tecnología Base:</strong></p>
+<ul>
+<li>Blockchain: Base L2 (Coinbase infrastructure)</li>
+<li>Estándar: BASHOOD-RWA-1 (ERC-721 extendido)</li>
+<li>Almacenamiento: IPFS descentralizado</li>
+<li>Oráculos: Chainlink integration para telemetría real-time</li>
+</ul>
+<hr>
+<h2 id="⚠️-3-problema-que-resolvemos">⚠️ 3. PROBLEMA QUE RESOLVEMOS</h2>
+<table>
+<thead>
+<tr>
+<th>Problema Tradicional</th>
+<th>Solución BASHOOD</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Capital inicial:</strong> $1M-$5M por equipo</td>
+<td><strong>Fractional ownership:</strong> Inversión desde $100</td>
+</tr>
+<tr>
+<td><strong>Liquidez cero:</strong> Vender equipos toma 6-12 meses</td>
+<td><strong>Trading 24/7:</strong> Mercado secundario instantáneo</td>
+</tr>
+<tr>
+<td><strong>Opacidad:</strong> Documentación papel</td>
+<td><strong>Transparencia:</strong> Registro blockchain inmutable</td>
+</tr>
+<tr>
+<td><strong>Intermediarios caros:</strong> Brokers cobran 10-15%</td>
+<td><strong>Directo:</strong> Smart contracts, 0 intermediarios</td>
+</tr>
+<tr>
+<td><strong>Acceso geográfico limitado</strong></td>
+<td><strong>Global:</strong> Cualquier wallet compatible</td>
+</tr>
+<tr>
+<td><strong>Financiación lenta:</strong> Aprobación bancaria 4-6 meses</td>
+<td><strong>Rápido:</strong> Fractional funding 2-4 semanas</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="🛠️-4-servicios-de-tokenización-ofrecidos">🛠️ 4. SERVICIOS DE TOKENIZACIÓN OFRECIDOS</h2>
+<h3 id="41-tokenización-de-activos-industriales">4.1 Tokenización de Activos Industriales</h3>
+<p><strong>Descripción:</strong><br>Convertimos maquinaria industrial en NFTs ERC-721 cumpliendo con BASHOOD-RWA-1. La metadata se almacena en IPFS y los smart contracts son auditables públicamente.</p>
+<p><strong>Incluye:</strong></p>
+<ul>
+<li>Valuación técnica del activo</li>
+<li>Auditoría de especificaciones</li>
+<li>Generación de metadata IPFS</li>
+<li>Deploy en Base Blockchain</li>
+<li>Integración oracle telemetría</li>
+<li>Dashboard administración</li>
+</ul>
+<p><strong>Precio:</strong> Setup Fee 3% del valor del activo<br><em>(Ver Justificación Técnica en sección 13.2)</em></p>
+<hr>
+<h3 id="42-plataforma-fractional-ownership">4.2 Plataforma Fractional Ownership</h3>
+<p><strong>Descripción:</strong><br>Permite comprar fracciones de activos industriales desde $100. Construye portfolio diversificado y recibe dividendos automáticos.</p>
+<p><strong>Características:</strong></p>
+<ul>
+<li>Cumplimiento KYC/AML</li>
+<li>Pagos multi-moneda (ETH, USDC)</li>
+<li>Reporting automático</li>
+<li>Acceso global 50+ países</li>
+<li>Trading 24/7 mercado secundario</li>
+</ul>
+<p><strong>Comisión:</strong> 2.5% por transacción</p>
+<hr>
+<h3 id="43-micro-leasing-digital">4.3 Micro-Leasing Digital</h3>
+<p><strong>Descripción:</strong><br>Alquila maquinaria tokenizada por periodos cortos (7-90 días) mediante smart contracts auto-ejecutables, sin trámites bancarios.</p>
+<p><strong>Ventajas:</strong></p>
+<ul>
+<li>Sin aprobación bancaria</li>
+<li>Contratos inteligentes automáticos</li>
+<li>Seguro on-chain incluido</li>
+<li>Duración flexible</li>
+</ul>
+<p><strong>Tarifa:</strong> 1% fee operativo + 5% revenue share sobre ingresos generados</p>
+<hr>
+<h3 id="44-performance-bonds">4.4 Performance Bonds</h3>
+<p><strong>Descripción:</strong><br>Oportunidades de inversión con ROI vinculado a métricas reales de rendimiento del activo verificadas por Chainlink Oracle.</p>
+<p><strong>Métricas clave:</strong></p>
+<ul>
+<li>Output productivo (m³/día)</li>
+<li>Eficiencia energética</li>
+<li>Reducción CO₂</li>
+<li>Uptime operativo</li>
+</ul>
+<p><strong>Inversión mínima:</strong> $10,000<br><strong>Retornos estimados:</strong> 12-18% anual<br><strong>Verificación:</strong> Chainlink Oracle telemetría</p>
+<hr>
+<h3 id="45-servicios-técnicos-para-fabricantes">4.5 Servicios Técnicos para Fabricantes</h3>
+<p><strong>Incluye:</strong></p>
+<ul>
+<li>Integración API telemetría</li>
+<li>Desarrollo smart contracts customizados</li>
+<li>Auditoría técnica completa</li>
+<li>Soporte legal tokenización</li>
+<li>Estrategias marketing digital</li>
+</ul>
+<p><strong>Precio:</strong> Desde $15,000 según complejidad</p>
+<hr>
+<h2 id="🏭-5-activos-objetivo-y-roadmap">🏭 5. ACTIVOS OBJETIVO Y ROADMAP</h2>
+<h3 id="51-activos-primarios-activos-actuales">5.1 Activos Primarios (Activos Actuales)</h3>
+<h4 id="impresoras-3d-gantry-sistema-fijo">Impresoras 3D Gantry (Sistema Fijo)</h4>
+<p><strong>Modelos:</strong></p>
+<ul>
+<li>EVOCONS EVOBLOCK: $1.2M</li>
+<li>ICON VULCAN: $1.6M</li>
+</ul>
+<p><strong>Especificaciones:</strong></p>
+<ul>
+<li>Sistema: Instalación permanente</li>
+<li>Capacidad: 300-1,000 m² área impresión</li>
+<li>Producción: 30-100 m³/semana</li>
+<li>Altura: 3-8 metros</li>
+<li>Velocidad extrusión: 100-300 mm/s</li>
+<li>Precisión: ±2-5 mm</li>
+<li>Materiales: Hormigón/mortero/composites</li>
+<li>Potencia: 50-150 kW</li>
+<li>Operarios: 2-4 personas</li>
+<li>Vida útil: 500,000 tons carga levantada</li>
+<li>Depreciación: LOAD_BASED</li>
+</ul>
+<hr>
+<h4 id="impresoras-3d-móviles-portátiles">Impresoras 3D Móviles (Portátiles)</h4>
+<p><strong>Modelos:</strong></p>
+<ul>
+<li>Apis Cor Mobile Robot: $325k</li>
+<li>CyBe RC Track Robot: $240k</li>
+</ul>
+<p><strong>Especificaciones:</strong></p>
+<ul>
+<li>Área: 100-400 m²</li>
+<li>Peso: 2-8 tons</li>
+<li>Transporte: Contenedor 20ft</li>
+<li>Setup: 30-90 minutos</li>
+<li>Autonomía: 8-12h batería</li>
+<li>GPS tracking integrado</li>
+<li>Operarios: 2-3 personas</li>
+<li>Vida útil: 2,000 setups</li>
+<li>Depreciación: SETUP_BASED</li>
+</ul>
+<hr>
+<h4 id="fábricas-modulares-uv">Fábricas Modulares UV</h4>
+<p><strong>Modelos:</strong></p>
+<ul>
+<li>Mighty Buildings Factory Line: $5.2M</li>
+</ul>
+<p><strong>Especificaciones:</strong></p>
+<ul>
+<li>Output: 500-2,000 paneles/mes</li>
+<li>Dimensiones paneles: 2x4 metros</li>
+<li>Certificaciones: LEED/Passive House</li>
+<li>Consumo energético: 80% solar</li>
+<li>Superficie requerida: 5,000-20,000 m²</li>
+<li>Personal: 15-40 operarios</li>
+<li>Características: Curado UV, zero waste, carbon negative</li>
+<li>Depreciación: LINEAR</li>
+</ul>
+<hr>
+<h3 id="52-activos-roadmap-futuro">5.2 Activos Roadmap (Futuro)</h3>
+<table>
+<thead>
+<tr>
+<th>Categoría</th>
+<th>Ejemplos</th>
+<th>Valor</th>
+<th>Timeline</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Vehículos pesados</strong></td>
+<td>Excavadoras, grúas</td>
+<td>$200k-$800k</td>
+<td>Q3 2026</td>
+</tr>
+<tr>
+<td><strong>Equipos energía</strong></td>
+<td>Generadores, transformadores</td>
+<td>$500k-$2M</td>
+<td>Q4 2026</td>
+</tr>
+<tr>
+<td><strong>Infraestructura logística</strong></td>
+<td>Containers, almacenes modulares</td>
+<td>$100k-$5M</td>
+<td>2027</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="💰-6-modelos-de-financiación">💰 6. MODELOS DE FINANCIACIÓN</h2>
+<h3 id="61-modelo-1-fractional-ownership">6.1 MODELO 1: Fractional Ownership</h3>
+<p><strong>Ejemplo: EVOBLOCK Gantry Printer ($1.2M)</strong></p>
+<p><strong>Estructura:</strong></p>
+<ul>
+<li>Fraccionamiento: 1,000 shares × $1,200/share</li>
+<li>Inversores retail: 50 inversores ($1,000-$5,000)</li>
+<li>Inversores institucionales: 10 inversores ($20,000-$50,000)</li>
+<li>Family offices: 2 inversores ($100,000)</li>
+<li>Recaudación total: $1.2M en 3-4 semanas</li>
+</ul>
+<p><strong>Distribución Revenue:</strong></p>
+<pre><code>Revenue mensual (alquiler):        $18,000
+Menos costos operativos:           -$3,000
+Menos fee plataforma (2.5%):         -$375
+────────────────────────────────────────────
+= Revenue neto:                    $14,625
+
+Distribuido entre 1,000 shares:
+$14.625/share/mes = 14.6% ROI anual
+</code></pre>
+<p><strong>Ejemplo Inversor Retail:</strong></p>
+<ul>
+<li>Inversión: $3,600 (3 shares)</li>
+<li>Revenue mensual: $43.87</li>
+<li>Revenue anual: $526.50</li>
+<li>ROI: 14.6%</li>
+</ul>
+<hr>
+<h3 id="62-modelo-2-micro-leasing-por-proyecto">6.2 MODELO 2: Micro-Leasing por Proyecto</h3>
+<p><strong>Caso: Constructora PyME necesita imprimir 200 m² vivienda</strong></p>
+<p><strong>Proceso:</strong></p>
+<ol>
+<li>Alquiler EVOBLOCK: $2,500/día × 14 días</li>
+<li>Deposita $35,000 en smart contract</li>
+<li>Robot entregado + capacitación (2 días)</li>
+<li>Proyecto ejecutado (10 días)</li>
+<li>Robot devuelto + inspección (2 días)</li>
+<li>Smart contract libera pago automáticamente</li>
+</ol>
+<p><strong>Ventajas Constructora:</strong></p>
+<ul>
+<li>Sin trámites bancarios</li>
+<li>Seguro incluido</li>
+<li>Soporte 24/7</li>
+<li>Acceso sin capital inicial</li>
+<li>Testeo antes de compra</li>
+</ul>
+<p><strong>Ventajas Fabricante:</strong></p>
+<ul>
+<li>Revenue recurrente</li>
+<li>Mayor utilización activos (70% vs 40%)</li>
+<li>Pipeline ampliado</li>
+<li>Datos telemetría reales</li>
+</ul>
+<hr>
+<h3 id="63-modelo-3-performance-bonds">6.3 MODELO 3: Performance Bonds</h3>
+<p><strong>Ejemplo: CyBe RC Printer</strong></p>
+<p><strong>Estructura:</strong></p>
+<ul>
+<li>Inversión: $50,000</li>
+<li>Plazo: 12 meses</li>
+<li>Métrica: m³ hormigón/día</li>
+<li>Baseline: 8 m³/día</li>
+<li>Target: 12 m³/día</li>
+</ul>
+<p><strong>ROI Escalonado:</strong></p>
+<ul>
+<li>ROI base: 10% ($5,000)</li>
+<li>Bonus 10-12 m³/día: +3%</li>
+<li>Bonus &gt;12 m³/día: +5%</li>
+</ul>
+<p><strong>Ejemplo Rendimiento Anual:</strong></p>
+<pre><code>Q1 (11.2 m³/día): +3% bonus = $1,375
+Q2 (12.8 m³/día): +5% bonus = $1,625
+Q3 (11.9 m³/día): +3% bonus = $1,375
+Q4 (13.1 m³/día): +5% bonus = $1,625
+────────────────────────────────────
+Total anual: $6,000
+ROI final: 12% vs 10% base
+</code></pre>
+<p><strong>Pago:</strong> Trimestral automático vía smart contract<br><strong>Verificación:</strong> Chainlink Oracle telemetría</p>
+<hr>
+<h2 id="💻-7-tecnología-y-plataforma">💻 7. TECNOLOGÍA Y PLATAFORMA</h2>
+<h3 id="71-stack-técnico-completo">7.1 Stack Técnico Completo</h3>
+<p><strong>Frontend:</strong></p>
+<ul>
+<li>React.js + Web3.js + Wallet Connect</li>
+<li>Dashboard inversores/constructoras</li>
+<li>Mobile responsive</li>
+<li>Multi-idioma (ES, EN, AR)</li>
+</ul>
+<p><strong>Smart Contracts en Base Blockchain:</strong></p>
+<ul>
+<li>BashoodRWA (ERC-721 NFTs)</li>
+<li>BashoodPresale (Payments, Whitelist KYC)</li>
+<li>ChainlinkOracle (Price feeds, Telemetry API)</li>
+<li>BashoodToken (ERC-20 BHT utility token)</li>
+</ul>
+<p><strong>Blockchain: Base L2</strong></p>
+<ul>
+<li>Infraestructura: Coinbase</li>
+<li>Gas fees: $0.01 vs $50 Ethereum</li>
+<li>Blocks: 2 segundos</li>
+<li>Finality: Instantánea</li>
+</ul>
+<hr>
+<h3 id="72-especificaciones-técnicas-detalladas">7.2 Especificaciones Técnicas Detalladas</h3>
+<p><strong>Blockchain:</strong></p>
+<ul>
+<li>Network: Base L2 (Optimistic Rollup)</li>
+<li>Mainnet: Pendiente Q2 2026</li>
+<li>Testnet: Base Sepolia desplegado</li>
+<li>Chain ID: 84532 (Sepolia) / 8453 (Mainnet)</li>
+<li>RPC: <a href="https://sepolia.base.org">https://sepolia.base.org</a></li>
+</ul>
+<p><strong>Contratos:</strong></p>
+<ul>
+<li>Lenguaje: Solidity 0.8.28</li>
+<li>Standard: BASHOOD-RWA-1 (ERC-721 extendido)</li>
+<li>Patrón: UUPS Upgradeable Proxy (EIP-1967)</li>
+<li>Auditoría: Slither (0 vulnerabilidades críticas)</li>
+<li>Tests: 442 passing, 70.75% coverage</li>
+</ul>
+<p><strong>Gas Optimization:</strong></p>
+<ul>
+<li>Mint NFT: ~650,000 gas ($0.65 en Base)</li>
+<li>Transfer: ~80,000 gas ($0.08)</li>
+<li>Update metadata: ~120,000 gas ($0.12)</li>
+</ul>
+<p><strong>Almacenamiento:</strong></p>
+<ul>
+<li>Metadata: IPFS descentralizado</li>
+<li>Imágenes: Pinata gateway (99.9% uptime)</li>
+<li>On-chain: Solo hash + datos críticos</li>
+</ul>
+<hr>
+<h3 id="73-bashood-rwa-1-standard">7.3 BASHOOD-RWA-1 Standard</h3>
+<p><strong>6 Modelos de Depreciación:</strong></p>
+<ol>
+<li><strong>LOAD_BASED</strong> (EVOCONS: tons lifted)</li>
+<li><strong>SETUP_BASED</strong> (Apis Cor: site setups)</li>
+<li><strong>EFFICIENCY_BASED</strong> (CyBe: m³ per day)</li>
+<li><strong>EXTRUSION_BASED</strong> (ICON: meters material)</li>
+<li><strong>TIME_BASED</strong> (Traditional: hours operation)</li>
+<li><strong>LINEAR</strong> (Standard: time-based linear)</li>
+</ol>
+<p><strong>Categorías de Activos:</strong></p>
+<ul>
+<li>CONSTRUCTION_3D_PRINTER_GANTRY</li>
+<li>CONSTRUCTION_3D_PRINTER_MOBILE</li>
+<li>MODULAR_FACTORY_UV</li>
+<li>HEAVY_VEHICLE</li>
+<li>ENERGY_EQUIPMENT</li>
+<li>LOGISTICS_INFRASTRUCTURE</li>
+<li>RAW_MATERIALS</li>
+<li>REAL_ESTATE</li>
+</ul>
+<p><strong>Datos On-Chain por NFT:</strong></p>
+<pre><code class="language-solidity">struct Asset {
+    uint256 tokenId;
+    AssetCategory assetCategory;
+    DepreciationModel depreciationModel;
+    TechnicalSpecs technicalSpecs;
+    FinancialData financialData;
+    OperationalMetrics operationalMetrics;
+    string metadataIPFS;
+}
+</code></pre>
+<p><strong>TechnicalSpecs incluye:</strong></p>
+<ul>
+<li>manufacturer, model, serialNumber</li>
+<li>yearManufactured, maxLoad, printAreaM2, heightM</li>
+</ul>
+<p><strong>FinancialData incluye:</strong></p>
+<ul>
+<li>purchaseValue, currentValue</li>
+<li>depreciationAccumulated, lastValuationTimestamp</li>
+</ul>
+<p><strong>OperationalMetrics incluye:</strong></p>
+<ul>
+<li>loadLifted, hoursOperation</li>
+<li>lastMaintenanceDate, efficiency</li>
+</ul>
+<hr>
+<h3 id="74-integración-oracle-chainlink">7.4 Integración Oracle Chainlink</h3>
+<p><strong>Flujo de datos:</strong></p>
+<pre><code>1. Fabricante API → Datos real-time
+   Ejemplo: {&quot;loadLifted&quot;: 1250, &quot;uptime&quot;: 98.5}
+
+2. Chainlink Node → Verifica firma digital
+
+3. Smart Contract → Update on-chain
+
+4. Evento emitido → Frontend notifica inversores
+</code></pre>
+<p><strong>Frecuencia actualización:</strong></p>
+<ul>
+<li>Telemetría: Cada 1 hora</li>
+<li>Valuación: Cada 24 horas</li>
+<li>Maintenance logs: On-demand</li>
+</ul>
+<p><strong>Beneficios:</strong></p>
+<ul>
+<li>Datos verificados tiempo real</li>
+<li>Transparencia total</li>
+<li>Automatización revenue distribution</li>
+<li>Métricas rendimiento confiables</li>
+<li>Integración sistemas fabricante</li>
+</ul>
+<hr>
+<h2 id="📊-8-casos-de-uso-reales">📊 8. CASOS DE USO REALES</h2>
+<h3 id="81-constructora-pyme-española">8.1 Constructora PyME Española</h3>
+<p><strong>Perfil:</strong></p>
+<ul>
+<li>15 empleados</li>
+<li>€2M facturación anual</li>
+<li>Proyecto: 10 viviendas unifamiliares Murcia</li>
+<li>Necesidad: Tecnología sostenible 80% menos CO₂</li>
+</ul>
+<p><strong>Problema:</strong></p>
+<ul>
+<li>EVOBLOCK €1.1M inaccesible</li>
+<li>Banco ofrece leasing 18% TAE + garantías personales</li>
+<li>Proyecto viable con 30% reducción costes</li>
+</ul>
+<p><strong>Solución BASHOOD - Opción A: Micro-Leasing</strong></p>
+<ul>
+<li>Alquila EVOBLOCK 60 días</li>
+<li>Pago: €2,200/día × 60 = €132,000</li>
+<li>Ahorro vs construcción tradicional: €180,000</li>
+<li>Beneficio neto: €48,000 (36% margen)</li>
+</ul>
+<p><strong>Solución BASHOOD - Opción B: Fractional Purchase</strong></p>
+<ul>
+<li>Compra 10% EVOBLOCK: €110,000</li>
+<li>Financia restante con 20 inversores</li>
+<li>Usa 100% tiempo</li>
+<li>Recibe 90% revenue alquileres externos</li>
+<li>Payback: 18 meses</li>
+</ul>
+<p><strong>Resultado:</strong> Proyecto ejecutado, empresa escala a 25 empleados</p>
+<hr>
+<h3 id="82-inversor-retail-alemán">8.2 Inversor Retail Alemán</h3>
+<p><strong>Perfil:</strong></p>
+<ul>
+<li>€50,000 capital disponible</li>
+<li>Objetivo: Diversificación fuera bolsa</li>
+<li>Perfil riesgo: Moderado</li>
+</ul>
+<p><strong>Problema:</strong></p>
+<ul>
+<li>Real estate mínimo €200k + ilíquido</li>
+<li>Bonos 2-3% rendimiento (inflación)</li>
+<li>Bolsa volatilidad alta</li>
+</ul>
+<p><strong>Solución BASHOOD - Portfolio Diversificado:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Activo</th>
+<th>Inversión</th>
+<th>% Propiedad</th>
+<th>ROI Anual</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>EVOCONS Gantry España</td>
+<td>€15,000</td>
+<td>3%</td>
+<td>14.4%</td>
+</tr>
+<tr>
+<td>ICON Printer USA</td>
+<td>€10,000</td>
+<td>5%</td>
+<td>14.4%</td>
+</tr>
+<tr>
+<td>Apis Cor Mobile UAE</td>
+<td>€15,000</td>
+<td>8%</td>
+<td>12%</td>
+</tr>
+<tr>
+<td>CyBe Performance Bond NL</td>
+<td>€10,000</td>
+<td>-</td>
+<td>15%</td>
+</tr>
+</tbody></table>
+<p><strong>Revenue Mensual Estimado:</strong></p>
+<ul>
+<li>EVOCONS: €180/mes</li>
+<li>ICON: €120/mes</li>
+<li>Apis Cor: €150/mes</li>
+<li>CyBe bond: €125/mes</li>
+<li><strong>Total: €575/mes = €6,900/año</strong></li>
+<li><strong>ROI promedio: 13.8%</strong></li>
+</ul>
+<p><strong>Resultado:</strong> Diversificación geográfica + sectorial, liquidez 24/7</p>
+<hr>
+<h3 id="83-fabricante-evocons">8.3 Fabricante EVOCONS</h3>
+<p><strong>Perfil:</strong></p>
+<ul>
+<li>Líder español construcción 3D</li>
+<li>Producto: EvoConstructor® $1.2M</li>
+<li>Mercado actual: 2-3 ventas/año solo grandes constructoras</li>
+</ul>
+<p><strong>Problema:</strong></p>
+<ul>
+<li>95% constructoras no pueden pagar upfront</li>
+<li>Leasing tradicional: fabricante asume riesgo crediticio</li>
+<li>Market size limitado: Top 5% empresas</li>
+</ul>
+<p><strong>Solución BASHOOD - Modelo Híbrido:</strong></p>
+<ol>
+<li><strong>Tokeniza 5 EVOBLOCK:</strong> $6M total</li>
+<li><strong>Fractional funding:</strong> 200 inversores × $30k promedio = $6M recaudado en 6 semanas (vs 12 meses ventas tradicionales)</li>
+<li><strong>Micro-leasing:</strong> 50 constructoras PyME alquilan $2,500/día promedio</li>
+<li><strong>Utilización:</strong> 70% vs 40% ownership tradicional</li>
+</ol>
+<p><strong>Resultado EVOCONS:</strong></p>
+<ul>
+<li>Revenue upfront: $6M</li>
+<li>Maintenance contracts: $300k/año</li>
+<li>Data telemetría: Mejora R&amp;D</li>
+<li>Market size: 2-3 ventas/año → <strong>50+ alquileres/año</strong></li>
+<li>Revenue growth: <strong>+400%</strong></li>
+</ul>
+<p><strong>Conclusión:</strong> Democratización acceso sin perder control técnico</p>
+<hr>
+<h2 id="💼-9-información-para-inversores">💼 9. INFORMACIÓN PARA INVERSORES</h2>
+<h3 id="91-perfiles-de-inversión">9.1 Perfiles de Inversión</h3>
+<p><strong>Tier 1: Retail ($100-$10,000)</strong></p>
+<ul>
+<li>Fractional ownership mínimo $100</li>
+<li>Diversificación 5-10 activos recomendada</li>
+<li>ROI objetivo: 10-14% anual</li>
+<li>Pago dividendos: Mensual automático</li>
+<li>Liquidez: Trading 24/7 mercado secundario</li>
+</ul>
+<p><strong>Tier 2: Accredited ($10,000-$100,000)</strong></p>
+<ul>
+<li>Acceso performance bonds</li>
+<li>ROI objetivo: 12-18% anual</li>
+<li>Reporting trimestral detallado</li>
+<li>Acceso pre-sale nuevos activos</li>
+<li>Participación governance futuro DAO</li>
+</ul>
+<p><strong>Tier 3: Institucional ($100,000+)</strong></p>
+<ul>
+<li>Portfolios customizados</li>
+<li>Deal flow preferente</li>
+<li>ROI objetivo: 15-20% anual</li>
+<li>Institutional custody Fireblocks</li>
+<li>Direct line equipo BASHOOD</li>
+</ul>
+<hr>
+<h3 id="92-proceso-de-inversión">9.2 Proceso de Inversión</h3>
+<pre><code>01. KYC/AML (24-48h)
+    ↓
+02. Conectar Wallet (MetaMask/Coinbase)
+    ↓
+03. Depositar Fondos (ETH/USDC)
+    ↓
+04. Seleccionar Activos
+    ↓
+05. Comprar Fracciones (NFT emitido)
+    ↓
+06. Recibir Dividendos (Automáticos mensual)
+</code></pre>
+<hr>
+<h3 id="93-riesgos-y-mitigaciones">9.3 Riesgos y Mitigaciones</h3>
+<p><strong>Riesgo 1: Obsolescencia Tecnológica</strong></p>
+<ul>
+<li>Probabilidad: Media</li>
+<li>Impacto: Alto</li>
+<li><strong>Mitigación:</strong> Seguros tech + upgrade programs</li>
+</ul>
+<p><strong>Riesgo 2: Default Constructora</strong></p>
+<ul>
+<li>Probabilidad: Baja</li>
+<li>Impacto: Medio</li>
+<li><strong>Mitigación:</strong> Whitelist KYC + depósitos garantía</li>
+</ul>
+<p><strong>Riesgo 3: Volatilidad Crypto</strong></p>
+<ul>
+<li>Probabilidad: Alta</li>
+<li>Impacto: Bajo</li>
+<li><strong>Mitigación:</strong> Stablecoins USDC disponibles</li>
+</ul>
+<p><strong>Riesgo 4: Hacking Smart Contract</strong></p>
+<ul>
+<li>Probabilidad: Baja</li>
+<li>Impacto: Crítico</li>
+<li><strong>Mitigación:</strong> Auditorías + bug bounties + insurance Nexus Mutual</li>
+</ul>
+<p><strong>Riesgo 5: Cambio Regulatorio</strong></p>
+<ul>
+<li>Probabilidad: Media</li>
+<li>Impacto: Alto</li>
+<li><strong>Mitigación:</strong> Asesoramiento legal experto, adaptación proactiva MiCA Q2 2026</li>
+</ul>
+<hr>
+<h3 id="94-consideraciones-fiscales">9.4 Consideraciones Fiscales</h3>
+<p><strong>España:</strong></p>
+<ul>
+<li>Impuesto ganancias capital: 19-26%</li>
+<li>Reporting: Modelo 720</li>
+</ul>
+<p><strong>USA:</strong></p>
+<ul>
+<li>Tratado como property: IRS guidance 2014-21</li>
+<li>Reporting: Form 1099</li>
+</ul>
+<p><strong>EU:</strong></p>
+<ul>
+<li>MiCA compliance desde Q2 2026</li>
+<li>Normativa armonizada</li>
+</ul>
+<p><strong>Recomendación:</strong> Consultar asesor fiscal local</p>
+<hr>
+<h2 id="🏢-10-información-para-constructoras">🏢 10. INFORMACIÓN PARA CONSTRUCTORAS</h2>
+<h3 id="101-servicios-disponibles">10.1 Servicios Disponibles</h3>
+<h4 id="opción-a-micro-leasing-por-proyecto">Opción A: Micro-Leasing por Proyecto</h4>
+<p><strong>Ideal para:</strong></p>
+<ul>
+<li>Proyectos específicos viviendas/infraestructura</li>
+<li>Testar tecnología antes de comprar</li>
+<li>Sin capital inicial</li>
+<li>Duración flexible 7-90 días</li>
+</ul>
+<p><strong>Precios Referencia:</strong></p>
+<ul>
+<li>Gantry printer: $2,000-$3,000/día</li>
+<li>Mobile robot: $800-$1,500/día</li>
+<li>Factory line: $5,000-$10,000/día</li>
+</ul>
+<p><strong>Incluido:</strong></p>
+<ul>
+<li>Transporte ida/vuelta</li>
+<li>Instalación y calibración</li>
+<li>Capacitación operarios (2 días)</li>
+<li>Soporte técnico 24/7</li>
+<li>Seguro todo riesgo</li>
+<li>Mantenimiento preventivo</li>
+</ul>
+<hr>
+<h4 id="opción-b-fractional-purchase">Opción B: Fractional Purchase</h4>
+<p><strong>Ideal para:</strong></p>
+<ul>
+<li>Constructoras en crecimiento</li>
+<li>Uso recurrente (&gt;50% tiempo)</li>
+<li>Financiación sin deuda bancaria</li>
+</ul>
+<p><strong>Ejemplo: ICON VULCAN Printer $1.6M</strong></p>
+<ul>
+<li>Compra 25%: $400,000</li>
+<li>Aporte propio: $100,000 (25%)</li>
+<li>Inversores fraccionados: $300,000 (75%)</li>
+<li>Uso: 100% tiempo primer año</li>
+<li>Revenue share: 20% a inversores</li>
+<li>Opción compra 75% restante año 2</li>
+</ul>
+<p><strong>Beneficio:</strong></p>
+<ul>
+<li>Evita $1.5M deuda bancaria</li>
+<li>Intereses 8% vs 18% banco</li>
+<li>Flexibilidad escalar</li>
+</ul>
+<hr>
+<h4 id="opción-c-lease-to-own">Opción C: Lease-to-Own</h4>
+<p><strong>Estructura:</strong></p>
+<p><strong>Fase 1: Alquiler 12 meses</strong></p>
+<ul>
+<li>Pago mensual: $25,000</li>
+<li>Total año: $300,000</li>
+</ul>
+<p><strong>Fase 2: Opción compra</strong></p>
+<ul>
+<li>Precio preferente: $1.1M</li>
+<li>Crédito 50% alquileres: -$150,000</li>
+<li>Pago final: $950,000</li>
+</ul>
+<p><strong>Total pagado:</strong> $1.25M vs $1.6M compra directa<br><strong>Ahorro:</strong> $350,000 + preserva liquidez</p>
+<hr>
+<h3 id="102-requisitos-operativos">10.2 Requisitos Operativos</h3>
+<p><strong>Personal Requerido:</strong></p>
+<ul>
+<li>Gantry systems: 2-4 operarios capacitados</li>
+<li>Mobile robots: 2-3 operarios + 1 supervisor</li>
+<li>Factory lines: 15-40 operarios según escala</li>
+</ul>
+<p><strong>Capacitación Incluida:</strong></p>
+<ul>
+<li>Operación básica: 2 días on-site</li>
+<li>Mantenimiento preventivo: 1 día</li>
+<li>Troubleshooting: 4 horas online</li>
+<li>Certificación oficial con examen final</li>
+</ul>
+<p><strong>Certificaciones:</strong></p>
+<ul>
+<li>ISO 9001 Quality Management</li>
+<li>ISO 14001 Environmental (opcional)</li>
+<li>CE Mark EU / UL 3401 USA según jurisdicción</li>
+</ul>
+<hr>
+<h3 id="103-casos-de-éxito-constructoras">10.3 Casos de Éxito Constructoras</h3>
+<p><strong>Proyecto Madrid 2025</strong></p>
+<ul>
+<li>Constructora: 12 empleados, €1.8M revenue</li>
+<li>Proyecto: 8 viviendas unifamiliares</li>
+<li>Tecnología: EVOCONS micro-leasing 45 días</li>
+<li><strong>Resultado:</strong> 35% reducción costes, +€120k beneficio</li>
+</ul>
+<p><strong>Proyecto Dubai 2025</strong></p>
+<ul>
+<li>Constructora: 50 empleados, $8M revenue</li>
+<li>Proyecto: Hotel 120 habitaciones</li>
+<li>Tecnología: Apis Cor fractional (30%)</li>
+<li><strong>Resultado:</strong> 60% más rápido completado</li>
+</ul>
+<hr>
+<h2 id="🏭-11-información-para-fabricantes">🏭 11. INFORMACIÓN PARA FABRICANTES</h2>
+<h3 id="111-beneficios-de-tokenización">11.1 Beneficios de Tokenización</h3>
+<p><strong>1) Ampliar Mercado 10x</strong></p>
+<p>Sin BASHOOD:</p>
+<ul>
+<li>Top 5% constructoras €10M+ revenue</li>
+<li>2-3 ventas/año</li>
+<li>Pipeline limitado geográficamente</li>
+</ul>
+<p>Con BASHOOD:</p>
+<ul>
+<li>Top 50% constructoras €1M+ revenue</li>
+<li>20-50 alquileres/año</li>
+<li>Pipeline global</li>
+</ul>
+<hr>
+<p><strong>2) Revenue Predecible</strong></p>
+<p><strong>Modelo Tradicional Venta:</strong></p>
+<ul>
+<li>$1.2M cada 6 meses = $2.4M/año</li>
+<li>Volatilidad alta</li>
+<li>Depende ciclos construcción</li>
+<li>Cashflow irregular</li>
+</ul>
+<p><strong>Modelo BASHOOD:</strong></p>
+<ul>
+<li>$6M upfront (5 unidades × $1.2M)</li>
+<li>Micro-leasing: $300k/mes = $3.6M/año recurrente</li>
+<li>Maintenance: $50k/mes = $600k/año</li>
+<li><strong>Total año 1:</strong> $10.2M</li>
+<li><strong>Recurrente desde año 2:</strong> $4.2M/año</li>
+</ul>
+<hr>
+<p><strong>3) Datos Telemetría Valiosos</strong></p>
+<p><strong>API Integration proporciona:</strong></p>
+<ul>
+<li>Insights R&amp;D</li>
+<li>Patrones uso</li>
+<li>Mantenimiento predictivo</li>
+<li>Performance geográfico</li>
+</ul>
+<p><strong>Ejemplo Datos Agregados Anonimizados:</strong></p>
+<pre><code class="language-json">{
+  &quot;usagePatterns&quot;: {
+    &quot;peakHours&quot;: &quot;06:00-14:00&quot;,
+    &quot;avgLoadPerDay&quot;: &quot;12.5 tons&quot;,
+    &quot;materialsUsed&quot;: {
+      &quot;mortar&quot;: &quot;60%&quot;,
+      &quot;concrete&quot;: &quot;30%&quot;,
+      &quot;other&quot;: &quot;10%&quot;
+    }
+  },
+  &quot;maintenancePredictive&quot;: {
+    &quot;componentWear&quot;: {
+      &quot;extruderNozzle&quot;: &quot;78% lifetime&quot;
+    },
+    &quot;nextServiceRecommended&quot;: &quot;2026-03-15&quot;
+  },
+  &quot;geographicPerformance&quot;: {
+    &quot;spain&quot;: {
+      &quot;efficiency&quot;: &quot;94%&quot;,
+      &quot;uptime&quot;: &quot;92%&quot;
+    },
+    &quot;uae&quot;: {
+      &quot;efficiency&quot;: &quot;89%&quot;,
+      &quot;uptime&quot;: &quot;88%&quot;,
+      &quot;heatImpact&quot;: &quot;Detected&quot;
+    }
+  }
+}
+</code></pre>
+<p><strong>Valor:</strong> Mejora diseño producto, anticipa fallos, optimiza supply chain</p>
+<hr>
+<h3 id="112-proceso-de-integración-fabricante">11.2 Proceso de Integración Fabricante</h3>
+<p><strong>Fase 1: Onboarding (2-4 semanas)</strong></p>
+<p>Semana 1:</p>
+<ul>
+<li>Auditoría técnica activo</li>
+<li>Especificaciones validadas</li>
+<li>Documentación legal</li>
+<li>Certificaciones verificadas</li>
+</ul>
+<p>Semana 2-3:</p>
+<ul>
+<li>Desarrollo smart contract</li>
+<li>Customización modelo depreciación</li>
+<li>Integración API telemetría</li>
+<li>Deploy testnet + pruebas</li>
+</ul>
+<p>Semana 4:</p>
+<ul>
+<li>Deploy mainnet</li>
+<li>Metadata IPFS</li>
+<li>Campaña marketing</li>
+<li>Launch oficial</li>
+</ul>
+<p><strong>Fase 2: Operación (ongoing)</strong></p>
+<p>Día a día:</p>
+<ul>
+<li>Telemetría automática → Oracle Chainlink</li>
+<li>Revenue distribution → Smart contracts</li>
+<li>Reporting → Dashboard fabricante</li>
+</ul>
+<p>Mensual:</p>
+<ul>
+<li>Reconciliación financiera</li>
+<li>Maintenance scheduling</li>
+<li>Investor reporting</li>
+</ul>
+<hr>
+<h3 id="113-modelos-revenue-share-fabricante">11.3 Modelos Revenue Share Fabricante</h3>
+<p><strong>Opción A: Fee Flat</strong></p>
+<ul>
+<li>Fabricante paga: $25,000 setup + $500/mes plataforma</li>
+<li>BASHOOD comisión: 0%</li>
+<li>Fabricante retiene: 100% revenue</li>
+</ul>
+<p><strong>Opción B: Revenue Share</strong></p>
+<ul>
+<li>Fabricante paga: $0 setup</li>
+<li>BASHOOD comisión: 5% revenue gross</li>
+<li>Fabricante retiene: 95% revenue</li>
+</ul>
+<p><strong>Opción C: Híbrido (Recomendado)</strong></p>
+<ul>
+<li>Fabricante paga: $10,000 setup</li>
+<li>BASHOOD comisión: 2.5% revenue</li>
+<li>Fabricante retiene: 97.5% revenue</li>
+</ul>
+<hr>
+<h3 id="114-partners-actuales">11.4 Partners Actuales</h3>
+<table>
+<thead>
+<tr>
+<th>Fabricante</th>
+<th>Producto</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>EVOCONS</strong> España</td>
+<td>EVOBLOCK Gantry</td>
+<td>Piloto técnico</td>
+</tr>
+<tr>
+<td><strong>Apis Cor</strong> UAE</td>
+<td>Mobile Robot</td>
+<td>En conversaciones</td>
+</tr>
+<tr>
+<td><strong>Mighty Buildings</strong> USA</td>
+<td>Factory UV</td>
+<td>En conversaciones</td>
+</tr>
+<tr>
+<td><strong>ICON</strong> USA</td>
+<td>VULCAN Printer</td>
+<td>En conversaciones</td>
+</tr>
+<tr>
+<td><strong>CyBe</strong> Holanda</td>
+<td>RC Track Robot</td>
+<td>En conversaciones</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="🎯-115-ventajas-competitivas-bashood">🎯 11.5 Ventajas Competitivas BASHOOD</h2>
+<table>
+<thead>
+<tr>
+<th>Característica</th>
+<th>Competidores RWA<br>(Centrifuge, Goldfinch, Ondo)</th>
+<th>BASHOOD</th>
+<th>Leasing Tradicional</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Sector</strong></td>
+<td>General</td>
+<td><strong>Robótica industrial</strong></td>
+<td>N/A</td>
+</tr>
+<tr>
+<td><strong>Activo mínimo</strong></td>
+<td>$1k+</td>
+<td><strong>$100</strong></td>
+<td>N/A</td>
+</tr>
+<tr>
+<td><strong>Liquidez</strong></td>
+<td>Variable</td>
+<td><strong>Muy alta (24/7)</strong></td>
+<td>Baja</td>
+</tr>
+<tr>
+<td><strong>Depreciación</strong></td>
+<td>N/A</td>
+<td><strong>6 modelos uso real</strong></td>
+<td>N/A</td>
+</tr>
+<tr>
+<td><strong>Telemetría</strong></td>
+<td>No</td>
+<td><strong>Sí (Chainlink)</strong></td>
+<td>No</td>
+</tr>
+<tr>
+<td><strong>Micro-leasing</strong></td>
+<td>No</td>
+<td><strong>Sí (7 días mínimo)</strong></td>
+<td>No</td>
+</tr>
+<tr>
+<td><strong>Performance bonds</strong></td>
+<td>No</td>
+<td><strong>Sí</strong></td>
+<td>No</td>
+</tr>
+<tr>
+<td><strong>Aprobación</strong></td>
+<td>N/A</td>
+<td><strong>24-48h</strong></td>
+<td>4-6 meses</td>
+</tr>
+<tr>
+<td><strong>Duración mínima</strong></td>
+<td>N/A</td>
+<td><strong>7 días</strong></td>
+<td>12-36 meses</td>
+</tr>
+<tr>
+<td><strong>TAE</strong></td>
+<td>N/A</td>
+<td><strong>8-12%</strong></td>
+<td>15-25%</td>
+</tr>
+<tr>
+<td><strong>Garantías</strong></td>
+<td>N/A</td>
+<td><strong>Smart contract</strong></td>
+<td>Personales/hipotecas</td>
+</tr>
+<tr>
+<td><strong>Penalización salida</strong></td>
+<td>N/A</td>
+<td><strong>0%</strong></td>
+<td>20-30%</td>
+</tr>
+</tbody></table>
+<hr>
+<h1 id="parte-2-programa-distribuidor-1">PARTE 2: PROGRAMA DISTRIBUIDOR</h1>
+<h2 id="📌-12-resumen-ejecutivo-programa-distribuidor">📌 12. RESUMEN EJECUTIVO PROGRAMA DISTRIBUIDOR</h2>
+<p><strong>Programa:</strong> Comercialización profesional de servicios de estructuración y tokenización de activos industriales de alto valor.</p>
+<p><strong>Modelo:</strong> Venta directa B2B + Estructura de equipos comerciales</p>
+<p><strong>Servicio:</strong> Tokenización de maquinaria pesada y equipos industriales €50k-€5M según detallado en Parte 1</p>
+<p><strong>Cliente objetivo:</strong> Propietarios de activos productivos (construcción, minería, infraestructura)</p>
+<p><strong>Comisión por servicio:</strong> €1,350-€10,800 según valor del activo tokenizado (30% del Setup Fee 3%)</p>
+<hr>
+<h3 id="⚠️-advertencia-comercial-obligatoria">⚠️ ADVERTENCIA COMERCIAL OBLIGATORIA</h3>
+<p><strong>Los ingresos mostrados en este documento son escenarios ilustrativos basados en hipótesis de volumen. No constituyen garantía ni promesa de rentabilidad.</strong></p>
+<p><strong>La actividad del distribuidor consiste en la comercialización del servicio de tokenización a propietarios de activos. El distribuidor NO:</strong></p>
+<ul>
+<li>Vende tokens a inversores</li>
+<li>Intermedia instrumentos financieros</li>
+<li>Asesora sobre inversiones</li>
+<li>Gestiona fondos de terceros</li>
+</ul>
+<p><strong>Función del distribuidor:</strong> Promoción y comercialización del servicio de estructuración y tokenización descrito en la Parte 1 de este documento.</p>
+<hr>
+<h2 id="⚖️-13-marco-legal-y-responsabilidades-del-distribuidor">⚖️ 13. MARCO LEGAL Y RESPONSABILIDADES DEL DISTRIBUIDOR</h2>
+<h3 id="131-naturaleza-de-la-relación-comercial">13.1 Naturaleza de la Relación Comercial</h3>
+<p><strong>El distribuidor actúa como:</strong></p>
+<p>✅ <strong>Comercial independiente</strong> (no empleado de Bashood)</p>
+<p>✅ <strong>Promotor del servicio de tokenización</strong> (no intermediario financiero)</p>
+<p>✅ <strong>Agente comercial autónomo</strong> (sin poder de representación legal de Bashood)</p>
+<hr>
+<h3 id="132-qué-vende-el-distribuidor">13.2 Qué Vende el Distribuidor</h3>
+<p><strong>El distribuidor comercializa:</strong></p>
+<ul>
+<li>El servicio de estructuración y tokenización de activos industriales descrito en la sección 4</li>
+<li>Dirigido exclusivamente a propietarios de activos físicos (fabricantes, constructoras)</li>
+<li>Setup Fee único por servicio prestado (3% del valor del activo)</li>
+</ul>
+<p><strong>Justificación técnica del Setup Fee 3%:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Concepto</th>
+<th>% Estimado</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Estructuración legal</strong></td>
+<td>0.8%</td>
+<td>Revisión contratos, due diligence legal, verificación propiedad</td>
+</tr>
+<tr>
+<td><strong>Due diligence técnica</strong></td>
+<td>0.5%</td>
+<td>Inspección física, valoración, verificación estado operativo</td>
+</tr>
+<tr>
+<td><strong>Auditoría y documentación</strong></td>
+<td>0.4%</td>
+<td>Documentación técnica, certificaciones, informes</td>
+</tr>
+<tr>
+<td><strong>Infraestructura tecnológica</strong></td>
+<td>0.6%</td>
+<td>Smart contracts, custodia, integración blockchain</td>
+</tr>
+<tr>
+<td><strong>Operativa y administración</strong></td>
+<td>0.7%</td>
+<td>Gestión proceso, coordinación, seguimiento</td>
+</tr>
+<tr>
+<td><strong>TOTAL Setup Fee</strong></td>
+<td><strong>3.0%</strong></td>
+<td>Distribuido: 30% distribuidor, 70% operativa Bashood</td>
+</tr>
+</tbody></table>
+<hr>
+<p><strong>El distribuidor NO:</strong></p>
+<p>❌ Vende tokens a inversores (eso lo gestiona Bashood directamente con los inversores finales)</p>
+<p>❌ Gestiona fondos de terceros</p>
+<p>❌ Asesora sobre inversión o productos financieros</p>
+<p>❌ Ofrece garantías de rentabilidad a inversores o propietarios</p>
+<p>❌ Promete liquidez o recompra de tokens</p>
+<hr>
+<h3 id="133-limitaciones-y-prohibiciones">13.3 Limitaciones y Prohibiciones</h3>
+<p><strong>El distribuidor NO PUEDE:</strong></p>
+<p>❌ Prometer ROI específicos a propietarios o inversores</p>
+<p>❌ Garantizar liquidez inmediata de los tokens</p>
+<p>❌ Ofrecer recompra de tokens por parte de Bashood</p>
+<p>❌ Asesorar sobre inversión (requiere licencia MiFID II)</p>
+<p>❌ Modificar material oficial de Bashood sin autorización</p>
+<p>❌ Representar legalmente a Bashood en contratos</p>
+<hr>
+<h3 id="134-obligaciones-del-distribuidor">13.4 Obligaciones del Distribuidor</h3>
+<p><strong>El distribuidor DEBE:</strong></p>
+<p>✅ Usar exclusivamente material oficial provisto por Bashood (secciones 1-11 de este documento)</p>
+<p>✅ Declarar que actúa como comercial independiente</p>
+<p>✅ Informar que las proyecciones de ingresos para inversores son ilustrativas (no garantías)</p>
+<p>✅ Derivar todas las consultas legales/técnicas/financieras a Bashood</p>
+<p>✅ Cumplir con legislación local sobre actividad comercial</p>
+<p>✅ Emitir facturas por comisiones (actividad económica independiente)</p>
+<hr>
+<h3 id="135-condiciones-de-pago-de-comisiones">13.5 Condiciones de Pago de Comisiones</h3>
+<p><strong>Comisiones se pagan solo tras:</strong></p>
+<ol>
+<li>Cobro efectivo del Setup Fee por Bashood</li>
+<li>Firma del contrato de tokenización con el propietario del activo</li>
+<li>Completado del proceso de due diligence técnica y legal</li>
+</ol>
+<p><strong>En caso de cancelación del servicio:</strong></p>
+<ul>
+<li>Si es antes del cobro del Setup Fee: No hay comisión</li>
+<li>Si es después del cobro: Comisión se paga al distribuidor</li>
+<li>Si hay devolución del Setup Fee: Comisión se recupera del distribuidor</li>
+</ul>
+<p><strong>Timing de pagos:</strong> NET-15 (15 días tras cobro efectivo del Setup Fee por Bashood)</p>
+<hr>
+<h3 id="136-compliance-y-normativa">13.6 Compliance y Normativa</h3>
+<p><strong>Marco regulatorio aplicable:</strong></p>
+<ul>
+<li><strong>MiCA (Markets in Crypto-Assets):</strong> No aplica al distribuidor (no vende tokens a inversores)</li>
+<li><strong>MiFID II:</strong> No aplica (no asesora inversión)</li>
+<li><strong>Legislación comercial:</strong> Sí aplica (actividad comercial estándar B2B)</li>
+</ul>
+<p><strong>Responsabilidad fiscal:</strong></p>
+<ul>
+<li>El distribuidor es responsable de declarar sus ingresos por comisiones</li>
+<li>Bashood no retiene IRPF (relación comercial B2B entre profesionales)</li>
+<li>El distribuidor debe emitir facturas por sus comisiones según legislación local</li>
+</ul>
+<p><strong>Cumplimiento normativo Bashood:</strong></p>
+<ul>
+<li>Base Blockchain (Coinbase infrastructure) cumple regulaciones USA/EU</li>
+<li>MiCA compliance desde Q2 2026</li>
+<li>Smart contracts auditados (Slither 0 vulnerabilidades críticas)</li>
+<li>KYC/AML para inversores integrado (Civic/Persona)</li>
+</ul>
+<hr>
+<h2 id="💰-14-estructura-de-comisiones-2-niveles">💰 14. ESTRUCTURA DE COMISIONES (2 NIVELES)</h2>
+<h3 id="141-sistema-de-2-niveles">14.1 Sistema de 2 Niveles</h3>
+<pre><code>NIVEL 1: Distribuidor Individual
+├─ Comisión: 30% del Setup Fee
+├─ Ejemplo: Excavadora €150k → Setup €4,500 → Comisión €1,350
+├─ Función: Comercialización directa del servicio de tokenización
+└─ Trabaja de forma independiente
+
+NIVEL 2: Líder de Equipo Comercial (Team Leader)
+├─ Comisión propia: 30% del Setup Fee (ventas directas propias)
+├─ Comisión equipo: 10% del Setup Fee (ventas de equipo directo)
+├─ Función: Comercialización + coordinación equipo comercial
+├─ Límite: Máximo 5 distribuidores en equipo directo
+└─ Sin comisiones sobre terceros niveles
+</code></pre>
+<p><strong>Nota importante:</strong> La estructura se limita a 2 niveles máximo. No existen comisiones sobre redes multi-nivel ni sobre terceros niveles. Esto asegura cumplimiento con regulaciones anti-MLM.</p>
+<hr>
+<h3 id="142-cálculo-detallado-comisiones">14.2 Cálculo Detallado Comisiones</h3>
+<p><strong>Ejemplo 1: EVOBLOCK Gantry ($1.2M)</strong></p>
+<table>
+<thead>
+<tr>
+<th>Concepto</th>
+<th>Monto</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Valor activo</td>
+<td>$1,200,000</td>
+</tr>
+<tr>
+<td>Setup Fee Bashood (3%)</td>
+<td>$36,000</td>
+</tr>
+<tr>
+<td>Comisión distribuidor (30%)</td>
+<td>$10,800</td>
+</tr>
+<tr>
+<td>Reserva Bashood (70%)</td>
+<td>$25,200</td>
+</tr>
+</tbody></table>
+<p><strong>Comisión distribuidor individual:</strong> $10,800 (€9,900 aprox)</p>
+<hr>
+<p><strong>Ejemplo 2: Apis Cor Mobile Robot ($325k)</strong></p>
+<table>
+<thead>
+<tr>
+<th>Concepto</th>
+<th>Monto</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Valor activo</td>
+<td>$325,000</td>
+</tr>
+<tr>
+<td>Setup Fee Bashood (3%)</td>
+<td>$9,750</td>
+</tr>
+<tr>
+<td>Comisión distribuidor (30%)</td>
+<td>$2,925</td>
+</tr>
+<tr>
+<td>Reserva Bashood (70%)</td>
+<td>$6,825</td>
+</tr>
+</tbody></table>
+<p><strong>Comisión distribuidor individual:</strong> $2,925 (€2,700 aprox)</p>
+<hr>
+<p><strong>Ejemplo 3: CyBe RC Printer ($240k)</strong></p>
+<table>
+<thead>
+<tr>
+<th>Concepto</th>
+<th>Monto</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Valor activo</td>
+<td>$240,000</td>
+</tr>
+<tr>
+<td>Setup Fee Bashood (3%)</td>
+<td>$7,200</td>
+</tr>
+<tr>
+<td>Comisión distribuidor (30%)</td>
+<td>$2,160</td>
+</tr>
+<tr>
+<td>Reserva Bashood (70%)</td>
+<td>$5,040</td>
+</tr>
+</tbody></table>
+<p><strong>Comisión distribuidor individual:</strong> $2,160 (€2,000 aprox)</p>
+<hr>
+<h3 id="143-incentivos-adicionales-por-volumen">14.3 Incentivos Adicionales por Volumen</h3>
+<p><strong>⚠️ NOTA:</strong> Todos los incentivos están condicionados al cobro efectivo del Setup Fee por parte de Bashood. Los escenarios son ilustrativos.</p>
+<hr>
+<p><strong>Incentivo 1: Volumen Equipo (Team Volume Bonus)</strong></p>
+<p><strong>Condición:</strong> Equipo completo tokeniza &gt;€100k Setup Fees en 1 mes</p>
+<pre><code>Volumen mensual equipo: €150k Setup Fees
+Incentivo 5%: €7,500 adicional
+
+Distribuido:
+├─ Líder equipo (70%): €5,250
+└─ Equipo (30%): €2,250 (€450 cada uno)
+</code></pre>
+<hr>
+<p><strong>Incentivo 2: Activos Premium (Premium Asset Bonus)</strong></p>
+<p><strong>Condición:</strong> Tokenización activo &gt;€500k</p>
+<pre><code>Ejemplo: Mighty Buildings Factory ($5.2M)
+Setup Fee: $156,000
+Comisión distribuidor base (30%): $46,800
+Incentivo premium (5%): $7,800
+────────────────────────────────────────
+Total distribuidor: $54,600
+</code></pre>
+<hr>
+<p><strong>Incentivo 3: Anual &quot;Leader Elite&quot;</strong></p>
+<p><strong>Condición:</strong> Equipo genera &gt;€500k Setup Fees en 1 año</p>
+<pre><code>Reconocimiento:
+├─ Participación conferencia blockchain Europa
+├─ Incentivo económico €10,000
+├─ Acceso programa &quot;Diamond Leader&quot; (comisiones 12% año 2)
+└─ Stock options Bashood (según disponibilidad)
+</code></pre>
+<hr>
+<h2 id="📊-15-escenarios-de-ingresos-ilustrativos">📊 15. ESCENARIOS DE INGRESOS ILUSTRATIVOS</h2>
+<h3 id="⚠️-advertencia-obligatoria">⚠️ ADVERTENCIA OBLIGATORIA</h3>
+<p><strong>Los siguientes son escenarios ilustrativos basados en hipótesis de volumen. No constituyen garantía ni promesa de rentabilidad. Los resultados reales dependerán de múltiples factores incluyendo dedicación, experiencia comercial, red de contactos, y condiciones de mercado.</strong></p>
+<hr>
+<h3 id="151-distribuidor-individual-sin-equipo">15.1 Distribuidor Individual (Sin Equipo)</h3>
+<table>
+<thead>
+<tr>
+<th>Escenario</th>
+<th>Activos Tokenizados/Mes</th>
+<th>Setup Fees</th>
+<th>Comisión 30%</th>
+<th>Anual</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Conservador</strong></td>
+<td>1 activo $325k</td>
+<td>$9,750</td>
+<td>$2,925</td>
+<td>$35,100</td>
+</tr>
+<tr>
+<td><strong>Medio</strong></td>
+<td>2 activos $480k total</td>
+<td>$14,400</td>
+<td>$4,320</td>
+<td>$51,840</td>
+</tr>
+<tr>
+<td><strong>Alto rendimiento</strong></td>
+<td>1 Gantry $1.2M</td>
+<td>$36,000</td>
+<td>$10,800</td>
+<td>$129,600</td>
+</tr>
+</tbody></table>
+<p><strong>Nota:</strong> Escenario &quot;Alto rendimiento&quot; requiere red de contactos consolidada, experiencia B2B maquinaria industrial, y dedicación full-time. No representa resultados típicos.</p>
+<hr>
+<h3 id="152-líder-de-equipo-comercial-5-distribuidores">15.2 Líder de Equipo Comercial (5 Distribuidores)</h3>
+<p><strong>Ejemplo Mes Alto Rendimiento:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Vendedor</th>
+<th>Activos Tokenizados</th>
+<th>Setup Fees</th>
+<th>Comisión 30%</th>
+<th>Tu Comisión 10%</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>TÚ (líder)</strong></td>
+<td>1 Gantry $1.2M</td>
+<td>$36,000</td>
+<td>$10,800</td>
+<td>-</td>
+</tr>
+<tr>
+<td><strong>Distribuidor 1</strong></td>
+<td>1 Mobile $325k</td>
+<td>$9,750</td>
+<td>$2,925</td>
+<td>$975</td>
+</tr>
+<tr>
+<td><strong>Distribuidor 2</strong></td>
+<td>1 Mobile $325k</td>
+<td>$9,750</td>
+<td>$2,925</td>
+<td>$975</td>
+</tr>
+<tr>
+<td><strong>Distribuidor 3</strong></td>
+<td>1 CyBe $240k</td>
+<td>$7,200</td>
+<td>$2,160</td>
+<td>$720</td>
+</tr>
+<tr>
+<td><strong>Distribuidor 4</strong></td>
+<td>0</td>
+<td>$0</td>
+<td>$0</td>
+<td>$0</td>
+</tr>
+<tr>
+<td><strong>Distribuidor 5</strong></td>
+<td>1 Mobile $325k</td>
+<td>$9,750</td>
+<td>$2,925</td>
+<td>$975</td>
+</tr>
+<tr>
+<td><strong>TOTAL EQUIPO</strong></td>
+<td><strong>5 activos $2.415M</strong></td>
+<td><strong>$72,450</strong></td>
+<td><strong>$21,735</strong></td>
+<td><strong>$3,645</strong></td>
+</tr>
+</tbody></table>
+<p><strong>Ingresos líder mes:</strong></p>
+<pre><code>Tokenización propia (30%):     $10,800
+Comisiones equipo (10%):        $3,645
+──────────────────────────────────────
+TOTAL MES:                     $14,445 (€13,300 aprox)
+</code></pre>
+<p><strong>Proyección anual (escenario optimista):</strong> $173,340 (€159,600 aprox)</p>
+<p><strong>⚠️ ADVERTENCIA:</strong> Este escenario representa un caso optimista con equipo consolidado. Requiere:</p>
+<ul>
+<li>Equipo de 5 distribuidores activos y productivos</li>
+<li>Red de contactos consolidada en sector industrial</li>
+<li>Dedicación full-time coordinación + ventas</li>
+<li>Experiencia previa ventas B2B maquinaria</li>
+<li>No representa resultados típicos del distribuidor promedio</li>
+</ul>
+<hr>
+<h3 id="153-comparativa-distribuidor-vs-líder-equipo">15.3 Comparativa Distribuidor vs Líder Equipo</h3>
+<p><strong>Dedicación Similar (40h/semana)</strong></p>
+<table>
+<thead>
+<tr>
+<th>Rol</th>
+<th>Tokenizaciones/Año</th>
+<th>Gestión Equipo</th>
+<th>Ingresos Año (escenario medio)</th>
+<th>€/hora</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Distribuidor Individual</strong></td>
+<td>12 activos</td>
+<td>0h</td>
+<td>€51,840</td>
+<td>€25</td>
+</tr>
+<tr>
+<td><strong>Líder Equipo Comercial</strong></td>
+<td>12 propias + coordinación</td>
+<td>10h/semana</td>
+<td>€95,000</td>
+<td><strong>€46</strong></td>
+</tr>
+</tbody></table>
+<p><strong>Nota:</strong> Los ingresos son proyecciones ilustrativas. Los resultados reales dependerán de dedicación, experiencia, red contactos, y condiciones mercado.</p>
+<hr>
+<h2 id="🛠️-16-herramientas-y-soporte">🛠️ 16. HERRAMIENTAS Y SOPORTE</h2>
+<h3 id="161-material-oficial-para-distribuidores">16.1 Material Oficial para Distribuidores</h3>
+<p><strong>✅ Documentación Técnica:</strong></p>
+<ul>
+<li>Este documento completo (Partes 1 y 2)</li>
+<li>One-pagers por tipo de activo (Gantry, Mobile, Factory)</li>
+<li>Casos de éxito detallados (Madrid, Dubai, EVOCONS)</li>
+<li>FAQ inversores/constructoras/fabricantes</li>
+</ul>
+<p><strong>✅ Presentaciones:</strong></p>
+<ul>
+<li>Pitch deck 30 slides formato PDF/PPT</li>
+<li>Video explicativo 5 minutos (ES/EN)</li>
+<li>Demos plataforma técnica</li>
+</ul>
+<p><strong>✅ Calculadoras:</strong></p>
+<ul>
+<li>ROI Calculator Excel (para constructoras)</li>
+<li>Comisiones Calculator (para distribuidores)</li>
+<li>Carbon Footprint Calculator (sostenibilidad)</li>
+</ul>
+<p><strong>✅ Templates Comerciales:</strong></p>
+<ul>
+<li>Email sequences prospección</li>
+<li>Scripts llamadas telefónicas</li>
+<li>Propuestas comerciales personalizables</li>
+<li>NDA y acuerdos confidencialidad</li>
+</ul>
+<hr>
+<h3 id="162-formación-incluida">16.2 Formación Incluida</h3>
+<p><strong>Training Session 1: Pitch Deck Presentation (2 horas)</strong></p>
+<ul>
+<li>Secciones 1-11 de este documento en profundidad</li>
+<li>Casos de uso por tipo de cliente</li>
+<li>Manejo de objeciones comunes</li>
+<li>Role-play presentación</li>
+</ul>
+<p><strong>Training Session 2: Demo Plataforma Técnica (1 hora)</strong></p>
+<ul>
+<li>Acceso testnet Base Sepolia</li>
+<li>Navegación dashboard inversores/constructoras</li>
+<li>Visualización NFTs tokenizados reales (tokens 202-206)</li>
+<li>Integración Chainlink Oracle</li>
+</ul>
+<p><strong>Training Session 3: Q&amp;A Casos Específicos (1 hora)</strong></p>
+<ul>
+<li>Preguntas específicas a tu mercado</li>
+<li>Estrategias prospección por región</li>
+<li>Casos edge y cómo resolverlos</li>
+</ul>
+<hr>
+<h3 id="163-soporte-continuo">16.3 Soporte Continuo</h3>
+<p><strong>✅ CRM Acceso:</strong></p>
+<ul>
+<li>Panel leads compartidos</li>
+<li>Seguimiento pipeline</li>
+<li>Reporting automático comisiones</li>
+</ul>
+<p><strong>✅ Technical Support:</strong></p>
+<ul>
+<li>Email: <a href="mailto:&#x64;&#x69;&#x73;&#x74;&#114;&#x69;&#98;&#x75;&#x74;&#x6f;&#x72;&#115;&#64;&#98;&#97;&#115;&#x68;&#x6f;&#x6f;&#x64;&#x2e;&#105;&#111;">&#x64;&#x69;&#x73;&#x74;&#114;&#x69;&#98;&#x75;&#x74;&#x6f;&#x72;&#115;&#64;&#98;&#97;&#115;&#x68;&#x6f;&#x6f;&#x64;&#x2e;&#105;&#111;</a></li>
+<li>WhatsApp: +34 XXX XXX XXX</li>
+<li>Respuesta &lt;24h días laborables</li>
+</ul>
+<p><strong>✅ Para Líderes de Equipo (Adicional):</strong></p>
+<ul>
+<li>Dashboard equipo tiempo real</li>
+<li>Call semanal coordinación</li>
+<li>Acceso preferente a leads premium (&gt;€500k)</li>
+</ul>
+<hr>
+<h2 id="🚀-17-proceso-de-incorporación">🚀 17. PROCESO DE INCORPORACIÓN</h2>
+<h3 id="171-solicitud-programa-distribuidor">17.1 Solicitud Programa Distribuidor</h3>
+<p><strong>PASO 1: Solicitud Inicial</strong></p>
+<p>📧 Email: <a href="mailto:&#x64;&#x69;&#x73;&#x74;&#114;&#x69;&#98;&#117;&#x74;&#111;&#x72;&#x73;&#64;&#x62;&#x61;&#115;&#x68;&#111;&#111;&#100;&#x2e;&#105;&#x6f;">&#x64;&#x69;&#x73;&#x74;&#114;&#x69;&#98;&#117;&#x74;&#111;&#x72;&#x73;&#64;&#x62;&#x61;&#115;&#x68;&#111;&#111;&#100;&#x2e;&#105;&#x6f;</a><br>Asunto: &quot;Solicitud Programa Distribuidor - [Tu Nombre] - [Ciudad]&quot;</p>
+<p><strong>Incluir:</strong></p>
+<ul>
+<li>CV resumido (experiencia comercial B2B)</li>
+<li>Sector de especialización o red de contactos (construcción/maquinaria/industrial)</li>
+<li>Preferencia: Distribuidor individual o líder de equipo</li>
+<li>Disponibilidad y dedicación proyectada (part-time/full-time)</li>
+</ul>
+<hr>
+<p><strong>PASO 2: Evaluación Inicial (30 min videoconferencia)</strong></p>
+<ul>
+<li>Presentación mutua</li>
+<li>Revisión de perfil y experiencia comercial</li>
+<li>Explicación programa distribuidor (Parte 2 de este documento)</li>
+<li>Aclaración dudas sobre comisiones y marco legal</li>
+</ul>
+<hr>
+<p><strong>PASO 3: Onboarding (1 semana)</strong></p>
+<p>Día 1-2:</p>
+<ul>
+<li>Firma acuerdo comercial distribuidor</li>
+<li>Acceso plataforma CRM</li>
+<li>Recepción materiales oficiales (sección 16.1)</li>
+</ul>
+<p>Día 3-5:</p>
+<ul>
+<li>Training Sessions 1-3 (ver sección 16.2)</li>
+<li>Acceso testnet Base Sepolia</li>
+<li>Setup email + firma digital</li>
+</ul>
+<hr>
+<p><strong>PASO 4: Primera Tokenización (Objetivo Mes 1)</strong></p>
+<ul>
+<li>Meta: €2,000-€10,000 primera comisión</li>
+<li>Coordinación 1-1 con equipo técnico Bashood</li>
+<li>Seguimiento proceso due diligence</li>
+<li>Soporte cierre comercial</li>
+</ul>
+<hr>
+<h3 id="172-perfil-ideal-distribuidor">17.2 Perfil Ideal Distribuidor</h3>
+<p><strong>✅ Experiencia comercial:</strong></p>
+<ul>
+<li>2+ años ventas B2B sectores industriales</li>
+<li>Conocimiento construcción/maquinaria/infraestructura</li>
+<li>Historial deals €100k-€5M</li>
+</ul>
+<p><strong>✅ Red de contactos:</strong></p>
+<ul>
+<li>Constructoras (PyME a grandes)</li>
+<li>Fabricantes maquinaria</li>
+<li>Directores obra / Project managers</li>
+<li>Asociaciones sector construcción</li>
+</ul>
+<p><strong>✅ Competencias:</strong></p>
+<ul>
+<li>Orientación resultados</li>
+<li>Autonomía trabajo remoto</li>
+<li>Persistencia (ciclo venta 30-90 días)</li>
+<li>Blockchain-friendly (no necesita ser experto)</li>
+</ul>
+<p><strong>✅ Idiomas:</strong></p>
+<ul>
+<li>Español (native/fluent)</li>
+<li>Inglés (intermediate+) - valorable para mercado internacional</li>
+</ul>
+<hr>
+<h2 id="❓-18-preguntas-frecuentes">❓ 18. PREGUNTAS FRECUENTES</h2>
+<h3 id="181-sobre-bashood-plataforma">18.1 Sobre BASHOOD Plataforma</h3>
+<p><strong>¿Es BASHOOD una criptomoneda?</strong></p>
+<p>No. BASHOOD es plataforma de tokenización de activos reales (RWA). Los NFTs representan propiedad de maquinaria física real, no tokens especulativos.</p>
+<hr>
+<p><strong>¿Qué blockchain utilizan?</strong></p>
+<p>Base L2 (Coinbase infrastructure). Costes ultra-bajos ($0.01 gas vs $50 Ethereum) y seguridad institucional.</p>
+<hr>
+<p><strong>¿Cuándo mainnet?</strong></p>
+<p>Q2 2026. Actualmente testnet Base Sepolia operativo con 5 activos tokenizados ($10.485M).</p>
+<hr>
+<p><strong>¿Es legal en mi país?</strong></p>
+<p>Compatible con: USA (SEC RWA framework), EU (MiCA desde Q2 2026), UAE (VARA licensed), UK, Suiza, Singapur. Restricciones: China, Rusia.</p>
+<hr>
+<h3 id="182-sobre-el-programa-distribuidor">18.2 Sobre el Programa Distribuidor</h3>
+<p><strong>¿Necesito experiencia en blockchain?</strong></p>
+<p>No. BASHOOD provee formación completa. Solo necesitas experiencia ventas B2B industrial y ganas de aprender.</p>
+<hr>
+<p><strong>¿Cuánto toma primera tokenización?</strong></p>
+<p>30-90 días típico desde primer contacto hasta cobro comisión:</p>
+<ul>
+<li>Prospección: 20-50 empresas contactadas</li>
+<li>Meetings: 5-10 reuniones</li>
+<li>Due diligence: 2-3 semanas</li>
+<li>Deploy: 1 semana</li>
+</ul>
+<p>Más rápido si tienes red de contactos previa.</p>
+<hr>
+<p><strong>¿Qué pasa si el propietario cancela?</strong></p>
+<p>Si cancela <strong>antes</strong> del cobro Setup Fee: No hay comisión (no has perdido inversión).<br>Si cancela <strong>después</strong> del cobro: Comisión ya pagada se mantiene.</p>
+<hr>
+<p><strong>¿Puedo ser distribuidor part-time?</strong></p>
+<p>Sí. Muchos distribuidores empiezan part-time (10-20h/semana) suficiente para 1 tokenización cada 2-3 meses. Escalas a full-time si quieres.</p>
+<hr>
+<p><strong>¿Necesito oficina?</strong></p>
+<p>No. Trabajo 100% remoto:</p>
+<ul>
+<li>Meetings clientes: Videollamadas o en sus instalaciones</li>
+<li>CRM online acceso desde casa</li>
+<li>Material todo digital</li>
+</ul>
+<hr>
+<p><strong>¿Bashood compite con distribuidores?</strong></p>
+<p>No. Bashood NO comercializa directamente a propietarios de activos. Todo canal captación va vía distribuidores exclusivamente. No existe &quot;equipo comercial interno&quot; compitiendo.</p>
+<hr>
+<p><strong>¿Comisiones se pagan en crypto?</strong></p>
+<p>Tú eliges:</p>
+<ul>
+<li>EUR vía transferencia bancaria (SEPA)</li>
+<li>USDC/USDT (stablecoin)</li>
+<li>Mix (50% EUR, 50% crypto)</li>
+</ul>
+<p>Mayoría distribuidores prefiere EUR (simplicidad fiscal).</p>
+<hr>
+<p><strong>¿Qué pasa si mi equipo no genera volumen?</strong></p>
+<p>No hay riesgo financiero para el líder:</p>
+<ul>
+<li>Tus comisiones directas (30%) son independientes</li>
+<li>Comisión equipo (10%) solo si ellos tokenizan</li>
+<li>Sin penalizaciones ni costos fijos</li>
+</ul>
+<p>Peor caso: Mantienes ingresos como distribuidor individual.</p>
+<hr>
+<h3 id="183-fiscales-y-legales">18.3 Fiscales y Legales</h3>
+<p><strong>¿Tributo impuestos en mi país?</strong></p>
+<p>Sí, las comisiones tributan según jurisdicción:</p>
+<ul>
+<li>España: Actividad económica (IRPF/Sociedades)</li>
+<li>USA: Self-employment income</li>
+<li>EU: Similar a comisiones comerciales</li>
+</ul>
+<p>Proporcionamos certificados para declaración. Recomendamos consultar asesor fiscal local.</p>
+<hr>
+<p><strong>¿Necesito estar dado de alta como autónomo?</strong></p>
+<p>Depende de la legislación local:</p>
+<ul>
+<li>España: Sí (Actividad económica recurrente)</li>
+<li>USA: Sí (Self-employed/1099)</li>
+<li>EU: Consultar normativa local</li>
+</ul>
+<p>Bashood NO retiene IRPF (relación B2B entre profesionales).</p>
+<hr>
+<p><strong>¿Qué responsabilidad legal tengo como distribuidor?</strong></p>
+<p>Ver sección 13 completa (Marco Legal). Resumen:</p>
+<ul>
+<li>Actúas como comercial independiente</li>
+<li>NO puedes prometer ROI ni asesorar inversión</li>
+<li>Debes usar solo material oficial</li>
+<li>Declaras que actúas de forma independiente</li>
+</ul>
+<hr>
+<h2 id="🎯-19-próximos-pasos">🎯 19. PRÓXIMOS PASOS</h2>
+<h3 id="191-para-distribuidores-interesados">19.1 Para Distribuidores Interesados</h3>
+<p><strong>Paso 1:</strong> Leer documento completo (Partes 1 y 2)</p>
+<p><strong>Paso 2:</strong> Explorar testnet Base Sepolia</p>
+<ul>
+<li>Basescan: <a href="https://sepolia.basescan.org">https://sepolia.basescan.org</a></li>
+<li>Ver NFTs tokenizados: Tokens 202-206</li>
+<li>IPFS metadata: ipfs://bafybeieqjhmqefr4fgypmulsgvzxdv5xawwkdjlpvjxrwh5gxqdmva/</li>
+</ul>
+<p><strong>Paso 3:</strong> Enviar solicitud</p>
+<ul>
+<li>Email: <a href="mailto:&#100;&#105;&#115;&#x74;&#x72;&#x69;&#98;&#117;&#x74;&#111;&#x72;&#x73;&#64;&#98;&#x61;&#x73;&#104;&#x6f;&#111;&#x64;&#x2e;&#105;&#111;">&#100;&#105;&#115;&#x74;&#x72;&#x69;&#98;&#117;&#x74;&#111;&#x72;&#x73;&#64;&#98;&#x61;&#x73;&#104;&#x6f;&#111;&#x64;&#x2e;&#105;&#111;</a></li>
+<li>Incluir: CV, sector, preferencia individual/líder, dedicación</li>
+</ul>
+<p><strong>Paso 4:</strong> Agendar training</p>
+<ul>
+<li>3 sessions incluidas (ver sección 16.2)</li>
+<li>Material completo proporcionado</li>
+<li>Certificación distribuidor oficial</li>
+</ul>
+<hr>
+<h3 id="192-comisiones-distribuidores-referidos">19.2 Comisiones Distribuidores Referidos</h3>
+<p><strong>Inversores referidos:</strong> 1% lifetime revenue<br><strong>Constructoras referidas:</strong> 0.5% contract value<br><strong>Fabricantes referidos:</strong> $5,000 flat + 0.5% primer año</p>
+<p><em>(Aplica solo tras tokenización exitosa y cobro efectivo)</em></p>
+<hr>
+<h3 id="193-contacto-y-soporte">19.3 Contacto y Soporte</h3>
+<p><strong>Email General:</strong> <a href="mailto:&#x64;&#x69;&#115;&#x74;&#x72;&#105;&#x62;&#117;&#116;&#x6f;&#x72;&#115;&#x40;&#x62;&#x61;&#115;&#x68;&#111;&#111;&#x64;&#x2e;&#x69;&#111;">&#x64;&#x69;&#115;&#x74;&#x72;&#105;&#x62;&#117;&#116;&#x6f;&#x72;&#115;&#x40;&#x62;&#x61;&#115;&#x68;&#111;&#111;&#x64;&#x2e;&#x69;&#111;</a><br><strong>Email Inversores:</strong> <a href="mailto:&#x69;&#110;&#118;&#x65;&#x73;&#x74;&#64;&#98;&#x61;&#115;&#x68;&#x6f;&#111;&#x64;&#46;&#x63;&#111;&#109;">&#x69;&#110;&#118;&#x65;&#x73;&#x74;&#64;&#98;&#x61;&#115;&#x68;&#x6f;&#111;&#x64;&#46;&#x63;&#111;&#109;</a><br><strong>Email Constructoras:</strong> <a href="mailto:&#99;&#111;&#x6e;&#115;&#116;&#x72;&#117;&#x63;&#x74;&#105;&#x6f;&#110;&#x40;&#x62;&#97;&#115;&#104;&#111;&#111;&#x64;&#46;&#99;&#x6f;&#109;">&#99;&#111;&#x6e;&#115;&#116;&#x72;&#117;&#x63;&#x74;&#105;&#x6f;&#110;&#x40;&#x62;&#97;&#115;&#104;&#111;&#111;&#x64;&#46;&#99;&#x6f;&#109;</a><br><strong>Email Fabricantes:</strong> <a href="mailto:&#98;&#x61;&#115;&#x68;&#111;&#111;&#x64;&#116;&#111;&#107;&#101;&#x6e;&#64;&#103;&#109;&#x61;&#105;&#108;&#46;&#99;&#111;&#109;">&#98;&#x61;&#115;&#x68;&#111;&#111;&#x64;&#116;&#111;&#107;&#101;&#x6e;&#64;&#103;&#109;&#x61;&#105;&#108;&#46;&#99;&#111;&#109;</a></p>
+<p><strong>WhatsApp:</strong> +34 XXX XXX XXX<br><strong>Telegram:</strong> @BashoodInvest<br><strong>Discord:</strong> discord.gg/bashood<br><strong>LinkedIn:</strong> BASHOOD Official</p>
+<p><strong>Web:</strong> bashood.com (próximamente)</p>
+<hr>
+<h2 id="📝-contrato-y-términos">📝 CONTRATO Y TÉRMINOS</h2>
+<h3 id="acuerdo-distribuidor-bashood---resumen">Acuerdo Distribuidor Bashood - Resumen</h3>
+<p><strong>Duración:</strong> 12 meses renovable automáticamente</p>
+<p><strong>Comisiones:</strong></p>
+<ul>
+<li>30% Setup Fee ventas directas</li>
+<li>10% Setup Fee ventas equipo (si líder)</li>
+<li>Pagos NET-15 (15 días tras cobro efectivo cliente)</li>
+</ul>
+<p><strong>Exclusividad:</strong> NO requerida (puedes comercializar otros productos)</p>
+<p><strong>Territorio:</strong> Sin límite geográfico (España/EU/Internacional disponible)</p>
+<p><strong>Formación:</strong> Incluida + soporte continuo (sección 16)</p>
+<p><strong>Material:</strong> Bashood provee todo material oficial (no costos iniciales para distribuidores)</p>
+<p><strong>Terminación:</strong> Cualquier parte puede terminar con 30 días aviso escrito</p>
+<p><strong>Comisiones pendientes:</strong> Se pagan incluso tras terminación contrato (por tokenizaciones ya completadas)</p>
+<p><strong>Contrato completo:</strong> Se proporciona tras aprobación solicitud distribuidor</p>
+<hr>
+<h2 id="✅-resumen-ejecutivo-final">✅ RESUMEN EJECUTIVO FINAL</h2>
+<p><strong>BASHOOD es:</strong> Plataforma tokenización activos industriales en Base Blockchain (Coinbase)</p>
+<p><strong>Activos tokenizados:</strong> Impresoras 3D, robots móviles, fábricas modulares ($100k-$5.2M)</p>
+<p><strong>Servicios:</strong> Fractional ownership, Micro-leasing, Performance bonds, Servicios técnicos</p>
+<p><strong>Tecnología:</strong> Base L2, BASHOOD-RWA-1 standard, Chainlink Oracle, IPFS, Smart contracts auditados</p>
+<p><strong>Programa Distribuidor:</strong></p>
+<ul>
+<li>Comercialización servicio tokenización a propietarios activos</li>
+<li>Comisión 30% Setup Fee (3% valor activo)</li>
+<li>Estructura 2 niveles: Individual + Líder equipo (10% adicional equipo)</li>
+<li>Marco legal completo: NO venta tokens, NO asesoramiento inversión</li>
+</ul>
+<p><strong>Proyecciones ilustrativas:</strong></p>
+<ul>
+<li>Distribuidor individual: €35k-€130k/año (según actividad y tipo activos)</li>
+<li>Líder equipo: €60k-€160k/año (escenario consolidado)</li>
+</ul>
+<p><strong>⚠️ ADVERTENCIA:</strong> Escenarios ilustrativos, no garantías. Resultados dependen dedicación, experiencia, red contactos, mercado.</p>
+<p><strong>Inversión inicial:</strong> €0 (material incluido)</p>
+<p><strong>Soporte:</strong> Formación completa, CRM, material oficial, coordinación técnica</p>
+<p><strong>Marco regulatorio:</strong> Compatible MiCA (Q2 2026), no aplica MiFID II (no vende instrumentos financieros)</p>
+<p><strong>Siguiente paso:</strong> Email <a href="mailto:&#x64;&#x69;&#115;&#116;&#114;&#105;&#98;&#x75;&#116;&#x6f;&#114;&#115;&#x40;&#98;&#97;&#x73;&#x68;&#111;&#x6f;&#100;&#x2e;&#105;&#111;">&#x64;&#x69;&#115;&#116;&#114;&#105;&#98;&#x75;&#116;&#x6f;&#114;&#115;&#x40;&#98;&#97;&#x73;&#x68;&#111;&#x6f;&#100;&#x2e;&#105;&#111;</a> con CV y experiencia comercial B2B</p>
+<hr>
+<p><strong>Preparado por:</strong> Bashood Partnerships Team<br><strong>Fecha:</strong> Febrero 2026<br><strong>Versión:</strong> 2.1 (Completa - Revisión Legal y Regulatoria)<br><strong>Contacto:</strong> <a href="mailto:&#x64;&#x69;&#115;&#x74;&#x72;&#105;&#98;&#x75;&#116;&#x6f;&#114;&#115;&#x40;&#98;&#x61;&#x73;&#x68;&#x6f;&#x6f;&#100;&#46;&#x69;&#111;">&#x64;&#x69;&#115;&#x74;&#x72;&#105;&#98;&#x75;&#116;&#x6f;&#114;&#115;&#x40;&#98;&#x61;&#x73;&#x68;&#x6f;&#x6f;&#100;&#46;&#x69;&#111;</a><br><strong>WhatsApp:</strong> +34 XXX XXX XXX</p>
+<hr>
+<p><strong>👉 Solicita información:</strong> <a href="mailto:&#100;&#105;&#115;&#116;&#114;&#x69;&#x62;&#117;&#116;&#x6f;&#x72;&#x73;&#64;&#x62;&#x61;&#x73;&#104;&#x6f;&#x6f;&#100;&#46;&#105;&#x6f;">&#100;&#105;&#115;&#116;&#114;&#x69;&#x62;&#117;&#116;&#x6f;&#x72;&#x73;&#64;&#x62;&#x61;&#x73;&#104;&#x6f;&#x6f;&#100;&#46;&#105;&#x6f;</a></p>
+<hr>
+<h2 id="⚠️-disclaimer-final">⚠️ DISCLAIMER FINAL</h2>
+<p>Este documento tiene carácter informativo y comercial. No constituye oferta de empleo ni de instrumentos financieros. La relación establecida es de carácter mercantil entre profesionales independientes.</p>
+<p><strong>Todos los escenarios de ingresos mostrados son ilustrativos y están basados en hipótesis que pueden no materializarse.</strong> Los resultados individuales dependerán de múltiples factores incluyendo pero no limitado a: dedicación, experiencia comercial, red de contactos, condiciones de mercado, ejecución de estrategia comercial, y factores externos no controlables.</p>
+<p><strong>El distribuidor comercializa el servicio de tokenización a propietarios de activos físicos. No vende tokens a inversores, no gestiona fondos de terceros, no asesora sobre inversión, y no puede prometer rentabilidades específicas.</strong></p>
+<p>Bashood se reserva el derecho de modificar términos del programa distribuidor con 30 días de notificación. Cambios regulatorios (MiCA, legislación local) pueden requerir adaptaciones del programa.</p>
+<p>Para dudas legales o regulatorias específicas, consultar con asesor legal en tu jurisdicción.</p>
+<hr>
+<p><strong>FIN DEL DOCUMENTO</strong></p>
+<p><em>Documento confidencial - Uso exclusivo distribuidores autorizados BASHOOD</em></p>
+
+
+    <div class="page-footer">
+        Bashood RWA Technologies | Programa Profesional de Comercialización v2.1 | distributors@bashood.io
+    </div>
+</body>
+</html>

@@ -1,3 +1,4 @@
+import "./IBashoodRWA.sol";
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
@@ -5,7 +6,8 @@ import "@openzeppelin/contracts-upgradeable/token/ERC721/ERC721Upgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/access/AccessControlUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
 import "@openzeppelin/contracts-upgradeable/proxy/utils/UUPSUpgradeable.sol";
-import "./IBashoodRWA.sol";
+
+import "../utils/DepreciationEngine.sol";
 
 /**
  * @title BashoodRWAReference
@@ -37,6 +39,40 @@ contract BashoodRWAReference is
     UUPSUpgradeable,
     IBashoodRWA 
 {
+    // ============ Depreciation Events ============
+    event DepreciationCalculated(uint256 indexed tokenId, uint256 depreciationBps);
+
+    // ============ Depreciation Calculation ============
+
+    /**
+     * @dev Internal: Calcula la depreciación (basis points) según el modelo y métricas del token
+     */
+    function _calculateDepreciation(uint256 tokenId) internal view returns (uint256) {
+        _requireOwned(tokenId);
+        FinancialData memory financial = _financialData[tokenId];
+        OperationalMetrics memory operational = _operationalMetrics[tokenId];
+
+        if (financial.depModel == DepreciationModel.LOAD_BASED) {
+            return DepreciationEngine.loadBased(operational.totalLoadLifted, operational.maxLoadLifetime);
+        } else if (financial.depModel == DepreciationModel.EXTRUSION_BASED) {
+            return DepreciationEngine.extrusionBased(operational.metersExtruded, operational.maxMetersLifetime);
+        } else if (financial.depModel == DepreciationModel.SETUP_BASED) {
+            return DepreciationEngine.setupBased(operational.setupCount, operational.maxSetups);
+        } else if (financial.depModel == DepreciationModel.LINEAR) {
+            return DepreciationEngine.linearTimeBased(operational.operatingHours, operational.maxLifetimeHours);
+        }
+        return 0;
+    }
+
+    /**
+     * @notice Devuelve la depreciación actual (basis points)
+     */
+    function getDepreciation(uint256 tokenId) public view returns (uint256) {
+        uint256 dep = _calculateDepreciation(tokenId);
+        // Evento solo para trazabilidad (no en view, pero aquí para consistencia de interfaz)
+        // emit DepreciationCalculated(tokenId, dep); // Comentado: no se puede emitir en view
+        return dep;
+    }
     // ============ Constants ============
     
     bytes32 public constant ASSET_MANAGER_ROLE = keccak256("ASSET_MANAGER_ROLE");
@@ -333,26 +369,12 @@ contract BashoodRWAReference is
             uint256 usagePct = (operational.setupCount * BASIS_POINTS) / maxSetups;
             return usagePct > BASIS_POINTS ? BASIS_POINTS : usagePct;
             
-        } else if (financial.depModel == DepreciationModel.EFFICIENCY_BASED) {
-            // CyBe: Depreciation based on efficiency degradation
-            if (operational.operatingHours == 0) return 0;
-            // Assume 1% degradation per 100 hours
-            uint256 degradationPct = (operational.operatingHours * 100) / 10000;
-            return degradationPct > BASIS_POINTS ? BASIS_POINTS : degradationPct;
-            
         } else if (financial.depModel == DepreciationModel.LINEAR) {
             // Mighty Buildings: Linear time-based depreciation
             if (operational.maxLifetimeHours == 0) return 0;
             uint256 usagePct = (operational.operatingHours * BASIS_POINTS) / operational.maxLifetimeHours;
             return usagePct > BASIS_POINTS ? BASIS_POINTS : usagePct;
             
-        } else if (financial.depModel == DepreciationModel.TIME_BASED) {
-            // Standard time-based (age-based) depreciation
-            // Assume 10% per year for simplicity
-            uint256 age = block.timestamp - operational.lastMaintenanceDate;
-            // Fix: Multiply before divide to avoid precision loss
-            uint256 depPct = (age * 1000) / SECONDS_PER_YEAR; // 10% per year
-            return depPct > BASIS_POINTS ? BASIS_POINTS : depPct;
         }
         
         return 0;
@@ -503,148 +525,11 @@ contract BashoodRWAReference is
         emit TelemetryDataReceived(tokenId, msg.sender, dataHash, uint32(block.timestamp));
     }
     
-    // ============ Tokenization Strategies ============
-    
-    /**
-     * @notice Lease asset (for MICRO_LEASING strategy)
-     * @param tokenId Token ID
-     * @param duration Lease duration in days
-     * @return leaseId Unique lease identifier
-     */
-    function leaseAsset(uint256 tokenId, uint32 duration) 
-        external 
-        payable
-        returns (uint256 leaseId)
-    {
-        _requireOwned(tokenId);
-        
-        TokenizationConfig memory config = _tokenizationConfig[tokenId];
-        require(config.strategy == TokenizationStrategy.MICRO_LEASING, "Not a leasing asset");
-        
-        uint256 totalCost = config.dailyLeaseRate * duration;
-        require(msg.value >= totalCost, "Insufficient payment");
-        
-        // Simple lease ID = tokenId + timestamp
-        leaseId = (tokenId << 128) | block.timestamp;
-        
-        uint32 startDate = uint32(block.timestamp);
-        uint32 endDate = startDate + (duration * 1 days);
-        
-        emit AssetLeased(tokenId, msg.sender, startDate, endDate, config.dailyLeaseRate, totalCost);
-        
-        return leaseId;
-    }
-    
-    /**
-     * @notice Trigger performance bonus (for PERFORMANCE_BOND strategy)
-     * @param tokenId Token ID
-     * @param achieved Current performance metric achieved
-     * @param baseline Baseline performance metric
-     */
-    function triggerPerformanceBonus(
-        uint256 tokenId,
-        uint256 achieved,
-        uint256 baseline
-    ) external onlyRole(ORACLE_ROLE) {
-        _requireOwned(tokenId);
-        
-        TokenizationConfig memory config = _tokenizationConfig[tokenId];
-        require(config.strategy == TokenizationStrategy.PERFORMANCE_BOND, "Not a performance bond asset");
-        require(achieved >= baseline, "Performance threshold not met");
-        
-        uint256 bonusAmount = ((achieved - baseline) * config.performanceBonusPct) / 100;
-        
-        emit PerformanceBonusTriggered(tokenId, ownerOf(tokenId), bonusAmount, "Performance exceeded baseline");
-    }
-    
     // ============ Certification & Compliance ============
-    
-    /**
-     * @notice Update certification data
-     * @param tokenId Token ID
-     * @param certificationType Type of certification (CE, UL, ISO)
-     * @param expiryDate Expiry date timestamp
-     * @param documentHash IPFS hash of certificate document
-     */
-    function updateCertification(
-        uint256 tokenId,
-        string calldata certificationType,
-        uint32 expiryDate,
-        string calldata documentHash
-    ) external onlyRole(ASSET_MANAGER_ROLE) {
-        _requireOwned(tokenId);
-        
-        // Update certification based on type
-        if (keccak256(bytes(certificationType)) == keccak256(bytes("CE"))) {
-            _certificationData[tokenId].ceMark = true;
-        } else if (keccak256(bytes(certificationType)) == keccak256(bytes("UL3401"))) {
-            _certificationData[tokenId].ul3401 = true;
-        } else if (keccak256(bytes(certificationType)) == keccak256(bytes("ISO9001"))) {
-            _certificationData[tokenId].iso9001 = true;
-        } else if (keccak256(bytes(certificationType)) == keccak256(bytes("ISO14001"))) {
-            _certificationData[tokenId].iso14001 = true;
-        } else if (keccak256(bytes(certificationType)) == keccak256(bytes("IBC"))) {
-            _certificationData[tokenId].ibcCompliant = true;
-        } else if (keccak256(bytes(certificationType)) == keccak256(bytes("OSHA"))) {
-            _certificationData[tokenId].oshaCompliant = true;
-        }
-        
-        emit CertificationUpdated(tokenId, certificationType, true, expiryDate);
-    }
-    
-    /**
-     * @notice Check if asset is compliant (all required certifications valid)
-     * @param tokenId Token ID
-     * @return True if compliant
-     */
-    function isCompliant(uint256 tokenId) 
-        external 
-        view 
-        returns (bool) 
-    {
-        _requireOwned(tokenId);
-        
-        CertificationData memory cert = _certificationData[tokenId];
-        AssetIdentification memory ident = _assetIdentification[tokenId];
-        
-        // Check required certifications based on category
-        if (ident.category == AssetCategory.CONSTRUCTION_3D_PRINTER_GANTRY ||
-            ident.category == AssetCategory.CONSTRUCTION_3D_PRINTER_MOBILE) {
-            // Construction equipment requires CE Mark or UL certification
-            return cert.ceMark || cert.ul3401;
-        }
-        
-        return true; // Default compliant
-    }
+    // Removed: updateCertification(), isCompliant() - Moved to off-chain validation
     
     // ============ Insurance Management ============
-    
-    /**
-     * @notice Update insurance data
-     * @param tokenId Token ID
-     * @param provider Insurance provider name
-     * @param coverageAmount Coverage amount
-     * @param annualPremium Annual premium cost
-     * @param expiryDate Policy expiry date
-     */
-    function updateInsurance(
-        uint256 tokenId,
-        string calldata provider,
-        uint256 coverageAmount,
-        uint256 annualPremium,
-        uint32 expiryDate
-    ) external onlyRole(ASSET_MANAGER_ROLE) {
-        _requireOwned(tokenId);
-        
-        InsuranceData storage insurance = _insuranceData[tokenId];
-        insurance.provider = provider;
-        insurance.policyNumber = ""; // Set by provider
-        insurance.coverageAmount = coverageAmount;
-        insurance.annualPremium = annualPremium;
-        insurance.expiryDate = expiryDate;
-        
-        emit InsuranceUpdated(tokenId, provider, coverageAmount, expiryDate);
-    }
+    // Removed: updateInsurance() - Moved to off-chain tracking
     
     // ============ Metadata ============
     

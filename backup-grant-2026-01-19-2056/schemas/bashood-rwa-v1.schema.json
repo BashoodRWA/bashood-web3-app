@@ -1,0 +1,560 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://bashood.com/schemas/rwa/v1",
+  "title": "Bashood RWA Standard v1.0",
+  "description": "Standard schema for tokenizing real-world industrial assets on Base L2",
+  "version": "1.0.0",
+  "type": "object",
+  "required": ["standard", "asset", "identification", "financials", "operational"],
+  
+  "properties": {
+    "standard": {
+      "type": "string",
+      "const": "BASHOOD-RWA-1",
+      "description": "Standard identifier"
+    },
+    
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$",
+      "default": "1.0.0"
+    },
+    
+    "asset": {
+      "type": "object",
+      "required": ["name", "category", "subcategory"],
+      "properties": {
+        "name": {"type": "string", "minLength": 1, "maxLength": 200},
+        "description": {"type": "string", "maxLength": 2000},
+        "category": {
+          "type": "string",
+          "enum": [
+            "CONSTRUCTION_3D_PRINTER_GANTRY",
+            "CONSTRUCTION_3D_PRINTER_MOBILE",
+            "MODULAR_FACTORY_UV",
+            "HEAVY_VEHICLE",
+            "ENERGY_EQUIPMENT",
+            "LOGISTICS_INFRASTRUCTURE",
+            "RAW_MATERIALS",
+            "REAL_ESTATE"
+          ]
+        },
+        "subcategory": {"type": "string"},
+        "manufacturer": {"type": "string"},
+        "model": {"type": "string"},
+        "tags": {"type": "array", "items": {"type": "string"}}
+      }
+    },
+    
+    "identification": {
+      "type": "object",
+      "required": ["serialNumber"],
+      "properties": {
+        "serialNumber": {"type": "string", "minLength": 1},
+        "yearManufactured": {"type": "integer", "minimum": 1900, "maximum": 2100},
+        "countryOfOrigin": {"type": "string", "pattern": "^[A-Z]{2,3}$"},
+        "internalAssetId": {"type": "string"},
+        "previousOwners": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {"type": "string"},
+              "period": {"type": "string"}
+            }
+          }
+        }
+      }
+    },
+    
+    "specifications": {
+      "type": "object",
+      "description": "Technical specifications (varies by asset type)",
+      "properties": {
+        "dimensions": {
+          "type": "object",
+          "properties": {
+            "length": {"type": "number"},
+            "width": {"type": "number"},
+            "height": {"type": "number"},
+            "unit": {"type": "string", "enum": ["mm", "cm", "m", "in", "ft"]}
+          }
+        },
+        "weight": {
+          "type": "object",
+          "properties": {
+            "value": {"type": "number"},
+            "unit": {"type": "string", "enum": ["kg", "ton", "lb"]}
+          }
+        },
+        "power": {
+          "type": "object",
+          "properties": {
+            "consumption": {"type": "number"},
+            "unit": {"type": "string", "enum": ["kW", "W", "hp"]}
+          }
+        },
+        "loadCapacity": {
+          "type": "object",
+          "description": "For EVOCONS: 3000 kg",
+          "properties": {
+            "value": {"type": "number"},
+            "unit": {"type": "string", "enum": ["kg", "ton", "lb"]}
+          }
+        },
+        "displacementSpeed": {
+          "type": "object",
+          "description": "For EVOCONS: 40 m/min",
+          "properties": {
+            "value": {"type": "number"},
+            "unit": {"type": "string", "enum": ["m/min", "m/s", "ft/min"]}
+          }
+        },
+        "printVolume": {
+          "type": "object",
+          "description": "For 3D printers",
+          "properties": {
+            "x": {"type": "number"},
+            "y": {"type": "number"},
+            "z": {"type": "number"},
+            "unit": {"type": "string", "enum": ["m", "cm", "ft"]}
+          }
+        },
+        "materialType": {
+          "type": "string",
+          "enum": ["CONCRETE", "LAVACRETE", "CYBE_MORTAR", "UV_RESIN", "STEEL", "OTHER"]
+        },
+        "materialPSI": {
+          "type": "integer",
+          "description": "For ICON Lavacrete: 6000 psi"
+        },
+        "setupTime": {
+          "type": "object",
+          "description": "For Apis Cor: < 60 min",
+          "properties": {
+            "value": {"type": "number"},
+            "unit": {"type": "string", "enum": ["min", "hour", "day"]}
+          }
+        },
+        "autoLubrication": {
+          "type": "boolean",
+          "description": "EVOCONS feature"
+        },
+        "uvCureEfficiency": {
+          "type": "number",
+          "description": "For Mighty Buildings",
+          "minimum": 0,
+          "maximum": 100
+        }
+      }
+    },
+    
+    "financials": {
+      "type": "object",
+      "required": ["purchasePrice", "currentValue"],
+      "properties": {
+        "purchasePrice": {
+          "type": "object",
+          "required": ["value", "currency", "date"],
+          "properties": {
+            "value": {"type": "number", "minimum": 0},
+            "currency": {"type": "string", "pattern": "^[A-Z]{3}$"},
+            "date": {"type": "string", "format": "date"}
+          }
+        },
+        "currentValue": {
+          "type": "object",
+          "required": ["value", "currency"],
+          "properties": {
+            "value": {"type": "number", "minimum": 0},
+            "currency": {"type": "string", "pattern": "^[A-Z]{3}$"},
+            "lastAppraisal": {"type": "string", "format": "date"},
+            "appraisalMethod": {"type": "string"}
+          }
+        },
+        "depreciationModel": {
+          "type": "string",
+          "enum": ["LOAD_BASED", "EXTRUSION_BASED", "SETUP_BASED", "TIME_BASED", "EFFICIENCY_BASED", "LINEAR"]
+        },
+        "residualValue": {
+          "type": "object",
+          "description": "Salvage value at end of life (10-25% of CAPEX)",
+          "properties": {
+            "percentage": {"type": "number", "minimum": 0, "maximum": 100},
+            "estimatedValue": {"type": "number"},
+            "currency": {"type": "string"}
+          }
+        },
+        "insuranceValue": {
+          "type": "object",
+          "properties": {
+            "value": {"type": "number"},
+            "currency": {"type": "string"},
+            "annualPremium": {"type": "number"},
+            "premiumPercentage": {"type": "number", "description": "1-3% of CAPEX typically"}
+          }
+        },
+        "maintenanceReserve": {
+          "type": "object",
+          "description": "5-8% of rental income reserved for maintenance",
+          "properties": {
+            "percentage": {"type": "number", "minimum": 0, "maximum": 100},
+            "currentBalance": {"type": "number"},
+            "currency": {"type": "string"}
+          }
+        }
+      }
+    },
+    
+    "operational": {
+      "type": "object",
+      "required": ["status"],
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": ["OPERATIONAL", "MAINTENANCE", "INACTIVE", "DECOMMISSIONED"]
+        },
+        "operatingHours": {
+          "type": "number",
+          "description": "Total hours of operation"
+        },
+        "maxLifetimeHours": {
+          "type": "number",
+          "description": "Expected lifetime in hours"
+        },
+        "usageMetrics": {
+          "type": "object",
+          "description": "Specific to asset type",
+          "properties": {
+            "totalLoadLifted": {
+              "type": "object",
+              "description": "For EVOCONS: current/max 500,000 tons",
+              "properties": {
+                "current": {"type": "number"},
+                "max": {"type": "number"},
+                "unit": {"type": "string", "enum": ["ton", "kg"]}
+              }
+            },
+            "metersExtruded": {
+              "type": "object",
+              "description": "For ICON: meters of Lavacrete",
+              "properties": {
+                "current": {"type": "number"},
+                "max": {"type": "number"},
+                "unit": {"type": "string", "const": "m"}
+              }
+            },
+            "setupCount": {
+              "type": "object",
+              "description": "For Apis Cor: number of site setups",
+              "properties": {
+                "current": {"type": "integer"},
+                "max": {"type": "integer"}
+              }
+            },
+            "cubicMetersPerDay": {
+              "type": "number",
+              "description": "For CyBe: daily output"
+            },
+            "panelsProduced": {
+              "type": "integer",
+              "description": "For Mighty Buildings"
+            }
+          }
+        },
+        "lastMaintenance": {"type": "string", "format": "date"},
+        "nextMaintenanceRequired": {"type": "string", "format": "date"},
+        "maintenanceIntervalHours": {
+          "type": "number",
+          "description": "Hours between maintenance (e.g., 2500 for EVOCONS)"
+        },
+        "maintenanceCostPercentage": {
+          "type": "number",
+          "description": "2-3% of CAPEX annually"
+        },
+        "location": {
+          "type": "object",
+          "properties": {
+            "facility": {"type": "string"},
+            "address": {"type": "string"},
+            "city": {"type": "string"},
+            "country": {"type": "string"},
+            "gps": {
+              "type": "object",
+              "properties": {
+                "latitude": {"type": "number"},
+                "longitude": {"type": "number"}
+              }
+            },
+            "mobile": {"type": "boolean", "description": "For Apis Cor"}
+          }
+        }
+      }
+    },
+    
+    "certifications": {
+      "type": "object",
+      "properties": {
+        "required": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "enum": ["CE_MARK", "UL_3401", "ISO_9001", "ISO_14001", "IBC", "OSHA"]
+              },
+              "issueDate": {"type": "string", "format": "date"},
+              "expiryDate": {"type": "string", "format": "date"},
+              "issuingBody": {"type": "string"},
+              "documentHash": {"type": "string", "pattern": "^(Qm|bafy)[a-zA-Z0-9]{44,}$"}
+            }
+          }
+        },
+        "optional": {
+          "type": "array",
+          "items": {"type": "string"}
+        }
+      }
+    },
+    
+    "insurance": {
+      "type": "object",
+      "properties": {
+        "provider": {"type": "string"},
+        "policyNumber": {"type": "string"},
+        "type": {
+          "type": "string",
+          "enum": ["INLAND_MARINE", "EQUIPMENT_BREAKDOWN", "GENERAL_LIABILITY", "COMPREHENSIVE"]
+        },
+        "coverage": {
+          "type": "object",
+          "properties": {
+            "value": {"type": "number"},
+            "currency": {"type": "string"}
+          }
+        },
+        "annualPremium": {
+          "type": "object",
+          "properties": {
+            "value": {"type": "number"},
+            "currency": {"type": "string"},
+            "percentageOfCAPEX": {"type": "number", "description": "1.5-2.5% for mobile assets"}
+          }
+        },
+        "expiryDate": {"type": "string", "format": "date"}
+      }
+    },
+    
+    "telemetry": {
+      "type": "object",
+      "description": "Real-time data integration",
+      "properties": {
+        "provider": {
+          "type": "string",
+          "enum": ["EVOCONS_REALTIME", "ICON_MAGWARE", "APISCOR_CLOUD_GPS", "CYBE_AUTO", "MIGHTY_IOT", "NONE"]
+        },
+        "apiEndpoint": {"type": "string", "format": "uri"},
+        "apiKeyEncrypted": {"type": "string"},
+        "metrics": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {"type": "string"},
+              "updateFrequency": {
+                "type": "string",
+                "enum": ["REALTIME", "HOURLY", "DAILY", "WEEKLY", "MONTHLY", "ON_DEMAND"]
+              },
+              "lastValue": {"type": ["number", "string"]},
+              "lastUpdate": {"type": "string", "format": "date-time"}
+            }
+          }
+        },
+        "oracleIntegration": {
+          "type": "object",
+          "properties": {
+            "chainlinkNode": {"type": "boolean"},
+            "oracleAddress": {"type": "string", "pattern": "^0x[a-fA-F0-9]{40}$"},
+            "verificationMethod": {"type": "string"}
+          }
+        }
+      }
+    },
+    
+    "tokenization": {
+      "type": "object",
+      "required": ["strategy"],
+      "properties": {
+        "strategy": {
+          "type": "string",
+          "enum": ["FULL_OWNERSHIP", "FRACTIONAL", "MICRO_LEASING", "PERFORMANCE_BOND", "REVENUE_SHARE"]
+        },
+        "fractional": {
+          "type": "object",
+          "properties": {
+            "totalShares": {"type": "integer", "minimum": 1},
+            "minInvestment": {
+              "type": "object",
+              "properties": {
+                "value": {"type": "number"},
+                "currency": {"type": "string"}
+              }
+            },
+            "revenueSharePercentage": {"type": "number", "minimum": 0, "maximum": 100}
+          }
+        },
+        "microLeasing": {
+          "type": "object",
+          "description": "For Apis Cor mobile units",
+          "properties": {
+            "minPeriod": {
+              "type": "object",
+              "properties": {
+                "value": {"type": "integer"},
+                "unit": {"type": "string", "enum": ["day", "week", "month"]}
+              }
+            },
+            "dailyRate": {
+              "type": "object",
+              "properties": {
+                "value": {"type": "number"},
+                "currency": {"type": "string"}
+              }
+            },
+            "setupFee": {
+              "type": "object",
+              "properties": {
+                "value": {"type": "number"},
+                "currency": {"type": "string"}
+              }
+            }
+          }
+        },
+        "performanceBonus": {
+          "type": "object",
+          "description": "For CyBe efficiency-based rewards",
+          "properties": {
+            "trigger": {"type": "string"},
+            "bonusRate": {"type": "number"},
+            "measurement": {"type": "string"},
+            "baseline": {"type": "number"},
+            "bonusThreshold": {"type": "number"}
+          }
+        }
+      }
+    },
+    
+    "esg": {
+      "type": "object",
+      "description": "Environmental, Social, Governance metrics",
+      "properties": {
+        "carbonFootprint": {
+          "type": "object",
+          "properties": {
+            "annualTonsCO2": {"type": "number"},
+            "offsetPercentage": {"type": "number"}
+          }
+        },
+        "wasteReduction": {
+          "type": "number",
+          "description": "For Mighty Buildings: 0% waste"
+        },
+        "energyEfficiency": {
+          "type": "string",
+          "enum": ["A+", "A", "B", "C", "D"]
+        },
+        "greenBondEligible": {"type": "boolean"},
+        "sustainabilityCertifications": {
+          "type": "array",
+          "items": {"type": "string"}
+        }
+      }
+    },
+    
+    "secondaryMarket": {
+      "type": "object",
+      "properties": {
+        "marketExists": {"type": "boolean"},
+        "averageRetentionRate": {
+          "type": "number",
+          "description": "60% after 3 years for CyBe equipment"
+        },
+        "liquidityScore": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 10
+        },
+        "comparableSales": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "saleDate": {"type": "string", "format": "date"},
+              "salePrice": {"type": "number"},
+              "age": {"type": "number"},
+              "condition": {"type": "string"}
+            }
+          }
+        }
+      }
+    },
+    
+    "documentation": {
+      "type": "object",
+      "properties": {
+        "images": {
+          "type": "array",
+          "items": {"type": "string", "pattern": "^(https?://|ipfs://|Qm|bafy)"}
+        },
+        "manuals": {
+          "type": "array",
+          "items": {"type": "string"}
+        },
+        "certificates": {
+          "type": "array",
+          "items": {"type": "string"}
+        },
+        "inspectionReports": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "date": {"type": "string", "format": "date"},
+              "inspector": {"type": "string"},
+              "result": {"type": "string", "enum": ["PASS", "CONDITIONAL", "FAIL"]},
+              "documentHash": {"type": "string"}
+            }
+          }
+        },
+        "maintenanceRecords": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "date": {"type": "string", "format": "date"},
+              "type": {"type": "string", "enum": ["PREVENTIVE", "CORRECTIVE", "MAJOR_OVERHAUL"]},
+              "cost": {"type": "number"},
+              "provider": {"type": "string"},
+              "notes": {"type": "string"}
+            }
+          }
+        }
+      }
+    },
+    
+    "ownership": {
+      "type": "object",
+      "required": ["legalOwner"],
+      "properties": {
+        "legalOwner": {"type": "string"},
+        "custodian": {"type": "string"},
+        "tokenized": {"type": "boolean"},
+        "tokenContract": {"type": "string", "pattern": "^0x[a-fA-F0-9]{40}$"},
+        "tokenId": {"type": "integer"},
+        "blockchain": {"type": "string", "enum": ["BASE", "ETHEREUM", "OPTIMISM", "ARBITRUM"]},
+        "chainId": {"type": "integer"}
+      }
+    }
+  }
+}

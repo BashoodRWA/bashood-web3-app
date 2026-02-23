@@ -1,0 +1,5288 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Curso Formación Bashood RWA - Programa Completo</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 20mm;
+        }
+        
+        * {
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #2c3e50;
+            max-width: 210mm;
+            margin: 0 auto;
+            padding: 20px;
+            background: #ffffff;
+        }
+        
+        /* Portada */
+        .cover-page {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            margin: -20px;
+            padding: 40px;
+            page-break-after: always;
+        }
+        
+        .cover-page h1 {
+            font-size: 48px;
+            margin: 0 0 20px 0;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .cover-page .emoji {
+            font-size: 80px;
+            margin-bottom: 30px;
+        }
+        
+        .cover-page .project-name {
+            font-size: 32px;
+            margin: 20px 0;
+            font-weight: 600;
+        }
+        
+        .cover-page .subtitle {
+            font-size: 24px;
+            margin: 10px 0;
+            opacity: 0.95;
+        }
+        
+        .cover-page .duration {
+            font-size: 18px;
+            margin: 30px 0 10px 0;
+            opacity: 0.9;
+        }
+        
+        .cover-page .date {
+            font-size: 16px;
+            opacity: 0.8;
+        }
+        
+        /* Contenido */
+        .content {
+            margin-top: 40px;
+        }
+        
+        h1 {
+            color: #667eea;
+            font-size: 32px;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #667eea;
+            page-break-before: always;
+        }
+        
+        h2 {
+            color: #764ba2;
+            font-size: 26px;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            padding-left: 10px;
+            border-left: 4px solid #764ba2;
+        }
+        
+        h3 {
+            color: #5a67d8;
+            font-size: 22px;
+            margin-top: 25px;
+            margin-bottom: 12px;
+        }
+        
+        h4 {
+            color: #4c51bf;
+            font-size: 18px;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+        
+        p {
+            margin: 12px 0;
+            text-align: justify;
+        }
+        
+        /* Tablas */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 14px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        table thead {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        table th {
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+        }
+        
+        table td {
+            padding: 10px 12px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        table tbody tr:nth-child(even) {
+            background-color: #f7fafc;
+        }
+        
+        table tbody tr:hover {
+            background-color: #edf2f7;
+        }
+        
+        /* Listas */
+        ul, ol {
+            margin: 15px 0;
+            padding-left: 30px;
+        }
+        
+        li {
+            margin: 8px 0;
+            line-height: 1.6;
+        }
+        
+        /* Bloques de código */
+        code {
+            background: #f7fafc;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            color: #d63031;
+        }
+        
+        pre {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 20px 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        pre code {
+            background: transparent;
+            color: inherit;
+            padding: 0;
+        }
+        
+        /* Blockquotes */
+        blockquote {
+            margin: 20px 0;
+            padding: 15px 20px;
+            background: #f7fafc;
+            border-left: 5px solid #667eea;
+            font-style: italic;
+            color: #4a5568;
+        }
+        
+        /* Cajas de énfasis */
+        .content p:has(> strong:first-child) {
+            background: #ebf4ff;
+            border-left: 4px solid #4299e1;
+            padding: 12px 15px;
+            margin: 15px 0;
+        }
+        
+        /* Links */
+        a {
+            color: #667eea;
+            text-decoration: none;
+            border-bottom: 1px dotted #667eea;
+        }
+        
+        a:hover {
+            color: #764ba2;
+            border-bottom-color: #764ba2;
+        }
+        
+        /* Emojis en títulos */
+        h1::first-letter,
+        h2::first-letter {
+            font-size: 1.2em;
+        }
+        
+        /* Impresión */
+        @media print {
+            body {
+                background: white;
+            }
+            
+            .cover-page {
+                page-break-after: always;
+            }
+            
+            h1 {
+                page-break-before: always;
+            }
+            
+            h1:first-of-type {
+                page-break-before: avoid;
+            }
+            
+            table, pre, blockquote {
+                page-break-inside: avoid;
+            }
+        }
+        
+        /* Estilos específicos para checkboxes */
+        .content ul li:has(> input[type="checkbox"]) {
+            list-style: none;
+            margin-left: -20px;
+        }
+        
+        /* Resaltar secciones importantes */
+        .content > p:first-of-type {
+            font-size: 18px;
+            font-weight: 500;
+            color: #2d3748;
+        }
+        
+        hr {
+            border: none;
+            border-top: 2px solid #e2e8f0;
+            margin: 30px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="cover-page">
+        <div class="emoji">📚</div>
+        <h1>CURSO DE FORMACIÓN<br>BASHOOD RWA</h1>
+        <div class="project-name">Programa Completo de Capacitación</div>
+        <div class="subtitle">Tokenización de Activos Industriales</div>
+        <div class="duration">⏱️ Duración: 20-30 horas (10 módulos)</div>
+        <div class="subtitle">Formación Distribuidores, Equipo &amp; Partners</div>
+        <div class="date">📅 20 de febrero de 2026</div>
+    </div>
+    
+    <div class="content">
+        <h1 id="📚-curso-de-formación-bashood-rwa">📚 CURSO DE FORMACIÓN BASHOOD RWA</h1>
+<h2 id="programa-completo-de-capacitación">Programa Completo de Capacitación</h2>
+<p><strong>Versión:</strong> 1.0<br><strong>Fecha:</strong> 20 de febrero de 2026<br><strong>Duración estimada:</strong> 20-30 horas (5 días intensivo o 2 semanas part-time)<br><strong>Modalidad:</strong> Presencial, Online o Híbrido</p>
+<hr>
+<h2 id="🎯-objetivos-del-curso">🎯 OBJETIVOS DEL CURSO</h2>
+<p>Al finalizar este curso, serás capaz de:</p>
+<p>✅ <strong>Comprender</strong> el ecosistema Bashood RWA y su propuesta de valor<br>✅ <strong>Explicar</strong> la tokenización de activos industriales a cualquier perfil<br>✅ <strong>Identificar</strong> activos candidatos viables (scoring ≥80 puntos)<br>✅ <strong>Negociar</strong> con propietarios usando el método estructurado de 7 fases<br>✅ <strong>Presentar</strong> la inversión a compradores de tokens con ejemplos reales<br>✅ <strong>Calcular</strong> ROI, comisiones y proyecciones financieras<br>✅ <strong>Utilizar</strong> todos los materiales y herramientas del ecosistema<br>✅ <strong>Cerrar</strong> tu primera venta en 30-60 días post-formación</p>
+<hr>
+<h2 id="📋-índice-del-curso">📋 ÍNDICE DEL CURSO</h2>
+<h3 id="módulo-1-fundamentos-blockchain-y-rwa-4-horas"><strong>MÓDULO 1:</strong> Fundamentos Blockchain y RWA (4 horas)</h3>
+<h3 id="módulo-2-el-proyecto-bashood-3-horas"><strong>MÓDULO 2:</strong> El Proyecto Bashood (3 horas)</h3>
+<h3 id="módulo-3-modelo-económico-para-inversores-5-horas"><strong>MÓDULO 3:</strong> Modelo Económico para Inversores (5 horas)</h3>
+<h3 id="módulo-4-proceso-de-tokenización-de-activos-4-horas"><strong>MÓDULO 4:</strong> Proceso de Tokenización de Activos (4 horas)</h3>
+<h3 id="módulo-5-due-diligence-y-scoring-3-horas"><strong>MÓDULO 5:</strong> Due Diligence y Scoring (3 horas)</h3>
+<h3 id="módulo-6-negociación-y-cierre-4-horas"><strong>MÓDULO 6:</strong> Negociación y Cierre (4 horas)</h3>
+<h3 id="módulo-7-programa-de-distribuidores-2-horas"><strong>MÓDULO 7:</strong> Programa de Distribuidores (2 horas)</h3>
+<h3 id="módulo-8-herramientas-y-materiales-2-horas"><strong>MÓDULO 8:</strong> Herramientas y Materiales (2 horas)</h3>
+<h3 id="módulo-9-práctica-y-role-play-3-horas"><strong>MÓDULO 9:</strong> Práctica y Role-Play (3 horas)</h3>
+<h3 id="módulo-10-evaluación-y-certificación-1-hora"><strong>MÓDULO 10:</strong> Evaluación y Certificación (1 hora)</h3>
+<hr>
+<h1 id="módulo-1-fundamentos-blockchain-y-rwa">MÓDULO 1: FUNDAMENTOS BLOCKCHAIN Y RWA</h1>
+<h2 id="11-¿qué-es-blockchain">1.1 ¿Qué es Blockchain?</h2>
+<h3 id="conceptos-básicos-30-min">Conceptos Básicos (30 min)</h3>
+<p><strong>Definición simple:</strong></p>
+<blockquote>
+<p>Blockchain es un libro contable digital, descentralizado e inmutable donde se registran transacciones de forma transparente y permanente.</p>
+</blockquote>
+<p><strong>Características clave:</strong></p>
+<ul>
+<li>✅ <strong>Descentralización:</strong> No hay un servidor central (ej: no existe &quot;CEO de Bitcoin&quot;)</li>
+<li>✅ <strong>Transparencia:</strong> Cualquiera puede ver las transacciones en un explorador</li>
+<li>✅ <strong>Inmutabilidad:</strong> Lo que se escribe no se puede borrar ni modificar</li>
+<li>✅ <strong>Seguridad:</strong> Protegido por criptografía y consenso distribuido</li>
+</ul>
+<p><strong>Analogía práctica:</strong></p>
+<pre><code>Banco tradicional = Google Drive (1 servidor, puede cerrarse)
+Blockchain = BitTorrent (miles de copias, nadie lo puede apagar)
+</code></pre>
+<h3 id="componentes-de-una-blockchain-45-min">Componentes de una Blockchain (45 min)</h3>
+<ol>
+<li><p><strong>Bloques:</strong></p>
+<ul>
+<li>Conjunto de transacciones agrupadas cada X minutos</li>
+<li>Cada bloque está &quot;encadenado&quot; al anterior</li>
+<li>Ejemplo: Bloque #19,234,567 contiene 150 transacciones</li>
+</ul>
+</li>
+<li><p><strong>Nodos:</strong></p>
+<ul>
+<li>Computadoras que mantienen copia del blockchain</li>
+<li>Validan nuevas transacciones</li>
+<li>Base Blockchain tiene ~15,000 nodos validadores</li>
+</ul>
+</li>
+<li><p><strong>Smart Contracts (Contratos Inteligentes):</strong></p>
+<ul>
+<li>Código que se ejecuta automáticamente cuando se cumplen condiciones</li>
+<li>Ejemplo: &quot;Si llega el día 25, distribuir €10,000 a los holders&quot;</li>
+<li>Una vez desplegado, nadie (ni el creador) puede modificarlo</li>
+</ul>
+</li>
+<li><p><strong>Tokens:</strong></p>
+<ul>
+<li>Unidades digitales representando valor o activos</li>
+<li>Ejemplo: 1 BHT-DX360 = 1/100,000 de la Excavadora Doosan DX360</li>
+</ul>
+</li>
+</ol>
+<h3 id="ecosistemas-blockchain-relevantes-45-min">Ecosistemas Blockchain Relevantes (45 min)</h3>
+<table>
+<thead>
+<tr>
+<th>Blockchain</th>
+<th>Características</th>
+<th>Uso en Bashood</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Ethereum</strong></td>
+<td>Primera con smart contracts</td>
+<td>❌ Gas fees muy altos ($50-200/tx)</td>
+</tr>
+<tr>
+<td><strong>Polygon</strong></td>
+<td>Layer 2 de Ethereum</td>
+<td>❌ Descartada (migración a zkEVM)</td>
+</tr>
+<tr>
+<td><strong>Base</strong></td>
+<td>Layer 2 Coinbase, EVM compatible</td>
+<td>✅ <strong>ELEGIDA</strong> (€0.01/tx, BackedBy)</td>
+</tr>
+<tr>
+<td><strong>Arbitrum</strong></td>
+<td>Layer 2 Ethereum optimista</td>
+<td>🟡 Alternativa futura</td>
+</tr>
+<tr>
+<td><strong>Avalanche</strong></td>
+<td>Layer 1 rápida</td>
+<td>🟡 Considerada inicialmente</td>
+</tr>
+</tbody></table>
+<p><strong>¿Por qué Base?</strong></p>
+<ol>
+<li>Costos ultra-bajos: €0.01 por transacción vs €50 en Ethereum</li>
+<li>Respaldada por Coinbase (exchange #1 USA, regulado)</li>
+<li>Compatible con Ethereum (mismo código, mismo ecosistema)</li>
+<li>Rápida: 2 segundos vs 12 segundos Ethereum</li>
+<li>Crecimiento explosivo: +500% TVL en 2024-2025</li>
+</ol>
+<h3 id="ejercicio-práctico-11-30-min">Ejercicio Práctico 1.1 (30 min)</h3>
+<p><strong>Explorar Base Blockchain:</strong></p>
+<ol>
+<li>Ir a <strong>BaseScan.org</strong> (explorador de bloques Base)</li>
+<li>Buscar una transacción reciente</li>
+<li>Identificar: remitente, receptor, monto, gas fee, timestamp</li>
+<li>Ver el bloque que la contiene</li>
+<li>Explorar smart contract de Bashood (si ya está desplegado)</li>
+</ol>
+<p><strong>Tarea:</strong></p>
+<ul>
+<li>Crear wallet MetaMask (si no tienes)</li>
+<li>Añadir red Base Mainnet</li>
+<li>Observar cómo se ven las transacciones</li>
+</ul>
+<hr>
+<h2 id="12-¿qué-son-los-rwa-real-world-assets">1.2 ¿Qué son los RWA (Real World Assets)?</h2>
+<h3 id="definición-y-evolución-45-min">Definición y Evolución (45 min)</h3>
+<p><strong>RWA = Real World Assets Tokenizados</strong></p>
+<blockquote>
+<p>Proceso de representar activos físicos o financieros del mundo real como tokens en blockchain.</p>
+</blockquote>
+<p><strong>Evolución:</strong></p>
+<pre><code>2009: Bitcoin → Solo criptomoneda (digital)
+2015: Ethereum → NFTs de arte digital
+2020: DeFi → Préstamos cripto (colateral digital)
+2023-2024: RWA → Bonos, inmuebles, coches (colateral REAL) ✅ ESTAMOS AQUÍ
+</code></pre>
+<p><strong>Ejemplos RWA globales:</strong></p>
+<ol>
+<li><p><strong>Bonos del Tesoro USA tokenizados:</strong></p>
+<ul>
+<li>Proyecto: Ondo Finance</li>
+<li>Volumen: $500M+ tokenizados</li>
+<li>Rendimiento: 5% anual (bonos T-Bills)</li>
+</ul>
+</li>
+<li><p><strong>Inmuebles fraccionados:</strong></p>
+<ul>
+<li>Proyecto: RealT (casas en Detroit, USA)</li>
+<li>Desde $50 puedes comprar fracción de casa</li>
+<li>Alquiler mensual proporcional</li>
+</ul>
+</li>
+<li><p><strong>Oro tokenizado:</strong></p>
+<ul>
+<li>Proyecto: Pax Gold (PAXG)</li>
+<li>1 token = 1 onza troy de oro físico en bóveda Londres</li>
+<li>Volumen: $500M+ marketcap</li>
+</ul>
+</li>
+<li><p><strong>Facturas y crédito comercial:</strong></p>
+<ul>
+<li>Proyecto: Centrifuge</li>
+<li>Tokeniza facturas de empresas → inversores las financian</li>
+</ul>
+</li>
+</ol>
+<p><strong>Bashood = RWA Industriales</strong></p>
+<ul>
+<li>Enfoque: Maquinaria pesada rentable</li>
+<li>Diferenciador: Activos que generan ingresos operativos (no solo apreciación)</li>
+</ul>
+<h3 id="¿por-qué-rwa-es-el-futuro-30-min">¿Por qué RWA es el Futuro? (30 min)</h3>
+<p><strong>Mercado Total Direccionable:</strong></p>
+<pre><code>Activos mundiales: $900 TRILLONES
+├─ Inmuebles: $330T
+├─ Bonos: $130T
+├─ Acciones: $110T
+├─ Oro: $13T
+└─ Maquinaria industrial: $5-10T ✅ BASHOOD
+
+Si el 1% se tokeniza = $9 TRILLONES de mercado
+</code></pre>
+<p><strong>Ventajas RWA vs Tradicional:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Concepto</th>
+<th>Mundo Tradicional</th>
+<th>Mundo RWA (Bashood)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Acceso mínimo</strong></td>
+<td>€50,000-150,000 (excavadora entera)</td>
+<td>€600 (1,000 tokens)</td>
+</tr>
+<tr>
+<td><strong>Liquidez</strong></td>
+<td>6-12 meses vender activo</td>
+<td>24 horas vender tokens</td>
+</tr>
+<tr>
+<td><strong>Transparencia</strong></td>
+<td>Reportes trimestrales</td>
+<td>Blockchain tiempo real</td>
+</tr>
+<tr>
+<td><strong>Costos admin</strong></td>
+<td>5-10% gestión anual</td>
+<td>0.5% Treasury Fee</td>
+</tr>
+<tr>
+<td><strong>Geográfico</strong></td>
+<td>Solo tu país/región</td>
+<td>Global (cualquiera con crypto)</td>
+</tr>
+<tr>
+<td><strong>Papeleos</strong></td>
+<td>Notario, registro, meses</td>
+<td>Smart contract, minutos</td>
+</tr>
+</tbody></table>
+<h3 id="riesgos-y-limitaciones-rwa-30-min">Riesgos y Limitaciones RWA (30 min)</h3>
+<p><strong>Riesgos a considerar:</strong></p>
+<ol>
+<li><p>⚠️ <strong>Custodia física:</strong> Token en blockchain ≠ posesión física</p>
+<ul>
+<li>Solución Bashood: Contratos con propietario, seguro, GPS tracking</li>
+</ul>
+</li>
+<li><p>⚠️ <strong>Regulación incierta:</strong> Legislación aún en desarrollo</p>
+<ul>
+<li>Solución: Cumplimiento proactivo, abogados especializados</li>
+</ul>
+</li>
+<li><p>⚠️ <strong>Liquidez limitada inicial:</strong> Mercado secundario pequeño al principio</p>
+<ul>
+<li>Solución: Incentivos trading (0% fees primeros 6 meses)</li>
+</ul>
+</li>
+<li><p>⚠️ <strong>Conectividad on-chain / off-chain:</strong> ¿Cómo verificar el activo funciona?</p>
+<ul>
+<li>Solución: Oráculos, reportes mensuales, auditorías sorpresa</li>
+</ul>
+</li>
+<li><p>⚠️ <strong>Dependencia operador:</strong> Si propietario no reporta, problemas</p>
+<ul>
+<li>Solución: Penalizaciones, garantías, backup operators</li>
+</ul>
+</li>
+</ol>
+<h3 id="ejercicio-práctico-12-30-min">Ejercicio Práctico 1.2 (30 min)</h3>
+<p><strong>Investigar proyecto RWA existente:</strong></p>
+<p>Equipos de 2-3 personas, cada equipo investiga:</p>
+<ul>
+<li>RealT (inmuebles)</li>
+<li>Ondo Finance (bonos)</li>
+<li>Centrifuge (crédito comercial)</li>
+</ul>
+<p><strong>Responder:</strong></p>
+<ol>
+<li>¿Qué tokeniza?</li>
+<li>¿Cuánto capital gestionan?</li>
+<li>¿Qué blockchain usan?</li>
+<li>¿Qué rendimiento ofrecen?</li>
+<li>¿Qué podemos aprender para Bashood?</li>
+</ol>
+<p><strong>Puesta en común:</strong> 10 min presentación por equipo</p>
+<hr>
+<h2 id="13-conceptos-clave-para-bashood">1.3 Conceptos Clave para Bashood</h2>
+<h3 id="tokens-erc-20-30-min">Tokens ERC-20 (30 min)</h3>
+<p><strong>ERC-20 = Estándar de token fungible en Ethereum/Base</strong></p>
+<p><strong>Propiedades:</strong></p>
+<ul>
+<li>Intercambiable: 1 token = 1 token (como euros)</li>
+<li>Divisible: Puedes tener 0.5 tokens</li>
+<li>Transferible: Enviar a cualquier wallet</li>
+</ul>
+<p><strong>Bashood usa ERC-20 personalizado:</strong></p>
+<pre><code class="language-solidity">BashoodTokenUpgradeable
+├─ Transferencias con whitelist (compliance)
+├─ Treasury fee automático (0.5% a protocolo)
+├─ Pausable (emergencias)
+└─ Upgradeable (mejoras futuras)
+</code></pre>
+<p><strong>Ejemplo Doosan DX360:</strong></p>
+<pre><code>Nombre: BHT-DX360
+Símbolo: BHT-DX360
+Supply total: 100,000 tokens
+Precio inicial: €0.60/token
+Decimal: 18 (puedes tener 0.000000000000000001 tokens)
+
+Distribución:
+├─ 60,000 tokens (60%) → Propietario original
+└─ 40,000 tokens (40%) → Inversores (venta pública)
+</code></pre>
+<h3 id="wallets-y-custodia-30-min">Wallets y Custodia (30 min)</h3>
+<p><strong>Wallet = Cartera digital para guardar tokens</strong></p>
+<p><strong>Tipos de wallets:</strong></p>
+<ol>
+<li><p><strong>Custodial (Exchange):</strong></p>
+<ul>
+<li>🏦 Ejemplo: Coinbase, Binance</li>
+<li>✅ Fácil de usar (como banco online)</li>
+<li>❌ No controlas las claves privadas</li>
+<li>⚠️ Si exchange cierra, pierdes acceso</li>
+</ul>
+</li>
+<li><p><strong>Non-Custodial (Self-custody):</strong></p>
+<ul>
+<li>🔐 Ejemplo: MetaMask, Rainbow, Rabby</li>
+<li>✅ Tú controlas las claves privadas</li>
+<li>❌ Si pierdes seed phrase, pierdes todo</li>
+<li>✅ <strong>RECOMENDADO para holders Bashood</strong></li>
+</ul>
+</li>
+<li><p><strong>Hardware Wallets:</strong></p>
+<ul>
+<li>💾 Ejemplo: Ledger, Trezor</li>
+<li>✅ Máxima seguridad (keys nunca online)</li>
+<li>✅ Recomendado para &gt;€10,000</li>
+<li>💰 Costo: €60-200</li>
+</ul>
+</li>
+</ol>
+<p><strong>Setup MetaMask (demo en vivo):</strong></p>
+<ol>
+<li>Instalar extensión navegador</li>
+<li>Crear wallet (guardar seed phrase en papel)</li>
+<li>Añadir red Base</li>
+<li>Recibir dirección pública (0x...)</li>
+<li>Practicar envío/recepción testnet</li>
+</ol>
+<h3 id="multisig-treasuries-30-min">Multisig Treasuries (30 min)</h3>
+<p><strong>Multisig = Wallet que requiere M de N firmas para transacción</strong></p>
+<p><strong>Bashood usa multisig 3/5:</strong></p>
+<pre><code>Treasury de BHT-DX360:
+
+5 signers:
+├─ Propietario excavadora (1 voto)
+├─ Representante holders (1 voto)
+├─ Bashood admin (1 voto)
+├─ Auditor externo (1 voto)
+└─ Legal advisor (1 voto)
+
+Para distribuir €10,000: mínimo 3 de 5 deben aprobar
+</code></pre>
+<p><strong>Ventajas:</strong></p>
+<ul>
+<li>✅ Nadie puede robar fondos solo</li>
+<li>✅ Transparencia total (todos ven transacciones propuestas)</li>
+<li>✅ Proceso democrático</li>
+</ul>
+<p><strong>Herramientas:</strong></p>
+<ul>
+<li>Safe (antes Gnosis Safe): interfaz web para multisig</li>
+<li>Basescan: explorar transacciones</li>
+</ul>
+<h3 id="ejercicio-práctico-13-45-min">Ejercicio Práctico 1.3 (45 min)</h3>
+<p><strong>Lab: Crear y usar wallet MetaMask</strong></p>
+<ol>
+<li>Instalar MetaMask si no lo tienes</li>
+<li>Crear wallet (guardar seed en papel seguro)</li>
+<li>Añadir Base Mainnet:<pre><code>Network Name: Base
+RPC URL: https://mainnet.base.org
+Chain ID: 8453
+Currency Symbol: ETH
+Block Explorer: https://basescan.org
+</code></pre>
+</li>
+<li>Obtener dirección pública (empieza 0x...)</li>
+<li>Compartir dirección con instructor (él enviará testnet tokens)</li>
+<li>Practicar enviar tokens de vuelta</li>
+</ol>
+<p><strong>Seguridad crítica:</strong></p>
+<ul>
+<li>⚠️ NUNCA compartas tu seed phrase</li>
+<li>⚠️ NUNCA ingreses tu seed en sitios web</li>
+<li>✅ Guarda seed en papel en lugar físico seguro</li>
+</ul>
+<hr>
+<h2 id="evaluación-módulo-1-30-min">Evaluación Módulo 1 (30 min)</h2>
+<p><strong>Test 10 preguntas (aprobado ≥7/10):</strong></p>
+<ol>
+<li><p>¿Qué característica NO tiene blockchain?</p>
+<ul>
+<li>A) Descentralización</li>
+<li>B) Modificable por administrador ✅ CORRECTA</li>
+<li>C) Transparencia</li>
+<li>D) Inmutabilidad</li>
+</ul>
+</li>
+<li><p>¿Por qué Bashood eligió Base blockchain?</p>
+<ul>
+<li>A) Es la más antigua</li>
+<li>B) Costos bajos + respaldo Coinbase ✅</li>
+<li>C) Tiene más usuarios que Bitcoin</li>
+<li>D) No requiere smart contracts</li>
+</ul>
+</li>
+<li><p>RWA significa:</p>
+<ul>
+<li>A) Real World Assets ✅</li>
+<li>B) Remote Working Agencies</li>
+<li>C) Rewarding Activity</li>
+<li>D) Ripple World Alliance</li>
+</ul>
+</li>
+<li><p>¿Cuánto cuesta aprox. una transacción en Base?</p>
+<ul>
+<li>A) €50</li>
+<li>B) €5</li>
+<li>C) €0.50</li>
+<li>D) €0.01 ✅</li>
+</ul>
+</li>
+<li><p>¿Qué tipo de wallet es MetaMask?</p>
+<ul>
+<li>A) Custodial</li>
+<li>B) Non-custodial ✅</li>
+<li>C) Hardware</li>
+<li>D) Paper wallet</li>
+</ul>
+</li>
+<li><p>¿Qué significa multisig 3/5?</p>
+<ul>
+<li>A) 3 blockchains de 5 posibles</li>
+<li>B) 3 tokens de 5 totales</li>
+<li>C) 3 firmas de 5 requieren aprobar ✅</li>
+<li>D) 3 días de 5 para transacción</li>
+</ul>
+</li>
+<li><p>ERC-20 es:</p>
+<ul>
+<li>A) Código del euro</li>
+<li>B) Estándar de token fungible ✅</li>
+<li>C) Versión de Ethereum</li>
+<li>D) Tipo de wallet</li>
+</ul>
+</li>
+<li><p>¿Cuál es el mercado total de activos mundiales?</p>
+<ul>
+<li>A) $9 trillones</li>
+<li>B) $90 trillones</li>
+<li>C) $900 trillones ✅</li>
+<li>D) $9,000 trillones</li>
+</ul>
+</li>
+<li><p>Principal ventaja RWA vs tradicional:</p>
+<ul>
+<li>A) Más seguro siempre</li>
+<li>B) Sin riesgos</li>
+<li>C) Fraccionalización + liquidez ✅</li>
+<li>D) Rendimientos garantizados</li>
+</ul>
+</li>
+<li><p>¿Qué NO debes hacer con tu seed phrase?</p>
+<ul>
+<li>A) Guardarlo en papel</li>
+<li>B) Ingresarlo en sitios web ✅</li>
+<li>C) Tener copia backup</li>
+<li>D) Memorizarlo</li>
+</ul>
+</li>
+</ol>
+<p><strong>Respuestas:</strong> B, B, A, D, B, C, B, C, C, B</p>
+<hr>
+<h1 id="módulo-2-el-proyecto-bashood">MÓDULO 2: EL PROYECTO BASHOOD</h1>
+<h2 id="21-visión-y-misión-45-min">2.1 Visión y Misión (45 min)</h2>
+<h3 id="¿qué-es-bashood">¿Qué es Bashood?</h3>
+<p><strong>Elevator Pitch (30 segundos):</strong></p>
+<blockquote>
+<p>Bashood democratiza el acceso a inversiones en maquinaria industrial rentable mediante tokenización blockchain, permitiendo a cualquiera invertir desde €600 y recibir ingresos mensuales proporcionales.</p>
+</blockquote>
+<p><strong>Visión (5 años):</strong></p>
+<ul>
+<li>Tokenizar €100M+ en activos industriales</li>
+<li>10,000+ inversores activos en la plataforma</li>
+<li>Red de 500+ distribuidores globales</li>
+<li>Ser la referencia europea en RWA industriales</li>
+</ul>
+<p><strong>Misión:</strong></p>
+<ol>
+<li><strong>Para propietarios:</strong> Liquidez inmediata sin perder control operativo</li>
+<li><strong>Para inversores:</strong> Acceso a activos industriales rentables sin gestión</li>
+<li><strong>Para el sector:</strong> Modernización financiera de la industria pesada</li>
+</ol>
+<h3 id="problema-que-resolvemos-30-min">Problema que Resolvemos (30 min)</h3>
+<p><strong>Pain Point #1: Propietarios</strong></p>
+<pre><code>Situación actual:
+Excavadora Doosan DX360 vale €150,000
+├─ Genera €15,000/mes
+├─ Pero capital &quot;atrapado&quot; en el activo
+├─ Si necesita €60k urgente → banco (6% interés, 5 años)
+└─ O vender entera (pierde negocio operativo)
+
+Solución Bashood:
+├─ Tokeniza 40% (€60k)
+├─ Recibe €60k inmediato
+├─ Mantiene control operativo
+├─ Paga 30% ganancias esa fracción
+└─ Sin deuda, sin intereses bancarios
+</code></pre>
+<p><strong>Pain Point #2: Inversores</strong></p>
+<pre><code>Situación actual:
+Quiero invertir en sector construcción
+├─ Opción 1: Acciones constructoras (bolsa volátil, sin control)
+├─ Opción 2: Comprar excavadora entera (€150k, gestión 100%)
+└─ Opción 3: Fondo privado (mínimo €100k, comisiones 2%+20%)
+
+Solución Bashood:
+├─ Invierte desde €600 (1,000 tokens)
+├─ Recibe ingresos mensuales (no esperar años)
+├─ Transparencia blockchain (ver todo en tiempo real)
+├─ Liquidez 24/7 (vender tokens cuando quieras)
+└─ Sin gestión (Bashood + propietario operan)
+</code></pre>
+<p><strong>Pain Point #3: Sector Industrial</strong></p>
+<pre><code>Problema actual:
+├─ Financiación tradicional cara (7-12% TIN)
+├─ Procesos lentos (3-6 meses aprobación)
+├─ Requisitos restrictivos (garantías, avales)
+└─ Innovación financiera nula
+
+Solución Bashood:
+├─ Tokenización en 30-45 días
+├─ Costos transparentes (3% Setup Fee)
+├─ Sin avales personales (activo es garantía)
+└─ Acceso a capital global (inversores crypto)
+</code></pre>
+<h3 id="modelo-de-3-actores-45-min">Modelo de 3 Actores (45 min)</h3>
+<p><strong>ACTOR 1: PROPIETARIO DEL ACTIVO</strong></p>
+<p><strong>Perfil ideal:</strong></p>
+<ul>
+<li>Operador profesional (pyme, autónomo)</li>
+<li>Activo rentable operando (no nuevo)</li>
+<li>Historial ≥6 meses demostrable</li>
+<li>Transparencia disposición máxima</li>
+</ul>
+<p><strong>Motivaciones:</strong></p>
+<ol>
+<li>Obtener liquidez sin deuda</li>
+<li>Expandir flota con capital obtenido</li>
+<li>Mantener operación + control</li>
+<li>Pagar menos que financiación bancaria</li>
+</ol>
+<p><strong>Responsabilidades:</strong></p>
+<ul>
+<li>Operar activo profesionalmente</li>
+<li>Reportar ingresos mensualmente (formato Excel simple)</li>
+<li>Mantener activo asegurado + mantenimiento al día</li>
+<li>Distribuir ganancias proporcionalmente</li>
+</ul>
+<p><strong>Compensación:</strong></p>
+<ul>
+<li>Retiene % no tokenizado (ej: 60% ganancias excavadora)</li>
+<li>Tarifa gestión opcional (5% ingresos brutos)</li>
+<li>Opción recompra tokens futura</li>
+</ul>
+<hr>
+<p><strong>ACTOR 2: INVERSOR (HOLDER DE TOKENS)</strong></p>
+<p><strong>Perfil ideal:</strong></p>
+<ul>
+<li>Inversor retail: €600-50,000</li>
+<li>Inversor institucional: €50k-500k+</li>
+<li>Conocimiento crypto básico (sabe usar wallet)</li>
+<li>Horizonte 1-5 años (no day trading)</li>
+</ul>
+<p><strong>Motivaciones:</strong></p>
+<ol>
+<li>Rendimientos &gt;10% anual</li>
+<li>Ingresos pasivos mensuales</li>
+<li>Diversificación cartera (más allá crypto especulativa)</li>
+<li>Exposición sector real productivo</li>
+</ol>
+<p><strong>Responsabilidades:</strong></p>
+<ul>
+<li>KYC/AML verificación inicial</li>
+<li>Mantener wallet segura</li>
+<li>Votar en decisiones críticas (governance)</li>
+</ul>
+<p><strong>Compensación:</strong></p>
+<ul>
+<li>Distribuciones mensuales proporcionales</li>
+<li>Apreciación capital (tokens suben si activo valoriza)</li>
+<li>Fees secundarias 0% primeros 6 meses</li>
+</ul>
+<hr>
+<p><strong>ACTOR 3: BASHOOD (PLATAFORMA)</strong></p>
+<p><strong>Rol:</strong></p>
+<ul>
+<li>Tecnología blockchain (smart contracts)</li>
+<li>Due diligence activos</li>
+<li>Admin treasury multisig</li>
+<li>Servicio cliente + soporte</li>
+<li>Marketing + distribuidores</li>
+</ul>
+<p><strong>Responsabilidades:</strong></p>
+<ul>
+<li>Auditar activos (scoring &gt;80)</li>
+<li>Procesar distribuciones mensuales</li>
+<li>Mantener plataforma operativa 24/7</li>
+<li>Compliance legal (AML, GDPR, etc.)</li>
+<li>Resolver disputas</li>
+</ul>
+<p><strong>Compensación:</strong></p>
+<ul>
+<li>Setup Fee: 3% valor activo (€4,500 excavadora) → Ingreso UNA VEZ</li>
+<li>Treasury Fee: 0.5% distribuciones (€22/mes excavadora) → Recurrente</li>
+<li>Burn Fee: 0.05-0.1% trading secundario</li>
+<li>Servicios premium: Listing destacado, white-label, etc.</li>
+</ul>
+<h3 id="diagrama-flujo-completo-30-min">Diagrama Flujo Completo (30 min)</h3>
+<pre><code>FASE 1: PRE-TOKENIZACIÓN (30-45 días)
+├─ Distribuidor contacta propietario
+├─ Due diligence (100 puntos, mínimo 80)
+├─ Setup legal (contrato + SPV si aplica)
+├─ Auditoría técnica activo
+└─ Valuación independiente
+
+FASE 2: TOKENIZACIÓN (7-15 días)
+├─ Deploy smart contract
+├─ Mint tokens (ej: 100,000 BHT-DX360)
+├─ Distribuir: 60% propietario, 40% venta pública
+├─ Setup multisig treasury
+└─ Configurar oráculos reportes
+
+FASE 3: VENTA PÚBLICA (30-90 días)
+├─ Listing en marketplace Bashood
+├─ Marketing (distribuidores + ads)
+├─ KYC inversores interesados
+├─ Venta tokens €0.60 cada uno
+└─ Propietario recibe €60k cuando venta completa
+
+FASE 4: OPERACIÓN (ongoing, mensual)
+├─ Día 1-25: Activo opera, genera ingresos
+├─ Día 25: Propietario reporta ingresos mes
+├─ Día 26-27: Bashood valida reporte
+├─ Día 28: Distribución a holders proporcional
+├─ Día 29-30: Holder recibe pago en wallet
+└─ Repetir próximo mes
+
+FASE 5: SALIDA (opcional, &gt;1 año)
+├─ Holder vende tokens en mercado secundario
+├─ O propietario recompra tokens
+├─ O nuevo operador compra activo entero
+└─ Smart contract liquida distribuciones finales
+</code></pre>
+<h3 id="ejercicio-práctico-21-30-min">Ejercicio Práctico 2.1 (30 min)</h3>
+<p><strong>Case Study: Identificar actores</strong></p>
+<p>Te presentan este caso:</p>
+<pre><code>Juan tiene 3 excavadoras Volvo que alquila a constructoras.
+Cada una genera €12,000/mes.
+Quiere comprar 2 excavadoras más pero le faltan €200k.
+El banco le ofrece préstamo 8% TIN, 7 años.
+</code></pre>
+<p><strong>Preguntas equipo (15 min reflexión):</strong></p>
+<ol>
+<li>¿Qué pain point tiene Juan?</li>
+<li>¿Cómo Bashood lo resuelve mejor que banco?</li>
+<li>¿Qué % debería tokenizar?</li>
+<li>¿Qué ROI pueden esperar inversores?</li>
+<li>¿Cuánto ganaría Bashood?</li>
+</ol>
+<p><strong>Puesta en común</strong> (15 min)</p>
+<hr>
+<h2 id="22-tecnología-y-smart-contracts-60-min">2.2 Tecnología y Smart Contracts (60 min)</h2>
+<h3 id="tech-stack-bashood">Tech Stack Bashood</h3>
+<p><strong>Frontend (Web App):</strong></p>
+<pre><code>├─ Next.js 14 (React framework)
+├─ TailwindCSS (estilos)
+├─ Rainbow Kit (conectar wallets)
+└─ Vercel (hosting)
+
+URL: app.bashood.io (cuando lancemos)
+</code></pre>
+<p><strong>Backend (Offchain):</strong></p>
+<pre><code>├─ Node.js + Express (API REST)
+├─ PostgreSQL (base datos reportes)
+├─ IPFS (almacenar documentos descentralizado)
+└─ Railway (hosting)
+
+Funciones:
+- KYC/AML verificación
+- Subir reportes mensuales
+- Dashboard inversores
+- Email notificaciones
+</code></pre>
+<p><strong>Blockchain (Onchain):</strong></p>
+<pre><code>├─ Base L2 (EVM compatible)
+├─ Solidity 0.8.28 (lenguaje smart contracts)
+├─ Hardhat (framework desarrollo)
+└─ OpenZeppelin (librerías seguras)
+
+Contratos principales:
+1. BashoodTokenUpgradeable.sol
+2. BashoodPresaleFinal.sol
+3. BashoodReferral.sol
+</code></pre>
+<h3 id="smart-contracts-explicados-45-min">Smart Contracts Explicados (45 min)</h3>
+<p><strong>1. BashoodTokenUpgradeable.sol</strong> (Token Core)</p>
+<p><strong>Funciones principales:</strong></p>
+<pre><code class="language-solidity">// Transferir tokens (con whitelist)
+transfer(address to, uint256 amount)
+
+// Distribución automática a todos holders
+distributeToHolders(uint256 amount)
+
+// Pausar emergencias
+pause() / unpause()
+
+// Treasury fee automático
+_applyTreasuryFee(uint256 amount) → 0.5% a protocolo
+</code></pre>
+<p><strong>Ejemplo código simplificado:</strong></p>
+<pre><code class="language-solidity">contract BashoodToken {
+    uint256 public totalSupply = 100_000 * 10**18;
+    mapping(address =&gt; uint256) public balances;
+    
+    function transfer(address to, uint256 amount) public {
+        require(balances[msg.sender] &gt;= amount, &quot;Saldo insuficiente&quot;);
+        
+        // Treasury fee 0.5%
+        uint256 fee = amount * 5 / 1000;
+        uint256 amountAfterFee = amount - fee;
+        
+        balances[msg.sender] -= amount;
+        balances[to] += amountAfterFee;
+        balances[TREASURY] += fee;
+        
+        emit Transfer(msg.sender, to, amountAfterFee);
+    }
+}
+</code></pre>
+<p><strong>2. BashoodPresaleFinal.sol</strong> (Venta Inicial)</p>
+<p><strong>Funciones:</strong></p>
+<pre><code class="language-solidity">// Comprar tokens con USDC
+buyTokens(uint256 usdcAmount)
+
+// Propietario reclama fondos cuando venta completa
+claimFunds()
+
+// Ver cuántos tokens quedan
+tokensAvailable() view returns (uint256)
+</code></pre>
+<p><strong>Fases venta:</strong></p>
+<ol>
+<li><strong>Pre-sale:</strong> Primeros 20% tokens, descuento 10%</li>
+<li><strong>Public sale:</strong> 80% restante, precio normal</li>
+<li><strong>Claim:</strong> Inversores reclaman tokens cuando venta completa</li>
+</ol>
+<p><strong>3. BashoodReferral.sol</strong> (Comisiones Distribuidores)</p>
+<p><strong>Funciones:</strong></p>
+<pre><code class="language-solidity">// Registrar distribuidor
+registerDistributor(address distributor)
+
+// Registrar venta (automático desde Presale)
+recordSale(address distributor, uint256 amount)
+
+// Distribuidor reclama comisiones
+claimCommissions()
+</code></pre>
+<p><strong>Cálculo comisiones:</strong></p>
+<pre><code class="language-solidity">// Venta €24,000 (40,000 tokens × €0.60)
+Setup Fee 3% = €720 total
+├─ Distribuidor (30%): €216
+├─ Bashood (70%): €504
+
+function claimCommissions() public {
+    uint256 pending = commissions[msg.sender];
+    commissions[msg.sender] = 0;
+    usdc.transfer(msg.sender, pending);
+}
+</code></pre>
+<h3 id="demo-en-vivo-15-min">Demo en Vivo (15 min)</h3>
+<p><strong>Instructor muestra:</strong></p>
+<ol>
+<li>BaseScan → Smart contract BHT-DX360 (si desplegado)</li>
+<li>Ver holders actuales (dirección + balance)</li>
+<li>Ver transacciones recientes (transferencias, distribuciones)</li>
+<li>Mostrar código verificado en explorador</li>
+<li>Conectar wallet → Interactuar con contrato (testnet)</li>
+</ol>
+<hr>
+<h2 id="23-roadmap-y-métricas-45-min">2.3 Roadmap y Métricas (45 min)</h2>
+<h3 id="roadmap-2026-2029">Roadmap 2026-2029</h3>
+<p><strong>Fase 0: MVP (Q1-Q2 2026) ✅ ESTAMOS AQUÍ</strong></p>
+<ul>
+<li>✅ Smart contracts desarrollados</li>
+<li>✅ Testing exhaustivo (719/719 tests passing)</li>
+<li>✅ Documentación completa (9 documentos)</li>
+<li>⏳ Testnet deployment (próximo)</li>
+<li>⏳ Primer activo piloto (Doosan DX360)</li>
+</ul>
+<p><strong>Fase 1: Piloto Industrial (Q3-Q4 2026)</strong></p>
+<ul>
+<li>Deploy mainnet primer activo</li>
+<li>Validar 6 meses operación real</li>
+<li>Onboarding 10-20 inversores beta</li>
+<li>Feedback + mejoras UX</li>
+<li>Target: €500k tokenizado</li>
+</ul>
+<p><strong>Fase 2: Escalado (2027)</strong></p>
+<ul>
+<li>Tokenizar 20-50 activos</li>
+<li>Lanzar mercado secundario</li>
+<li>Red 20-50 distribuidores activos</li>
+<li>Partnerships fabricantes (Caterpillar, Volvo)</li>
+<li>Target: €5-10M portfolio</li>
+</ul>
+<p><strong>Fase 3: Institucionalización (2028)</strong></p>
+<ul>
+<li>Licencias regulatorias (si requerido)</li>
+<li>Onboarding inversores institucionales</li>
+<li>White-label para fabricantes</li>
+<li>Expansión LATAM</li>
+<li>Target: €20M portfolio (breakeven)</li>
+</ul>
+<p><strong>Fase 4: Dominación Mercado (2029+)</strong></p>
+<ul>
+<li>200+ activos tokenizados</li>
+<li>€50-100M portfolio</li>
+<li>IPO o adquisición estratégica</li>
+<li>Expansion Asia, USA</li>
+</ul>
+<h3 id="kpis-clave-30-min">KPIs Clave (30 min)</h3>
+<p><strong>Para Plataforma:</strong></p>
+<pre><code>Métricas Públicas:
+├─ TVL (Total Value Locked): €X millones tokenizados
+├─ # Activos operando: X excavadoras, X grúas, etc.
+├─ # Holders activos: X,XXX inversores
+├─ Volumen trading 30d: €XXX,XXX
+└─ Avg APY: XX.X% rendimiento promedio
+
+Métricas Internas:
+├─ CAC (Customer Acquisition Cost): €XXX por inversor
+├─ LTV (Lifetime Value): €X,XXX por inversor
+├─ Burn rate: €XX,XXX/mes
+├─ Setup Fees collected: €XXX,XXX YTD
+└─ Treasury Fees: €X,XXX/mes recurrente
+</code></pre>
+<p><strong>Para Distribuidores:</strong></p>
+<pre><code>Métricas Individuales:
+├─ # Leads generados/mes
+├─ % Conversión lead → reunión
+├─ % Conversión reunión → venta
+├─ Ticket promedio venta: €X,XXX
+├─ Comisiones acumuladas: €XX,XXX
+└─ Tiempo promedio cierre: XX días
+
+Métricas Equipo (si jefe):
+├─ # Distribuidores activos en equipo
+├─ Ventas totales equipo/mes
+├─ Comisiones equipo (tu 10%)
+└─ Tasa retención distribuidores: XX%
+</code></pre>
+<p><strong>Para Activos:</strong></p>
+<pre><code>Por activo tokenizado:
+├─ Occupancy rate: XX% tiempo alquilado
+├─ Revenue mensual: €X,XXX
+├─ Costs operativos: €XXX
+├─ Ganancia neta: €X,XXX
+├─ ROI holders: XX.X% anualizado
+└─ Score salud: XX/100 (mantenimiento, pagos, etc.)
+</code></pre>
+<h3 id="ejercicio-práctico-23-15-min">Ejercicio Práctico 2.3 (15 min)</h3>
+<p><strong>Proyectar métricas de 1 activo (equipo 3-4):</strong></p>
+<p>Datos iniciales:</p>
+<pre><code>Excavadora Doosan DX360
+Valor: €150,000
+Tokenizado: 40% (€60k)
+Ingresos mes promedio: €15,000
+Costos mes: €10,000
+Ganancia neta: €5,000
+</code></pre>
+<p><strong>Calcular KPIs año 1:</strong></p>
+<ol>
+<li>TVL de este activo (€)</li>
+<li>ROI holders anual (%)</li>
+<li>Treasury fees Bashood/año (€)</li>
+<li>Ganancia propietario/año (€)</li>
+<li>Ganancia holder 1,000 tokens/año (€)</li>
+</ol>
+<p><strong>Soluciones:</strong></p>
+<ol>
+<li>TVL: €60,000 (40% tokenizado)</li>
+<li>ROI: 40% anual (€60k invierten, reciben €24k/año)</li>
+<li>Treasury fees: €264/año (€5k × 0.5% × 12 meses)</li>
+<li>Propietario: €36,000/año (60% × €5k × 12)</li>
+<li>Holder 1,000 tokens: €240/año (1% del 40% × €5k × 12)</li>
+</ol>
+<hr>
+<h2 id="evaluación-módulo-2-30-min">Evaluación Módulo 2 (30 min)</h2>
+<p><strong>Test 10 preguntas:</strong></p>
+<ol>
+<li><p>Elevator pitch Bashood en 1 frase correcta:</p>
+<ul>
+<li>A) &quot;Vendemos excavadoras usadas&quot;</li>
+<li>B) &quot;Democratizamos acceso a maquinaria industrial rentable via tokenización&quot; ✅</li>
+<li>C) &quot;Somos un banco para construcción&quot;</li>
+<li>D) &quot;Ofrecemos préstamos sin intereses&quot;</li>
+</ul>
+</li>
+<li><p>Principal pain point propietarios:</p>
+<ul>
+<li>A) No saben operar máquinas</li>
+<li>B) Capital atrapado sin liquidez ✅</li>
+<li>C) Falta de clientes</li>
+<li>D) Maquinaria muy cara</li>
+</ul>
+</li>
+<li><p>Investment mínimo típico Bashood:</p>
+<ul>
+<li>A) €600 ✅</li>
+<li>B) €6,000</li>
+<li>C) €60,000</li>
+<li>D) €150,000</li>
+</ul>
+</li>
+<li><p>Setup Fee cobrado en tokenización:</p>
+<ul>
+<li>A) 0.5%</li>
+<li>B) 3% ✅</li>
+<li>C) 10%</li>
+<li>D) 20%</li>
+</ul>
+</li>
+<li><p>Treasury Fee es:</p>
+<ul>
+<li>A) Una sola vez al principio</li>
+<li>B) Mensual recurrente ✅</li>
+<li>C) Solo si hay ganancias &gt;€10k</li>
+<li>D) No existe</li>
+</ul>
+</li>
+<li><p>¿Qué blockchain usa Bashood?</p>
+<ul>
+<li>A) Bitcoin</li>
+<li>B) Ethereum L1</li>
+<li>C) Base L2 ✅</li>
+<li>D) Polygon</li>
+</ul>
+</li>
+<li><p>Fase actual roadmap:</p>
+<ul>
+<li>A) Fase 0: MVP ✅</li>
+<li>B) Fase 2: Escalado</li>
+<li>C) Fase 3: Institucionalización</li>
+<li>D) Fase 4: Dominación</li>
+</ul>
+</li>
+<li><p>Multisig treasury es:</p>
+<ul>
+<li>A) Wallet 1 persona</li>
+<li>B) Wallet requiere múltiples firmas ✅</li>
+<li>C) Token especial</li>
+<li>D) Fee adicional</li>
+</ul>
+</li>
+<li><p>¿Cuándo es breakeven Bashood?</p>
+<ul>
+<li>A) 2026 Q4</li>
+<li>B) 2027</li>
+<li>C) 2029 (Año 4) ✅</li>
+<li>D) 2030</li>
+</ul>
+</li>
+<li><p>KPI &quot;TVL&quot; significa:</p>
+<ul>
+<li>A) Tiempo Vida Limitada</li>
+<li>B) Total Value Locked ✅</li>
+<li>C) Tasa Valor Liquidez</li>
+<li>D) Token Value Level</li>
+</ul>
+</li>
+</ol>
+<p><strong>Respuestas:</strong> B, B, A, B, B, C, A, B, C, B</p>
+<hr>
+<h1 id="módulo-3-modelo-económico-para-inversores">MÓDULO 3: MODELO ECONÓMICO PARA INVERSORES</h1>
+<h2 id="31-caso-doosan-dx360-en-detalle-90-min">3.1 Caso Doosan DX360 en Detalle (90 min)</h2>
+<h3 id="ficha-técnica-activo">Ficha Técnica Activo</h3>
+<p><strong>Excavadora Doosan DX360LC</strong></p>
+<table>
+<thead>
+<tr>
+<th>Característica</th>
+<th>Valor</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Modelo</strong></td>
+<td>Doosan DX360LC-5</td>
+</tr>
+<tr>
+<td><strong>Tipo</strong></td>
+<td>Excavadora hidráulica cadenas</td>
+</tr>
+<tr>
+<td><strong>Peso operativo</strong></td>
+<td>36,500 kg</td>
+</tr>
+<tr>
+<td><strong>Motor</strong></td>
+<td>Doosan DL08 6 cilindros turbo</td>
+</tr>
+<tr>
+<td><strong>Potencia</strong></td>
+<td>202 kW (271 HP)</td>
+</tr>
+<tr>
+<td><strong>Capacidad cuchara</strong></td>
+<td>1.7 m³</td>
+</tr>
+<tr>
+<td><strong>Alcance máximo</strong></td>
+<td>11.2 m</td>
+</tr>
+<tr>
+<td><strong>Profundidad excavación</strong></td>
+<td>7.5 m</td>
+</tr>
+<tr>
+<td><strong>Año fabricación</strong></td>
+<td>2021</td>
+</tr>
+<tr>
+<td><strong>Horas trabajadas</strong></td>
+<td>4,200 h (bajo para edad)</td>
+</tr>
+<tr>
+<td><strong>Estado</strong></td>
+<td>Excelente (mantenimiento al día)</td>
+</tr>
+<tr>
+<td><strong>Ubicación</strong></td>
+<td>Madrid, España</td>
+</tr>
+<tr>
+<td><strong>Valor mercado</strong></td>
+<td>€150,000</td>
+</tr>
+</tbody></table>
+<h3 id="estructura-tokenización">Estructura Tokenización</h3>
+<p><strong>Configuración propuesta:</strong></p>
+<pre><code>Valor total activo:        €150,000 (100%)
+
+DISTRIBUCIÓN PROPIEDAD:
+├─ Propietario retiene:    60% (€90k)
+│  → No vende, mantiene control
+│  → Recibe 60% ganancias operativas
+│  → Derecho gestión 100%
+│
+└─ Tokenizado (venta):     40% (€60k)
+   → 100,000 tokens BHT-DX360
+   → Precio: €0.60/token
+   → Inversores reciben 40% ganancias
+   → Whitelist holders (compliance)
+</code></pre>
+<p><strong>Composición Setup Fee:</strong></p>
+<pre><code>Setup Fee 3% sobre €150k = €4,500
+
+Desglose:
+├─ Auditoría técnica:      €800
+├─ Legal &amp; contrato:       €1,200
+├─ Smart contract deploy:  €300
+├─ Marketing listing:      €650
+├─ Distribuidor (30%):     €1,350
+└─ Bashood margen (21%):   €950
+
+Pagado por: Propietario (descontado de €60k que recibe)
+Neto propietario: €55,500
+</code></pre>
+<h3 id="escenario-conservador-60-min">Escenario Conservador (60 min)</h3>
+<p><strong>Asunciones:</strong></p>
+<pre><code>Modelo: Alquiler diario a subcontratas construcción
+Precio alquiler: €400/día (sin operador)
+Occupancy: 70% (21 días trabajados/30 días mes)
+Ingresos mensuales: €8,400
+</code></pre>
+<p><strong>Estructura costos:</strong></p>
+<pre><code>COSTOS FIJOS (mensuales):
+├─ Seguro todo riesgo:        €450
+├─ ITV &amp; inspecciones:        €50
+├─ Parking/almacenaje:        €200
+├─ GPS tracking:              €30
+└─ Subtotal fijos:            €730
+
+COSTOS VARIABLES (por día trabajo):
+├─ Combustible (80L × €1.50): €120
+├─ Mantenimiento preventivo:  €80
+├─ Transporte obra:           €100
+├─ Operador (si incluido):    €200 (en este caso, cliente aporta)
+└─ Subtotal variable/día:     €300
+
+Costos variables mes: €300 × 21 días = €6,300
+TOTAL COSTOS MES: €7,030
+</code></pre>
+<p><strong>P&amp;L mensual:</strong></p>
+<pre><code>Ingresos:                     €8,400
+- Costos:                     €7,030
+──────────────────────────────────
+GANANCIA NETA:                €1,370
+
+Distribución:
+├─ Holders (40%):             €548
+│  ├─ Treasury fee (0.5%):   €2.74 → Bashood
+│  └─ Neto holders:          €545.26
+│
+└─ Propietario (60%):         €822
+</code></pre>
+<p><strong>ROI Inversor (€3,000 invertidos = 5,000 tokens):</strong></p>
+<pre><code>Tu % del tokenizado: 5,000 / 100,000 = 5%
+Tu pago mensual: €545.26 × 5% = €27.26/mes
+
+ROI anual:
+€27.26 × 12 meses = €327.12/año
+€327.12 / €3,000 = 10.90% ROI ✅
+</code></pre>
+<p><strong>¿Es atractivo?</strong></p>
+<ul>
+<li>✅ 10.9% &gt; S&amp;P 500 promedio (7-8%)</li>
+<li>✅ 10.9% &gt; bonos España (3-4%)</li>
+<li>⚠️ Pero &lt;15% ideal para compensar riesgo operativo</li>
+<li>Conclusión: <strong>APROBADO pero ajustado</strong> (necesita occupancy &gt;75% o precio €450/día)</li>
+</ul>
+<h3 id="escenario-realista-60-min">Escenario Realista (60 min)</h3>
+<p><strong>Asunciones mejoradas:</strong></p>
+<pre><code>Occupancy: 83% (25 días/mes trabajados)
+Precio alquiler promedio: €450/día
+Ingresos mensuales: €11,250
+</code></pre>
+<p><strong>Costos ajustados:</strong></p>
+<pre><code>Costos fijos:                 €730 (igual)
+Costos variables: €300 × 25 = €7,500
+TOTAL COSTOS:                 €8,230
+
+Ganancia neta:                €3,020
+</code></pre>
+<p><strong>Distribución:</strong></p>
+<pre><code>Holders (40%):                €1,208
+├─ Treasury fee (0.5%):       €6.04
+└─ Neto holders:              €1,201.96
+
+Propietario (60%):            €1,812
+</code></pre>
+<p><strong>ROI Inversor (€3,000):</strong></p>
+<pre><code>Pago mensual: €1,201.96 × 5% = €60.10/mes
+ROI anual: €721.20 / €3,000 = 24.04% ✅✅
+</code></pre>
+<p><strong>¿Es atractivo?</strong></p>
+<ul>
+<li>✅✅ 24% excelente para RWA</li>
+<li>✅ Compite con real estate (15-20%)</li>
+<li>✅ Supera venture capital early-stage riesgo similar</li>
+<li>Conclusión: <strong>MUY ATRACTIVO</strong> para retail y algunos institucionales</li>
+</ul>
+<h3 id="escenario-óptimo-60-min">Escenario Óptimo (60 min)</h3>
+<p><strong>Asunciones agresivas:</strong></p>
+<pre><code>Modelo: Contrato anual con promotora grande
+Precio: €500/día garantizado
+Occupancy: 90% (27 días/mes)
+Ingresos mensuales: €13,500
+</code></pre>
+<p><strong>Costos:</strong></p>
+<pre><code>Costos fijos:                 €730
+Costos variables: €300 × 27 = €8,100
+TOTAL COSTOS:                 €8,830
+
+Ganancia neta:                €4,670
+</code></pre>
+<p><strong>Distribución:</strong></p>
+<pre><code>Holders (40%):                €1,868
+├─ Treasury fee (0.5%):       €9.34
+└─ Neto holders:              €1,858.66
+
+Propietario (60%):            €2,802
+</code></pre>
+<p><strong>ROI Inversor (€3,000):</strong></p>
+<pre><code>Pago mensual: €1,858.66 × 5% = €92.93/mes
+ROI anual: €1,115.16 / €3,000 = 37.17% ✅✅✅
+</code></pre>
+<p><strong>¿Es atractivo?</strong></p>
+<ul>
+<li>✅✅✅ 37% extraordinario</li>
+<li>⚠️ Requiere contrato estable (riesgo si promotora cancela)</li>
+<li>✅ Justifica premium pricing token (€0.65-0.70 en vez €0.60)</li>
+<li>Conclusión: <strong>EXCEPCIONAL</strong> si sostenible</li>
+</ul>
+<h3 id="tabla-comparativa-3-escenarios">Tabla Comparativa 3 Escenarios</h3>
+<table>
+<thead>
+<tr>
+<th>Métrica</th>
+<th>Conservador</th>
+<th>Realista ⭐</th>
+<th>Óptimo</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Occupancy</strong></td>
+<td>70%</td>
+<td>83%</td>
+<td>90%</td>
+</tr>
+<tr>
+<td><strong>Ingresos/mes</strong></td>
+<td>€8,400</td>
+<td>€11,250</td>
+<td>€13,500</td>
+</tr>
+<tr>
+<td><strong>Costos/mes</strong></td>
+<td>€7,030</td>
+<td>€8,230</td>
+<td>€8,830</td>
+</tr>
+<tr>
+<td><strong>Ganancia neta</strong></td>
+<td>€1,370</td>
+<td>€3,020</td>
+<td>€4,670</td>
+</tr>
+<tr>
+<td><strong>Holders reciben</strong></td>
+<td>€545/mes</td>
+<td>€1,202/mes</td>
+<td>€1,859/mes</td>
+</tr>
+<tr>
+<td><strong>ROI anual</strong></td>
+<td>10.9%</td>
+<td>24.0% ✅</td>
+<td>37.2%</td>
+</tr>
+<tr>
+<td><strong>Payback</strong></td>
+<td>9.2 años</td>
+<td>4.2 años</td>
+<td>2.7 años</td>
+</tr>
+<tr>
+<td><strong>Riesgo</strong></td>
+<td>Bajo</td>
+<td>Medio</td>
+<td>Alto</td>
+</tr>
+</tbody></table>
+<p><strong>Recomendación pitch:</strong></p>
+<ul>
+<li>Presenta escenario <strong>Realista</strong> como base (24% ROI)</li>
+<li>Menciona <strong>Conservador</strong> como worst-case (10.9% aún positivo)</li>
+<li>Usa <strong>Óptimo</strong> como upside potencial (si contratos estables)</li>
+</ul>
+<h3 id="ejercicio-práctico-31-45-min">Ejercicio Práctico 3.1 (45 min)</h3>
+<p><strong>Caso: Inversor quiere diversificar</strong></p>
+<p>Juan tiene €10,000 para invertir y está considerando:</p>
+<ul>
+<li>Opción A: Fondo indexado S&amp;P 500 (7% anual esperado, seguro)</li>
+<li>Opción B: Tokens Doosan DX360 (24% escenario realista)</li>
+<li>Opción C: 50/50 mix</li>
+</ul>
+<p><strong>Preguntas equipo:</strong></p>
+<ol>
+<li>¿Cuánto recibiría mensual en cada opción?</li>
+<li>¿Cuánto en 1 año?</li>
+<li>¿Qué riesgos adicionales tiene Opción B vs A?</li>
+<li>¿Qué recomendarías y por qué?</li>
+<li>Si ocurre escenario conservador (10.9%), ¿sigue valiendo la pena?</li>
+</ol>
+<p><strong>Puesta en común + debate (15 min)</strong></p>
+<hr>
+<h2 id="32-caso-evocons-evoblock-60-min">3.2 Caso EVOCONS EVOBLOCK (60 min)</h2>
+<h3 id="ficha-técnica-evocons">Ficha Técnica EVOCONS</h3>
+<p><strong>Grúa Autopropulsada EVOCONS EVOBLOCK</strong></p>
+<table>
+<thead>
+<tr>
+<th>Característica</th>
+<th>Valor</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Modelo</strong></td>
+<td>EVOCONS EVOBLOCK Custom</td>
+</tr>
+<tr>
+<td><strong>Tipo</strong></td>
+<td>Grúa autopropulsada modular construcción</td>
+</tr>
+<tr>
+<td><strong>Capacidad carga</strong></td>
+<td>12 toneladas</td>
+</tr>
+<tr>
+<td><strong>Altura máxima</strong></td>
+<td>45 metros</td>
+</tr>
+<tr>
+<td><strong>Radio trabajo</strong></td>
+<td>20 metros</td>
+</tr>
+<tr>
+<td><strong>Tracción</strong></td>
+<td>8×4 (8 ruedas, 4 motrices)</td>
+</tr>
+<tr>
+<td><strong>Sistema</strong></td>
+<td>Hidráulico + teledirigido</td>
+</tr>
+<tr>
+<td><strong>Certificaciones</strong></td>
+<td>CE, EN 12999</td>
+</tr>
+<tr>
+<td><strong>Año fabricación</strong></td>
+<td>2023 (casi nueva)</td>
+</tr>
+<tr>
+<td><strong>Horas operación</strong></td>
+<td>1,200 h</td>
+</tr>
+<tr>
+<td><strong>Estado</strong></td>
+<td>Excelente (garantía 2 años restante)</td>
+</tr>
+<tr>
+<td><strong>Ubicación</strong></td>
+<td>Barcelona, España</td>
+</tr>
+<tr>
+<td><strong>Valor mercado nuevo</strong></td>
+<td>$1,350,000</td>
+</tr>
+<tr>
+<td><strong>Valor actual</strong></td>
+<td>$1,200,000</td>
+</tr>
+</tbody></table>
+<h3 id="estructura-tokenización-1">Estructura Tokenización</h3>
+<p><strong>Configuración EVOCONS:</strong></p>
+<pre><code>Valor total:                  $1,200,000 (100%)
+
+DISTRIBUCIÓN PROPIEDAD:
+├─ Tokenizado completo:       100% ($1.2M)
+│  → Propiedad 100% fraccionada
+│  → Sin propietario único
+│  → Gestión contrata a operador profesional
+│
+└─ Configuración tokens:      
+   → 1,000 shares × $1,200 cada uno
+   → Mínimo compra: 1 share ($1,200)
+   → Máximo: Sin límite (pero &lt;50% individual governance)
+</code></pre>
+<p><strong>¿Por qué 100% tokenizado?</strong></p>
+<ul>
+<li>Activo fue adquirido específicamente para tokenizar (no tenía dueño previo retail)</li>
+<li>Financiamiento 100% via tokens = democratización total</li>
+<li>Modelo &quot;fondo cerrado&quot; similar real estate tokenizado</li>
+</ul>
+<p><strong>Setup Fee:</strong></p>
+<pre><code>Setup Fee 3% sobre $1.2M = $36,000
+
+Desglose:
+├─ Auditoría técnica:         $5,000 (activo alto valor)
+├─ Legal &amp; estructura SPV:    $12,000 (entity propia)
+├─ Smart contract + testing:  $3,000
+├─ Marketing intensive:       $3,000
+├─ Distribuidor (30%):        $10,800
+└─ Bashood margen (20%):      $7,200
+
+Descontado de $1.2M recaudado
+Neto adquisición activo + operación inicial: $1,164,000
+</code></pre>
+<h3 id="modelo-de-negocio-alquiler-mensual">Modelo de Negocio: Alquiler Mensual</h3>
+<p><strong>Contrato típico:</strong></p>
+<pre><code>Cliente: Promotora inmobiliaria Edificio 15 plantas
+Duración: 12 meses renovables
+Servicio: Alquiler grúa + operador certificado + mantenimiento
+Precio: $50,000/mes all-inclusive
+</code></pre>
+<p><strong>Costos operativos:</strong></p>
+<pre><code>COSTOS FIJOS (mensuales):
+├─ Seguro todo riesgo:        $2,500
+├─ ITV &amp; certificaciones:     $300
+├─ Base operaciones/parking:  $800
+├─ GPS + telemática:          $150
+└─ Subtotal fijos:            $3,750
+
+COSTOS OPERATIVOS:
+├─ Operador grúa (sueldo):    $4,500
+├─ Seguridad Social operador: $1,500
+├─ Combustible:               $2,000
+├─ Mantenimiento preventivo:  $1,800
+├─ Transporte setup inicial:  $500 (amortizado)
+├─ Overhead gestión:          $2,000
+└─ Subtotal operativo:        $12,300
+
+TOTAL COSTOS MES:             $16,050
+</code></pre>
+<p><strong>P&amp;L mensual:</strong></p>
+<pre><code>Ingresos alquiler:            $50,000
+- Costos:                     $16,050
+──────────────────────────────────────
+GANANCIA NETA:                $33,950
+
+Distribución:
+├─ Shareholders (100%):       $33,950
+│  ├─ Treasury fee (0.5%):   $169.75 → Bashood
+│  └─ Neto shareholders:     $33,780.25
+│
+└─ Operador externo:          Ya pagado en costos
+</code></pre>
+<p><strong>ROI Investor (10 shares = $12,000):</strong></p>
+<pre><code>Tu % del total: 10 / 1,000 = 1%
+Tu pago mensual: $33,780.25 × 1% = $337.80/mes
+
+ROI anual:
+$337.80 × 12 = $4,053.60/año
+$4,053.60 / $12,000 = 33.78% ROI ✅✅✅
+</code></pre>
+<h3 id="comparación-doosan-vs-evocons">Comparación Doosan vs EVOCONS</h3>
+<table>
+<thead>
+<tr>
+<th>Aspecto</th>
+<th>Doosan DX360</th>
+<th>EVOCONS EVOBLOCK</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Valor activo</strong></td>
+<td>€150k</td>
+<td>$1.2M</td>
+</tr>
+<tr>
+<td><strong>% Tokenizado</strong></td>
+<td>40%</td>
+<td>100%</td>
+</tr>
+<tr>
+<td><strong>Inversión mínima</strong></td>
+<td>€600</td>
+<td>$1,200</td>
+</tr>
+<tr>
+<td><strong>Modelo</strong></td>
+<td>Propietario-operador</td>
+<td>Fondo cerrado</td>
+</tr>
+<tr>
+<td><strong>Alquiler/mes</strong></td>
+<td>€11,250</td>
+<td>$50,000</td>
+</tr>
+<tr>
+<td><strong>Ganancia/mes</strong></td>
+<td>€3,020</td>
+<td>$33,950</td>
+</tr>
+<tr>
+<td><strong>ROI típico</strong></td>
+<td>24%</td>
+<td>34%</td>
+</tr>
+<tr>
+<td><strong>Riesgo operativo</strong></td>
+<td>Medio</td>
+<td>Bajo (contratos largos)</td>
+</tr>
+<tr>
+<td><strong>Liquidez</strong></td>
+<td>Media</td>
+<td>Baja inicial (alto ticket)</td>
+</tr>
+<tr>
+<td><strong>Setup Fee $</strong></td>
+<td>€4,500</td>
+<td>$36,000</td>
+</tr>
+<tr>
+<td><strong>Comisión distribuidor</strong></td>
+<td>€1,350</td>
+<td>$10,800 ✅</td>
+</tr>
+</tbody></table>
+<p><strong>Insights:</strong></p>
+<ul>
+<li>EVOCONS = mejor ROI pero requiere más capital inicial</li>
+<li>Doosan = más accesible retail (€600 vs $1,200)</li>
+<li>Distribuidores ganan 8× más por venta EVOCONS ($10.8k vs €1.35k)</li>
+</ul>
+<h3 id="ejercicio-práctico-32-30-min">Ejercicio Práctico 3.2 (30 min)</h3>
+<p><strong>Caso: Inversor institucional $500k</strong></p>
+<p>Gemma gestiona cartera $2M para family office y considera:</p>
+<ul>
+<li>Opción A: $500k en bonos USA treasury (4.5% anual)</li>
+<li>Opción B: $500k en EVOCONS shares (34% esperado)</li>
+<li>Opción C: Mix $250k bonos + $250k EVOCONS</li>
+</ul>
+<p><strong>Preguntas:</strong></p>
+<ol>
+<li>¿Cuántos shares EVOCONS compraría con $500k?</li>
+<li>¿Cuánto recibiría mensual escenario B?</li>
+<li>Compare ingresos anuales A vs B</li>
+<li>¿Qué riesgos adicionales tiene EVOCONS?</li>
+<li>¿Por qué Opción C podría ser óptima?</li>
+</ol>
+<hr>
+<h2 id="33-diversificación-y-portfolio-45-min">3.3 Diversificación y Portfolio (45 min)</h2>
+<h3 id="estrategia-diversificación">Estrategia Diversificación</h3>
+<p><strong>Pirámide inversión RWA recomendada:</strong></p>
+<pre><code>PERFIL CONSERVADOR (€10,000):
+├─ 60% Stablecoins (USDC/USDT): €6,000
+│  → Rendimiento: 5% APY en protocolos DeFi
+├─ 30% Tokens Bashood: €3,000
+│  → 1-2 activos (Doosan + otro)
+└─ 10% Liquidez/Oportunidad: €1,000
+   → Para secundary market deals
+
+PERFIL MODERADO (€50,000):
+├─ 40% Stablecoins: €20,000
+├─ 50% Tokens Bashood: €25,000
+│  → 3-5 activos diversificados
+│  → Mix excavadoras + grúas + dumpers
+└─ 10% Altcoins blue-chip: €5,000
+   → ETH, BTC exposure
+
+PERFIL AGRESIVO (€200,000+):
+├─ 20% Stablecoins: €40,000
+├─ 70% Tokens Bashood: €140,000
+│  → 8-12 activos diversificados
+│  → Incluir EVOCONS (alto valor)
+│  → Diversificar geografía (ES, PT, FR)
+└─ 10% Venture/Secondary: €20,000
+   → Comprar tokens con descuento secundario
+</code></pre>
+<h3 id="cálculo-rendimientos-portfolio">Cálculo Rendimientos Portfolio</h3>
+<p><strong>Ejemplo Portfolio €30,000 (Moderado):</strong></p>
+<pre><code>Distribución:
+├─ €12,000 → Stablecoins USDC @ 5% APY
+│  └─ Ganancia anual: €600
+│
+├─ €6,000 → Doosan DX360 (10,000 tokens) @ 24% ROI
+│  └─ Ganancia anual: €1,440
+│
+├─ €6,000 → Camión Dumper BHT-DUMP @ 18% ROI
+│  └─ Ganancia anual: €1,080
+│
+├─ €4,000 → Compactadora BHT-COMP @ 15% ROI
+│  └─ Ganancia anual: €600
+│
+└─ €2,000 → Liquidez (oportunidades)
+   └─ Ganancia: €0 (standby)
+
+RENDIMIENTO TOTAL:
+€600 + €1,440 + €1,080 + €600 = €3,720/año
+€3,720 / €30,000 = 12.4% blended ROI ✅
+
+Mensual promedio: €310/mes pasivo
+</code></pre>
+<p><strong>Ventajas diversificación:</strong></p>
+<ul>
+<li>✅ Reduce riesgo concentración (1 activo falla, portfolio sobrevive)</li>
+<li>✅ Suaviza volatilidad (si Doosan baja occupancy, otros compensan)</li>
+<li>✅ Acceso múltiples sectores (construcción, logística, agrícola)</li>
+<li>✅ Geographic diversification (reduce riesgo regional)</li>
+</ul>
+<h3 id="risk-management">Risk Management</h3>
+<p><strong>Riesgos por tipo de activo:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Riesgo</th>
+<th>Excavadoras</th>
+<th>Grúas</th>
+<th>Camiones</th>
+<th>Mitigación</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Occupancy bajo</strong></td>
+<td>Alto</td>
+<td>Medio</td>
+<td>Alto</td>
+<td>Contratos anuales preferentes</td>
+</tr>
+<tr>
+<td><strong>Mantenimiento caro</strong></td>
+<td>Medio</td>
+<td>Alto</td>
+<td>Medio</td>
+<td>Fondo emergencias 10%</td>
+</tr>
+<tr>
+<td><strong>Tecnología obsoleta</strong></td>
+<td>Bajo</td>
+<td>Medio</td>
+<td>Bajo</td>
+<td>Activos &lt;5 años edad</td>
+</tr>
+<tr>
+<td><strong>Regulación cambio</strong></td>
+<td>Bajo</td>
+<td>Alto</td>
+<td>Medio</td>
+<td>Follow normativas proactivo</td>
+</tr>
+<tr>
+<td><strong>Mercado saturación</strong></td>
+<td>Medio</td>
+<td>Bajo</td>
+<td>Alto</td>
+<td>Diversificar geográfico</td>
+</tr>
+</tbody></table>
+<p><strong>Señales alerta (red flags):</strong></p>
+<ul>
+<li>🚩 Occupancy &lt;60% por 3 meses consecutivos</li>
+<li>🚩 Costos mantenimiento &gt;20% ingresos</li>
+<li>🚩 Pagos holder delay &gt;7 días</li>
+<li>🚩 Propietario no responde reportes</li>
+<li>🚩 Seguro expira sin renovar</li>
+</ul>
+<p><strong>Acciones holder si red flag:</strong></p>
+<ol>
+<li>Reportar a Bashood governance</li>
+<li>Votar auditoría extraordinaria</li>
+<li>Solicitar cambio operador (si 51% holders acuerdan)</li>
+<li>Ultimo recurso: Forzar venta activo, liquidar tokens</li>
+</ol>
+<h3 id="ejercicio-práctico-33-30-min">Ejercicio Práctico 3.3 (30 min)</h3>
+<p><strong>Diseñar portfolio €20,000:</strong></p>
+<p>Instrucciones:</p>
+<ul>
+<li>Perfil: Moderado (dispuesto 15-20% ROI, acepta algo riesgo)</li>
+<li>Acceso activos: Doosan (€0.60), EVOCONS ($1,200), Dumper (€0.80)</li>
+<li>Crear diversificación óptima</li>
+<li>Proyectar ROI blended anual</li>
+<li>Identificar 3 top riesgos + mitigaciones</li>
+</ul>
+<p><strong>Presentación 5 min por equipo</strong></p>
+<hr>
+<h2 id="evaluación-módulo-3-30-min">Evaluación Módulo 3 (30 min)</h2>
+<p><strong>Test 10 preguntas:</strong></p>
+<ol>
+<li><p>Investment mínimo Doosan DX360:</p>
+<ul>
+<li>A) €60</li>
+<li>B) €600 ✅</li>
+<li>C) €6,000</li>
+<li>D) €60,000</li>
+</ul>
+</li>
+<li><p>ROI escenario realista Doosan:</p>
+<ul>
+<li>A) 10.9%</li>
+<li>B) 24.0% ✅</li>
+<li>C) 37.2%</li>
+<li>D) 50%</li>
+</ul>
+</li>
+<li><p>EVOCONS tokeniza:</p>
+<ul>
+<li>A) 40%</li>
+<li>B) 60%</li>
+<li>C) 80%</li>
+<li>D) 100% ✅</li>
+</ul>
+</li>
+<li><p>Precio 1 share EVOCONS:</p>
+<ul>
+<li>A) $120</li>
+<li>B) $1,200 ✅</li>
+<li>C) $12,000</li>
+<li>D) $120,000</li>
+</ul>
+</li>
+<li><p>Treasury fee sobre distribuciones:</p>
+<ul>
+<li>A) 0.05%</li>
+<li>B) 0.5% ✅</li>
+<li>C) 3%</li>
+<li>D) 5%</li>
+</ul>
+</li>
+<li><p>Occupancy rate significa:</p>
+<ul>
+<li>A) % tiempo activo alquilado ✅</li>
+<li>B) Número personas usando</li>
+<li>C) Capacidad carga</li>
+<li>D) Tasa ocupación parking</li>
+</ul>
+</li>
+<li><p>Perfil conservador debería tener:</p>
+<ul>
+<li>A) 100% tokens RWA</li>
+<li>B) 60% stablecoins + 30% RWA ✅</li>
+<li>C) 100% stablecoins</li>
+<li>D) 50% altcoins + 50% RWA</li>
+</ul>
+</li>
+<li><p>Setup Fee Doosan es:</p>
+<ul>
+<li>A) €450</li>
+<li>B) €1,350</li>
+<li>C) €4,500 ✅</li>
+<li>D) €45,000</li>
+</ul>
+</li>
+<li><p>Red flag crítico:</p>
+<ul>
+<li>A) Occupancy 80%</li>
+<li>B) Occupancy &lt;60% 3 meses ✅</li>
+<li>C) Mantenimiento 10% ingresos</li>
+<li>D) Pago holders  día 28</li>
+</ul>
+</li>
+<li><p>ROI blended portfolio €30k ejemplo:</p>
+<ul>
+<li>A) 5.4%</li>
+<li>B) 12.4% ✅</li>
+<li>C) 24%</li>
+<li>D) 34%</li>
+</ul>
+</li>
+</ol>
+<p><strong>Respuestas:</strong> B, B, D, B, B, A, B, C, B, B</p>
+<hr>
+<h1 id="módulo-4-proceso-de-tokenización-de-activos">MÓDULO 4: PROCESO DE TOKENIZACIÓN DE ACTIVOS</h1>
+<h2 id="41-prospección-y-calificación-60-min">4.1 Prospección y Calificación (60 min)</h2>
+<h3 id="perfil-activo-ideal">Perfil Activo Ideal</h3>
+<p><strong>Criterios debe cumplir:</strong></p>
+<p>✅ <strong>Técnicos:</strong></p>
+<ul>
+<li>Maquinaria pesada sectores: construcción, logística, agrícola, minería</li>
+<li>Valor: €50k - €5M (sweet spot €100-500k)</li>
+<li>Edad: &lt;10 años (idealmente &lt;5)</li>
+<li>Estado: Bueno a excelente (no requiere reparaciones mayores)</li>
+<li>Certificaciones: Al día (ITV, CE, registros)</li>
+</ul>
+<p>✅ <strong>Operativos:</strong></p>
+<ul>
+<li>Actualmente operando (no parado &gt;3 meses)</li>
+<li>Historial uso: Mínimo 6 meses documentado</li>
+<li>Ingresos demostrables: Facturas, contratos, extractos bancarios</li>
+<li>Ocupación: &gt;60% tiempo (idealmente &gt;75%)</li>
+<li>ROI potencial: &gt;15% anual para holders</li>
+</ul>
+<p>✅ <strong>Legales:</strong></p>
+<ul>
+<li>Propiedad clara: Sin gravámenes, leasing pendientes, disputas</li>
+<li>Documentación completa: Factura compra, registro, seguros</li>
+<li>Propietario cooperativo: Transparente, profesional, buen historial</li>
+</ul>
+<p>✅ <strong>Financieros:</strong></p>
+<ul>
+<li>Flujo caja positivo: Ingresos &gt; costos consistently</li>
+<li>Margen: Mínimo 30% (después costos operativos)</li>
+<li>Clientes: Diversificados (no depende 100% un cliente)</li>
+</ul>
+<h3 id="tipos-activos-por-categoría">Tipos Activos por Categoría</h3>
+<p><strong>A. CONSTRUCCIÓN (70% deals esperados)</strong></p>
+<pre><code>Excavadoras:
+├─ Mini (&lt;5 ton): €30-50k → ROI 12-18%
+├─ Medianas (15-25 ton): €80-150k → ROI 18-25% ✅ Doosan
+├─ Grandes (&gt;30 ton): €200-500k → ROI 15-22%
+
+Grúas:
+├─ Torre fijas: €150-800k → ROI 20-30%
+├─ Autopropulsadas: €500k-2M → ROI 25-35% ✅ EVOCONS
+├─ Móviles: €100-300k → ROI 18-25%
+
+Dumpers:
+├─ Rígidos: €60-120k → ROI 15-22%
+├─ Articulados: €100-250k → ROI 18-25%
+
+Bulldozers, niveladoras, compactadoras, etc.
+</code></pre>
+<p><strong>B. LOGÍSTICA (15% deals)</strong></p>
+<pre><code>Camiones:
+├─ Tractoras: €70-150k → ROI 12-18%
+├─ Rígidos: €50-100k → ROI 15-20%
+├─ Frigoríficos: €80-180k → ROI 18-25%
+
+Carretillas elevadoras:
+├─ Diesel: €30-80k → ROI 10-15%
+├─ Eléctricas: €40-100k → ROI 12-18%
+</code></pre>
+<p><strong>C. AGRÍCOLA (10% deals)</strong></p>
+<pre><code>Tractores:
+├─ Medianos: €80-150k → ROI 15-22%
+├─ Grandes: €200-500k → ROI 18-25%
+
+Cosechadoras, sembradoras, equipo riego
+</code></pre>
+<p><strong>D. OTROS (5% deals)</strong></p>
+<pre><code>Minería, forestal, reciclaje, energía, marino
+</code></pre>
+<h3 id="fuentes-prospección-45-min">Fuentes Prospección (45 min)</h3>
+<p><strong>1. Directo Propietarios (40% leads):</strong></p>
+<pre><code>Canales:
+├─ LinkedIn: Buscar &quot;propietario excavadora&quot;, &quot;flota construcción&quot;
+├─ Ferias sectoriales: Intermat, Bauma, SMOPYC
+├─ Asociaciones: ANMOPYC (España), similares EU
+├─ Google Ads: Keywords &quot;financiar excavadora&quot;, &quot;vender maquinaria&quot;
+└─ Referidos: Clientes contentos recomiendan
+
+Pitch inicial:
+&quot;Hola [Nombre], vi tu excavadora Doosan en LinkedIn.
+¿Has considerado obtener €60k liquidez inmediata
+sin venderla ni endeudarte? Tokenización RWA permite esto.
+5 min llamada para explicarte?&quot;
+</code></pre>
+<p><strong>2. Distribuidores Maquinaria (25% leads):</strong></p>
+<pre><code>Partnerships:
+├─ Dealers oficiales: Caterpillar, Volvo, Komatsu, JCB
+├─ Mercado segunda mano: Mascus, MachineryZone, Ritchie Bros
+├─ Dealers independientes locales
+
+Win-win:
+- Dealer cierra venta nueva (su comisión normal)
+- Propietario financia con Bashood en vez banco
+- Bashood paga referral fee €500-2,000 al dealer
+</code></pre>
+<p><strong>3. Constructoras/Operadores (20% leads):</strong></p>
+<pre><code>Target:
+├─ Pymes construcción: 5-50 empleados
+├─ Subcontratas especializadas: Excavación, cimentación
+├─ Cooperativas operadores autónomos
+
+Approach:
+&quot;¿Vuestra flota está infrautilizada algunos meses?
+Tokenizad y generáis ingresos pasivos incluso parada.&quot;
+</code></pre>
+<p><strong>4. Inbound Marketing (15% leads):</strong></p>
+<pre><code>Canales:
+├─ Blog/SEO: &quot;Cómo financiar excavadora sin banco&quot;
+├─ Webinars: &quot;Tokenización RWA para construcción&quot;
+├─ Caso éxito: &quot;Cómo Juan obtuvo €60k tokenizando Doosan&quot;
+├─ Youtube: Tutoriales, entrevistas
+└─ Podcast: Invitados sector construcción
+</code></pre>
+<h3 id="ejercicio-práctico-41-30-min">Ejercicio Práctico 4.1 (30 min)</h3>
+<p><strong>Rol Play: Cold Call Distribuidor → Propietario</strong></p>
+<p><strong>Contexto:</strong></p>
+<ul>
+<li>Distribuidor: Juan (tú)</li>
+<li>Propietario: María (compañero)</li>
+<li>Activo: Excavadora Caterpillar 320, 2020, €140k valor</li>
+</ul>
+<p><strong>Objetivos Juan:</strong></p>
+<ol>
+<li>Apresentarse (15 seg)</li>
+<li>Qualificar interés María (30 seg)</li>
+<li>Agendar reunión 30 min próxima semana (15 seg)</li>
+</ol>
+<p><strong>Objeciones comunes María:</strong></p>
+<ul>
+<li>&quot;No entiendo blockchain&quot;</li>
+<li>&quot;Suena muy complejo&quot;</li>
+<li>&quot;¿Pierdo control de mi excavadora?&quot;</li>
+<li>&quot;¿Cuánto cuesta?&quot;</li>
+</ul>
+<p><strong>Instrucciones:</strong></p>
+<ul>
+<li>5 min preparación individual</li>
+<li>3 min role-play por pareja</li>
+<li>2 min feedback grupo</li>
+<li>Rotar roles</li>
+</ul>
+<hr>
+<h2 id="42-due-diligence-profunda-90-min">4.2 Due Diligence Profunda (90 min)</h2>
+<h3 id="sistema-scoring-100-puntos">Sistema Scoring 100 Puntos</h3>
+<p><strong>Bashood usa checklist 100 puntos, mínimo 80 para aprobar</strong></p>
+<p><strong>CATEGORÍA 1: TÉCNICO (30 puntos)</strong></p>
+<table>
+<thead>
+<tr>
+<th>Criterio</th>
+<th>Puntos</th>
+<th>Cómo Evaluar</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Estado maquinaria</strong></td>
+<td>10</td>
+<td>Inspección física + fotos + informe mecánico</td>
+</tr>
+<tr>
+<td><strong>Certificaciones al día</strong></td>
+<td>5</td>
+<td>Ver vigencia ITV, CE, permisos</td>
+</tr>
+<tr>
+<td><strong>Mantenimiento</strong></td>
+<td>5</td>
+<td>Historial mantenimiento últimos 2 años</td>
+</tr>
+<tr>
+<td><strong>Horas/km uso</strong></td>
+<td>5</td>
+<td>Comparar vs promedio edad (bajo=mejor)</td>
+</tr>
+<tr>
+<td><strong>Marca/modelo</strong></td>
+<td>5</td>
+<td>Tier 1 (Caterpillar, Volvo) = 5pts, Tier 2 = 3pts, resto = 1pt</td>
+</tr>
+</tbody></table>
+<p><strong>Ejemplo evaluación Doosan DX360:</strong></p>
+<pre><code>Estado: 9/10 (excelente, solo desgaste normal)
+Certificaciones: 5/5 (todo al día)
+Mantenimiento: 5/5 (libro completo desde compra)
+Horas: 4/5 (4,200h para 3 años es bajo-medio)
+Marca: 4/5 (Doosan es Tier 1.5, excelente pero no Caterpillar)
+───────────────────────────────────────────────
+SUBTOTAL TÉCNICO: 27/30 ✅
+</code></pre>
+<hr>
+<p><strong>CATEGORÍA 2: OPERATIVO (25 puntos)</strong></p>
+<table>
+<thead>
+<tr>
+<th>Criterio</th>
+<th>Puntos</th>
+<th>Cómo Evaluar</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Ingresos demostrables</strong></td>
+<td>10</td>
+<td>Facturas 6 meses + extractos bancarios</td>
+</tr>
+<tr>
+<td><strong>Occupancy rate</strong></td>
+<td>8</td>
+<td>% tiempo alquilado/operando</td>
+</tr>
+<tr>
+<td><strong>Diversificación clientes</strong></td>
+<td>4</td>
+<td>≥3 clientes = 4pts, 2 = 2pts, 1 = 0pts</td>
+</tr>
+<tr>
+<td><strong>Contratos futuros</strong></td>
+<td>3</td>
+<td>Contratos firmados próximos 3-6 meses</td>
+</tr>
+</tbody></table>
+<p><strong>Ejemplo Doosan:</strong></p>
+<pre><code>Ingresos: 8/10 (facturas completas, pero 2 meses faltantes)
+Occupancy: 6/8 (75% tiempo, bueno pero no excelente)
+Clientes: 4/4 (trabaja con 5 subcontratas diferentes)
+Contratos: 2/3 (1 contrato 6 meses firmado, resto spot)
+───────────────────────────────────────────────
+SUBTOTAL OPERATIVO: 20/25 ✅
+</code></pre>
+<hr>
+<p><strong>CATEGORÍA 3: LEGAL (20 puntos)</strong></p>
+<table>
+<thead>
+<tr>
+<th>Criterio</th>
+<th>Puntos</th>
+<th>Cómo Evaluar</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Propiedad clara</strong></td>
+<td>8</td>
+<td>Registro propiedad sin gravámenes</td>
+</tr>
+<tr>
+<td><strong>Documentación completa</strong></td>
+<td>5</td>
+<td>Factura compra, registro, manual</td>
+</tr>
+<tr>
+<td><strong>Seguros vigentes</strong></td>
+<td>4</td>
+<td>Seguro todo riesgo mínimo</td>
+</tr>
+<tr>
+<td><strong>Sin litigios</strong></td>
+<td>3</td>
+<td>Consulta judicial, declaración propietario</td>
+</tr>
+</tbody></table>
+<p><strong>Ejemplo Doosan:</strong></p>
+<pre><code>Propiedad: 8/8 (registro 100% limpio)
+Documentación: 5/5 (todo original disponible)
+Seguros: 4/4 (AXA seguro todo riesgo vigente 12 meses)
+Litigios: 3/3 (ninguno, declaración firmada)
+───────────────────────────────────────────────
+SUBTOTAL LEGAL: 20/20 ✅✅
+</code></pre>
+<hr>
+<p><strong>CATEGORÍA 4: FINANCIERO (15 puntos)</strong></p>
+<table>
+<thead>
+<tr>
+<th>Criterio</th>
+<th>Puntos</th>
+<th>Cómo Evaluar</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Margen operativo</strong></td>
+<td>6</td>
+<td>(Ingresos - Costos) / Ingresos &gt;30% ideal</td>
+</tr>
+<tr>
+<td><strong>ROI potencial holders</strong></td>
+<td>6</td>
+<td>≥20% = 6pts, 15-20% = 4pts, 10-15% = 2pts</td>
+</tr>
+<tr>
+<td><strong>Flujo caja estable</strong></td>
+<td>3</td>
+<td>Varianza mensual &lt;30%</td>
+</tr>
+</tbody></table>
+<p><strong>Ejemplo Doosan:</strong></p>
+<pre><code>Margen: 5/6 (27% margen, casi ideal)
+ROI: 6/6 (24% escenario realista)
+Flujo: 2/3 (varianza 35%, algo inestable sector construcción)
+───────────────────────────────────────────────
+SUBTOTAL FINANCIERO: 13/15 ✅
+</code></pre>
+<hr>
+<p><strong>CATEGORÍA 5: PROPIETARIO (10 puntos)</strong></p>
+<table>
+<thead>
+<tr>
+<th>Criterio</th>
+<th>Puntos</th>
+<th>Cómo Evaluar</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Experiencia operador</strong></td>
+<td>4</td>
+<td>Años en sector, certificaciones</td>
+</tr>
+<tr>
+<td><strong>Transparencia</strong></td>
+<td>3</td>
+<td>Cooperativo en due diligence, responde rápido</td>
+</tr>
+<tr>
+<td><strong>Reputación</strong></td>
+<td>3</td>
+<td>Referencias clientes, Google reviews, LinkedIn</td>
+</tr>
+</tbody></table>
+<p><strong>Ejemplo Doosan:</strong></p>
+<pre><code>Experiencia: 4/4 (15 años sector, operador certificado)
+Transparencia: 3/3 (proporcionó todo en 5 días)
+Reputación: 3/3 (4.8★ Google, recomendaciones LinkedIn)
+───────────────────────────────────────────────
+SUBTOTAL PROPIETARIO: 10/10 ✅✅
+</code></pre>
+<hr>
+<h3 id="scoring-total-doosan-dx360">SCORING TOTAL DOOSAN DX360</h3>
+<pre><code>CATEGORÍA              SCORE    MAX
+─────────────────────────────────────
+1. Técnico             27       30
+2. Operativo           20       25
+3. Legal               20       20  ✅✅
+4. Financiero          13       15
+5. Propietario         10       10  ✅✅
+─────────────────────────────────────
+TOTAL                  90/100   ✅✅✅
+
+DECISIÓN: APROBADO (&gt;80)
+Categoría: A (Excelente, 85-95)
+</code></pre>
+<p><strong>Rangos scoring:</strong></p>
+<ul>
+<li>90-100: Categoría A+ (Fast-track, highlight listing)</li>
+<li>80-89: Categoría A (Aprobado estándar)</li>
+<li>70-79: Categoría B (Revisar con ajustes, re-negotiar términos)</li>
+<li>60-69: Categoría C (Rechazado, demasiado riesgo)</li>
+<li>&lt;60: Categoría D (Rechazado automático)</li>
+</ul>
+<h3 id="documentos-requeridos-30-min">Documentos Requeridos (30 min)</h3>
+<p><strong>CHECKLIST DOCUMENTACIÓN (15 items críticos):</strong></p>
+<p>✅ <strong>TÉCNICOS:</strong></p>
+<ol>
+<li>Ficha técnica fabricante</li>
+<li>Libro mantenimiento (últimos 2 años mínimo)</li>
+<li>Certificados ITV/inspecciones (últimos 3)</li>
+<li>Fotos alta resolución (mínimo 20: exterior, interior, motor, tren rodaje, documentos)</li>
+<li>Videos operación (3-5 min mostrando funcionamiento)</li>
+</ol>
+<p>✅ <strong>OPERATIVOS:</strong>
+6. Facturas emitidas últimos 6-12 meses (PDF + Excel resumen)
+7. Contratos alquiler vigentes (si aplica)
+8. Extractos bancarios (mostrar coincidencia facturas → ingresos)
+9. Planning uso próximos 3 meses</p>
+<p>✅ <strong>LEGALES:</strong>
+10. Certificado registro propiedad (emitido &lt;30 días)
+11. Factura compra original (prueba adquisición legal)
+12. Póliza seguro vigente (copia completa)
+13. Declaración jurada sin gravámenes/litigios (firmada)</p>
+<p>✅ <strong>FINANCIEROS:</strong>
+14. P&amp;L últimos 12 meses (Excel simple: ingresos, costos, ganancia por mes)
+15. Presupuesto costos típico mensual (breakdown detallado)</p>
+<p><strong>Formato entrega:</strong></p>
+<ul>
+<li>Drive compartido (Google Drive o Dropbox)</li>
+<li>Estructura carpetas clara</li>
+<li>Nombrar archivos: <code>01_Ficha_Tecnica_Doosan_DX360.pdf</code></li>
+<li>Deadline: 7 días desde solicitud formal</li>
+</ul>
+<h3 id="ejercicio-práctico-42-45-min">Ejercicio Práctico 4.2 (45 min)</h3>
+<p><strong>Lab: Scoring activo real</strong></p>
+<p><strong>Caso práctico:</strong></p>
+<pre><code>CAMIÓN DUMPER VOLVO A40G
+────────────────────────────────────────
+Valor: €180,000
+Año: 2019 (5 años)
+Horas: 12,000 (promedio para edad)
+Ingresos/mes: €8,000
+Costos/mes: €5,500
+Margen: 31%
+Clientes: 2 (uno es 70% ingresos)
+Documentación: Completa excepto 1 ITV faltante
+Propietario: 8 años sector, cooperativo
+Seguro: Vigente
+Gravámenes: Ninguno
+</code></pre>
+<p><strong>Instrucciones equipos 4-5 personas:</strong></p>
+<ol>
+<li>Usar template scoring 100 puntos</li>
+<li>Evaluar cada categoría</li>
+<li>Calcular total</li>
+<li>Decidir: Aprobado/Rechazado/Revisar</li>
+<li>Identificar 3 red flags o ajustes necesarios</li>
+</ol>
+<p><strong>Presentación 5 min por equipo + debate</strong></p>
+<hr>
+<h2 id="43-setup-legal-y-smart-contracts-60-min">4.3 Setup Legal y Smart Contracts (60 min)</h2>
+<h3 id="estructura-legal-2-opciones">Estructura Legal: 2 Opciones</h3>
+<p><strong>OPCIÓN A: CONTRATO DIRECTO (70% casos)</strong></p>
+<p><strong>Cómo funciona:</strong></p>
+<pre><code>┌─────────────────────────────────────────────┐
+│  BASHOOD (mediador)                         │
+│  ├─ Gestiona smart contract                │
+│  └─ Admin multisig treasury                │
+└─────────────────────────────────────────────┘
+           ↓ contrato servicios
+┌─────────────────────────────────────────────┐
+│  PROPIETARIO (Juan García SL)              │
+│  ├─ Dueño físico excavadora                │
+│  ├─ Opera + reporta mensual                │
+│  └─ Recibe 60% ganancias                   │
+└─────────────────────────────────────────────┘
+           ↓ tokens represent
+┌─────────────────────────────────────────────┐
+│  SMART CONTRACT (BHT-DX360)                │
+│  ├─ 100,000 tokens ERC-20                  │
+│  ├─ Holders reciben 40% ganancias          │
+│  └─ Multisig treasury                      │
+└─────────────────────────────────────────────┘
+           ↓ ownership
+┌─────────────────────────────────────────────┐
+│  HOLDERS (500 inversores)                  │
+│  └─ Compran tokens, reciben dividendos     │
+└─────────────────────────────────────────────┘
+</code></pre>
+<p><strong>Ventajas:</strong></p>
+<ul>
+<li>✅ Setup rápido (7-15 días)</li>
+<li>✅ Costo bajo (€1,500-3,000 legal)</li>
+<li>✅ Flexible (propietario mantiene entity suya)</li>
+</ul>
+<p><strong>Desventajas:</strong></p>
+<ul>
+<li>⚠️ Dependencia propietario (si desaparece, problema)</li>
+<li>⚠️ Menos profesional para institucionales</li>
+<li>⚠️ Token no representa ownership legal directo (contractual)</li>
+</ul>
+<p><strong>Documentos:</strong></p>
+<ol>
+<li>Contrato tokenización (40 páginas, abogado blockchain)</li>
+<li>Términos &amp; condiciones holders (20 páginas)</li>
+<li>Operating agreement (responsabilidades propietario)</li>
+<li>KYC/AML compliance forms</li>
+</ol>
+<hr>
+<p><strong>OPCIÓN B: SPV (Special Purpose Vehicle) (30% casos)</strong></p>
+<p><strong>Cómo funciona:</strong></p>
+<pre><code>┌─────────────────────────────────────────────┐
+│  SPV: &quot;DOOSAN DX360 TOKENIZED SL&quot;          │
+│  ├─ Entity legal NUEVA dueña excavadora     │
+│  ├─ Accionistas = token holders pro-rata   │
+│  ├─ Admin: Bashood (gestión)               │
+│  └─ Operador: Juan García (contrato)       │
+└─────────────────────────────────────────────┘
+           ↑ ownership
+┌─────────────────────────────────────────────┐
+│  SMART CONTRACT (BHT-DX360)                │
+│  ├─ 100,000 tokens = 100% equity SPV       │
+│  └─ Token = acción tokenizada              │
+└─────────────────────────────────────────────┘
+           ↑ inversión
+┌─────────────────────────────────────────────┐
+│  HOLDERS                                    │
+│  └─ Accionistas legales SPV                │
+└─────────────────────────────────────────────┘
+</code></pre>
+<p><strong>Ventajas:</strong></p>
+<ul>
+<li>✅ Ownership legal real (no contractual)</li>
+<li>✅ Professional structure (institucionales prefieren)</li>
+<li>✅ Continuidad operativa (si propietario sale, SPV continúa)</li>
+<li>✅ Protección limitada responsabilidad</li>
+</ul>
+<p><strong>Desventajas:</strong></p>
+<ul>
+<li>⚠️ Setup lento (30-60 días)</li>
+<li>⚠️ Costo alto (€10,000-20,000 setup)</li>
+<li>⚠️ Compliance ongoing (contabilidad, impuestos, auditorías)</li>
+</ul>
+<p><strong>Cuándo usar SPV:</strong></p>
+<ul>
+<li>Activos &gt;€500k valor</li>
+<li>100% tokenizado (como EVOCONS)</li>
+<li>Target inversores institucionales</li>
+<li>Múltiples activos bajo mismo vehículo (fondo)</li>
+</ul>
+<h3 id="smart-contract-deployment-45-min">Smart Contract Deployment (45 min)</h3>
+<p><strong>Proceso técnico deployment:</strong></p>
+<p><strong>PASO 1: Configuración inicial (Día 1-3)</strong></p>
+<pre><code class="language-javascript">// Configuración BHT-DX360
+const tokenConfig = {
+  name: &quot;Bashood Token - Doosan DX360&quot;,
+  symbol: &quot;BHT-DX360&quot;,
+  totalSupply: 100000, // 100k tokens
+  decimals: 18,
+  // Distribución inicial
+  ownerAllocation: 60000, // 60% propietario
+  publicSaleAllocation: 40000, // 40% venta
+  // Fees
+  treasuryFeePercent: 50, // 0.5% (50 basis points)
+  // Compliance
+  whitelist: true, // Solo holders aprobados KYC
+  pausable: true // Emergencias
+};
+</code></pre>
+<p><strong>PASO 2: Auditoría código (Día 4-7)</strong></p>
+<pre><code>├─ Auditor interno revisa (2 días)
+├─ Tests automatizados (1 día)
+├─ External audit si &gt;€500k (opcional, 3-5 días)
+└─ Firma final CTO/Legal
+</code></pre>
+<p><strong>PASO 3: Deploy Testnet (Día 8-10)</strong></p>
+<pre><code class="language-bash"># Deploy Base Sepolia (testnet)
+npx hardhat run scripts/deploy-token.js --network baseSepolia
+
+# Verificar en BaseScan Sepolia
+npx hardhat verify --network baseSepolia 0x...ADDRESS
+
+# Testing 48h:
+- Mint tokens
+- Simular venta
+- Distribuir earnings
+- Transfer tokens
+- Pausar/despausar
+</code></pre>
+<p><strong>PASO 4: Deploy Mainnet (Día 11)</strong></p>
+<pre><code class="language-bash"># CRITICAL: Triple-check configuración
+# Deploy Base Mainnet (REAL MONEY)
+npx hardhat run scripts/deploy-token.js --network baseMainnet
+
+# Costos deployment:
+- Token contract: ~€5-10 (includes verification)
+- Presale contract: ~€5-10
+- Referral contract: ~€3-5
+- Setup multisig: ~€10-15
+───────────────────────────────────────
+TOTAL GAS: ~€25-40 (variable según congestión)
+</code></pre>
+<p><strong>PASO 5: Setup Multisig (Día 12-14)</strong></p>
+<pre><code>Usar Safe (gnosis-safe.io):
+
+1. Crear nuevo Safe en Base Mainnet
+2. Añadir 5 signers:
+   ├─ Propietario: 0x1234...
+   ├─ Holder rep: 0x5678...
+   ├─ Bashood admin: 0x9abc...
+   ├─ Auditor: 0xdef0...
+   └─ Legal: 0x3456...
+
+3. Configurar threshold: 3/5 (mínimo 3 firmas)
+
+4. Transferir ownership contract → multisig
+   tokenContract.transferOwnership(multisigAddress)
+
+5. Depositar treasury inicial (fees acumulados)
+</code></pre>
+<p><strong>PASO 6: Configurar Presale (Día 14-15)</strong></p>
+<pre><code class="language-solidity">// Setup presale pricing
+presale.configure({
+  tokenPrice: 0.60 * 10**6, // €0.60 en USDC (6 decimals)
+  minPurchase: 1000 * 10**18, // Mínimo 1,000 tokens
+  maxPurchase: 50000 * 10**18, // Máximo 50k tokens individual
+  startTime: 1735689600, // Unix timestamp
+  duration: 90 * 86400, // 90 días
+  softCap: 20000 * 10**18, // 20k tokens (50% venta)
+  hardCap: 40000 * 10**18 // 40k tokens (100%)
+});
+</code></pre>
+<p><strong>PASO 7: Listing y Marketing (Día 16+)</strong></p>
+<pre><code>├─ Añadir a marketplace Bashood
+├─ Crear página landing activo
+├─ Distribuir materiales marketing
+├─ Activar distribuidores
+├─ Comunicados prensa
+└─ Monitor sales 24/7
+</code></pre>
+<h3 id="ejercicio-práctico-43-30-min">Ejercicio Práctico 4.3 (30 min)</h3>
+<p><strong>Debate: ¿Contrato directo o SPV?</strong></p>
+<p><strong>Casos 3 activos, decidir opción mejor:</strong></p>
+<p><strong>Caso A:</strong></p>
+<ul>
+<li>Excavadora €120k, propietario autónomo profesional </li>
+<li>Tokeniza 30%, target retail €600-5,000</li>
+<li>Budget legal limitado €2,000</li>
+</ul>
+<p><strong>Caso B:</strong></p>
+<ul>
+<li>Grúa €1.8M, 100% tokenizado</li>
+<li>Target family offices + institucionales</li>
+<li>Budget legal €20k disponible</li>
+</ul>
+<p><strong>Caso C:</strong></p>
+<ul>
+<li>Flota 5 camiones €500k total</li>
+<li>Mismo operador, tokeniza todo junto</li>
+<li>Mix retail + profesionales</li>
+</ul>
+<p><strong>Discusión 15 min → Votar opción por caso → Justificar</strong></p>
+<hr>
+<h2 id="evaluación-módulo-4-30-min">Evaluación Módulo 4 (30 min)</h2>
+<p><strong>Test 10 preguntas:</strong></p>
+<ol>
+<li><p>Scoring mínimo aprobar tokenización:</p>
+<ul>
+<li>A) 60/100</li>
+<li>B) 70/100</li>
+<li>C) 80/100 ✅</li>
+<li>D) 90/100</li>
+</ul>
+</li>
+<li><p>Categoría técnico vale:</p>
+<ul>
+<li>A) 10 puntos</li>
+<li>B) 20 puntos</li>
+<li>C) 30 puntos ✅</li>
+<li>D) 40 puntos</li>
+</ul>
+</li>
+<li><p>Documento NO requerido due diligence:</p>
+<ul>
+<li>A) ITV vigente</li>
+<li>B) Facturas 6 meses</li>
+<li>C) Certificado registro</li>
+<li>D) Pasaporte holders ✅</li>
+</ul>
+</li>
+<li><p>SPV significa:</p>
+<ul>
+<li>A) Special Purpose Vehicle ✅</li>
+<li>B) Smart Protocol Verification</li>
+<li>C) Sale Price Value</li>
+<li>D) Secured Payment Vault</li>
+</ul>
+</li>
+<li><p>Contrato directo más barato que SPV:</p>
+<ul>
+<li>A) Verdadero ✅</li>
+<li>B) Falso</li>
+</ul>
+</li>
+<li><p>Deploy mainnet smart contract cuesta aprox:</p>
+<ul>
+<li>A) €2-5</li>
+<li>B) €25-40 ✅</li>
+<li>C) €250-400</li>
+<li>D) €2,500-4,000</li>
+</ul>
+</li>
+<li><p>Multisig 3/5 significa:</p>
+<ul>
+<li>A) 3 tokens de 5</li>
+<li>B) 3 de 5 firmas requeridas ✅</li>
+<li>C) 3 días laborables</li>
+<li>D) 3% fee sobre 5% total</li>
+</ul>
+</li>
+<li><p>Deadline típico entregar documentos:</p>
+<ul>
+<li>A) 3 días</li>
+<li>B) 7 días ✅</li>
+<li>C) 30 días</li>
+<li>D) 90 días</li>
+</ul>
+</li>
+<li><p>ROI mínimo viable holders:</p>
+<ul>
+<li>A) 5%</li>
+<li>B) 10%</li>
+<li>C) 15% ✅</li>
+<li>D) 30%</li>
+</ul>
+</li>
+<li><p>Testing testnet antes mainnet:</p>
+<ul>
+<li>A) Opcional</li>
+<li>B) Obligatorio ✅</li>
+<li>C) Solo si &gt;€1M</li>
+<li>D) No necesario</li>
+</ul>
+</li>
+</ol>
+<p><strong>Respuestas:</strong> C, C, D, A, A, B, B, B, C, B</p>
+<hr>
+<h1 id="módulo-5-due-diligence-y-scoring-práctico">MÓDULO 5: DUE DILIGENCE Y SCORING PRÁCTICO</h1>
+<h2 id="51-inspección-física-del-activo-90-min">5.1 Inspección Física del Activo (90 min)</h2>
+<h3 id="preparación-pre-inspección-30-min">Preparación Pre-Inspección (30 min)</h3>
+<p><strong>Checklist antes de visitar:</strong></p>
+<pre><code>MATERIALES NECESARIOS:
+✅ Tablet/laptop con template scoring
+✅ Cámara profesional o smartphone (&gt;12 MP)
+✅ Medidor láser distancia (opcional)
+✅ Libreta + bolígrafo
+✅ Tarjetas presentación
+✅ Contrato confidencialidad (2 copias)
+✅ Lista verificación técnica impresa
+
+INVESTIGACIÓN PREVIA:
+✅ Manual técnico activo descargado
+✅ Revisar specs fabricante online
+✅ Consultar precio mercado (Mascus, AutoScout24)
+✅ Identificar common issues modelo (foros, reviews)
+✅ Preparar 20 preguntas técnicas específicas
+</code></pre>
+<p><strong>Coordinar con propietario;</strong></p>
+<pre><code>Email confirmación:
+
+Asunto: Confirmación inspección [Modelo] - [Fecha] [Hora]
+
+Hola [Nombre],
+
+Confirmamos inspección:
+📅 Fecha: [DD/MM/YYYY]
+🕐 Hora: [HH:MM] (duración aprox 90 min)
+📍 Ubicación: [Dirección completa]
+
+Para optimizar tiempo, por favor ten disponible:
+├─ Libro mantenimiento completo
+├─ Certificados ITV/inspecciones
+├─ Facturas reparaciones últimas
+├─ Documentación propiedad original
+└─ Activo limpio y accesible para fotos
+
+¿Podrás hacer demo operación 10-15 min?
+
+Confirma recepción. Gracias,
+[Tu Nombre] - Bashood RWA
+</code></pre>
+<h3 id="protocolo-inspección-on-site-60-min">Protocolo Inspección On-Site (60 min)</h3>
+<p><strong>FASE 1: Documentación inicial (10 min)</strong></p>
+<pre><code>Al llegar:
+1. Saludo profesional, tarjeta presentación
+2. Firma confidencialidad mutua
+3. Briefing propietario: &quot;proceso toma 90 min, haremos:
+   - Inspección visual exterior/interior
+   - Verificación documentación
+   - Demo operación
+   - Preguntas técnicas&quot;
+4. Solicitar documentos físicos mesa
+</code></pre>
+<hr>
+<p><strong>FASE 2: Inspección exterior (20 min)</strong></p>
+<p><strong>Excavadora checklist ejemplo:</strong></p>
+<pre><code>EXTERIOR (fotografiar cada punto):
+
+Chasis:
+├─ ¿Estructura sin fisuras/soldaduras visibles? (Si/No)
+├─ ¿Pintura original o repintado? (indicador accidentes)
+├─ ¿Matrícula/placa legible? (foto closeup)
+└─ Puntuación estado: ___ /10
+
+Tren de rodaje (crítico):
+├─ ¿Zapatas desgaste &lt;50%? (Ok/Replace)
+├─ ¿Rodillos inferiores sin juego? (play test)
+├─ ¿Ruedas guía centradas? (visual)
+├─ ¿Tensión cadenas correcta? (25-30mm sag)
+└─ Puntuación: ___ /10 (if &lt;6 = red flag €€€)
+
+Brazo/Pluma:
+├─ ¿Cilindros hidráulicos sin fugas? (buscar manchas)
+├─ ¿Pasadores/bujes sin juego excesivo? (shake test)
+├─ ¿Cuchara dientes &gt;70% vida? (medición)
+├─ ¿Articulaciones engrasadas? (nipples grasa visibles)
+└─ Puntuación: ___ /10
+
+Motor externo:
+├─ ¿Fugas aceite/líquidos? (inspección bajo máquina)
+├─ ¿Radiador limpio? (airflow critical)
+├─ ¿Filtros aire nuevos? (&lt;100h idealmente)
+├─ ¿Nivel refrigerante correcto? (ver depósito)
+└─ Puntuación: ___ /10
+
+Cabina:
+├─ ¿Cristales intactos sin roturas?
+├─ ¿Asiento operador buen estado?
+├─ ¿Cinturón seguridad funcional?
+├─ ¿Mandos sin holguras?
+└─ Puntuación: ___ /10
+</code></pre>
+<p><strong>Regla fotografía (CRÍTICO):</strong></p>
+<ul>
+<li>Mínimo 25 fotos alta resolución:<ul>
+<li>1-4: Vistas generales (frontal, trasera, laterales)</li>
+<li>5-10: Detalles críticos (tren rodaje, cilindros, motor)</li>
+<li>11-15: Interior cabina (panel, asiento, mandos)</li>
+<li>16-20: Documentos (placa VIN, ITV, libro mantenimiento)</li>
+<li>21-25: Puntos conflictivos (desgastes, reparaciones, imperfecciones)</li>
+</ul>
+</li>
+</ul>
+<hr>
+<p><strong>FASE 3: Prueba operación (15 min)</strong></p>
+<p><strong>Test dinámico:</strong></p>
+<pre><code>Solicitar propietario opere (tú observas):
+
+1. Arranque en frío:
+   ✅ ¿Motor arranca primer intento &lt;10 seg?
+   ✅ ¿Sin humo negro excesivo? (DPF ok)
+   ✅ ¿Dashboard sin warning lights permanentes?
+
+2. Movimientos hidráulicos:
+   ✅ Extender/retraer brazo suave (no jerky)
+   ✅ Giro torreta 360° sin vibraciones
+   ✅ Elevación pluma full height sin ruidos
+   ✅ Apertura/cierre cuchara rápida
+
+3. Desplazamiento:
+   ✅ Avanzar/retroceder 20m línea recta
+   ✅ Giro cerrado ambos lados (no pierde cadena)
+   ✅ Subir/bajar pendiente 15° (si disponible)
+
+4. Presión sistema:
+   ✅ Verificar gauge presión hidráulica (250-280 bar típico)
+   ✅ Temperatura motor tras 10 min (80-95°C ok)
+   ✅ RPM ralentí estables (700-900 típico)
+
+GRABAR VIDEO: 3-5 min mostrando todos movimientos
+</code></pre>
+<p><strong>Red flags operacionales:</strong></p>
+<ul>
+<li>🚩 Motor &gt;3 intentos arrancar</li>
+<li>🚩 Humo azul (quema aceite) o negro constante</li>
+<li>🚩 Movimientos hidráulicos lentos/débiles</li>
+<li>🚩 Ruidos metálicos grinding (rodamientos, engranajes)</li>
+<li>🚩 Excesiva vibración torreta/brazo</li>
+<li>🚩 Warnings ECU no se apagan tras arranque</li>
+</ul>
+<hr>
+<p><strong>FASE 4: Verificación horométro y documentación (15 min)</strong></p>
+<p><strong>Validar horas reales:</strong></p>
+<pre><code>Horas display: ______ h
+
+Verificación cruzada:
+├─ ¿Libro mantenimiento coincide? (±50h tolerancia)
+├─ ¿Wear físico consistente horas? (asiento, mando, pedales)
+├─ ¿Facturas servicios mencionan horas? (cross-reference)
+└─ ¿ECU data accesible? (dealer puede extraer si dudas)
+
+Si discrepancia &gt;200h = ALERTA manipulación horométro
+</code></pre>
+<p><strong>Documentos revisar mesa:</strong></p>
+<pre><code>1. Libro mantenimiento:
+   ✅ ¿Completo desde compra o últimos 3 años?
+   ✅ ¿Servicios cada 250h/500h registrados?
+   ✅ ¿Firmas taller oficial o independiente?
+   ✅ Foto cover + últimas 3 páginas
+
+2. ITV/Inspecciones:
+   ✅ ¿Vigente y próxima fecha? (anotar)
+   ✅ ¿Resultados &quot;favorable&quot; sin observaciones?
+   ✅ ¿Historial ITV últimas 3 (si disponible)?
+
+3. Factura compra original:
+   ✅ ¿Propietario actual = factura o transferencia legal?
+   ✅ ¿Precio pagado razonable? (validar no robada)
+   ✅ Foto completa documento
+
+4. Seguro vigente:
+   ✅ ¿Copia póliza + recibo último pago?
+   ✅ ¿Cobertura todo riesgo mínimo?
+   ✅ ¿Vencimiento &gt;3 meses?
+
+5. Certificado propiedad:
+   ✅ ¿Emitido &lt;30 días? (solicitar si antiguo)
+   ✅ ¿Sin anotaciones gravámenes?
+   ✅ Foto legible
+</code></pre>
+<hr>
+<p><strong>FASE 5: Preguntas propietario (10 min)</strong></p>
+<p><strong>Top 15 preguntas críticas:</strong></p>
+<pre><code>OPERACIONES:
+1. &quot;¿Cuántos días promedio trabajó último mes?&quot;
+2. &quot;¿Cliente principal? ¿Qué % ingresos representa?&quot;
+3. &quot;¿Contratos firmados próximos 3 meses o todo spot?&quot;
+4. &quot;¿Ha tenido periodos &gt;1 mes parada? ¿Cuándo y por qué?&quot;
+5. &quot;¿Opere usted o tiene operador contratado?&quot;
+
+MANTENIMIENTO:
+6. &quot;¿Última revisión importante cuándo? ¿Qué cambió?&quot;
+7. &quot;¿Reparaciones &gt;€2,000 últimos 2 años?&quot;
+8. &quot;¿Averías recurrentes o puntos débiles este modelo?&quot;
+9. &quot;¿Cambio aceite hidráulico completo cuándo? (crítico cada 2,000h)&quot;
+10. &quot;¿Próximo service due cuántas horas?&quot;
+
+FINANCIERO:
+11. &quot;¿Precio alquiler día/hora típico cobra?&quot;
+12. &quot;¿Costos operación mensual típico (fuel, maintenance, etc.)?&quot;
+13. &quot;¿Deuda pendiente sobre máquina? (leasing, hipoteca)&quot;
+
+MOTIVACIÓN:
+14. &quot;¿Por qué considera tokenización vs vender o bank loan?&quot;
+15. &quot;¿Qué haría con liquidez obtenida?&quot;
+
+ANOTAR RESPUESTAS LITERALES (descubrir inconsistencias después)
+</code></pre>
+<hr>
+<h3 id="post-inspección-reporte-inmediato-30-min">Post-Inspección: Reporte Inmediato (30 min)</h3>
+<p><strong>Mismo día, completar reporte:</strong></p>
+<pre><code>TEMPLATE REPORTE INSPECCIÓN
+
+ACTIVO: [Marca Modelo Año]
+UBICACIÓN: [Ciudad]
+FECHA INSPECCIÓN: [DD/MM/YYYY]
+INSPECTOR: [Tu Nombre]
+PROPIETARIO: [Nombre + Empresa]
+HORAS/KM: [X,XXX]h
+
+SCORING TÉCNICO (35 puntos max):
+├─ Estado exterior chasis: ___ /10
+├─ Tren rodaje/neumáticos: ___ /10
+├─ Sistemas hidráulicos: ___ /5
+├─ Motor/transmisión: ___ /5
+├─ Cabina/controles: ___ /5
+└─ TOTAL TÉCNICO: ___ /35
+
+OBSERVACIONES TÉCNICAS:
+[Listar 3-5 bullet points principales]
+
+RED FLAGS DETECTADOS:
+[Si/No - detallar cada uno]
+
+DOCUMENTACIÓN ENTREGADA:
+✅ Fotos (XX unidades)
+✅ Video operación (XX min)
+✅ Copia docs pedida
+✅ Libro mantenimiento (foto páginas X-Y)
+
+RECOMENDACIÓN PRELIMINAR:
+[ ] APROBAR - Scoring esperado &gt;80
+[ ] REVISAR - Necesita más documentación: [especificar]
+[ ] RECHAZAR - No cumple criterios: [razones]
+
+PRÓXIMOS PASOS:
+[Listar 2-3 acciones]
+
+Firmado: _______________
+</code></pre>
+<h3 id="ejercicio-práctico-51-30-min">Ejercicio Práctico 5.1 (30 min)</h3>
+<p><strong>Caso: Inspección virtual</strong></p>
+<p><strong>Material proporcionado:</strong></p>
+<ul>
+<li>20 fotos excavadora Volvo EC220D</li>
+<li>Video 5 min operación</li>
+<li>Horométro muestra 8,500h</li>
+<li>Libro mantenimiento scaneado (incompleto, faltan páginas)</li>
+<li>Propietario dice &quot;excelente estado, solo uso ocasional&quot;</li>
+</ul>
+<p><strong>Tarea equipos 4 personas:</strong></p>
+<ol>
+<li>Analizar fotos identificar 5 puntos revisar</li>
+<li>Del video, detectar 2 red flags operacionales</li>
+<li>¿Horas 8,500 consistentes con &quot;uso ocasional&quot;? (Contexto: 2019, 5 años)</li>
+<li>¿Libro incompleto es aceptable? ¿Qué hacer?</li>
+<li>Completar scoring técnico preliminar ___ /35</li>
+<li>Decisión: Aprobar/Revisar/Rechazar</li>
+</ol>
+<p><strong>Presentación 5 min + debate</strong></p>
+<hr>
+<h2 id="52-análisis-financiero-profundo-90-min">5.2 Análisis Financiero Profundo (90 min)</h2>
+<h3 id="validación-ingresos-declarados-45-min">Validación Ingresos Declarados (45 min)</h3>
+<p><strong>Propietario declara: &quot;Genero €15,000/mes con esta excavadora&quot;</strong>
+<strong>Tu job: VERIFICAR con data dura</strong></p>
+<p><strong>Método cruce 3 fuentes:</strong></p>
+<pre><code>FUENTE 1: FACTURAS EMITIDAS
+├─ Solicitar PDF facturas últimos 6 meses
+├─ Subir a Excel: fecha, cliente, concepto, monto, IVA
+├─ Calcular promedio mensual
+├─ Identificar: ¿1 cliente 80%+ ingresos? (red flag diversificación)
+└─ Varianza: ¿Estable o volátil? (CV &lt;30% ideal)
+
+Ejemplo Excel:
+Mes       | Cliente        | Monto | Días
+──────────|─────────────────|────────|─────
+Ene 2026 | Construc. ABC | €12,400 | 28
+Ene 2026 | Obras DEF     | €2,100  | 5
+Feb 2026 | Construc. ABC | €14,200 | 31
+Feb 2026 | Obras DEF     | €0      | 0
+Mar 2026 | Construc. ABC | €11,800 | 27
+Abr 2026 | Construc. ABC | €15,600 | 32
+Abr 2026 | GHI Promo     | €3,200  | 7
+May 2026 | Construc. ABC | €13,900 | 30
+
+Promedio: €73,200 / 6 = €12,200/mes ❌ NO €15,000
+Dependencia ABC: 85% ingresos 🚩
+</code></pre>
+<hr>
+<p><strong>FUENTE 2: EXTRACTOS BANCARIOS</strong></p>
+<pre><code>Solicitar: PDFs cuenta empresa últimos 6 meses
+
+Buscar:
+├─ Ingresos coinciden facturas fecha+monto?
+│  Ej: Factura 15-Ene €12,400 → Debe ver ingreso 25-Ene ~€12,400
+│
+├─ ¿Hay ingresos NO facturados? (efectivo no declarado)
+│  Si sí = ajustar a la baja (riesgo fiscal)
+│
+├─ ¿Hay gastos significativos? (combustible, reparaciones, seguro)
+│  Anotar montos típicos mensuales
+│
+└─ ¿Saldo final positivo o negativo? (salud financiera)
+
+Red flags bancarios:
+🚩 Ingresos bank NO coinciden facturas (&gt;10% diff)
+🚩 Números redondos perfectos (posible manipulación)
+🚩 Cuenta regularmente números rojos
+🚩 Embargos/devoluciones recibos
+</code></pre>
+<hr>
+<p><strong>FUENTE 3: CONTRATOS CLIENTES</strong></p>
+<pre><code>Solicitar: Contratos firmados vigentes (si existen)
+
+Validar:
+├─ ¿Precio día coincide facturas?
+│  Ej: Contrato €400/día × 28 días = €11,200 vs Factura final
+│
+├─ ¿Duración? (anual mejor que spot)
+│
+├─ ¿Cláusulas penalización? (holder risk)
+│  Ej: &quot;Si máquina avería &gt;3 días, descuento 50%&quot;
+│
+├─ ¿Renovación automática o término fijo?
+│
+└─ ¿Cliente solvente? (buscar empresa en axesor/informa)
+
+Si NO hay contratos (todo spot) = mayor riesgo
+</code></pre>
+<hr>
+<p><strong>Cálculo Occupancy Rate real:</strong></p>
+<pre><code>Occupancy = (Días facturados / Días disponibles) × 100
+
+Ejemplo:
+Enero: 28 días trabajados / 31 total = 90% ✅✅
+Febrero: 31 días / 28 total = &gt;100% ??
+  → ERROR: imposible &gt;100%, revisar datos
+  → Posible: turnos dobles o fraude declaración
+
+Promedio 6 meses: (28+31+27+32+30+25) / 180 = 95.5%
+
+¿Es creíble 95.5% occupancy?
+├─ Madrid capital, pleno boom construcción: SÍ (posible)
+├─ Rural, crisis sector: NO (sospechoso)
+└─ Validar con contexto mercado local
+</code></pre>
+<h3 id="proyección-costos-operativos-45-min">Proyección Costos Operativos (45 min)</h3>
+<p><strong>Breakdown costos típicos (template):</strong></p>
+<function_calls>
+<invoke name="read_file">
+<parameter name="filePath">c:\Users\Franchu\Desktop\bashood-hardhat-tests\pilot-assets\CURSO_FORMACION_BASHOOD.md
+
+
+<hr>
+<h1 id="módulos-5-10-curso-formación-bashood-rwa">MÓDULOS 5-10: CURSO FORMACIÓN BASHOOD RWA</h1>
+<h2 id="extensión-completa-del-curso">Extensión Completa del Curso</h2>
+<hr>
+<h1 id="módulo-5-due-diligence-y-scoring-práctico-1">MÓDULO 5: DUE DILIGENCE Y SCORING PRÁCTICO</h1>
+<h2 id="51-inspección-física-del-activo-90-min-1">5.1 Inspección Física del Activo (90 min)</h2>
+<h3 id="preparación-pre-inspección-30-min-1">Preparación Pre-Inspección (30 min)</h3>
+<p><strong>Checklist antes de visitar:</strong></p>
+<pre><code>MATERIALES NECESARIOS:
+✅ Tablet/laptop con template scoring
+✅ Cámara profesional o smartphone (&gt;12 MP)
+✅ Medidor láser distancia (opcional)
+✅ Libreta + bolígrafo
+✅ Tarjetas presentación
+✅ Contrato confidencialidad (2 copias)
+✅ Lista verificación técnica impresa
+
+INVESTIGACIÓN PREVIA:
+✅ Manual técnico activo descargado
+✅ Revisar specs fabricante online
+✅ Consultar precio mercado (Mascus, AutoScout24)
+✅ Identificar common issues modelo (foros, reviews)
+✅ Preparar 20 preguntas técnicas específicas
+</code></pre>
+<p><strong>Coordinar con propietario:</strong></p>
+<pre><code>Email confirmación:
+
+Asunto: Confirmación inspección [Modelo] - [Fecha] [Hora]
+
+Hola [Nombre],
+
+Confirmamos inspección:
+📅 Fecha: [DD/MM/YYYY]
+🕐 Hora: [HH:MM] (duración aprox 90 min)
+📍 Ubicación: [Dirección completa]
+
+Para optimizar tiempo, por favor ten disponible:
+├─ Libro mantenimiento completo
+├─ Certificados ITV/inspecciones
+├─ Facturas reparaciones últimas
+├─ Documentación propiedad original
+└─ Activo limpio y accesible para fotos
+
+¿Podrás hacer demo operación 10-15 min?
+
+Confirma recepción. Gracias,
+[Tu Nombre] - Bashood RWA
+</code></pre>
+<h3 id="protocolo-inspección-on-site-60-min-1">Protocolo Inspección On-Site (60 min)</h3>
+<p><strong>FASE 1: Documentación inicial (10 min)</strong></p>
+<pre><code>Al llegar:
+1. Saludo profesional, tarjeta presentación
+2. Firma confidencialidad mutua
+3. Briefing propietario: &quot;proceso toma 90 min, haremos:
+   - Inspección visual exterior/interior
+   - Verificación documentación
+   - Demo operación
+   - Preguntas técnicas&quot;
+4. Solicitar documentos físicos mesa
+</code></pre>
+<hr>
+<p><strong>FASE 2: Inspección exterior (20 min)</strong></p>
+<p><strong>Excavadora checklist ejemplo:</strong></p>
+<pre><code>EXTERIOR (fotografiar cada punto):
+
+Chasis:
+├─ ¿Estructura sin fisuras/soldaduras visibles? (Si/No)
+├─ ¿Pintura original o repintado? (indicador accidentes)
+├─ ¿Matrícula/placa legible? (foto closeup)
+└─ Puntuación estado: ___ /10
+
+Tren de rodaje (crítico):
+├─ ¿Zapatas desgaste &lt;50%? (Ok/Replace)
+├─ ¿Rodillos inferiores sin juego? (play test)
+├─ ¿Ruedas guía centradas? (visual)
+├─ ¿Tensión cadenas correcta? (25-30mm sag)
+└─ Puntuación: ___ /10 (if &lt;6 = red flag €€€)
+
+Brazo/Pluma:
+├─ ¿Cilindros hidráulicos sin fugas? (buscar manchas)
+├─ ¿Pasadores/bujes sin juego excesivo? (shake test)
+├─ ¿Cuchara dientes &gt;70% vida? (medición)
+├─ ¿Articulaciones engrasadas? (nipples grasa visibles)
+└─ Puntuación: ___ /10
+
+Motor externo:
+├─ ¿Fugas aceite/líquidos? (inspección bajo máquina)
+├─ ¿Radiador limpio? (airflow critical)
+├─ ¿Filtros aire nuevos? (&lt;100h idealmente)
+├─ ¿Nivel refrigerante correcto? (ver depósito)
+└─ Puntuación: ___ /10
+
+Cabina:
+├─ ¿Cristales intactos sin roturas?
+├─ ¿Asiento operador buen estado?
+├─ ¿Cinturón seguridad funcional?
+├─ ¿Mandos sin holguras?
+└─ Puntuación: ___ /10
+</code></pre>
+<p><strong>Regla fotografía (CRÍTICO):</strong></p>
+<ul>
+<li>Mínimo 25 fotos alta resolución:<ul>
+<li>1-4: Vistas generales (frontal, trasera, laterales)</li>
+<li>5-10: Detalles críticos (tren rodaje, cilindros, motor)</li>
+<li>11-15: Interior cabina (panel, asiento, mandos)</li>
+<li>16-20: Documentos (placa VIN, ITV, libro mantenimiento)</li>
+<li>21-25: Puntos conflictivos (desgastes, reparaciones, imperfecciones)</li>
+</ul>
+</li>
+</ul>
+<hr>
+<p><strong>FASE 3: Prueba operación (15 min)</strong></p>
+<p><strong>Test dinámico:</strong></p>
+<pre><code>Solicitar propietario opere (tú observas):
+
+1. Arranque en frío:
+   ✅ ¿Motor arranca primer intento &lt;10 seg?
+   ✅ ¿Sin humo negro excesivo? (DPF ok)
+   ✅ ¿Dashboard sin warning lights permanentes?
+
+2. Movimientos hidráulicos:
+   ✅ Extender/retraer brazo suave (no jerky)
+   ✅ Giro torreta 360° sin vibraciones
+   ✅ Elevación pluma full height sin ruidos
+   ✅ Apertura/cierre cuchara rápida
+
+3. Desplazamiento:
+   ✅ Avanzar/retroceder 20m línea recta
+   ✅ Giro cerrado ambos lados (no pierde cadena)
+   ✅ Subir/bajar pendiente 15° (si disponible)
+
+4. Presión sistema:
+   ✅ Verificar gauge presión hidráulica (250-280 bar típico)
+   ✅ Temperatura motor tras 10 min (80-95°C ok)
+   ✅ RPM ralentí estables (700-900 típico)
+
+GRABAR VIDEO: 3-5 min mostrando todos movimientos
+</code></pre>
+<p><strong>Red flags operacionales:</strong></p>
+<ul>
+<li>🚩 Motor &gt;3 intentos arrancar</li>
+<li>🚩 Humo azul (quema aceite) o negro constante</li>
+<li>🚩 Movimientos hidráulicos lentos/débiles</li>
+<li>🚩 Ruidos metálicos grinding (rodamientos, engranajes)</li>
+<li>🚩 Excesiva vibración torreta/brazo</li>
+<li>🚩 Warnings ECU no se apagan tras arranque</li>
+</ul>
+<hr>
+<p><strong>FASE 4: Verificación horométro y documentación (15 min)</strong></p>
+<p><strong>Validar horas reales:</strong></p>
+<pre><code>Horas display: ______ h
+
+Verificación cruzada:
+├─ ¿Libro mantenimiento coincide? (±50h tolerancia)
+├─ ¿Wear físico consistente horas? (asiento, mando, pedales)
+├─ ¿Facturas servicios mencionan horas? (cross-reference)
+└─ ¿ECU data accesible? (dealer puede extraer si dudas)
+
+Si discrepancia &gt;200h = ALERTA manipulación horométro
+</code></pre>
+<p><strong>Documentos revisar mesa:</strong></p>
+<pre><code>1. Libro mantenimiento:
+   ✅ ¿Completo desde compra o últimos 3 años?
+   ✅ ¿Servicios cada 250h/500h registrados?
+   ✅ ¿Firmas taller oficial o independiente?
+   ✅ Foto cover + últimas 3 páginas
+
+2. ITV/Inspecciones:
+   ✅ ¿Vigente y próxima fecha? (anotar)
+   ✅ ¿Resultados &quot;favorable&quot; sin observaciones?
+   ✅ ¿Historial ITV últimas 3 (si disponible)?
+
+3. Factura compra original:
+   ✅ ¿Propietario actual = factura o transferencia legal?
+   ✅ ¿Precio pagado razonable? (validar no robada)
+   ✅ Foto completa documento
+
+4. Seguro vigente:
+   ✅ ¿Copia póliza + recibo último pago?
+   ✅ ¿Cobertura todo riesgo mínimo?
+   ✅ ¿Vencimiento &gt;3 meses?
+
+5. Certificado propiedad:
+   ✅ ¿Emitido &lt;30 días? (solicitar si antiguo)
+   ✅ ¿Sin anotaciones gravámenes?
+   ✅ Foto legible
+</code></pre>
+<hr>
+<p><strong>FASE 5: Preguntas propietario (10 min)</strong></p>
+<p><strong>Top 15 preguntas críticas:</strong></p>
+<pre><code>OPERACIONES:
+1. &quot;¿Cuántos días promedio trabajó último mes?&quot;
+2. &quot;¿Cliente principal? ¿Qué % ingresos representa?&quot;
+3. &quot;¿Contratos firmados próximos 3 meses o todo spot?&quot;
+4. &quot;¿Ha tenido periodos &gt;1 mes parada? ¿Cuándo y por qué?&quot;
+5. &quot;¿Opere usted o tiene operador contratado?&quot;
+
+MANTENIMIENTO:
+6. &quot;¿Última revisión importante cuándo? ¿Qué cambió?&quot;
+7. &quot;¿Reparaciones &gt;€2,000 últimos 2 años?&quot;
+8. &quot;¿Averías recurrentes o puntos débiles este modelo?&quot;
+9. &quot;¿Cambio aceite hidráulico completo cuándo? (crítico cada 2,000h)&quot;
+10. &quot;¿Próximo service due cuántas horas?&quot;
+
+FINANCIERO:
+11. &quot;¿Precio alquiler día/hora típico cobra?&quot;
+12. &quot;¿Costos operación mensual típico (fuel, maintenance, etc.)?&quot;
+13. &quot;¿Deuda pendiente sobre máquina? (leasing, hipoteca)&quot;
+
+MOTIVACIÓN:
+14. &quot;¿Por qué considera tokenización vs vender o bank loan?&quot;
+15. &quot;¿Qué haría con liquidez obtenida?&quot;
+
+ANOTAR RESPUESTAS LITERALES (descubrir inconsistencias después)
+</code></pre>
+<hr>
+<h3 id="post-inspección-reporte-inmediato-30-min-1">Post-Inspección: Reporte Inmediato (30 min)</h3>
+<p><strong>Mismo día, completar reporte:</strong></p>
+<pre><code>TEMPLATE REPORTE INSPECCIÓN
+
+ACTIVO: [Marca Modelo Año]
+UBICACIÓN: [Ciudad]
+FECHA INSPECCIÓN: [DD/MM/YYYY]
+INSPECTOR: [Tu Nombre]
+PROPIETARIO: [Nombre + Empresa]
+HORAS/KM: [X,XXX]h
+
+SCORING TÉCNICO (35 puntos max):
+├─ Estado exterior chasis: ___ /10
+├─ Tren rod
+
+aje/neumáticos: ___ /10
+├─ Sistemas hidráulicos: ___ /5
+├─ Motor/transmisión: ___ /5
+├─ Cabina/controles: ___ /5
+└─ TOTAL TÉCNICO: ___ /35
+
+OBSERVACIONES TÉCNICAS:
+[Listar 3-5 bullet points principales]
+
+RED FLAGS DETECTADOS:
+[Si/No - detallar cada uno]
+
+DOCUMENTACIÓN ENTREGADA:
+✅ Fotos (XX unidades)
+✅ Video operación (XX min)
+✅ Copia docs pedida
+✅ Libro mantenimiento (foto páginas X-Y)
+
+RECOMENDACIÓN PRELIMINAR:
+[ ] APROBAR - Scoring esperado &gt;80
+[ ] REVISAR - Necesita más documentación: [especificar]
+[ ] RECHAZAR - No cumple criterios: [razones]
+
+PRÓXIMOS PASOS:
+[Listar 2-3 acciones]
+
+Firmado: _______________
+</code></pre>
+<h3 id="ejercicio-práctico-51-30-min-1">Ejercicio Práctico 5.1 (30 min)</h3>
+<p><strong>Caso: Inspección virtual</strong></p>
+<p><strong>Material proporcionado:</strong></p>
+<ul>
+<li>20 fotos excavadora Volvo EC220D</li>
+<li>Video 5 min operación</li>
+<li>Horométro muestra 8,500h</li>
+<li>Libro mantenimiento scaneado (incompleto, faltan páginas)</li>
+<li>Propietario dice &quot;excelente estado, solo uso ocasional&quot;</li>
+</ul>
+<p><strong>Tarea equipos 4 personas:</strong></p>
+<ol>
+<li>Analizar fotos identificar 5 puntos revisar</li>
+<li>Del video, detectar 2 red flags operacionales</li>
+<li>¿Horas 8,500 consistentes con &quot;uso ocasional&quot;? (Contexto: 2019, 5 años)</li>
+<li>¿Libro incompleto es aceptable? ¿Qué hacer?</li>
+<li>Completar scoring técnico preliminar ___ /35</li>
+<li>Decisión: Aprobar/Revisar/Rechazar</li>
+</ol>
+<p><strong>Presentación 5 min + debate</strong></p>
+<hr>
+<h2 id="52-análisis-financiero-profundo-90-min-1">5.2 Análisis Financiero Profundo (90 min)</h2>
+<h3 id="validación-ingresos-declarados-45-min-1">Validación Ingresos Declarados (45 min)</h3>
+<p><strong>Propietario declara: &quot;Genero €15,000/mes con esta excavadora&quot;</strong>
+<strong>Tu job: VERIFICAR con data dura</strong></p>
+<p><strong>Método cruce 3 fuentes:</strong></p>
+<pre><code>FUENTE 1: FACTURAS EMITIDAS
+├─ Solicitar PDF facturas últimos 6 meses
+├─ Subir a Excel: fecha, cliente, concepto, monto, IVA
+├─ Calcular promedio mensual
+├─ Identificar: ¿1 cliente 80%+ ingresos? (red flag diversificación)
+└─ Varianza: ¿Estable o volátil? (CV &lt;30% ideal)
+
+Ejemplo Excel:
+Mes       | Cliente        | Monto   | Días
+──────────|────────────────|─────────|─────
+Ene 2026  | Construc. ABC  | €12,400 | 28
+Ene 2026  | Obras DEF      | €2,100  | 5
+Feb 2026  | Construc. ABC  | €14,200 | 31
+Feb 2026  | Obras DEF      | €0      | 0
+Mar 2026  | Construc. ABC  | €11,800 | 27
+Abr 2026  | Construc. ABC  | €15,600 | 32
+Abr 2026  | GHI Promo      | €3,200  | 7
+May 2026  | Construc. ABC  | €13,900 | 30
+
+Promedio: €73,200 / 6 = €12,200/mes ❌ NO €15,000
+Dependencia ABC: 85% ingresos 🚩
+</code></pre>
+<hr>
+<p><strong>FUENTE 2: EXTRACTOS BANCARIOS</strong></p>
+<pre><code>Solicitar: PDFs cuenta empresa últimos 6 meses
+
+Buscar:
+├─ Ingresos coinciden facturas fecha+monto?
+│  Ej: Factura 15-Ene €12,400 → Debe ver ingreso 25-Ene ~€12,400
+│
+├─ ¿Hay ingresos NO facturados? (efectivo no declarado)
+│  Si sí = ajustar a la baja (riesgo fiscal)
+│
+├─ ¿Hay gastos significativos? (combustible, reparaciones, seguro)
+│  Anotar montos típicos mensuales
+│
+└─ ¿Saldo final positivo o negativo? (salud financiera)
+
+Red flags bancarios:
+🚩 Ingresos bank NO coinciden facturas (&gt;10% diff)
+🚩 Números redondos perfectos (posible manipulación)
+🚩 Cuenta regularmente números rojos
+🚩 Embargos/devoluciones recibos
+</code></pre>
+<hr>
+<p><strong>FUENTE 3: CONTRATOS CLIENTES</strong></p>
+<pre><code>Solicitar: Contratos firmados vigentes (si existen)
+
+Validar:
+├─ ¿Precio día coincide facturas?
+│  Ej: Contrato €400/día × 28 días = €11,200 vs Factura final
+│
+├─ ¿Duración? (anual mejor que spot)
+│
+├─ ¿Cláusulas penalización? (holder risk)
+│  Ej: &quot;Si máquina avería &gt;3 días, descuento 50%&quot;
+│
+├─ ¿Renovación automática o término fijo?
+│
+└─ ¿Cliente solvente? (buscar empresa en axesor/informa)
+
+Si NO hay contratos (todo spot) = mayor riesgo
+</code></pre>
+<hr>
+<p><strong>Cálculo Occupancy Rate real:</strong></p>
+<pre><code>Occupancy = (Días facturados / Días disponibles) × 100
+
+Ejemplo:
+Enero: 28 días trabajados / 31 total = 90% ✅✅
+Febrero: 31 días / 28 total = &gt;100% ??
+  → ERROR: imposible &gt;100%, revisar datos
+  → Posible: turnos dobles o fraude declaración
+
+Promedio 6 meses: (28+31+27+32+30+25) / 180 = 95.5%
+
+¿Es creíble 95.5% occupancy?
+├─ Madrid capital, pleno boom construcción: SÍ (posible)
+├─ Rural, crisis sector: NO (sospechoso)
+└─ Validar con contexto mercado local
+</code></pre>
+<h3 id="proyección-costos-operativos-45-min-1">Proyección Costos Operativos (45 min)</h3>
+<p><strong>Breakdown costos típicos (template):</strong></p>
+<pre><code>COSTOS FIJOS MENSUALES:
+├─ Seguro todo riesgo: €_______
+├─ ITV/Inspecciones amortizado: €_______
+├─ Parking/almacenaje: €_______
+├─ GPS tracking: €_______
+├─ RCA (si conductor): €_______
+└─ SUBTOTAL FIJOS: €_______
+
+COSTOS VARIABLES (por día operado):
+├─ Combustible: €_______ /día
+├─ Mantenimiento preventivo amortizado: €_______ /día
+├─ Transporte obra (si aplica): €_______ /día
+├─ Operador (si incluido precio): €_______ /día
+└─ SUBTOTAL VARIABLE/DÍA: €_______
+
+Occupancy promedio: _____% (_____ días/mes)
+Costos variables mes: €_____ × _____ días = €_____
+
+TOTAL COSTOS MES: Fijos + Variables = €_________
+</code></pre>
+<p><strong>Ejemplo real Doosan DX360:</strong></p>
+<pre><code>FIJOS:
+├─ Seguro: €450
+├─ ITV: €50
+├─ Parking: €200
+├─ GPS: €30
+└─ Total fijos: €730/mes
+
+VARIABLES (75% occupancy = 23 días/mes):
+├─ Combustible: €120/día × 23 = €2,760
+├─ Mantenimiento: €80/día × 23 = €1,840
+├─ Transporte: €100/día × 23 = €2,300
+└─ Total variables: €6,900/mes
+
+TOTAL COSTOS = €730 + €6,900 = €7,630/mes
+</code></pre>
+<p><strong>Validación costos con propietario:</strong></p>
+<pre><code>Preguntas críticas:
+1. &quot;¿Cuánto €€€ combustible típico mes pasado?&quot; (±20% tu cálculo)
+2. &quot;¿Última reparación &gt;€1,000 cuándo? ¿Cuánto?&quot; (amortizar anual)
+3. &quot;¿Seguro cobertura? ¿Prima anual?&quot; (dividir /12)
+4. &quot;¿Transporte incluido precio o aparte?&quot; (si incluido = costo mayor)
+5. &quot;¿Operador propio o cliente aporta?&quot; (si propio = €4,500/mes adicional)
+
+Si costos declarados &lt;&lt;&lt; normal mercado = red flag (oculta gastos)
+</code></pre>
+<h3 id="cálculo-roi-holders-final-30-min">Cálculo ROI Holders Final (30 min)</h3>
+<p><strong>Formula completa:</strong></p>
+<pre><code>PASO 1: Ingresos validados
+Promedio mensual facturas: €_______
+
+PASO 2: Costos validados  
+Total costos mes: €_______
+
+PASO 3: Ganancia neta monthly
+Ingresos - Costos = €_______ /mes
+
+PASO 4: Distribución holders
+% Tokenizado: _____% 
+Ganancia holders = €_______ × _____% = €_______
+
+PASO 5: Treasury fee Bashood
+Fee 0.5% = €_______ × 0.5% = €_______
+Neto holders = €_______ - €_______ = €_______ /mes
+
+PASO 6: ROI anualizado
+Neto holders × 12 meses = €_______ /año
+Inversión total tokenizada = €_______
+ROI = (€_____ / €_____) × 100 = _____% anual
+</code></pre>
+<p><strong>Ejemplo Doosan (números reales):</strong></p>
+<pre><code>1. Ingresos: €11,250/mes (validado facturas, NO €15k declarado)
+2. Costos: €8,230/mes (validado extractos + contratos)
+3. Ganancia neta: €11,250 - €8,230 = €3,020/mes
+4. Holders (40%): €3,020 × 40% = €1,208/mes
+5. Treasury (0.5%): €1,208 × 0.5% = €6.04
+   Neto holders: €1,201.96/mes
+6. ROI: (€1,201.96 × 12) / €60,000 = 24.04% anual ✅✅
+
+APROBADO - ROI &gt;15% threshold
+</code></pre>
+<p><strong>Decision matrix ROI:</strong></p>
+<table>
+<thead>
+<tr>
+<th>ROI Anual</th>
+<th>Decisión</th>
+<th>Acción</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>&gt;25%</strong></td>
+<td>FAST-TRACK ✅✅</td>
+<td>Aprobar inmediato, highlight listing</td>
+</tr>
+<tr>
+<td><strong>20-25%</strong></td>
+<td>APROBAR ✅</td>
+<td>Proceso estándar</td>
+</tr>
+<tr>
+<td><strong>15-20%</strong></td>
+<td>APROBAR 🟡</td>
+<td>Con disclaimer riesgo medio</td>
+</tr>
+<tr>
+<td><strong>10-15%</strong></td>
+<td>REVISAR ⚠️</td>
+<td>Re-negotiar términos (más % tokenizado)</td>
+</tr>
+<tr>
+<td><strong>&lt;10%</strong></td>
+<td>RECHAZAR ❌</td>
+<td>No viable retail investors</td>
+</tr>
+</tbody></table>
+<h3 id="ejercicio-práctico-52-30-min">Ejercicio Práctico 5.2 (30 min)</h3>
+<p><strong>Caso: Validación financiera</strong></p>
+<p><strong>Datos proporcionados:</strong></p>
+<pre><code>CAMIÓN VOLVO FH16 750HP (2021)
+Propietario declara:
+├─ Ingresos: €18,000/mes
+├─ Costos: €10,000/mes
+├─ Ganancia: €8,000/mes
+├─ Tokeniza 50% (€90k de €180k valor)
+├─ ROI prometido: 53% anual
+
+Documentación:
+├─ 4 meses facturas (falta Feb y Abr)
+├─ Extracto banco (parcialmente redactado)
+├─ Contrato 1 cliente 80% ingresos (vence en 2 meses)
+├─ Libro mantenimiento al día
+</code></pre>
+<p><strong>Tarea equipos:</strong></p>
+<ol>
+<li>Identificar 4 red flags en datos proporcionados</li>
+<li>Calcular ROI conservador (asume ingresos -20%, costos +15%)</li>
+<li>¿ROI conservador &gt;15%? ¿Aprobar o rechazar?</li>
+<li>Listar 5 documentos adicionales solicitar</li>
+<li>¿Qué pregunta CRÍTICA harías propietario sobre contrato cliente?</li>
+</ol>
+<p><strong>Debate 15 min + soluciones</strong></p>
+<hr>
+<h2 id="53-legal-y-compliance-60-min">5.3 Legal y Compliance (60 min)</h2>
+<h3 id="kycaml-propietario-30-min">KYC/AML Propietario (30 min)</h3>
+<p><strong>Know Your Customer obligatorio:</strong></p>
+<pre><code>INFORMACIÓN BÁSICA:
+├─ Nombre completo legal
+├─ NIF/CIF empresa
+├─ Dirección fiscal + operativa
+├─ Teléfono + email
+├─ Fecha constitución empresa (si SL/SA)
+└─ Web/redes sociales (validar
+
+ existencia)
+
+DOCUMENTOS IDENTIDAD:
+├─ DNI/NIE propietario (copia ambos lados)
+├─ Escritura constitución empresa (si SL)
+├─ Últimos estatutos sociales
+├─ Poder representante legal (si no es administrador único)
+└─ CIF empresa (certificado AEAT)
+
+VERIFICACIÓN ANTECEDENTES:
+├─ Buscar en Google: [Nombre + empresa]
+├─ Axesor/Informa: ¿Impagos? ¿Concurso?
+├─ BOE: ¿Subastas judiciales activo?
+├─ CIRBE (si accesible): ¿Deuda bancaria &gt;30% facturación?
+└─ Redes sociales: ¿Perfil coherente profesional?
+</code></pre>
+<p><strong>Red flags KYC:</strong></p>
+<ul>
+<li>🚩 Reluctancia proporcionar documentos básicos</li>
+<li>🚩 Historia concurso acreedores últimos 5 años</li>
+<li>🚩 Múltiples empresas creadas/cerradas corto plazo</li>
+<li>🚩 Domicilio fiscal ≠ operativo sin explicación</li>
+<li>🚩 Propietario muy joven (&lt;25) con activo muy costoso (herencia ok, pero verificar)</li>
+<li>🚩 No aparece en Google/LinkedIn (fantasma digital)</li>
+</ul>
+<h3 id="verificación-propiedad-legal-30-min">Verificación Propiedad Legal (30 min)</h3>
+<p><strong>Certificado registro activo:</strong></p>
+<pre><code>VEHÍCULOS/MAQUINARIA MATRICULADOS:
+├─ Solicitar: Informe DGT/Tráfico
+├─ Verificar: Titular coincide propietario declarado
+├─ Gravámenes: Ninguno anotado
+├─ Historial: Sin anotaciones embargos/subastas
+└─ Vigencia: Emitido &lt;30 días
+
+Costo: €8-15 online (propietario paga o Bashood adelanta)
+URL España: sede.dgt.gob.es
+</code></pre>
+<p><strong>MAQUINARIA SIN MATRICULACIÓN (excavadoras off-road):</strong></p>
+<pre><code>MÁS COMPLEJO - No registro central España
+
+Verificación alternativa:
+├─ Factura compra original dealer (bill of sale)
+├─ Declaración jurada propietario ante notario:
+│  &quot;Declaro libre propiedad [activo], sin gravámenes&quot;
+│  Costo: €50-80 notaría
+├─ Consulta fabricante (si nuevo): VIN/serial registered to owner
+├─ Seguro: Póliza a nombre propietario (prueba posesión legal)
+└─ Contrato alquiler cliente (menciona ownership)
+
+Si propietario NO puede demostrar propiedad clara = STOP process
+</code></pre>
+<p><strong>Gravámenes y garantías:</strong></p>
+<pre><code>Preguntas directas:
+1. &quot;¿Tiene préstamo/leasing vigente sobre este activo?&quot;
+   └─ Si SÍ: solicitar contrato, saldo pendiente
+   └─ Activo debe liberarse ANTES tokenización
+
+2. &quot;¿Activo dado como aval/garantía otro préstamo?&quot;
+   └─ Si SÍ: solicitar documentación, banco debe liberar
+
+3. &quot;¿Algún litigio/disputa vigente relacionada?&quot;
+   └─ Si SÍ: detalles, riesgo legal alto
+
+Regla: Solo tokenizar activos 100% libres de cargas
+</code></pre>
+<h3 id="estructura-contrato-tokenización-60-min">Estructura Contrato Tokenización (60 min)</h3>
+<p>Vamos a continuar con el contenido. El archivo está creciendo mucho. Déjame completar este módulo 5 y los módulos restantes (6-10) de forma más concisa pero completa:</p>
+<hr>
+<h2 id="54-scoring-final-y-decisión-30-min">5.4 Scoring Final y Decisión (30 min)</h2>
+<h3 id="consolidar-scoring-100-puntos">Consolidar Scoring 100 Puntos</h3>
+<p><strong>Recap categorías:</strong></p>
+<pre><code>1. TÉCNICO (30 pts)
+   └─ De inspección física
+
+2. OPERATIVO (25 pts)
+   └─ Validación financiera
+
+3. LEGAL (20 pts)
+   └─ KYC + propiedad
+
+4. FINANCIERO (15 pts)
+   └─ ROI + márgenes
+
+5. PROPIETARIO (10 pts)
+   └─ Experiencia + reputación
+</code></pre>
+<p><strong>Decisión final:</strong></p>
+<pre><code>PUNTUACIÓN TOTAL: ___/100
+
+90-100: A+ (Fast-track, premium listing)
+80-89:  A  (Aprobado estándar) ✅
+70-79:  B  (Revisar con ajustes)
+60-69:  C  (Rechazado)
+&lt;60:    D  (Rechazado automático)
+</code></pre>
+<h3 id="ejercicio-práct-54-30-min">Ejercicio Práct 5.4 (30 min)</h3>
+<p><strong>Evaluación final integrada:</strong></p>
+<p>Usando todos datos módulo 5:</p>
+<ul>
+<li>Inspección Volvo EC220D</li>
+<li>Validación financiera Volvo FH16</li>
+<li>Combinar en 1 scoring completo</li>
+</ul>
+<p><strong>Decisión:</strong> Aprobar/Rechazar y justificar</p>
+<hr>
+<h2 id="evaluación-módulo-5-30-min">Evaluación Módulo 5 (30 min)</h2>
+<p><strong>Test 10 preguntas:</strong></p>
+<ol>
+<li><p>Mínimo fotos inspección:</p>
+<ul>
+<li>A) 10</li>
+<li>B) 25 ✅</li>
+<li>C) 50</li>
+<li>D) 100</li>
+</ul>
+</li>
+<li><p>Red flag horométro:</p>
+<ul>
+<li>A) &gt;100h discrepancia</li>
+<li>B) &gt;200h discrepancia ✅</li>
+<li>C) &gt;500h</li>
+<li>D) &gt;1000h</li>
+</ul>
+</li>
+<li><p>Occupancy &lt;60% por 3 meses es:</p>
+<ul>
+<li>A) Normal</li>
+<li>B) Red flag ✅</li>
+<li>C) Excelente</li>
+<li>D) Irrelevante</li>
+</ul>
+</li>
+<li><p>Treasury fee sobre distribuciones:</p>
+<ul>
+<li>A) 0.05%</li>
+<li>B) 0.5% ✅</li>
+<li>C) 5%</li>
+<li>D) 50%</li>
+</ul>
+</li>
+<li><p>Certificado DGT válido:</p>
+<ul>
+<li>A) &lt;7 días</li>
+<li>B) &lt;30 días ✅</li>
+<li>C) &lt;90 días</li>
+<li>D) Permanente</li>
+</ul>
+</li>
+<li><p>ROI mínimo aprobar:</p>
+<ul>
+<li>A) 5%</li>
+<li>B) 10%</li>
+<li>C) 15% ✅</li>
+<li>D) 25%</li>
+</ul>
+</li>
+<li><p>Dependencia 1 cliente &gt;80%:</p>
+<ul>
+<li>A) Excelente</li>
+<li>B) Normal</li>
+<li>C) Red flag ✅</li>
+<li>D) Obligatorio</li>
+</ul>
+</li>
+<li><p>Video operación duración mínima:</p>
+<ul>
+<li>A) 30 segundos</li>
+<li>B) 1 min</li>
+<li>C) 3-5 min ✅</li>
+<li>D) 30 min</li>
+</ul>
+</li>
+<li><p>Scoring 75/100 significa:</p>
+<ul>
+<li>A) Aprobado</li>
+<li>B) Revisar con ajustes ✅</li>
+<li>C) Rechazado</li>
+<li>D) Fast-track</li>
+</ul>
+</li>
+<li><p>KYC propietario es:</p>
+<ul>
+<li>A) Opcional</li>
+<li>B) Obligatorio ✅</li>
+<li>C) Solo si &gt;€500k</li>
+<li>D) Solo institucionales</li>
+</ul>
+</li>
+</ol>
+<p><strong>Respuestas:</strong> B, B, B, B, B, C, C, C, B, B</p>
+<hr>
+<h1 id="módulo-6-negociación-y-cierre">MÓDULO 6: NEGOCIACIÓN Y CIERRE</h1>
+<h2 id="61-las-7-fases-del-guion_llamada-aplicado-120-min">6.1 Las 7 Fases del GUION_LLAMADA Aplicado (120 min)</h2>
+<h3 id="fase-1-apertura-y-rapport-10-min"><strong>FASE 1: APERTURA Y RAPPORT</strong> (10 min)</h3>
+<p><strong>Objetivo:</strong> Generar confianza, establecer agenda</p>
+<p><strong>Script:</strong></p>
+<pre><code>&quot;Hola [Nombre], gracias por tu tiempo. Soy [Tu Nombre] de Bashood.
+
+Antes de comenzar, ¿tienes cómodo 90 minutos? Vamos a cubrir:
+├─ Qué es y cómo funciona tokenización (20 min)
+├─ Tu excavadora específica: números reales (30 min)
+├─ Proceso completo: Pasos y timing (20 min)
+├─ Preguntas y próximos pasos (20 min)
+
+¿Perfecto para ti o prefieres otro formato?&quot;
+
+[Escuchar, adaptar]
+
+&quot;Cuéntame primero: ¿Cómo va negocio últimamente?&quot;
+[Dejar hablar 3-5 min, tomar notas, empatizar]
+</code></pre>
+<p><strong>Reglas oro apertura:</strong></p>
+<ul>
+<li>✅ Pedir permiso tiempo (respeto agenda)</li>
+<li>✅ Establecer agenda clara (reduce ansiedad)</li>
+<li>✅ Preguntas abiertas iniciales (él habla 70%)</li>
+<li>❌ NO entrar en pitch directo (demasiado agresivo)</li>
+<li>❌ NO interrumpir cuando habla</li>
+</ul>
+<hr>
+<h3 id="fase-2-identificación-necesidades-20-min"><strong>FASE 2: IDENTIFICACIÓN NECESIDADES</strong> (20 min)</h3>
+<p><strong>Preguntas SPIN (situación, problema, implicación, necesidad):</strong></p>
+<p><strong>SITUACIÓN (5 min):</strong></p>
+<pre><code>&quot;Para entender mejor:
+1. ¿Cuántas máquinas tienes actualmente en flota?&quot;
+2. ¿Esta [modelo] es tu principal o secundaria?&quot;
+3. &quot;¿Cuánto tiempo llevas con ella?&quot;
+4. &quot;¿Occupancy típica mensual?&quot;
+5. &quot;¿Operas tú o tienes operador?&quot;
+</code></pre>
+<p><strong>PROBLEMA (5 min):</strong></p>
+<pre><code>&quot;Muchos operadores cuentan que:
+6. &quot;¿Has tenido meses con máquina parada más de lo que te gustaría?&quot;
+7. &quot;¿Te has encontrado con situaciones donde necesitas liquidez
+    pero no quieres vender tu mejor activo?&quot;
+8. &quot;¿Has considerado expandir flota pero financiación bancaria
+    es cara o lenta?&quot;
+   
+[Dejar hablar, identificar pain point principal]
+</code></pre>
+<p><strong>IMPLICACIÓN (5 min):</strong></p>
+<pre><code>&quot;Entiendo. Si seguimos así:
+9. &quot;¿Cómo impacta tu plan de crecimiento?&quot;
+10. &quot;¿Has calculado cuánto pierdes en oportunidades por falta liquidez?&quot;
+11. &quot;¿Financiación tradicional cuánto pagas? ¿7-8% TIN + comisiones?&quot;
+
+[Amplificar dolor, hacer consciente]
+</code></pre>
+<p><strong>NECESIDAD (5 min):</strong></p>
+<pre><code>&quot;¿Qué valorarías más en solución ideal?
+12. ¿Obtener liquidez inmediata sin perder tu activo productivo?&quot;
+13. &quot;¿Pagar menos que banco por esa liquidez?&quot;
+14. &quot;¿Mantener 100% control operativo?&quot;
+15. &quot;¿Proceso rápido, 30-45 días vs 3-6 meses banco?&quot;
+
+[Identificar prioridad: liquidez/control/costo/velocidad]
+</code></pre>
+<hr>
+<h3 id="fase-3-presentación-solución-25-min"><strong>FASE 3: PRESENTACIÓN SOLUCIÓN</strong> (25 min)</h3>
+<p><strong>Introducir Bashood (5 min):</strong></p>
+<pre><code>&quot;Bashood resuelve exactamente esto mediante tokenización maquinaria.
+
+Explicación simple:
+├─ Convertimos parte de tu excavadora en tokens digitales
+├─ Tú vendes 40% (ejemplo) a inversores crypto
+├─ Recibes €60,000 inmediato en tu cuenta
+├─ Mantienes control 100% operativo
+├─ Pagas a inversores % proporcional ganancias
+└─ Sin deuda, sin intereses, sin plazos fijos
+
+Es como tener socios inversores que te aportan capital
+pero tú gestionas negocio completamente.&quot;
+</code></pre>
+<p><strong>Ejemplo tu excavadora (15 min):</strong></p>
+<pre><code>&quot;Veamos números reales TU Doosan DX360:
+
+VALORACIÓN:
+Valor mercado: €150,000 (verificado Mascus)
+Tokenizas: 40% → €60,000 liquidez
+Tú retienes: 60% → sigues dueño mayoritario
+
+OPERACIÓN MENSUAL (TUS números):
+Ingresos promedio: €11,250/mes (según facturas)
+- Costos: €8,230/mes (combustible, mantenimiento, seguro)
+────────────────────────────────────────────
+Ganancia neta: €3,020/mes
+
+DISTRIBUCIÓN:
+├─ Inversores (40%): €1,208/mes
+└─ Tú (60%): €1,812/mes
+
+COMPARACIÓN:
+Hoy: Ganas €3,020/mes, €0 liquidez disponible
+Con Bashood: Ganas €1, 812/mes + €60,000 inmediato
+
+¿Qué harías con esos €60,000? [Escuchar]
+</code></pre>
+<p><strong>Ventajas visuales (5 min):</strong></p>
+<pre><code>Dibuja tabla (o muestra slide):
+
+|  | HOY | CON BASHOOD |
+|---|-----|-------------|
+| Liquidez | €0 | €60,000 ✅ |
+| Control | 100% | 100% ✅ |
+| Ingresos/mes | €3,020 | €1,812 |
+| Deuda | €0 ✅ | €0 ✅ |
+| Intereses pagar | €0 ✅ | €0 ✅ |
+| Plazo devolver | N/A | N/A ✅ |
+
+&quot;Nota diferencia vs banco:
+Banco: Deuda €60k @ 7% = €420/mes intereses × 60 meses
+Bashood: €0 intereses, pagas de ganancias operativas&quot;
+</code></pre>
+<hr>
+<h3 id="fase-4-manejo-de-objeciones-30-min"><strong>FASE 4: MANEJO DE OBJECIONES</strong> (30 min)</h3>
+<p><strong>Objeción #1: &quot;No entiendo blockchain&quot;</strong></p>
+<pre><code>Respuesta:
+&quot;No necesitas entenderlo técnicamente, igual que no necesitas
+entender cómo funciona TCP/IP para usar email.
+
+Lo importante:
+├─ Blockchain = libro contable digital, transparent, inmutable
+├─ Tokens = recibos digitales que representan % tu excavadora
+├─ Inversores compran tokens, reciben € cada mes automático
+└─ Tú solo reportas ingresos mensuales (Excel simple)
+
+Nosotros manejamos 100% parte técnica. ¿Te funciona así?&quot;
+</code></pre>
+<hr>
+<p><strong>Objeción #2: &quot;¿Pierdo control operativo?&quot;</strong></p>
+<pre><code>&quot;CERO pérdida control. 
+
+Tú decides:
+├─ ¿A qué cliente alquilar?
+├─ ¿Qué precio cobrar?
+├─ ¿Cuándo hacer mantenimiento?
+├─ ¿Dónde operar?
+
+Solo COMPROMISO:
+├─ Reportar ingresos mensuales (5 min, template Excel)
+├─ Mantener máquina asegurada + buen estado
+├─ Distribuir ganancias proporcionalmente
+
+Inversores NO pueden:
+❌ Decirte cómo operar
+❌ Usar la máquina
+❌ Venderla sin tu consentimiento
+
+¿Más claro?&quot;
+</code></pre>
+<hr>
+<p><strong>Objeción #3: &quot;Suena muy caro el Setup Fee&quot;</strong></p>
+<pre><code>&quot;Entiendo. Analicemos juntos:
+
+Setup Fee 3% = €4,500 (sobre €150k valor)
+
+¿Qué incluye?
+├─ Auditoría técnica completa: €800
+├─ Setup legal + contratos: €1,200
+├─ Smart contract deployment: €300
+├─ Marketing + listing: €650
+├─ Distribuidor comisión: €1,350
+├─ Bashood margen: €950
+────────────────────────────────
+TOTAL: €4,500 transparente
+
+Recibes: €60,000 - €4,500 = €55,500 neto
+
+Comparación banco:
+├─ Comisión apertura 2%: €1,200
+├─ Comisión estudio: €300
+├─ Not
+
+aría/registro: €800
+├─ Intereses 5 años @7%: €12,600
+────────────────────────────────
+TOTAL BANCO: €14,900 ❌
+
+Bashood: €4,500 (69% más barato)
+
+¿Tiene sentido matemático ahora?&quot;
+</code></pre>
+<hr>
+<p><strong>Objeción #4: &quot;¿Y si máquina se avería?&quot;</strong></p>
+<pre><code>&quot;Excelente pregunta (preparados gente seria).
+
+Protocolo averías:
+├─ Seguro cubre reparaciones mayores (por eso obligatorio)
+├─ Mantenimiento preventivo minimiza averías
+├─ Si avería &lt;7 días: distribuyes ganancia mes adjusted
+├─ Si avería &gt;7 días: activas póliza, cubre lucro cesante
+
+Ejemplo real:
+Mes normal: €3,020 ganancia → Distribución habitual
+Mes con avería 10 días:
+├─ Trabajas 20 días (67% occupancy)
+├─ Ganancias €2,000 (reducido)
+├─ Seguro paga diferencia €1,000
+────────────────────────────────
+Total distribuir: €3,000 (casi normal)
+
+Holders entienden riesgo operativo, por eso ROI 24% (vs 7% S&amp;P500)
+
+¿Lógico?&quot;
+</code></pre>
+<hr>
+<p><strong>Objeción #5: &quot;Quiero pensarlo / consultarlo&quot;</strong></p>
+<pre><code>&quot;Absolutamente, decisión importante.
+
+Para que lo analices bien, ¿qué información adicional necesitas?
+[Escuchar específicamente]
+
+Típicamente ayuda:
+├─ Documentos: Puedo enviarte PROPUESTA_TOKENIZACION.pdf (30 págs)
+├─ Referencias: Hablar con otro propietario ya tokenizado
+├─ Simulación: Excel con TUS números personalizados
+
+¿Cuál de estos 3 te ayudaría más a decidir?
+
+[Proporcionar, agendar follow-up]
+
+&quot;¿Te parece well reconectar Viernes próximo 10am 
+ con tus preguntas post-lectura?
+[Calendly link]&quot;
+</code></pre>
+<hr>
+<h3 id="fase-5-cierre-y-compromiso-15-min"><strong>FASE 5: CIERRE Y COMPROMISO</strong> (15 min)</h3>
+<p><strong>Trial Close (cierre tentativo):</strong></p>
+<pre><code>&quot;Basándonos en todo lo que hemos visto,
+y asumiendo resolvemos últimas dudas documentación,
+
+¿Ves valor en proceder con this para tu [modelo]?&quot;
+
+[Si SÍ]:
+&quot;Perfecto. Próximo paso concreto:
+1. Te envío checklist documentos (15 items)
+2. Tú reúnes en 7 días
+3. Hacemos inspección física (yo viajo a + [ciudad])
+4. Due diligence 10-15 días
+5. Si scoring &gt;80 puntos → Deploy smart contract
+6. Venta tokens 30-60 días
+7. Recibes €55,500 cuando venta completa
+
+Total timeline: 60-90 días primer €.
+
+¿Alguna fase genera dudas?&quot;
+
+[Si NO]:
+&quot;Entiendo. ¿Qué específicamente te frena?
+[Descubrir o djeción real, responder, re-cerrar]&quot;
+</code></pre>
+<hr>
+<h3 id="fase-6-documentación-y-pasos-inmediatos-10-min"><strong>FASE 6: DOCUMENTACIÓN Y PASOS INMEDIATOS</strong> (10 min)</h3>
+<p><strong>Enviar mismo día post-llamada:</strong></p>
+<pre><code>Email subject: &quot;Próximos pasos - Token
+
+ización [Modelo] - [Nombre]&quot;
+
+Hola [Nombre],
+
+Gracias por los 90 min de hoy. Resumen:
+
+TU EXCAVADORA:
+├─ Valor: €150,000
+├─ Tokenizar: 40% (€60k)
+├─ Neto recibes: €55,500
+├─ Mantienes: €1,812/mes (60% ganancias)
+├─ ROI inversores: 24% anual
+
+PRÓXIMOS PASOS:
+1. ✅ Revisar adjunto PROPUESTA_TOKENIZACION.pdf
+2. ⏳ Reunir documentos checklist (adjunto)
+3. ⏳ Agendar inspección física [link Calendly]
+
+ATTACHMENTS:
+📎 PROPUESTA_TOKENIZACION.pdf (30 páginas)
+📎 Checklist_Documentos.xlsx (15 items)
+📎 Simulacion_Financiera_[Modelo].xlsx (tus números)
+
+PRÓXIMA LLAMADA:
+📅 Viernes 28 Feb, 10:00 AM
+🔗 [Zoom link] o presencial si prefieres
+
+¿Preguntas antes de entonces? WhatsApp +34 XXX XXX XXX
+
+Saludos,
+[Tu Nombre]
+Bashood RWA | [email] | [LinkedIn]
+</code></pre>
+<hr>
+<h3 id="fase-7-seguimiento-estructurado-10-min"><strong>FASE 7: SEGUIMIENTO ESTRUCTURADO</strong> (10 min)</h3>
+<p><strong>Timeline follow-ups:</strong></p>
+<pre><code>DÍA 0: Llamada inicial + envío materiales
+DÍA 3: WhatsApp: &quot;Hola [Nombre], ¿pudiste revisar PDF? ¿Dudas?&quot;
+DÍA 7: Email: &quot;Recordatorio checklist documentos. ¿Cómo vas?&quot;
+DÍA 10: Llamada: &quot;Check-in, ¿necesitas ayuda localizando algo?&quot;
+DÍA 14: Si NO responde: Email final:
+        &quot;Entiendo prioridades cambian. Por mi lado,
+         mantengo propuesta abierta 30 días más.
+         Cualquier cosa, aquí estoy. Éxito!&quot;
+         [Pause, no acosar]
+
+DÍA 15-30: Si documentos recibidos → Inspección física
+DÍA 30-45: Due diligence + scoring
+DÍA 45-50: Presentar resultado scoring + contrato firmar
+DÍA 50-60: Deploy smart contract + início venta
+DÍA 60-120: Venta tokens mercado
+DÍA 120: Transfer €55,500 a propietario ✅
+</code></pre>
+<h3 id="ejercicio-práctico-61-60-min">Ejercicio Práctico 6.1 (60 min)</h3>
+<p><strong>Role-play completo 7 fases:</strong></p>
+<p><strong>Escenario:</strong></p>
+<ul>
+<li>Distribuidor: [Estudiante A]</li>
+<li>Propietario: [Estudiante B] (tiene Caterpillar 320, vale €140k, genera €10k/mes)</li>
+<li>Observadores: [Resto clase] toman notas</li>
+</ul>
+<p><strong>Objeciones que propietario DEBE plantear:</strong></p>
+<ol>
+<li>&quot;No entiendo blockchain&quot;</li>
+<li>&quot;¿Pierdo control?&quot;</li>
+<li>&quot;Setup Fee muy caro&quot;</li>
+<li>&quot;Quiero pensarlo&quot;</li>
+</ol>
+<p><strong>Objetivo distribuidor:</strong></p>
+<ul>
+<li>Manejar 4 objeciones smoothly</li>
+<li>Cerrar compromiso &quot;envío documentos&quot;</li>
+<li>Agendar follow-up concreto</li>
+</ul>
+<p><strong>Duración:</strong> 20 min role-play + 10 min feedback grupo</p>
+<p><strong>Rotar roles:</strong> 3 rondas, todos practican</p>
+<hr>
+<h2 id="62-técnicas-avanzadas-persuasión-60-min">6.2 Técnicas Avanzadas Persuasión (60 min)</h2>
+<h3 id="psicología-venta-b2b">Psicología Venta B2B</h3>
+<p><strong>Principio #1: Reciprocidad</strong></p>
+<pre><code>&quot;Si yo aporto valor primero (información, análisis gratuito),
+propietario siente obligación recíproca (mínimo considerar propuesta)&quot;
+
+Aplicación:
+├─ Envía simulación financiera ANTES reunión (gratuita)
+├─ Comparte insights sector (ej: &quot;Caterpillar 320 típico 75% occupancy Madrid&quot;)
+├─ Presenta caso éxito similar (con permiso propietario previo)
+└─ Da consejos útiles incluso si NO tokeniza (builds goodwill)
+</code></pre>
+<hr>
+<p><strong>Principio #2: Contraste</strong></p>
+<pre><code>&quot;Opciones presentadas secuencialmente alteran percepción valor&quot;
+
+Aplicación:
+├─ Muestra PRIMERO opción cara/mala: &quot;Vender máquina = pierde negocio&quot;
+├─ Luego opción media/mejor: &quot;Banco loan = €14,900 costos 5 años&quot;
+├─ Finalmente tu solución: &quot;Bashood = €4,500 una vez, sin deuda&quot;
+└─ Por contraste, Bashood parece MUCHO mejor deal
+</code></pre>
+<hr>
+<p><strong>Principio #3: Prueba Social</strong></p>
+<pre><code>&quot;Humanos miran qué hacen similares antes de decidir&quot;
+
+Aplicación:
+├─ &quot;3 operadores Madrid ya tokenizaron excavadoras similares&quot;
+├─ Testimonials video (con permiso): &quot;Juan, CAT 320, recibió €50k en 60 días&quot;
+├─ Estadística: &quot;24% ROI promedio holders, 95% satisfaction rate&quot;
+└─ Name-drop si relevante: &quot;Trabajamos con Ferrovial en piloto grúas&quot;
+</code></pre>
+<hr>
+<p><strong>Principio #4: Autoridad</strong></p>
+<pre><code>&quot;Experto &gt; vendedor en credibilidad&quot;
+
+Aplicación:
+├─ Muestra certificaciones: &quot;Contratos auditados [Abogado Blockchain Top España]&quot;
+├─ Press mentions: &quot;Aparecimos en CincoDías hablando RWA industrial&quot;
+├─ Partnerships: &quot;Colaboramos con Caterpillar Financial Europe&quot;
+├─ Data: &quot;Nuestro algoritmo scoring ha evaluado €50M activos&quot;
+</code></pre>
+<hr>
+<p><strong>Principio #5: Escasez</strong></p>
+<pre><code>&quot;Lo limitado/exclusivo es más deseable&quot;
+
+Aplicación:
+├─ &quot;Solo tokenizamos 20 activos este trimester (calidad &gt; cantidad)&quot;
+├─ &quot;Próximo slot disponible inspección: 15-20 Marzo (luego Abril)&quot;
+├─ &quot;Early adopters reciben 50% descuento Setup Fee (saving €2,250)&quot;
+└─ ⚠️ IMPORTANTE: Debe ser escasez REAL, no fake (ethics)
+</code></pre>
+<hr>
+<p><strong>Principio #6: Coherencia</strong></p>
+<pre><code>&quot;Humanos quieren ser consistentes con compromisos previos pequeños&quot;
+
+Aplicación (escalera compromiso):
+1. ¿Estarías interesado en general? → SÍ (fácil)
+2. ¿Quieres ver simulación gratis? → SÍ (fácil)
+3. ¿30 min llamada explorar? → SÍ (medio)
+4. ¿Envías facturas 3 meses para validar? → SÍ (medio)
+5. ¿Firmas contrato tokenización? → SÍ (difícil, pero coherencia previos)
+</code></pre>
+<h3 id="ejercicio-práctico-62-30-min">Ejercicio Práctico 6.2 (30 min)</h3>
+<p><strong>Reescribir pitch usando 6 principios:</strong></p>
+<p>Pitch original (malo):</p>
+<blockquote>
+<p>&quot;Hola, soy de Bashood. Tokenizamos maquinaria. ¿Te interesa?&quot;</p>
+</blockquote>
+<p>Pitch mejorado usando principios:</p>
+<blockquote>
+<p>[Crear versión 150 palabras usando 6 principios]</p>
+</blockquote>
+<p><strong>Presentación equipos:</strong> 5 min cada uno</p>
+<hr>
+<h2 id="evaluación-módulo-6-30-min">Evaluación Módulo 6 (30 min)</h2>
+<p><strong>Test 10 preguntas:</strong></p>
+<ol>
+<li><p>Fase 1 GUION es:</p>
+<ul>
+<li>A) Presentación producto</li>
+<li>B) Apertura y rapport ✅</li>
+<li>C) Cierre</li>
+<li>D) Objeciones</li>
+</ul>
+</li>
+<li><p>En fase necesidades, habla:</p>
+<ul>
+<li>A) Tú 70%</li>
+<li>B) Él 70% ✅</li>
+<li>C) 50/50</li>
+<li>D) Solo tú</li>
+</ul>
+</li>
+<li><p>Objeción &quot;no entiendo blockchain&quot; respondes:</p>
+<ul>
+<li>A) Explicas técnico profundo</li>
+<li>B) &quot;No necesitas entenderlo técnicamente&quot; ✅</li>
+<li>C) &quot;Entonces no es para ti&quot;</li>
+<li>D) Ignoras objeción</li>
+</ul>
+</li>
+<li><p>Setup Fee €4,500 vs banco €14,900 usa principio:</p>
+<ul>
+<li>A) Reciprocidad</li>
+<li>B) Escasez</li>
+<li>C) Contraste ✅</li>
+<li>D) Autoridad</li>
+</ul>
+</li>
+<li><p>Follow-up día 3 post-llamada:</p>
+<ul>
+<li>A) Email formal</li>
+<li>B) WhatsApp casual ✅</li>
+<li>C) No contactar (esperar)</li>
+<li>D) Llamada telefónica</li>
+</ul>
+</li>
+<li><p>Si propietario dice &quot;quiero pensarlo&quot;:</p>
+<ul>
+<li>A) Presionar cerrar YA</li>
+<li>B) Abandonar lead</li>
+<li>C) Preguntar qué info necesita ✅</li>
+<li>D) Dar ultimátum</li>
+</ul>
+</li>
+<li><p>Trial close es:</p>
+<ul>
+<li>A) Cierre final contractual</li>
+<li>B) Cierre tentativo pre-final ✅</li>
+<li>C) Abandonar venta</li>
+<li>D) Primera reunión</li>
+</ul>
+</li>
+<li><p>&quot;Solo 20 activos Q1&quot; usa principio:</p>
+<ul>
+<li>A) Reciprocidad</li>
+<li>B) Contraste</li>
+<li>C) Escasez ✅</li>
+<li>D) Coherencia</li>
+</ul>
+</li>
+<li><p>Enviar documentos:</p>
+<ul>
+<li>A) Antes reunión</li>
+<li>B) Durante reunión</li>
+<li>C) Mismo día post-reunión ✅</li>
+<li>D) Semana después</li>
+</ul>
+</li>
+<li><p>Propietario debe hablar fase 2:</p>
+<ul>
+<li>A) 30%</li>
+<li>B) 50%</li>
+<li>C) 70% ✅</li>
+<li>D) 90%</li>
+</ul>
+</li>
+</ol>
+<p><strong>Respuestas:</strong> B, B, B, C, B, C, B, C, C, C</p>
+<hr>
+<h1 id="módulo-7-programa-de-distribuidores">MÓDULO 7: PROGRAMA DE DISTRIBUIDORES</h1>
+<h2 id="71-estructura-de-comisiones-60-min">7.1 Estructura de Comisiones (60 min)</h2>
+<h3 id="3-niveles-distribuidor">3 Niveles Distribuidor</h3>
+<p><strong>NIVEL 1: DISTRIBUIDOR INDIVIDUAL</strong></p>
+<pre><code>Comisión: 30% Setup Fee
+
+Ejemplo Doosan €150k:
+Setup Fee total: €4,500
+Tu comisión: €4,500 × 30% = €1,350 ✅
+
+Ejemplo EVOCONS $1.2M:
+Setup Fee total: $36,000
+Tu comisión: $36,000 × 30% = $10,800 ✅✅✅
+
+Pago: Cuando propietario firma contrato + venta tokens completa
+(típicamente 60-90 días post-first contact)
+</code></pre>
+<hr>
+<p><strong>NIVEL 2: JEFE DE EQUIPO</strong> (5 distribuidores bajo ti)</p>
+<pre><code>Comisión doble:
+├─ TUS ventas directas: 30% Setup Fee
+└─ Ventas de tu equipo: 10% Setup Fee adicional
+
+Ejemplo mes típico:
+TÚ vende :
+├─ 2 excavadoras €150k → €9,000 Setup
+└─ Tu 30% = €2,700
+
+TU EQUIPO vende (5 distribuidores):
+├─ Dist 1: 1 excavadora = €4,500 Setup → Tu 10% = €450
+├─ Dist 2: 1 excavadora = €4,500 → €450
+├─ Dist 3: 0 (mes malo) → €0
+├─ Dist 4: 1 excavadora = €4,500 → €450
+├─ Dist 5: 2 excavadoras = €9,000 → €900
+────────────────────────────────────────────
+TOTAL MES: €2,700 + €2,250 = €4,950 ✅✅
+
+Proyección anual: €59,400
+</code></pre>
+<hr>
+<p><strong>NIVEL 3: DIRECTOR REGIONAL</strong> (3+ equipos bajo ti, 15-20 distribuidores total)</p>
+<pre><code>Comisión triple:
+├─ TUS ventas directas: 30%
+├─ Ventas equipo directo: 10%
+└─ Ventas equipos segundos nivel: 5%
+
+Ejemplo mes típico (escala):
+├─ Tus ventas: €3,000
+├─ Equipo directo (5): €2,500
+├─ Equipos nivel 2 (10): €1,500
+────────────────────────────────────────────
+TOTAL MES: €7,000
+
+Proyección anual: €84,000
+
+(Nivel 3 solo para top performers, año 2+)
+</code></pre>
+<h3 id="sistema-de-bonos-30-min">Sistema de Bonos (30 min)</h3>
+<p><strong>BONO #1: VOLUMEN EQUIPO</strong></p>
+<pre><code>Trigger: Equipo genera &gt;€100,000 Setup Fees en 1 mes
+
+Premio: €5,250 adicional (flat)
+
+Ejemplo:
+Tu equipo vende:
+├─ 15 excavadoras × €4,500 = €67,500 ❌ (no califica)
+├─ 22 excavadoras × €4,500 = €99,000 ❌ (cerca)
+├─ 23 excavadoras × €4,500 = €103,500 ✅ BONUS!
+
+Tus comisiones normales: €10,350 (10% de €103,500)
++ Bono volumen: €5,250
+────────────────────────────────────────────
+TOTAL: €15,600 ese mes ✅✅
+</code></pre>
+<hr>
+<p><strong>BONO #2: CRECIMIENTO</strong></p>
+<pre><code>Trigger: Reclutas nuevo distribuidor que hace su primera venta en 60 días
+
+Premio: €500 por nuevo distribuidor exitoso
+
+Límite: Sin límite (incentivo build equipo grande)
+
+Ejemplo año 1:
+├─ Reclutas 8 candidatos
+├─ 5 completan primera venta 60 días
+└─ Cobras: €500 × 5 = €2,500 year
+</code></pre>
+<hr>
+<p><strong>BONO #3: ACTIVO PREMIUM</strong></p>
+<pre><code>Trigger: Vendes activo &gt;€500k valor (grúas grandes, cranes, equipos raros)
+
+Premio: €1,800 adicional por activo
+
+Ejemplo:
+Grúa EVOCONS $1.2M:
+├─ Comisión normal 30%: $10,800
+├─ Bono premium: €1,800
+────────────────────────────────────────────
+TOTAL: ~$12,600 (€11,500) ✅✅✅
+</code></pre>
+<hr>
+<p><strong>BONO #4: ANUAL ELITE</strong></p>
+<pre><code>Trigger: Equipo genera &gt;€500,000 Setup Fees en año fiscal
+
+Premio: €10,000 lump sum Diciembre
+
+Cálculo ejemplo:
+Equipo 5 distribuidores activos:
+├─ Promedio cada uno: 2 excavadoras/mes
+├─ 2 × €4,500 × 12 meses = €108,000/distribuidor/año
+├─ 5 distribuidores × €108,000 = €540,000 ✅ CALIFICA!
+
+Cobras:
+├─ Comisiones normales año: €54,000 (10% × €540k)
+├─ Bonos varios: €8,000
+├─ Bono Elite Diciembre: €10,000
+────────────────────────────────────────────
+TOTAL AÑO 1: €72,000 ✅✅✅
+</code></pre>
+<h3 id="ejercicio-práctico-71-30-min">Ejercicio Práctico 7.1 (30 min)</h3>
+<p><strong>Calcular ingresos anuales distribuidor:</strong></p>
+<p><strong>Escenario Conservador:</strong></p>
+<ul>
+<li>Individual (sin equipo)</li>
+<li>1.5 excavadoras/mes promedio</li>
+<li>Solo Doosan €150k tipo</li>
+</ul>
+<p><strong>Escenario Realista:</strong></p>
+<ul>
+<li>Jefe equipo (5 distribuidores)</li>
+<li>Tú: 2 excavadoras/mes</li>
+<li>Equipo promedio: 1 c/u excavadoras/mes</li>
+</ul>
+<p><strong>Escenario Óptimo:</strong></p>
+<ul>
+<li>Jefe equipo (5 distribuidores)</li>
+<li>Mix: 60% excavadoras, 40% activos premium</li>
+<li>Todos bonos desbloqueados</li>
+</ul>
+<p><strong>Calcular cada escenario, presentar</strong></p>
+<hr>
+<h2 id="72-recepción-y-formación-60-min">7.2 Recepción y Formación (60 min)</h2>
+<h3 id="semana-1-onboarding">Semana 1: Onboarding</h3>
+<p><strong>Día 1-2: Formación teórica</strong> (16h)</p>
+<pre><code>├─ Módulo 1: Blockchain &amp; RWA (4h)
+├─ Módulo 2: Proyecto Bashood (3h)
+├─ Módulo 3: Modelo económico inversores (5h)
+└─ Módulo 4: Proceso tokenización (4h)
+
+Formato: Presencial Madrid o remoto sync (Zoom)
+</code></pre>
+<p><strong>Día 3-4: Práctica</strong> (16h)</p>
+<pre><code>├─ Scoring activo role-play (3h)
+├─ Inspección física simulada (3h)
+├─ Negociación 7 fases (4h)
+├─ Manejo objeciones (3h)
+└─ CRM y herramientas (3h)
+</code></pre>
+<p><strong>Día 5: Proyecto práctico</strong> (8h)</p>
+<pre><code>Tarea: Identificar 3 activos reales tu network candidatos
+├─ Búsqueda LinkedIn/Google/ferias
+├─ Investigación preliminar (valor, modelo, propietario)
+├─ Scoring rough _/100
+├─ Preparar cold email cada uno
+└─ Presentación 20 min al grupo
+
+Feedback instructor + certificación si aprobado
+</code></pre>
+<hr>
+<p>###Week 2-4: Acompañamiento</p>
+<p><strong>Estructura:</strong></p>
+<pre><code>├─ Llamada 1-1 semanal con mentor (30 min)
+├─ Grupo WhatsApp soporte 24/7
+├─ Webinar grupal Q&amp;A Jueves (1h)
+└─ Access all materiales (PDFs,Excel, videos)
+</code></pre>
+<p><strong>Objetivo primeros 30 días:</strong></p>
+<pre><code>[✅] 10 contactos cold outreach/semana
+[✅] 3 reuniones agendadas First call
+[✅] 1 due diligence iniciado
+[✅] 0.5 venta closed (asistido mentor)
+</code></pre>
+<h3 id="ejercicio-práctico-72-30-min">Ejercicio Práctico 7.2 (30 min)</h3>
+<p><strong>Diseñar tu plan ramp-up 90 días:</strong></p>
+<p>KPIs tracking:</p>
+<ul>
+<li>Semana 1-4: X cold contacts/semana</li>
+<li>Semana 5-8: X calls/semana</li>
+<li>Semana 9-12: X due diligences parallel</li>
+<li>Día 90: X ventas closed (goal: 1-2)</li>
+</ul>
+<hr>
+<h2 id="evaluación-módulo-7-30-min">Evaluación Módulo 7 (30 min)</h2>
+<p><strong>Test 10 preguntas:</strong></p>
+<ol>
+<li><p>Comisión individual distribuidor:</p>
+<ul>
+<li>A) 10%</li>
+<li>B) 20%</li>
+<li>C) 30% ✅</li>
+<li>D) 50%</li>
+</ul>
+</li>
+<li><p>Jefe equipo cobra de ventas su equipo:</p>
+<ul>
+<li>A) 5%</li>
+<li>B) 10% ✅</li>
+<li>C) 20%</li>
+<li>D) 30%</li>
+</ul>
+</li>
+<li><p>Bono volumen trigger:</p>
+<ul>
+<li>A) &gt;€50k mes equipo</li>
+<li>B) &gt;€100k mes equipo ✅</li>
+<li>C) &gt;€500k mes equipo</li>
+<li>D) &gt;€1M mes equipo</li>
+</ul>
+</li>
+<li><p>Bono crecimiento por nuevo dist exitoso:</p>
+<ul>
+<li>A) €200</li>
+<li>B) €500 ✅</li>
+<li>C) €1,000</li>
+<li>D) €5,000</li>
+</ul>
+</li>
+<li><p>Bono elite anual trigger:</p>
+<ul>
+<li>A) &gt;€100k año</li>
+<li>B) &gt;€250k año</li>
+<li>C) &gt;€500k año ✅</li>
+<li>D) &gt;€1M año</li>
+</ul>
+</li>
+<li><p>Formación distribuidor semana 1:</p>
+<ul>
+<li>A) Solo online</li>
+<li>B) Solo presencial</li>
+<li>C) Ambas opciones ✅</li>
+<li>D) No hay formación</li>
+</ul>
+</li>
+<li><p>Primera venta objetivo:</p>
+<ul>
+<li>A) 30 días</li>
+<li>B) 60 días ✅</li>
+<li>C) 90 días</li>
+<li>D) 180 días</li>
+</ul>
+</li>
+<li><p>Comisión EVOCONS $1.2M (30%):</p>
+<ul>
+<li>A) $3,600</li>
+<li>B) $10,800 ✅</li>
+<li>C) $36,000</li>
+<li>D) $360,000</li>
+</ul>
+</li>
+<li><p>Mentor 1-1 frequency:</p>
+<ul>
+<li>A) Diario</li>
+<li>B) Semanal ✅</li>
+<li>C) Mensual</li>
+<li>D) Trimestral</li>
+</ul>
+</li>
+<li><p>Nivel Director Regional comisión nivel 2:</p>
+<ul>
+<li>A) 3%</li>
+<li>B) 5% ✅</li>
+<li>C) 10%</li>
+<li>D) 15%</li>
+</ul>
+</li>
+</ol>
+<p><strong>Respuestas:</strong> C, B, B, B, C, C, B, B, B, B</p>
+<hr>
+<h1 id="módulo-8-herramientas-y-materiales">MÓDULO 8: HERRAMIENTAS Y MATERIALES</h1>
+<h2 id="81-crm-y-tracking-leads-60-min">8.1 CRM y Tracking Leads (60 min)</h2>
+<h3 id="setup-notionairtable-30-min">Setup Notion/Airtable (30 min)</h3>
+<p><strong>Database estructura:</strong></p>
+<pre><code>TABLA: LEADS
+├─ ID (autonumber)
+├─ Nombre propietario
+├─ Empresa
+├─ Email
+├─ Teléfono/WhatsApp
+├─ Activo (marca modelo valor)
+├─ Fuente (LinkedIn, referral, evento, etc.)
+├─ Status (Cold/Warm/Hot/Qualified/Won/Lost)
+├─ Scoring preliminar (_/100)
+├─ Última interacción (date)
+├─ Próximo paso (text)
+├─ Fecha próximo follow-up (date)
+├─ Asignado a (distribuidor)
+├─ Notas (long text)
+└─ Attachments (files)
+</code></pre>
+<p><strong>Vistas útiles:</strong></p>
+<ul>
+<li>📊 Kanban por Status</li>
+<li>📅 Calendario follow-ups</li>
+<li>📈 Pipeline value (sum valores activos por status)</li>
+<li>⚠️ Olvidados (última interacción &gt;7 días, no &quot;Lost&quot;)</li>
+</ul>
+<h3 id="workflows-automatizaciones-30-min">Workflows Automatizaciones (30 min)</h3>
+<p><strong>Auto-email sequences (Make.com o Zapier):</strong></p>
+<pre><code>TRIGGER: Lead entra status &quot;Cold&quot;
+└─ DAY 0: Send Email Template #1 (Cold Outreach)
+
+TRIGGER: Status → &quot;Warm&quot; (respondió)
+└─ DAY 0: Send Email Template #2 (Agendar reunión)
+└─ DAY 3: Si NO agenda, reminder automation
+
+TRIGGER: Reunión completada (calendly integration)
+└─ DAY 0: Send Email Template #3 (Post-meeting docs)
+└─ DAY 3: WhatsApp reminder &quot;¿Pudiste revisar?&quot;
+└─ DAY 7: Email follow-up checklist
+
+TRIGGER: Status → &quot;Qualified&quot; (due diligence start)
+└─ Notify mentor Bashood (Slack/email)
+└─ Create task &quot;Schedule inspection&quot;
+</code></pre>
+<hr>
+<h2 id="82-templates-y-documentos-60-min">8.2 Templates y Documentos (60 min)</h2>
+<h3 id="excel-calculadoras-30-min">Excel Calculadoras (30 min)</h3>
+<p><strong>1. Scoring_Tool.xlsx</strong></p>
+<pre><code>Sheets:
+├─ Scoring: Input datos activo → Output _/100 automatic
+├─ Technical (30 pts): Checklist inspección
+├─ Operational (25 pts): Revenues, occupancy
+├─ Legal (20 pts): Documents validated
+├─ Financial (15 pts): ROI, margins
+└─ Owner (10 pts): Experience, reputation
+</code></pre>
+<p><strong>2. ROI_Calculator.xlsx</strong></p>
+<pre><code>Inputs:
+├─ Valor activo
+├─ % Tokenizar
+├─ Ingresos mes
+├─ Costos mes
+├─ Occupancy %
+
+Outputs:
+├─ Ganancia neta mes
+├─ Distribución holders
+├─ Treasury fee
+├─ ROI anual %
+├─ Gráfico 3 escenarios
+└─ Payback period
+</code></pre>
+<p><strong>3. Commission_Tracker.xlsx</strong></p>
+<pre><code>Tracking mensual:
+├─ Deals closed
+├─ Setup Fees generados
+├─ Tu comisión 30%
+├─ Comisión equipo 10%
+├─ Bonos acumulados
+└─ TOTAL mes
+
+Dashboard anual:
+├─ Ingresos por mes (chart)
+├─ Pipeline proyectado
+├─ TOP performers equipo
+└─ Goal vs actual
+</code></pre>
+<hr>
+<h3 id="pitch-deck-30-min">Pitch Deck (30 min)</h3>
+<p><strong>Estructura 15 slides:</strong></p>
+<pre><code>1. Cover: Bashood RWA - Tokeniza tu maquinaria
+2. Problema: Capital atrapado, financiación cara
+3. Solución: Tokenización = liquidez sin deuda
+4. Cómo funciona: 5 pasos visual
+5. Ejemplo Doosan: Números reales con gráficos
+6. Beneficios propietario: 6 bullet points
+7. Beneficios inversores: ROI atractivo
+8. Tech: Blockchain Base, seguridad, transparencia
+9. Proceso: Timeline 60-90 días
+10. Costos: Setup Fee breakdown transparent
+11. Comparación vs banco: Tabla side-by-side
+12. FAQs: Top 5 respondidas
+13. Casos éxito: Testimonials (cuando tengamos)
+14. Equipo: Founders + advisors
+15. Call to action: Próximos pasos + contacto
+
+Formato: Google Slides (compartible) + PDF export
+</code></pre>
+<hr>
+<h2 id="83-materiales-marketing-60-min">8.3 Materiales Marketing (60 min)</h2>
+<h3 id="landing-page-activo-30-min">Landing Page Activo (30 min)</h3>
+<p><strong>Cada activo tokenizado tiene página:</strong></p>
+<pre><code>URL: bashood.io/assets/doosan-dx360-madrid-2026
+
+SECCIONES:
+├─ Hero: Foto activo +  &quot;Invierte desde €600 en Doosan DX360&quot;
+├─ Overview: Ficha técnica (specs, valor, ubicación, horas)
+├─ Financials: Ingresos históricos chart, ROI proyectado
+├─ Documents: PDFs descargables (propuesta, contrato, ITV)
+├─ Tokenomics: Supply, precio token, distribución, fees
+├─ Reporting: Updates mensuales (cuando opere)
+├─ Smart Contract: Link BaseScan, address, código verificado
+├─ FAQ: 10-15 preguntas específicas este activo
+└─ CTA: &quot;Comprar tokens&quot; button (conecta wallet)
+
+Generado automáticamente desde admin panel Bashood
+</code></pre>
+<hr>
+<h3 id="social-media-content-30-min">Social Media Content (30 min)</h3>
+<p><strong>Templates posts distribuidor:</strong></p>
+<p><strong>LinkedIn Post Template A: Educativo</strong></p>
+<pre><code>[Carrusel 5 slides]
+
+Slide 1: &quot;¿Sabías que tu excavadora puede generar €60 liquidez SIN venderla?&quot;
+Slide 2: &quot;Tokenización RWA explicada en 60 segundos&quot;
+Slide 3: &quot;Caso real: Doosan DX360 Madrid&quot;
+Slide 4: &quot;Beneficios vs financiación tradicional&quot;
+Slide 5: &quot;¿Tu maquinaria califica? Check 5 criterios&quot;
+
+CTA: &quot;DM si quieres explorar para tu flota&quot;
+
+Frecuencia: 2-3x semana
+</code></pre>
+<hr>
+<p><strong>LinkedIn Post Template B: Case Study</strong></p>
+<pre><code>[Texto + imagen activo]
+
+&quot;Case Study: Cómo Juan obtuvo €55k liquidez sin vender su excavadora
+
+Situación: Juan opera Doosan DX360 generando €11k/mes.
+Necesitaba capital comprar segunda máquina.
+Banco ofrecía €60k @ 7% TIN (€420/mes intereses 5 años).
+
+Solución Bashood:
+├─ Tokenizó 40% excavadora
+├─ Recibió €55k neto en 60 días
+├─ Mantiene operación completa
+├─ Paga holders de ganancias (€1,200/mes vs €420 intereses FIJOS)
+└─ Sin deuda, sin aval, sin plazos
+
+¿Tu situación similar? Hablemos. 👇&quot;
+
+Frecuencia: 1x semana (cuando tengas casos reales permission)
+</code></pre>
+<hr>
+<p><strong>Twitter/X Template:</strong></p>
+<pre><code>&quot;RWA = democratización acceso activos reales
+
+Antes:
+├─ Excavadora €150k = solo rico compra entera
+├─ Yield 24% = solo si tienes €150k upfront
+
+Ahora con @BashoodRWA:
+├─ Inviertes desde €600
+├─ Same 24% yield
+├─ Liquidez 24/7 tokens
+
+Era nueva finanzas industriales 🏗️⛓️&quot;
+
+Frecuencia: Daily (micro-content)
+</code></pre>
+<hr>
+<h2 id="evaluación-módulo-8-30-min">Evaluación Módulo 8 (30 min)</h2>
+<p><strong>Test 10 preguntas:</strong></p>
+<ol>
+<li><p>CRM recomendado:</p>
+<ul>
+<li>A) Excel básico</li>
+<li>B) Notion/Airtable ✅</li>
+<li>C) Papel notas</li>
+<li>D) No usar CRM</li>
+</ul>
+</li>
+<li><p>Lead &quot;olvidado&quot; es:</p>
+<ul>
+<li>A) &gt;3 días sin contacto</li>
+<li>B) &gt;7 días sin contacto ✅</li>
+<li>C) &gt;30 días</li>
+<li>D) Status &quot;Lost&quot;</li>
+</ul>
+</li>
+<li><p>Auto-email día 3 post-meeting:</p>
+<ul>
+<li>A) Cold outreach</li>
+<li>B) Reminder reviewing docs ✅</li>
+<li>C) Contract signature</li>
+<li>D) No enviar</li>
+</ul>
+</li>
+<li><p>ROI Calculator inputs principales:</p>
+<ul>
+<li>A) Solo valor activo</li>
+<li>B) Valor + ingresos + costos ✅</li>
+<li>C) Solo ingresos</li>
+<li>D) Solo % tokenizar</li>
+</ul>
+</li>
+<li><p>Pitch deck slides recomendados:</p>
+<ul>
+<li>A) 5-7</li>
+<li>B) 10-12</li>
+<li>C) 15-20 ✅</li>
+<li>D) 50+</li>
+</ul>
+</li>
+<li><p>Landing page cada activo incluye:</p>
+<ul>
+<li>A) Solo foto</li>
+<li>B) Foto + precio</li>
+<li>C) Financials + docs + smart contract ✅</li>
+<li>D) Solo smart contract</li>
+</ul>
+</li>
+<li><p>Frecuencia post LinkedIn educativo:</p>
+<ul>
+<li>A) Diario</li>
+<li>B) 2-3x semana ✅</li>
+<li>C) 1x mes</li>
+<li>D) Nunca</li>
+</ul>
+</li>
+<li><p>Commission tracker muestra:</p>
+<ul>
+<li>A) Solo ventas mes actual</li>
+<li>B) Ventas + comisiones + bonos ✅</li>
+<li>C) Solo bonos</li>
+<li>D) Solo proyección</li>
+</ul>
+</li>
+<li><p>Scoring tool output:</p>
+<ul>
+<li>A) Si/No binario</li>
+<li>B) Score _/100 ✅</li>
+<li>C) Solo categoría A/B/C</li>
+<li>D) Texto libre</li>
+</ul>
+</li>
+<li><p>Make.com/Zapier se usan para:</p>
+<ul>
+<li>A) Crear PDFs</li>
+<li>B) Automatizar workflows ✅</li>
+<li>C) Inspecciones físicas</li>
+<li>D) Smart contracts</li>
+</ul>
+</li>
+</ol>
+<p><strong>Respuestas:</strong> B, B, B, B, C, C, B, B, B, B</p>
+<hr>
+<h1 id="módulo-9-práctica-y-role-play-intensivo">MÓDULO 9: PRÁCTICA Y ROLE-PLAY INTENSIVO</h1>
+<h2 id="91-escenarios-reales-120-min">9.1 Escenarios Reales (120 min)</h2>
+<h3 id="escenario-1-propietario-escéptico">Escenario #1: Propietario Escéptico</h3>
+<p><strong>Setup:</strong></p>
+<pre><code>Propietario: María
+Activo: Grúa torre Liebherr €800k, genera €25k/mes
+Personalidad: Analítica, desconfiada crypto
+Objeciones: &quot;Blockchain es para especuladores&quot;, &quot;No entiendo técnico&quot;, &quot;Mis clientes no confiarán&quot;
+</code></pre>
+<p><strong>Role-play 20 min:</strong></p>
+<ul>
+<li>Distribuidor debe: Ganar confianza, educar sin jerga técnica, cerrar sending docs</li>
+<li>Observadores: Checklist scoring 1-10 en 5 áreas:<ul>
+<li>Rapport building</li>
+<li>Claridad explicativa</li>
+<li>Manejo objeciones</li>
+<li>Profesionalismo</li>
+<li>Cierre eficaz</li>
+</ul>
+</li>
+</ul>
+<p><strong>Feedback grupal 10 min</strong></p>
+<hr>
+<h3 id="escenario-2-propietario-impaciente">Escenario #2: Propietario Impaciente</h3>
+<p><strong>Setup:</strong></p>
+<pre><code>Propietario: Carlos
+Activo: 3 camiones Volvo FH, vale €450k total
+Personalidad: Agresiva, quiere €€€ YA
+Objeciones: &quot;Cuánto tardo recibir dinero?&quot;, &quot;60 días demasiado&quot;, &quot;Setup Fee alto&quot;, &quot;Por qué no banco más rápido?&quot;
+</code></pre>
+<p><strong>Role-play 20 min:</strong></p>
+<ul>
+<li>Distribuidor debe: Manage expectations realistas, defender proceso, comparar timing banco honest</li>
+<li>Reto: NO prometer deadlines irreales solo para cerrar</li>
+</ul>
+<p><strong>Feedback grupal 10 min</strong></p>
+<hr>
+<h3 id="escenario-3-propietario-números-guy">Escenario #3: Propietario Números Guy</h3>
+<p><strong>Setup:</strong></p>
+<pre><code>Propietario: Luis
+Activo: Excavadora CAT 336, €180k, genera €13k/mes
+Personalidad: Ingeniero, quiere spreadsheet todo
+Objeciones: &quot;Muéstrame Excel proyecciones 5 años&quot;, &quot;¿Y si occupancy baja 50%?&quot;, &quot;¿Y si inflaión sube costos 20%?&quot;
+</code></pre>
+<p><strong>Role-play 20 min:</strong></p>
+<ul>
+<li>Distribuidor debe: Usar ROI Calculator live, modelar escenarios, ser transparente riesgos</li>
+<li>Debe llevar laptop con Excel preparado</li>
+</ul>
+<p><strong>Feedback grupal 10 min</strong></p>
+<hr>
+<h3 id="escenario-4-propietario-necesita-convencer-socio">Escenario #4: Propietario Necesita Convencer Socio</h3>
+<p><strong>Setup:</strong></p>
+<pre><code>Propietario: Ana (50% empresa)
+Activo: Dumper Caterpillar €200k
+Personalidad: Interesada pero no decide sola
+Reto: Socio (Pedro) ausente, escéptico, Ana debe convencerlo
+</code></pre>
+<p><strong>Role-play 20 min:</strong></p>
+<ul>
+<li>Distribuidor debe: Proporcionar argumentos Ana use con Pedro, agendar call 3-way follow-up</li>
+<li>Debe crear &quot;cheat sheet&quot; argumentos para Ana</li>
+</ul>
+<p><strong>Feedback grupal 10 min</strong></p>
+<hr>
+<h3 id="escenario-5-propietario-financieramente-distressed">Escenario #5: Propietario Financieramente Distressed</h3>
+<p><strong>Setup:</strong></p>
+<pre><code>Propietario: Javier  
+Activo: 2 excavadoras €270k, pero negocio mal últimos meses
+Realidad: Occupancy cayó a 45%, necesita liquidez URGENTE
+Red flags: Mantenimiento atrasado, seguro vencido hace 1 mes
+</code></pre>
+<p><strong>Role-play 20 min:</strong></p>
+<ul>
+<li>Distribuidor debe: Identificar red flags, decidir si RECHAZAR educadamente o CONDICIONAR (arreglar issues primero)</li>
+<li>Difícil: Must say NO a venta fácil si no viable</li>
+</ul>
+<p><strong>Feedback grupal 10 min</strong></p>
+<hr>
+<h3 id="escenario-6-propietario-perfecto-layup-easy">Escenario #6: Propietario Perfecto (layup easy)</h3>
+<p><strong>Setup:</strong></p>
+<pre><code>Propietario: Tomás
+Activo: EVOCONS grúa $1.2M, contrato 3 años promotora, genera $50k/mes consistente
+Documentación: Perfecta, todo al día
+Personalidad: Profesional, entiende finanzas, decisión rápida
+</code></pre>
+<p><strong>Role-play 20 min:</strong></p>
+<ul>
+<li>Distribuidor debe: Close fast, NO over-complicate, pedir referrals su network</li>
+<li>Test: ¿Puede distribuidor reconocer &quot;slamdunk deal&quot; vs over-selling?</li>
+</ul>
+<p><strong>Feedback grupal 10 min</strong></p>
+<hr>
+<h2 id="92-simulación-inspección-60-min">9.2 Simulación Inspección (60 min)</h2>
+<h3 id="setup-físico-15-min">Setup Físico (15 min)</h3>
+<p><strong>Materiales:</strong></p>
+<ul>
+<li>Fotos impresas excavadora (20 unidades)</li>
+<li>Video operación proyectado</li>
+<li>&quot;Propietario&quot; (actor) con documentos físicos</li>
+<li>Template scoring impreso para cada estudiante</li>
+</ul>
+<h3 id="inspección-competitiva-30-min">Inspección Competitiva (30 min)</h3>
+<p><strong>Instrucdores:</strong></p>
+<pre><code>Equipos 2-3 personas simultáneamente:
+├─ 10 min: Inspeccionar fotos + video
+├─ 10 min: Entrevistar &quot;propietario&quot; (turno each equipo)
+├─ 10 min: Completar scoring individual
+
+Competencia: Equipo con scoring más cercano al scoring &quot;correcto&quot; instructor gana
+Premio: Certificado &quot;Best Due Diligencer&quot; + LinkedIn badge
+</code></pre>
+<h3 id="debriefing-15-min">Debriefing (15 min)</h3>
+<p>Instructor revela:</p>
+<ul>
+<li>Scoring correcto _/100</li>
+<li>Red flags ocultos en fotos (ej: fuga hidráulica sutil)</li>
+<li>Inconsistencias respuestas propietario (test attention)</li>
+<li>Aprendizajes clave</li>
+</ul>
+<hr>
+<h2 id="93-pitch-competition-60-min">9.3 Pitch Competition (60 min)</h2>
+<h3 id="formato-shark-tank-45-min">Formato Shark Tank (45 min)</h3>
+<p><strong>Estructura:</strong></p>
+<pre><code>4-5 estudiantes pitchean:
+├─ Activo: (real o fictional) que identificaron
+├─ Propietario: (actor o roleplay compañero)
+├─ Pitch: 10 min presentación completa 7 fases condensed
+├─ Q&amp;A: 5 min panel &quot;sharks&quot; (instructores) preguntan tough
+
+Panel evalúa (1-10 score):
+├─ Claridad explicación
+├─ Homework previo (research activo)
+├─ Scoring preliminar correcto
+├─ Manejo objeciones
+├─ Cierre y próximos pasos claros
+</code></pre>
+<h3 id="premios-15-min">Premios (15 min)</h3>
+<p><strong>Winners reciben:</strong></p>
+<ul>
+<li>🏆 Golden Distributor Trophy (físico)</li>
+<li>📜 Certificado &quot;Top Closer&quot;</li>
+<li>💰 50% descuento propio Setup Fee primer deal cerrado real (worth €2,250)</li>
+<li>📸 Feature en Bashood LinkedIn/website</li>
+</ul>
+<hr>
+<h2 id="evaluación-módulo-9-30-min">Evaluación Módulo 9 (30 min)</h2>
+<p><strong>Evaluación práctica (no test escrito):</strong></p>
+<p>Cada estudiante hace:</p>
+<ol>
+<li><p><strong>Role-play final 15 min</strong> (1-1 instructor)</p>
+<ul>
+<li>Escenario random asignado</li>
+<li>Debe manejar mínimo 3 objeciones</li>
+<li>Cerrar compromiso envío docs</li>
+</ul>
+</li>
+<li><p><strong>Scoring rápido 5 min</strong></p>
+<ul>
+<li>Dados 10 data points activo</li>
+<li>Calcular score _/100</li>
+<li>Decisión: Aprobar/Rechazar/Revisar</li>
+</ul>
+</li>
+</ol>
+<p><strong>Pass criteria:</strong></p>
+<ul>
+<li>Role-play &gt;7/10</li>
+<li>Scoring ±5 puntos correcto</li>
+<li>Decisión correcta</li>
+</ul>
+<hr>
+<h1 id="módulo-10-evaluación-y-certificación-final">MÓDULO 10: EVALUACIÓN Y CERTIFICACIÓN FINAL</h1>
+<h2 id="101-test-comprensivo-60-min">10.1 Test Comprensivo (60 min)</h2>
+<p><strong>50 preguntas multi-choice (todos módulos):</strong></p>
+<p><strong>MÓDULO 1-2 (10 preguntas):</strong>
+1-10: Blockchain basics, Base, RWA, Bashood vision, tech stack, smart contracts</p>
+<p><strong>MÓDULO 3-4 (10 preguntas):</strong>
+11-20: ROI cálculos, Doosan/EVOCONS numbers, scoring system, SPV vs directo</p>
+<p><strong>MÓDULO 5-6 (10 preguntas):</strong>
+21-30: Inspección, validación financiera, 7 fases GUION, objeciones</p>
+<p><strong>MÓDULO 7-8 (10 preguntas):</strong>
+31-40: Comisiones, bonos, niveles, CRM, herramientas, pitch deck</p>
+<p><strong>MÓDULO 9-10 (10 preguntas):</strong>
+41-50: Role-plays, scenarios, best practices, ethics, compliance</p>
+<p><strong>Passing score:</strong> ≥70% (35/50 correctas)</p>
+<hr>
+<h2 id="102-proyecto-final-presentación-90-min">10.2 Proyecto Final Presentación (90 min)</h2>
+<h3 id="entregables-requeridos">Entregables Requeridos</h3>
+<p><strong>Cada estudiante debe presentar:</strong></p>
+<p><strong>1. DEAL REAL PROPUESTO (30 min prep, 20 min present):</strong></p>
+<pre><code>Identificar activo REAL tu network potencial tokenizar
+
+Entregables PDF:
+├─ Ficha técnica activo (marca, modelo, valor, ubicación, horas)
+├─ Research propietario (nombre, empresa, LinkedIn, motivación expected)
+├─ Scoring preliminar _/100 (con justificación cada categoría)
+├─ Financials estimados (ingresos, costos, ROI proyectado)
+├─ Plan approach (cómo contactarías, qué diríás, timeline)
+└─ Pitch deck personalizado 10 slides específico este activo
+
+Presentación:
+├─ 15 min: Walk-through entregables
+├─ 5 min: Q&amp;A panel instructores
+
+Evaluación (60 pts):
+├─ Research quality (15 pts)
+├─ Scoring accuracy (15 pts)
+├─ Financials realism (15 pts)
+├─ Pitch effectiveness (15 pts)
+</code></pre>
+<hr>
+<p><strong>2. PLAN DE ACCIÓN 90 DÍAS (15 min present):</strong></p>
+<pre><code>Documento estratégico personal:
+
+Secciones:
+├─ Objetivos: Ventas targets (conservador, realista, óptimo)
+├─ Network mapping: 20 contacts potenciales (nombres, LinkedIn, approach)
+├─ Weekly schedule: Time blocking (prospecting, calls, admin)
+├─ KPIs tracking: Leads, calls, meetings, due diligences, sales
+├─ Recursos: Qué necesitas Bashood proporcione (leads, materials, support)
+├─ Riesgos: Top 3 blockers potenciales + mitigación
+
+Presentación:
+├─ 10 min: Plan overview
+├─ 5 min: Commitment público goals
+
+Evaluación (40 pts):
+├─ Realism plan (10 pts)
+├─ Detail level (10 pts)
+├─ KPIs clarity (10 pts)
+├─ Commitment demonstration (10 pts)
+</code></pre>
+<hr>
+<h2 id="103-certificación-y-graduación-30-min">10.3 Certificación y Graduación (30 min)</h2>
+<h3 id="criterios-aprobación-final">Criterios Aprobación Final</h3>
+<p><strong>Componentes totales (300 pts):</strong></p>
+<pre><code>1. Tests módulos 1-10 (10 tests × 10 pts): 100 pts
+2. Proyecto final deal real: 60 pts
+3. Plan 90 días: 40 pts
+4. Role-plays prácticos: 60 pts
+5. Participación clase: 40 pts
+──────────────────────────────────────────
+TOTAL CURSO: 300 pts
+
+Rangos certificación:
+├─ 270-300 (90-100%): DISTINCIÓN (Certified Elite Distributor) 🏆
+├─ 240-269 (80-89%): APROBADO (Certified Distributor) ✅
+├─ 210-239 (70-79%): CONDICIONAL (probation 30 días + re-test)
+└─ &lt;210 (&lt; 70%): NO APROBADO (puede repetir curso 50% descuento)
+</code></pre>
+<h3 id="ceremonia-graduación-30-min">Ceremonia Graduación (30 min)</h3>
+<p><strong>Formato:</strong></p>
+<pre><code>1. Bienvenida Director Bashood (5 min)
+2. Reconocimiento individual (10 min):
+   ├─ Nombre cada graduado llamado
+   ├─ Entrega certificado físico + digital
+   ├─ Foto oficial handshake
+   └─ LinkedIn badge unlocked real-time
+
+3. Premios especiales (5 min):
+   ├─ 🏆 Best Deal Proposal
+   ├─ 🎯 Top Test Score
+   ├─ 💬 Best Negotiator (role-plays)
+   ├─ 🤝 Most Improved
+   └─ 🌟 Future Star (instructor&#39;s pick)
+
+4. Toast y networking (10 min):
+   ├─ Champagne/cava celebración
+   ├─ Group photo oficial
+   └─ Exchange contacts todos graduados (future colaboration)
+</code></pre>
+<hr>
+<h2 id="104-post-certificación-soporte-continuo-info">10.4 Post-Certificación: Soporte Continuo (info)</h2>
+<p><strong>Incluido 3 meses post-curso:</strong></p>
+<p><strong>1. Coaching mensual 1-1 (60 min/mes):</strong></p>
+<pre><code>├─ Review pipeline
+├─ Troubleshoot deals stuck
+├─ Improve pitch based real feedback
+└─ Plan próximo mes
+</code></pre>
+<p><strong>2. Grupo WhatsApp graduados (24/7):</strong></p>
+<pre><code>├─ Dudas rápidas respondidas &lt;2h
+├─ Share best practices entre graduados
+├─ Announcements nuevos materiales/partners
+└─ Celebration wins (motiva grupo)
+</code></pre>
+<p><strong>3. Webinar mensual avanzado (90 min):</strong></p>
+<pre><code>Temas rotatorios:
+├─ Mes 1: Prospecting avanzado (scraping tools, cold email mastery)
+├─ Mes 2: Negociación compleja (multiple stakeholders)
+├─ Mes 3: Scale team (recruiting, managing sub-dist)
+└─ Mes 4+: Guest speakers (propietarios, inversores, experts RWA)
+</code></pre>
+<p><strong>4. Access plataforma permanente:</strong></p>
+<pre><code>├─ Materials actualizados (templates, pitch decks v2, etc.)
+├─ Video library grabaciones clases (repaso)
+├─ Excel tools nuevos (calculators más sofisticados)
+└─ Community forum Q&amp;A búsquedas
+</code></pre>
+<p><strong>5. Fast-track nuevos productos:</strong></p>
+<pre><code>Cuando Bashood lance:
+├─ Mercado secundario trading
+├─ White-label B2B
+├─ Nuevos tipos activos (inmuebles, patents, etc.)
+
+Graduados reciben:
+├─ Training beta gratis
+├─ First access nuevos leads
+└─ Comisiones preferentes (ej: 35% vs 30% nuevos)
+</code></pre>
+<hr>
+<h2 id="resumen-ejecutivo-completo-curso">RESUMEN EJECUTIVO COMPLETO CURSO</h2>
+<h3 id="estadísticas-finales">Estadísticas Finales</h3>
+<p><strong>Duración total:</strong> 31 horas contacto + 20 horas trabajo propio
+<strong>Módulos:</strong> 10 completos
+<strong>Ejercicios prácticos:</strong> 25+
+<strong>Role-plays:</strong> 15+
+<strong>Tests evaluación:</strong> 11 (10 módulos + final)
+<strong>Proyecto final:</strong> 2 entregables grandes</p>
+<h3 id="resultados-esperados-post-curso">Resultados Esperados Post-Curso</h3>
+<p><strong>Habilidades adquiridas:</strong></p>
+<ul>
+<li>✅ Explicar blockchain y RWA a audiencia no-técnica (15 min pitch)</li>
+<li>✅ Scoring activos método 100 puntos (precisión ±5)</li>
+<li>✅ Inspeccionar físicamente maquinaria (25+ checkpoints)</li>
+<li>✅ Validar financiera mente ingresos/costos (3 fuentes cruce)</li>
+<li>✅ Negociar 7 fases GUION (manejar 10+ objeciones)</li>
+<li>✅ Calcular ROI, comisiones, proyecciones (Excel mastery)</li>
+<li>✅ Usar CRM tracking leads (Notion/Airtable setup)</li>
+<li>✅ Presentar pitch deck profesional (15 slides) </li>
+<li>✅ Close deals (mínimo 1 en primeros 90 días post-curso)</li>
+<li>✅ Reclutar/manage equipo distribuidores (si nivel 2)</li>
+</ul>
+<h3 id="outcomes-kpis-esperados">Outcomes KPIs Esperados</h3>
+<p><strong>Primeros 90 días post-certificación (promedio graduados):</strong></p>
+<pre><code>├─ Cold outreach: 120 contacts (40/mes × 3)
+├─ First calls: 15 agendadas (12.5% conversion)
+├─ Due diligences: 5 iniciadas (33% call→DD)
+├─ Deals closed: 1.5 promedio (30% DD→close)
+├─ Comisiones: €2,025 (1.5 × €1,350)
+└─ Pipeline: €18,000 Setup Fees (12 deals en proceso)
+
+Ingreso mensual promedio mes 3-6: €3,375
+Ingreso mensual promedio mes 6-12: €5,400
+</code></pre>
+<p><strong>Top 20% performers primeros 6 meses:</strong></p>
+<pre><code>├─ Deals closed: 5-7
+├─ Comisiones: €6,750-€9,450
+├─ Equipo formado: 2-3 sub-distribuidores
+├─ Comisiones mensuales: €8,000-€12,000 (mes 6)
+└─ Path to Jefe de Equipo (nivel 2)
+</code></pre>
+<h3 id="certificación-valor">Certificación Valor</h3>
+<p><strong>LinkedIn Certified Badge:</strong></p>
+<pre><code>&quot;Certified Bashood RWA Distributor&quot;
+├─ Issued by: Bashood Technologies SL
+├─ Credential ID: #BHDRWA-2026-XXX
+├─ Verification: bashood.io/verify/XXX
+└─ Skills endorsed: RWA Tokenization, Due Diligence, Blockchain Sales, Asset Valuation
+</code></pre>
+<p><strong>Alumni Network:</strong></p>
+<ul>
+<li>Access red 50+ distribuidores certificados España/EU</li>
+<li>Colaboraciones cross-region (tú Madrid, referral Barcelona)</li>
+<li>Eventos networking anuales (Bashood Summit)</li>
+</ul>
+<hr>
+<h2 id="certificación-final">CERTIFICACIÓN FINAL</h2>
+<p>🎓 <strong>CERTIFICADO OFICIAL DE FINALIZACIÓN</strong></p>
+<pre><code>═══════════════════════════════════════════════════════════
+                BASHOOD RWA TECHNOLOGIES
+                Certified Distributor Program
+                                
+Este certificado confirma que:
+
+                    [TU NOMBRE COMPLETO]
+
+Ha completado exitosamente el Curso de Formación Bashood RWA
+con una puntuación de [XXX]/300 ([XX]%)
+
+Competencies certificadas:
+✓ Blockchain &amp; RWA Fundamentals
+✓ Asset Scoring &amp; Due Diligence
+✓ Financial Modeling &amp; ROI Calculation  
+✓ Negotiation &amp; Sales Closing (7-Phase Method)
+✓ Distributor Program Mastery
+
+Fecha emisión: [DD/MM/YYYY]
+Credential ID: #BHDRWA-2026-XXX
+Válido: Permanente (subject ongoing compliance)
+
+____________________          ____________________
+[Firma CEO Bashood]           [Firma Director Training]
+
+Verificar autenticidad: bashood.io/verify/XXX
+═══════════════════════════════════════════════════════════
+</code></pre>
+<hr>
+<h2 id="próximos-pasos-graduados">PRÓXIMOS PASOS GRADUADOS</h2>
+<p><strong>Semana 1 post-curso:</strong></p>
+<ul>
+<li><input disabled="" type="checkbox"> Actualizar LinkedIn profile (añadir certificación, badge)</li>
+<li><input disabled="" type="checkbox"> Enviar certificado a 10 contacts potenciales clientes (credibility)</li>
+<li><input disabled="" type="checkbox"> Schedulear llamada onboarding oficial Bashood ops team (CRM setup, lead assignment)</li>
+<li><input disabled="" type="checkbox"> Identificar 3 activos tu network comenzar outreach inmediato</li>
+</ul>
+<p><strong>Mes 1 post-curso:</strong></p>
+<ul>
+<li><input disabled="" type="checkbox"> 40 cold contacts (emails/LinkedIn)</li>
+<li><input disabled="" type="checkbox"> 5 first calls agendadas mínimo</li>
+<li><input disabled="" type="checkbox"> 1 due diligence iniciado</li>
+<li><input disabled="" type="checkbox"> 1 coaching session con mentor (revisar progress)</li>
+</ul>
+<p><strong>Mes 2-3:</strong></p>
+<ul>
+<li><input disabled="" type="checkbox"> First deal closed objetivo</li>
+<li><input disabled="" type="checkbox"> Comenzar reclutar si path jefe de equipo</li>
+<li><input disabled="" type="checkbox"> Refinar pitch basado feedback real</li>
+<li><input disabled="" type="checkbox"> Testimonial video potencialmente (si primera venta exitosa)</li>
+</ul>
+<hr>
+<p><strong>¡ENHORABUENA GRADUADOS!</strong></p>
+<p>**Ahora eres parte del futuro democratización financ</p>
+<p>iera industrial.**</p>
+<p><strong>Questions? → <a href="mailto:&#x73;&#117;&#112;&#112;&#x6f;&#114;&#x74;&#64;&#98;&#x61;&#x73;&#104;&#111;&#111;&#x64;&#x2e;&#105;&#x6f;">&#x73;&#117;&#112;&#112;&#x6f;&#114;&#x74;&#64;&#98;&#x61;&#x73;&#104;&#111;&#111;&#x64;&#x2e;&#105;&#x6f;</a> | WhatsApp +34 XXX XXX XXX</strong></p>
+<hr>
+<p><em>Fin Módulos 5-10</em>
+<em>Total páginas añadidas: ~180</em>
+<em>Total curso completo: ~380 páginas</em></p>
+
+    </div>
+    
+    <div style="margin-top: 60px; padding: 30px; background: #f7fafc; border-radius: 8px; text-align: center;">
+        <h3 style="color: #667eea; margin-top: 0;">🎓 Certificación Bashood RWA</h3>
+        <p style="font-size: 16px; color: #4a5568;">
+            Para obtener el certificado oficial, debes completar los 10 módulos con nota ≥70% 
+            y presentar un proyecto final (pitch deck + role-play negociación).
+        </p>
+        <p style="font-size: 14px; color: #718096; margin-top: 20px;">
+            <strong>Soporte post-curso:</strong> 3 meses coaching incluido<br>
+            <strong>Acceso:</strong> Sandbox testnet para práctica ilimitada<br>
+            <strong>Materiales:</strong> Templates, CRM, documentación completa
+        </p>
+    </div>
+</body>
+</html>

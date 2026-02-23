@@ -1,0 +1,47 @@
+{
+  "network": "localhost",
+  "timestamp": "2026-02-18T22:21:53.652Z",
+  "tokenomics": {
+    "bhtPerLot": "25,000 BHT",
+    "ethPerLot": "0.1 ETH",
+    "pricePerBHT": "$0.0092",
+    "presaleSupply": "250,000,000 BHT",
+    "targetRaise": "1,000 ETH ($2.3M)"
+  },
+  "contracts": {
+    "paymentSplitter": "0x0370C18DD149355057CDDD3E636CcF5C97Bf098e",
+    "bashoodToken": "0x5FbDB2315678afecb367f032d93F642f64180aa3",
+    "nftContract": "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
+    "priceFeed": "0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0",
+    "referralValidator": "0xCf7Ed3AccA5a467e9e704C703E8D87F634fB0Fc9",
+    "bashoodReferral": "0xDc64a140Aa3E981100a9becA4E685f962f0cF6C9",
+    "bashoodPresale": "0x5FC8d32690cc91D4c39d9d3abcBD16989F875707",
+    "bashoodRescue": "0x0165878A594ca255338adfa4d48449f69242Eb8F"
+  },
+  "wallets": {
+    "development": {
+      "address": "0x0370C18DD149355057CDDD3E636CcF5C97Bf098e",
+      "share": "45%"
+    },
+    "operations": {
+      "address": "0x70997970C51812dc3A010C7d01b50e0d17dc79C8",
+      "share": "25%"
+    },
+    "marketing": {
+      "address": "0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC",
+      "share": "20%"
+    },
+    "treasury": {
+      "address": "0xE4dE660B6EfD0241f827c0f17CEe721aC5F44afE",
+      "share": "10%"
+    }
+  },
+  "presale": {
+    "active": true,
+    "startTime": 1771456913,
+    "endTime": 1774045313,
+    "maxSupply": 10000,
+    "bhtAllocated": "250,000,000 BHT",
+    "nftsMinted": 10000
+  }
+}

@@ -1,0 +1,184 @@
+﻿forge : Warning: optimizer settings and `viaIR` have been disabled for 
+accurate coverage reports.
+En línea: 1 Carácter: 1
++ forge coverage --report summary 2>&1 | Out-File -FilePath forge-cover ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Warning: optimi...verage reports. 
+   :String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+If you encounter "stack too deep" errors, consider using `--ir-minimum` which 
+enables `viaIR` with minimum optimization resolving most of the errors
+Compiling 160 files with Solc 0.8.28
+Solc 0.8.28 finished in 4.68s
+Compiler run successful with warnings:
+Warning (5667): Unused function parameter. Remove or comment out the variable name to silence this warning.
+  --> contracts/MockPresaleTarget.sol:29:61:
+   |
+29 |     function purchaseWithETH(uint256 amount, uint256 nftId, uint256 referralCode, bytes calldata data) external payable {
+   |                                                             ^^^^^^^^^^^^^^^^^^^^
+
+Warning (5667): Unused function parameter. Remove or comment out the variable name to silence this warning.
+  --> contracts/MockPresaleTarget.sol:56:46:
+   |
+56 |     function purchaseWithBHT(uint256 amount, uint256 nftId, uint256 referralCode, bytes calldata data) external {
+   |                                              ^^^^^^^^^^^^^
+
+Warning (5667): Unused function parameter. Remove or comment out the variable name to silence this warning.
+  --> contracts/MockPresaleTarget.sol:56:61:
+   |
+56 |     function purchaseWithBHT(uint256 amount, uint256 nftId, uint256 referralCode, bytes calldata data) external {
+   |                                                             ^^^^^^^^^^^^^^^^^^^^
+
+Warning (5667): Unused function parameter. Remove or comment out the variable name to silence this warning.
+  --> contracts/MockPresaleTarget.sol:56:83:
+   |
+56 |     function purchaseWithBHT(uint256 amount, uint256 nftId, uint256 referralCode, bytes calldata data) external {
+   |                                                                                   ^^^^^^^^^^^^^^^^^^^
+
+Warning (2072): Unused local variable.
+   --> contracts/standards/BashoodRWAReference.sol:288:9:
+    |
+288 |         OperationalMetrics memory operational = _operationalMetrics[tokenId];
+    |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Warning (2072): Unused local variable.
+   --> contracts/standards/BashoodRWAReference.sol:313:9:
+    |
+313 |         TechnicalSpecs memory specs = _technicalSpecs[tokenId];
+    |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Warning (2072): Unused local variable.
+   --> contracts/standards/BashoodRWAReference.sol:555:9:
+    |
+555 |         uint256 total = _nextTokenId - 201;
+    |         ^^^^^^^^^^^^^
+
+Warning (2018): Function state mutability can be restricted to pure
+  --> contracts/ReferralValidator.sol:17:5:
+   |
+17 |     function isValid(address referrer) external view override returns (bool) {
+   |     ^ (Relevant source part starts here and spans across multiple lines).
+
+Analysing contracts...
+Running tests...
+
+Ran 7 tests for test/foundry/PresaleInvariants.t.sol:PresaleInvariantsTest
+[PASS] invariant_ETHConservation() (runs: 256, calls: 3840, reverts: 0)
+
+Ôò¡--------------------------+-----------------+-------+---------+----------Ôò«
+| Contract                 | Selector        | Calls | Reverts | Discards |
++=========================================================================+
+| PresaleInvariantsHandler | purchaseWithETH | 1316  | 0       | 0        |
+|--------------------------+-----------------+-------+---------+----------|
+| PresaleInvariantsHandler | togglePause     | 1274  | 0       | 0        |
+|--------------------------+-----------------+-------+---------+----------|
+| PresaleInvariantsHandler | warpTime        | 1250  | 0       | 0        |
+Ôò░--------------------------+-----------------+-------+---------+----------Ôò»
+
+[PASS] invariant_callSummary() (runs: 256, calls: 3840, reverts: 0)
+
+Ôò¡--------------------------+-----------------+-------+---------+----------Ôò«
+| Contract                 | Selector        | Calls | Reverts | Discards |
++=========================================================================+
+| PresaleInvariantsHandler | purchaseWithETH | 1316  | 0       | 0        |
+|--------------------------+-----------------+-------+---------+----------|
+| PresaleInvariantsHandler | togglePause     | 1274  | 0       | 0        |
+|--------------------------+-----------------+-------+---------+----------|
+| PresaleInvariantsHandler | warpTime        | 1250  | 0       | 0        |
+Ôò░--------------------------+-----------------+-------+---------+----------Ôò»
+
+[PASS] invariant_paymentSplitterSharesTotal100() (runs: 256, calls: 3840, reverts: 0)
+
+Ôò¡--------------------------+-----------------+-------+---------+----------Ôò«
+| Contract                 | Selector        | Calls | Reverts | Discards |
++=========================================================================+
+| PresaleInvariantsHandler | purchaseWithETH | 1316  | 0       | 0        |
+|--------------------------+-----------------+-------+---------+----------|
+| PresaleInvariantsHandler | togglePause     | 1274  | 0       | 0        |
+|--------------------------+-----------------+-------+---------+----------|
+| PresaleInvariantsHandler | warpTime        | 1250  | 0       | 0        |
+Ôò░--------------------------+-----------------+-------+---------+----------Ôò»
+
+[PASS] invariant_rescueContractAlwaysSet() (runs: 256, calls: 3840, reverts: 0)
+
+Ôò¡--------------------------+-----------------+-------+---------+----------Ôò«
+| Contract                 | Selector        | Calls | Reverts | Discards |
++=========================================================================+
+| PresaleInvariantsHandler | purchaseWithETH | 1316  | 0       | 0        |
+|--------------------------+-----------------+-------+---------+----------|
+| PresaleInvariantsHandler | togglePause     | 1274  | 0       | 0        |
+|--------------------------+-----------------+-------+---------+----------|
+| PresaleInvariantsHandler | warpTime        | 1250  | 0       | 0        |
+Ôò░--------------------------+-----------------+-------+---------+----------Ôò»
+
+[PASS] invariant_totalNFTsSoldNeverExceedsMax() (runs: 256, calls: 3840, reverts: 0)
+
+Ôò¡--------------------------+-----------------+-------+---------+----------Ôò«
+| Contract                 | Selector        | Calls | Reverts | Discards |
++=========================================================================+
+| PresaleInvariantsHandler | purchaseWithETH | 1316  | 0       | 0        |
+|--------------------------+-----------------+-------+---------+----------|
+| PresaleInvariantsHandler | togglePause     | 1274  | 0       | 0        |
+|--------------------------+-----------------+-------+---------+----------|
+| PresaleInvariantsHandler | warpTime        | 1250  | 0       | 0        |
+Ôò░--------------------------+-----------------+-------+---------+----------Ôò»
+
+[PASS] invariant_totalPurchasesConsistency() (runs: 256, calls: 3840, reverts: 0)
+
+Ôò¡--------------------------+-----------------+-------+---------+----------Ôò«
+| Contract                 | Selector        | Calls | Reverts | Discards |
++=========================================================================+
+| PresaleInvariantsHandler | purchaseWithETH | 1316  | 0       | 0        |
+|--------------------------+-----------------+-------+---------+----------|
+| PresaleInvariantsHandler | togglePause     | 1274  | 0       | 0        |
+|--------------------------+-----------------+-------+---------+----------|
+| PresaleInvariantsHandler | warpTime        | 1250  | 0       | 0        |
+Ôò░--------------------------+-----------------+-------+---------+----------Ôò»
+
+[PASS] invariant_userPurchasesRespectLimit() (runs: 256, calls: 3840, reverts: 0)
+
+Ôò¡--------------------------+-----------------+-------+---------+----------Ôò«
+| Contract                 | Selector        | Calls | Reverts | Discards |
++=========================================================================+
+| PresaleInvariantsHandler | purchaseWithETH | 1316  | 0       | 0        |
+|--------------------------+-----------------+-------+---------+----------|
+| PresaleInvariantsHandler | togglePause     | 1274  | 0       | 0        |
+|--------------------------+-----------------+-------+---------+----------|
+| PresaleInvariantsHandler | warpTime        | 1250  | 0       | 0        |
+Ôò░--------------------------+-----------------+-------+---------+----------Ôò»
+
+Suite result: ok. 7 passed; 0 failed; 0 skipped; finished in 5.92s (24.13s CPU time)
+
+Ran 14 tests for test/foundry/PresaleFuzzing.t.sol:PresaleFuzzingTest
+[FAIL: E10; counterexample: calldata=0x9d3151060000000000000000000000354f6bb365b7de0c4c1722ea56b8a2053650900f25 args=[77912998856881283270533443674359364407979024584485 [7.791e49]]] testFuzz_canPurchaseAfterUnpause(uint256) (runs: 0, ╬╝: 0, ~: 0)
+[PASS] testFuzz_cannotExceedMaxPerUser(uint256) (runs: 10000, ╬╝: 33789, ~: 33981)
+[PASS] testFuzz_cannotPurchaseAfterEnd(uint256,uint256) (runs: 10000, ╬╝: 34567, ~: 34741)
+[PASS] testFuzz_cannotPurchaseBeforeStart(uint256,uint256) (runs: 10000, ╬╝: 34087, ~: 34590)
+[PASS] testFuzz_cannotPurchaseWhilePaused(uint256) (runs: 10000, ╬╝: 60217, ~: 60429)
+[PASS] testFuzz_cannotUnderpay(uint256,uint256) (runs: 10000, ╬╝: 35835, ~: 35336)
+[FAIL: E10; counterexample: calldata=0xac4b8c0100000000000000000000000000000000000000000158fe28c327224dfedd9083 args=[417070714966090354236690563 [4.17e26]]] testFuzz_exactPayment(uint256) (runs: 0, ╬╝: 0, ~: 0)
+[FAIL: E10; counterexample: calldata=0xe260b6470000000000000000000000000000000000000000000000000000000000002de90000000000000000000000000000000000000000000000000000000000003d59 args=[11753 [1.175e4], 15705 [1.57e4]]] testFuzz_multiUserPurchases(uint256,uint256) (runs: 0, ╬╝: 0, ~: 0)
+[FAIL: E10; counterexample: calldata=0x5fa58a0c0000000000000000000000000000000000000000000000000000000000000002ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff args=[2, 115792089237316195423570985008687907853269984665640564039457584007913129639935 [1.157e77]]] testFuzz_onlyValidNFTIds(uint256,uint256) (runs: 0, ╬╝: 0, ~: 0)
+[PASS] testFuzz_overpaymentReverts(uint256,uint256) (runs: 10000, ╬╝: 35630, ~: 35193)
+[FAIL: E10; counterexample: calldata=0xa47e02690000008bac1549e6a580bc63481d6a156c01f2f615d1cfe4a8c3d295b311b67b args=[3765555058554125452624169042243682530513623273969753019680498486720123 [3.765e69]]] testFuzz_paymentDistribution(uint256) (runs: 0, ╬╝: 0, ~: 0)
+[FAIL: E10; counterexample: calldata=0x9afc81280000000000000000000000000000000000000000000000000000000000001d230000000000000000000000000000000000000000000000000000000000000012 args=[7459, 18]] testFuzz_purchaseAtRandomTimes(uint256,uint256) (runs: 0, ╬╝: 0, ~: 0)
+[FAIL: E10; counterexample: calldata=0xbc9b0cbe0000000000000000000000000000000000000000000000000000000000000cd2 args=[3282]] testFuzz_purchaseQuantityBoundaries(uint256) (runs: 0, ╬╝: 0, ~: 0)
+[PASS] testFuzz_reentrancyProtection(uint256) (runs: 10000, ╬╝: 343214, ~: 343426)
+Suite result: FAILED. 7 passed; 7 failed; 0 skipped; finished in 6.45s (35.22s CPU time)
+
+Ran 2 test suites in 6.46s (12.37s CPU time): 14 tests passed, 7 failed, 0 skipped (21 total tests)
+
+Failing tests:
+Encountered 7 failing tests in test/foundry/PresaleFuzzing.t.sol:PresaleFuzzingTest
+[FAIL: E10; counterexample: calldata=0x9d3151060000000000000000000000354f6bb365b7de0c4c1722ea56b8a2053650900f25 args=[77912998856881283270533443674359364407979024584485 [7.791e49]]] testFuzz_canPurchaseAfterUnpause(uint256) (runs: 0, ╬╝: 0, ~: 0)
+[FAIL: E10; counterexample: calldata=0xac4b8c0100000000000000000000000000000000000000000158fe28c327224dfedd9083 args=[417070714966090354236690563 [4.17e26]]] testFuzz_exactPayment(uint256) (runs: 0, ╬╝: 0, ~: 0)
+[FAIL: E10; counterexample: calldata=0xe260b6470000000000000000000000000000000000000000000000000000000000002de90000000000000000000000000000000000000000000000000000000000003d59 args=[11753 [1.175e4], 15705 [1.57e4]]] testFuzz_multiUserPurchases(uint256,uint256) (runs: 0, ╬╝: 0, ~: 0)
+[FAIL: E10; counterexample: calldata=0x5fa58a0c0000000000000000000000000000000000000000000000000000000000000002ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff args=[2, 115792089237316195423570985008687907853269984665640564039457584007913129639935 [1.157e77]]] testFuzz_onlyValidNFTIds(uint256,uint256) (runs: 0, ╬╝: 0, ~: 0)
+[FAIL: E10; counterexample: calldata=0xa47e02690000008bac1549e6a580bc63481d6a156c01f2f615d1cfe4a8c3d295b311b67b args=[3765555058554125452624169042243682530513623273969753019680498486720123 [3.765e69]]] testFuzz_paymentDistribution(uint256) (runs: 0, ╬╝: 0, ~: 0)
+[FAIL: E10; counterexample: calldata=0x9afc81280000000000000000000000000000000000000000000000000000000000001d230000000000000000000000000000000000000000000000000000000000000012 args=[7459, 18]] testFuzz_purchaseAtRandomTimes(uint256,uint256) (runs: 0, ╬╝: 0, ~: 0)
+[FAIL: E10; counterexample: calldata=0xbc9b0cbe0000000000000000000000000000000000000000000000000000000000000cd2 args=[3282]] testFuzz_purchaseQuantityBoundaries(uint256) (runs: 0, ╬╝: 0, ~: 0)
+
+Encountered a total of 7 failing tests, 14 tests succeeded
+
+Tip: Run `forge test --rerun` to retry only the 7 failed tests

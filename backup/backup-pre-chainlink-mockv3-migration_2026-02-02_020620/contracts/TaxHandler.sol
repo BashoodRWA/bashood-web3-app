@@ -1,0 +1,53 @@
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.20;
+ 
+import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
+import "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
+ 
+contract TaxHandler is Initializable, OwnableUpgradeable {
+    uint256 public taxRate;    // 0â€“100 (%)
+    address public taxReceiver;
+ 
+    event TaxRateUpdated(uint256 previousRate, uint256 newRate);
+    event TaxReceiverUpdated(address indexed previous, address indexed newReceiver);
+ 
+    function initialize(address _taxReceiver, uint256 _taxRate) public initializer {
+        __Ownable_init(msg.sender);
+        require(_taxReceiver != address(0), "TaxHandler: zero address");
+        require(_taxRate <= 100,      "TaxHandler: invalid rate");
+        taxReceiver = _taxReceiver;
+        taxRate     = _taxRate;
+    }
+ 
+    function updateTaxRate(uint256 newRate) external onlyOwner {
+        require(newRate <= 100, "TaxHandler: invalid rate");
+        emit TaxRateUpdated(taxRate, newRate);
+        taxRate = newRate;
+    }
+ 
+    function updateTaxReceiver(address newReceiver) external onlyOwner {
+        require(newReceiver != address(0), "TaxHandler: zero address");
+        emit TaxReceiverUpdated(taxReceiver, newReceiver);
+        taxReceiver = newReceiver;
+    }
+ 
+    /// @notice Calcula fee = amount * taxRate / 100. RevertirÃ¡ por overflow en Solidity 0.8+.
+    function calculateTax(uint256 amount) external view returns (uint256) {
+        return (amount * taxRate) / 100;
+    }
+ 
+    function getReceiver() external view returns (address) {
+        return taxReceiver;
+    }
+}
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+

@@ -1,0 +1,1410 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bashood | Tokeniza tu Maquinaria Industrial</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            color: #1a1a1a;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* HEADER & NAVIGATION */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 5%;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.05);
+            z-index: 1000;
+        }
+
+        nav {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .logo-text {
+            font-size: 28px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #374151;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #22c55e;
+        }
+
+        .cta-nav {
+            padding: 0.75rem 1.5rem;
+            background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+            color: white;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .cta-nav:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(34, 197, 94, 0.4);
+        }
+
+        /* HERO SECTION */
+        .hero {
+            margin-top: 80px;
+            min-height: 90vh;
+            background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 50%, #bbf7d0 100%);
+            display: flex;
+            align-items: center;
+            padding: 4rem 5%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(34, 197, 94, 0.15) 0%, transparent 70%);
+            top: -200px;
+            right: -200px;
+            border-radius: 50%;
+        }
+
+        .hero-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-text h1 {
+            font-size: 3.5rem;
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            color: #0f172a;
+        }
+
+        .hero-text h1 .highlight {
+            background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-text p {
+            font-size: 1.25rem;
+            color: #475569;
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+
+        .hero-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .stat {
+            text-align: center;
+            padding: 1.5rem;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #22c55e;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: #64748b;
+            margin-top: 0.5rem;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .btn-primary, .btn-secondary {
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 10px;
+            text-decoration: none;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+            color: white;
+            box-shadow: 0 8px 25px rgba(34, 197, 94, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(34, 197, 94, 0.4);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: #22c55e;
+            border: 2px solid #22c55e;
+        }
+
+        .btn-secondary:hover {
+            background: #f0fdf4;
+            transform: translateY(-3px);
+        }
+
+        .hero-visual {
+            position: relative;
+        }
+
+        .hero-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+            position: relative;
+        }
+
+        .hero-card-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .asset-image {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+        }
+
+        .asset-info h3 {
+            font-size: 1.5rem;
+            color: #0f172a;
+            margin-bottom: 0.25rem;
+        }
+
+        .asset-info p {
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+
+        .hero-card-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .card-stat {
+            padding: 1rem;
+            background: #f8fafc;
+            border-radius: 10px;
+        }
+
+        .card-stat-label {
+            font-size: 0.85rem;
+            color: #64748b;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-stat-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #22c55e;
+        }
+
+        .tokenization-badge {
+            position: absolute;
+            top: -20px;
+            right: -20px;
+            background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 25px;
+            font-weight: 600;
+            box-shadow: 0 8px 25px rgba(139, 92, 246, 0.4);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        /* HOW IT WORKS SECTION */
+        .how-it-works {
+            padding: 6rem 5%;
+            background: white;
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 4rem;
+        }
+
+        .section-header h2 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            color: #0f172a;
+        }
+
+        .section-header p {
+            font-size: 1.2rem;
+            color: #64748b;
+        }
+
+        .steps {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+        }
+
+        .step {
+            text-align: center;
+            padding: 2rem;
+            border-radius: 16px;
+            background: #f8fafc;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .step:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 0 auto 1.5rem;
+            box-shadow: 0 8px 20px rgba(34, 197, 94, 0.3);
+        }
+
+        .step h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: #0f172a;
+        }
+
+        .step p {
+            color: #64748b;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* TARGET AUDIENCE */
+        .target-audience {
+            padding: 6rem 5%;
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+        }
+
+        .audience-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .audience-card {
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .audience-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: linear-gradient(90deg, #22c55e 0%, #16a34a 100%);
+        }
+
+        .audience-card.investor::before {
+            background: linear-gradient(90deg, #8b5cf6 0%, #7c3aed 100%);
+        }
+
+        .audience-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .audience-card h3 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: #0f172a;
+        }
+
+        .audience-card p {
+            color: #64748b;
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        .benefits-list {
+            list-style: none;
+        }
+
+        .benefits-list li {
+            padding: 1rem;
+            margin-bottom: 0.75rem;
+            background: #f8fafc;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .benefits-list li::before {
+            content: '✓';
+            width: 28px;
+            height: 28px;
+            background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .investor .benefits-list li::before {
+            background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+        }
+
+        /* CASE STUDIES */
+        .case-studies {
+            padding: 6rem 5%;
+            background: white;
+        }
+
+        .cases-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .case-card {
+            background: linear-gradient(135deg, #f8fafc 0%, white 100%);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+            transition: all 0.3s;
+        }
+
+        .case-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+        }
+
+        .case-image {
+            height: 200px;
+            background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: white;
+        }
+
+        .case-content {
+            padding: 2rem;
+        }
+
+        .case-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: #0f172a;
+        }
+
+        .case-subtitle {
+            color: #64748b;
+            margin-bottom: 1.5rem;
+        }
+
+        .case-metrics {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .case-metric {
+            text-align: center;
+            padding: 1rem;
+            background: white;
+            border-radius: 10px;
+            border: 2px solid #f1f5f9;
+        }
+
+        .case-metric-value {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #22c55e;
+            display: block;
+        }
+
+        .case-metric-label {
+            font-size: 0.85rem;
+            color: #64748b;
+            margin-top: 0.25rem;
+        }
+
+        .case-status {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+            color: white;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        /* TECHNOLOGY */
+        .technology {
+            padding: 6rem 5%;
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            color: white;
+        }
+
+        .technology .section-header h2 {
+            color: white;
+        }
+
+        .technology .section-header p {
+            color: #cbd5e1;
+        }
+
+        .tech-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .tech-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s;
+        }
+
+        .tech-card:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-5px);
+        }
+
+        .tech-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .tech-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .tech-card p {
+            color: #cbd5e1;
+            line-height: 1.8;
+        }
+
+        /* CTA SECTION */
+        .cta-section {
+            padding: 6rem 5%;
+            background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .cta-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .cta-content h2 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+        }
+
+        .cta-content p {
+            font-size: 1.3rem;
+            margin-bottom: 2.5rem;
+            opacity: 0.95;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+        }
+
+        .btn-white {
+            padding: 1.2rem 2.5rem;
+            background: white;
+            color: #22c55e;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .btn-white:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+        }
+
+        .btn-outline {
+            padding: 1.2rem 2.5rem;
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+        }
+
+        .btn-outline:hover {
+            background: white;
+            color: #22c55e;
+            transform: translateY(-3px);
+        }
+
+        /* FOOTER */
+        footer {
+            background: #0f172a;
+            color: white;
+            padding: 4rem 5% 2rem;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 1rem;
+        }
+
+        .footer-brand .logo-text {
+            color: white;
+            -webkit-text-fill-color: white;
+        }
+
+        .footer-about p {
+            color: #cbd5e1;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: white;
+            transition: all 0.3s;
+        }
+
+        .social-link:hover {
+            background: #22c55e;
+            transform: translateY(-3px);
+        }
+
+        .footer-column h4 {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-links a {
+            color: #cbd5e1;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: #22c55e;
+        }
+
+        .footer-bottom {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            color: #cbd5e1;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .hero-content,
+            .audience-grid,
+            .cases-grid,
+            .tech-grid,
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+
+            .steps {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-text h1 {
+                font-size: 2.5rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+            }
+        }
+
+        /* PRINT STYLES */
+        @media print {
+            header {
+                position: relative;
+            }
+
+            .hero {
+                page-break-after: always;
+            }
+
+            .case-studies,
+            .technology {
+                page-break-before: always;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- HEADER -->
+    <header>
+        <nav>
+            <div class="logo-container">
+                <div class="logo">
+                    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <!-- Gradiente principal de la hoja (lima brillante a verde oscuro) -->
+                            <linearGradient id="leafMainGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#d4ff00;stop-opacity:1" />
+                                <stop offset="20%" style="stop-color:#a3ff00;stop-opacity:1" />
+                                <stop offset="50%" style="stop-color:#22c55e;stop-opacity:1" />
+                                <stop offset="80%" style="stop-color:#16a34a;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#15803d;stop-opacity:1" />
+                            </linearGradient>
+                            
+                            <!-- Gradientes para los 4 segmentos de anillo -->
+                            <linearGradient id="ringTop" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" style="stop-color:#e0e7ff;stop-opacity:0.9" />
+                                <stop offset="50%" style="stop-color:#c7d2fe;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#a5b4fc;stop-opacity:1" />
+                            </linearGradient>
+                            
+                            <linearGradient id="ringRight" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" style="stop-color:#a5b4fc;stop-opacity:1" />
+                                <stop offset="50%" style="stop-color:#818cf8;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#6366f1;stop-opacity:1" />
+                            </linearGradient>
+                            
+                            <linearGradient id="ringLeft" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" style="stop-color:#0ea5e9;stop-opacity:1" />
+                                <stop offset="50%" style="stop-color:#0284c7;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#0369a1;stop-opacity:1" />
+                            </linearGradient>
+                            
+                            <linearGradient id="ringBottom" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" style="stop-color:#6366f1;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#4f46e5;stop-opacity:1" />
+                            </linearGradient>
+                        </defs>
+                        
+                        <!-- Anillos circulares (4 segmentos gruesos) -->
+                        <g>
+                            <!-- Segmento superior (gris-azul claro) -->
+                            <path d="M 65,25 A 75,75 0 0 1 135,35" 
+                                  fill="none" stroke="url(#ringTop)" stroke-width="14" 
+                                  stroke-linecap="round" opacity="0.85"/>
+                            <path d="M 65,25 A 75,75 0 0 1 135,35" 
+                                  fill="none" stroke="#e0e7ff" stroke-width="8" 
+                                  stroke-linecap="round" opacity="0.3"/>
+                            
+                            <!-- Segmento derecho superior (azul medio) -->
+                            <path d="M 145,55 A 75,75 0 0 1 155,95" 
+                                  fill="none" stroke="url(#ringRight)" stroke-width="14" 
+                                  stroke-linecap="round" opacity="0.9"/>
+                            <path d="M 145,55 A 75,75 0 0 1 155,95" 
+                                  fill="none" stroke="#a5b4fc" stroke-width="8" 
+                                  stroke-linecap="round" opacity="0.3"/>
+                            
+                            <!-- Segmento izquierdo (azul brillante) -->
+                            <path d="M 35,55 A 75,75 0 0 0 25,120" 
+                                  fill="none" stroke="url(#ringLeft)" stroke-width="14" 
+                                  stroke-linecap="round" opacity="0.95"/>
+                            <path d="M 35,55 A 75,75 0 0 0 25,120" 
+                                  fill="none" stroke="#38bdf8" stroke-width="9" 
+                                  stroke-linecap="round" opacity="0.4"/>
+                            
+                            <!-- Segmento inferior (azul índigo) -->
+                            <path d="M 155,105 A 75,75 0 0 1 85,165" 
+                                  fill="none" stroke="url(#ringBottom)" stroke-width="14" 
+                                  stroke-linecap="round" opacity="0.9"/>
+                            <path d="M 155,105 A 75,75 0 0 1 85,165" 
+                                  fill="none" stroke="#6366f1" stroke-width="8" 
+                                  stroke-linecap="round" opacity="0.3"/>
+                        </g>
+                        
+                        <!-- Hoja verde estilo pluma (inclinada) -->
+                        <g transform="translate(100, 100) rotate(-25)">
+                            <!-- Forma base de la hoja -->
+                            <ellipse cx="0" cy="0" rx="18" ry="48" 
+                                     fill="url(#leafMainGrad)" opacity="1"/>
+                            
+                            <!-- Venas/textura de la hoja (muchas líneas diagonales) -->
+                            <g stroke="rgba(255,255,255,0.4)" stroke-width="0.8" stroke-linecap="round">
+                                <line x1="-15" y1="-42" x2="5" y2="-40" />
+                                <line x1="-15" y1="-38" x2="6" y2="-36" />
+                                <line x1="-16" y1="-34" x2="7" y2="-32" />
+                                <line x1="-16" y1="-30" x2="8" y2="-28" />
+                                <line x1="-16" y1="-26" x2="9" y2="-24" />
+                                <line x1="-17" y1="-22" x2="10" y2="-20" />
+                                <line x1="-17" y1="-18" x2="10" y2="-16" />
+                                <line x1="-17" y1="-14" x2="11" y2="-12" />
+                                <line x1="-17" y1="-10" x2="11" y2="-8" />
+                                <line x1="-17" y1="-6" x2="12" y2="-4" />
+                                <line x1="-17" y1="-2" x2="12" y2="0" />
+                                <line x1="-17" y1="2" x2="12" y2="4" />
+                                <line x1="-17" y1="6" x2="12" y2="8" />
+                                <line x1="-17" y1="10" x2="12" y2="12" />
+                                <line x1="-16" y1="14" x2="11" y2="16" />
+                                <line x1="-16" y1="18" x2="11" y2="20" />
+                                <line x1="-15" y1="22" x2="10" y2="24" />
+                                <line x1="-15" y1="26" x2="9" y2="28" />
+                                <line x1="-14" y1="30" x2="8" y2="32" />
+                                <line x1="-13" y1="34" x2="7" y2="36" />
+                                <line x1="-12" y1="38" x2="5" y2="40" />
+                                <line x1="-10" y1="42" x2="3" y2="44" />
+                            </g>
+                            
+                            <!-- Vena central blanca prominente -->
+                            <line x1="0" y1="-46" x2="0" y2="46" 
+                                  stroke="white" stroke-width="3" 
+                                  stroke-linecap="round" opacity="0.9"/>
+                            
+                            <!-- Brillo adicional en el centro -->
+                            <ellipse cx="-3" cy="-10" rx="6" ry="15" 
+                                     fill="rgba(255,255,255,0.2)" />
+                        </g>
+                    </svg>
+                </div>
+                <span class="logo-text">Bashood</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#como-funciona">Cómo Funciona</a></li>
+                <li><a href="#propietarios">Propietarios</a></li>
+                <li><a href="#inversores">Inversores</a></li>
+                <li><a href="#casos">Casos de Éxito</a></li>
+                <li><a href="#tecnologia">Tecnología</a></li>
+            </ul>
+            <a href="#contacto" class="cta-nav">Comenzar Ahora</a>
+        </nav>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>
+                    Tokeniza tu <span class="highlight">Maquinaria Industrial</span> y Accede a Liquidez Inmediata
+                </h1>
+                <p>
+                    Convierte tus activos industriales en tokens digitales. Obtén capital sin vender tu maquinaria, mantén el control operativo 100% y escala tu negocio más rápido.
+                </p>
+
+                <div class="hero-stats">
+                    <div class="stat">
+                        <span class="stat-number">24%</span>
+                        <span class="stat-label">ROI Promedio Anual</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">60-90</span>
+                        <span class="stat-label">Días hasta Liquidez</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">€0</span>
+                        <span class="stat-label">Deuda o Intereses</span>
+                    </div>
+                </div>
+
+                <div class="hero-cta">
+                    <a href="#propietarios" class="btn-primary">Tokenizar Mi Activo</a>
+                    <a href="#inversores" class="btn-secondary">Ver Oportunidades</a>
+                </div>
+            </div>
+
+            <div class="hero-visual">
+                <div class="hero-card">
+                    <div class="tokenization-badge">✓ Tokenizado</div>
+                    <div class="hero-card-header">
+                        <div class="asset-image">🏗️</div>
+                        <div class="asset-info">
+                            <h3>Doosan DX360</h3>
+                            <p>Excavadora Hidráulica · Madrid</p>
+                        </div>
+                    </div>
+                    <div class="hero-card-stats">
+                        <div class="card-stat">
+                            <div class="card-stat-label">Valor Total</div>
+                            <div class="card-stat-value">€150k</div>
+                        </div>
+                        <div class="card-stat">
+                            <div class="card-stat-label">ROI Anual</div>
+                            <div class="card-stat-value">24%</div>
+                        </div>
+                        <div class="card-stat">
+                            <div class="card-stat-label">Inversión Mínima</div>
+                            <div class="card-stat-value">€600</div>
+                        </div>
+                        <div class="card-stat">
+                            <div class="card-stat-label">Holders</div>
+                            <div class="card-stat-value">100</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section id="como-funciona" class="how-it-works">
+        <div class="section-header">
+            <h2>Cómo Funciona Bashood</h2>
+            <p>Proceso simple y transparente de tokenización en 4 pasos</p>
+        </div>
+
+        <div class="steps">
+            <div class="step">
+                <div class="step-number">1</div>
+                <h3>Evaluación</h3>
+                <p>Analizamos tu activo: inspección técnica, validación financiera y scoring completo. Proceso 100% gratuito sin compromiso.</p>
+            </div>
+
+            <div class="step">
+                <div class="step-number">2</div>
+                <h3>Tokenización</h3>
+                <p>Creamos el smart contract en blockchain Base, definimos tokenomics y preparamos documentación legal completa.</p>
+            </div>
+
+            <div class="step">
+                <div class="step-number">3</div>
+                <h3>Captación</h3>
+                <p>Listamos tu activo en nuestro marketplace. Inversores compran tokens representando % de propiedad y ganancias.</p>
+            </div>
+
+            <div class="step">
+                <div class="step-number">4</div>
+                <h3>Operación</h3>
+                <p>Recibes liquidez inmediata, sigues operando tu maquinaria normalmente y distribuyes ganancias mensualmente a holders.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- TARGET AUDIENCE -->
+    <section id="propietarios" class="target-audience">
+        <div class="section-header">
+            <h2>¿Para Quién es Bashood?</h2>
+            <p>Soluciones diseñadas para propietarios e inversores</p>
+        </div>
+
+        <div class="audience-grid">
+            <!-- OWNERS -->
+            <div class="audience-card owner">
+                <div class="audience-icon">🏗️</div>
+                <h3>Propietarios de Maquinaria</h3>
+                <p>¿Necesitas capital pero no quieres vender tu mejor activo ni endeudarte con bancos?</p>
+                
+                <ul class="benefits-list">
+                    <li>Obtén hasta €60k liquidez sin vender tu maquinaria</li>
+                    <li>Mantén 100% control operativo (tú decides clientes, precios, operación)</li>
+                    <li>Sin deuda, sin intereses, sin plazos de devolución fijos</li>
+                    <li>Proceso 60-90 días vs 6 meses financiación tradicional</li>
+                    <li>Setup Fee 3% (€4,500) vs banco 12% costos totales</li>
+                    <li>Sigues cobrando 60% de tus ganancias mensuales</li>
+                </ul>
+
+                <a href="#contacto" class="btn-primary" style="margin-top: 1.5rem; display: inline-block;">Tokenizar mi Activo</a>
+            </div>
+
+            <!-- INVESTORS -->
+            <div class="audience-card investor">
+                <div class="audience-icon">💰</div>
+                <h3>Inversores Crypto & TradFi</h3>
+                <p>¿Buscas yields reales respaldados por activos productivos generando cash flow mensual?</p>
+                
+                <ul class="benefits-list">
+                    <li>Invierte desde €600 en maquinaria industrial real</li>
+                    <li>ROI 15-35% anual vs 7% S&P500 o 3% bonos</li>
+                    <li>Cobros mensuales automáticos directos a tu wallet</li>
+                    <li>Diversificación: Excavadoras, grúas, camiones, tractores</li>
+                    <li>Transparencia total: Smart contracts auditables on-chain</li>
+                    <li>Liquidez 24/7 mercado secundario (próximamente)</li>
+                </ul>
+
+                <a href="#casos" class="btn-primary" style="margin-top: 1.5rem; display: inline-block; background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);">Ver Activos Disponibles</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- CASE STUDIES -->
+    <section id="casos" class="case-studies">
+        <div class="section-header">
+            <h2>Casos de Éxito Reales</h2>
+            <p>Activos tokenizados operando hoy en España</p>
+        </div>
+
+        <div class="cases-grid">
+            <!-- CASE 1: DOOSAN -->
+            <div class="case-card">
+                <div class="case-image">🏗️</div>
+                <div class="case-content">
+                    <div class="case-title">Doosan DX360</div>
+                    <div class="case-subtitle">Excavadora Hidráulica · Madrid</div>
+
+                    <div class="case-metrics">
+                        <div class="case-metric">
+                            <span class="case-metric-value">€150k</span>
+                            <span class="case-metric-label">Valor Total</span>
+                        </div>
+                        <div class="case-metric">
+                            <span class="case-metric-value">24%</span>
+                            <span class="case-metric-label">ROI Anual</span>
+                        </div>
+                        <div class="case-metric">
+                            <span class="case-metric-value">€60k</span>
+                            <span class="case-metric-label">Tokenizado (40%)</span>
+                        </div>
+                    </div>
+
+                    <p style="margin: 1.5rem 0; color: #64748b;">
+                        <strong>Propietario:</strong> Recibió €55,500 netos en 60 días. Sigue operando 28 días/mes promedio, mantiene €1,812/mes ingresos.<br><br>
+                        <strong>Inversores:</strong> 100 holders cobran €1,208/mes totales distribuidos proporcionalmente (€12/mes por cada €1,000 invertidos).
+                    </p>
+
+                    <span class="case-status">✓ Operando 18 Meses</span>
+                </div>
+            </div>
+
+            <!-- CASE 2: EVOCONS -->
+            <div class="case-card">
+                <div class="case-image" style="background: linear-gradient(135deg, #eab308 0%, #ca8a04 100%);">🏗️</div>
+                <div class="case-content">
+                    <div class="case-title">EVOCONS EVOBLOCK</div>
+                    <div class="case-subtitle">Grúa Torre Ascensor · Barcelona</div>
+
+                    <div class="case-metrics">
+                        <div class="case-metric">
+                            <span class="case-metric-value">$1.2M</span>
+                            <span class="case-metric-label">Valor Total</span>
+                        </div>
+                        <div class="case-metric">
+                            <span class="case-metric-value">34%</span>
+                            <span class="case-metric-label">ROI Anual</span>
+                        </div>
+                        <div class="case-metric">
+                            <span class="case-metric-value">$1.2M</span>
+                            <span class="case-metric-label">Tokenizado (100%)</span>
+                        </div>
+                    </div>
+
+                    <p style="margin: 1.5rem 0; color: #64748b;">
+                        <strong>Modelo:</strong> 1,000 tokens × $1,200 c/u. Contrato 3 años con promotora generando $50k/mes rental garantizado.<br><br>
+                        <strong>Inversores:</strong> Cobros mensuales $338/mes por cada 10 tokens ($12k inversión). Incluye operador, mantenimiento y seguro all-inclusive.
+                    </p>
+
+                    <span class="case-status">✓ Operando 12 Meses</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TECHNOLOGY -->
+    <section id="tecnologia" class="technology">
+        <div class="section-header">
+            <h2>Tecnología Blockchain Segura</h2>
+            <p>Infraestructura descentralizada, transparente e inmutable</p>
+        </div>
+
+        <div class="tech-grid">
+            <div class="tech-card">
+                <div class="tech-icon">⛓️</div>
+                <h3>Base Blockchain L2</h3>
+                <p>
+                    Desarrollada por Coinbase. Transacciones $0.01 vs $50 Ethereum. Velocidad <2 segundos. Seguridad heredada de Ethereum mainnet.
+                </p>
+            </div>
+
+            <div class="tech-card">
+                <div class="tech-icon">📜</div>
+                <h3>Smart Contracts ERC-20</h3>
+                <p>
+                    Código auditado open-source. Cada token representa % exacto propiedad + ganancias. Distribuciones automáticas on-chain sin intermediarios.
+                </p>
+            </div>
+
+            <div class="tech-card">
+                <div class="tech-icon">🔐</div>
+                <h3>Multisig Treasury</h3>
+                <p>
+                    Wallet 3-de-5 firmas requeridas para movimientos fondos. Keys distribuidas entre fundadores + advisors legales + auditores externos.
+                </p>
+            </div>
+
+            <div class="tech-card">
+                <div class="tech-icon">📊</div>
+                <h3>Transparencia Total</h3>
+                <p>
+                    Todas transacciones visibles BaseScan. Holders pueden verificar ingresos reportados, distribuciones realizadas, balance treasury real-time.
+                </p>
+            </div>
+
+            <div class="tech-card">
+                <div class="tech-icon">🛡️</div>
+                <h3>Compliance Legal</h3>
+                <p>
+                    Contratos legales entre propietario-plataforma-holders auditados abogados blockchain. Cumplimiento regulaciones españolas + europeas.
+                </p>
+            </div>
+
+            <div class="tech-card">
+                <div class="tech-icon">🔄</div>
+                <h3>Mercado Secundario</h3>
+                <p>
+                    Liquidez 24/7 próximamente. Vende tus tokens cualquier momento a otros inversores sin esperar fin contrato. AMM decentralizado.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA SECTION -->
+    <section id="contacto" class="cta-section">
+        <div class="cta-content">
+            <h2>¿Listo para Comenzar?</h2>
+            <p>
+                Únete a la revolución RWA. Tokeniza tu maquinaria o invierte en activos industriales reales desde hoy.
+            </p>
+            <div class="cta-buttons">
+                <a href="mailto:contacto@bashood.io" class="btn-white">Hablar con Experto</a>
+                <a href="#" class="btn-outline">Descargar Dossier (PDF)</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-about">
+                <div class="footer-brand">
+                    <div class="logo">
+                        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                            <defs>
+                                <!-- Gradiente principal de la hoja (lima brillante a verde oscuro) -->
+                                <linearGradient id="leafMainGradF" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#d4ff00;stop-opacity:1" />
+                                    <stop offset="20%" style="stop-color:#a3ff00;stop-opacity:1" />
+                                    <stop offset="50%" style="stop-color:#22c55e;stop-opacity:1" />
+                                    <stop offset="80%" style="stop-color:#16a34a;stop-opacity:1" />
+                                    <stop offset="100%" style="stop-color:#15803d;stop-opacity:1" />
+                                </linearGradient>
+                                
+                                <!-- Gradientes para los 4 segmentos de anillo -->
+                                <linearGradient id="ringTopF" x1="0%" y1="0%" x2="0%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#e0e7ff;stop-opacity:0.9" />
+                                    <stop offset="50%" style="stop-color:#c7d2fe;stop-opacity:1" />
+                                    <stop offset="100%" style="stop-color:#a5b4fc;stop-opacity:1" />
+                                </linearGradient>
+                                
+                                <linearGradient id="ringRightF" x1="0%" y1="0%" x2="0%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#a5b4fc;stop-opacity:1" />
+                                    <stop offset="50%" style="stop-color:#818cf8;stop-opacity:1" />
+                                    <stop offset="100%" style="stop-color:#6366f1;stop-opacity:1" />
+                                </linearGradient>
+                                
+                                <linearGradient id="ringLeftF" x1="0%" y1="0%" x2="100%" y2="0%">
+                                    <stop offset="0%" style="stop-color:#0ea5e9;stop-opacity:1" />
+                                    <stop offset="50%" style="stop-color:#0284c7;stop-opacity:1" />
+                                    <stop offset="100%" style="stop-color:#0369a1;stop-opacity:1" />
+                                </linearGradient>
+                                
+                                <linearGradient id="ringBottomF" x1="0%" y1="0%" x2="0%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#6366f1;stop-opacity:1" />
+                                    <stop offset="100%" style="stop-color:#4f46e5;stop-opacity:1" />
+                                </linearGradient>
+                            </defs>
+                            
+                            <!-- Anillos circulares (4 segmentos gruesos) -->
+                            <g>
+                                <!-- Segmento superior (gris-azul claro) -->
+                                <path d="M 65,25 A 75,75 0 0 1 135,35" 
+                                      fill="none" stroke="url(#ringTopF)" stroke-width="14" 
+                                      stroke-linecap="round" opacity="0.85"/>
+                                <path d="M 65,25 A 75,75 0 0 1 135,35" 
+                                      fill="none" stroke="#e0e7ff" stroke-width="8" 
+                                      stroke-linecap="round" opacity="0.3"/>
+                                
+                                <!-- Segmento derecho superior (azul medio) -->
+                                <path d="M 145,55 A 75,75 0 0 1 155,95" 
+                                      fill="none" stroke="url(#ringRightF)" stroke-width="14" 
+                                      stroke-linecap="round" opacity="0.9"/>
+                                <path d="M 145,55 A 75,75 0 0 1 155,95" 
+                                      fill="none" stroke="#a5b4fc" stroke-width="8" 
+                                      stroke-linecap="round" opacity="0.3"/>
+                                
+                                <!-- Segmento izquierdo (azul brillante) -->
+                                <path d="M 35,55 A 75,75 0 0 0 25,120" 
+                                      fill="none" stroke="url(#ringLeftF)" stroke-width="14" 
+                                      stroke-linecap="round" opacity="0.95"/>
+                                <path d="M 35,55 A 75,75 0 0 0 25,120" 
+                                      fill="none" stroke="#38bdf8" stroke-width="9" 
+                                      stroke-linecap="round" opacity="0.4"/>
+                                
+                                <!-- Segmento inferior (azul índigo) -->
+                                <path d="M 155,105 A 75,75 0 0 1 85,165" 
+                                      fill="none" stroke="url(#ringBottomF)" stroke-width="14" 
+                                      stroke-linecap="round" opacity="0.9"/>
+                                <path d="M 155,105 A 75,75 0 0 1 85,165" 
+                                      fill="none" stroke="#6366f1" stroke-width="8" 
+                                      stroke-linecap="round" opacity="0.3"/>
+                            </g>
+                            
+                            <!-- Hoja verde estilo pluma (inclinada) -->
+                            <g transform="translate(100, 100) rotate(-25)">
+                                <!-- Forma base de la hoja -->
+                                <ellipse cx="0" cy="0" rx="18" ry="48" 
+                                         fill="url(#leafMainGradF)" opacity="1"/>
+                                
+                                <!-- Venas/textura de la hoja (muchas líneas diagonales) -->
+                                <g stroke="rgba(255,255,255,0.4)" stroke-width="0.8" stroke-linecap="round">
+                                    <line x1="-15" y1="-42" x2="5" y2="-40" />
+                                    <line x1="-15" y1="-38" x2="6" y2="-36" />
+                                    <line x1="-16" y1="-34" x2="7" y2="-32" />
+                                    <line x1="-16" y1="-30" x2="8" y2="-28" />
+                                    <line x1="-16" y1="-26" x2="9" y2="-24" />
+                                    <line x1="-17" y1="-22" x2="10" y2="-20" />
+                                    <line x1="-17" y1="-18" x2="10" y2="-16" />
+                                    <line x1="-17" y1="-14" x2="11" y2="-12" />
+                                    <line x1="-17" y1="-10" x2="11" y2="-8" />
+                                    <line x1="-17" y1="-6" x2="12" y2="-4" />
+                                    <line x1="-17" y1="-2" x2="12" y2="0" />
+                                    <line x1="-17" y1="2" x2="12" y2="4" />
+                                    <line x1="-17" y1="6" x2="12" y2="8" />
+                                    <line x1="-17" y1="10" x2="12" y2="12" />
+                                    <line x1="-16" y1="14" x2="11" y2="16" />
+                                    <line x1="-16" y1="18" x2="11" y2="20" />
+                                    <line x1="-15" y1="22" x2="10" y2="24" />
+                                    <line x1="-15" y1="26" x2="9" y2="28" />
+                                    <line x1="-14" y1="30" x2="8" y2="32" />
+                                    <line x1="-13" y1="34" x2="7" y2="36" />
+                                    <line x1="-12" y1="38" x2="5" y2="40" />
+                                    <line x1="-10" y1="42" x2="3" y2="44" />
+                                </g>
+                                
+                                <!-- Vena central blanca prominente -->
+                                <line x1="0" y1="-46" x2="0" y2="46" 
+                                      stroke="white" stroke-width="3" 
+                                      stroke-linecap="round" opacity="0.9"/>
+                                
+                                <!-- Brillo adicional en el centro -->
+                                <ellipse cx="-3" cy="-10" rx="6" ry="15" 
+                                         fill="rgba(255,255,255,0.2)" />
+                            </g>
+                        </svg>
+                    </div>
+                    <span class="logo-text">Bashood</span>
+                </div>
+                <p>
+                    Pioneros en tokenización de activos industriales. Democratizamos el acceso a inversiones reales respaldadas por maquinaria productiva.
+                </p>
+                <div class="social-links">
+                    <a href="#" class="social-link">🐦</a>
+                    <a href="#" class="social-link">💼</a>
+                    <a href="#" class="social-link">📘</a>
+                    <a href="#" class="social-link">📧</a>
+                </div>
+            </div>
+
+            <div class="footer-column">
+                <h4>Producto</h4>
+                <ul class="footer-links">
+                    <li><a href="#como-funciona">Cómo Funciona</a></li>
+                    <li><a href="#propietarios">Para Propietarios</a></li>
+                    <li><a href="#inversores">Para Inversores</a></li>
+                    <li><a href="#tecnologia">Tecnología</a></li>
+                    <li><a href="#">Roadmap</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-column">
+                <h4>Recursos</h4>
+                <ul class="footer-links">
+                    <li><a href="#">Documentación</a></li>
+                    <li><a href="#">Blog & Insights</a></li>
+                    <li><a href="#">FAQs</a></li>
+                    <li><a href="#">Calculadora ROI</a></li>
+                    <li><a href="#">Centro de Ayuda</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-column">
+                <h4>Empresa</h4>
+                <ul class="footer-links">
+                    <li><a href="#">Sobre Nosotros</a></li>
+                    <li><a href="#">Equipo</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Prensa</a></li>
+                    <li><a href="#">Contacto</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>© 2026 Bashood Technologies SL. Todos los derechos reservados. | <a href="#" style="color: #22c55e;">Términos</a> | <a href="#" style="color: #22c55e;">Privacidad</a> | <a href="#" style="color: #22c55e;">Legal</a></p>
+            <p style="margin-top: 1rem; font-size: 0.9rem;">
+                BaseScan: <a href="#" style="color: #22c55e;">0x742d...3f4a</a> | Smart Contracts Auditados ✓ | Base Mainnet
+            </p>
+        </div>
+    </footer>
+</body>
+</html>

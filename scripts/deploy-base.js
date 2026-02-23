@@ -170,6 +170,14 @@ async function main() {
   console.log("npx hardhat verify --network", hre.network.name, "CONTRACT_ADDRESS [args...]");
   console.log("=".repeat(60) + "\n");
 
+  console.log("✅ Next Steps:");
+  console.log("  1. Verify contracts on Basescan (if mainnet)");
+  console.log("  2. Test purchase flow with 0.1 ETH");
+  console.log("  3. Launch presale marketing campaign");
+  console.log("\n⚠️  CRITICAL POST-PRESALE STEP:");
+  console.log("  🔒 After presale ends, run: npx hardhat run scripts/post-presale-lock.js");
+  console.log("     This locks economic parameters PERMANENTLY (irreversible).\n");
+
   // Save deployment info to file
   const deploymentInfo = {
     network: hre.network.name,

@@ -1,0 +1,65 @@
+═══════════════════════════════════════════════════════════
+  INSTRUCCIONES: CONVERTIR HTML A PDF
+═══════════════════════════════════════════════════════════
+
+Se han abierto 2 documentos en tu navegador:
+
+1. 📞 GUION_LLAMADA.html (40 páginas)
+2. 💼 PROPUESTA_TOKENIZACION.html (30 páginas)
+
+
+🖨️ PASOS PARA CREAR PDF:
+──────────────────────────────────────────────────────────
+
+PASO 1: Presiona Ctrl+P en cada ventana del navegador
+        (o haz clic derecho → Imprimir)
+
+PASO 2: En la ventana de impresión:
+        ├─ Destino: Selecciona "Guardar como PDF"
+        ├─ Márgenes: Predeterminados
+        ├─ Escala: 100%
+        └─ Fondo de gráficos: ✅ ACTIVADO (importante)
+
+PASO 3: Haz clic en "Guardar"
+
+PASO 4: Guarda con estos nombres:
+        ├─ 03_GUION_LLAMADA.pdf
+        └─ 01_PROPUESTA_TOKENIZACION.pdf
+
+
+📂 UBICACIÓN RECOMENDADA PARA GUARDAR:
+──────────────────────────────────────────────────────────
+
+Guarda en: C:\Users\Franchu\Desktop\bashood-hardhat-tests\pilot-assets\pdf\
+
+(O donde prefieras para facilitar su envío)
+
+
+💡 CONSEJOS:
+──────────────────────────────────────────────────────────
+
+✓ Usa Chrome o Edge para mejor calidad
+✓ Verifica que "Fondo de gráficos" esté activado
+✓ No cambies la escala (déjala en 100%)
+✓ Espera a que termine de cargar antes de imprimir
+
+
+🎯 USO DE LOS PDFs:
+──────────────────────────────────────────────────────────
+
+📞 GUION_LLAMADA.pdf:
+   → Solo para USO INTERNO
+   → Leer antes de la llamada con el propietario
+   → Tener abierto durante la llamada
+   → NO enviar al propietario
+
+💼 PROPUESTA_TOKENIZACION.pdf:
+   → Para ENVIAR AL PROPIETARIO
+   → Adjuntar en email POST-llamada
+   → Incluir con NDA
+   → Documento comercial principal
+
+
+═══════════════════════════════════════════════════════════
+¿Necesitas ayuda? Contacta contacto@bashood.io
+═══════════════════════════════════════════════════════════

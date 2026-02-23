@@ -19,10 +19,12 @@ contract ChainlinkPriceFeed is OwnableLocal {
     event MaxChangePctUpdated(uint256 pct);
 
     constructor(address _feed) {
+        require(_feed != address(0), "ChainlinkPriceFeed: invalid feed address");
         feed = IPriceFeed(_feed);
     }
 
     function setFeed(address _feed) external onlyOwner {
+        require(_feed != address(0), "ChainlinkPriceFeed: invalid feed address");
         feed = IPriceFeed(_feed);
         emit FeedUpdated(_feed);
     }
@@ -38,12 +40,20 @@ contract ChainlinkPriceFeed is OwnableLocal {
     }
 
     function getLatestPrice() external returns (int256 price, uint8 dec, uint256 updatedAt) {
-        (, int256 answer, , uint256 uAt, uint80 answeredInRound) = feed.latestRoundData();
+        (uint80 roundId, int256 answer, , uint256 uAt, uint80 answeredInRound) = feed.latestRoundData();
+        
         require(uAt != 0, "stale: updatedAt=0");
         require(answer > 0, "invalid: answer<=0");
         require(answeredInRound != 0, "invalid: answeredInRound=0");
-        // staleness
-        require(block.timestamp - uAt <= stalenessThreshold, "stale");
+        
+        // CRITICAL: Check for stale round BEFORE staleness timeout
+        require(answeredInRound >= roundId, "stale: answeredInRound < roundId");
+        
+        // staleness timeout check
+        require(block.timestamp >= uAt, "invalid: future timestamp");
+        unchecked {
+            require(block.timestamp - uAt <= stalenessThreshold, "stale: timeout exceeded");
+        }
 
         uint8 d = feed.decimals();
 
@@ -52,10 +62,8 @@ contract ChainlinkPriceFeed is OwnableLocal {
             uint256 prev = uint256(lastValidAnswer);
             uint256 curr = uint256(answer);
             uint256 diff = prev > curr ? prev - curr : curr - prev;
-            if (prev > 0) {
-                uint256 pct = (diff * 100) / prev;
-                require(pct <= maxChangePct, "change too large");
-            }
+            uint256 pct = (diff * 100) / prev;
+            require(pct <= maxChangePct, "change too large");
         }
 
         lastValidAnswer = answer;
@@ -64,12 +72,18 @@ contract ChainlinkPriceFeed is OwnableLocal {
 
     /// @notice Non-state-reading helper useful for tests and callers that only need a view.
     function peekLatestPrice() external view returns (int256 price, uint8 dec, uint256 updatedAt) {
-        (, int256 answer, , uint256 uAt, uint80 answeredInRound) = feed.latestRoundData();
+        (uint80 roundId, int256 answer, , uint256 uAt, uint80 answeredInRound) = feed.latestRoundData();
+        
         require(uAt != 0, "stale: updatedAt=0");
         require(answer > 0, "invalid: answer<=0");
         require(answeredInRound != 0, "invalid: answeredInRound=0");
-        require(block.timestamp - uAt <= stalenessThreshold, "stale");
+        require(answeredInRound >= roundId, "stale: answeredInRound < roundId");
+        require(block.timestamp >= uAt, "invalid: future timestamp");
+        unchecked {
+            require(block.timestamp - uAt <= stalenessThreshold, "stale: timeout exceeded");
+        }
         uint8 d = feed.decimals();
         return (answer, d, uAt);
     }
 }
+

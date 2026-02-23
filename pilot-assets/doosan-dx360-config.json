@@ -1,0 +1,214 @@
+{
+  "assetId": "PILOT-001",
+  "assetName": "Doosan DX360",
+  "assetType": "HYDRAULIC_EXCAVATOR_HEAVY",
+  "status": "VALIDATION_PHASE",
+  "lastUpdated": "2026-02-20",
+  
+  "technicalSpecs": {
+    "manufacturer": "Doosan",
+    "model": "DX360LC",
+    "category": "Heavy Hydraulic Excavator",
+    "engine": {
+      "power": 300,
+      "unit": "HP"
+    },
+    "weight": {
+      "operative": 36,
+      "unit": "tonnes"
+    },
+    "bucketCapacity": {
+      "min": 1.6,
+      "max": 2.1,
+      "unit": "m³"
+    },
+    "primaryUse": "Massive earth moving, quarries, continuous loading"
+  },
+  
+  "financialData": {
+    "assetValue": 150000,
+    "currency": "EUR",
+    "valuationDate": "2026-02-20",
+    "valuationMethod": "Market comparison (used equipment)",
+    "usefulLife": {
+      "min": 8,
+      "max": 12,
+      "unit": "years"
+    },
+    "operativeHours": {
+      "total": "TBD",
+      "annual": 2420,
+      "note": "220 days × 11 hours/day"
+    }
+  },
+  
+  "operativeData": {
+    "workSchedule": {
+      "startTime": "06:30",
+      "endTime": "18:30",
+      "effectiveHours": 11,
+      "daysPerYear": 220
+    },
+    "performance": {
+      "timePerLoad": 2.5,
+      "unit": "minutes",
+      "trucksPerHour": 24,
+      "trucksPerDay": 264,
+      "loadPerTruck": 25,
+      "loadUnit": "m³",
+      "dailyProduction": 6600,
+      "productionUnit": "m³/day"
+    },
+    "fuelConsumption": {
+      "literPerHour": 30,
+      "dailyConsumption": 330,
+      "fuelType": "Diesel",
+      "pricePerLiter": 1.45,
+      "dailyCost": 478.50,
+      "annualCost": 105270
+    }
+  },
+  
+  "costStructure": {
+    "annual": {
+      "fuel": 105270,
+      "insurance": 3000,
+      "maintenancePreventive": 10000,
+      "total": 118270
+    },
+    "notes": [
+      "Insurance: 2% of asset value",
+      "Preventive maintenance includes filters, lubricants, inspections",
+      "Does NOT include operator salary (assumed covered by client)",
+      "Does NOT include transportation (assumed on-site long-term)"
+    ]
+  },
+  
+  "revenueScenarios": {
+    "low": {
+      "monthly": 8000,
+      "annual": 96000,
+      "description": "Below operational costs - unsustainable",
+      "netProfit": -22270,
+      "profitMargin": -23.2
+    },
+    "medium": {
+      "monthly": 12000,
+      "annual": 144000,
+      "description": "Breakeven+ scenario - modest profitability",
+      "netProfit": 25730,
+      "profitMargin": 17.9
+    },
+    "high": {
+      "monthly": 15000,
+      "annual": 180000,
+      "description": "Optimal scenario - healthy margins",
+      "netProfit": 61730,
+      "profitMargin": 34.3
+    }
+  },
+  
+  "tokenizationSimulation": {
+    "tokenizedPercentage": 40,
+    "tokenizedValue": 60000,
+    "retainedByOwner": 60,
+    "note": "40% tokenization allows owner to retain majority control while testing RWA model",
+    
+    "distributionModel": {
+      "burnRate": 0.001,
+      "burnRateBps": 10,
+      "treasuryFee": 0.005,
+      "treasuryFeeBps": 50,
+      "holderDistribution": 0.994,
+      "holderDistributionBps": 9940
+    },
+    
+    "simulationParameters": {
+      "simulationPeriod": 12,
+      "simulationUnit": "months",
+      "selectedScenario": "medium",
+      "assumptions": [
+        "All revenue distributed monthly",
+        "Costs deducted before distribution",
+        "40% of net profit goes to token holders",
+        "60% retained by physical asset owner",
+        "Treasury fee applied on each distribution",
+        "Burn applied on each token transfer (not revenue distribution)"
+      ]
+    }
+  },
+  
+  "validationObjectives": {
+    "primary": [
+      "Validate RWA model mathematics",
+      "Validate realistic cashflow",
+      "Validate operational sustainability",
+      "Identify breakeven point",
+      "Measure real ROI under different scenarios"
+    ],
+    "secondary": [
+      "Test smart contract distribution logic",
+      "Validate treasury accumulation",
+      "Test proportional holder distribution",
+      "Simulate 12-month operation cycle",
+      "Identify potential risks/inefficiencies"
+    ],
+    "explicitNonGoals": [
+      "Public launch",
+      "Governance implementation",
+      "Parameter locking (lockParameters)",
+      "Marketing or community building",
+      "Legal entity establishment (yet)"
+    ]
+  },
+  
+  "nextSteps": {
+    "phase": "VALIDATION",
+    "actions": [
+      {
+        "step": 1,
+        "action": "Mathematical model validation",
+        "status": "IN_PROGRESS",
+        "output": "Financial simulation script"
+      },
+      {
+        "step": 2,
+        "action": "12-month cashflow simulation",
+        "status": "PENDING",
+        "output": "Monthly reports with 3 scenarios"
+      },
+      {
+        "step": 3,
+        "action": "ROI calculation per scenario",
+        "status": "PENDING",
+        "output": "ROI comparison table"
+      },
+      {
+        "step": 4,
+        "action": "Breakeven analysis",
+        "status": "PENDING",
+        "output": "Minimum monthly revenue required"
+      },
+      {
+        "step": 5,
+        "action": "Risk assessment",
+        "status": "PENDING",
+        "output": "Risk matrix (operational, financial, legal)"
+      },
+      {
+        "step": 6,
+        "action": "Negotiation with asset owner",
+        "status": "BLOCKED",
+        "blocker": "Awaiting model validation completion"
+      }
+    ]
+  },
+  
+  "complianceNotes": {
+    "jurisdiction": "Spain",
+    "taxImplications": "To be analyzed with fiscal advisor",
+    "ownershipStructure": "To be defined (direct vs SPV)",
+    "insuranceRequirements": "Industrial equipment insurance required",
+    "operationalLicenses": "Verify operator certifications"
+  }
+}

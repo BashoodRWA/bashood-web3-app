@@ -1,4 +1,5 @@
 ﻿require("@nomicfoundation/hardhat-toolbox");
+require("@nomicfoundation/hardhat-foundry");
 require('@openzeppelin/hardhat-upgrades');
 require('hardhat-contract-sizer');
 require('hardhat-gas-reporter');
@@ -73,7 +74,14 @@ module.exports = {
   // Ensure setup runs before any test files. Use 'file' for ESM-aware preloads and keep 'require' for CJS.
   file: ['test/setup.cjs', 'test/setup.js'],
   require: ['test/setup.cjs', 'test/setup.js'],
-  spec: ["test/**/*.test.cjs", "test/**/*.test.js"],
+  spec: [
+    "test/**/*.test.cjs",
+    "test/**/*.test.js",
+    "!test/**/*DEPRECATED*.js",
+    "!test/**/*DEPRECATED*.cjs",
+    "!test/**/*.SKIP.js",
+    "!test/**/*.SKIP.cjs"
+  ],
     // Configure reporter for CI JUnit output
     reporter: configuredReporter,
     reporterOptions: {
@@ -85,11 +93,24 @@ module.exports = {
     hardhat: {
       allowUnlimitedContractSize: true
     },
+    // Fork de Base Mainnet para testing local con estado real
+    "base-fork": {
+      url: process.env.BASE_MAINNET_RPC || "https://mainnet.base.org",
+      forking: {
+        enabled: true,
+        url: process.env.BASE_MAINNET_RPC || "https://mainnet.base.org",
+      },
+      accounts: process.env.PRIVATE_KEY 
+        ? [process.env.PRIVATE_KEY]
+        : [],
+      chainId: 8453,
+      allowUnlimitedContractSize: true
+    },
     // Base Sepolia Testnet
     "base-sepolia": {
-      url: process.env.BASE_SEPOLIA_RPC || "https://sepolia.base.org",
-      accounts: process.env.BASE_SEPOLIA_PRIVATE_KEY 
-        ? [process.env.BASE_SEPOLIA_PRIVATE_KEY]
+      url: process.env.BASE_SEPOLIA_RPC_URL || "https://sepolia.base.org",
+      accounts: process.env.PRIVATE_KEY 
+        ? [process.env.PRIVATE_KEY]
         : [],
       chainId: 84532,
       gasPrice: 1000000000, // 1 gwei (Base has low gas)
