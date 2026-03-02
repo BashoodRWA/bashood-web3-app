@@ -94,8 +94,13 @@ interface IBashoodModule {
 
     /**
      * @notice Rol del Core que este módulo requiere para operar.
-     * @dev El admin debe hacer `Core.grantRole(requiredRole(), moduleAddress)`.
-     * @return role_ bytes32 del rol requerido.
+     * @dev El admin debe hacer `Core.grantRole(requiredRole(), moduleAddress)`
+     *      si y solo si este valor es distinto de bytes32(0).
+     *
+     *   SENTINEL: bytes32(0) → módulo read-only. No requiere rol en el Core.
+     *             Puede leer estado y emitir eventos, pero no escribe storage.
+     *
+     * @return role_ bytes32 del rol requerido, o bytes32(0) si read-only.
      */
     function requiredRole() external view returns (bytes32 role_);
 }

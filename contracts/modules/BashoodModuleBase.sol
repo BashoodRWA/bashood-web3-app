@@ -45,16 +45,45 @@ abstract contract BashoodModuleBase is IBashoodModule, Ownable {
     /// @dev Versión semántica legible.
     string  private           _moduleVersion;
 
-    /// @dev Rol del Core que el módulo necesita para escribir en él.
+    /**
+     * @dev Rol del Core que el módulo necesita para operar sobre él.
+     *
+     * SENTINEL: bytes32(0) indica un módulo read-only (sin rol requerido).
+     *   – El admin no necesita hacer grantRole() para estos módulos.
+     *   – Un módulo read-only puede leer el Core y emitir eventos, pero no
+     *     puede escribir en su storage.
+     *   – Ejemplo: módulos de auditoría, snapshot, reporting off-chain.
+     *
+     * Si el módulo escribe en el Core, este campo debe corresponderse con un
+     * rol real de AccessControl (ej. ASSET_MANAGER_ROLE).
+     */
     bytes32 private immutable _requiredRole;
 
     // ── Constructor ──────────────────────────────────────────────────────────
 
     /**
      * @param core_          Dirección del BashoodCore (no puede ser address(0)).
+     *
+     *   SINGLE-CORE BINDING: `core_` se almacena como immutable y nunca
+     *   cambia tras el deploy. Un módulo está ligado a un único Core.
+     *   Si se necesita operar sobre dos Cores diferentes se despliegan
+     *   dos instancias del módulo. Esta restricción hace que el rol
+     *   otorgado sea perfectamente auditable en cualquier momento.
+     *
      * @param moduleId_      keccak256 del identificador del módulo.
-     * @param version_       Cadena de versión legible ("1.0.0").
+     *                       Formato: keccak256("<Nombre>/<versión-mayor>").
+     *                       Es el identificador canónico e inmutable.
+     * @param version_       Cadena de versión semántica legible ("1.0.0").
+     *
+     *   VERSION SEMANTICS: `moduleVersion` es metadata legible solamente.
+     *   La identidad canónica del módulo es `moduleId` (immutable).
+     *   No está permitido añadir un setter para `moduleVersion`; hacerlo
+     *   desacoplaría la versión visible del identificador inmutable.
+     *   El único mecanismo de upgrade es: deploy nueva versión → revocar
+     *   rol del módulo viejo → otorgar rol al módulo nuevo.
+     *
      * @param requiredRole_  bytes32 del rol que el admin debe otorgar al módulo.
+     *                       Pasar bytes32(0) para módulos read-only (sin rol).
      */
     constructor(
         address core_,
@@ -64,7 +93,6 @@ abstract contract BashoodModuleBase is IBashoodModule, Ownable {
     ) Ownable(msg.sender) {
         require(core_ != address(0),    "BashoodModule: core is zero address");
         require(moduleId_ != bytes32(0),"BashoodModule: moduleId is zero");
-        require(requiredRole_ != bytes32(0), "BashoodModule: requiredRole is zero");
         require(bytes(version_).length > 0,  "BashoodModule: version is empty");
 
         _core         = core_;
