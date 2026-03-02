@@ -64,6 +64,8 @@ El valor de mercado del activo (`currentValue`) se actualiza periódicamente a t
 
 Cualquier auditor externo puede verificar el historial completo de valoraciones consultando los eventos del contrato.
 
+> **Precisión:** El campo `currentValue` refleja una tasación orientativa basada en fuentes externas y no constituye precio garantizado de venta, valor liquidativo (NAV) ni valoración legal vinculante.
+
 ### 3. Los Módulos (Compliance y Seguro)
 
 Dos módulos especializados completan el registro:
@@ -125,10 +127,12 @@ Cualquier persona puede verificar estos registros on-chain en BaseScan sin crear
 
 **Lo que BHT no es:**
 - No es una participación en el rendimiento de los activos registrados
-- No garantiza rentabilidad de ningún tipo
+- No garantiza rendimiento de ningún tipo
 - No es un instrumento de inversión
 
-El BHT tiene valor porque el protocolo tiene uso. Cuantos más activos se registren y más transacciones ocurran, más se usa el protocolo — lo que aumenta la utilidad funcional del token.
+El BHT no representa participación en activos físicos, no otorga derechos sobre ingresos generados por dichos activos y no debe interpretarse como instrumento de inversión.
+
+El valor del BHT depende exclusivamente de su adopción como herramienta funcional dentro del protocolo. No existe garantía ni correlación contractual entre el crecimiento del protocolo y el precio del token.
 
 ---
 
@@ -167,7 +171,7 @@ Bashood fue diseñado con el marco UE/MiCA como referencia desde el inicio.
 Candidatos a la exención de NFT no fungibles del Artículo 2(3) del Reglamento (UE) 2023/1114 (MiCA), condicionado a que cada emisión concreta mantenga las condiciones de unicidad y ausencia de derechos financieros incorporados.
 
 **Posición del BHT:**  
-Token de utilidad funcional. No diseñado como instrumento financiero ni valor mobiliario. La clasificación regulatoria definitiva depende de la autoridad competente.
+Token de utilidad funcional diseñado para acceso y participación en el protocolo. No incorpora derechos financieros ni promesas de rendimiento. La clasificación regulatoria definitiva corresponde a la autoridad competente.
 
 **Lo que esto significa en la práctica:**
 - No prometemos rentabilidades ni rendimientos
@@ -235,6 +239,9 @@ BHT reduce el coste de usar el protocolo (hasta 60% de descuento en fees), permi
 **¿Es legal en España / UE?**  
 El protocolo está diseñado con el marco MiCA (Reglamento UE 2023/1114) como referencia. Sin embargo, no ofrecemos asesoramiento legal. La clasificación regulatoria de cualquier participación específica depende de las circunstancias concretas y debe ser evaluada por un asesor legal independiente.
 
+**¿Participar en Bashood es una inversión?**  
+No. Participar en Bashood implica utilizar un protocolo tecnológico. Ninguna acción dentro del protocolo garantiza ni promete rendimientos, beneficios financieros ni participación en resultados económicos derivados de activos físicos o del propio protocolo.
+
 **¿Puedo verificar los activos yo mismo?**  
 Sí. Los 5 activos piloto están en Base Sepolia (tokens #202–#206) y son verificables en BaseScan sin crear ninguna cuenta. El código es completamente open-source.
 
@@ -242,6 +249,10 @@ Sí. Los 5 activos piloto están en Base Sepolia (tokens #202–#206) y son veri
 El `OracleValuationModule`, que es el único contrato autorizado a actualizar el valor (`currentValue`) de cualquier activo registrado. Lee el precio desde un feed Chainlink verificable. Los administradores humanos no pueden modificar el valor directamente en producción.
 
 ---
+
+---
+
+> **Aviso final:** Nada en este documento debe interpretarse como oferta de inversión, promesa de rendimiento o participación en beneficios derivados de activos físicos o del propio protocolo.
 
 *Para documentación técnica completa, ver [WHITEPAPER.md](WHITEPAPER.md) y [BASHOOD-RWA-1-SPECIFICATION.md](BASHOOD-RWA-1-SPECIFICATION.md).*  
 *Código fuente: repositorio oficial del protocolo (open-source).*  

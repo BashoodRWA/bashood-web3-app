@@ -268,7 +268,7 @@ BASHOOD-RWA-1 (NFT ERC-721)
   └── Cualquier derecho económico: responsabilidad del emisor, off-chain
 ```
 
-**Consecuencia práctica:** La evolución del valor del BHT no está indexada ni correlacionada contractualmente con los activos registrados en BASHOOD-RWA-1. Un incremento en el número de activos registrados puede aumentar el uso del protocolo (y por tanto el valor funcional del BHT), pero esta relación es económica indirecta, no un derecho contractual directo.
+**Consecuencia práctica:** El valor del BHT depende exclusivamente de su adopción como herramienta funcional dentro del protocolo. No existe garantía ni correlación contractual entre el crecimiento del protocolo y el precio del token. La evolución del valor del BHT no está indexada ni correlacionada contractualmente con los activos registrados en BASHOOD-RWA-1.
 
 ### 5.4 Distribución de BHT
 
@@ -294,9 +294,11 @@ El modelo económico del protocolo Bashood se basa en tres principios no negocia
 
 2. **Sin participación en rendimiento de activos físicos**: El BHT no da derecho a participar en ingresos generados por los activos industriales registrados on-chain. Esos flujos, si existen, son relaciones contractuales off-chain entre el propietario del activo y terceros.
 
-3. **Sin proyecciones de ROI como compromiso financiero**: Las estimaciones de actividad de protocolo son orientativas y no constituyen promesa de rentabilidad para ningún tenedor de BHT.
+3. **Sin proyecciones de ROI como compromiso financiero**: Las estimaciones de actividad de protocolo son orientativas y no constituyen promesa de rendimiento para ningún tenedor de BHT.
 
-### 6.2 Mecanismos Deflacionarios
+### 6.4 No-Indexación BHT ↔ Activos RWA
+
+Bajo ninguna circunstancia el BHT está indexado al valor de los activos registrados mediante BASHOOD-RWA-1. No existe vínculo contractual, financiero ni automático entre el valor de los activos físicos y el token BHT. Esta separación es un principio constitucional del protocolo, no sujeto a modificación por gobernanza.
 
 **Burn de transacción (0,1%):**
 - En cada transacción del protocolo se destruye permanentemente el 0,1% del valor en BHT
@@ -350,7 +352,7 @@ Escribe Core.updateAssetValue(tokenId, valor, "ORACLE_REVALUATION")
 Gas cost: pagado por caller (sin fee de protocolo adicional en v1.0)
 ```
 
-### 7.3 Flujo del Tesoro del Protocolo
+> **Precisión regulatoria:** El campo `currentValue` refleja una tasación orientativa basada en fuentes externas (Chainlink) y no constituye precio garantizado de venta, valor liquidativo (NAV) ni valoración legal vinculante. Su propósito es informativo, no financiero.
 
 ```
 Ingresos del tesoro:
@@ -422,6 +424,8 @@ Si en el futuro la gobernanza decide aprobar distribuciones del tesoro a partici
 
 **Limitación explícita:** Ninguna distribución del tesoro puede estar indexada, vinculada ni correlacionada contractualmente con el rendimiento de activos físicos registrados en BASHOOD-RWA-1. Esta limitación es constitucional del protocolo.
 
+**El tesoro del protocolo no distribuye dividendos, no paga rendimientos garantizados y no constituye un mecanismo de retorno sobre inversión. Cualquier uso de fondos está sujeto a gobernanza y no implica derecho económico automático para los tenedores de BHT.**
+
 ### 8.4 Lo Que los Participantes de Staking Reciben (v1.0)
 
 - Poder de voto proporcional a su stake en decisiones de gobernanza
@@ -480,7 +484,7 @@ Queda explícitamente fuera del modelo económico del protocolo:
 
 ### 10.3 Sostenibilidad a Largo Plazo
 
-El modelo de sostenibilidad del protocolo se basa en el crecimiento del número de activos registrados (que genera fees de minting) y en el volumen de transacciones secundarias (que genera fees de trading cuando el marketplace esté activo).
+El modelo de uso del protocolo depende del número de activos registrados (que genera fees de minting) y del volumen de transacciones secundarias (que genera fees de trading cuando el marketplace esté activo). Estas fuentes son ingresos operativos del protocolo, no distribuciones para tenedores de BHT ni rendimientos asociados a activos físicos.
 
 ---
 
@@ -798,6 +802,10 @@ Insurer             → Aseguradoras acreditadas (gestión en InsuranceModule)
 | **Tesoro** | Contrato multisig que acumula fees del protocolo bajo control de gobernanza |
 
 ---
+
+---
+
+> **Aviso final:** Nada en este documento debe interpretarse como oferta de inversión, promesa de rendimiento o participación en beneficios derivados de activos físicos o del propio protocolo.
 
 *Bashood Technologies SL — 2 de marzo de 2026*  
 *Este whitepaper será actualizado antes de cualquier oferta pública. La versión vigente siempre estará disponible en el repositorio oficial del protocolo.*
