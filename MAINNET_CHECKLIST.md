@@ -249,6 +249,50 @@
 
 ---
 
+## 🏛️ RWA M4 — REGLAS DE GOBERNANZA ECONÓMICA
+
+> **Decisión arquitectónica fija** — Plan M4-F3 / v0.8-truth-model-formalized  
+> Modelo adoptado: **Opción A / Enforcement A3** (gobernanza sin cambio de bytecode)  
+> Fecha de decisión: 2 de marzo de 2026
+
+### Regla Maestra: Fuente de Verdad Económica
+
+**`Core.getFinancialData(tokenId).currentValue` = único valor autoritativo del activo.**
+
+- [ ] **ASSET_MANAGER_ROLE — Asignación en producción**
+  - [ ] `Core.grantRole(ASSET_MANAGER_ROLE, address(OracleValuationModule))` ✅ obligatorio
+  - [ ] **NUNCA** `Core.grantRole(ASSET_MANAGER_ROLE, <EOA>)` en producción
+  - [ ] Verificar que ningún EOA tiene `ASSET_MANAGER_ROLE` antes del lanzamiento
+  - [ ] El multisig admin NO debe tener `ASSET_MANAGER_ROLE` (solo `DEFAULT_ADMIN_ROLE`)
+
+- [ ] **OracleValuationModule — Verificación pre-lanzamiento**
+  - [ ] Feed Chainlink configurado: `Core.configureTelemetry(tokenId, { oracleAddress: feedAddr })`
+  - [ ] `OracleValuationModule.hasRole(ASSET_MANAGER_ROLE_IN_CORE)` → true
+  - [ ] Test smoke: `OracleValuationModule.pushValuation(tokenId)` ejecuta sin revert
+  - [ ] Evento `AssetValueUpdated` emitido con `reason = "ORACLE_REVALUATION"`
+
+- [ ] **Prohibición de actualizaciones manuales**
+  - [ ] Documentar en Incident Response: cualquier llamada directa a `updateAssetValue` en mainnet debe registrarse como incidente
+  - [ ] Configurar alerta Tenderly/Defender: `Core.updateAssetValue` llamado por llamante ≠ OracleValuationModule → alerta inmediata
+  - [ ] Si se requiere tasación manual de emergencia → `reason = "ADMIN_APPRAISAL"` + registro off-chain del tasador firmado por governance
+
+- [ ] **Fuentes de verdad no económica — confirmación**
+  - [ ] Compliance vigente → `CertificationModule.isCompliant(tokenId, [certTypes])` (NO `Core.getCertificationData()`)
+  - [ ] Póliza vigente → `InsuranceModule.isInsured(tokenId)` (NO `Core.getInsuranceData()`)
+  - [ ] `Core.*certificationData` y `Core.*insuranceData` son datos de mint, nunca se actualizan post-mint — verificado
+
+### Matriz de Roles M4 — Estado objetivo en producción
+
+| Rol | Holder en producción | Holder NUNCA |
+|---|---|---|
+| `DEFAULT_ADMIN_ROLE` | Multisig governance | EOA individual |
+| `ASSET_MANAGER_ROLE` | Únicamente `OracleValuationModule` | EOA / multisig directo |
+| `MINTER_ROLE` | Script de mint (o multisig) | — |
+| Certifier (CertModule) | Entidades auditoras acreditadas | — |
+| Insurer (InsModule) | Aseguradoras acreditadas | — |
+
+---
+
 ## ✅ FINAL CHECKS
 
 - [ ] **Code Review Completo**
