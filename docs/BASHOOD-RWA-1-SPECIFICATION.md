@@ -2,20 +2,37 @@
 
 ## Abstract
 
-BASHOOD-RWA-1 is a comprehensive standard for tokenizing industrial real-world assets (RWAs) on blockchain networks. This standard extends ERC-721 to include industry-specific metadata, depreciation models, telemetry integration, certification tracking, and multiple tokenization strategies. The standard is designed to support construction equipment, manufacturing machinery, energy infrastructure, and other high-value industrial assets.
+BASHOOD-RWA-1 is a standard for creating structured digital registry records of physical industrial assets on EVM-compatible blockchain networks. Each token is a verifiable, immutable on-chain record of an individual asset's identification, technical specifications, and appraised market value. The standard extends ERC-721 to include industry-specific metadata, usage-based depreciation models, oracle-driven valuation, certification tracking, and insurance status.
+
+> **Definición oficial del token (v1.0):** Un token BASHOOD-RWA-1 es un **registro digital estructurado** de un activo industrial físico. No representa, confiere ni implica título de propiedad, derecho contractual, participación económica ni rendimiento distribuible sobre el activo físico. Cualquier vínculo jurídico entre el token y el activo off-chain es responsabilidad exclusiva del emisor. Marco regulatorio de referencia: Reglamento (UE) 2023/1114 (MiCA).
+
+## Regulatory Scope (EU / MiCA)
+
+Under Regulation (EU) 2023/1114 (MiCA), each BASHOOD-RWA-1 token is intended to operate as a **non-fungible token exempt from MiCA scope** (Article 2(3)), provided the following conditions hold for a given issuance:
+
+| Condition | Required state |
+|---|---|
+| Uniqueness | Each token represents a single, unique physical asset (non-fungible) |
+| No stabilization mechanism | `currentValue` is an appraisal record, not a peg or redemption guarantee |
+| No financial instrument rights | Token transfer conveys the registry record only, not asset title or income rights |
+| No revenue distribution | `TokenizationConfig` fields are descriptive metadata; economic rights require a separate off-chain legal framework defined by the emitter |
+
+If an emitter uses `TokenizationConfig` (revenue-share, micro-leasing, fractional shares) to instrument real economic rights, the resulting instrument may be subject to MiCA (Article 3(1) — asset-referenced token) or MiFID II depending on jurisdiction. **The protocol does not determine the regulatory classification of any specific issuance. That classification is the legal responsibility of the asset emitter.**
 
 ## Motivation
 
-Current NFT standards (ERC-721, ERC-1155) are insufficient for representing complex industrial assets because they lack:
+Existing NFT standards (ERC-721, ERC-1155) are insufficient for industrial asset registries because they lack:
 
-1. **Asset-Specific Depreciation Models**: Industrial assets depreciate based on usage metrics (tons lifted, meters extruded, setup counts) rather than time alone
-2. **Real-Time Telemetry Integration**: Equipment manufacturers provide APIs with live operational data (load, pressure, GPS location) that must be integrated on-chain
-3. **Certification & Compliance Tracking**: Industrial assets require certifications (CE Mark, UL 3401, ISO 9001) with expiry dates and renewal tracking
-4. **Multiple Tokenization Strategies**: Different assets require different ownership models (fractional, micro-leasing, revenue-share, performance bonds)
-5. **Maintenance Scheduling**: Predictive maintenance based on operating hours and usage patterns
-6. **Insurance Management**: Equipment breakdown insurance, inland marine coverage, and liability tracking
+1. **Usage-Based Depreciation Models**: Industrial assets depreciate by operational metrics (tons lifted, meters extruded, site setups) rather than time alone
+2. **Oracle-Driven Valuation**: Market value must be updated by verifiable off-chain price feeds, not manual admin calls
+3. **Certification & Compliance Tracking**: Assets require certifications (CE Mark, UL 3401, ISO 9001) with expiry and renewal tracking
+4. **Operational Metadata**: Equipment-specific fields (load capacity, GPS tracking, PSI ratings) that generic NFTs cannot encode
+5. **Maintenance Scheduling**: Predictive maintenance records based on operating hours and usage patterns
+6. **Insurance Status**: Policy tracking (provider, coverage amount, expiry) as auditable on-chain state
 
-BASHOOD-RWA-1 solves these problems by providing a standardized interface that industrial companies can adopt to tokenize their assets on Base L2 and other EVM-compatible chains.
+**Note on tokenization strategies:** The standard includes `TokenizationConfig` fields (fractional, micro-leasing, revenue-share, performance bonds) as descriptive metadata fields reflecting the real-world operational model of the asset. These fields do not by themselves create legal rights. Implementing economic rights from these fields requires a separate off-chain legal framework established by the asset emitter.
+
+BASHOOD-RWA-1 solves these problems by providing a standardized interface for industrial asset registries on Base L2 and other EVM-compatible chains.
 
 ## Specification
 

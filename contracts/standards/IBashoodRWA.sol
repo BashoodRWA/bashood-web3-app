@@ -6,15 +6,45 @@ import "@openzeppelin/contracts/token/ERC721/IERC721.sol";
 /**
  * @title IBashoodRWA
  * @author Bashood Protocol
- * @notice Standard interface for Real World Asset tokenization on Base L2
- * @dev This is the BASHOOD-RWA-1 standard for industrial assets
- * 
- * Based on research of 5 leading construction robotics companies:
- * - EVOCONS (Spain): Gantry systems, load-based depreciation
- * - ICON (USA): Lavacrete extrusion, API integration
- * - Apis Cor (USA/UAE): Mobile robots, GPS tracking, micro-leasing
- * - CyBe Construction (Netherlands): Fast-cure mortar, performance bonuses
- * - Mighty Buildings (USA): UV-cure panels, ESG tracking
+ * @notice BASHOOD-RWA-1: Interfaz estándar para activos industriales reales tokenizados en Base L2.
+ *
+ * ════════════════════════════════════════════════════════════════════
+ * DEFINICIÓN OFICIAL DEL TOKEN (v1.0) — Marco regulatorio: UE / MiCA
+ * ════════════════════════════════════════════════════════════════════
+ *
+ * Cada token BASHOOD-RWA-1 es un REGISTRO DIGITAL ESTRUCTURADO de un activo
+ * industrial físico individual. El token:
+ *
+ * SÍ REPRESENTA
+ * ─────────────
+ * · Un registro inmutable de los datos de identificación, especificaciones técnicas
+ *   y precio de compra del activo en el momento del mint.
+ * · Un registro mutable del valor de mercado tasado (currentValue), actualizado
+ *   exclusivamente por OracleValuationModule con fuentes Chainlink verificables.
+ * · Un identificador único, no fungible y transferible del registro on-chain.
+ *   La transferencia del token es transferencia del REGISTRO, no del activo físico.
+ *
+ * NO REPRESENTA
+ * ─────────────
+ * · Título de propiedad ni derecho real sobre el activo físico.
+ * · Derecho contractual, crédito, participación económica ni rendimiento distribuible.
+ * · Instrumento financiero en el sentido del Reglamento (UE) 2023/1114 (MiCA),
+ *   Directiva MiFID II (2014/65/UE), ni ningún otro marco regulatorio.
+ * · Garantía de ningún vínculo jurídico entre el token y el activo off-chain.
+ *   Cualquier vínculo contractual es responsabilidad exclusiva del emisor del token.
+ *
+ * NOTA SOBRE ESTRATEGIAS DE TOKENIZACIÓN
+ * ────────────────────────────────────
+ * El protocolo incluye campos de configuración (TokenizationConfig) para
+ * estrategias como micro-leasing, revenue-share o fractional. Estos campos
+ * son METADATOS DESCRIPTIVOS del modelo operativo del activo. Su uso para
+ * instrumentar derechos económicos reales requiere un marco legal off-chain
+ * adicional definido por el emisor y sujeto a la regulación aplicable.
+ *
+ * @dev BASHOOD-RWA-1 extiende ERC-721 con metadatos industriales estructurados.
+ *      Diseñado a partir de investigación de 5 empresas de robótica de construcción:
+ *      EVOCONS (ES), ICON (US), Apis Cor (US/UAE), CyBe (NL), Mighty Buildings (US).
+ *      Desplegado en Base L2 (Chain ID: 8453).
  */
 interface IBashoodRWA is IERC721 {
     
