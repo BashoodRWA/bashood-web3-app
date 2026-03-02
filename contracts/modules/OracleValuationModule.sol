@@ -1,13 +1,13 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-import "@openzeppelin/contracts/access/Ownable.sol";
 import "../oracles/IPriceFeed.sol";
 import "../standards/IBashoodRWA.sol";
 import "./IOracleValuation.sol";
+import "./BashoodModuleBase.sol";
 
 /**
- * @dev Minimal interface for the Core functions the module needs.
+ * @dev Minimal interface for the Core functions this module needs.
  *      Avoids importing the full BashoodRWAReference.
  */
 interface ICoreValuationTarget {
@@ -19,36 +19,53 @@ interface ICoreValuationTarget {
         uint256 newValue,
         string calldata reason
     ) external;
+
+    function ASSET_MANAGER_ROLE() external view returns (bytes32);
 }
 
 /**
  * @title OracleValuationModule
- * @notice External module responsible for resolving asset market value via
- *         Chainlink price feeds and pushing the result to BashoodCore.
+ * @notice Primer módulo externo del protocolo Bashood. Conforme al patrón
+ *         oficial IBashoodModule / BashoodModuleBase.
+ *         Responsabilidad única: resolver el valor de mercado de un activo
+ *         mediante un feed Chainlink y empujarlo al Core.
  *
- * @dev Reads the feed address from TelemetryConfig.oracleAddress stored in Core.
- *      Normalises the raw Chainlink answer to 1e18 (USD) and calls
- *      Core.updateAssetValue().  The Core must authorise this contract via
- *      setOracleModule() before any push succeeds.
+ * @dev El Core no conoce este contrato; la autorización se gestiona
+ *      exclusivamente por ASSET_MANAGER_ROLE (rol otorgado por el admin).
  *
- * Plan M4 – Fase 3: externalización de tasación por oráculo.
+ * Plan M4 – Fase 3.
  */
-contract OracleValuationModule is IOracleValuation, Ownable {
+contract OracleValuationModule is IOracleValuation, BashoodModuleBase {
 
-    // ── Immutable ────────────────────────────────────────────────────────────
-    address private immutable _coreContract;
+    // ── Identificadores del módulo ────────────────────────────────────────
+    bytes32 public constant MODULE_IDENTIFIER = keccak256("OracleValuation/1.0");
+    string  public constant MODULE_VER        = "1.0.0";
 
-    // ── Configuration ────────────────────────────────────────────────────────
-    /// @notice Maximum seconds a Chainlink round is considered fresh.
-    uint256 public stalenessThreshold = 3600; // 1 hour default
+    // ── Configuración ────────────────────────────────────────────────────
+    /// @notice Máximo de segundos que un round de Chainlink se considera fresco.
+    uint256 public stalenessThreshold = 3600;
 
     // ── Events ───────────────────────────────────────────────────────────────
     event StalenessThresholdUpdated(uint256 newThreshold);
 
     // ── Constructor ──────────────────────────────────────────────────────────
-    constructor(address core_) Ownable(msg.sender) {
+    constructor(address core_)
+        BashoodModuleBase(
+            core_,
+            keccak256("OracleValuation/1.0"),
+            "1.0.0",
+            _fetchRole(core_)
+        )
+    {}
+
+    /**
+     * @dev Auxiliar: valida que core_ != address(0) antes de leer su rol.
+     *      Necesario porque los argumentos al constructor base se evalúan
+     *      antes de que BashoodModuleBase pueda comprobar la dirección.
+     */
+    function _fetchRole(address core_) private view returns (bytes32) {
         require(core_ != address(0), "OracleValuation: invalid core address");
-        _coreContract = core_;
+        return ICoreValuationTarget(core_).ASSET_MANAGER_ROLE();
     }
 
     // ── Admin ────────────────────────────────────────────────────────────────
@@ -65,27 +82,31 @@ contract OracleValuationModule is IOracleValuation, Ownable {
 
     // ── IOracleValuation ─────────────────────────────────────────────────────
 
-    /// @inheritdoc IOracleValuation
-    function coreContract() external view override returns (address) {
-        return _coreContract;
-    }
+    // coreContract() es provisto por BashoodModuleBase.
 
     /**
-     * @notice Resolve the Chainlink feed for `tokenId` and push the value to Core.
-     * @dev Callable by anyone — the Core enforces authorisation via _oracleModule.
-     * @param tokenId  Asset NFT id to revalue.
+     * @notice Resuelve el feed Chainlink del activo y empuja el valor al Core.
+     * @dev Cualquiera puede llamar esta función; la autorización la aplica el
+     *      Core mediante ASSET_MANAGER_ROLE sobre este contrato.
+     * @param tokenId  ID del activo NFT a revaluar.
      */
     function pushValuation(uint256 tokenId) external override {
-        ICoreValuationTarget core = ICoreValuationTarget(_coreContract);
-        IBashoodRWA.TelemetryConfig memory cfg = core.getTelemetryConfig(tokenId);
+        _requireValidToken(tokenId);
 
-        require(cfg.oracleAddress != address(0), "OracleValuation: no oracle configured for token");
+        ICoreValuationTarget core_ = ICoreValuationTarget(_coreAddress());
+        IBashoodRWA.TelemetryConfig memory cfg = core_.getTelemetryConfig(tokenId);
+
+        require(
+            cfg.oracleAddress != address(0),
+            "OracleValuation: no oracle configured for token"
+        );
 
         uint256 scaled = resolveValue(cfg.oracleAddress);
 
         emit ValuationPushed(tokenId, cfg.oracleAddress, scaled, 18, scaled);
+        emit ModuleOperationExecuted(tokenId, msg.sender);
 
-        core.updateAssetValue(tokenId, scaled, "ORACLE_REVALUATION");
+        core_.updateAssetValue(tokenId, scaled, "ORACLE_REVALUATION");
     }
 
     /**
@@ -93,8 +114,13 @@ contract OracleValuationModule is IOracleValuation, Ownable {
      * @param priceFeed  Chainlink AggregatorV3-compatible feed address.
      * @return scaledValue  Price in USD, scaled to 1e18.
      */
-    function resolveValue(address priceFeed) public view override returns (uint256 scaledValue) {
-        require(priceFeed != address(0), "OracleValuation: zero feed address");
+    function resolveValue(address priceFeed)
+        public
+        view
+        override
+        returns (uint256 scaledValue)
+    {
+        _requireNotZero(priceFeed, "OracleValuation: zero feed address");
 
         IPriceFeed feed = IPriceFeed(priceFeed);
 
@@ -112,7 +138,7 @@ contract OracleValuationModule is IOracleValuation, Ownable {
         uint8 dec = feed.decimals();
         uint256 raw = uint256(answer);
 
-        // Normalise to 1e18
+        // Normalizar a 1e18
         if (dec < 18) {
             scaledValue = raw * (10 ** uint256(18 - dec));
         } else if (dec > 18) {

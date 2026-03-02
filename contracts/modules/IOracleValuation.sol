@@ -40,8 +40,5 @@ interface IOracleValuation {
      */
     function resolveValue(address priceFeed) external view returns (uint256 scaledValue);
 
-    /**
-     * @notice Address of the BashoodCore contract this module is bound to.
-     */
-    function coreContract() external view returns (address);
+    // coreContract() se hereda de IBashoodModule — no se redeclara aquí.
 }
