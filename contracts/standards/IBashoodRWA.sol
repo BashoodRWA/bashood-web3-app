@@ -210,15 +210,19 @@ interface IBashoodRWA is IERC721 {
         uint32 timestamp
     );
     
-    /// @notice Emitted when certification is added or expires
+    /// @notice Emitted when certification is added or expires.
+    /// @dev No emitido por el Core. Reservado para uso del CertificationModule (M4-F3).
+    ///      El módulo emite sus propios eventos CertificationAdded / CertificationRevoked.
     event CertificationUpdated(
         uint256 indexed tokenId,
         string certificationType,
         bool isActive,
         uint32 expiryDate
     );
-    
-    /// @notice Emitted when insurance is updated
+
+    /// @notice Emitted when insurance data is updated.
+    /// @dev No emitido por el Core. Reservado para uso del InsuranceModule (M4-F3).
+    ///      El módulo emite sus propios eventos PolicyRegistered / PolicyRevoked.
     event InsuranceUpdated(
         uint256 indexed tokenId,
         string provider,
@@ -423,9 +427,8 @@ interface IBashoodRWA is IERC721 {
     
     /// @notice Get estimated residual value (salvage value at end of life)
     /// @param tokenId Token ID
-    /// @return residualValue Estimated value in USD (scaled 1e18)
     function getResidualValue(uint256 tokenId) external view returns (uint256 residualValue);
-    
+
     /// @notice Get remaining useful life percentage
     /// @param tokenId Token ID
     /// @return remainingLifePct Percentage of useful life remaining (0-100)

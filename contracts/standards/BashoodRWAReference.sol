@@ -39,90 +39,38 @@ contract BashoodRWAReference is
     UUPSUpgradeable,
     IBashoodRWA 
 {
-    // ============ Depreciation Events ============
-    event DepreciationCalculated(uint256 indexed tokenId, uint256 depreciationBps);
-
-    // ============ Depreciation Calculation ============
-
-    /**
-     * @dev Internal: Calcula la depreciación (basis points) según el modelo y métricas del token
-     */
-    function _calculateDepreciation(uint256 tokenId) internal view returns (uint256) {
-        _requireOwned(tokenId);
-        FinancialData memory financial = _financialData[tokenId];
-        OperationalMetrics memory operational = _operationalMetrics[tokenId];
-
-        if (financial.depModel == DepreciationModel.LOAD_BASED) {
-            return DepreciationEngine.loadBased(operational.totalLoadLifted, operational.maxLoadLifetime);
-        } else if (financial.depModel == DepreciationModel.EXTRUSION_BASED) {
-            return DepreciationEngine.extrusionBased(operational.metersExtruded, operational.maxMetersLifetime);
-        } else if (financial.depModel == DepreciationModel.SETUP_BASED) {
-            return DepreciationEngine.setupBased(operational.setupCount, operational.maxSetups);
-        } else if (financial.depModel == DepreciationModel.LINEAR) {
-            return DepreciationEngine.linearTimeBased(operational.operatingHours, operational.maxLifetimeHours);
-        }
-        return 0;
-    }
-
-    /**
-     * @notice Devuelve la depreciación actual (basis points)
-     */
-    function getDepreciation(uint256 tokenId) public view returns (uint256) {
-        uint256 dep = _calculateDepreciation(tokenId);
-        // Evento solo para trazabilidad (no en view, pero aquí para consistencia de interfaz)
-        // emit DepreciationCalculated(tokenId, dep); // Comentado: no se puede emitir en view
-        return dep;
-    }
+    // ============ Enums ============
+    // Uso interno: enum UsageMetricType { LOAD, EXTRUSION, SETUP, HOURS }
+    // ============ Enums ============
+    // ============ Enums ============
+    enum UsageMetricType { LOAD, EXTRUSION, SETUP, HOURS }
     // ============ Constants ============
-    
     bytes32 public constant ASSET_MANAGER_ROLE = keccak256("ASSET_MANAGER_ROLE");
     bytes32 public constant ORACLE_ROLE = keccak256("ORACLE_ROLE");
     bytes32 public constant UPGRADER_ROLE = keccak256("UPGRADER_ROLE");
-    
     uint256 public constant SECONDS_PER_YEAR = 365 days;
     uint256 public constant BASIS_POINTS = 10000; // 100.00%
-    
+
     // ============ State Variables ============
-    
-    /// @dev Counter for token IDs
     uint256 private _nextTokenId;
-    
-    /// @dev Mapping from token ID to asset identification data
     mapping(uint256 => AssetIdentification) private _assetIdentification;
-    
-    /// @dev Mapping from token ID to technical specifications
     mapping(uint256 => TechnicalSpecs) private _technicalSpecs;
-    
-    /// @dev Mapping from token ID to financial data
     mapping(uint256 => FinancialData) private _financialData;
-    
-    /// @dev Mapping from token ID to operational metrics
     mapping(uint256 => OperationalMetrics) private _operationalMetrics;
-    
-    /// @dev Mapping from token ID to certification data
     mapping(uint256 => CertificationData) private _certificationData;
-    
-    /// @dev Mapping from token ID to telemetry configuration
     mapping(uint256 => TelemetryConfig) private _telemetryConfig;
-    
-    /// @dev Mapping from token ID to tokenization configuration
     mapping(uint256 => TokenizationConfig) private _tokenizationConfig;
-    
-    /// @dev Mapping from token ID to insurance data
     mapping(uint256 => InsuranceData) private _insuranceData;
-    
-    /// @dev Mapping from token ID to metadata URI
     mapping(uint256 => string) private _tokenURIs;
-    
-    /// @dev Base URI for metadata
     string private _baseTokenURI;
-    
+
     // ============ Initialization ============
-    
     /// @custom:oz-upgrades-unsafe-allow constructor
     constructor() {
         _disableInitializers();
     }
+
+    // ...existing code...
     
     /**
      * @notice Initialize the contract
@@ -252,6 +200,14 @@ contract BashoodRWAReference is
         return _operationalMetrics[tokenId];
     }
     
+    /**
+     * @notice Devuelve los flags de elegibilidad de certificación establecidos
+     *         en el momento del mint del activo (estado inicial, inmutable).
+     * @dev ATENCIóN: Este mapping nunca se escribe tras el mint.
+     *      El estado de compliance VIGENTE y auditable vive en
+     *      CertificationModule (M4-F3). No usar este getter para
+     *      determinar si un activo está certificado actualmente.
+     */
     function getCertificationData(uint256 tokenId) 
         external 
         view 
@@ -279,6 +235,14 @@ contract BashoodRWAReference is
         return _tokenizationConfig[tokenId];
     }
     
+    /**
+     * @notice Devuelve los datos de seguro establecidos en el momento del mint
+     *         del activo (estado inicial, inmutable).
+     * @dev ATENCIóN: Este mapping nunca se escribe tras el mint.
+     *      El estado de la póliza VIGENTE y auditable vive en
+     *      InsuranceModule (M4-F3). No usar este getter para
+     *      determinar si un activo está asegurado actualmente.
+     */
     function getInsuranceData(uint256 tokenId) 
         external 
         view 
@@ -343,41 +307,9 @@ contract BashoodRWAReference is
         returns (uint256) 
     {
         _requireOwned(tokenId);
-        
         FinancialData memory financial = _financialData[tokenId];
         OperationalMetrics memory operational = _operationalMetrics[tokenId];
-        TechnicalSpecs memory specs = _technicalSpecs[tokenId];
-        
-        if (financial.depModel == DepreciationModel.LOAD_BASED) {
-            // EVOCONS: Depreciation based on tons lifted
-            uint256 maxLoad = operational.maxLoadLifetime;
-            if (maxLoad == 0) return 0;
-            uint256 usagePct = (operational.totalLoadLifted * BASIS_POINTS) / maxLoad;
-            return usagePct > BASIS_POINTS ? BASIS_POINTS : usagePct;
-            
-        } else if (financial.depModel == DepreciationModel.EXTRUSION_BASED) {
-            // ICON: Depreciation based on linear meters extruded
-            uint256 maxMeters = operational.maxMetersLifetime;
-            if (maxMeters == 0) return 0;
-            uint256 usagePct = (operational.metersExtruded * BASIS_POINTS) / maxMeters;
-            return usagePct > BASIS_POINTS ? BASIS_POINTS : usagePct;
-            
-        } else if (financial.depModel == DepreciationModel.SETUP_BASED) {
-            // Apis Cor: Depreciation based on setup count
-            uint256 maxSetups = operational.maxSetups;
-            if (maxSetups == 0) return 0;
-            uint256 usagePct = (operational.setupCount * BASIS_POINTS) / maxSetups;
-            return usagePct > BASIS_POINTS ? BASIS_POINTS : usagePct;
-            
-        } else if (financial.depModel == DepreciationModel.LINEAR) {
-            // Mighty Buildings: Linear time-based depreciation
-            if (operational.maxLifetimeHours == 0) return 0;
-            uint256 usagePct = (operational.operatingHours * BASIS_POINTS) / operational.maxLifetimeHours;
-            return usagePct > BASIS_POINTS ? BASIS_POINTS : usagePct;
-            
-        }
-        
-        return 0;
+        return DepreciationEngine.calculateDepreciation(uint8(financial.depModel), operational);
     }
     
     /**
@@ -434,7 +366,7 @@ contract BashoodRWAReference is
     /**
      * @notice Update operational metrics (typically called by oracle)
      * @param tokenId Token ID
-     * @param metricType Type of metric (LOAD, EXTRUSION, SETUP, HOURS)
+     * @param metricType Enum type of metric (LOAD, EXTRUSION, SETUP, HOURS)
      * @param newValue New value of the metric
      */
     function updateUsageMetrics(
@@ -443,27 +375,40 @@ contract BashoodRWAReference is
         uint256 newValue
     ) external onlyRole(ORACLE_ROLE) {
         _requireOwned(tokenId);
-        
-        // Fix: Initialize oldValue to 0 to avoid uninitialized variable warning
         uint256 oldValue = 0;
-        
-        // Update based on metric type
-        if (keccak256(bytes(metricType)) == keccak256(bytes("LOAD"))) {
+        // Internamente convertimos string a enum
+        uint8 metricEnum = _metricTypeStringToEnum(metricType);
+        if (metricEnum == 0) { // LOAD
             oldValue = _operationalMetrics[tokenId].totalLoadLifted;
             _operationalMetrics[tokenId].totalLoadLifted = newValue;
-        } else if (keccak256(bytes(metricType)) == keccak256(bytes("EXTRUSION"))) {
+        } else if (metricEnum == 1) { // EXTRUSION
             oldValue = _operationalMetrics[tokenId].metersExtruded;
             _operationalMetrics[tokenId].metersExtruded = newValue;
-        } else if (keccak256(bytes(metricType)) == keccak256(bytes("SETUP"))) {
+        } else if (metricEnum == 2) { // SETUP
             oldValue = _operationalMetrics[tokenId].setupCount;
             _operationalMetrics[tokenId].setupCount = uint32(newValue);
-        } else if (keccak256(bytes(metricType)) == keccak256(bytes("HOURS"))) {
+        } else if (metricEnum == 3) { // HOURS
             oldValue = _operationalMetrics[tokenId].operatingHours;
             _operationalMetrics[tokenId].operatingHours = newValue;
         }
-        
         uint256 depreciation = getDepreciationPercentage(tokenId);
         emit UsageMetricsUpdated(tokenId, metricType, oldValue, newValue, depreciation);
+    }
+
+    function _metricTypeStringToEnum(string calldata metricType) internal pure returns (uint8) {
+        if (keccak256(bytes(metricType)) == keccak256(bytes("LOAD"))) return 0;
+        if (keccak256(bytes(metricType)) == keccak256(bytes("EXTRUSION"))) return 1;
+        if (keccak256(bytes(metricType)) == keccak256(bytes("SETUP"))) return 2;
+        if (keccak256(bytes(metricType)) == keccak256(bytes("HOURS"))) return 3;
+        return 255; // UNKNOWN
+    }
+
+    function _usageMetricTypeToString(UsageMetricType metricType) internal pure returns (string memory) {
+        if (metricType == UsageMetricType.LOAD) return "LOAD";
+        if (metricType == UsageMetricType.EXTRUSION) return "EXTRUSION";
+        if (metricType == UsageMetricType.SETUP) return "SETUP";
+        if (metricType == UsageMetricType.HOURS) return "HOURS";
+        return "UNKNOWN";
     }
     
     /**
@@ -526,10 +471,14 @@ contract BashoodRWAReference is
     }
     
     // ============ Certification & Compliance ============
-    // Removed: updateCertification(), isCompliant() - Moved to off-chain validation
-    
+    // updateCertification() e isCompliant() movidos a CertificationModule (M4-F3).
+    // _certificationData existe en storage por compatibilidad del proxy UUPS;
+    // su escritura y la lógica de compliance viven en CertificationModule.
+
     // ============ Insurance Management ============
-    // Removed: updateInsurance() - Moved to off-chain tracking
+    // updateInsurance() movido a InsuranceModule (M4-F3).
+    // _insuranceData existe en storage por compatibilidad del proxy UUPS;
+    // su escritura y la lógica de pólizas viven en InsuranceModule.
     
     // ============ Metadata ============
     
