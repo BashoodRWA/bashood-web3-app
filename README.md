@@ -24,20 +24,22 @@ Los activos industriales de alto valor (maquinaria pesada, equipos mineros, grú
 
 | 🚧 Problema | 💡 Solución Bashood |
 |-------------|---------------------|
-| **Capital Alto** - $100k-$500k por equipo, inaccesible para inversores retail | **Fraccionamiento** - NFTs permiten inversión desde $100 |
+| **Acceso limitado** - $100k-$500k por equipo, fuera del alcance de la mayoría | **Registro accesible** - Participación desde $100 (modelo económico específico definido por el emisor) |
 | **Liquidez Nula** - Revender equipos toma meses, mercados fragmentados | **Mercado 24/7** - Trading instantáneo en exchanges descentralizados |
-| **Opacidad** - Documentación en papel, difícil verificar propiedad/historial | **Transparencia** - Registro inmutable on-chain, trazabilidad completa |
+| **Opacidad** - Documentación en papel, difícil verificar estado e historial | **Transparencia** - Registro inmutable on-chain, trazabilidad completa |
 | **Costos Intermediarios** - Brokers cobran 10-15% en comisiones | **Directo** - Smart contracts eliminan intermediarios |
-| **Acceso Geográfico** - Limitado a inversores locales | **Global** - Acceso desde cualquier wallet compatible |
+| **Acceso Geográfico** - Limitado a participantes locales | **Global** - Acceso desde cualquier wallet compatible |
 
-### **Nuestra Solución: Tokenización Híbrida Multi-Capa**
+### **Nuestra Solución: Registro Digital Estructurado de Activos Industriales**
 
-Bashood combina **activos físicos reales** con **tecnología blockchain** para crear un mercado eficiente, transparente y accesible:
+Bashood combina **activos físicos reales** con **tecnología blockchain** para crear un registro verificable, transparente y accesible:
 
 ```
-Activo Físico → NFT ERC1155 → Presale Smart Contract → Inversores Globales
-   ($250k)         (1 NFT)     (ETH/BHT payments)      (desde $100)
+Activo Físico → Registro NFT (BASHOOD-RWA-1) → Smart Contract → Participantes Globales
+   ($250k)          (ERC-721, 1 token)         (ETH/BHT)      (acceso desde $100)
 ```
+
+> ⚖️ **Definición oficial del token (v1.0, marco UE/MiCA):** Cada token BASHOOD-RWA-1 es un **registro digital estructurado** de un activo industrial físico. No representa título de propiedad, derecho contractual ni rendimiento distribuible sobre el activo. No está diseñado como instrumento financiero en el sentido de MiCA (Reglamento UE 2023/1114) o MiFID II. Cualquier vínculo jurídico entre el token y el activo off-chain, así como la clasificación regulatoria de cada emisión, es responsabilidad exclusiva del emisor. Ver [BASHOOD-RWA-1-SPECIFICATION.md](docs/BASHOOD-RWA-1-SPECIFICATION.md) y [IBashoodRWA.sol](contracts/standards/IBashoodRWA.sol).
 
 **Estado**: ✅ Listo para deployment en Base Sepolia  
 **Tests**: 442/446 passing (99.1%) ✅  

@@ -4,6 +4,8 @@
 **Fecha:** 16 Febrero 2026  
 **Objetivo:** Series A ($2M-$5M), CEX listings, partnerships
 
+> ⚠️ **Nota de coherencia documental (v1.0, 2026-03-02):** Este documento fue redactado antes de la fijación de la definición oficial del token. Cualquier referencia a "tokenización", "inversores", "% propiedad" o "rendimientos" en este deck debe interpretarse conforme a la definición oficial vigente: cada token BASHOOD-RWA-1 es un **registro digital estructurado** del activo, no un instrumento financiero. El lenguaje final de cualquier material de fundraising o marketing debe ser revisado con asesoría legal antes de su uso externo.
+
 ---
 
 ## 🎯 DECK PURPOSE
