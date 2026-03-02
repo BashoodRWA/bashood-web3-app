@@ -325,7 +325,76 @@ echidna test/echidna/BashoodEchidna.sol --contract BashoodTokenEchidnaTest
 | [`ChainlinkPriceFeed.sol`](contracts/oracles/ChainlinkPriceFeed.sol) | Oracle Chainlink para ETH/USD con validaciones |
 | [`BashoodPropertyNFT.sol`](contracts/BashoodPropertyNFT.sol) | NFT ERC721 para propiedades inmobiliarias |
 
-### **Interfaces**
+### **Protocolo RWA — Módulos Externos (Plan M4-F3)**
+
+| Módulo | Rol en Core | Responsabilidad única |
+|--------|-------------|----------------------|
+| [`OracleValuationModule`](contracts/modules/OracleValuationModule.sol) | `ASSET_MANAGER_ROLE` | Actualizador canónico del valor de mercado vía Chainlink |
+| [`CertificationModule`](contracts/modules/CertificationModule.sol) | `bytes32(0)` (read-only) | Estado de compliance vigente (certType bytes32, n certs/token) |
+| [`InsuranceModule`](contracts/modules/InsuranceModule.sol) | `bytes32(0)` (read-only) | Póliza de seguro vigente (1 póliza activa por token) |
+
+---
+
+## 📊 Modelo de Verdad del Protocolo RWA
+
+> **Regla crítica para integradores y auditores externos:**
+> Hay tres fuentes de verdad diferentes según lo que se consulte.
+
+### Verdad Económica (valor de mercado)
+
+```
+Fuente autoritativa: Core.getFinancialData(tokenId).currentValue
+
+Actualizador autorizado en producción:
+  OracleValuationModule.pushValuation(tokenId)
+  → Lee feed Chainlink configurado en Core.getTelemetryConfig(tokenId).oracleAddress
+  → Normaliza a 1e18
+  → Escribe Core.updateAssetValue(tokenId, value, "ORACLE_REVALUATION")
+
+PROHIBIDO en producción:
+  Core.updateAssetValue() llamado directamente por EOA o contrato arbitrario.
+  Solo se permite en emergencia documentada con reason = "ADMIN_APPRAISAL".
+```
+
+### Verdad de Compliance (certificaciones)
+
+```
+Core.getCertificationData(tokenId)
+  → Flags booleanos establecidos en el MINT del activo (inmutables)
+  → ceMark, ul3401, iso9001, iso14001, ibcCompliant, oshaCompliant
+  → Nunca se actualiza tras el mint
+
+CertificationModule.getCertification(tokenId, certType)
+CertificationModule.isCompliant(tokenId, [certType, ...])
+  → Estado de compliance VIGENTE y auditable
+  → certType = keccak256("CE_MARK") | keccak256("ISO_9001") | ...
+  → Fuente autoritativa para due-diligence on-chain
+```
+
+### Verdad de Seguro (póliza activa)
+
+```
+Core.getInsuranceData(tokenId)
+  → Datos de seguro establecidos en el MINT del activo (inmutables)
+  → Nunca se actualiza tras el mint
+
+InsuranceModule.getPolicy(tokenId)
+InsuranceModule.isInsured(tokenId)
+  → Póliza VIGENTE y auditable
+  → policyId = keccak256(policyNumber)
+  → Fuente autoritativa para cobertura actual
+```
+
+### Resumen para auditores
+
+| ¿Qué quiero saber? | Fuente correcta | NUNCA usar |
+|---|---|---|
+| Valor de mercado actual | `Core.currentValue` (vía `getFinancialData`) | Calcular fuera del Core |
+| ¿Está certificado hoy? | `CertificationModule.isCompliant()` | `Core.getCertificationData()` |
+| ¿Está asegurado hoy? | `InsuranceModule.isInsured()` | `Core.getInsuranceData()` |
+| Historial de valor | Eventos `AssetValueUpdated` (on-chain log) | Storage directamente |
+
+---
 
 ```solidity
 interface IBashoodRescue {

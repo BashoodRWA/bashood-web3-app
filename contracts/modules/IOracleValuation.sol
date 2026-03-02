@@ -3,10 +3,33 @@ pragma solidity ^0.8.20;
 
 /**
  * @title IOracleValuation
- * @notice Interface for the external oracle valuation module.
- * @dev Decouples Chainlink price-feed resolution from BashoodCore storage.
- *      The module is authorised on the Core via setOracleModule() and calls
- *      updateAssetValue() to push the resolved price.
+ * @notice Interfaz del módulo externo de tasación por oráculo del protocolo Bashood.
+ *
+ * ════════════════════════════════════════════════════════════════════════
+ * ACTUALIZADOR CANONÍCO DEL VALOR ECONÓMICO — Plan M4 / BASHOOD-RWA-1
+ * ════════════════════════════════════════════════════════════════════════
+ *
+ * Este módulo es el único actualizador autorizado de
+ * `FinancialData.currentValue` en el Core (BashoodRWAReference) durante
+ * la operación normal del protocolo.
+ *
+ * FLUJO OFICIAL DE VALORACIÓN
+ * ───────────────────────────
+ * 1. El admin configura el feed Chainlink del activo:
+ *      Core.configureTelemetry(tokenId, { oracleAddress: feedAddress, ... })
+ * 2. El admin otorga rol al módulo:
+ *      Core.grantRole(ASSET_MANAGER_ROLE, address(OracleValuationModule))
+ * 3. Cualquier cuenta llama en el momento deseado:
+ *      OracleValuationModule.pushValuation(tokenId)
+ *    El módulo resuelve el feed, normaliza a 1e18 y escribe en Core.
+ * 4. El Core emite AssetValueUpdated con reason="ORACLE_REVALUATION".
+ *
+ * PROHIBICIONES
+ * ─────────────
+ * · En producción, no se debe llamar Core.updateAssetValue() directamente
+ *   salvo emergencia documentada con reason="ADMIN_APPRAISAL".
+ * · Este módulo no tiene cursor de valoración propio; la fuente de
+ *   verdad económica siempre es Core.getFinancialData(tokenId).currentValue.
  *
  * Plan M4 – Fase 3: externalización de tasación por oráculo.
  */

@@ -253,11 +253,36 @@ contract BashoodRWAReference is
     }
     
     // ============ Value Management ============
-    
+
     /**
-     * @notice Update asset current value (typically called by oracle or asset manager)
-     * @param tokenId Token ID
-     * @param newValue New current value
+     * @notice Actualiza el valor de mercado actual del activo.
+     *
+     * ════════════════════════════════════════════════════════════════════
+     * FUENTE DE VERDAD ECONÓMICA OFICIAL — Plan M4 / BASHOOD-RWA-1
+     * ════════════════════════════════════════════════════════════════════
+     *
+     * `FinancialData.currentValue` es el único campo autoritativo del
+     * valor de mercado de un activo on-chain. Toda lógica de valoración
+     * (depreciación, oracle, tasación manual) converge en este campo.
+     *
+     * PROTOCOLO DE PRODUCCIÓN
+     * ────────────────────────
+     * · En producción, el único caller autorizado es OracleValuationModule
+     *   (al que se otorga ASSET_MANAGER_ROLE). Las actualizaciones manuales
+     *   directas al Core están PROHIBIDAS salvo emergencia documentada.
+     * · Toda actualización debe incluir un `reason` auditable:
+     *     - "ORACLE_REVALUATION"   → llamada de OracleValuationModule
+     *     - "ADMIN_APPRAISAL"      → tasación manual de emergencia
+     *     - "DEPRECIATION_UPDATE"  → ajuste manual por depreciación
+     * · Emite `AssetValueUpdated` con oldValue/newValue/reason para
+     *   trazabilidad completa por indexadores off-chain.
+     *
+     * INTEGRADORES: no llaméis a esta función directamente; usad
+     * OracleValuationModule.pushValuation(tokenId) en su lugar.
+     *
+     * @param tokenId  ID del activo NFT.
+     * @param newValue Nuevo valor en USD, escalado 1e18. Debe ser > 0.
+     * @param reason   Cadena auditable del origen de la actualización.
      */
     function updateAssetValue(uint256 tokenId, uint256 newValue, string calldata reason) 
         external 
