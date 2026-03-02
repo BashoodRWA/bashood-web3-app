@@ -28,8 +28,11 @@ import "@openzeppelin/contracts/token/ERC721/IERC721.sol";
  * ─────────────
  * · Título de propiedad ni derecho real sobre el activo físico.
  * · Derecho contractual, crédito, participación económica ni rendimiento distribuible.
- * · Instrumento financiero en el sentido del Reglamento (UE) 2023/1114 (MiCA),
- *   Directiva MiFID II (2014/65/UE), ni ningún otro marco regulatorio.
+ * · No dise\u00f1ado como instrumento financiero ni como criptoactivo con derechos
+ *   financieros en el sentido de MiCA (Reglamento UE 2023/1114) o MiFID II
+ *   (Directiva 2014/65/UE), sin que esto constituya una autocalificaci\u00f3n
+ *   jur\u00eddica absoluta. La clasificaci\u00f3n regulatoria de cada emisi\u00f3n es
+ *   responsabilidad del emisor y depende del marco jur\u00eddico aplicable.
  * · Garantía de ningún vínculo jurídico entre el token y el activo off-chain.
  *   Cualquier vínculo contractual es responsabilidad exclusiva del emisor del token.
  *

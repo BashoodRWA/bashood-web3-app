@@ -14,7 +14,7 @@ Under Regulation (EU) 2023/1114 (MiCA), each BASHOOD-RWA-1 token is intended to 
 |---|---|
 | Uniqueness | Each token represents a single, unique physical asset (non-fungible) |
 | No stabilization mechanism | `currentValue` is an appraisal record, not a peg or redemption guarantee |
-| No financial instrument rights | Token transfer conveys the registry record only, not asset title or income rights |
+| Not designed as financial instrument | Token transfer conveys the registry record only, not asset title or income rights. Regulatory classification of each specific issuance remains the emitter's legal responsibility. |
 | No revenue distribution | `TokenizationConfig` fields are descriptive metadata; economic rights require a separate off-chain legal framework defined by the emitter |
 
 If an emitter uses `TokenizationConfig` (revenue-share, micro-leasing, fractional shares) to instrument real economic rights, the resulting instrument may be subject to MiCA (Article 3(1) — asset-referenced token) or MiFID II depending on jurisdiction. **The protocol does not determine the regulatory classification of any specific issuance. That classification is the legal responsibility of the asset emitter.**
