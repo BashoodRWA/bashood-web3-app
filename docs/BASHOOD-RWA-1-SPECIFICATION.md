@@ -465,7 +465,7 @@ The standard includes metadata for 5 real industrial assets:
 
 ### BASHOOD-RWA-2 (Planned)
 - Carbon credit integration for ESG assets
-- Automated yield distribution to fractional owners
+- Configurable distribution flows for emitters who establish contractual economic frameworks off-chain (not yield instruments; distribution mechanics are emitter-defined)
 - Cross-chain asset bridging (Base ↔ Ethereum ↔ Polygon)
 - DeFi primitives (lending against RWA collateral)
 

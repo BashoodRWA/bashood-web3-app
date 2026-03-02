@@ -103,7 +103,7 @@ Convertimos maquinaria industrial en NFTs ERC-721 cumpliendo con BASHOOD-RWA-1. 
 ### 4.2 Plataforma Fractional Ownership
 
 **Descripción:**  
-Permite comprar fracciones de activos industriales desde $100. Construye portfolio diversificado y recibe dividendos automáticos.
+Permite registrar digitalmente fracciones de activos industriales desde $100. Construye cartera diversificada y recibe distribuciones según los términos del acuerdo contractual del emisor.
 
 **Características:**
 - Cumplimiento KYC/AML
@@ -548,20 +548,22 @@ struct Asset {
 
 ---
 
-## 💼 9. INFORMACIÓN PARA INVERSORES
+## 💼 9. INFORMACIÓN PARA PARTICIPANTES
 
-### 9.1 Perfiles de Inversión
+> ⚠️ **Aviso de coherencia documental (v1.0, 2026-03-02):** Esta sección fue redactada antes de la fijación de la definición oficial del token. Los tokens BASHOOD-RWA-1 son registros digitales estructurados de activos industriales, no instrumentos financieros. Las referencias a "ROI", "dividendos" o "inversores" en esta sección son orientativas del modelo operativo potencial del emisor. Cualquier material basado en este dossier debe ser revisado y adaptado con asesoría legal antes de su uso externo. Los derechos económicos específicos dependen del marco contractual que establezca el emisor de cada activo.
 
-**Tier 1: Retail ($100-$10,000)**
-- Fractional ownership mínimo $100
+### 9.1 Perfiles de Participación
+
+**Tier 1: Pequeño ($100-$10,000)**
+- Registro fraccionado mínimo $100
 - Diversificación 5-10 activos recomendada
-- ROI objetivo: 10-14% anual
-- Pago dividendos: Mensual automático
+- Distribución potencial: según acuerdo del emisor (estimación orientativa, no garantizada)
+- Distribuciones: según acuerdo contractual
 - Liquidez: Trading 24/7 mercado secundario
 
-**Tier 2: Accredited ($10,000-$100,000)**
+**Tier 2: Acreditado ($10,000-$100,000)**
 - Acceso performance bonds
-- ROI objetivo: 12-18% anual
+- Distribución potencial: según acuerdo del emisor (estimación orientativa, no garantizada)
 - Reporting trimestral detallado
 - Acceso pre-sale nuevos activos
 - Participación governance futuro DAO
@@ -569,7 +571,7 @@ struct Asset {
 **Tier 3: Institucional ($100,000+)**
 - Portfolios customizados
 - Deal flow preferente
-- ROI objetivo: 15-20% anual
+- Distribución potencial: según acuerdo del emisor (estimación orientativa, no garantizada)
 - Institutional custody Fireblocks
 - Direct line equipo BASHOOD
 
@@ -586,9 +588,9 @@ struct Asset {
     ↓
 04. Seleccionar Activos
     ↓
-05. Comprar Fracciones (NFT emitido)
+05. Adquirir Registros Fraccionados (token BASHOOD-RWA-1 emitido)
     ↓
-06. Recibir Dividendos (Automáticos mensual)
+06. Recibir Distribuciones (según acuerdo contractual del emisor)
 ```
 
 ---

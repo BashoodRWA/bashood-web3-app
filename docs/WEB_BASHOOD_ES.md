@@ -5,7 +5,7 @@
 **Bashood es un proyecto de tokenización en Base Chain con dos componentes principales:**
 
 1. **OPERATIVO AHORA:** Sistema de preventa de tokens BHT (auditado, 87 tests pasando)
-2. **EN DESARROLLO:** Plataforma para tokenizar activos reales (viviendas 3D, árboles, equipos industriales)
+2. **EN DESARROLLO:** Plataforma de registro digital estructurado de activos reales (BASHOOD-RWA-1: viviendas 3D, árboles, equipos industriales)
 
 **Estado actual:** Preventa lista para mainnet. Tokenización de activos físicos en fase de diseño técnico (interfaz completada, implementación pendiente).
 
