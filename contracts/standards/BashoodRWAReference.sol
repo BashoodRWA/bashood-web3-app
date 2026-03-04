@@ -65,6 +65,14 @@ contract BashoodRWAReference is
     mapping(uint256 => string) private _tokenURIs;
     string private _baseTokenURI;
 
+    /**
+     * @dev Storage gap para upgrades seguros (patrón OZ).
+     *      Slots usados: 11 (_nextTokenId + 9 mappings + _baseTokenURI).
+     *      Reserva: 50 slots adicionales. Reducir en 1 por cada nueva variable
+     *      que se añada en una acción de upgrade.
+     */
+    uint256[50] private __gap;
+
     // ============ Initialization ============
     /// @custom:oz-upgrades-unsafe-allow constructor
     constructor() {

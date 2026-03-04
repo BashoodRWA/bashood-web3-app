@@ -1,0 +1,888 @@
+{
+  "generatedAt": "2026-03-04T13:17:07.552Z",
+  "solcVersion": "0.8.28",
+  "evmVersion": "cancun",
+  "note": "Layout de referencia para v1.0-mainnet-freeze. Cualquier upgrade DEBE validarse contra este archivo usando @openzeppelin/hardhat-upgrades validateUpgrade().",
+  "contracts": {
+    "BashoodRWAReference": {
+      "storageLayout": {
+        "storage": [
+          {
+            "astId": 43838,
+            "contract": "contracts/standards/BashoodRWAReference.sol:BashoodRWAReference",
+            "label": "_nextTokenId",
+            "offset": 0,
+            "slot": "0",
+            "type": "t_uint256"
+          },
+          {
+            "astId": 43843,
+            "contract": "contracts/standards/BashoodRWAReference.sol:BashoodRWAReference",
+            "label": "_assetIdentification",
+            "offset": 0,
+            "slot": "1",
+            "type": "t_mapping(t_uint256,t_struct(AssetIdentification)45344_storage)"
+          },
+          {
+            "astId": 43848,
+            "contract": "contracts/standards/BashoodRWAReference.sol:BashoodRWAReference",
+            "label": "_technicalSpecs",
+            "offset": 0,
+            "slot": "2",
+            "type": "t_mapping(t_uint256,t_struct(TechnicalSpecs)45368_storage)"
+          },
+          {
+            "astId": 43853,
+            "contract": "contracts/standards/BashoodRWAReference.sol:BashoodRWAReference",
+            "label": "_financialData",
+            "offset": 0,
+            "slot": "3",
+            "type": "t_mapping(t_uint256,t_struct(FinancialData)45385_storage)"
+          },
+          {
+            "astId": 43858,
+            "contract": "contracts/standards/BashoodRWAReference.sol:BashoodRWAReference",
+            "label": "_operationalMetrics",
+            "offset": 0,
+            "slot": "4",
+            "type": "t_mapping(t_uint256,t_struct(OperationalMetrics)45414_storage)"
+          },
+          {
+            "astId": 43863,
+            "contract": "contracts/standards/BashoodRWAReference.sol:BashoodRWAReference",
+            "label": "_certificationData",
+            "offset": 0,
+            "slot": "5",
+            "type": "t_mapping(t_uint256,t_struct(CertificationData)45431_storage)"
+          },
+          {
+            "astId": 43868,
+            "contract": "contracts/standards/BashoodRWAReference.sol:BashoodRWAReference",
+            "label": "_telemetryConfig",
+            "offset": 0,
+            "slot": "6",
+            "type": "t_mapping(t_uint256,t_struct(TelemetryConfig)45443_storage)"
+          },
+          {
+            "astId": 43873,
+            "contract": "contracts/standards/BashoodRWAReference.sol:BashoodRWAReference",
+            "label": "_tokenizationConfig",
+            "offset": 0,
+            "slot": "7",
+            "type": "t_mapping(t_uint256,t_struct(TokenizationConfig)45460_storage)"
+          },
+          {
+            "astId": 43878,
+            "contract": "contracts/standards/BashoodRWAReference.sol:BashoodRWAReference",
+            "label": "_insuranceData",
+            "offset": 0,
+            "slot": "8",
+            "type": "t_mapping(t_uint256,t_struct(InsuranceData)45472_storage)"
+          },
+          {
+            "astId": 43882,
+            "contract": "contracts/standards/BashoodRWAReference.sol:BashoodRWAReference",
+            "label": "_tokenURIs",
+            "offset": 0,
+            "slot": "9",
+            "type": "t_mapping(t_uint256,t_string_storage)"
+          },
+          {
+            "astId": 43884,
+            "contract": "contracts/standards/BashoodRWAReference.sol:BashoodRWAReference",
+            "label": "_baseTokenURI",
+            "offset": 0,
+            "slot": "10",
+            "type": "t_string_storage"
+          },
+          {
+            "astId": 43889,
+            "contract": "contracts/standards/BashoodRWAReference.sol:BashoodRWAReference",
+            "label": "__gap",
+            "offset": 0,
+            "slot": "11",
+            "type": "t_array(t_uint256)50_storage"
+          }
+        ],
+        "types": {
+          "t_address": {
+            "encoding": "inplace",
+            "label": "address",
+            "numberOfBytes": "20"
+          },
+          "t_array(t_string_storage)dyn_storage": {
+            "base": "t_string_storage",
+            "encoding": "dynamic_array",
+            "label": "string[]",
+            "numberOfBytes": "32"
+          },
+          "t_array(t_uint256)50_storage": {
+            "base": "t_uint256",
+            "encoding": "inplace",
+            "label": "uint256[50]",
+            "numberOfBytes": "1600"
+          },
+          "t_bool": {
+            "encoding": "inplace",
+            "label": "bool",
+            "numberOfBytes": "1"
+          },
+          "t_bytes32": {
+            "encoding": "inplace",
+            "label": "bytes32",
+            "numberOfBytes": "32"
+          },
+          "t_enum(AssetCategory)45306": {
+            "encoding": "inplace",
+            "label": "enum IBashoodRWA.AssetCategory",
+            "numberOfBytes": "1"
+          },
+          "t_enum(DepreciationModel)45314": {
+            "encoding": "inplace",
+            "label": "enum IBashoodRWA.DepreciationModel",
+            "numberOfBytes": "1"
+          },
+          "t_enum(OperationalStatus)45320": {
+            "encoding": "inplace",
+            "label": "enum IBashoodRWA.OperationalStatus",
+            "numberOfBytes": "1"
+          },
+          "t_enum(TokenizationStrategy)45327": {
+            "encoding": "inplace",
+            "label": "enum IBashoodRWA.TokenizationStrategy",
+            "numberOfBytes": "1"
+          },
+          "t_mapping(t_uint256,t_string_storage)": {
+            "encoding": "mapping",
+            "key": "t_uint256",
+            "label": "mapping(uint256 => string)",
+            "numberOfBytes": "32",
+            "value": "t_string_storage"
+          },
+          "t_mapping(t_uint256,t_struct(AssetIdentification)45344_storage)": {
+            "encoding": "mapping",
+            "key": "t_uint256",
+            "label": "mapping(uint256 => struct IBashoodRWA.AssetIdentification)",
+            "numberOfBytes": "32",
+            "value": "t_struct(AssetIdentification)45344_storage"
+          },
+          "t_mapping(t_uint256,t_struct(CertificationData)45431_storage)": {
+            "encoding": "mapping",
+            "key": "t_uint256",
+            "label": "mapping(uint256 => struct IBashoodRWA.CertificationData)",
+            "numberOfBytes": "32",
+            "value": "t_struct(CertificationData)45431_storage"
+          },
+          "t_mapping(t_uint256,t_struct(FinancialData)45385_storage)": {
+            "encoding": "mapping",
+            "key": "t_uint256",
+            "label": "mapping(uint256 => struct IBashoodRWA.FinancialData)",
+            "numberOfBytes": "32",
+            "value": "t_struct(FinancialData)45385_storage"
+          },
+          "t_mapping(t_uint256,t_struct(InsuranceData)45472_storage)": {
+            "encoding": "mapping",
+            "key": "t_uint256",
+            "label": "mapping(uint256 => struct IBashoodRWA.InsuranceData)",
+            "numberOfBytes": "32",
+            "value": "t_struct(InsuranceData)45472_storage"
+          },
+          "t_mapping(t_uint256,t_struct(OperationalMetrics)45414_storage)": {
+            "encoding": "mapping",
+            "key": "t_uint256",
+            "label": "mapping(uint256 => struct IBashoodRWA.OperationalMetrics)",
+            "numberOfBytes": "32",
+            "value": "t_struct(OperationalMetrics)45414_storage"
+          },
+          "t_mapping(t_uint256,t_struct(TechnicalSpecs)45368_storage)": {
+            "encoding": "mapping",
+            "key": "t_uint256",
+            "label": "mapping(uint256 => struct IBashoodRWA.TechnicalSpecs)",
+            "numberOfBytes": "32",
+            "value": "t_struct(TechnicalSpecs)45368_storage"
+          },
+          "t_mapping(t_uint256,t_struct(TelemetryConfig)45443_storage)": {
+            "encoding": "mapping",
+            "key": "t_uint256",
+            "label": "mapping(uint256 => struct IBashoodRWA.TelemetryConfig)",
+            "numberOfBytes": "32",
+            "value": "t_struct(TelemetryConfig)45443_storage"
+          },
+          "t_mapping(t_uint256,t_struct(TokenizationConfig)45460_storage)": {
+            "encoding": "mapping",
+            "key": "t_uint256",
+            "label": "mapping(uint256 => struct IBashoodRWA.TokenizationConfig)",
+            "numberOfBytes": "32",
+            "value": "t_struct(TokenizationConfig)45460_storage"
+          },
+          "t_string_storage": {
+            "encoding": "bytes",
+            "label": "string",
+            "numberOfBytes": "32"
+          },
+          "t_struct(AssetIdentification)45344_storage": {
+            "encoding": "inplace",
+            "label": "struct IBashoodRWA.AssetIdentification",
+            "members": [
+              {
+                "astId": 45330,
+                "contract": "contracts/standards/BashoodRWAReference.sol:BashoodRWAReference",
+                "label": "name",
+                "offset": 0,
+                "slot": "0",
+                "type": "t_string_storage"
+              },
+              {
+                "astId": 45333,
+                "contract": "contracts/standards/BashoodRWAReference.sol:BashoodRWAReference",
+                "label": "category",
+                "offset": 0,
+                "slot": "1",
+                "type": "t_enum(AssetCategory)45306"
+              },
+              {
+                "astId": 45335,
+                "contract": "contracts/standards/BashoodRWAReference.sol:BashoodRWAReference",
+                "label": "manufacturer",
+                "offset": 0,
+                "slot": "2",
+                "type": "t_string_storage"
+              },
+              {
+                "astId": 45337,
+                "contract": "contracts/standards/BashoodRWAReference.sol:BashoodRWAReference",
+                "label": "model",
+                "offset": 0,
+                "slot": "3",
+                "type": "t_string_storage"
+              },
+              {
+                "astId": 45339,
+                "contract": "contracts/standards/BashoodRWAReference.sol:BashoodRWAReference",
+                "label": "serialNumber",
+                "offset": 0,
+                "slot": "4",
+                "type": "t_string_storage"
+              },
+              {
+                "astId": 45341,
+                "contract": "contracts/standards/BashoodRWAReference.sol:BashoodRWAReference",
+                "label": "yearManufactured",
+                "offset": 0,
+                "slot": "5",
+                "type": "t_uint16"
+              },
+              {
+                "astId": 45343,
+                "contract": "contracts/standards/BashoodRWAReference.sol:BashoodRWAReference",
+                "label": "countryOfOrigin",
+                "offset": 0,
+                "slot": "6",
+                "type": "t_string_storage"
+              }
+            ],
+            "numberOfBytes": "224"
+          },
+          "t_struct(CertificationData)45431_storage": {
+            "encoding": "inplace",
+            "label": "struct IBashoodRWA.CertificationData",
+            "members": [
+              {
+                "astId": 45417,
+                "contract": "contracts/standards/BashoodRWAReference.sol:BashoodRWAReference",
+                "label": "ceMark",
+                "offset": 0,
+                "slot": "0",
+                "type": "t_bool"
+              },
+              {
+                "astId": 45419,
+                "contract": "contracts/standards/BashoodRWAReference.sol:BashoodRWAReference",
+                "label": "ul3401",
+                "offset": 1,
+                "slot": "0",
+                "type": "t_bool"
+              },
+              {
+                "astId": 45421,
+                "contract": "contracts/standards/BashoodRWAReference.sol:BashoodRWAReference",
+                "label": "iso9001",
+                "offset": 2,
+                "slot": "0",
+                "type": "t_bool"
+              },
+              {
+                "astId": 45423,
+                "contract": "contracts/standards/BashoodRWAReference.sol:BashoodRWAReference",
+                "label": "iso14001",
+                "offset": 3,
+                "slot": "0",
+                "type": "t_bool"
+              },
+              {
+                "astId": 45425,
+                "contract": "contracts/standards/BashoodRWAReference.sol:BashoodRWAReference",
+                "label": "ibcCompliant",
+                "offset": 4,
+                "slot": "0",
+                "type": "t_bool"
+              },
+              {
+                "astId": 45427,
+                "contract": "contracts/standards/BashoodRWAReference.sol:BashoodRWAReference",
+                "label": "oshaCompliant",
+                "offset": 5,
+                "slot": "0",
+                "type": "t_bool"
+              },
+              {
+                "astId": 45430,
+                "contract": "contracts/standards/BashoodRWAReference.sol:BashoodRWAReference",
+                "label": "customCerts",
+                "offset": 0,
+                "slot": "1",
+                "type": "t_array(t_string_storage)dyn_storage"
+              }
+            ],
+            "numberOfBytes": "64"
+          },
+          "t_struct(FinancialData)45385_storage": {
+            "encoding": "inplace",
+            "label": "struct IBashoodRWA.FinancialData",
+            "members": [
+              {
+                "astId": 45371,
+                "contract": "contracts/standards/BashoodRWAReference.sol:BashoodRWAReference",
+                "label": "purchasePrice",
+                "offset": 0,
+                "slot": "0",
+                "type": "t_uint256"
+              },
+              {
+                "astId": 45373,
+                "contract": "contracts/standards/BashoodRWAReference.sol:BashoodRWAReference",
+                "label": "currentValue",
+                "offset": 0,
+                "slot": "1",
+                "type": "t_uint256"
+              },
+              {
+                "astId": 45375,
+                "contract": "contracts/standards/BashoodRWAReference.sol:BashoodRWAReference",
+                "label": "residualValuePct",
+                "offset": 0,
+                "slot": "2",
+                "type": "t_uint256"
+              },
+              {
+                "astId": 45377,
+                "contract": "contracts/standards/BashoodRWAReference.sol:BashoodRWAReference",
+                "label": "lastAppraisalDate",
+                "offset": 0,
+                "slot": "3",
+                "type": "t_uint32"
+              },
+              {
+                "astId": 45380,
+                "contract": "contracts/standards/BashoodRWAReference.sol:BashoodRWAReference",
+                "label": "depModel",
+                "offset": 4,
+                "slot": "3",
+                "type": "t_enum(DepreciationModel)45314"
+              },
+              {
+                "astId": 45382,
+                "contract": "contracts/standards/BashoodRWAReference.sol:BashoodRWAReference",
+                "label": "annualMaintenancePct",
+                "offset": 5,
+                "slot": "3",
+                "type": "t_uint16"
+              },
+              {
+                "astId": 45384,
+                "contract": "contracts/standards/BashoodRWAReference.sol:BashoodRWAReference",
+                "label": "insurancePremiumPct",
+                "offset": 7,
+                "slot": "3",
+                "type": "t_uint16"
+              }
+            ],
+            "numberOfBytes": "128"
+          },
+          "t_struct(InsuranceData)45472_storage": {
+            "encoding": "inplace",
+            "label": "struct IBashoodRWA.InsuranceData",
+            "members": [
+              {
+                "astId": 45463,
+                "contract": "contracts/standards/BashoodRWAReference.sol:BashoodRWAReference",
+                "label": "provider",
+                "offset": 0,
+                "slot": "0",
+                "type": "t_string_storage"
+              },
+              {
+                "astId": 45465,
+                "contract": "contracts/standards/BashoodRWAReference.sol:BashoodRWAReference",
+                "label": "policyNumber",
+                "offset": 0,
+                "slot": "1",
+                "type": "t_string_storage"
+              },
+              {
+                "astId": 45467,
+                "contract": "contracts/standards/BashoodRWAReference.sol:BashoodRWAReference",
+                "label": "coverageAmount",
+                "offset": 0,
+                "slot": "2",
+                "type": "t_uint256"
+              },
+              {
+                "astId": 45469,
+                "contract": "contracts/standards/BashoodRWAReference.sol:BashoodRWAReference",
+                "label": "annualPremium",
+                "offset": 0,
+                "slot": "3",
+                "type": "t_uint256"
+              },
+              {
+                "astId": 45471,
+                "contract": "contracts/standards/BashoodRWAReference.sol:BashoodRWAReference",
+                "label": "expiryDate",
+                "offset": 0,
+                "slot": "4",
+                "type": "t_uint256"
+              }
+            ],
+            "numberOfBytes": "160"
+          },
+          "t_struct(OperationalMetrics)45414_storage": {
+            "encoding": "inplace",
+            "label": "struct IBashoodRWA.OperationalMetrics",
+            "members": [
+              {
+                "astId": 45389,
+                "contract": "contracts/standards/BashoodRWAReference.sol:BashoodRWAReference",
+                "label": "status",
+                "offset": 0,
+                "slot": "0",
+                "type": "t_enum(OperationalStatus)45320"
+              },
+              {
+                "astId": 45391,
+                "contract": "contracts/standards/BashoodRWAReference.sol:BashoodRWAReference",
+                "label": "operatingHours",
+                "offset": 0,
+                "slot": "1",
+                "type": "t_uint256"
+              },
+              {
+                "astId": 45393,
+                "contract": "contracts/standards/BashoodRWAReference.sol:BashoodRWAReference",
+                "label": "maxLifetimeHours",
+                "offset": 0,
+                "slot": "2",
+                "type": "t_uint256"
+              },
+              {
+                "astId": 45395,
+                "contract": "contracts/standards/BashoodRWAReference.sol:BashoodRWAReference",
+                "label": "totalLoadLifted",
+                "offset": 0,
+                "slot": "3",
+                "type": "t_uint256"
+              },
+              {
+                "astId": 45397,
+                "contract": "contracts/standards/BashoodRWAReference.sol:BashoodRWAReference",
+                "label": "maxLoadLifetime",
+                "offset": 0,
+                "slot": "4",
+                "type": "t_uint256"
+              },
+              {
+                "astId": 45399,
+                "contract": "contracts/standards/BashoodRWAReference.sol:BashoodRWAReference",
+                "label": "metersExtruded",
+                "offset": 0,
+                "slot": "5",
+                "type": "t_uint256"
+              },
+              {
+                "astId": 45401,
+                "contract": "contracts/standards/BashoodRWAReference.sol:BashoodRWAReference",
+                "label": "maxMetersLifetime",
+                "offset": 0,
+                "slot": "6",
+                "type": "t_uint256"
+              },
+              {
+                "astId": 45403,
+                "contract": "contracts/standards/BashoodRWAReference.sol:BashoodRWAReference",
+                "label": "setupCount",
+                "offset": 0,
+                "slot": "7",
+                "type": "t_uint32"
+              },
+              {
+                "astId": 45405,
+                "contract": "contracts/standards/BashoodRWAReference.sol:BashoodRWAReference",
+                "label": "maxSetups",
+                "offset": 4,
+                "slot": "7",
+                "type": "t_uint32"
+              },
+              {
+                "astId": 45407,
+                "contract": "contracts/standards/BashoodRWAReference.sol:BashoodRWAReference",
+                "label": "cubicMetersPerDay",
+                "offset": 8,
+                "slot": "7",
+                "type": "t_uint16"
+              },
+              {
+                "astId": 45409,
+                "contract": "contracts/standards/BashoodRWAReference.sol:BashoodRWAReference",
+                "label": "lastMaintenanceDate",
+                "offset": 10,
+                "slot": "7",
+                "type": "t_uint32"
+              },
+              {
+                "astId": 45411,
+                "contract": "contracts/standards/BashoodRWAReference.sol:BashoodRWAReference",
+                "label": "nextMaintenanceDate",
+                "offset": 14,
+                "slot": "7",
+                "type": "t_uint32"
+              },
+              {
+                "astId": 45413,
+                "contract": "contracts/standards/BashoodRWAReference.sol:BashoodRWAReference",
+                "label": "maintenanceIntervalHours",
+                "offset": 18,
+                "slot": "7",
+                "type": "t_uint16"
+              }
+            ],
+            "numberOfBytes": "256"
+          },
+          "t_struct(TechnicalSpecs)45368_storage": {
+            "encoding": "inplace",
+            "label": "struct IBashoodRWA.TechnicalSpecs",
+            "members": [
+              {
+                "astId": 45347,
+                "contract": "contracts/standards/BashoodRWAReference.sol:BashoodRWAReference",
+                "label": "loadCapacity",
+                "offset": 0,
+                "slot": "0",
+                "type": "t_uint256"
+              },
+              {
+                "astId": 45349,
+                "contract": "contracts/standards/BashoodRWAReference.sol:BashoodRWAReference",
+                "label": "displacementSpeed",
+                "offset": 0,
+                "slot": "1",
+                "type": "t_uint256"
+              },
+              {
+                "astId": 45351,
+                "contract": "contracts/standards/BashoodRWAReference.sol:BashoodRWAReference",
+                "label": "powerConsumption",
+                "offset": 0,
+                "slot": "2",
+                "type": "t_uint256"
+              },
+              {
+                "astId": 45353,
+                "contract": "contracts/standards/BashoodRWAReference.sol:BashoodRWAReference",
+                "label": "printVolumeX",
+                "offset": 0,
+                "slot": "3",
+                "type": "t_uint256"
+              },
+              {
+                "astId": 45355,
+                "contract": "contracts/standards/BashoodRWAReference.sol:BashoodRWAReference",
+                "label": "printVolumeY",
+                "offset": 0,
+                "slot": "4",
+                "type": "t_uint256"
+              },
+              {
+                "astId": 45357,
+                "contract": "contracts/standards/BashoodRWAReference.sol:BashoodRWAReference",
+                "label": "printVolumeZ",
+                "offset": 0,
+                "slot": "5",
+                "type": "t_uint256"
+              },
+              {
+                "astId": 45359,
+                "contract": "contracts/standards/BashoodRWAReference.sol:BashoodRWAReference",
+                "label": "materialPSI",
+                "offset": 0,
+                "slot": "6",
+                "type": "t_uint16"
+              },
+              {
+                "astId": 45361,
+                "contract": "contracts/standards/BashoodRWAReference.sol:BashoodRWAReference",
+                "label": "setupTimeMinutes",
+                "offset": 2,
+                "slot": "6",
+                "type": "t_uint16"
+              },
+              {
+                "astId": 45363,
+                "contract": "contracts/standards/BashoodRWAReference.sol:BashoodRWAReference",
+                "label": "autoLubrication",
+                "offset": 4,
+                "slot": "6",
+                "type": "t_bool"
+              },
+              {
+                "astId": 45365,
+                "contract": "contracts/standards/BashoodRWAReference.sol:BashoodRWAReference",
+                "label": "gpsTracking",
+                "offset": 5,
+                "slot": "6",
+                "type": "t_bool"
+              },
+              {
+                "astId": 45367,
+                "contract": "contracts/standards/BashoodRWAReference.sol:BashoodRWAReference",
+                "label": "cubicMetersPerDay",
+                "offset": 0,
+                "slot": "7",
+                "type": "t_uint256"
+              }
+            ],
+            "numberOfBytes": "256"
+          },
+          "t_struct(TelemetryConfig)45443_storage": {
+            "encoding": "inplace",
+            "label": "struct IBashoodRWA.TelemetryConfig",
+            "members": [
+              {
+                "astId": 45434,
+                "contract": "contracts/standards/BashoodRWAReference.sol:BashoodRWAReference",
+                "label": "hasRealTimeAPI",
+                "offset": 0,
+                "slot": "0",
+                "type": "t_bool"
+              },
+              {
+                "astId": 45436,
+                "contract": "contracts/standards/BashoodRWAReference.sol:BashoodRWAReference",
+                "label": "oracleAddress",
+                "offset": 1,
+                "slot": "0",
+                "type": "t_address"
+              },
+              {
+                "astId": 45438,
+                "contract": "contracts/standards/BashoodRWAReference.sol:BashoodRWAReference",
+                "label": "apiProvider",
+                "offset": 0,
+                "slot": "1",
+                "type": "t_string_storage"
+              },
+              {
+                "astId": 45440,
+                "contract": "contracts/standards/BashoodRWAReference.sol:BashoodRWAReference",
+                "label": "apiKeyHash",
+                "offset": 0,
+                "slot": "2",
+                "type": "t_bytes32"
+              },
+              {
+                "astId": 45442,
+                "contract": "contracts/standards/BashoodRWAReference.sol:BashoodRWAReference",
+                "label": "lastTelemetryUpdate",
+                "offset": 0,
+                "slot": "3",
+                "type": "t_uint32"
+              }
+            ],
+            "numberOfBytes": "128"
+          },
+          "t_struct(TokenizationConfig)45460_storage": {
+            "encoding": "inplace",
+            "label": "struct IBashoodRWA.TokenizationConfig",
+            "members": [
+              {
+                "astId": 45447,
+                "contract": "contracts/standards/BashoodRWAReference.sol:BashoodRWAReference",
+                "label": "strategy",
+                "offset": 0,
+                "slot": "0",
+                "type": "t_enum(TokenizationStrategy)45327"
+              },
+              {
+                "astId": 45449,
+                "contract": "contracts/standards/BashoodRWAReference.sol:BashoodRWAReference",
+                "label": "isFractional",
+                "offset": 1,
+                "slot": "0",
+                "type": "t_bool"
+              },
+              {
+                "astId": 45451,
+                "contract": "contracts/standards/BashoodRWAReference.sol:BashoodRWAReference",
+                "label": "totalShares",
+                "offset": 0,
+                "slot": "1",
+                "type": "t_uint256"
+              },
+              {
+                "astId": 45453,
+                "contract": "contracts/standards/BashoodRWAReference.sol:BashoodRWAReference",
+                "label": "dailyLeaseRate",
+                "offset": 0,
+                "slot": "2",
+                "type": "t_uint256"
+              },
+              {
+                "astId": 45455,
+                "contract": "contracts/standards/BashoodRWAReference.sol:BashoodRWAReference",
+                "label": "performanceBonusPct",
+                "offset": 0,
+                "slot": "3",
+                "type": "t_uint16"
+              },
+              {
+                "astId": 45457,
+                "contract": "contracts/standards/BashoodRWAReference.sol:BashoodRWAReference",
+                "label": "revenueSharePct",
+                "offset": 2,
+                "slot": "3",
+                "type": "t_uint16"
+              },
+              {
+                "astId": 45459,
+                "contract": "contracts/standards/BashoodRWAReference.sol:BashoodRWAReference",
+                "label": "maintenanceReservePct",
+                "offset": 0,
+                "slot": "4",
+                "type": "t_uint256"
+              }
+            ],
+            "numberOfBytes": "160"
+          },
+          "t_uint16": {
+            "encoding": "inplace",
+            "label": "uint16",
+            "numberOfBytes": "2"
+          },
+          "t_uint256": {
+            "encoding": "inplace",
+            "label": "uint256",
+            "numberOfBytes": "32"
+          },
+          "t_uint32": {
+            "encoding": "inplace",
+            "label": "uint32",
+            "numberOfBytes": "4"
+          }
+        }
+      },
+      "slotSummary": {
+        "slot_0_offset_0": {
+          "label": "_nextTokenId",
+          "type": "t_uint256",
+          "slot": 0,
+          "offset": 0,
+          "contract": "contracts/standards/BashoodRWAReference.sol:BashoodRWAReference"
+        },
+        "slot_1_offset_0": {
+          "label": "_assetIdentification",
+          "type": "t_mapping(t_uint256,t_struct(AssetIdentification)45344_storage)",
+          "slot": 1,
+          "offset": 0,
+          "contract": "contracts/standards/BashoodRWAReference.sol:BashoodRWAReference"
+        },
+        "slot_2_offset_0": {
+          "label": "_technicalSpecs",
+          "type": "t_mapping(t_uint256,t_struct(TechnicalSpecs)45368_storage)",
+          "slot": 2,
+          "offset": 0,
+          "contract": "contracts/standards/BashoodRWAReference.sol:BashoodRWAReference"
+        },
+        "slot_3_offset_0": {
+          "label": "_financialData",
+          "type": "t_mapping(t_uint256,t_struct(FinancialData)45385_storage)",
+          "slot": 3,
+          "offset": 0,
+          "contract": "contracts/standards/BashoodRWAReference.sol:BashoodRWAReference"
+        },
+        "slot_4_offset_0": {
+          "label": "_operationalMetrics",
+          "type": "t_mapping(t_uint256,t_struct(OperationalMetrics)45414_storage)",
+          "slot": 4,
+          "offset": 0,
+          "contract": "contracts/standards/BashoodRWAReference.sol:BashoodRWAReference"
+        },
+        "slot_5_offset_0": {
+          "label": "_certificationData",
+          "type": "t_mapping(t_uint256,t_struct(CertificationData)45431_storage)",
+          "slot": 5,
+          "offset": 0,
+          "contract": "contracts/standards/BashoodRWAReference.sol:BashoodRWAReference"
+        },
+        "slot_6_offset_0": {
+          "label": "_telemetryConfig",
+          "type": "t_mapping(t_uint256,t_struct(TelemetryConfig)45443_storage)",
+          "slot": 6,
+          "offset": 0,
+          "contract": "contracts/standards/BashoodRWAReference.sol:BashoodRWAReference"
+        },
+        "slot_7_offset_0": {
+          "label": "_tokenizationConfig",
+          "type": "t_mapping(t_uint256,t_struct(TokenizationConfig)45460_storage)",
+          "slot": 7,
+          "offset": 0,
+          "contract": "contracts/standards/BashoodRWAReference.sol:BashoodRWAReference"
+        },
+        "slot_8_offset_0": {
+          "label": "_insuranceData",
+          "type": "t_mapping(t_uint256,t_struct(InsuranceData)45472_storage)",
+          "slot": 8,
+          "offset": 0,
+          "contract": "contracts/standards/BashoodRWAReference.sol:BashoodRWAReference"
+        },
+        "slot_9_offset_0": {
+          "label": "_tokenURIs",
+          "type": "t_mapping(t_uint256,t_string_storage)",
+          "slot": 9,
+          "offset": 0,
+          "contract": "contracts/standards/BashoodRWAReference.sol:BashoodRWAReference"
+        },
+        "slot_10_offset_0": {
+          "label": "_baseTokenURI",
+          "type": "t_string_storage",
+          "slot": 10,
+          "offset": 0,
+          "contract": "contracts/standards/BashoodRWAReference.sol:BashoodRWAReference"
+        },
+        "slot_11_offset_0": {
+          "label": "__gap",
+          "type": "t_array(t_uint256)50_storage",
+          "slot": 11,
+          "offset": 0,
+          "contract": "contracts/standards/BashoodRWAReference.sol:BashoodRWAReference"
+        }
+      },
+      "gapSlot": {
+        "slot": 11,
+        "type": "t_array(t_uint256)50_storage"
+      }
+    }
+  },
+  "ozValidation": {
+    "status": "PASS",
+    "kind": "uups"
+  }
+}

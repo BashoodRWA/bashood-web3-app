@@ -66,7 +66,13 @@ module.exports = {
           },
           // Cancun required for OZ v5 Governor (uses mcopy opcode).
           // Base L2 is Cancun-compatible (activated June 2024).
-          evmVersion: "cancun"
+          evmVersion: "cancun",
+          // Emit storage layout in artifacts for upgrade safety validation.
+          outputSelection: {
+            "*": {
+              "*": ["storageLayout"]
+            }
+          }
         }
       },
   paths: {
