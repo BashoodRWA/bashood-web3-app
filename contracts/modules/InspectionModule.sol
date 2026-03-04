@@ -1,0 +1,283 @@
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.20;
+
+import "./BashoodModuleBase.sol";
+
+/**
+ * @dev Minimal Core interface: validar existencia del token.
+ *      ownerOf() revierte con ERC721NonexistentToken si no está mintado.
+ */
+interface ICoreForInspection {
+    function ownerOf(uint256 tokenId) external view returns (address);
+}
+
+/**
+ * @title InspectionModule
+ * @notice Módulo externo del protocolo Bashood. Conforme al patrón oficial
+ *         IBashoodModule / BashoodModuleBase (Plan M4 – Fase 3).
+ *
+ * @dev Responsabilidad única: registrar el historial cronológico de
+ *      inspecciones técnicas de activos industriales RWA.
+ *
+ *      ARQUITECTURA
+ *      ─────────────
+ *      · El Core almacena el ESTADO ACTUAL del activo (OperationalMetrics).
+ *      · Este módulo almacena el HISTORIAL de inspecciones (append-only).
+ *      · No escribe en el Core — solo lee ownerOf() para validar tokenId.
+ *      · requiredRole = ASSET_MANAGER_ROLE (declarado, sin llamadas write al Core).
+ *
+ *      AUTORIZACIÓN INTERNA
+ *      ─────────────────────
+ *      · El owner gestiona una whitelist de inspectores acreditados.
+ *      · El owner es inspector implícito.
+ *      · Cada inspección queda ligada al inspector que la ejecutó (msg.sender).
+ *
+ *      TIPOS DE RESULTADO
+ *      ───────────────────
+ *      0 = PASS
+ *      1 = FAIL
+ *      2 = CONDITIONAL (requiere acción correctiva)
+ */
+contract InspectionModule is BashoodModuleBase {
+
+    // ── Identidad del módulo ──────────────────────────────────────────────
+
+    bytes32 public constant MODULE_IDENTIFIER =
+        keccak256("Inspection/1.0");
+    string  public constant MODULE_VER = "1.0.0";
+
+    /// @notice Rol del Core que el módulo declara necesitar.
+    bytes32 public constant ASSET_MANAGER_ROLE =
+        keccak256("ASSET_MANAGER_ROLE");
+
+    // ── Tipos ─────────────────────────────────────────────────────────────
+
+    /**
+     * @notice Resultado de una inspección técnica.
+     * @param timestamp       Marca de tiempo Unix de la inspección.
+     * @param inspector       Dirección del inspector que la ejecutó.
+     * @param inspectionType  Identificador del tipo: "VISUAL", "STRUCTURAL",
+     *                        "ELECTRICAL", "LOAD_TEST", "FULL", etc.
+     * @param result          0=PASS | 1=FAIL | 2=CONDITIONAL.
+     * @param docHash         Hash del informe (IPFS CID o hash documental).
+     * @param notes           Observaciones libres.
+     */
+    struct InspectionRecord {
+        uint32  timestamp;
+        address inspector;
+        bytes32 inspectionType;
+        uint8   result;
+        bytes32 docHash;
+        string  notes;
+    }
+
+    // ── Storage ───────────────────────────────────────────────────────────
+
+    /// @dev tokenId → historial cronológico de inspecciones (append-only).
+    mapping(uint256 => InspectionRecord[]) private _inspections;
+
+    /// @dev Whitelist de inspectores acreditados.
+    mapping(address => bool) private _inspectors;
+
+    // ── Eventos ───────────────────────────────────────────────────────────
+
+    /**
+     * @notice Emitido cuando se registra una nueva inspección.
+     * @param tokenId        ID del activo inspeccionado.
+     * @param inspector      Cuenta que realizó la inspección.
+     * @param inspectionType Tipo de inspección.
+     * @param result         0=PASS | 1=FAIL | 2=CONDITIONAL.
+     * @param recordIndex    Índice en el array de inspecciones del token.
+     */
+    event InspectionRecorded(
+        uint256 indexed tokenId,
+        address indexed inspector,
+        bytes32         inspectionType,
+        uint8           result,
+        uint256         recordIndex
+    );
+
+    /// @notice Emitido cuando se acredita un inspector.
+    event InspectorGranted(address indexed account);
+
+    /// @notice Emitido cuando se revoca un inspector.
+    event InspectorRevoked(address indexed account);
+
+    // ── Modificadores ────────────────────────────────────────────────────
+
+    modifier onlyInspector() {
+        require(
+            _inspectors[msg.sender] || msg.sender == owner(),
+            "InspectionModule: not an inspector"
+        );
+        _;
+    }
+
+    // ── Constructor ───────────────────────────────────────────────────────
+
+    /**
+     * @param core_  Dirección del BashoodCore (BashoodRWAReference).
+     *               Usada para verificar existencia de tokenId via ownerOf().
+     */
+    constructor(address core_)
+        BashoodModuleBase(
+            core_,
+            keccak256("Inspection/1.0"),
+            "1.0.0",
+            keccak256("ASSET_MANAGER_ROLE")   // rol declarado, no usado en write
+        )
+    {}
+
+    // ── Gestión de inspectores (onlyOwner) ────────────────────────────────
+
+    /**
+     * @notice Acredita a una cuenta como inspector.
+     * @param account Dirección del inspector a acreditar.
+     */
+    function grantInspector(address account) external onlyOwner {
+        _requireNotZero(account, "InspectionModule: zero address");
+        require(!_inspectors[account], "InspectionModule: already inspector");
+        _inspectors[account] = true;
+        emit InspectorGranted(account);
+    }
+
+    /**
+     * @notice Revoca la acreditación de un inspector.
+     * @param account Dirección del inspector a revocar.
+     */
+    function revokeInspector(address account) external onlyOwner {
+        require(_inspectors[account], "InspectionModule: not an inspector");
+        _inspectors[account] = false;
+        emit InspectorRevoked(account);
+    }
+
+    /**
+     * @notice Consulta si una cuenta es inspector acreditado.
+     * @param account Dirección a consultar.
+     */
+    function isInspector(address account) external view returns (bool) {
+        return _inspectors[account] || account == owner();
+    }
+
+    // ── Escritura de inspecciones ────────────────────────────────────────
+
+    /**
+     * @notice Registra una nueva inspección técnica para un activo.
+     *
+     * @dev Valida que el tokenId existe en el Core mediante ownerOf().
+     *      El registro es append-only; no puede modificarse ni eliminarse.
+     *
+     * @param tokenId        ID del activo (debe existir en el Core).
+     * @param inspectionType Tipo de inspección. Ej: keccak256("VISUAL").
+     * @param result         0=PASS | 1=FAIL | 2=CONDITIONAL.
+     * @param docHash        Hash del archivo de informe (puede ser bytes32(0)
+     *                       si todavía no hay documento).
+     * @param notes          Observaciones del inspector (puede estar vacío).
+     */
+    function recordInspection(
+        uint256         tokenId,
+        bytes32         inspectionType,
+        uint8           result,
+        bytes32         docHash,
+        string calldata notes
+    ) external onlyInspector {
+        _requireValidToken(tokenId);
+        require(inspectionType != bytes32(0), "InspectionModule: empty type");
+        require(result <= 2,                  "InspectionModule: invalid result");
+
+        // Valida existencia del token en el Core (revierte si no existe).
+        ICoreForInspection(_coreAddress()).ownerOf(tokenId);
+
+        _inspections[tokenId].push(InspectionRecord({
+            timestamp:      uint32(block.timestamp),
+            inspector:      msg.sender,
+            inspectionType: inspectionType,
+            result:         result,
+            docHash:        docHash,
+            notes:          notes
+        }));
+
+        uint256 idx = _inspections[tokenId].length - 1;
+
+        emit InspectionRecorded(tokenId, msg.sender, inspectionType, result, idx);
+        emit ModuleOperationExecuted(tokenId, msg.sender);
+    }
+
+    // ── Lectura de historial ──────────────────────────────────────────────
+
+    /**
+     * @notice Devuelve una inspección específica por índice.
+     * @param tokenId ID del activo.
+     * @param index   Índice en el array de historial (0-based).
+     */
+    function getInspection(uint256 tokenId, uint256 index)
+        external
+        view
+        returns (InspectionRecord memory)
+    {
+        _requireValidToken(tokenId);
+        require(
+            index < _inspections[tokenId].length,
+            "InspectionModule: index out of bounds"
+        );
+        return _inspections[tokenId][index];
+    }
+
+    /**
+     * @notice Devuelve el número total de inspecciones registradas para un activo.
+     * @param tokenId ID del activo.
+     */
+    function getInspectionCount(uint256 tokenId)
+        external
+        view
+        returns (uint256)
+    {
+        return _inspections[tokenId].length;
+    }
+
+    /**
+     * @notice Devuelve la inspección más reciente del activo.
+     * @param tokenId ID del activo.
+     */
+    function getLatestInspection(uint256 tokenId)
+        external
+        view
+        returns (InspectionRecord memory)
+    {
+        _requireValidToken(tokenId);
+        uint256 len = _inspections[tokenId].length;
+        require(len > 0, "InspectionModule: no inspections recorded");
+        return _inspections[tokenId][len - 1];
+    }
+
+    /**
+     * @notice Indica si la última inspección del activo fue aprobada (PASS).
+     * @param tokenId ID del activo.
+     * @return true si la última inspección tiene result == 0 (PASS).
+     *         false si no hay inspecciones o la última fue FAIL/CONDITIONAL.
+     */
+    function passedLatestInspection(uint256 tokenId)
+        external
+        view
+        returns (bool)
+    {
+        uint256 len = _inspections[tokenId].length;
+        if (len == 0) return false;
+        return _inspections[tokenId][len - 1].result == 0;
+    }
+
+    /**
+     * @notice Devuelve el historial completo de inspecciones de un activo.
+     * @dev    Usar con precaución en mainnet; para listas largas usar
+     *         paginación con getInspection(tokenId, index).
+     * @param tokenId ID del activo.
+     */
+    function getAllInspections(uint256 tokenId)
+        external
+        view
+        returns (InspectionRecord[] memory)
+    {
+        _requireValidToken(tokenId);
+        return _inspections[tokenId];
+    }
+}
