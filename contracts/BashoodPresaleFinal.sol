@@ -71,8 +71,6 @@ contract BashoodPresaleFinal is ReentrancyGuard, AccessControl, IERC1155Receiver
     
     // Constantes optimizadas
     uint256 private constant _MAX_BPS = 10000;
-    uint256 private constant _PRECISION = 1e18;
-    uint8 private constant _DEFAULT_DECIMALS = 18;
 
 
 

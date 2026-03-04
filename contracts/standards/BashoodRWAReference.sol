@@ -37,7 +37,8 @@ contract BashoodRWAReference is
     ERC721Upgradeable,
     AccessControlUpgradeable,
     UUPSUpgradeable,
-    IBashoodRWA 
+    IBashoodRWA,
+    ICoreForAggregator
 {
     // ============ Enums ============
     // Uso interno: enum UsageMetricType { LOAD, EXTRUSION, SETUP, HOURS }
@@ -194,10 +195,24 @@ contract BashoodRWAReference is
     function getOperationalMetrics(uint256 tokenId) 
         external 
         view 
+        override(ICoreForAggregator)
         returns (OperationalMetrics memory) 
     {
         _requireOwned(tokenId);
         return _operationalMetrics[tokenId];
+    }
+
+    /**
+     * @notice ownerOf explícito para resolver la herencia múltiple
+     *         entre ERC721Upgradeable, IERC721 e ICoreForAggregator.
+     */
+    function ownerOf(uint256 tokenId)
+        public
+        view
+        override(ERC721Upgradeable, IERC721, ICoreForAggregator)
+        returns (address)
+    {
+        return super.ownerOf(tokenId);
     }
     
     /**

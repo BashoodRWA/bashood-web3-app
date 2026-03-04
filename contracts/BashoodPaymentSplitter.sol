@@ -138,7 +138,8 @@ contract BashoodPaymentSplitter {
      * @notice Libera fondos a todas las wallets de una vez
      */
     function releaseAll() external {
-        for (uint256 i = 0; i < _payees.length; i++) {
+        uint256 len = _payees.length;
+        for (uint256 i = 0; i < len; i++) {
             address payable account = payable(_payees[i]);
             uint256 payment = releasable(account);
             
@@ -164,12 +165,13 @@ contract BashoodPaymentSplitter {
         uint256[] memory pending,
         uint256[] memory released_
     ) {
-        wallets = new address[](_payees.length);
-        percentages = new uint256[](_payees.length);
-        pending = new uint256[](_payees.length);
-        released_ = new uint256[](_payees.length);
+        uint256 len = _payees.length;
+        wallets = new address[](len);
+        percentages = new uint256[](len);
+        pending = new uint256[](len);
+        released_ = new uint256[](len);
         
-        for (uint256 i = 0; i < _payees.length; i++) {
+        for (uint256 i = 0; i < len; i++) {
             address account = _payees[i];
             wallets[i] = account;
             percentages[i] = _shares[account];

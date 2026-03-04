@@ -5,18 +5,6 @@ import "../standards/IBashoodRWA.sol";
 import "./BashoodModuleBase.sol";
 
 /**
- * @dev Minimal Core interface para OperationalMetricsAggregator.
- *      Lee métricas operativas y verifica tokens.
- */
-interface ICoreForAggregator {
-    function ownerOf(uint256 tokenId) external view returns (address);
-    function getOperationalMetrics(uint256 tokenId)
-        external
-        view
-        returns (IBashoodRWA.OperationalMetrics memory);
-}
-
-/**
  * @title OperationalMetricsAggregator
  * @notice Módulo externo del protocolo Bashood. Conforme al patrón oficial
  *         IBashoodModule / BashoodModuleBase (Plan M4 – Fase 3).

@@ -467,3 +467,16 @@ interface IBashoodRWA is IERC721 {
     /// @return remainingLifePct Percentage of useful life remaining (0-100)
     function getRemainingLifePercentage(uint256 tokenId) external view returns (uint256 remainingLifePct);
 }
+
+/**
+ * @dev Minimal Core interface requerida por OperationalMetricsAggregator.
+ *      Definida aqU00ed para que BashoodRWAReference la implemente explícitamente
+ *      y Slither reconozca la conformidad de tipo.
+ */
+interface ICoreForAggregator {
+    function ownerOf(uint256 tokenId) external view returns (address);
+    function getOperationalMetrics(uint256 tokenId)
+        external
+        view
+        returns (IBashoodRWA.OperationalMetrics memory);
+}
