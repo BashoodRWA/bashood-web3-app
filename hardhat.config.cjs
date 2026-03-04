@@ -9,7 +9,10 @@ module.exports = {
       optimizer: {
         enabled: true,
         runs: 10  // Reduced for large contracts
-      }
+      },
+      // Cancun required for OZ v5 Governor (uses mcopy opcode).
+      // Base L2 is Cancun-compatible (activated June 2024).
+      evmVersion: "cancun"
     }
   },
   paths: {

@@ -136,7 +136,8 @@ async function main() {
     "BashoodReferral",
     "BashoodPaymentSplitter",
     "BashoodRescue",
-    "BashoodPresaleFinal"
+    "BashoodPresaleFinal",
+    "BashoodRWAReference"
   ];
   
   let allCompiled = true;

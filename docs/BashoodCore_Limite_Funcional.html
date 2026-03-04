@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>BashoodCore – Límite Funcional y Arquitectónico</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: #f7f8fa;
+      color: #1a1a2e;
+      padding: 40px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    header {
+      border-bottom: 3px solid #1e3a5f;
+      padding-bottom: 20px;
+      margin-bottom: 36px;
+    }
+
+    header h1 {
+      font-size: 1.9rem;
+      color: #1e3a5f;
+      letter-spacing: 0.02em;
+    }
+
+    header .meta {
+      margin-top: 8px;
+      font-size: 0.85rem;
+      color: #555;
+      display: flex;
+      gap: 32px;
+      flex-wrap: wrap;
+    }
+
+    header .meta span strong { color: #1e3a5f; }
+
+    .badge {
+      display: inline-block;
+      background: #1e3a5f;
+      color: #fff;
+      font-size: 0.72rem;
+      padding: 2px 10px;
+      border-radius: 12px;
+      margin-left: 10px;
+      vertical-align: middle;
+      letter-spacing: 0.05em;
+    }
+
+    section {
+      background: #fff;
+      border: 1px solid #dde3ed;
+      border-radius: 8px;
+      padding: 28px 32px;
+      margin-bottom: 28px;
+      page-break-inside: avoid;
+    }
+
+    section h2 {
+      font-size: 1.0rem;
+      color: #1e3a5f;
+      margin-bottom: 16px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      border-left: 4px solid #4a90d9;
+      padding-left: 12px;
+    }
+
+    /* Tablas */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.83rem;
+      margin-top: 4px;
+    }
+
+    thead tr {
+      background: #1e3a5f;
+      color: #fff;
+    }
+
+    thead th {
+      padding: 10px 14px;
+      text-align: left;
+      font-weight: 600;
+    }
+
+    tbody tr:nth-child(even) { background: #f0f4fa; }
+    tbody tr:nth-child(odd)  { background: #fff; }
+
+    tbody td {
+      padding: 9px 14px;
+      border-bottom: 1px solid #e8ecf3;
+      vertical-align: top;
+    }
+
+    code {
+      background: #eef2f8;
+      color: #1e3a5f;
+      padding: 1px 6px;
+      border-radius: 4px;
+      font-size: 0.82rem;
+      font-family: 'Consolas', 'Courier New', monospace;
+    }
+
+    /* Listas */
+    ul, ol {
+      padding-left: 22px;
+      font-size: 0.86rem;
+      line-height: 1.8;
+      color: #2a2a3e;
+    }
+
+    ul li, ol li { margin-bottom: 4px; }
+    ul li strong, ol li strong { color: #1e3a5f; }
+
+    /* Sub-listas */
+    ul ul {
+      margin-top: 4px;
+      padding-left: 20px;
+    }
+
+    ul ul li {
+      color: #555;
+      font-size: 0.82rem;
+    }
+
+    /* Bloque de dependencias */
+    pre {
+      background: #1a1a2e;
+      color: #a8d8a8;
+      padding: 16px 20px;
+      border-radius: 6px;
+      font-family: 'Consolas', 'Courier New', monospace;
+      font-size: 0.85rem;
+      line-height: 1.6;
+      overflow-x: auto;
+      margin-top: 4px;
+    }
+
+    /* Principios */
+    .principios p {
+      font-size: 0.86rem;
+      line-height: 1.75;
+      padding: 8px 12px;
+      border-left: 3px solid #4a90d9;
+      background: #f0f4fa;
+      border-radius: 0 6px 6px 0;
+      margin-bottom: 10px;
+    }
+
+    .principios p strong { color: #1e3a5f; }
+
+    /* Candidatos */
+    .candidatos ol {
+      counter-reset: item;
+      list-style: none;
+      padding: 0;
+    }
+
+    .candidatos ol li {
+      padding: 10px 14px;
+      margin-bottom: 8px;
+      background: #fff8e8;
+      border-left: 4px solid #ff9800;
+      border-radius: 0 6px 6px 0;
+      font-size: 0.86rem;
+      color: #3a2e00;
+    }
+
+    .candidatos ol li::before {
+      content: counter(item) ". ";
+      counter-increment: item;
+      font-weight: 700;
+      color: #ff9800;
+    }
+
+    /* Nota de advertencia */
+    .nota {
+      font-size: 0.80rem;
+      color: #777;
+      margin-top: 10px;
+      font-style: italic;
+    }
+
+    /* Cierre formal */
+    .cierre {
+      background: #1e3a5f;
+      color: #fff;
+      border-radius: 8px;
+      padding: 20px 28px;
+      margin-bottom: 28px;
+      font-size: 0.90rem;
+      text-align: center;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      page-break-inside: avoid;
+    }
+
+    footer {
+      text-align: center;
+      font-size: 0.75rem;
+      color: #aaa;
+      margin-top: 40px;
+      padding-top: 16px;
+      border-top: 1px solid #dde3ed;
+    }
+
+    @media print {
+      body { background: #fff; padding: 20px; }
+      section { border: 1px solid #ccc; box-shadow: none; }
+      .no-print { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>BashoodCore <span class="badge">BASHOOD-RWA-1</span></h1>
+  <div class="meta">
+    <span><strong>Documento:</strong> Límite Funcional y Arquitectónico</span>
+    <span><strong>Plan:</strong> M4 – Fase 3</span>
+    <span><strong>Versión:</strong> 1.0.0</span>
+    <span><strong>Fecha:</strong> 2 de marzo de 2026</span>
+  </div>
+</header>
+
+<!-- SECCIÓN 1 -->
+<section>
+  <h2>1 · Identidad del módulo</h2>
+  <table>
+    <thead>
+      <tr>
+        <th style="width:35%">Campo</th>
+        <th>Valor</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>Nombre</td><td>BashoodCore (<code>BashoodRWAReference</code>)</td></tr>
+      <tr><td>Estándar</td><td>BASHOOD-RWA-1</td></tr>
+      <tr><td>Contrato base</td><td><code>ERC721Upgradeable</code>, <code>AccessControlUpgradeable</code>, <code>UUPSUpgradeable</code></td></tr>
+      <tr><td>Patrón de actualización</td><td>UUPS proxy</td></tr>
+      <tr><td>Versión actual</td><td>1.0.0</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- SECCIÓN 2 -->
+<section>
+  <h2>2 · Responsabilidades exclusivas del Core</h2>
+  <ul>
+    <li>
+      <strong>Ciclo de vida del activo NFT</strong>
+      <ul>
+        <li>Inicialización del contrato (<code>initialize</code>)</li>
+        <li>Acuñación de activos industriales (<code>mintAsset</code>)</li>
+        <li>Gestión del identificador de token (<code>_nextTokenId</code>)</li>
+      </ul>
+    </li>
+    <li>
+      <strong>Almacenamiento canónico del activo</strong> — el Core es el único titular del estado por token:
+      <ul>
+        <li><code>AssetIdentification</code> — identidad física y documental</li>
+        <li><code>TechnicalSpecs</code> — especificaciones técnicas</li>
+        <li><code>FinancialData</code> — precio, valor actual, reservas</li>
+        <li><code>OperationalMetrics</code> — métricas de uso en tiempo real</li>
+        <li><code>CertificationData</code> — cumplimiento normativo</li>
+        <li><code>TelemetryConfig</code> — configuración de oráculos Chainlink</li>
+        <li><code>TokenizationConfig</code> — estrategia de tokenización</li>
+        <li><code>InsuranceData</code> — datos de seguro</li>
+      </ul>
+    </li>
+    <li>
+      <strong>Gestión de valor y depreciación (coordinación)</strong>
+      <ul>
+        <li>Actualización de valor por evento externo (<code>updateAssetValue</code>)</li>
+        <li>Cálculo delegado a <code>DepreciationEngine</code> (<code>calculateCurrentValue</code>, <code>getDepreciationPercentage</code>)</li>
+        <li>Valor residual y vida remanente (<code>getResidualValue</code>, <code>getRemainingLifePercentage</code>)</li>
+      </ul>
+    </li>
+    <li>
+      <strong>Actualizaciones operacionales</strong>
+      <ul>
+        <li>Registro de mantenimiento (<code>recordMaintenance</code>)</li>
+        <li>Actualización de métricas de uso (<code>updateUsageMetrics</code>)</li>
+      </ul>
+    </li>
+    <li>
+      <strong>Control de acceso</strong>
+      <ul>
+        <li>Roles: <code>DEFAULT_ADMIN_ROLE</code>, <code>ASSET_MANAGER_ROLE</code>, <code>ORACLE_ROLE</code>, <code>UPGRADER_ROLE</code></li>
+      </ul>
+    </li>
+  </ul>
+</section>
+
+<!-- SECCIÓN 3 -->
+<section>
+  <h2>3 · Límite explícito: lo que el Core NO hace</h2>
+  <table>
+    <thead>
+      <tr>
+        <th style="width:50%">Responsabilidad</th>
+        <th>Módulo externo responsable</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Cálculo aritmético de depreciación</td>
+        <td><code>DepreciationEngine</code></td>
+      </tr>
+      <tr>
+        <td>Validación de feeds de precios (oráculos)</td>
+        <td><code>ChainlinkPriceFeed</code> / <code>IPriceFeed</code></td>
+      </tr>
+      <tr>
+        <td>Lógica de distribución de ingresos</td>
+        <td>Módulo futuro (Fase 3+)</td>
+      </tr>
+      <tr>
+        <td>Gestión de fracciones de propiedad</td>
+        <td>Módulo futuro (Fase 3+)</td>
+      </tr>
+      <tr>
+        <td>Seguimiento de rendimiento ESG</td>
+        <td>Módulo futuro (Fase 3+)</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- SECCIÓN 4 -->
+<section>
+  <h2>4 · Dependencias actuales del Core</h2>
+  <pre>BashoodRWAReference
+ ├── IBashoodRWA               (interfaz de tipos y enums)
+ └── DepreciationEngine        (librería interna de cálculo)</pre>
+</section>
+
+<!-- SECCIÓN 5 -->
+<section>
+  <h2>5 · Principios de diseño del límite</h2>
+  <div class="principios">
+    <p><strong>Alta cohesión:</strong> el Core agrupa únicamente lo que tiene autoridad directa sobre el estado del activo.</p>
+    <p><strong>Bajo acoplamiento:</strong> la lógica de cálculo es externa (<code>DepreciationEngine</code>) y no modifica estado.</p>
+    <p><strong>Compatibilidad de almacenamiento:</strong> el layout de storage no varía entre fases para garantizar la seguridad del proxy UUPS.</p>
+    <p><strong>Interfaz pública estable:</strong> las firmas públicas no cambian; la refactorización es interna.</p>
+  </div>
+</section>
+
+<!-- SECCIÓN 6 -->
+<section>
+  <h2>6 · Candidatos a externalización en Fase 3</h2>
+  <div class="candidatos">
+    <ol>
+      <li>Lógica de tasación por oráculo (actualmente acoplada al Core vía <code>FinancialData</code>).</li>
+      <li>Gestión y registro de certificaciones (<code>CertificationData</code>).</li>
+      <li>Configuración y lectura de telemetría (<code>TelemetryConfig</code>).</li>
+    </ol>
+  </div>
+  <p class="nota">Cada candidato será evaluado por impacto en storage layout antes de su migración.</p>
+</section>
+
+<!-- CIERRE -->
+<div class="cierre">
+  Este documento es el contrato formal de responsabilidades del BashoodCore para las fases siguientes.
+</div>
+
+<footer>
+  Bashood Protocol · Plan M4 – Fase 3 · Documento interno de arquitectura · 2 de marzo de 2026
+  <br/><span class="no-print" style="display:block;margin-top:8px;color:#aaa;font-size:0.7rem">
+    Para exportar a PDF: Ctrl+P → Destino: Guardar como PDF → Papel A4 · Márgenes mínimos · Activar gráficos de fondo
+  </span>
+</footer>
+
+</body>
+</html>

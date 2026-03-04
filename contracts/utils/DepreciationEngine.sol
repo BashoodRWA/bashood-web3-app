@@ -1,10 +1,25 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
+import "../standards/IBashoodRWA.sol";
+
 /// @title DepreciationEngine
 /// @notice Lógica matemática para todos los modelos de depreciación BASHOOD-RWA-1
 /// @dev Todas las funciones devuelven basis points (1% = 100, 100% = 10,000)
 library DepreciationEngine {
+        // Consolidated depreciation calculation
+        function calculateDepreciation(uint8 depModel, IBashoodRWA.OperationalMetrics memory operational) internal pure returns (uint256) {
+            if (depModel == uint8(IBashoodRWA.DepreciationModel.LOAD_BASED)) {
+                return loadBased(operational.totalLoadLifted, operational.maxLoadLifetime);
+            } else if (depModel == uint8(IBashoodRWA.DepreciationModel.EXTRUSION_BASED)) {
+                return extrusionBased(operational.metersExtruded, operational.maxMetersLifetime);
+            } else if (depModel == uint8(IBashoodRWA.DepreciationModel.SETUP_BASED)) {
+                return setupBased(operational.setupCount, operational.maxSetups);
+            } else if (depModel == uint8(IBashoodRWA.DepreciationModel.LINEAR)) {
+                return linearTimeBased(operational.operatingHours, operational.maxLifetimeHours);
+            }
+            return 0;
+        }
     error InvalidReferenceValue(string);
 
     // 1. LOAD_BASED

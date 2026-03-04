@@ -38,7 +38,8 @@ module.exports = {
               optimizer: {
                 enabled: false,
                 runs: 1
-              }
+              },
+              evmVersion: "cancun"
             }
           }
         ]
@@ -49,7 +50,8 @@ module.exports = {
         settings: {
           optimizer: {
             enabled: false  // Disable optimizer for debugging oracle validation issue
-          }
+          },
+          evmVersion: "cancun"
         }
       }
     : {
@@ -61,7 +63,10 @@ module.exports = {
           },
           metadata: {
             bytecodeHash: "none"  // Remove metadata hash to reduce contract size
-          }
+          },
+          // Cancun required for OZ v5 Governor (uses mcopy opcode).
+          // Base L2 is Cancun-compatible (activated June 2024).
+          evmVersion: "cancun"
         }
       },
   paths: {

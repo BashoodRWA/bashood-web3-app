@@ -34,6 +34,14 @@ contract BashoodToken is ERC20, Ownable, ReentrancyGuard, Pausable {
     uint256 public treasuryFee;      // 0.5% (en basis points, 50/10000)
  
     address public treasuryWallet;
+
+    /**
+     * @dev Points to the governance rewards pool / staking distributor.
+     *      In production this MUST be set to the BashoodTimelock address
+     *      BEFORE calling lockParameters() — otherwise sendToGovernancePool()
+     *      will always revert after the lock.
+     *      Default value address(0) is safe: sendToGovernancePool() guards against it.
+     */
     address public stakingContract;
  
     uint256 public totalBurned;
@@ -168,10 +176,19 @@ contract BashoodToken is ERC20, Ownable, ReentrancyGuard, Pausable {
         _transfer(address(this), treasuryWallet, amount);
     }
  
-    /// @notice Send contract-held tokens to the staking contract. Owner only.
-    /// @param amount Amount of tokens to send to staking
+    /**
+     * @notice Send contract-held tokens to the governance rewards pool.
+     * @dev `stakingContract` MUST be set to BashoodTimelock (or a governance
+     *      rewards distributor) before calling this function. Owner only.
+     *
+     *      Legacy name preserved for test compatibility. In production, this
+     *      function routes tokens to the timelock-controlled governance pool.
+     *      If stakingContract == address(0), the call reverts.
+     *
+     * @param amount Amount of tokens to send
+     */
     function sendToStaking(uint256 amount) external onlyOwner whenNotPaused {
-        require(stakingContract != address(0), "Staking contract not set");
+        if (stakingContract == address(0)) revert InvalidStakingContract();
         require(balanceOf(address(this)) >= amount, "Not enough tokens");
         _transfer(address(this), stakingContract, amount);
     }
@@ -278,13 +295,20 @@ contract BashoodToken is ERC20, Ownable, ReentrancyGuard, Pausable {
     
     /**
      * @notice Lock economic parameters permanently (one-time, irreversible).
-     * @dev After calling this function, setBurnRate(), setTreasuryFee(), 
+     * @dev After calling this function, setBurnRate(), setTreasuryFee(),
      *      setTreasuryWallet(), and setStakingContract() will permanently revert.
      *      This ensures post-presale immutability of economic terms for regulatory compliance.
-     * 
-     * SECURITY: This action is IRREVERSIBLE. Once locked, parameters cannot be changed.
-     * REGULATORY: Demonstrates commitment to fixed economic terms post-sale.
-     * TIMING: Should be called after presale ends and before token distribution.
+     *
+     * SECURITY:    IRREVERSIBLE. Once locked, parameters cannot be changed.
+     * REGULATORY:  Demonstrates commitment to fixed economic terms post-sale.
+     * TIMING:      Call AFTER all addresses are configured — recommended order:
+     *               1. setTreasuryWallet(BashoodTreasury)
+     *               2. setStakingContract(BashoodTimelock)  ← governance pool
+     *               3. lockParameters()                     ← freeze everything
+     *
+     * WARNING: If stakingContract is address(0) at lock time, sendToStaking()
+     *          will always revert after the lock (cannot update stakingContract later).
+     *          The deploy script enforces this ordering — see scripts/deploy-mainnet.cjs.
      */
     function lockParameters() external onlyOwner {
         require(!parametersLocked, "Already locked");

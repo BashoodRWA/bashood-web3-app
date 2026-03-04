@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>BashoodCore – Arquitectura Técnica</title>
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: #f7f8fa;
+      color: #1a1a2e;
+      padding: 40px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    header {
+      border-bottom: 3px solid #1e3a5f;
+      padding-bottom: 20px;
+      margin-bottom: 36px;
+    }
+
+    header h1 {
+      font-size: 1.9rem;
+      color: #1e3a5f;
+      letter-spacing: 0.02em;
+    }
+
+    header .meta {
+      margin-top: 8px;
+      font-size: 0.85rem;
+      color: #555;
+      display: flex;
+      gap: 32px;
+    }
+
+    header .meta span strong {
+      color: #1e3a5f;
+    }
+
+    .badge {
+      display: inline-block;
+      background: #1e3a5f;
+      color: #fff;
+      font-size: 0.72rem;
+      padding: 2px 10px;
+      border-radius: 12px;
+      margin-left: 10px;
+      vertical-align: middle;
+      letter-spacing: 0.05em;
+    }
+
+    section {
+      background: #fff;
+      border: 1px solid #dde3ed;
+      border-radius: 8px;
+      padding: 28px 32px;
+      margin-bottom: 30px;
+      page-break-inside: avoid;
+    }
+
+    section h2 {
+      font-size: 1.05rem;
+      color: #1e3a5f;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      border-left: 4px solid #4a90d9;
+      padding-left: 12px;
+    }
+
+    section p.desc {
+      font-size: 0.83rem;
+      color: #666;
+      margin-bottom: 20px;
+      padding-left: 16px;
+    }
+
+    .mermaid {
+      overflow-x: auto;
+      padding: 10px 0;
+    }
+
+    .legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 16px;
+      padding-left: 4px;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 0.78rem;
+      color: #444;
+    }
+
+    .legend-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 3px;
+      flex-shrink: 0;
+    }
+
+    footer {
+      text-align: center;
+      font-size: 0.75rem;
+      color: #aaa;
+      margin-top: 40px;
+      padding-top: 16px;
+      border-top: 1px solid #dde3ed;
+    }
+
+    @media print {
+      body { background: #fff; padding: 20px; }
+      section { border: 1px solid #ccc; box-shadow: none; }
+      .no-print { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>BashoodCore <span class="badge">BASHOOD-RWA-1</span></h1>
+  <div class="meta">
+    <span><strong>Documento:</strong> Arquitectura Técnica – Plan M4 Fase 3</span>
+    <span><strong>Versión:</strong> 1.0.0</span>
+    <span><strong>Fecha:</strong> 2 de marzo de 2026</span>
+  </div>
+</header>
+
+<!-- DIAGRAMA 1 -->
+<section>
+  <h2>1 · Diagrama de Dependencias</h2>
+  <p class="desc">
+    Relaciones de herencia e importación del contrato principal. Las flechas indican dirección de dependencia.
+    Las herencias de OpenZeppelin son la base del estándar ERC-721 con control de acceso y actualización UUPS.
+  </p>
+  <div class="mermaid">
+graph LR
+    BashoodRWAReference -->|"import"| IBashoodRWA
+    BashoodRWAReference -->|"import"| DepreciationEngine
+    BashoodRWAReference -->|"inherits"| ERC721Upgradeable
+    BashoodRWAReference -->|"inherits"| AccessControlUpgradeable
+    BashoodRWAReference -->|"inherits"| UUPSUpgradeable
+    BashoodRWAReference -->|"inherits"| Initializable
+    DepreciationEngine -->|"usa tipos"| IBashoodRWA
+
+    style IBashoodRWA fill:#1a4a2e,color:#fff,stroke:#4caf50
+    style DepreciationEngine fill:#4a2e00,color:#fff,stroke:#ff9800
+    style ERC721Upgradeable fill:#2e2e4a,color:#fff,stroke:#7986cb
+    style AccessControlUpgradeable fill:#2e2e4a,color:#fff,stroke:#7986cb
+    style UUPSUpgradeable fill:#2e2e4a,color:#fff,stroke:#7986cb
+    style Initializable fill:#2e2e4a,color:#fff,stroke:#7986cb
+    style BashoodRWAReference fill:#1e3a5f,color:#fff,stroke:#4a90d9
+  </div>
+  <div class="legend">
+    <div class="legend-item"><div class="legend-dot" style="background:#1e3a5f"></div>BashoodCore (contrato principal)</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#1a4a2e"></div>IBashoodRWA (interfaz de tipos)</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#4a2e00"></div>DepreciationEngine (librería de cálculo)</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#2e2e4a"></div>OpenZeppelin (base estándar)</div>
+  </div>
+</section>
+
+<!-- DIAGRAMA 2 -->
+<section>
+  <h2>2 · Diagrama de Flujo de Llamadas</h2>
+  <p class="desc">
+    Secuencia de interacciones entre actores externos y el Core para las operaciones principales.
+    El único salto a módulo externo es la delegación de cálculo aritmético a <code>DepreciationEngine</code>.
+  </p>
+  <div class="mermaid">
+sequenceDiagram
+    actor Manager as ASSET_MANAGER
+    actor Oracle as ORACLE_ROLE
+    participant Core as BashoodRWAReference
+    participant Engine as DepreciationEngine
+    participant ERC721 as ERC721Upgradeable
+
+    Manager->>Core: mintAsset(to, identification, specs, financials, operational, uri)
+    Core->>Core: _nextTokenId++
+    Core->>ERC721: _safeMint(to, tokenId)
+    Core->>Core: _store(8 structs de activo)
+    Core-->>Manager: tokenId
+
+    Manager->>Core: updateAssetValue(tokenId, newValue, reason)
+    Core->>Core: _financialData[tokenId].currentValue = newValue
+    Core-->>Manager: emit AssetValueUpdated
+
+    Oracle->>Core: updateUsageMetrics(tokenId, metricType, value)
+    Core->>Core: _metricTypeStringToEnum(metricType)
+    Core->>Core: _operationalMetrics[tokenId].update(value)
+    Core-->>Oracle: emit UsageMetricsUpdated
+
+    Manager->>Core: calculateCurrentValue(tokenId)
+    Core->>Engine: calculateDepreciation(depModel, operationalMetrics)
+    Engine-->>Core: depreciationBasisPoints
+    Core-->>Manager: currentValue
+
+    Manager->>Core: recordMaintenance(tokenId, cost, description)
+    Core->>Core: _operationalMetrics[tokenId].maintenanceCostReserve += cost
+    Core-->>Manager: emit MaintenanceRecorded
+  </div>
+</section>
+
+<!-- DIAGRAMA 3 -->
+<section>
+  <h2>3 · Diagrama de Ownership y Control de Acceso</h2>
+  <p class="desc">
+    Jerarquía de roles basada en <code>AccessControlUpgradeable</code> de OpenZeppelin.
+    <code>DEFAULT_ADMIN_ROLE</code> es el único que puede otorgar y revocar cualquier rol.
+    Cada rol tiene acceso restringido a funciones específicas.
+  </p>
+  <div class="mermaid">
+graph TD
+    ADMIN["DEFAULT_ADMIN_ROLE · Admin"]
+    MANAGER["ASSET_MANAGER_ROLE"]
+    ORACLE["ORACLE_ROLE"]
+    UPGRADER["UPGRADER_ROLE"]
+
+    ADMIN -->|"otorga / revoca"| MANAGER
+    ADMIN -->|"otorga / revoca"| ORACLE
+    ADMIN -->|"otorga / revoca"| UPGRADER
+    ADMIN -->|"se auto-gestiona"| ADMIN
+
+    MANAGER -->|"autoriza"| F1["mintAsset()"]
+    MANAGER -->|"autoriza"| F2["updateAssetValue()"]
+    MANAGER -->|"autoriza"| F3["recordMaintenance()"]
+    MANAGER -->|"autoriza"| F4["setCertificationData()"]
+    MANAGER -->|"autoriza"| F5["setTelemetryConfig()"]
+    MANAGER -->|"autoriza"| F6["setTokenizationConfig()"]
+    MANAGER -->|"autoriza"| F7["setInsuranceData()"]
+
+    ORACLE -->|"autoriza"| F8["updateUsageMetrics()"]
+    UPGRADER -->|"autoriza"| F9["_authorizeUpgrade() · UUPS"]
+
+    style ADMIN fill:#1e3a5f,color:#fff,stroke:#4a90d9
+    style MANAGER fill:#1a4a2e,color:#fff,stroke:#4caf50
+    style ORACLE fill:#4a2e00,color:#fff,stroke:#ff9800
+    style UPGRADER fill:#3a1a3a,color:#fff,stroke:#9c27b0
+  </div>
+  <div class="legend">
+    <div class="legend-item"><div class="legend-dot" style="background:#1e3a5f"></div>DEFAULT_ADMIN_ROLE</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#1a4a2e"></div>ASSET_MANAGER_ROLE</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#4a2e00"></div>ORACLE_ROLE</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#3a1a3a"></div>UPGRADER_ROLE</div>
+  </div>
+</section>
+
+<!-- TABLA DE LÍMITES -->
+<section>
+  <h2>4 · Límite formal del Core</h2>
+  <p class="desc">Responsabilidades incluidas y excluidas del contrato principal.</p>
+  <table style="width:100%;border-collapse:collapse;font-size:0.83rem;margin-top:8px">
+    <thead>
+      <tr style="background:#1e3a5f;color:#fff">
+        <th style="padding:10px 14px;text-align:left">Responsabilidad</th>
+        <th style="padding:10px 14px;text-align:left">Estado</th>
+        <th style="padding:10px 14px;text-align:left">Módulo</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr style="background:#f0f4fa">
+        <td style="padding:9px 14px">Ciclo de vida del activo NFT (mint, initialize)</td>
+        <td style="padding:9px 14px;color:#1a4a2e;font-weight:600">✔ Core</td>
+        <td style="padding:9px 14px">BashoodRWAReference</td>
+      </tr>
+      <tr>
+        <td style="padding:9px 14px">Almacenamiento canónico (8 structs)</td>
+        <td style="padding:9px 14px;color:#1a4a2e;font-weight:600">✔ Core</td>
+        <td style="padding:9px 14px">BashoodRWAReference</td>
+      </tr>
+      <tr style="background:#f0f4fa">
+        <td style="padding:9px 14px">Gestión de valor y depreciación (coordinación)</td>
+        <td style="padding:9px 14px;color:#1a4a2e;font-weight:600">✔ Core</td>
+        <td style="padding:9px 14px">BashoodRWAReference</td>
+      </tr>
+      <tr>
+        <td style="padding:9px 14px">Cálculo aritmético de depreciación</td>
+        <td style="padding:9px 14px;color:#4a2e00;font-weight:600">→ Delegado</td>
+        <td style="padding:9px 14px">DepreciationEngine</td>
+      </tr>
+      <tr style="background:#f0f4fa">
+        <td style="padding:9px 14px">Tasación por oráculo Chainlink</td>
+        <td style="padding:9px 14px;color:#ff6f00;font-weight:600">⚠ Candidato F3</td>
+        <td style="padding:9px 14px">Módulo Oráculos</td>
+      </tr>
+      <tr>
+        <td style="padding:9px 14px">Gestión de certificaciones</td>
+        <td style="padding:9px 14px;color:#ff6f00;font-weight:600">⚠ Candidato F3</td>
+        <td style="padding:9px 14px">Módulo Certificaciones</td>
+      </tr>
+      <tr style="background:#f0f4fa">
+        <td style="padding:9px 14px">Telemetría y configuración de feeds</td>
+        <td style="padding:9px 14px;color:#ff6f00;font-weight:600">⚠ Candidato F3</td>
+        <td style="padding:9px 14px">Módulo Telemetría</td>
+      </tr>
+      <tr>
+        <td style="padding:9px 14px">Distribución de ingresos / fracciones / ESG</td>
+        <td style="padding:9px 14px;color:#c62828;font-weight:600">✗ Fuera de scope</td>
+        <td style="padding:9px 14px">F4+ (futuro)</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<footer>
+  Bashood Protocol · Plan M4 – Fase 3 · Documento interno de arquitectura · 2 de marzo de 2026
+  <br/><span class="no-print" style="display:block;margin-top:8px;color:#aaa;font-size:0.7rem">
+    Para exportar a PDF: Ctrl+P → Destino: Guardar como PDF → Papel A4 · Sin márgenes
+  </span>
+</footer>
+
+<script>
+  mermaid.initialize({ startOnLoad: true, theme: 'default', securityLevel: 'loose' });
+</script>
+</body>
+</html>
