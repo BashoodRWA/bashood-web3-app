@@ -1,9 +1,9 @@
 # 📊 BASHOOD TOKEN ECONOMICS (TOKENOMICS)
 
 **Documento de Economía del Token - Versión 1.0**  
-**Fecha:** 16 Febrero 2026  
-**Estado:** Draft para Auditoría Contable  
-**Preparado para:** Fundraising, Exchange Listings, Mainnet Launch
+**Fecha:** 4 de marzo de 2026  
+**Estado:** v1.1 — Architecture Freeze Alineado  
+**Preparado para:** Mainnet Launch, Auditoría Técnica, Revisión Legal Externa
 
 ---
 
@@ -13,7 +13,7 @@ Bashood es un ecosistema de tokenización RWA (Real World Assets) con dos tokens
 1. **$BASHOOD** - Token de utilidad y governance (Preventa)
 2. **BASHOOD-RWA-NFTs** - NFTs representando activos físicos tokenizados
 
-Este documento detalla la estructura económica, distribución, utilidad, y modelo de ingresos para evaluación contable y due diligence.
+Este documento detalla la estructura económica, distribución y utilidad del token BHT, diseñado como token de utilidad funcional bajo el marco MiCA (Reglamento UE 2023/1114). No constituye prospecto, instrumento financiero ni promesa de rendimiento.
 
 ---
 
@@ -22,31 +22,40 @@ Este documento detalla la estructura económica, distribución, utilidad, y mode
 ### 1.1 Supply & Distribution
 
 **Total Supply:** 1,000,000,000 BASHOOD (1 billion tokens)  
-**Token Standard:** ERC20 Upgradeable  
-**Network:** Polygon (Layer 2)  
+**Token Standard:** ERC20  
+**Network:** Base L2 (Ethereum Layer 2 de Coinbase, Chain ID 8453)  
 **Decimals:** 18
 
 #### Distribución Inicial
 
 | Categoría | Tokens | % | Vesting | Purpose |
 |-----------|--------|---|---------|---------|
-| **Public Sale (Preventa)** | 400,000,000 | 40% | Unlocked at TGE | Fundraising público |
-| **Team & Founders** | 150,000,000 | 15% | 24 months cliff, 36 months linear | Alineación long-term |
+| **Public Sale (Preventa)** | 250,000,000 | 25% | 20% at TGE, 80% linear 12 months | Acceso inicial al token de utilidad |
+| **Team & Founders** | 150,000,000 | 15% | 24 months cliff, 36 months linear | Alineación long-term (off-chain custody) |
 | **Advisors** | 50,000,000 | 5% | 12 months cliff, 24 months linear | Asesoramiento estratégico |
-| **Treasury & Development** | 200,000,000 | 20% | Controlado por DAO | Desarrollo continuo |
-| **Liquidity Pools** | 100,000,000 | 10% | Unlocked at TGE | Market making |
-| **Marketing & Partnerships** | 70,000,000 | 7% | 6 months cliff, 18 months linear | Growth & adoption |
-| **Community Rewards** | 30,000,000 | 3% | Distributed over 48 months | Staking, incentivos |
+| **Reserva del Protocolo** | 200,000,000 | 20% | Controlado por gobernanza (multisig) | Desarrollo, auditorías, grants |
+| **Liquidez Inicial** | 100,000,000 | 10% | Unlocked at TGE | Market making en DEX |
+| **Ecosistema y Comunidad** | 200,000,000 | 20% | Linear 48 months | Incentivos de adopción, partners, comunidad |
+| **Reserva de Emergencia** | 50,000,000 | 5% | Bajo multisig (3/5) | Fondo de contingencia |
+
+**Total:** 1,000,000,000 BHT (100%)
 
 **Total:** 1,000,000,000 BASHOOD (100%)
 
 ### 1.2 Vesting Schedule Details
+
+**Public Sale / Preventa (250M tokens):**
+- 20% desbloqueado en TGE: 50,000,000 tokens
+- 80% linear vesting: 200,000,000 tokens durante 12 meses
+- Release mensual: 16,666,667 tokens/mes
+- **Propósito:** Reducir presión de venta inicial (dump prevention)
 
 **Team & Founders (150M tokens):**
 - Cliff: 24 months (no tokens released)
 - Linear vesting: 36 months después del cliff
 - Release mensual: 4,166,667 tokens
 - **Total duration:** 60 months (5 años)
+- **Nota:** Vesting ejecutado mediante acuerdos de custodia off-chain. No implementado por smart contract en v1.0.
 
 **Advisors (50M tokens):**
 - Cliff: 12 months
@@ -54,41 +63,41 @@ Este documento detalla la estructura económica, distribución, utilidad, y mode
 - Release mensual: 2,083,333 tokens
 - **Total duration:** 36 months (3 años)
 
-**Marketing (70M tokens):**
-- Cliff: 6 months
-- Linear vesting: 18 months después del cliff
-- Release mensual: 3,888,889 tokens
-- **Total duration:** 24 months (2 años)
-
-**Community Rewards (30M tokens):**
-- No cliff
+**Ecosistema y Comunidad (200M tokens):**
+- Sin cliff
 - Linear distribution: 48 months
-- Release mensual: 625,000 tokens
+- Release mensual: 4,166,667 tokens
 - **Total duration:** 48 months (4 años)
+- **Uso:** Incentivos de adopción, grants a desarrolladores, activaciones de comunidad — no distribuciones de yield
+
+**Reserva de Emergencia (50M tokens):**
+- Bajo control de multisig 3/5
+- Sin schedule predefinido
+- Solo activable por decisión de gobernanza con quórum
 
 ### 1.3 Preventa Structure
 
-**Fase 1:** Early Bird (100M tokens @ $0.001)
+**Fase 1:** Early Bird (75M tokens @ $0.001)
 - Precio: $0.001 per token
 - Min purchase: $100 (100,000 tokens)
 - Max purchase: $10,000 (10,000,000 tokens)
-- Bonus: +20% tokens
 
-**Fase 2:** Public Sale (300M tokens @ $0.002)
+**Fase 2:** Public Sale (175M tokens @ $0.002)
 - Precio: $0.002 per token
 - Min purchase: $50 (25,000 tokens)
 - Max purchase: $50,000 (25,000,000 tokens)
-- Bonus: +10% tokens
 
 **Total Fundraising Target:**
-- Phase 1: 100M × $0.001 = $100,000
-- Phase 2: 300M × $0.002 = $600,000
-- **Total: $700,000** (sin contar bonuses)
+- Phase 1: 75M × $0.001 = $75,000
+- Phase 2: 175M × $0.002 = $350,000
+- **Total: $425,000**
 
-**Con bonuses:**
-- Phase 1 efectivo: $100k → 120M tokens entregados
-- Phase 2 efectivo: $600k → 330M tokens entregados
-- **Total tokens vendidos: 450M** (de 400M allocation + 50M extra de reserva treasury)
+**Vesting de preventa aplicado:**
+- 20% desbloqueado en TGE: 50,000,000 tokens
+- 80% linear 12 meses: 200,000,000 tokens (16,666,667/mes)
+- Objetivo: reducir presión de venta inicial al lanzamiento
+
+*Las proyecciones de fundraising son orientativas. No constituyen garantía de recaudación.*
 
 ### 1.4 Token Utility
 
@@ -99,11 +108,12 @@ Este documento detalla la estructura económica, distribución, utilidad, y mode
    - Propuestas requieren mínimo 1M tokens staked
    - Quorum: 5% del supply circulante
 
-2. **Staking Rewards**
-   - APY: 8-12% (variable según lockup)
-   - Lockup 3 meses: 8% APY
-   - Lockup 6 meses: 10% APY
-   - Lockup 12 meses: 12% APY
+2. **Governance Staking (sin yield garantizado)**
+   - El staking de BHT otorga poder de voto proporcional en el protocolo
+   - No existe APY fijo ni garantizado de ningún tipo
+   - No existe lockup obligatorio vinculado a rendimiento prometido
+   - El pool de Ecosistema y Comunidad (200M tokens) puede distribuir incentivos de actividad, sujeto exclusivamente a decisión de gobernanza
+   - Las distribuciones del pool son discrecionales y no constituyen rendimiento financiero ni instrumento de inversión
 
 3. **Fee Discounts (RWA Marketplace)**
    - Sin tokens: 2.5% fee por transacción RWA
@@ -111,15 +121,22 @@ Este documento detalla la estructura económica, distribución, utilidad, y mode
    - Holding 100k tokens: 1.5% fee (-40%)
    - Holding 1M tokens: 1.0% fee (-60%)
 
-4. **RWA Minting Requirements**
-   - Mint NFT RWA: Requiere 1,000 $BASHOOD staked
-   - Los tokens permanecen staked mientras el NFT existe
-   - Burn NFT: Tokens unstaked y devueltos
+4. **Acceso al Protocolo RWA**
+   - El mint de un activo BASHOOD-RWA-1 requiere el rol `ASSET_MANAGER_ROLE` (AccessControl on-chain)
+   - No existe ningún requisito de BHT staked para interactuar con el Core RWA
+   - El BHT y los NFT BASHOOD-RWA-1 son instrumentos completamente separados sin vínculo contractual directo
+   - Esta separación es un invariante permanente del protocolo (v1.0-mainnet-freeze)
 
-5. **Referral Rewards**
-   - Nivel 1: 10% de fees en $BASHOOD
-   - Nivel 2: 5% de fees en $BASHOOD
-   - Requiere mínimo 1,000 tokens staked
+5. **Mecanismos de Burn y Tesoro (on-chain)**
+   - **Burn automático:** 0,1% de cada transferencia BHT se destruye permanentemente (`burnRate = 10` basis points)
+   - **Fee al tesoro:** 0,5% de cada transferencia va al tesoro del protocolo (`treasuryFee = 50` basis points)
+   - Los fondos del tesoro pueden destinarse a: desarrollo del ecosistema, provisión de liquidez, o recompras discrecionales aprobadas por gobernanza
+   - No existe mecanismo de recompra automático ni distribución automática a holders
+
+6. **Sistema de Referidos**
+   - 10% de las fees generadas por el referido (actividad transaccional probada)
+   - No requiere BHT staked
+   - Naturaleza: incentivo por actividad, no distribución pasiva
 
 ---
 
@@ -127,8 +144,8 @@ Este documento detalla la estructura económica, distribución, utilidad, y mode
 
 ### 2.1 NFT Structure
 
-**Standard:** ERC721 Upgradeable  
-**Network:** Polygon  
+**Standard:** ERC721  
+**Network:** Base L2 (Ethereum Layer 2 de Coinbase, Chain ID 8453)  
 **Supply:** Sin límite (cada NFT = 1 activo físico real)
 
 ### 2.2 NFT Economics
@@ -175,13 +192,12 @@ Este documento detalla la estructura económica, distribución, utilidad, y mode
 
 | Fuente | Año 1 | Año 2 | Año 3 | Año 5 |
 |--------|-------|-------|-------|-------|
-| **Preventa $BASHOOD** | $700,000 | - | - | - |
+| **Preventa BHT** | $425,000 | - | - | - |
 | **RWA Minting Fees** | $500,000 | $1,200,000 | $2,500,000 | $5,000,000 |
-| **Trading Fees (2.5%)** | $250,000 | $750,000 | $2,000,000 | $5,000,000 |
+| **Trading Fees** | $250,000 | $750,000 | $2,000,000 | $5,000,000 |
 | **Fractional Fees** | $100,000 | $300,000 | $800,000 | $2,000,000 |
 | **Oracle Services** | $30,000 | $150,000 | $400,000 | $1,000,000 |
-| **Staking Fees** | - | $50,000 | $200,000 | $500,000 |
-| **TOTAL** | **$1,580,000** | **$2,450,000** | **$5,900,000** | **$13,500,000** |
+| **TOTAL** | **$1,305,000** | **$2,400,000** | **$5,700,000** | **$13,000,000** |
 
 ### 3.2 Uso de Fondos
 
@@ -204,7 +220,38 @@ Este documento detalla la estructura económica, distribución, utilidad, y mode
 
 ---
 
-## 📈 4. PROYECCIONES FINANCIERAS
+## � 3.5 TOKEN SUSTAINABILITY MODEL
+
+### Principios de Sostenibilidad
+
+| Principio | Detalle | Estado |
+|---|---|---|
+| Supply fijo | 1,000,000,000 BHT, no hay emisión adicional post-mint | ✅ Implementado |
+| Mecanismo deflacionario | 0,1% burn automático en cada transferencia | ✅ Implementado |
+| Vesting preventa | 80% con linear 12 meses (reduce dump en TGE) | ✅ Definido |
+| Vesting equipo | 24 meses cliff + 36 meses linear (5 años total) | ✅ Definido |
+| Pool incentivos capeado | 200M tokens máx para ecosistema (20% del supply) | ✅ Definido |
+| Sin inflación post-mint | No existe emisión programada adicional | ✅ Implementado |
+| Sin APY garantizado | No existe promesa de rendimiento de ninguna clase | ✅ Formalizado |
+| Tesoro bajo gobernanza | Treasury no distribuye automáticamente a holders | ✅ Formalizado |
+| Separación BHT ↔ RWA | Cero vínculo contractual entre valor de activos y BHT | ✅ Invariante permanente |
+
+### Token Sustainability Ratio (TSR) — Inputs
+
+| Parámetro | Valor |
+|---|---|
+| Supply total | 1,000,000,000 BHT |
+| Tokens en circulación en TGE | 50,000,000 (5% — solo TGE preventa + liquidez) |
+| Tokens desbloqueados en mes 12 | ~350,000,000 (35%) |
+| Burn acumulado estimado (año 1, 1,000 transacciones/día) | ~36,500 BHT |
+| Máx emisiones de incentivos/año | 50,000,000 BHT (capped, 4.17M/mes) |
+| Pool de yield garantizado | 0 |
+
+> **Nota:** La estimación de burn asume volumen bajo conservador. A mayor adopción, mayor desinflación por burn.
+
+---
+
+## �📈 4. PROYECCIONES FINANCIERAS
 
 ### 4.1 Supuestos Clave
 
@@ -383,9 +430,9 @@ Este documento detalla la estructura económica, distribución, utilidad, y mode
 
 ### 7.3 Para Exchange Listing
 
-✅ **Technical Requirements (Polygon):**
-- [x] Smart contract audited (4 audits ✅)
-- [x] Verified on Polygonscan (pending deploy)
+✅ **Technical Requirements (Base L2):**
+- [x] Smart contract audited (838 tests ✅)
+- [x] Verified on BaseScan (pending mainnet deploy)
 - [x] Open source code (GitHub)
 - [x] Token standard compliant (ERC20/ERC721)
 
@@ -497,40 +544,33 @@ Al final de auditoría contable, recibirás:
 | | Año 1 | Año 2 | Año 3 | Año 5 |
 |---|---|---|---|---|
 | **REVENUES** | | | | |
-| Preventa | $700k | - | - | - |
+| Preventa | $425k | - | - | - |
 | RWA Minting | $500k | $1.2M | $2.5M | $5M |
 | Trading Fees | $250k | $750k | $2M | $5M |
 | Fractional | $100k | $300k | $800k | $2M |
 | Oracle | $30k | $150k | $400k | $1M |
 | Other | - | $50k | $200k | $500k |
-| **TOTAL REVENUE** | **$1.58M** | **$2.45M** | **$5.9M** | **$13.5M** |
+| **TOTAL REVENUE** | **$1.30M** | **$2.40M** | **$5.70M** | **$13.0M** |
 | | | | | |
 | **EXPENSES** | | | | |
-| Development | $632k | $980k | $2.36M | $5.4M |
-| Operations | $395k | $612k | $1.48M | $3.38M |
-| Marketing | $316k | $490k | $1.18M | $2.7M |
+| Development | $522k | $960k | $2.28M | $5.2M |
+| Operations | $326k | $600k | $1.43M | $3.25M |
+| Marketing | $261k | $480k | $1.14M | $2.6M |
 | Legal/Compliance | $150k | $100k | $200k | $300k |
-| **TOTAL EXPENSES** | **$1.49M** | **$2.18M** | **$5.22M** | **$11.78M** |
+| **TOTAL EXPENSES** | **$1.26M** | **$2.14M** | **$5.05M** | **$11.35M** |
 | | | | | |
-| **EBITDA** | **$86k** | **$270k** | **$680k** | **$1.72M** |
-| **Margin** | **5.4%** | **11%** | **11.5%** | **12.7%** |
+| **EBITDA** | **$44k** | **$260k** | **$650k** | **$1.65M** |
+| **Margin** | **3.4%** | **10.8%** | **11.4%** | **12.7%** |
 
 ### 9.2 Balance Sheet Projection
 
 **Assets (Año 1):**
-- Cash: $700k (preventa funds)
-- Token treasury: 200M $BASHOOD (~$4M market value @ $0.02)
-- RWA NFT inventory: 100 NFTs (~$5M value)
-- **Total Assets: ~$9.7M**
+- Cash: $425k (preventa funds conservador)
+- Token treasury: 200M BHT (valor de mercado orientativo — no garantizado)
+- RWA NFT inventory: 5 activos piloto testnet
+- **Total Assets: orientativo, sujeto a mercado**
 
-**Liabilities:**
-- Unvested tokens: 200M (team/advisors) @ $0.02 = $4M
-- Operational payables: $50k
-- **Total Liabilities: ~$4.05M**
-
-**Equity:**
-- Founder equity: Variable (depends on legal structure)
-- **Net Worth: ~$5.65M**
+**Nota:** Las cifras del balance sheet son orientativas. No constituyen estados financieros auditados.
 
 ---
 
@@ -576,7 +616,7 @@ Al final de auditoría contable, recibirás:
 | **TOTAL** | **$310k-$725k** | |
 
 **Funding Source Options:**
-1. Use preventa funds ($700k raised)
+1. Use preventa funds (~$425k raised target)
 2. SAFT/SAFE round ($500k-$1M)
 3. Angel investors ($250k-$500k)
 4. Strategic partners/VCs ($1M+)
@@ -658,8 +698,8 @@ Al final de auditoría contable, recibirás:
 ---
 
 **Documento preparado por:** Bashood Development Team  
-**Para:** Auditoría Contable, Fundraising, Exchange Listings  
+**Para:** Mainnet Launch, Revisión Legal Externa, Architecture Freeze  
 **Contacto:** [AÑADIR EMAIL]  
-**Última actualización:** 16 Febrero 2026
+**Última actualización:** 4 de marzo de 2026
 
-**STATUS: 🔴 DRAFT - REQUIERE AUDITORÍA EXTERNA**
+**STATUS: 🟡 v1.1 — ARCHITECTURE FREEZE ALINEADO — PENDIENTE REVISIÓN LEGAL INDEPENDIENTE**

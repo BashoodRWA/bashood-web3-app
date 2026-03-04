@@ -272,15 +272,15 @@ BASHOOD-RWA-1 (NFT ERC-721)
 
 ### 5.4 Distribución de BHT
 
-| Categoría | Porcentaje | Descripción |
-|---|---|---|
-| Preventa pública | 25% | Acceso inicial al token de utilidad |
-| Ecosistema y comunidad | 20% | Incentivos a desarrolladores, partners |
-| Equipo y fundadores | 15% | Vesting 2 años con cliff 6 meses |
-| Reserva del protocolo | 20% | Desarrollo futuro, auditorías |
-| Liquidez inicial | 10% | Pares en DEX en mainnet |
-| Advisors | 5% | Con vesting |
-| Reserva de emergencia | 5% | Bajo multisig |
+| Categoría | Porcentaje | Tokens | Vesting |
+|---|---|---|---|
+| Preventa pública | 25% | 250,000,000 | 20% at TGE, 80% linear 12 meses |
+| Ecosistema y comunidad | 20% | 200,000,000 | Linear 48 meses — incentivos de adopción |
+| Equipo y fundadores | 15% | 150,000,000 | Cliff 24 meses, linear 36 meses (total 5 años) |
+| Reserva del protocolo | 20% | 200,000,000 | Bajo gobernanza multisig |
+| Liquidez inicial | 10% | 100,000,000 | Unlocked at TGE |
+| Advisors | 5% | 50,000,000 | Cliff 12 meses, linear 24 meses |
+| Reserva de emergencia | 5% | 50,000,000 | Bajo multisig 3/5 |
 
 ---
 
