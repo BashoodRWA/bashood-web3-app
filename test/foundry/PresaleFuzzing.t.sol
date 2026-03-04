@@ -4,7 +4,7 @@ pragma solidity ^0.8.20;
 import "forge-std/Test.sol";
 import "../../contracts/BashoodPresaleFinal.sol";
 import "../../contracts/BashoodToken.sol";
-import "../../contracts/BashoodPropertyNFT.sol";
+import "../../contracts/MockNFT1155.sol";
 import "../../contracts/BashoodReferral.sol";
 import "../../contracts/BashoodPaymentSplitter.sol";
 
@@ -16,7 +16,7 @@ import "../../contracts/BashoodPaymentSplitter.sol";
 contract PresaleFuzzingTest is Test {
     BashoodPresaleFinal public presale;
     BashoodToken public token;
-    BashoodPropertyNFT public nft;
+    MockNFT1155 public nft;
     BashoodReferral public referral;
     BashoodPaymentSplitter public paymentSplitter;
 
@@ -26,6 +26,9 @@ contract PresaleFuzzingTest is Test {
     address public marketing;
     address public operations;
     address public treasuryPS;
+    address public signerAddr;
+
+    uint256 constant SIGNER_KEY = 999;
 
     uint256 constant PRESALE_START = 1704067200;
     uint256 constant PRESALE_END = 1735689600;
@@ -35,6 +38,7 @@ contract PresaleFuzzingTest is Test {
     uint256 constant NFT_PRICE_BHT = 100 * 1e18;
 
     function setUp() public {
+        signerAddr = vm.addr(SIGNER_KEY);
         user = vm.addr(1);
         treasury = vm.addr(3);
         development = vm.addr(4);
@@ -43,7 +47,7 @@ contract PresaleFuzzingTest is Test {
         treasuryPS = vm.addr(7);
 
         token = new BashoodToken(treasury);
-        nft = new BashoodPropertyNFT("https://api.bashood.com/metadata/");
+        nft = new MockNFT1155();
         referral = new BashoodReferral(
             address(this),
             address(this),
@@ -76,8 +80,15 @@ contract PresaleFuzzingTest is Test {
             MAX_SUPPLY
         );
 
-        bytes32 MINTER_ROLE = keccak256("MINTER_ROLE");
-        nft.grantRole(MINTER_ROLE, address(presale));
+        // MockNFT1155 has no access control — mint NFT stock to presale for selling
+        // allowedNftIds[1] and [2] are set automatically in BashoodPresaleFinal constructor
+        nft.mintTo(address(presale), 1, MAX_SUPPLY);
+        nft.mintTo(address(presale), 2, MAX_SUPPLY);
+
+        // Set authorized signer for whitelist signature verification (E31/E12)
+        presale.setSigner(signerAddr);
+        // maxPerUser defaults to 1 in constructor — override for test suite
+        presale.setMaxPerUser(MAX_PER_USER);
 
         vm.warp(PRESALE_START + 1 days);
     }
@@ -94,8 +105,8 @@ contract PresaleFuzzingTest is Test {
         uint256 cost = NFT_PRICE_ETH * quantity;
         
         vm.deal(user, cost);
-        vm.prank(user);
-        presale.purchaseWithETH{value: cost}(1, quantity, 0, "");
+        vm.prank(user, user); // msg.sender == tx.origin: bypass bot protection (E10)
+        presale.purchaseWithETH{value: cost}(1, quantity, 0, _sign(user, 0));
         
         // Purchase successful
     }
@@ -135,8 +146,8 @@ contract PresaleFuzzingTest is Test {
         uint256 cost = NFT_PRICE_ETH * quantity;
         
         vm.deal(user, cost);
-        vm.prank(user);
-        presale.purchaseWithETH{value: cost}(1, quantity, 0, "");
+        vm.prank(user, user); // msg.sender == tx.origin: bypass bot protection (E10)
+        presale.purchaseWithETH{value: cost}(1, quantity, 0, _sign(user, 0));
         
         // Purchase successful
         // Within limits
@@ -161,8 +172,8 @@ contract PresaleFuzzingTest is Test {
         uint256 cost = NFT_PRICE_ETH * quantity;
         
         vm.deal(user, cost);
-        vm.prank(user);
-        presale.purchaseWithETH{value: cost}(1, quantity, 0, "");
+        vm.prank(user, user); // msg.sender == tx.origin: bypass bot protection (E10)
+        presale.purchaseWithETH{value: cost}(1, quantity, 0, _sign(user, 0));
         
         // Purchase successful
     }
@@ -219,8 +230,8 @@ contract PresaleFuzzingTest is Test {
         uint256 cost = NFT_PRICE_ETH * quantity;
         
         vm.deal(user, cost);
-        vm.prank(user);
-        presale.purchaseWithETH{value: cost}(1, quantity, 0, "");
+        vm.prank(user, user); // msg.sender == tx.origin: bypass bot protection (E10)
+        presale.purchaseWithETH{value: cost}(1, quantity, 0, _sign(user, 0));
         
         // Purchase successful
     }
@@ -236,13 +247,13 @@ contract PresaleFuzzingTest is Test {
         vm.deal(user, cost);
         
         if (nftId == 1 || nftId == 2) {
-            vm.prank(user);
-            presale.purchaseWithETH{value: cost}(nftId, quantity, 0, "");
+            vm.prank(user, user); // msg.sender == tx.origin: bypass bot protection (E10)
+            presale.purchaseWithETH{value: cost}(nftId, quantity, 0, _sign(user, 0));
             // Purchase successful
         } else {
-            vm.prank(user);
+            vm.prank(user, user);
             vm.expectRevert();
-            presale.purchaseWithETH{value: cost}(nftId, quantity, 0, "");
+            presale.purchaseWithETH{value: cost}(nftId, quantity, 0, _sign(user, 0));
         }
     }
 
@@ -254,16 +265,16 @@ contract PresaleFuzzingTest is Test {
         quantity = bound(quantity, 1, 5);
         uint256 cost = NFT_PRICE_ETH * quantity;
         
-        uint256 balanceBefore = address(paymentSplitter).balance;
+        uint256 balanceBefore = address(presale).balance;
         
         vm.deal(user, cost);
-        vm.prank(user);
-        presale.purchaseWithETH{value: cost}(1, quantity, 0, "");
+        vm.prank(user, user); // msg.sender == tx.origin: bypass bot protection (E10)
+        presale.purchaseWithETH{value: cost}(1, quantity, 0, _sign(user, 0));
         
-        uint256 balanceAfter = address(paymentSplitter).balance;
+        uint256 balanceAfter = address(presale).balance;
         uint256 received = balanceAfter - balanceBefore;
         
-        // 100% va al splitter (presale no tiene treasury fee)
+        // ETH queda en el presale (sin auto-forward al splitter); se transfiere mediante rescueUnsoldNFTs / admin
         assertEq(received, cost);
     }
 
@@ -295,11 +306,21 @@ contract PresaleFuzzingTest is Test {
         for (uint256 i = 0; i < numUsers; i++) {
             address buyer = vm.addr(100 + i);
             vm.deal(buyer, costPerUser);
-            vm.prank(buyer);
-            presale.purchaseWithETH{value: costPerUser}(1, quantityPerUser, 0, "");
+            vm.prank(buyer, buyer); // msg.sender == tx.origin: bypass bot protection (E10)
+            presale.purchaseWithETH{value: costPerUser}(1, quantityPerUser, i, _sign(buyer, i));
         }
         
         assertEq(presale.totalNFTsSold(), numUsers * quantityPerUser);
+    }
+
+    /// @dev Genera firma ECDSA válida del signer autorizado
+    function _sign(address addr, uint256 nonce) internal view returns (bytes memory) {
+        bytes32 messageHash = keccak256(abi.encodePacked(addr, nonce));
+        bytes32 ethSignedHash = keccak256(
+            abi.encodePacked("\x19Ethereum Signed Message:\n32", messageHash)
+        );
+        (uint8 v, bytes32 r, bytes32 s) = vm.sign(SIGNER_KEY, ethSignedHash);
+        return abi.encodePacked(r, s, v);
     }
 }
 

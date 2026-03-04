@@ -107,8 +107,8 @@ contract BashoodRWAFuzzTest is Test {
         uint256 operatingHours,
         uint256 maxLifetimeHours
     ) public {
-        vm.assume(maxLifetimeHours > 0 && maxLifetimeHours < 1000000);
-        vm.assume(operatingHours <= maxLifetimeHours);
+        maxLifetimeHours = bound(maxLifetimeHours, 1, 999_999);
+        operatingHours   = bound(operatingHours, 0, maxLifetimeHours);
         
         vm.prank(assetManager);
         uint256 tokenId = bashoodRWA.mintAsset(
