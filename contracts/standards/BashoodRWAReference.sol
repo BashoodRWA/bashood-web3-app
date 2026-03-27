@@ -6,6 +6,7 @@ import "@openzeppelin/contracts-upgradeable/token/ERC721/ERC721Upgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/access/AccessControlUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
 import "@openzeppelin/contracts-upgradeable/proxy/utils/UUPSUpgradeable.sol";
+import "@openzeppelin/contracts/utils/Strings.sol";
 
 import "../utils/DepreciationEngine.sol";
 
@@ -40,9 +41,8 @@ contract BashoodRWAReference is
     IBashoodRWA,
     ICoreForAggregator
 {
-    // ============ Enums ============
-    // Uso interno: enum UsageMetricType { LOAD, EXTRUSION, SETUP, HOURS }
-    // ============ Enums ============
+    using Strings for uint256;
+
     // ============ Enums ============
     enum UsageMetricType { LOAD, EXTRUSION, SETUP, HOURS }
     // ============ Constants ============
@@ -52,26 +52,48 @@ contract BashoodRWAReference is
     uint256 public constant SECONDS_PER_YEAR = 365 days;
     uint256 public constant BASIS_POINTS = 10000; // 100.00%
 
+    /// @dev H-02: Maximum operating-hours increment allowed per telemetry push (1 year = 8 760 h).
+    uint256 public constant MAX_TELEMETRY_HOURS_DELTA = 8_760;
+
+    // ============ Custom Errors ============
+    error InvalidRecipient();
+    error InvalidPurchasePrice();
+    error InvalidCurrentValue();
+    error InvalidValue();
+    error TelemetryHoursDeltaTooLarge();
+
     // ============ State Variables ============
-    uint256 private _nextTokenId;
-    mapping(uint256 => AssetIdentification) private _assetIdentification;
-    mapping(uint256 => TechnicalSpecs) private _technicalSpecs;
-    mapping(uint256 => FinancialData) private _financialData;
-    mapping(uint256 => OperationalMetrics) private _operationalMetrics;
-    mapping(uint256 => CertificationData) private _certificationData;
-    mapping(uint256 => TelemetryConfig) private _telemetryConfig;
-    mapping(uint256 => TokenizationConfig) private _tokenizationConfig;
-    mapping(uint256 => InsuranceData) private _insuranceData;
-    mapping(uint256 => string) private _tokenURIs;
-    string private _baseTokenURI;
+    // @dev Variables marcadas `internal` (no `private`) para permitir acceso
+    //      desde implementaciones V2+ en el patrón UUPS. Sin efecto a nivel EVM —
+    //      los slots de storage son idénticos. Práctica estándar de OZ upgradeable.
+    uint256 internal _nextTokenId;
+    mapping(uint256 => AssetIdentification) internal _assetIdentification;
+    mapping(uint256 => TechnicalSpecs) internal _technicalSpecs;
+    mapping(uint256 => FinancialData) internal _financialData;
+    mapping(uint256 => OperationalMetrics) internal _operationalMetrics;
+    mapping(uint256 => CertificationData) internal _certificationData;
+    mapping(uint256 => TelemetryConfig) internal _telemetryConfig;
+    mapping(uint256 => TokenizationConfig) internal _tokenizationConfig;
+    mapping(uint256 => InsuranceData) internal _insuranceData;
+    mapping(uint256 => string) internal _tokenURIs;
+    string internal _baseTokenURI;
+
+    // ============ O(1) Query Indexes (H-01 DoS fix) ============
+    /// @dev Category index: uint8(AssetCategory) → tokenIds. Populated at mint; never changes after.
+    mapping(uint8 => uint256[]) internal _categoryIndex;
+    /// @dev Manufacturer index: keccak256(manufacturer name) → tokenIds.
+    mapping(bytes32 => uint256[]) internal _manufacturerIndex;
+    /// @dev Per-owner cumulative currentValue. Updated at mint, transfer and updateAssetValue.
+    mapping(address => uint256) internal _ownerTotalValue;
 
     /**
      * @dev Storage gap para upgrades seguros (patrón OZ).
-     *      Slots usados: 11 (_nextTokenId + 9 mappings + _baseTokenURI).
-     *      Reserva: 50 slots adicionales. Reducir en 1 por cada nueva variable
-     *      que se añada en una acción de upgrade.
+     *      Slots usados: 14 (11 originales + 3 nuevos índices H-01).
+     *      Reserva: 47 slots adicionales. Reducir en 1 por cada nueva variable
+     *      que se añada en una acción de upgrade en V1.
+     *      NOTA: BashoodRWAReferenceV2 añade su propio __gapV2 después de este bloque.
      */
-    uint256[50] private __gap;
+    uint256[47] internal __gap;
 
     // ============ Initialization ============
     /// @custom:oz-upgrades-unsafe-allow constructor
@@ -126,20 +148,41 @@ contract BashoodRWAReference is
         OperationalMetrics calldata operational,
         string calldata metadataURI
     ) external onlyRole(ASSET_MANAGER_ROLE) returns (uint256) {
-        require(to != address(0), "Invalid recipient");
-        require(financials.purchasePrice > 0, "Invalid purchase price");
-        require(financials.currentValue > 0, "Invalid current value");
-        
+        return _mintAssetCore(to, identification, specs, financials, operational, metadataURI);
+    }
+
+    /**
+     * @dev Lógica interna de mint sin control de acceso. Compartida con V2+ via herencia.
+     *      Llamado desde `mintAsset` (V1) y `mintAssetV2` (V2). Los checks de acceso
+     *      y precondiciones adicionales se realizan en el caller externo.
+     */
+    function _mintAssetCore(
+        address to,
+        AssetIdentification calldata identification,
+        TechnicalSpecs calldata specs,
+        FinancialData calldata financials,
+        OperationalMetrics calldata operational,
+        string calldata metadataURI
+    ) internal returns (uint256) {
+        if (to == address(0)) revert InvalidRecipient();
+        if (financials.purchasePrice == 0) revert InvalidPurchasePrice();
+        if (financials.currentValue == 0) revert InvalidCurrentValue();
+
         uint256 tokenId = _nextTokenId++;
-        
+
         _safeMint(to, tokenId);
-        
+
         _assetIdentification[tokenId] = identification;
         _technicalSpecs[tokenId] = specs;
         _financialData[tokenId] = financials;
         _operationalMetrics[tokenId] = operational;
         _tokenURIs[tokenId] = metadataURI;
-        
+
+        // Update O(1) indexes (H-01 fix)
+        _categoryIndex[uint8(identification.category)].push(tokenId);
+        _manufacturerIndex[keccak256(bytes(identification.manufacturer))].push(tokenId);
+        _ownerTotalValue[to] += financials.currentValue;
+
         emit AssetMinted(
             tokenId,
             to,
@@ -148,7 +191,7 @@ contract BashoodRWAReference is
             identification.model,
             financials.purchasePrice
         );
-        
+
         return tokenId;
     }
     
@@ -312,11 +355,23 @@ contract BashoodRWAReference is
         onlyRole(ASSET_MANAGER_ROLE) 
     {
         _requireOwned(tokenId);
-        require(newValue > 0, "Invalid value");
+        if (newValue == 0) revert InvalidValue();
         
         uint256 oldValue = _financialData[tokenId].currentValue;
         _financialData[tokenId].currentValue = newValue;
-        
+
+        // Keep owner total-value index in sync (H-01 fix)
+        address tokenOwner = _ownerOf(tokenId);
+        if (tokenOwner != address(0) && oldValue != newValue) {
+            if (_ownerTotalValue[tokenOwner] >= oldValue) {
+                unchecked {
+                    _ownerTotalValue[tokenOwner] = _ownerTotalValue[tokenOwner] - oldValue + newValue;
+                }
+            } else {
+                _ownerTotalValue[tokenOwner] = newValue;
+            }
+        }
+
         emit AssetValueUpdated(tokenId, oldValue, newValue, reason);
     }
     
@@ -423,9 +478,9 @@ contract BashoodRWAReference is
         uint256 newValue
     ) external onlyRole(ORACLE_ROLE) {
         _requireOwned(tokenId);
-        uint256 oldValue = 0;
         // Internamente convertimos string a enum
         uint8 metricEnum = _metricTypeStringToEnum(metricType);
+        uint256 oldValue;
         if (metricEnum == 0) { // LOAD
             oldValue = _operationalMetrics[tokenId].totalLoadLifted;
             _operationalMetrics[tokenId].totalLoadLifted = newValue;
@@ -438,6 +493,8 @@ contract BashoodRWAReference is
         } else if (metricEnum == 3) { // HOURS
             oldValue = _operationalMetrics[tokenId].operatingHours;
             _operationalMetrics[tokenId].operatingHours = newValue;
+        } else {
+            oldValue = 0; // UNKNOWN metric type — no state change
         }
         uint256 depreciation = getDepreciationPercentage(tokenId);
         emit UsageMetricsUpdated(tokenId, metricType, oldValue, newValue, depreciation);
@@ -451,14 +508,6 @@ contract BashoodRWAReference is
         return 255; // UNKNOWN
     }
 
-    function _usageMetricTypeToString(UsageMetricType metricType) internal pure returns (string memory) {
-        if (metricType == UsageMetricType.LOAD) return "LOAD";
-        if (metricType == UsageMetricType.EXTRUSION) return "EXTRUSION";
-        if (metricType == UsageMetricType.SETUP) return "SETUP";
-        if (metricType == UsageMetricType.HOURS) return "HOURS";
-        return "UNKNOWN";
-    }
-    
     /**
      * @notice Update asset operational status
      * @param tokenId Token ID
@@ -498,12 +547,35 @@ contract BashoodRWAReference is
     }
     
     // ============ Telemetry & Oracle Integration ============
-    
+
     /**
-     * @notice Receive telemetry data from oracle
-     * @param tokenId Token ID
-     * @param dataHash Hash of the telemetry data
-     * @param metrics Updated operational metrics from API
+     * @notice Receive telemetry data from oracle.
+     *
+     * ════════════════════════════════════════════════════════════════════
+     * H-02 FIX — Partial-update pattern
+     * ════════════════════════════════════════════════════════════════════
+     * ORACLE_ROLE may only update the **telemetric** fields listed below.
+     * Structural parameters (lifetime caps, depreciation model config,
+     * maintenance schedule) are immutable from the oracle perspective;
+     * their values are preserved from storage regardless of what the
+     * caller passes in `metrics`.
+     *
+     * Updatable fields:
+     *   - operatingHours     (monotone ↑, delta ≤ MAX_TELEMETRY_HOURS_DELTA)
+     *   - totalLoadLifted    (monotone ↑)
+     *   - metersExtruded     (monotone ↑)
+     *   - setupCount         (monotone ↑)
+     *   - cubicMetersPerDay  (rate, any value)
+     *   - status             (OperationalStatus enum)
+     *   - lastMaintenanceDate / nextMaintenanceDate
+     *
+     * Immutable from telemetry:
+     *   - maxLifetimeHours, maxLoadLifetime, maxMetersLifetime, maxSetups
+     *   - maintenanceIntervalHours
+     *
+     * @param tokenId   Token ID
+     * @param dataHash  Hash of the raw telemetry payload (audit trail)
+     * @param metrics   Telemetry payload — only operational fields are read
      */
     function receiveTelemetryData(
         uint256 tokenId,
@@ -511,10 +583,51 @@ contract BashoodRWAReference is
         OperationalMetrics calldata metrics
     ) external onlyRole(ORACLE_ROLE) {
         _requireOwned(tokenId);
-        
-        _operationalMetrics[tokenId] = metrics;
+
+        OperationalMetrics storage stored = _operationalMetrics[tokenId];
+
+        // ── operatingHours: monotone counter, bounded delta ──────────────
+        if (metrics.operatingHours > stored.operatingHours) {
+            if (metrics.operatingHours - stored.operatingHours > MAX_TELEMETRY_HOURS_DELTA)
+                revert TelemetryHoursDeltaTooLarge();
+            stored.operatingHours = metrics.operatingHours;
+        }
+        // (silent no-op on decrement — oracle feed may replay stale data)
+
+        // ── totalLoadLifted: monotone counter ─────────────────────────────
+        if (metrics.totalLoadLifted > stored.totalLoadLifted) {
+            stored.totalLoadLifted = metrics.totalLoadLifted;
+        }
+
+        // ── metersExtruded: monotone counter ──────────────────────────────
+        if (metrics.metersExtruded > stored.metersExtruded) {
+            stored.metersExtruded = metrics.metersExtruded;
+        }
+
+        // ── setupCount: monotone counter ──────────────────────────────────
+        if (metrics.setupCount > stored.setupCount) {
+            stored.setupCount = metrics.setupCount;
+        }
+
+        // ── cubicMetersPerDay: current-rate field, any value allowed ──────
+        stored.cubicMetersPerDay = metrics.cubicMetersPerDay;
+
+        // ── status: operational state machine ─────────────────────────────
+        stored.status = metrics.status;
+
+        // ── maintenance dates: scheduling fields ──────────────────────────
+        stored.lastMaintenanceDate = metrics.lastMaintenanceDate;
+        stored.nextMaintenanceDate = metrics.nextMaintenanceDate;
+
+        // Structural fields intentionally NOT touched:
+        //   stored.maxLifetimeHours       (depreciation cap — set at mint)
+        //   stored.maxLoadLifetime        (depreciation cap — set at mint)
+        //   stored.maxMetersLifetime      (depreciation cap — set at mint)
+        //   stored.maxSetups              (depreciation cap — set at mint)
+        //   stored.maintenanceIntervalHours (schedule config — set at mint)
+
         _telemetryConfig[tokenId].lastTelemetryUpdate = uint32(block.timestamp);
-        
+
         emit TelemetryDataReceived(tokenId, msg.sender, dataHash, uint32(block.timestamp));
     }
     
@@ -544,7 +657,7 @@ contract BashoodRWAReference is
             return tokenSpecificURI;
         }
         
-        return string(abi.encodePacked(_baseTokenURI, _toString(tokenId), ".json"));
+        return string(abi.encodePacked(_baseTokenURI, tokenId.toString(), ".json"));
     }
     
     function setBaseURI(string memory baseURI) 
@@ -564,72 +677,40 @@ contract BashoodRWAReference is
     
     // ============ Utility Functions ============
     
-    function getAssetsByCategory(AssetCategory category) 
-        external 
-        view 
-        returns (uint256[] memory tokenIds) 
+    /**
+     * @notice Returns all tokenIds minted under the given category.
+     * @dev O(1) lookup via _categoryIndex populated at mint. Gas-safe regardless of total supply.
+     */
+    function getAssetsByCategory(AssetCategory category)
+        external
+        view
+        returns (uint256[] memory)
     {
-        // Simple implementation - in production use indexing service
-        uint256 count = 0;
-        uint256 total = _nextTokenId - 201;
-        
-        // Count matching assets
-        for (uint256 i = 201; i < _nextTokenId; i++) {
-            if (_assetIdentification[i].category == category) {
-                count++;
-            }
-        }
-        
-        // Build array
-        tokenIds = new uint256[](count);
-        uint256 index = 0;
-        for (uint256 i = 201; i < _nextTokenId; i++) {
-            if (_assetIdentification[i].category == category) {
-                tokenIds[index++] = i;
-            }
-        }
-        
-        return tokenIds;
+        return _categoryIndex[uint8(category)];
     }
-    
-    function getAssetsByManufacturer(string calldata manufacturer) 
-        external 
-        view 
-        returns (uint256[] memory tokenIds) 
+
+    /**
+     * @notice Returns all tokenIds minted by the given manufacturer.
+     * @dev O(1) lookup via _manufacturerIndex populated at mint. Gas-safe regardless of total supply.
+     */
+    function getAssetsByManufacturer(string calldata manufacturer)
+        external
+        view
+        returns (uint256[] memory)
     {
-        uint256 count = 0;
-        
-        // Count matching assets
-        for (uint256 i = 201; i < _nextTokenId; i++) {
-            if (keccak256(bytes(_assetIdentification[i].manufacturer)) == keccak256(bytes(manufacturer))) {
-                count++;
-            }
-        }
-        
-        // Build array
-        tokenIds = new uint256[](count);
-        uint256 index = 0;
-        for (uint256 i = 201; i < _nextTokenId; i++) {
-            if (keccak256(bytes(_assetIdentification[i].manufacturer)) == keccak256(bytes(manufacturer))) {
-                tokenIds[index++] = i;
-            }
-        }
-        
-        return tokenIds;
+        return _manufacturerIndex[keccak256(bytes(manufacturer))];
     }
-    
-    function getTotalAssetValue(address owner) 
-        external 
-        view 
-        returns (uint256 totalValue) 
+
+    /**
+     * @notice Returns the cumulative currentValue of all tokens owned by `owner`.
+     * @dev O(1) read from _ownerTotalValue, maintained at mint/transfer/updateAssetValue.
+     */
+    function getTotalAssetValue(address owner)
+        external
+        view
+        returns (uint256)
     {
-        totalValue = 0;
-        for (uint256 i = 201; i < _nextTokenId; i++) {
-            if (_ownerOf(i) == owner) {
-                totalValue += _financialData[i].currentValue;
-            }
-        }
-        return totalValue;
+        return _ownerTotalValue[owner];
     }
     
     function configureTelemetry(uint256 tokenId, TelemetryConfig calldata telemetry) 
@@ -648,27 +729,40 @@ contract BashoodRWAReference is
         _tokenizationConfig[tokenId] = config;
     }
     
-    function _toString(uint256 value) internal pure returns (string memory) {
-        if (value == 0) {
-            return "0";
+    // ============ Transfer Hook — owner value index (H-01 fix) ============
+
+    /**
+     * @dev ERC721 transfer hook. Keeps _ownerTotalValue in sync for transfers and burns.
+     *      Mints are NOT handled here — mintAsset updates _ownerTotalValue directly after
+     *      storing _financialData, because _safeMint runs before _financialData is written.
+     */
+    function _update(address to, uint256 tokenId, address auth)
+        internal
+        override
+        returns (address)
+    {
+        address from = super._update(to, tokenId, auth);
+
+        // Only update on transfers (from != 0 means not a mint)
+        if (from != address(0)) {
+            uint256 value = _financialData[tokenId].currentValue;
+            if (value > 0) {
+                if (_ownerTotalValue[from] >= value) {
+                    unchecked { _ownerTotalValue[from] -= value; }
+                } else {
+                    _ownerTotalValue[from] = 0;
+                }
+                if (to != address(0)) {
+                    _ownerTotalValue[to] += value;
+                }
+            }
         }
-        uint256 temp = value;
-        uint256 digits;
-        while (temp != 0) {
-            digits++;
-            temp /= 10;
-        }
-        bytes memory buffer = new bytes(digits);
-        while (value != 0) {
-            digits -= 1;
-            buffer[digits] = bytes1(uint8(48 + uint256(value % 10)));
-            value /= 10;
-        }
-        return string(buffer);
+
+        return from;
     }
-    
+
     // ============ Upgrade Authorization ============
-    
+
     function _authorizeUpgrade(address newImplementation) 
         internal 
         override 

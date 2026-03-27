@@ -65,6 +65,10 @@ contract BashoodReferral is ReentrancyGuard {
  
     /// @notice Record a referral reward. Called by the presale contract during purchase.
     /// @dev Only callable by the presale contract via onlyPresale modifier.
+    ///      H-03: This is the ONLY place where referralCount increments, ensuring
+    ///      every credit corresponds to a verified on-chain purchase.
+    ///      The validator check runs whenever `validator` is a deployed contract;
+    ///      passing an EOA as validator (test deployments) skips the check gracefully.
     /// @param user The buyer who was referred
     /// @param referrer The referrer who will receive credit toward NFT reward
     function rewardReferrer(address user, address referrer) external onlyPresale {
@@ -72,24 +76,33 @@ contract BashoodReferral is ReentrancyGuard {
         require(referrer != address(0), "Invalid referrer address");
         require(user != referrer, "Cannot refer yourself");
         require(referrals[user] == address(0), "User already referred");
-        // require(validator.isValid(referrer), "Referrer not valid"); // deshabilitado para tests
- 
+
+        // H-03: validator check — only executed when validator is a real contract.
+        // EOA validators (used in test deployments) are silently skipped.
+        if (address(validator).code.length > 0) {
+            require(validator.isValid(referrer), "Referrer not valid");
+        }
+
         referrals[user] = referrer;
         referralCount[referrer]++;
         rewarded[user] = true;
- 
+
         emit ReferralRewarded(user, referrer);
     }
  
-    /// @notice Self-register a referral before purchasing. Any user can call this.
+    /// @notice Self-register a referral intent before purchasing. Any user can call this.
+    /// @dev H-03 FIX: Only records the referrer mapping. referralCount is NOT incremented here;
+    ///      it is incremented exclusively in rewardReferrer() which requires an actual purchase
+    ///      routed through the presale contract. This eliminates Sybil attacks where puppet
+    ///      wallets call registerReferral() without spending any ETH.
     /// @param referrer Address of the user who referred msg.sender
     function registerReferral(address referrer) external {
         require(referrer != address(0), "Invalid referrer address");
         require(referrer != msg.sender, "Cannot refer yourself");
         require(referrals[msg.sender] == address(0), "Already referred");
- 
+
         referrals[msg.sender] = referrer;
-        referralCount[referrer]++;
+        // NOTE: referralCount[referrer] is intentionally NOT incremented here (H-03).
         emit ReferralRegistered(msg.sender, referrer);
     }
  

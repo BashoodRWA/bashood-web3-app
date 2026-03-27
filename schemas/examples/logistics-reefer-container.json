@@ -1,0 +1,174 @@
+{
+  "schemaVersion": "BASHOOD-RWA-1.0",
+
+  "name": "Contenedor High Cube Refrigerado Carrier #TRLU8841320 — 40ft Reefer",
+  "description": "Contenedor ISO 40ft High Cube refrigerado (reefer) equipado con unidad Carrier Transicold X4 7300. Fabricado por CIMC en 2021. Capaz de mantener temperaturas desde -30°C hasta +30°C con control de atmósfera controlada. Historial operativo completo con 47 rutas transoceánicas completadas. Actualmente registrado bajo gestión de MSC para el corredor Asia-Europa. Equipado con sistema de telemetría en tiempo real PureFresh.",
+  "image": "ipfs://QmLogisticsReeferTRLU8841320Photo",
+  "external_url": "https://app.bashood.com/assets/389",
+
+  "assetClass": "LOGISTICS",
+
+  "protocol": {
+    "contractAddress": "0x0000000000000000000000000000000000000000",
+    "tokenId": 389,
+    "chainId": 8453,
+    "standard": "BASHOOD-RWA-1",
+    "mintedAt": 1743300000,
+    "mintedBy": "0x0000000000000000000000000000000000000001",
+    "metadataCID": "QmReeferTRLU8841320MetadataHash"
+  },
+
+  "identification": {
+    "serialNumber": "TRLU8841320",
+    "manufacturer": "CIMC (China International Marine Containers)",
+    "model": "RC-40HC-Reefer / Carrier Transicold X4 7300",
+    "yearManufactured": 2021,
+    "countryOfOrigin": "CN"
+  },
+
+  "condition": {
+    "status": "OPERATIONAL",
+    "operatingHours": 27840,
+    "maxLifetimeHours": 131400,
+    "conditionGrade": "GOOD",
+    "inspectionDate": 1739000000,
+    "inspectionProvider": "Bureau Veritas Marine & Offshore",
+    "notes": "Inspección quinquenal (ACEP 2026) completada anticipadamente. Estructura sin corrosión significativa. Unidad refrigerante Carrier funcionando dentro de especificaciones de fábrica. Juntas de puerta renovadas. Suelo de madera tropical sin daños. Registro BIC activo."
+  },
+
+  "financials": {
+    "purchasePrice": 38500,
+    "currency": "USD",
+    "depreciationModel": "LINEAR",
+    "residualValuePct": 18,
+    "annualMaintenancePct": 5,
+    "insurancePremiumPct": 1.2,
+    "acquisitionDate": 1624000000,
+    "lastAppraisalValue": 29800,
+    "lastAppraisalDate": 1739000000,
+    "appraisalProvider": "Container Value Index — Drewry"
+  },
+
+  "location": {
+    "country": "NL",
+    "region": "Zuid-Holland",
+    "city": "Rotterdam",
+    "coordinates": { "lat": 51.9225, "lng": 4.4792 },
+    "locationType": "LAST_KNOWN",
+    "updatedAt": 1743280000
+  },
+
+  "documents": [
+    {
+      "type": "LEGAL_TITLE",
+      "uri": "ipfs://QmBICCertTRLU8841320",
+      "sha256": "d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b9c0d1e2",
+      "name": "Certificado BIC — Bureau International des Containers",
+      "mimeType": "application/pdf",
+      "issuedBy": "Bureau International des Containers et du Transport Intermodal",
+      "issuedAt": 1624000000,
+      "expiresAt": 1789000000
+    },
+    {
+      "type": "CERTIFICATION",
+      "uri": "ipfs://QmCSCCertTRLU8841320",
+      "sha256": "e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b9c0d1e2f3",
+      "name": "Convention for Safe Containers (CSC) Safety Approval Plate",
+      "mimeType": "application/pdf",
+      "issuedBy": "Bureau Veritas Marine & Offshore",
+      "issuedAt": 1624000000,
+      "expiresAt": 1782000000
+    },
+    {
+      "type": "INSPECTION_REPORT",
+      "uri": "ipfs://QmACEP2026TRLU8841320",
+      "sha256": "f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b9c0d1e2f3a4",
+      "name": "ACEP Inspection 2026 — Bureau Veritas",
+      "mimeType": "application/pdf",
+      "issuedBy": "Bureau Veritas Marine & Offshore",
+      "issuedAt": 1739000000,
+      "expiresAt": 1896000000
+    },
+    {
+      "type": "TECHNICAL_DATASHEET",
+      "uri": "ipfs://QmCarrierX47300DatasheetTRLU",
+      "sha256": "a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b9c0d1e2f3a4b5",
+      "name": "Manual técnico Carrier Transicold X4 7300",
+      "mimeType": "application/pdf",
+      "issuedBy": "Carrier Transicold",
+      "issuedAt": 1615000000
+    },
+    {
+      "type": "PHOTO_PRIMARY",
+      "uri": "ipfs://QmPhotoTRLU8841320Front",
+      "sha256": "b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6",
+      "name": "Foto frontal — Puerto de Rotterdam",
+      "mimeType": "image/jpeg",
+      "issuedAt": 1739000000
+    }
+  ],
+
+  "certifications": [
+    {
+      "type": "ISO_9001",
+      "status": "ACTIVE",
+      "issuedBy": "DNV",
+      "issuedAt": 1624000000,
+      "expiresAt": 1877000000,
+      "certificateNumber": "DNV-CIMC-9001-2021-RC40HC"
+    }
+  ],
+
+  "telemetry": {
+    "hasRealTimeAPI": true,
+    "provider": "CARRIER_PUREFRESH",
+    "oracleAddress": "0x0000000000000000000000000000000000000005",
+    "dataFrequency": "HOURLY",
+    "metrics": [
+      "SUPPLY_AIR_TEMP_C",
+      "RETURN_AIR_TEMP_C",
+      "SET_POINT_C",
+      "HUMIDITY_PCT",
+      "CO2_LEVEL_PPM",
+      "O2_LEVEL_PCT",
+      "POWER_CONSUMPTION_KW",
+      "GPS_POSITION",
+      "DOOR_STATUS",
+      "ALARM_CODE"
+    ]
+  },
+
+  "extensions": {
+    "logistics": {
+      "assetSubtype": "REEFER_CONTAINER",
+      "capacity": {
+        "maxPayload_kg": 26500,
+        "volume_m3": 67.5,
+        "TEU": 2
+      },
+      "mobility": {
+        "mode": "MULTIMODAL",
+        "registrationNumber": "TRLU8841320"
+      },
+      "usageMetrics": {
+        "totalTrips": 47,
+        "utilizationRate_pct": 84,
+        "lastTripDate": 1742000000,
+        "currentLocation": {
+          "lat": 51.9225,
+          "lng": 4.4792,
+          "updatedAt": 1743280000,
+          "provider": "CARRIER_PUREFRESH_GPS"
+        }
+      },
+      "specialFeatures": {
+        "isRefrigerated": true,
+        "temperatureRange": {
+          "min_C": -30,
+          "max_C": 30
+        },
+        "isHazmatCertified": false
+      }
+    }
+  }
+}

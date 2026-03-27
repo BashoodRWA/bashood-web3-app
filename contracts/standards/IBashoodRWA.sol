@@ -83,13 +83,35 @@ interface IBashoodRWA is IERC721 {
         DECOMMISSIONED     // End of life
     }
     
-    /// @notice Tokenization strategies
+    /**
+     * @notice Tokenization strategies — clasificación descriptiva del modelo operativo del activo.
+     *
+     * @dev IMPORTANTE: Estos valores son METADATOS DESCRIPTIVOS almacenados en `TokenizationConfig`.
+     *      No instrumentan ningún derecho económico on-chain por sí mismos.
+     *      Su uso para crear derechos económicos reales (reparto de ingresos, arrendamiento,
+     *      bonus de performance) requiere un marco legal off-chain adicional definido y
+     *      ejecutado por el emisor, sujeto a la regulación aplicable (MiCA, MiFID II, etc.).
+     *
+     *      Estado on-chain de cada estrategia:
+     *      - FULL_OWNERSHIP    → Modelo estándar ERC-721. Sin lógica adicional on-chain.
+     *      - FRACTIONAL        → Los campos `isFractional` y `totalShares` registran la config
+     *                            descriptiva. Sin contrato de distribución de shares implementado.
+     *      - MICRO_LEASING     → El campo `dailyLeaseRate` registra la tarifa descriptiva.
+     *                            `leaseAsset()` fue eliminado por optimización de tamaño.
+     *                            La ejecución del leasing se gestiona off-chain.
+     *      - PERFORMANCE_BOND  → El campo `performanceBonusPct` registra el % descriptivo.
+     *                            `triggerPerformanceBonus()` fue eliminado por optimización.
+     *                            El pago del bonus se gestiona off-chain.
+     *      - REVENUE_SHARE     → El campo `revenueSharePct` registra el % descriptivo.
+     *                            No existe distribuidor de ingresos on-chain en esta versión.
+     *                            La distribución se gestiona off-chain por el emisor.
+     */
     enum TokenizationStrategy {
-        FULL_OWNERSHIP,    // Traditional NFT ownership
-        FRACTIONAL,        // Multiple owners via shares
-        MICRO_LEASING,     // Daily/weekly rentals (Apis Cor)
-        PERFORMANCE_BOND,  // Bonuses for efficiency (CyBe)
-        REVENUE_SHARE      // Income-based returns
+        FULL_OWNERSHIP,    // Registro estándar. Sin lógica económica adicional on-chain.
+        FRACTIONAL,        // Metadato: config de fraccionamiento. Sin distribuidor de shares on-chain.
+        MICRO_LEASING,     // Metadato: tarifa diaria. Ejecución del leasing off-chain.
+        PERFORMANCE_BOND,  // Metadato: % de bonus. Pago del bonus off-chain.
+        REVENUE_SHARE      // Metadato: % de reparto. Distribución de ingresos off-chain.
     }
     
     // ==================== STRUCTS ====================

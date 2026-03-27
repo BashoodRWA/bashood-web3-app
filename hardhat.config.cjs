@@ -2,6 +2,15 @@ require("@nomicfoundation/hardhat-toolbox");
 require('@openzeppelin/hardhat-upgrades');
 require('dotenv').config();
 
+// ── Audit pipeline tasks ──────────────────────────────────────────────────────
+require("./tasks/audit-gas.cjs");
+require("./tasks/audit-coverage.cjs");
+require("./tasks/audit-slither.cjs");
+require("./tasks/audit-regulatory.cjs");
+require("./tasks/audit-custom.cjs");
+require("./tasks/audit-full.cjs");
+// ─────────────────────────────────────────────────────────────────────────────
+
 module.exports = {
   solidity: {
     version: "0.8.28",

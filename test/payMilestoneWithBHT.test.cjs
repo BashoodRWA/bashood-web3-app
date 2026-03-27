@@ -24,7 +24,7 @@ describe("BashoodPresaleFinal - payMilestoneWithBHT", function () {
   priceFeed = await MockFeed.deploy(8, ethers.parseUnits('2000', 8));
     await priceFeed.waitForDeployment();
     const Validator = await ethers.getContractFactory("ReferralValidator");
-    const validator = await Validator.deploy(deployer.address);
+    const validator = await Validator.deploy(deployer.address, ethers.ZeroAddress, 0, 0);
     await validator.waitForDeployment();
     const BashoodReferral = await ethers.getContractFactory("contracts/BashoodReferral.sol:BashoodReferral");
     const referral = await BashoodReferral.deploy(

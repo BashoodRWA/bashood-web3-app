@@ -43,6 +43,7 @@ describe('🎯 BashoodPresaleFinal - Critical Branch Coverage (Excellence 90%+)'
             await nft.getAddress(),
             await referral.getAddress(),
             project.address,
+            project.address, // _operationsWallet
             ethers.parseEther('0.1'), // nftPriceETH
             ethers.parseUnits('100', 18), // nftPriceBHT
             now + 100, // presaleStart
@@ -381,6 +382,7 @@ describe('🎯 BashoodPresaleFinal - Critical Branch Coverage (Excellence 90%+)'
                     await nft.getAddress(),
                     await referral.getAddress(),
                     project.address,
+                    project.address, // _operationsWallet
                     ethers.parseEther('0.1'),
                     ethers.parseUnits('100', 18),
                     now + 100,
@@ -400,6 +402,7 @@ describe('🎯 BashoodPresaleFinal - Critical Branch Coverage (Excellence 90%+)'
                     alice.address, // EOA, not contract
                     await referral.getAddress(),
                     project.address,
+                    project.address, // _operationsWallet
                     ethers.parseEther('0.1'),
                     ethers.parseUnits('100', 18),
                     now + 100,
@@ -419,6 +422,7 @@ describe('🎯 BashoodPresaleFinal - Critical Branch Coverage (Excellence 90%+)'
                     await nft.getAddress(),
                     alice.address, // EOA, not contract
                     project.address,
+                    project.address, // _operationsWallet
                     ethers.parseEther('0.1'),
                     ethers.parseUnits('100', 18),
                     now + 100,
@@ -437,6 +441,7 @@ describe('🎯 BashoodPresaleFinal - Critical Branch Coverage (Excellence 90%+)'
                 await nft.getAddress(),
                 await referral.getAddress(),
                 project.address,
+                project.address, // _operationsWallet
                 ethers.parseEther('0.1'),
                 ethers.parseUnits('100', 18),
                 now + 100,
@@ -564,6 +569,7 @@ describe('🎯 BashoodPresaleFinal - Critical Branch Coverage (Excellence 90%+)'
                 await nft.getAddress(),
                 await referral.getAddress(),
                 project.address,
+                project.address, // _operationsWallet
                 ethers.parseEther('0.1'),
                 ethers.parseUnits('100', 18),
                 0, // presaleStart = 0
@@ -1233,6 +1239,7 @@ describe('🎯 BashoodPresaleFinal - Critical Branch Coverage (Excellence 90%+)'
                 await nft.getAddress(),
                 await referral.getAddress(),
                 project.address,
+                project.address, // _operationsWallet
                 ethers.parseEther('0.1'),
                 ethers.parseUnits('100', 18),
                 now + 100,
@@ -1260,6 +1267,7 @@ describe('🎯 BashoodPresaleFinal - Critical Branch Coverage (Excellence 90%+)'
                 await nft.getAddress(),
                 await referral.getAddress(),
                 project.address,
+                project.address, // _operationsWallet
                 ethers.parseEther('0.1'),
                 ethers.parseUnits('100', 18),
                 now + 100,
@@ -1310,6 +1318,7 @@ describe('🎯 BashoodPresaleFinal - Critical Branch Coverage (Excellence 90%+)'
                 await nft.getAddress(),
                 await referral.getAddress(),
                 project.address,
+                project.address, // _operationsWallet
                 ethers.parseEther('0.1'),
                 ethers.parseUnits('100', 18),
                 now + 100,
@@ -1346,6 +1355,7 @@ describe('🎯 BashoodPresaleFinal - Critical Branch Coverage (Excellence 90%+)'
                 await nft.getAddress(),
                 await referral.getAddress(),
                 project.address,
+                project.address, // _operationsWallet
                 ethers.parseEther('0.1'),
                 ethers.parseUnits('100', 18),
                 now - 86400,
@@ -1499,6 +1509,7 @@ describe('🎯 BashoodPresaleFinal - Critical Branch Coverage (Excellence 90%+)'
                 await nft.getAddress(),
                 await referral.getAddress(),
                 project.address,
+                project.address, // _operationsWallet
                 ethers.parseEther('0.1'),
                 ethers.parseUnits('100', 18),
                 now + 100,
@@ -1541,6 +1552,7 @@ describe('🎯 BashoodPresaleFinal - Critical Branch Coverage (Excellence 90%+)'
                 await nft.getAddress(),
                 await referral.getAddress(),
                 project.address,
+                project.address, // _operationsWallet
                 ethers.parseEther('0.1'),
                 ethers.parseUnits('100', 18),
                 now + 100,
@@ -1604,6 +1616,7 @@ describe('🎯 BashoodPresaleFinal - Critical Branch Coverage (Excellence 90%+)'
                 await nft.getAddress(),
                 await referral.getAddress(),
                 project.address,
+                project.address, // _operationsWallet
                 ethers.parseEther('0.1'),
                 ethers.parseUnits('100', 18),
                 now + 100,
@@ -1639,6 +1652,7 @@ describe('🎯 BashoodPresaleFinal - Critical Branch Coverage (Excellence 90%+)'
                 await nft.getAddress(),
                 await referral.getAddress(),
                 project.address,
+                project.address, // _operationsWallet
                 ethers.parseEther('0.1'),
                 ethers.parseUnits('100', 18),
                 now + 100,
@@ -1679,6 +1693,7 @@ describe('🎯 BashoodPresaleFinal - Critical Branch Coverage (Excellence 90%+)'
                 await testNft.getAddress(),
                 await badReferral.getAddress(),
                 project.address,
+                project.address, // _operationsWallet
                 ethers.parseEther('0.1'),
                 ethers.parseUnits('100', 18),
                 0, // presaleStart = 0 (use presaleActive flag)

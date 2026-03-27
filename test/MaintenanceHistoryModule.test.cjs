@@ -60,48 +60,48 @@ describe("MaintenanceHistoryModule", function () {
   // ─── Recorder management ─────────────────────────────────────────────────────
   describe("Recorder management", function () {
     it("owner es recorder implícito", async function () {
-      expect(await module_.isRecorder(owner.address)).to.equal(true);
+      expect(await module_.isRecorder(TOKEN_ID, owner.address)).to.equal(true);
     });
 
     it("grantRecorder acredita a recorder", async function () {
-      await module_.connect(owner).grantRecorder(recorder.address);
-      expect(await module_.isRecorder(recorder.address)).to.equal(true);
+      await module_.connect(owner).grantRecorder(TOKEN_ID, recorder.address);
+      expect(await module_.isRecorder(TOKEN_ID, recorder.address)).to.equal(true);
     });
 
     it("grantRecorder emite RecorderGranted", async function () {
-      await expect(module_.connect(owner).grantRecorder(recorder.address))
+      await expect(module_.connect(owner).grantRecorder(TOKEN_ID, recorder.address))
         .to.emit(module_, "RecorderGranted")
         .withArgs(recorder.address);
     });
 
     it("revokeRecorder revoca a recorder", async function () {
-      await module_.connect(owner).grantRecorder(recorder.address);
-      await module_.connect(owner).revokeRecorder(recorder.address);
-      expect(await module_.isRecorder(recorder.address)).to.equal(false);
+      await module_.connect(owner).grantRecorder(TOKEN_ID, recorder.address);
+      await module_.connect(owner).revokeRecorder(TOKEN_ID, recorder.address);
+      expect(await module_.isRecorder(TOKEN_ID, recorder.address)).to.equal(false);
     });
 
     it("solo owner puede grantRecorder", async function () {
       await expect(
-        module_.connect(attacker).grantRecorder(attacker.address)
+        module_.connect(attacker).grantRecorder(TOKEN_ID, attacker.address)
       ).to.be.revertedWithCustomError(module_, "OwnableUnauthorizedAccount");
     });
 
     it("revert si grantRecorder de address zero", async function () {
       await expect(
-        module_.connect(owner).grantRecorder(ethers.ZeroAddress)
+        module_.connect(owner).grantRecorder(TOKEN_ID, ethers.ZeroAddress)
       ).to.be.revertedWith("MaintenanceHistory: zero address");
     });
 
     it("revert si ya es recorder", async function () {
-      await module_.connect(owner).grantRecorder(recorder.address);
+      await module_.connect(owner).grantRecorder(TOKEN_ID, recorder.address);
       await expect(
-        module_.connect(owner).grantRecorder(recorder.address)
+        module_.connect(owner).grantRecorder(TOKEN_ID, recorder.address)
       ).to.be.revertedWith("MaintenanceHistory: already recorder");
     });
 
     it("revert si revokeRecorder de alguien que no lo es", async function () {
       await expect(
-        module_.connect(owner).revokeRecorder(attacker.address)
+        module_.connect(owner).revokeRecorder(TOKEN_ID, attacker.address)
       ).to.be.revertedWith("MaintenanceHistory: not a recorder");
     });
   });
@@ -111,7 +111,7 @@ describe("MaintenanceHistoryModule", function () {
     const ONE_ETH = ethers.parseEther("1");
 
     beforeEach(async function () {
-      await module_.connect(owner).grantRecorder(recorder.address);
+      await module_.connect(owner).grantRecorder(TOKEN_ID, recorder.address);
     });
 
     it("registra un evento de mantenimiento correctamente", async function () {
@@ -179,7 +179,7 @@ describe("MaintenanceHistoryModule", function () {
 
     it("revert si token no existe en el Core", async function () {
       await expect(
-        module_.connect(recorder).logEvent(999n, "PREVENTIVE", 0n, 0, ethers.ZeroHash, "")
+        module_.connect(owner).logEvent(999n, "PREVENTIVE", 0n, 0, ethers.ZeroHash, "")
       ).to.be.revertedWith("ERC721NonexistentToken");
     });
 

@@ -92,7 +92,7 @@ describe('Coverage extras', function () {
   expect((await bht.totalBurned()).toString()).to.not.equal('0');
 
     // sendToTreasury and sendToStaking reverts when staking not set
-    await expect(bht.connect(owner).sendToStaking(1)).to.be.revertedWith('Staking contract not set');
+    await expect(bht.connect(owner).sendToStaking(1)).to.be.revertedWithCustomError(bht, "InvalidStakingContract");
 
     // set staking contract and send
   console.log('STEP: before setStakingContract/sendToStaking');

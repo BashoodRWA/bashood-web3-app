@@ -31,7 +31,8 @@ describe("PoC: BashoodPresaleFinal - referral contract revert does not break pur
       nftAddr,
       referralAddr,
       owner.address,
-      1, // nftPriceETH
+      owner.address, // _operationsWallet
+        1, // nftPriceETH
       1, // nftPriceBHT
       1, // presaleStart
       9999999999, // presaleEnd

@@ -1,7 +1,7 @@
 // Script para deploy del PaymentSplitter de Bashood
 // Uso: npx hardhat run scripts/deploy-payment-splitter.js --network base-sepolia
 
-const hre = require("hardhat");
+import hre from "hardhat";
 const ethers = hre.ethers;
 
 async function main() {
@@ -51,12 +51,16 @@ async function main() {
   console.log("\n📦 Deploying BashoodPaymentSplitter...");
   
   const BashoodPaymentSplitter = await ethers.getContractFactory("BashoodPaymentSplitter");
-  const splitter = await BashoodPaymentSplitter.deploy(
+
+  const payees = [
     WALLETS.development,
     WALLETS.operations,
     WALLETS.marketing,
     WALLETS.treasury
-  );
+  ];
+  const shares = [45, 25, 20, 10];
+
+  const splitter = await BashoodPaymentSplitter.deploy(payees, shares);
   
   await splitter.waitForDeployment();
   const splitterAddress = await splitter.getAddress();
@@ -70,15 +74,16 @@ async function main() {
   console.log("\n🔍 Verifying configuration...");
   
   const distributionInfo = await splitter.getDistributionInfo();
-  
+  const [distWallets, distPercentages, distPending, distReleased] = distributionInfo;
+
   console.log("\n📊 Distribution Summary:");
-  for (let i = 0; i < distributionInfo.wallets.length; i++) {
-    const walletNames = ["Development", "Operations", "Marketing", "Treasury"];
+  const walletNames = ["Development", "Operations", "Marketing", "Treasury"];
+  for (let i = 0; i < distWallets.length; i++) {
     console.log(`  ${walletNames[i]}:`);
-    console.log(`    Address: ${distributionInfo.wallets[i]}`);
-    console.log(`    Share: ${distributionInfo.percentages[i]}%`);
-    console.log(`    Pending: ${ethers.formatEther(distributionInfo.pending[i])} ETH`);
-    console.log(`    Released: ${ethers.formatEther(distributionInfo.released[i])} ETH`);
+    console.log(`    Address: ${distWallets[i]}`);
+    console.log(`    Share: ${distPercentages[i]}%`);
+    console.log(`    Pending: ${ethers.formatEther(distPending[i])} ETH`);
+    console.log(`    Released: ${ethers.formatEther(distReleased[i])} ETH`);
   }
 
   // ============================================
@@ -99,6 +104,7 @@ async function main() {
     
     // Verificar distribución
     const updatedInfo = await splitter.getDistributionInfo();
+    const [updWallets, , updPending] = updatedInfo;
     console.log("\n📈 Expected distribution of 1 ETH:");
     console.log("  Development: 0.45 ETH (45%)");
     console.log("  Operations:  0.25 ETH (25%)");
@@ -106,9 +112,9 @@ async function main() {
     console.log("  Treasury:    0.10 ETH (10%)");
     
     console.log("\n💰 Actual pending amounts:");
-    for (let i = 0; i < updatedInfo.wallets.length; i++) {
-      const walletNames = ["Development", "Operations", "Marketing", "Treasury"];
-      console.log(`  ${walletNames[i]}: ${ethers.formatEther(updatedInfo.pending[i])} ETH`);
+    const wnames = ["Development", "Operations", "Marketing", "Treasury"];
+    for (let i = 0; i < updWallets.length; i++) {
+      console.log(`  ${wnames[i]}: ${ethers.formatEther(updPending[i])} ETH`);
     }
   }
 
@@ -144,7 +150,7 @@ async function main() {
 }`);
 
   // Guardar deployment info
-  const fs = require("fs");
+  const { default: fs } = await import("fs");
   const deploymentData = {
     network: hre.network.name,
     timestamp: new Date().toISOString(),

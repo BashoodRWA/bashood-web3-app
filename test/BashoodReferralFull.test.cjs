@@ -14,7 +14,7 @@ describe("Registro y restricciones adicionales", function () {
     [owner, user1, user2, user3] = await ethers.getSigners();
 
     const Validator = await ethers.getContractFactory("ReferralValidator");
-    validator = await Validator.deploy(owner.address);
+    validator = await Validator.deploy(owner.address, ethers.ZeroAddress, 0, 0);
     await validator.waitForDeployment();
 
   const NFT = await ethers.getContractFactory("contracts/MockNFT1155.sol:MockNFT1155");

@@ -48,13 +48,14 @@ async function generateSignature(signer, userAddress, nonce) {
     );
     await referral.waitForDeployment();
 
-    // Deploy Presale (bht, nft, referral, projectWallet, nftPriceETH, nftPriceBHT, start, end, maxSupply)
+    // Deploy Presale (bht, nft, referral, projectWallet, operationsWallet, nftPriceETH, nftPriceBHT, start, end, maxSupply)
     const Presale = await ethers.getContractFactory("BashoodPresaleFinal");
     const presale = await Presale.deploy(
       await bht.getAddress(),
       await nft.getAddress(),
       await referral.getAddress(),
       treasury.address,
+      owner.address, // _operationsWallet
       ethers.parseEther("0.01"), // nftPriceETH
       ethers.parseUnits("1", 18), // nftPriceBHT
       0, // start

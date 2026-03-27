@@ -232,7 +232,7 @@ describe("BashoodToken - Comprehensive Coverage Tests", function () {
 
       await expect(
         token.sendToStaking(ethers.parseEther("10"))
-      ).to.be.revertedWith("Staking contract not set");
+      ).to.be.revertedWithCustomError(token, "InvalidStakingContract");
     });
 
     it("Debe permitir sendToStaking después de configurar staking", async function () {

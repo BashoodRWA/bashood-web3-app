@@ -88,8 +88,28 @@ contract MaintenanceHistoryModule is BashoodModuleBase {
     /// @dev tokenId → historial cronológico de mantenimientos (append-only).
     mapping(uint256 => MaintenanceEvent[]) private _history;
 
-    /// @dev Whitelist de empresas de mantenimiento autorizadas.
-    mapping(address => bool) private _recorders;
+    /**
+     * @dev Whitelist de empresas de mantenimiento autorizadas POR TOKEN.
+     *      _recorders[tokenId][account] = true si account puede registrar
+     *      mantenimientos del activo tokenId.
+     */
+    mapping(uint256 => mapping(address => bool)) private _recorders;
+
+    // ── Rate-limiting ────────────────────────────────────────────────────
+
+    /// @notice Máximo de escrituras permitidas por una empresa en una época.
+    ///         Configurable por el owner. El owner está exento.
+    uint256 public maxWritesPerEpoch = 20;
+
+    /// @notice Duración de una época en segundos para el rate-limiting.
+    ///         Por defecto 1 hora. Configurable por el owner.
+    uint256 public epochDuration = 1 hours;
+
+    /// @dev company → número de época (block.timestamp / epochDuration) de su último write.
+    mapping(address => uint256) private _epochStart;
+
+    /// @dev company → número de writes en la época actual.
+    mapping(address => uint256) private _epochCount;
 
     // ── Eventos ───────────────────────────────────────────────────────────
 
@@ -113,15 +133,8 @@ contract MaintenanceHistoryModule is BashoodModuleBase {
     /// @notice Emitido cuando se revoca una empresa de mantenimiento.
     event RecorderRevoked(address indexed account);
 
-    // ── Modificadores ────────────────────────────────────────────────────
-
-    modifier onlyRecorder() {
-        require(
-            _recorders[msg.sender] || msg.sender == owner(),
-            "MaintenanceHistory: not a recorder"
-        );
-        _;
-    }
+    /// @notice Emitido cuando el owner actualiza los parámetros de rate-limiting.
+    event RateLimitUpdated(uint256 maxWritesPerEpoch, uint256 epochDuration);
 
     // ── Constructor ───────────────────────────────────────────────────────
 
@@ -138,34 +151,55 @@ contract MaintenanceHistoryModule is BashoodModuleBase {
         )
     {}
 
-    // ── Gestión de recorders (onlyOwner) ─────────────────────────────────
+    // ── Gestión de recorders por token (onlyOwner) ─────────────────────────
 
     /**
-     * @notice Acredita a una cuenta como recorder autorizado.
-     * @param account Empresa de mantenimiento o ASSET_MANAGER.
+     * @notice Acredita a una cuenta como recorder para un token específico.
+     * @param tokenId ID del activo sobre el que se concede la autorización.
+     * @param account Empresa de mantenimiento a acreditar.
      */
-    function grantRecorder(address account) external onlyOwner {
+    function grantRecorder(uint256 tokenId, address account) external onlyOwner {
+        _requireValidToken(tokenId);
         _requireNotZero(account, "MaintenanceHistory: zero address");
-        require(!_recorders[account], "MaintenanceHistory: already recorder");
-        _recorders[account] = true;
+        require(!_recorders[tokenId][account], "MaintenanceHistory: already recorder");
+        _recorders[tokenId][account] = true;
         emit RecorderGranted(account);
     }
 
     /**
-     * @notice Revoca la autorización de un recorder.
+     * @notice Revoca la autorización de un recorder para un token específico.
+     * @param tokenId ID del activo para el que se revoca.
      * @param account Dirección a revocar.
      */
-    function revokeRecorder(address account) external onlyOwner {
-        require(_recorders[account], "MaintenanceHistory: not a recorder");
-        _recorders[account] = false;
+    function revokeRecorder(uint256 tokenId, address account) external onlyOwner {
+        require(_recorders[tokenId][account], "MaintenanceHistory: not a recorder");
+        _recorders[tokenId][account] = false;
         emit RecorderRevoked(account);
     }
 
     /**
-     * @notice Consulta si una cuenta es recorder autorizado.
+     * @notice Consulta si una cuenta es recorder autorizado para un token concreto.
+     * @param tokenId ID del activo.
+     * @param account Dirección a consultar.
+     * @return true si account puede registrar mantenimientos del activo tokenId.
+     *         El owner devuelve siempre true (autorización implícita global).
      */
-    function isRecorder(address account) external view returns (bool) {
-        return _recorders[account] || account == owner();
+    function isRecorder(uint256 tokenId, address account) external view returns (bool) {
+        return _recorders[tokenId][account] || account == owner();
+    }
+
+    // ── Configuración de rate-limiting (onlyOwner) ────────────────────────
+
+    /**
+     * @notice Actualiza los parámetros de rate-limiting.
+     * @param maxWrites    Máximo de escrituras permitidas por empresa por época.
+     * @param epochDur     Duración de la época en segundos (mín. 1).
+     */
+    function setRateLimit(uint256 maxWrites, uint256 epochDur) external onlyOwner {
+        require(epochDur > 0, "MaintenanceHistory: epochDuration must be > 0");
+        maxWritesPerEpoch = maxWrites;
+        epochDuration     = epochDur;
+        emit RateLimitUpdated(maxWrites, epochDur);
     }
 
     // ── Escritura de historial ────────────────────────────────────────────
@@ -193,9 +227,27 @@ contract MaintenanceHistoryModule is BashoodModuleBase {
         uint32          nextDate,
         bytes32         docHash,
         string calldata notes
-    ) external onlyRecorder {
+    ) external {
         _requireValidToken(tokenId);
+        require(
+            _recorders[tokenId][msg.sender] || msg.sender == owner(),
+            "MaintenanceHistory: not a recorder"
+        );
         require(bytes(maintenanceType).length > 0, "MaintenanceHistory: empty type");
+
+        // Rate-limiting: solo aplica a recorders externos (el owner está exento).
+        if (msg.sender != owner()) {
+            uint256 epochBucket = block.timestamp / epochDuration;
+            if (_epochStart[msg.sender] != epochBucket) {
+                _epochStart[msg.sender] = epochBucket;
+                _epochCount[msg.sender] = 0;
+            }
+            require(
+                _epochCount[msg.sender] < maxWritesPerEpoch,
+                "MaintenanceHistory: rate limit exceeded"
+            );
+            _epochCount[msg.sender]++;
+        }
 
         // Valida existencia del token en el Core.
         ICoreForMaintenance(_coreAddress()).ownerOf(tokenId);

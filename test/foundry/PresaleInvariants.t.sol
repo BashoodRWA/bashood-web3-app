@@ -179,6 +179,7 @@ contract PresaleInvariantsTest is Test {
             address(nft),                   // _nftContract
             address(referral),              // _referralContract
             payable(address(splitter)),     // _projectWallet
+            operations,                     // _operationsWallet
             NFT_PRICE_ETH,                  // _nftPriceETH
             NFT_PRICE_BHT,                  // _nftPriceBHT
             PRESALE_START,                  // _presaleStart

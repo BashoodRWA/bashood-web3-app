@@ -46,6 +46,7 @@ contract EchidnaBashoodPresaleTest {
             address(nft),
             address(referral),
             payable(TREASURY),
+            TREASURY, // _operationsWallet
             0.1 ether,  // nftPriceETH
             1000 * 10**18, // nftPriceBHT
             block.timestamp,

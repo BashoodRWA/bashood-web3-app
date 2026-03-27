@@ -74,55 +74,55 @@ describe("InspectionModule", function () {
   // ─── Inspector management ────────────────────────────────────────────────────
   describe("Inspector management", function () {
     it("owner es inspector implícito", async function () {
-      expect(await module_.isInspector(owner.address)).to.equal(true);
+      expect(await module_.isInspector(TOKEN_ID, owner.address)).to.equal(true);
     });
 
     it("grantInspector acredita a inspector", async function () {
-      await module_.connect(owner).grantInspector(inspector.address);
-      expect(await module_.isInspector(inspector.address)).to.equal(true);
+      await module_.connect(owner).grantInspector(TOKEN_ID, inspector.address);
+      expect(await module_.isInspector(TOKEN_ID, inspector.address)).to.equal(true);
     });
 
     it("grantInspector emite InspectorGranted", async function () {
-      await expect(module_.connect(owner).grantInspector(inspector.address))
+      await expect(module_.connect(owner).grantInspector(TOKEN_ID, inspector.address))
         .to.emit(module_, "InspectorGranted")
         .withArgs(inspector.address);
     });
 
     it("revokeInspector revoca a inspector", async function () {
-      await module_.connect(owner).grantInspector(inspector.address);
-      await module_.connect(owner).revokeInspector(inspector.address);
-      expect(await module_.isInspector(inspector.address)).to.equal(false);
+      await module_.connect(owner).grantInspector(TOKEN_ID, inspector.address);
+      await module_.connect(owner).revokeInspector(TOKEN_ID, inspector.address);
+      expect(await module_.isInspector(TOKEN_ID, inspector.address)).to.equal(false);
     });
 
     it("revokeInspector emite InspectorRevoked", async function () {
-      await module_.connect(owner).grantInspector(inspector.address);
-      await expect(module_.connect(owner).revokeInspector(inspector.address))
+      await module_.connect(owner).grantInspector(TOKEN_ID, inspector.address);
+      await expect(module_.connect(owner).revokeInspector(TOKEN_ID, inspector.address))
         .to.emit(module_, "InspectorRevoked")
         .withArgs(inspector.address);
     });
 
     it("solo owner puede grantInspector", async function () {
       await expect(
-        module_.connect(attacker).grantInspector(attacker.address)
+        module_.connect(attacker).grantInspector(TOKEN_ID, attacker.address)
       ).to.be.revertedWithCustomError(module_, "OwnableUnauthorizedAccount");
     });
 
     it("revert si grantInspector de address zero", async function () {
       await expect(
-        module_.connect(owner).grantInspector(ethers.ZeroAddress)
+        module_.connect(owner).grantInspector(TOKEN_ID, ethers.ZeroAddress)
       ).to.be.revertedWith("InspectionModule: zero address");
     });
 
     it("revert si ya es inspector", async function () {
-      await module_.connect(owner).grantInspector(inspector.address);
+      await module_.connect(owner).grantInspector(TOKEN_ID, inspector.address);
       await expect(
-        module_.connect(owner).grantInspector(inspector.address)
+        module_.connect(owner).grantInspector(TOKEN_ID, inspector.address)
       ).to.be.revertedWith("InspectionModule: already inspector");
     });
 
     it("revert si revokeInspector de alguien que no lo es", async function () {
       await expect(
-        module_.connect(owner).revokeInspector(attacker.address)
+        module_.connect(owner).revokeInspector(TOKEN_ID, attacker.address)
       ).to.be.revertedWith("InspectionModule: not an inspector");
     });
   });
@@ -130,7 +130,7 @@ describe("InspectionModule", function () {
   // ─── recordInspection ────────────────────────────────────────────────────────
   describe("recordInspection()", function () {
     beforeEach(async function () {
-      await module_.connect(owner).grantInspector(inspector.address);
+      await module_.connect(owner).grantInspector(TOKEN_ID, inspector.address);
     });
 
     it("registra inspección PASS correctamente", async function () {
@@ -214,7 +214,7 @@ describe("InspectionModule", function () {
     it("revert si tokenId no existe en el Core", async function () {
       const NONEXISTENT = 999n;
       await expect(
-        module_.connect(inspector).recordInspection(
+        module_.connect(owner).recordInspection(
           NONEXISTENT, INSPECTION_VISUAL, RESULT_PASS, ethers.ZeroHash, ""
         )
       ).to.be.revertedWith("ERC721NonexistentToken");
@@ -232,7 +232,7 @@ describe("InspectionModule", function () {
   // ─── Lectura ─────────────────────────────────────────────────────────────────
   describe("Lectura de historial", function () {
     beforeEach(async function () {
-      await module_.connect(owner).grantInspector(inspector.address);
+      await module_.connect(owner).grantInspector(TOKEN_ID, inspector.address);
       await module_.connect(inspector).recordInspection(
         TOKEN_ID, INSPECTION_VISUAL, RESULT_PASS, ethers.ZeroHash, "Primera"
       );

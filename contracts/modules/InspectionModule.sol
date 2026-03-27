@@ -76,8 +76,28 @@ contract InspectionModule is BashoodModuleBase {
     /// @dev tokenId → historial cronológico de inspecciones (append-only).
     mapping(uint256 => InspectionRecord[]) private _inspections;
 
-    /// @dev Whitelist de inspectores acreditados.
-    mapping(address => bool) private _inspectors;
+    /**
+     * @dev Whitelist de inspectores acreditados POR TOKEN.
+     *      _inspectors[tokenId][account] = true si account puede inspeccionar
+     *      el activo tokenId.
+     */
+    mapping(uint256 => mapping(address => bool)) private _inspectors;
+
+    // ── Rate-limiting ────────────────────────────────────────────────────
+
+    /// @notice Máximo de inspecciones permitidas por empresa en una época.
+    ///         Configurable por el owner. El owner está exento.
+    uint256 public maxWritesPerEpoch = 20;
+
+    /// @notice Duración de una época en segundos para el rate-limiting.
+    ///         Por defecto 1 hora. Configurable por el owner.
+    uint256 public epochDuration = 1 hours;
+
+    /// @dev inspector → número de época de su último write.
+    mapping(address => uint256) private _epochStart;
+
+    /// @dev inspector → número de writes en la época actual.
+    mapping(address => uint256) private _epochCount;
 
     // ── Eventos ───────────────────────────────────────────────────────────
 
@@ -103,15 +123,8 @@ contract InspectionModule is BashoodModuleBase {
     /// @notice Emitido cuando se revoca un inspector.
     event InspectorRevoked(address indexed account);
 
-    // ── Modificadores ────────────────────────────────────────────────────
-
-    modifier onlyInspector() {
-        require(
-            _inspectors[msg.sender] || msg.sender == owner(),
-            "InspectionModule: not an inspector"
-        );
-        _;
-    }
+    /// @notice Emitido cuando el owner actualiza los parámetros de rate-limiting.
+    event RateLimitUpdated(uint256 maxWritesPerEpoch, uint256 epochDuration);
 
     // ── Constructor ───────────────────────────────────────────────────────
 
@@ -128,35 +141,55 @@ contract InspectionModule is BashoodModuleBase {
         )
     {}
 
-    // ── Gestión de inspectores (onlyOwner) ────────────────────────────────
+    // ── Gestión de inspectores por token (onlyOwner) ──────────────────────
 
     /**
-     * @notice Acredita a una cuenta como inspector.
+     * @notice Acredita a una cuenta como inspector para un token específico.
+     * @param tokenId ID del activo sobre el que se concede la autorización.
      * @param account Dirección del inspector a acreditar.
      */
-    function grantInspector(address account) external onlyOwner {
+    function grantInspector(uint256 tokenId, address account) external onlyOwner {
+        _requireValidToken(tokenId);
         _requireNotZero(account, "InspectionModule: zero address");
-        require(!_inspectors[account], "InspectionModule: already inspector");
-        _inspectors[account] = true;
+        require(!_inspectors[tokenId][account], "InspectionModule: already inspector");
+        _inspectors[tokenId][account] = true;
         emit InspectorGranted(account);
     }
 
     /**
-     * @notice Revoca la acreditación de un inspector.
+     * @notice Revoca la acreditación de un inspector para un token específico.
+     * @param tokenId ID del activo para el que se revoca.
      * @param account Dirección del inspector a revocar.
      */
-    function revokeInspector(address account) external onlyOwner {
-        require(_inspectors[account], "InspectionModule: not an inspector");
-        _inspectors[account] = false;
+    function revokeInspector(uint256 tokenId, address account) external onlyOwner {
+        require(_inspectors[tokenId][account], "InspectionModule: not an inspector");
+        _inspectors[tokenId][account] = false;
         emit InspectorRevoked(account);
     }
 
     /**
-     * @notice Consulta si una cuenta es inspector acreditado.
+     * @notice Consulta si una cuenta es inspector acreditado para un token concreto.
+     * @param tokenId ID del activo.
      * @param account Dirección a consultar.
+     * @return true si account puede inspeccionar el activo tokenId.
+     *         El owner devuelve siempre true (autorización implícita global).
      */
-    function isInspector(address account) external view returns (bool) {
-        return _inspectors[account] || account == owner();
+    function isInspector(uint256 tokenId, address account) external view returns (bool) {
+        return _inspectors[tokenId][account] || account == owner();
+    }
+
+    // ── Configuración de rate-limiting (onlyOwner) ────────────────────────
+
+    /**
+     * @notice Actualiza los parámetros de rate-limiting.
+     * @param maxWrites    Máximo de inspecciones permitidas por empresa por época.
+     * @param epochDur     Duración de la época en segundos (mín. 1).
+     */
+    function setRateLimit(uint256 maxWrites, uint256 epochDur) external onlyOwner {
+        require(epochDur > 0, "InspectionModule: epochDuration must be > 0");
+        maxWritesPerEpoch = maxWrites;
+        epochDuration     = epochDur;
+        emit RateLimitUpdated(maxWrites, epochDur);
     }
 
     // ── Escritura de inspecciones ────────────────────────────────────────
@@ -180,10 +213,28 @@ contract InspectionModule is BashoodModuleBase {
         uint8           result,
         bytes32         docHash,
         string calldata notes
-    ) external onlyInspector {
+    ) external {
         _requireValidToken(tokenId);
+        require(
+            _inspectors[tokenId][msg.sender] || msg.sender == owner(),
+            "InspectionModule: not an inspector"
+        );
         require(inspectionType != bytes32(0), "InspectionModule: empty type");
         require(result <= 2,                  "InspectionModule: invalid result");
+
+        // Rate-limiting: solo aplica a inspectores externos (el owner está exento).
+        if (msg.sender != owner()) {
+            uint256 epochBucket = block.timestamp / epochDuration;
+            if (_epochStart[msg.sender] != epochBucket) {
+                _epochStart[msg.sender] = epochBucket;
+                _epochCount[msg.sender] = 0;
+            }
+            require(
+                _epochCount[msg.sender] < maxWritesPerEpoch,
+                "InspectionModule: rate limit exceeded"
+            );
+            _epochCount[msg.sender]++;
+        }
 
         // Valida existencia del token en el Core (revierte si no existe).
         ICoreForInspection(_coreAddress()).ownerOf(tokenId);

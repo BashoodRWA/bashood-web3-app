@@ -51,7 +51,7 @@ describe("Coverage: BashoodToken branch tests", function () {
   // --- L123: sendToStaking — staking contract not set ---
   it("sendToStaking reverts when staking contract not set", async function () {
     await expect(token.sendToStaking(ethers.parseEther("1")))
-      .to.be.revertedWith("Staking contract not set");
+      .to.be.revertedWithCustomError(token, "InvalidStakingContract");
   });
 
   // --- L135: sendToStaking — not enough tokens ---

@@ -1,0 +1,191 @@
+{
+  "schemaVersion": "BASHOOD-RWA-1.0",
+
+  "name": "Doosan DX360LC-7 #0047 — Excavadora de Cadenas 36T",
+  "description": "Excavadora de cadenas de gran tonelaje Doosan DX360LC-7. Motor Doosan DL08 Stage V, 225 kW. Equipada con sistema GPS Topcon y telemetría DoosanCONNECT. Historial de mantenimiento completo desde nuevo. Actualmente en operación en proyecto de infraestructura vial en Comunidad Valencia. Ideal para movimiento de tierras en obras civiles, minería superficial y proyectos de gran volumen.",
+  "image": "ipfs://QmMachineryDX360Photo001",
+  "external_url": "https://app.bashood.com/assets/247",
+
+  "assetClass": "MACHINERY",
+
+  "protocol": {
+    "contractAddress": "0x0000000000000000000000000000000000000000",
+    "tokenId": 247,
+    "chainId": 8453,
+    "standard": "BASHOOD-RWA-1",
+    "mintedAt": 1743100000,
+    "mintedBy": "0x0000000000000000000000000000000000000001",
+    "metadataCID": "QmDX360LC7047MetadataHash"
+  },
+
+  "identification": {
+    "serialNumber": "XJCHE00APHG247651",
+    "manufacturer": "Doosan Bobcat",
+    "model": "DX360LC-7",
+    "yearManufactured": 2022,
+    "countryOfOrigin": "KR",
+    "vin": "XJCHE00APHG247651",
+    "oemPartNumber": "DX360LC-7-ES-2022"
+  },
+
+  "condition": {
+    "status": "OPERATIONAL",
+    "operatingHours": 4820,
+    "maxLifetimeHours": 18000,
+    "conditionGrade": "GOOD",
+    "inspectionDate": 1740000000,
+    "inspectionProvider": "Dekra Servicios Digitales S.A.",
+    "notes": "Revisión mayor completada a las 4500h. Mangueras hidráulicas renovadas. Oruga derecha reemplazada a las 3200h. Sistema eléctrico en perfecto estado. Próxima revisión programada a las 6000h."
+  },
+
+  "financials": {
+    "purchasePrice": 312000,
+    "currency": "EUR",
+    "depreciationModel": "TIME_BASED",
+    "residualValuePct": 20,
+    "annualMaintenancePct": 4,
+    "insurancePremiumPct": 2,
+    "acquisitionDate": 1680000000,
+    "lastAppraisalValue": 248000,
+    "lastAppraisalDate": 1740000000,
+    "appraisalProvider": "Ritchie Bros. Auctioneers España"
+  },
+
+  "location": {
+    "country": "ES",
+    "region": "Comunitat Valenciana",
+    "city": "Valencia",
+    "coordinates": { "lat": 39.4699, "lng": -0.3763 },
+    "locationType": "MOBILE",
+    "updatedAt": 1743100000
+  },
+
+  "documents": [
+    {
+      "type": "PURCHASE_INVOICE",
+      "uri": "ipfs://QmInvoiceDX360001",
+      "sha256": "f1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2",
+      "name": "Factura de compra DX360LC-7",
+      "mimeType": "application/pdf",
+      "issuedBy": "Doosan Bobcat España",
+      "issuedAt": 1680000000
+    },
+    {
+      "type": "TECHNICAL_DATASHEET",
+      "uri": "ipfs://QmDatasheetDX360LC7",
+      "sha256": "a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2",
+      "name": "Ficha técnica DX360LC-7",
+      "mimeType": "application/pdf",
+      "issuedBy": "Doosan Bobcat",
+      "issuedAt": 1675000000
+    },
+    {
+      "type": "INSPECTION_REPORT",
+      "uri": "ipfs://QmInspectionDX360001",
+      "sha256": "b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3",
+      "name": "Informe Dekra — Inspección completa 4500h",
+      "mimeType": "application/pdf",
+      "issuedBy": "Dekra Servicios Digitales S.A.",
+      "issuedAt": 1740000000
+    },
+    {
+      "type": "MAINTENANCE_RECORD",
+      "uri": "ipfs://QmMaintenanceDX360001",
+      "sha256": "c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4",
+      "name": "Libro de mantenimiento completo desde nuevo",
+      "mimeType": "application/pdf",
+      "issuedBy": "Doosan Bobcat España",
+      "issuedAt": 1740000000
+    },
+    {
+      "type": "PHOTO_PRIMARY",
+      "uri": "ipfs://QmPhotoDX360001Front",
+      "sha256": "d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5",
+      "name": "Foto lateral derecha",
+      "mimeType": "image/jpeg",
+      "issuedAt": 1740000000
+    }
+  ],
+
+  "certifications": [
+    {
+      "type": "CE_MARK",
+      "status": "ACTIVE",
+      "issuedBy": "TÜV SÜD",
+      "issuedAt": 1680000000,
+      "expiresAt": 1869000000,
+      "certificateNumber": "TUVSUD-CE-DX360-2022-001"
+    },
+    {
+      "type": "ISO_9001",
+      "status": "ACTIVE",
+      "issuedBy": "Bureau Veritas",
+      "issuedAt": 1677000000,
+      "expiresAt": 1772000000,
+      "certificateNumber": "BV-9001-DOOSAN-2022"
+    }
+  ],
+
+  "telemetry": {
+    "hasRealTimeAPI": true,
+    "provider": "DOOSAN_CONNECT",
+    "oracleAddress": "0x0000000000000000000000000000000000000003",
+    "dataFrequency": "HOURLY",
+    "metrics": [
+      "ENGINE_HOURS",
+      "FUEL_CONSUMPTION_L_H",
+      "ENGINE_LOAD_PCT",
+      "HYDRAULIC_PRESSURE_BAR",
+      "ENGINE_OIL_TEMP",
+      "COOLANT_TEMP",
+      "GPS_POSITION",
+      "IDLE_TIME_H"
+    ]
+  },
+
+  "extensions": {
+    "machinery": {
+      "machineType": "EXCAVATOR",
+      "operatingSpecs": {
+        "enginePower_kW": 225,
+        "engineModel": "Doosan DL08 Stage V",
+        "fuelType": "DIESEL",
+        "fuelCapacity_L": 520,
+        "operatingWeight_kg": 36400,
+        "maxLoadCapacity_kg": 18000,
+        "maxReach_m": 11.2,
+        "maxDigDepth_m": 7.27,
+        "travelSpeed_km_h": 5.5,
+        "undercarriageType": "CRAWLER"
+      },
+      "usageHistory": {
+        "totalHours": 4820,
+        "maxLifetimeHours": 18000,
+        "totalLoadLifted_t": 87360,
+        "maxLoadLifetime_t": 360000,
+        "majorOverhaulHistory": [
+          {
+            "date": 1720000000,
+            "hoursAtOverhaul": 3200,
+            "description": "Reemplazo oruga derecha completa + ajuste tensión oruga izquierda",
+            "cost_usd": 12400,
+            "provider": "Doosan Bobcat España — Servicio oficial"
+          },
+          {
+            "date": 1738000000,
+            "hoursAtOverhaul": 4500,
+            "description": "Revisión mayor 4500h: mangueras hidráulicas, aceites, filtros, culata inspeccionada sin anomalías",
+            "cost_usd": 8700,
+            "provider": "Doosan Bobcat España — Servicio oficial"
+          }
+        ]
+      },
+      "attachments": [
+        "BUCKET_1.8m3_GP",
+        "BUCKET_0.9m3_ROCK",
+        "HYDRAULIC_QUICK_COUPLER"
+      ],
+      "emissionsStandard": "STAGE_V"
+    }
+  }
+}

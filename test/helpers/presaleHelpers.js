@@ -101,6 +101,7 @@ async function deployPresale(opts = {}) {
       nftAddr,
       referralAddr,
       projectWalletAddr,
+      projectWalletAddr, // _operationsWallet (reuse projectWallet in tests)
       ethers.parseEther('0.01'), // nftPriceETH default (smaller to match tests)
       ethers.parseUnits('1', 18), // nftPriceBHT default (1 BHT)
       0,
@@ -123,6 +124,7 @@ async function deployPresale(opts = {}) {
       nftAddr,
       referralAddr,
       projectWalletAddr,
+      projectWalletAddr, // _operationsWallet (reuse projectWallet in tests)
       ethers.parseEther('0.01'), // nftPriceETH (default adjusted)
       ethers.parseUnits('1', 18), // nftPriceBHT (default adjusted)
       0,

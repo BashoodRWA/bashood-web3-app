@@ -39,6 +39,7 @@ describe("BashoodPresaleFinal - Branch Coverage High Priority", function() {
                     nftContract.target,
                     referralContract.target,
                     projectWallet.address,
+                    projectWallet.address, // _operationsWallet
                     ethers.parseEther("0.1"), // nftPriceETH
                     ethers.parseUnits("100", 18), // nftPriceBHT
                     0, // presaleStart
@@ -57,6 +58,7 @@ describe("BashoodPresaleFinal - Branch Coverage High Priority", function() {
                     nftContract.target,
                     referralContract.target,
                     projectWallet.address,
+                    projectWallet.address, // _operationsWallet
                     ethers.parseEther("0.1"), // nftPriceETH
                     ethers.parseUnits("100", 18), // nftPriceBHT
                     0, // presaleStart
@@ -75,6 +77,7 @@ describe("BashoodPresaleFinal - Branch Coverage High Priority", function() {
                     ethers.ZeroAddress, // nftContract = 0x0
                     referralContract.target,
                     projectWallet.address,
+                    projectWallet.address, // _operationsWallet
                     ethers.parseEther("0.1"), // nftPriceETH
                     ethers.parseUnits("100", 18), // nftPriceBHT
                     0, // presaleStart
@@ -93,6 +96,7 @@ describe("BashoodPresaleFinal - Branch Coverage High Priority", function() {
                     user2.address, // EOA instead of contract
                     referralContract.target,
                     projectWallet.address,
+                    projectWallet.address, // _operationsWallet
                     ethers.parseEther("0.1"), // nftPriceETH
                     ethers.parseUnits("100", 18), // nftPriceBHT
                     0, // presaleStart
@@ -111,6 +115,7 @@ describe("BashoodPresaleFinal - Branch Coverage High Priority", function() {
                     nftContract.target,
                     ethers.ZeroAddress, // referralContract = 0x0
                     projectWallet.address,
+                    projectWallet.address, // _operationsWallet
                     ethers.parseEther("0.1"), // nftPriceETH
                     ethers.parseUnits("100", 18), // nftPriceBHT
                     0, // presaleStart
@@ -129,6 +134,7 @@ describe("BashoodPresaleFinal - Branch Coverage High Priority", function() {
                     nftContract.target,
                     user1.address, // EOA instead of contract
                     projectWallet.address,
+                    projectWallet.address, // _operationsWallet
                     ethers.parseEther("0.1"), // nftPriceETH
                     ethers.parseUnits("100", 18), // nftPriceBHT
                     0, // presaleStart
@@ -147,6 +153,7 @@ describe("BashoodPresaleFinal - Branch Coverage High Priority", function() {
                     nftContract.target,
                     referralContract.target,
                     ethers.ZeroAddress, // projectWallet = 0x0
+                    projectWallet.address, // _operationsWallet
                     ethers.parseEther("0.1"), // nftPriceETH
                     ethers.parseUnits("100", 18), // nftPriceBHT
                     0, // presaleStart
@@ -165,6 +172,7 @@ describe("BashoodPresaleFinal - Branch Coverage High Priority", function() {
                 nftContract.target,
                 referralContract.target,
                 projectWallet.address,
+                projectWallet.address, // _operationsWallet
                 ethers.parseEther("0.1"), // nftPriceETH
                 ethers.parseUnits("100", 18), // nftPriceBHT
                 0, // presaleStart
@@ -200,6 +208,7 @@ describe("BashoodPresaleFinal - Branch Coverage High Priority", function() {
                 nftContract.target,
                 referralContract.target,
                 projectWallet.address,
+                projectWallet.address, // _operationsWallet
                 ethers.parseEther("0.1"), // nftPriceETH
                 ethers.parseUnits("100", 18), // nftPriceBHT
                 0, // presaleStart
@@ -223,6 +232,7 @@ describe("BashoodPresaleFinal - Branch Coverage High Priority", function() {
                 nftContract.target,
                 referralContract.target,
                 projectWallet.address,
+                projectWallet.address, // _operationsWallet
                 ethers.parseEther("0.1"), // nftPriceETH
                 ethers.parseUnits("100", 18), // nftPriceBHT
                 0, // presaleStart
@@ -254,6 +264,7 @@ describe("BashoodPresaleFinal - Branch Coverage High Priority", function() {
                 nftContract.target,
                 referralContract.target,
                 projectWallet.address,
+                projectWallet.address, // _operationsWallet
                 ethers.parseEther("0.1"), // nftPriceETH
                 ethers.parseUnits("100", 18), // nftPriceBHT
                 0, // presaleStart = 0 (use presaleActive flag)
@@ -374,6 +385,7 @@ describe("BashoodPresaleFinal - Branch Coverage High Priority", function() {
                 nftContract.target,
                 referralContract.target,
                 projectWallet.address,
+                projectWallet.address, // _operationsWallet
                 ethers.parseEther("0.1"), // nftPriceETH
                 ethers.parseUnits("100", 18), // nftPriceBHT
                 0, // presaleStart
@@ -404,6 +416,7 @@ describe("BashoodPresaleFinal - Branch Coverage High Priority", function() {
                 nftContract.target,
                 referralContract.target,
                 projectWallet.address,
+                projectWallet.address, // _operationsWallet
                 ethers.parseEther("0.1"), // nftPriceETH
                 ethers.parseUnits("100", 18), // nftPriceBHT
                 0, // presaleStart

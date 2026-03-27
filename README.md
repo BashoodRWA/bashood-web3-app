@@ -1,18 +1,13 @@
-# 🏗️ Bashood - Industrial Asset Tokenization Platform
+# Bashood — Industrial Asset Tokenization Platform
 
-<div align="center">
+![Solidity](https://img.shields.io/badge/Solidity-0.8.28-363636?style=flat-square&logo=solidity)
+![Base](https://img.shields.io/badge/Base-L2-0052FF?style=flat-square)
+![HH Tests](https://img.shields.io/badge/Hardhat-1054_passing-success?style=flat-square)
+![Forge Tests](https://img.shields.io/badge/Forge-117_passing_(10k_fuzz)-success?style=flat-square)
+![Bytecode](https://img.shields.io/badge/BashoodPresaleFinal-17.88_KB-blue?style=flat-square)
+![Architecture](https://img.shields.io/badge/Architecture-FROZEN-orange?style=flat-square)
 
-![Bashood Logo](https://img.shields.io/badge/Bashood-Industrial_Tokenization-blue?style=for-the-badge)
-![Solidity](https://img.shields.io/badge/Solidity-0.8.28-363636?style=for-the-badge&logo=solidity)
-![Base](https://img.shields.io/badge/Base-Blockchain-0052FF?style=for-the-badge)
-![Tests](https://img.shields.io/badge/Tests-442_passing-success?style=for-the-badge)
-![Coverage](https://img.shields.io/badge/Coverage-70.75%25-yellow?style=for-the-badge)
-
-**Democratizando el acceso a activos industriales de alto valor mediante tokenización en Base L2**
-
-[🚀 Quick Start](#-quick-start) • [📖 Documentación](#-documentación) • [🏗️ Arquitectura](#️-arquitectura) • [🔒 Seguridad](#-seguridad)
-
-</div>
+Plataforma de tokenización de activos industriales (maquinaria pesada, equipos mineros, grúas) como NFTs en Base L2. Los tokens representan **registros digitales estructurados** de activos físicos — no títulos de propiedad ni instrumentos financieros.
 
 ---
 
@@ -41,11 +36,13 @@ Activo Físico → Registro NFT (BASHOOD-RWA-1) → Smart Contract → Participa
 
 > ⚖️ **Definición oficial del token (v1.0, marco UE/MiCA):** Cada token BASHOOD-RWA-1 es un **registro digital estructurado** de un activo industrial físico. No representa título de propiedad, derecho contractual ni rendimiento distribuible sobre el activo. No está diseñado como instrumento financiero en el sentido de MiCA (Reglamento UE 2023/1114) o MiFID II. Cualquier vínculo jurídico entre el token y el activo off-chain, así como la clasificación regulatoria de cada emisión, es responsabilidad exclusiva del emisor. Ver [BASHOOD-RWA-1-SPECIFICATION.md](docs/BASHOOD-RWA-1-SPECIFICATION.md) y [IBashoodRWA.sol](contracts/standards/IBashoodRWA.sol).
 
-**Estado**: ✅ Listo para deployment en Base Sepolia  
-**Tests**: 442/446 passing (99.1%) ✅  
-**Coverage**: 70.75% branches, 97.3% statements, 100% functions  
-**Seguridad**: 0 vulnerabilidades críticas (Slither audited)  
-**Última actualización**: 15 Enero 2026
+**Estado**: 🔜 Pendiente deployment en Base Sepolia (audit externo previo requerido)
+**Tests Hardhat**: 1054 passing, 0 failing ✅
+**Tests Foundry**: 117 passing, 0 failed — 10 suites, 10k fuzz runs ✅
+**BashoodPresaleFinal bytecode**: 17.88 KB (margen: 6.12 KB vs límite 24 KB) ✅
+**Seguridad**: 0 vulnerabilidades críticas (Slither). Hallazgos H-01/H-02/H-03 resueltos ✅
+**Arquitectura**: BashoodPresaleFinal FROZEN — sin nueva lógica de negocio ✅
+**Última actualización**: 23 marzo 2026
 
 ---
 
@@ -92,14 +89,53 @@ Activo Físico → Registro NFT (BASHOOD-RWA-1) → Smart Contract → Participa
 
 ### **Contratos Principales**
 
-| Contrato | Responsabilidad | Tamaño | LOC |
-|----------|----------------|--------|-----|
-| 🏛️ **BashoodPresaleFinal** | Core del sistema de presale | 16.9 KB | 735 |
-| 💰 **BashoodToken (BHT)** | Token de utilidad ERC20 | Optimizado | 280 |
-| 🎨 **BashoodMultiToken** | NFTs de activos (ERC1155) | Optimizado | 450 |
-| 🤝 **BashoodReferral** | Sistema de referidos | Ligero | 180 |
-| 🚨 **BashoodRescue** | Mecanismos de emergencia | Seguro | 220 |
-| 📊 **ChainlinkPriceFeed** | Oracle de precios | Confiable | 95 |
+| Contrato | Bytecode | Responsabilidad |
+|---|---|---|
+| `BashoodPresaleFinal.sol` | **17.88 KB** — FROZEN | Orquestador de presale (ETH + BHT, oracle, referidos, rescue) |
+| `BashoodRWAReference.sol` | 23.14 KB | ERC-721 RWA core con sistema de módulos |
+| `BashoodGovernor.sol` | 16.63 KB | Governance on-chain |
+| `BashoodMultiToken.sol` | 7.50 KB | NFTs ERC-1155 (activos industriales) |
+| `BashoodToken.sol` | 6.05 KB | Token ERC-20 de utilidad (BHT) con burn |
+| `BashoodTimelock.sol` | 6.21 KB | Timelock para operaciones admin críticas |
+| `BashoodRescue.sol` | 5.08 KB | Mecanismos de rescate y emergencia |
+| `BashoodReferral.sol` | 2.79 KB | Sistema de referidos |
+
+### **Módulos RWA (contracts/modules/)**
+
+Contratos independientes invocados por `BashoodRWAReference` mediante interfaz. Nunca desde `BashoodPresaleFinal`.
+
+| Módulo | Bytecode | Responsabilidad |
+|---|---|---|
+| `MaintenanceHistoryModule.sol` | 6.09 KB | Historial de mantenimiento por token (per-token auth + rate-limit) |
+| `LifecycleEventsModule.sol` | 5.53 KB | Eventos de ciclo de vida por token |
+| `InspectionModule.sol` | 5.52 KB | Historial de inspección por token (per-token auth + rate-limit) |
+| `InsuranceModule.sol` | 4.34 KB | Póliza de seguro vigente por token |
+| `CertificationModule.sol` | 3.63 KB | Estado de compliance y certificaciones |
+| `OracleValuationModule.sol` | 3.57 KB | Valor de mercado vía Chainlink (único con `ASSET_MANAGER_ROLE`) |
+| `FeeDiscountModule.sol` | 2.23 KB | Descuentos de fees |
+
+> **Regla arquitectónica:** `BashoodPresaleFinal` está cerrado para nueva lógica de negocio. Ver [ARCHITECTURE.md](ARCHITECTURE.md).
+
+---
+
+### **Modelo de Tokens — ERC-1155 (Presale) vs ERC-721 (RWA)**
+
+> ⚠️ El protocolo utiliza **dos estándares de token distintos con propósitos ortogonales**. No existe ni existirá conversión automática entre ellos.
+
+| | `BashoodMultiToken` (ERC-1155) | `BashoodRWAReference` (ERC-721) |
+|---|---|---|
+| **Estándar** | ERC-1155 semi-fungible | ERC-721 no fungible |
+| **Propósito** | Token de participación en presale | Registro digital estructurado de un activo industrial real |
+| **Quién lo minta** | `BashoodPresaleFinal` (MINTER_ROLE) al comprar | `ASSET_MANAGER_ROLE` contra un activo físico verificado |
+| **Cantidad total** | Fija: 30 NFTs (BASHOOD_NFT, tokenId=2) | Ilimitada: 1 token por activo individual registrado |
+| **Valor referenciado** | Precio de presale en ETH/BHT | Valoración de mercado del activo vía Chainlink oracle |
+| **Derechos que representa** | Los que el emisor defina off-chain en los T&C de la presale | Registro inmutable de identificación, specs y valor del activo |
+| **Transferible** | ✅ Sí (ERC-1155 `safeTransferFrom`) | ✅ Sí (ERC-721 `transferFrom`) |
+| **Convertible en el otro** | ❌ No — no hay mecanismo de redención on-chain | ❌ No — independiente de presale |
+
+> Los ERC-1155 de presale y los ERC-721 RWA son tokens con ciclos de vida **completamente independientes**. Que un usuario haya comprado en la presale no le confiere automáticamente ningún derecho sobre ningún activo registrado en `BashoodRWAReference`. Cualquier vínculo entre ambos es responsabilidad contractual off-chain del emisor.
+
+---
 
 ### **Flujo de Compra de NFT**
 
@@ -165,20 +201,17 @@ function purchaseWithBHT(uint256 nftId, uint256 quantity) external {
 ### **3. Oráculo Chainlink Robusto**
 
 ```solidity
-function _getFreshPrice() internal view returns (uint256) {
-    (uint80 roundId, int256 answer, , uint256 updatedAt, ) = 
+// Único punto de validación oracle — _bhtFromFiat() y _calculateBhtAmounts() delegan aquí
+function _getOracleData() internal view returns (int256 answer, uint8 decimals_) {
+    require(maxPriceStaleness > 0, "Staleness req");
+    require(address(priceFeed) != address(0), "PriceFeed req");
+    (uint80 roundId, int256 _answer, , uint256 updatedAt, uint80 answeredInRound) =
         priceFeed.latestRoundData();
-    
-    // Validación 1: Precio positivo
-    require(answer > 0, "Invalid price");
-    
-    // Validación 2: No stale (máx 1 hora)
-    require(block.timestamp - updatedAt <= maxPriceStaleness);
-    
-    // Validación 3: RoundId secuencial (evita manipulación)
-    require(roundId > lastRoundId);
-    
-    return uint256(answer);
+    require(_answer > 0, "Invalid price");
+    require(updatedAt > 0, "Price too stale");
+    require(block.timestamp - updatedAt <= maxPriceStaleness, "Price too stale");
+    require(answeredInRound >= roundId, "Incomplete round"); // evita datos de ronda incompleta
+    return (_answer, priceFeed.decimals());
 }
 ```
 
@@ -187,9 +220,9 @@ function _getFreshPrice() internal view returns (uint256) {
 | Capa | Mecanismo | Implementación |
 |------|-----------|----------------|
 | 🛡️ **Reentrancy** | Guards en todas las funciones públicas | `nonReentrant` modifier |
-| 🔐 **Access Control** | Sistema de roles granular | `ADMIN_ROLE`, `OPERATOR_ROLE`, `EMERGENCY_ROLE` |
+| 🔐 **Access Control** | Sistema de roles granular | `ADMIN_ROLE`, `EMERGENCY_ROLE`, `WHITELIST_ROLE` |
 | ⏸️ **Pause** | Emergency stop | `Pausable` de OpenZeppelin |
-| 🚫 **Whitelist** | KYC/AML compliance | Merkle tree signatures |
+| 🚫 **Whitelist** | KYC/AML configurable | `WHITELIST_ROLE` vía AccessControl |
 | 🐋 **Anti-Whale** | Límites por usuario | `maxPerUser` configurable |
 | 📊 **Oracle** | Validación precio/staleness | 3 checks redundantes |
 | 💸 **Rescue** | Fondos atrapados | `BashoodRescue` contract |
@@ -263,9 +296,10 @@ npx hardhat run scripts/presale-status.js --network base-sepolia deployment-*.js
 ### **Suite de Tests Completa**
 
 ```bash
-# Tests unitarios (442 passing)
-npm test                          # Todos los tests
-npm test -- test/BashoodPresaleFinal.test.cjs  # Test específico
+# Tests unitarios (1054 Hardhat + 117 Foundry)
+npx hardhat test                  # Todos los tests Hardhat
+forge test --fuzz-runs 10000      # Todos los tests Foundry con fuzzing
+npm test -- test/BashoodPresaleFinal.test.cjs  # Test específico Hardhat
 
 # Coverage detallado
 npm run coverage                  # Genera reporte HTML en coverage/
@@ -279,13 +313,12 @@ npm run echidna:presale           # Property-based testing
 ### **Métricas de Calidad**
 
 | Métrica | Valor | Estado |
-|---------|-------|--------|
-| **Tests Passing** | 442/446 (99.1%) | ✅ Excelente |
-| **Branch Coverage** | 70.75% | ✅ Bueno |
-| **Statement Coverage** | 97.3% | ✅ Excelente |
-| **Function Coverage** | 100% | ✅ Perfecto |
-| **Vulnerabilidades Críticas** | 0 | ✅ Seguro |
-| **Gas Optimization** | Custom errors, struct packing | ✅ Optimizado |
+|---|---|---|
+| **Tests Hardhat** | 1054 passing, 0 failing | ✅ |
+| **Tests Foundry** | 117 passing, 0 failed (10k fuzz) | ✅ |
+| **BashoodPresaleFinal bytecode** | 17.88 KB (margen 6.12 KB) | ✅ |
+| **Vulnerabilidades críticas** | 0 (Slither) | ✅ |
+| **Arquitectura** | FROZEN — sin nueva lógica en contrato principal | ✅ |
 
 ### **Análisis de Seguridad**
 
@@ -312,20 +345,21 @@ echidna test/echidna/BashoodEchidna.sol --contract BashoodTokenEchidnaTest
 
 ### **Core Contracts**
 
-| Contrato | Descripción | Tamaño | Audit |
-|----------|-------------|--------|-------|
-| [`BashoodPresaleFinal.sol`](contracts/BashoodPresaleFinal.sol) | Sistema principal de presale con pagos ETH/BHT | 16.9 KB | ✅ |
-| [`BashoodToken.sol`](contracts/BashoodToken.sol) | Token ERC20 de utilidad (BHT) con burn | Optimizado | ✅ |
-| [`BashoodMultiToken.sol`](contracts/BashoodMultiToken.sol) | NFTs ERC1155 representando activos industriales | Optimizado | ✅ |
-| [`BashoodReferral.sol`](contracts/BashoodReferral.sol) | Sistema de referidos multinivel | Ligero | ✅ |
-| [`BashoodRescue.sol`](contracts/BashoodRescue.sol) | Mecanismos de rescate y emergencia | Seguro | ✅ |
+| Contrato | Bytecode | Descripción |
+|---|---|---|
+| [`BashoodPresaleFinal.sol`](contracts/BashoodPresaleFinal.sol) | 17.88 KB — **FROZEN** | Orquestador de presale con pagos ETH/BHT, oracle, referidos, rescue |
+| [`BashoodRWAReference.sol`](contracts/BashoodRWAReference.sol) | 23.14 KB | ERC-721 RWA core con sistema de módulos |
+| [`BashoodToken.sol`](contracts/BashoodToken.sol) | 6.05 KB | Token ERC-20 de utilidad (BHT) con burn |
+| [`BashoodMultiToken.sol`](contracts/BashoodMultiToken.sol) | 7.50 KB | NFTs ERC-1155 representando activos industriales |
+| [`BashoodReferral.sol`](contracts/BashoodReferral.sol) | 2.79 KB | Sistema de referidos |
+| [`BashoodRescue.sol`](contracts/BashoodRescue.sol) | 5.08 KB | Mecanismos de rescate y emergencia |
 
 ### **Oracle & Helpers**
 
 | Contrato | Descripción |
-|----------|-------------|
-| [`ChainlinkPriceFeed.sol`](contracts/oracles/ChainlinkPriceFeed.sol) | Oracle Chainlink para ETH/USD con validaciones |
-| [`BashoodPropertyNFT.sol`](contracts/BashoodPropertyNFT.sol) | NFT ERC721 para propiedades inmobiliarias |
+|---|---|
+| [`AggregatorV3Interface.sol`](contracts/AggregatorV3Interface.sol) | Interfaz Chainlink ETH/USD |
+| [`BashoodPropertyNFT.sol`](contracts/BashoodPropertyNFT.sol) | NFT ERC-721 para propiedades inmobiliarias |
 
 ### **Protocolo RWA — Módulos Externos (Plan M4-F3)**
 
@@ -552,19 +586,18 @@ npm run generate:report     # Generar reporte de seguridad
 ## 🗺️ Roadmap
 
 ### **Q1 2026** ✅ Completado
-- ✅ Desarrollo de smart contracts core
-- ✅ Suite de tests (442 tests, 70.75% coverage)
-- ✅ Auditoría de seguridad (Slither, Foundry, Echidna)
-- ✅ Optimización de gas (custom errors, struct packing)
-- ✅ Integración Chainlink oracle
-- ✅ Sistema de referidos multinivel
+- ✅ Smart contracts core + módulos RWA (8 módulos)
+- ✅ 1054 tests Hardhat + 117 Foundry (10k fuzz runs)
+- ✅ Hallazgos H-01/H-02/H-03 resueltos
+- ✅ Rate-limiting y scope per-token en módulos RWA
+- ✅ Consolidación oracle en `_getOracleData()` — eliminación duplicación
+- ✅ Arquitectura BashoodPresaleFinal FROZEN + ARCHITECTURE.md
 
 ### **Q2 2026** 🔄 En Progreso
-- 🔄 Deployment en Base Sepolia testnet
-- 🔄 Testing con usuarios beta (100 testers)
-- 🔄 Integración frontend Web3
-- 🔄 Documentación de API para integradores
-- ⏳ Auditoría externa (CertiK/OpenZeppelin)
+- 🔄 Infraestructura multi-sig Gnosis Safe 3-of-5
+- 🔄 Timelock para funciones admin críticas
+- ⏳ Deployment en Base Sepolia
+- ⏳ Audit externo (ConsenSys Diligence / OpenZeppelin / Spearbit)
 
 ### **Q3 2026** 📋 Planificado
 - ⏳ Deployment en Base Mainnet
@@ -764,180 +797,4 @@ Ver [LICENSE](LICENSE) para el texto completo.
 
 </div>
 
----
-
-## 🧪 Testing & Seguridad
-
-```bash
-# Tests unitarios (323 tests)
-npm test
-
-# Coverage (67.41%)
-npm run coverage
-
-# Análisis estático de seguridad
-npm run security:slither
-
-# Tests de fuzzing
-npm run forge:fuzz
-```
-
-**Ver documentación de seguridad**: [SECURITY-README.md](SECURITY-README.md)
-
----
-
-## 📚 Documentación
-
-### Deployment & Operaciones
-- 📘 [BASE_INTEGRATION_README.md](BASE_INTEGRATION_README.md) - Guía de integración Base
-- 🔐 [scripts/CONFIGURE_SECURITY_README.md](scripts/CONFIGURE_SECURITY_README.md) - Configuración de seguridad
-- 📋 [MAINNET_DEPLOYMENT_CHECKLIST_FINAL.md](MAINNET_DEPLOYMENT_CHECKLIST_FINAL.md) - Checklist mainnet
-
-### Seguridad & Análisis
-- 🛡️ [SECURITY-README.md](SECURITY-README.md) - Framework de seguridad multi-capa
-- 🔍 [ANALISIS_SEGURIDAD_EDGE_CASES.md](ANALISIS_SEGURIDAD_EDGE_CASES.md) - Análisis de edge cases
-- 📊 [COVERAGE_REPORT.md](COVERAGE_REPORT.md) - Reporte de cobertura
-
-### Testing & Desarrollo
-- 🧪 [SESION_TESTS_2026-01-15_PART2.md](SESION_TESTS_2026-01-15_PART2.md) - Tests adicionales
-- 📐 [CONTRACT_SIZE_OPTIMIZATION.md](CONTRACT_SIZE_OPTIMIZATION.md) - Optimización de tamaño
-
----
-
-## ⚙️ Características
-
-### Tokenización de Activos Industriales
-- ✅ NFTs representan maquinaria real ($100k-$500k por unidad)
-- ✅ Presale con pagos en ETH o BHT (token nativo)
-- ✅ Sistema de referidos integrado
-- ✅ Oracle Chainlink para precios en tiempo real
-- ✅ Mecanismos de rescate y emergencia
-
-### Seguridad
-- ✅ Validaciones oracle (staleness, price limits)
-- ✅ Whitelist KYC/AML configurable
-- ✅ Límites anti-ballena (maxPerUser)
-- ✅ Access control basado en roles
-- ✅ Reentrancy guards
-- ✅ Custom errors (optimización gas)
-
-### Redes Soportadas
-- 🔷 **Base Sepolia** (testnet) - Chain ID: 84532
-- 🔷 **Base Mainnet** (producción) - Chain ID: 8453
-- 🔧 **Hardhat Local** (desarrollo)
-
----
-
-## 🔄 Workflow Completo de Deployment
-
-### 1. Preparación (5 minutos)
-```bash
-cp .env.example .env
-# Editar .env con:
-# - BASE_SEPOLIA_PRIVATE_KEY
-# - OWNER_ADDRESS
-# - PROJECT_WALLET
-# - BASESCAN_API_KEY
-```
-
-### 2. Validación (30 segundos)
-```bash
-npx hardhat run scripts/validate-base-config.js --network base-sepolia
-```
-
-### 3. Deploy (2-3 minutos)
-```bash
-npx hardhat run scripts/deploy-base.js --network base-sepolia
-# Output: deployment-base-sepolia-{timestamp}.json
-```
-
-### 4. Configuración de Seguridad (2 minutos)
-```bash
-PRESALE_ADDRESS=0x... npx hardhat run scripts/configure-presale-security.js --network base-sepolia
-```
-
-### 5. Verificación (5 minutos)
-```bash
-npx hardhat verify --network base-sepolia 0xPRESALE_ADDRESS
-```
-
-### 6. Monitoreo
-```bash
-npx hardhat run scripts/presale-status.js --network base-sepolia deployment-*.json
-```
-
-**Tiempo total**: ~15 minutos
-
----
-
-## 💰 Estimación de Costos (Base)
-
-| Operación | Gas | ETH @ 1 gwei | USD @ $3000/ETH |
-|-----------|-----|--------------|------------------|
-| Deploy completo | ~2.5M | 0.0025 | $7.50 |
-| Compra NFT (ETH) | ~120k | 0.00012 | $0.36 |
-| Compra NFT (BHT) | ~150k | 0.00015 | $0.45 |
-| Transferencia | ~40k | 0.00004 | $0.12 |
-
-**Ahorro vs Ethereum L1**: ~95% en costos de gas
-
----
-
-## 🐛 Troubleshooting
-
-### Error: "insufficient funds"
-🔧 Obtén testnet ETH: https://www.base.org/docs/using-base/quickstart#faucet
-
-### Error: "invalid private key"
-🔧 Verifica formato en .env (con o sin "0x")
-
-### Error: "contract not verified"
-🔧 Obtén BASESCAN_API_KEY: https://basescan.org/apis
-
-**Más troubleshooting**: Ver [BASE_INTEGRATION_README.md#troubleshooting](BASE_INTEGRATION_README.md)
-
----
-
-## 📊 Estado del Proyecto
-
-```
-✅ Contratos: 100% (16.9 KB, optimizado)
-✅ Tests: 323/323 passing
-✅ Coverage: 67.41% branch
-✅ Seguridad: Slither 0 issues críticos
-✅ Optimización: Custom errors, struct packing
-✅ Scripts: Deploy, configure, monitor
-🟡 Testnet: Pendiente deployment
-⬜ Mainnet: Después de testing
-```
-
----
-
-## 📞 Recursos
-
-- 📘 [Documentación Base](https://docs.base.org/)
-- 🔍 [Base Sepolia Explorer](https://sepolia.basescan.org/)
-- 🔍 [Base Mainnet Explorer](https://basescan.org/)
-- 💬 [Discord Base](https://discord.gg/buildonbase)
-- 🚰 [Base Faucet](https://www.base.org/docs/using-base/quickstart#faucet)
-
----
-
-## ⚠️ Notas Importantes
-
-- 🔴 **NUNCA** commitear `.env` con private keys
-- 🟡 **SIEMPRE** testear en Sepolia antes de mainnet
-- 🟢 **GUARDAR** deployment JSONs en lugar seguro
-- 🔵 **CONFIGURAR** seguridad antes de activar presale
-
----
-
-## 📜 Licencia
-
-MIT License - Ver contratos individuales para detalles
-
----
-
-**Bashood Industrial Asset Tokenization Platform**  
-*Democratizando el acceso a activos industriales de alto valor*
 

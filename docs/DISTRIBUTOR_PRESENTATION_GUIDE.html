@@ -1,0 +1,1258 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>BASHOOD - Guía de Presentación para Distribuidores v2.0</title>
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { color: #008000; } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { color: #008000; font-weight: bold; } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.5.1/github-markdown.min.css" />
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">BASHOOD - Guía de Presentación para Distribuidores
+v2.0</h1>
+</header>
+<h1 id="guía-de-presentación-para-distribuidores-bashood">GUÍA DE
+PRESENTACIÓN PARA DISTRIBUIDORES BASHOOD</h1>
+<p><strong>Documento Oficial v2.0</strong><br />
+<strong>Actualizado:</strong> 4 de marzo de 2026<br />
+<strong>Confidencialidad:</strong> Uso interno — distribuidores y
+partners autorizados</p>
+<hr />
+<blockquote>
+<p><strong>Nota de posicionamiento:</strong> Este documento describe
+BASHOOD como infraestructura de protocolo para la digitalización de
+activos industriales reales (RWA). Los tokens BASHOOD-RWA-1 son
+registros digitales verificables de activos físicos, no instrumentos
+financieros ni participaciones económicas. Los flujos económicos
+derivados del uso de cualquier activo tokenizado son gestionados
+off-chain entre el operador y los titulares legales del activo, dentro
+del vehículo legal que corresponda.</p>
+</blockquote>
+<hr />
+<h2 id="índice-rápido">ÍNDICE RÁPIDO</h2>
+<ol type="1">
+<li><a href="#elevator-pitch">Elevator Pitch (30 segundos)</a></li>
+<li><a href="#descripción-completa">Descripción del Protocolo</a></li>
+<li><a href="#servicios-ofrecidos">Servicios de Infraestructura</a></li>
+<li><a href="#sectores-objetivo">Sectores y Activos Objetivo</a></li>
+<li><a href="#arquitectura-rwa">Arquitectura RWA</a></li>
+<li><a href="#tecnología">Tecnología y Protocolo</a></li>
+<li><a href="#casos-de-uso">Casos de Uso</a></li>
+<li><a href="#ventajas-competitivas">Ventajas Competitivas</a></li>
+<li><a href="#participantes">Participantes del Ecosistema</a></li>
+<li><a href="#para-operadores">Para Operadores de Activos</a></li>
+<li><a href="#para-fabricantes">Para Fabricantes</a></li>
+<li><a href="#faq">Preguntas Frecuentes</a></li>
+<li><a href="#datos-técnicos">Datos Técnicos Clave</a></li>
+<li><a href="#próximos-pasos">Próximos Pasos</a></li>
+</ol>
+<hr />
+<h2 id="elevator-pitch">ELEVATOR PITCH (30 SEGUNDOS)</h2>
+<blockquote>
+<p><strong>BASHOOD es una infraestructura blockchain para digitalizar
+activos industriales de alto valor y su ciclo de vida
+operativo.</strong></p>
+<p>Cuando una empresa registra una impresora 3D industrial de $1.2M en
+BASHOOD, el resultado es un registro digital inmutable — verificable por
+cualquier parte — que contiene: - Identificación y especificaciones
+técnicas del activo - Valoración actualizada vía oráculo Chainlink -
+Historial de inspecciones, mantenimiento y ciclo de vida - Estado de
+certificaciones y cobertura de seguro vigentes</p>
+<p>El protocolo provee la <strong>capa de referencia digital</strong>
+del activo. Los acuerdos económicos sobre ese activo se estructuran
+off-chain, en vehículos legales apropiados para cada jurisdicción.</p>
+</blockquote>
+<hr />
+<h2 id="descripción-completa">DESCRIPCIÓN DEL PROTOCOLO</h2>
+<h3 id="qué-es-bashood">¿Qué es BASHOOD?</h3>
+<p><strong>BASHOOD</strong> es un <strong>protocolo de infraestructura
+RWA (Real World Assets)</strong> desplegado en Base L2. Permite a
+fabricantes, operadores y emisores crear registros digitales
+verificables, auditables e interoperables de activos industriales
+físicos de alto valor.</p>
+<p><strong>BASHOOD no es:</strong> - Una plataforma de inversión - Un
+gestor de activos - Un marketplace de participaciones financieras</p>
+<p><strong>BASHOOD es:</strong> - Una capa de registro y referencia
+digital del activo - Una infraestructura de telemetría y valoración
+on-chain - Un conjunto de módulos de lifecycle (inspection, maintenance,
+certification, insurance) - Un protocolo abierto sobre el que emisores y
+operadores construyen sus propios productos</p>
+<h3 id="misión">Misión</h3>
+<p>Proveer la infraestructura técnica estándar para que el ecosistema
+industrial pueda emitir, gestionar y verificar activos tokenizados con
+el máximo nivel de trazabilidad y transparencia.</p>
+<h3 id="problema-que-resuelve">Problema que Resuelve</h3>
+<table>
+<colgroup>
+<col style="width: 47%" />
+<col style="width: 52%" />
+</colgroup>
+<thead>
+<tr>
+<th>Barrera Actual</th>
+<th>Solución BASHOOD</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Documentación en papel dispersa en múltiples sistemas</td>
+<td>Registro on-chain inmutable y verificable por cualquier parte</td>
+</tr>
+<tr>
+<td>Historial de mantenimiento y certificaciones no auditables</td>
+<td>Módulos <code>InspectionModule</code>,
+<code>MaintenanceHistoryModule</code>,
+<code>CertificationModule</code></td>
+</tr>
+<tr>
+<td>Valoración del activo dependiente de intermediarios</td>
+<td>OracleValuationModule vía Chainlink — verificable on-chain</td>
+</tr>
+<tr>
+<td>Estado del activo opaco para financiadores, aseguradoras y
+compradores</td>
+<td>NFT BASHOOD-RWA-1 como digital twin del activo físico</td>
+</tr>
+<tr>
+<td>Transferencia de titularidad documental lenta</td>
+<td>Transferencia del token de referencia en segundos (titularidad
+legal: off-chain)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="propuesta-de-valor-técnica">Propuesta de Valor Técnica</h3>
+<ul>
+<li><strong>BASHOOD-RWA-1:</strong> Estándar técnico open-source para
+tokenizar activos industriales en EVM</li>
+<li><strong>6 modelos de depreciación:</strong> Basados en uso real
+(carga, extrusión, setups, horas, eficiencia, lineal)</li>
+<li><strong>Telemetría on-chain:</strong> Integración con APIs de
+fabricantes vía Chainlink Oracle</li>
+<li><strong>Módulos de lifecycle:</strong> Inspection, Maintenance,
+LifecycleEvents, OperationalMetrics, Certification, Insurance</li>
+<li><strong>Diseñado para compatibilidad regulatoria:</strong> Marco
+MiCA (UE) como referencia de diseño desde el inicio</li>
+</ul>
+<hr />
+<h2 id="servicios-ofrecidos">SERVICIOS DE INFRAESTRUCTURA</h2>
+<h3 id="tokenización-de-activos-industriales-taas">1. Tokenización de
+Activos Industriales (TaaS)</h3>
+<p><strong>Para fabricantes y emisores de RWA:</strong> - Emisión de NFT
+ERC-721 conforme al estándar BASHOOD-RWA-1 - Metadata técnica completa
+almacenada en IPFS descentralizado - Smart contracts de registro y
+lifecycle desplegados en Base L2 - Integración opcional con oráculo de
+telemetría (Chainlink)</p>
+<p><strong>Entregables:</strong> - Auditoría y validación de
+especificaciones técnicas - Generación de metadata IPFS verificable -
+Deploy del contrato en Base Sepolia (testnet) y Base Mainnet - Dashboard
+de administración del activo</p>
+<p><strong>Precio:</strong> Por proyecto, según complejidad del
+activo</p>
+<hr />
+<h3 id="oracle-valuation-module">2. Oracle Valuation Module</h3>
+<p><strong>Para operadores que requieren valoración
+actualizada:</strong> - Integración con Chainlink Price Feeds
+configurados por tipo de activo - Actualización de
+<code>currentValue</code> del activo verificable on-chain - Historial
+completo de valoraciones inmutable (eventos
+<code>AssetValueUpdated</code>) - Cualquier parte puede verificar la
+fuente del dato de valoración</p>
+<p><strong>Precisión:</strong> El valor refleja una tasación orientativa
+a partir de fuentes externas. No constituye valoración legal vinculante
+ni precio garantizado de venta.</p>
+<hr />
+<h3 id="lifecycle-modules">3. Lifecycle Modules</h3>
+<p>Módulos especializados que extienden el registro base del activo:</p>
+<table>
+<colgroup>
+<col style="width: 47%" />
+<col style="width: 52%" />
+</colgroup>
+<thead>
+<tr>
+<th>Módulo</th>
+<th>Función</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>CertificationModule</strong></td>
+<td>Registro de certificaciones vigentes (CE Mark, ISO, etc.)</td>
+</tr>
+<tr>
+<td><strong>InsuranceModule</strong></td>
+<td>Registro de póliza de seguro activa por activo</td>
+</tr>
+<tr>
+<td><strong>InspectionModule</strong></td>
+<td>Historial cronológico de inspecciones técnicas
+(PASS/FAIL/CONDITIONAL)</td>
+</tr>
+<tr>
+<td><strong>MaintenanceHistoryModule</strong></td>
+<td>Log append-only de eventos de mantenimiento y costes acumulados</td>
+</tr>
+<tr>
+<td><strong>LifecycleEventsModule</strong></td>
+<td>Historial de transiciones de estado operativo
+(OPERATIONAL/MAINTENANCE/INACTIVE/DECOMMISSIONED)</td>
+</tr>
+<tr>
+<td><strong>OperationalMetricsAggregator</strong></td>
+<td>Agregación cross-asset y consultas de flota (lee Core en tiempo
+real)</td>
+</tr>
+</tbody>
+</table>
+<p>Todos los módulos son contratos externos que no modifican el Core —
+el activo base es inmutable.</p>
+<hr />
+<h3 id="integración-api-y-telemetría">4. Integración API y
+Telemetría</h3>
+<p><strong>Para fabricantes con sistemas de telemetría propios:</strong>
+- Conexión de API REST del fabricante con nodo Chainlink dedicado -
+Actualización periódica de métricas operativas on-chain (horas de uso,
+ciclos, eficiencia) - Datos anonimizados y agregables para análisis de
+flota - NDA para protección de IP técnica del fabricante</p>
+<p><strong>Valor para el fabricante:</strong> datos agregados de uso
+real → mejora de producto, mantenimiento predictivo, optimización de
+supply chain.</p>
+<hr />
+<h3 id="compliance-services">5. Compliance Services</h3>
+<p><strong>Para emisores que requieren soporte regulatorio:</strong> -
+Documentación técnica para due diligence legal (MiCA, VARA, otros) -
+Integración KYC/AML en whitelist on-chain (via Presale contract) -
+Reporting automatizado de métricas del activo para auditorías - Soporte
+en structuring del vehículo legal off-chain (SPV, etc.) — en
+coordinación con asesor legal externo</p>
+<p><strong>Precio:</strong> Desde $15,000 proyecto base. Soporte legal
+externo no incluido.</p>
+<hr />
+<h2 id="sectores-objetivo">SECTORES Y ACTIVOS OBJETIVO</h2>
+<h3 id="sector-primario-construcción-con-impresión-3d-y-robótica">Sector
+Primario: Construcción con Impresión 3D y Robótica</h3>
+<h4 id="impresoras-3d-gantry-pórtico-fijo">1. Impresoras 3D Gantry
+(Pórtico Fijo)</h4>
+<p><strong>Activos de referencia:</strong> - EVOCONS EVOBLOCK (España) —
+valor de registro: $1.2M - ICON VULCAN (USA) — valor de registro:
+$1.6M</p>
+<p><strong>Características del activo:</strong> - Sistema de instalación
+permanente - Área de impresión: 300–1.000 m² - Producción: 30–100
+m³/semana - Vida útil de referencia: 500.000 tons de carga levantada -
+<strong>Modelo de depreciación:</strong> LOAD_BASED (toneladas)</p>
+<p><strong>Especificaciones técnicas registrables:</strong></p>
+<pre><code>Altura de impresión: 3–8 metros
+Velocidad de extrusión: 100–300 mm/s
+Precisión: ±2–5 mm
+Materiales: hormigón, mortero, composites
+Potencia: 50–150 kW
+Personal requerido: 2–4 operarios</code></pre>
+<hr />
+<h4 id="impresoras-3d-móviles-robots-portátiles">2. Impresoras 3D
+Móviles (Robots Portátiles)</h4>
+<p><strong>Activos de referencia:</strong> - Apis Cor Mobile Robot (UAE)
+— valor de registro: $325k - CyBe RC Track Robot (Países Bajos) — valor
+de registro: $240k</p>
+<p><strong>Características del activo:</strong> - Portátil; setup en ~48
+minutos - GPS tracking integrado - Vida útil de referencia: 2.000 setups
+- <strong>Modelo de depreciación:</strong> SETUP_BASED
+(configuraciones)</p>
+<p><strong>Especificaciones técnicas registrables:</strong></p>
+<pre><code>Área de impresión: 100–400 m²
+Peso del sistema: 2–8 tons
+Transporte: contenedor 20ft
+Velocidad de setup: 30–90 min
+Personal requerido: 2–3 operarios</code></pre>
+<hr />
+<h4 id="fábricas-modulares-uv">3. Fábricas Modulares UV</h4>
+<p><strong>Activo de referencia:</strong> - Mighty Buildings Factory
+Line (USA) — valor de registro: $5.2M</p>
+<p><strong>Características del activo:</strong> - Producción de paneles
+prefabricados por curado UV - Zero waste, carbon negative -
+<strong>Modelo de depreciación:</strong> LINEAR</p>
+<p><strong>Especificaciones técnicas registrables:</strong></p>
+<pre><code>Output: 500–2.000 paneles/mes
+Dimensiones de paneles: 2×4 metros
+Certificaciones: LEED, Passive House
+Superficie de planta: 5.000–20.000 m²
+Personal requerido: 15–40 operarios</code></pre>
+<hr />
+<h3 id="activos-secundarios-roadmap">Activos Secundarios (Roadmap)</h3>
+<table>
+<colgroup>
+<col style="width: 24%" />
+<col style="width: 22%" />
+<col style="width: 31%" />
+<col style="width: 22%" />
+</colgroup>
+<thead>
+<tr>
+<th>Categoría</th>
+<th>Ejemplos</th>
+<th>Valor Típico</th>
+<th>Timeline</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Vehículos pesados</td>
+<td>Excavadoras, grúas</td>
+<td>$200k–$800k</td>
+<td>Q3 2026</td>
+</tr>
+<tr>
+<td>Equipos de energía</td>
+<td>Generadores, transformadores</td>
+<td>$500k–$2M</td>
+<td>Q4 2026</td>
+</tr>
+<tr>
+<td>Infraestructura logística</td>
+<td>Contenedores, almacenes modulares</td>
+<td>$100k–$5M</td>
+<td>2027</td>
+</tr>
+<tr>
+<td>Créditos de carbono</td>
+<td>Activos ESG certificados</td>
+<td>Variable</td>
+<td>2027</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="arquitectura-rwa">ARQUITECTURA RWA</h2>
+<p>BASHOOD provee las capas técnicas del stack RWA. Las capas legales y
+económicas son responsabilidad del emisor y de los asesores jurídicos de
+cada jurisdicción.</p>
+<pre><code>┌─────────────────────────────────────────────────────────────┐
+│                  CAPA LEGAL / OFF-CHAIN                     │
+│                                                             │
+│   SPV / Vehículo Legal ←→ Titular Legal del Activo Físico  │
+│   Derechos económicos definidos en contrato off-chain       │
+│   Custodia del activo físico: responsabilidad del operador  │
+└──────────────────────────┬──────────────────────────────────┘
+                           │ referencia
+┌──────────────────────────▼──────────────────────────────────┐
+│              TOKEN REFERENCE LAYER (BASHOOD)                │
+│                                                             │
+│   BashoodRWAReference (ERC-721 UUPS)                        │
+│   - Identificación inmutable del activo                     │
+│   - Especificaciones técnicas on-chain                      │
+│   - Estado operativo actual (OPERATIONAL / MAINTENANCE /    │
+│     INACTIVE / DECOMMISSIONED)                              │
+│   - Métricas operativas actuales (horas, ciclos, carga)     │
+└──────────────────────────┬──────────────────────────────────┘
+                           │
+          ┌────────────────┼────────────────┐
+          ▼                ▼                ▼
+┌───────────────┐ ┌───────────────┐ ┌──────────────────────┐
+│ ORACLE LAYER  │ │ LIFECYCLE     │ │ COMPLIANCE LAYER     │
+│               │ │ MODULES       │ │                      │
+│ Chainlink     │ │               │ │ CertificationModule  │
+│ Price Feeds   │ │ Inspection    │ │ InsuranceModule      │
+│               │ │ Maintenance   │ │                      │
+│ OracleValuat- │ │ Lifecycle     │ │ KYC/AML Whitelist    │
+│ ionModule     │ │ Events        │ │ (Presale)            │
+│               │ │               │ │                      │
+│ currentValue  │ │ Metrics       │ │                      │
+│ actualizado   │ │ Aggregator    │ │                      │
+└───────────────┘ └───────────────┘ └──────────────────────┘
+          │                │                │
+          └────────────────┼────────────────┘
+                           ▼
+┌─────────────────────────────────────────────────────────────┐
+│                BASE L2 BLOCKCHAIN                           │
+│  Chain ID: 8453 | EVM: cancun | Gas: ~$0.01/tx             │
+└─────────────────────────────────────────────────────────────┘</code></pre>
+<h3 id="flujos-económicos-off-chain">Flujos Económicos: Off-Chain</h3>
+<p>Los flujos de ingresos derivados del uso operativo del activo
+(alquiler, operación, servicios) son gestionados <strong>fuera del
+protocolo</strong>, entre el operador del activo y los titulares legales
+correspondientes, a través del vehículo legal que éstos hayan
+constituido (SPV, contrato de arrendamiento, etc.).</p>
+<p>BASHOOD registra el estado técnico y operativo del activo. No ejecuta
+ni distribuye flujos económicos entre participantes.</p>
+<h3 id="fees-de-infraestructura-del-protocolo">Fees de Infraestructura
+del Protocolo</h3>
+<p>Los únicos ingresos del protocolo son:</p>
+<table>
+<thead>
+<tr>
+<th>Concepto</th>
+<th>Modelo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Emisión / tokenización de activo</td>
+<td>Fee por unidad tokenizada</td>
+</tr>
+<tr>
+<td>SaaS de gestión y lifecycle</td>
+<td>Fee mensual por activo activo</td>
+</tr>
+<tr>
+<td>Oracle telemetría</td>
+<td>Fee por actualización Chainlink</td>
+</tr>
+<tr>
+<td>Compliance services</td>
+<td>Fee por proyecto</td>
+</tr>
+<tr>
+<td>BHT utility token</td>
+<td>Fee discount para holders; acceso a gobernanza</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="tecnología">TECNOLOGÍA Y PROTOCOLO</h2>
+<h3 id="bashood-como-rwa-infrastructure-protocol">BASHOOD como RWA
+Infrastructure Protocol</h3>
+<pre><code>┌─────────────────────────────────────────────────────────┐
+│              INTEGRADORES / FRONTENDS                   │
+│  Plataformas de emisores, gestores de activos,          │
+│  portales de operadores, APIs de fabricantes            │
+└─────────────────────────────────────────────────────────┘
+                          ↓
+┌─────────────────────────────────────────────────────────┐
+│           SMART CONTRACTS (Base Blockchain)             │
+│                                                         │
+│  BashoodRWAReference ──── OracleValuationModule         │
+│  (Core: estado actual)    (Chainlink Price Feed)        │
+│         │                                               │
+│  ┌──────┴──────────────────────────────────────┐        │
+│  │           LIFECYCLE MODULES                │        │
+│  │  InspectionModule  MaintenanceHistoryModule │        │
+│  │  LifecycleEventsModule  MetricsAggregator   │        │
+│  │  CertificationModule  InsuranceModule       │        │
+│  └────────────────────────────────────────────┘        │
+│                                                         │
+│  BashoodToken (BHT) ── BHTVotes ── BashoodGovernor      │
+│  BashoodPresaleFinal ── BashoodPaymentSplitter          │
+└─────────────────────────────────────────────────────────┘
+                          ↓
+┌─────────────────────────────────────────────────────────┐
+│                  BASE L2 BLOCKCHAIN                     │
+│  Coinbase infrastructure | ~$0.01/tx | 2s finality      │
+│  Hereda seguridad de Ethereum mainnet                   │
+└─────────────────────────────────────────────────────────┘</code></pre>
+<h3 id="especificaciones-técnicas-del-protocolo">Especificaciones
+Técnicas del Protocolo</h3>
+<p><strong>Blockchain:</strong> - Network: Base L2 (Optimistic Rollup) -
+Chain ID: 8453 (Mainnet) / 84532 (Sepolia testnet) - EVM target: cancun
+- Mainnet: Q2 2026 | Testnet: ✅ Operativo en Base Sepolia</p>
+<p><strong>Smart Contracts:</strong> - Lenguaje: Solidity 0.8.28 -
+Estándar activo: BASHOOD-RWA-1 (ERC-721 extendido) - Patrón de
+actualización: UUPS Upgradeable Proxy (EIP-1967) - Análisis estático:
+Slither 0.11.3 — 0 vulnerabilidades críticas en contratos de producción
+- Tests: 197 passing (Hardhat + Forge), 0 failing - Fuzzing: 25
+invariant tests passing (256 runs × 3.840 calls cada uno)</p>
+<p><strong>Costes operativos estimados en Base L2:</strong> - Mint de
+activo: ~650.000 gas (~$0.65) - Transferencia: ~80.000 gas (~$0.08) -
+Update de estado: ~120.000 gas (~$0.12) - Log de mantenimiento:
+~90.000–130.000 gas</p>
+<p><strong>Almacenamiento:</strong> - Metadata: IPFS descentralizado
+(Pinata gateway) - On-chain: hash de metadata + datos críticos de
+identificación + métricas operativas</p>
+<hr />
+<h3 id="estándar-bashood-rwa-1">Estándar BASHOOD-RWA-1</h3>
+<p><strong>6 Modelos de Depreciación Industrial:</strong></p>
+<pre class="solidity"><code>enum DepreciationModel {
+    LOAD_BASED,        // ej. grúas: toneladas levantadas
+    EXTRUSION_BASED,   // ej. impresoras 3D: metros de material
+    SETUP_BASED,       // ej. robots móviles: configuraciones de sitio
+    TIME_BASED,        // ej. maquinaria pesada: horas de operación
+    EFFICIENCY_BASED,  // ej. CyBe: m³/día de producción
+    LINEAR             // estándar: tiempo calendario
+}</code></pre>
+<p><strong>8 Categorías de Activos:</strong></p>
+<pre class="solidity"><code>enum AssetCategory {
+    CONSTRUCTION_3D_PRINTER_GANTRY,
+    CONSTRUCTION_3D_PRINTER_MOBILE,
+    MODULAR_FACTORY_UV,
+    HEAVY_VEHICLE,
+    ENERGY_EQUIPMENT,
+    LOGISTICS_INFRASTRUCTURE,
+    RAW_MATERIALS,
+    REAL_ESTATE
+}</code></pre>
+<p><strong>Estados Operativos del Activo:</strong></p>
+<pre class="solidity"><code>enum OperationalStatus {
+    OPERATIONAL,      // activo en uso
+    MAINTENANCE,      // en mantenimiento programado
+    INACTIVE,         // fuera de servicio temporalmente
+    DECOMMISSIONED    // retirado permanentemente (estado terminal)
+}</code></pre>
+<h3 id="integración-oracle-chainlink">Integración Oracle Chainlink</h3>
+<pre><code>API Fabricante → Nodo Chainlink → OracleValuationModule → BashoodRWAReference
+
+Ejemplo EVOCONS EVOBLOCK:
+1. API telemetría envía: {&quot;loadLifted&quot;: 1250, &quot;uptime&quot;: 98.5}
+2. Chainlink verifica y firma el dato
+3. OracleValuationModule actualiza currentValue on-chain
+4. Evento AssetValueUpdated emitido — auditable por cualquier parte</code></pre>
+<p>Frecuencia de actualización configurable: - Telemetría: cada 1 hora
+(según feed configurado) - Valoración: cada 24 horas (según staleness
+threshold) - Lifecycle events: on-demand (por operador autorizado)</p>
+<hr />
+<h2 id="casos-de-uso">CASOS DE USO</h2>
+<h3 id="caso-1-fabricante-que-digitaliza-su-flota">Caso 1: Fabricante
+que Digitaliza su Flota</h3>
+<p><strong>Perfil:</strong> EVOCONS — fabricante español de sistemas
+Gantry de construcción 3D</p>
+<p><strong>Situación actual:</strong> - 95% de las constructoras no
+pueden adquirir el equipo ($1.2M upfront) - El fabricante no tiene
+visibilidad del estado real de sus equipos una vez vendidos - El
+historial de mantenimiento depende de documentación en papel</p>
+<p><strong>Con BASHOOD:</strong></p>
+<pre><code>1. Tokenización:
+   → 5 unidades EVOBLOCK registradas en blockchain
+   → Cada activo tiene digital twin verificable on-chain
+
+2. Telemetría:
+   → API EVOCONS conectada vía Chainlink
+   → Métricas de uso en tiempo real: carga, uptime, eficiencia
+   → Datos para mantenimiento predictivo y mejora de diseño
+
+3. Historial auditable:
+   → InspectionModule: historial de inspecciones pre/post uso
+   → MaintenanceHistoryModule: log de servicios con costes acumulados
+   → CertificationModule: estado de certificaciones CE/ISO vigentes
+
+4. Visibilidad para financiadores y aseguradoras:
+   → Cualquier parte puede verificar el estado real del activo on-chain
+   → InsuranceModule: cobertura vigente registrada y auditable</code></pre>
+<p><strong>Resultado:</strong> El fabricante tiene visibilidad completa
+del ciclo de vida de sus activos, puede demostrar el estado técnico a
+financiadores y aseguradoras, y amplía el mercado accesible a operadores
+que estructuran la financiación off-chain.</p>
+<hr />
+<h3 id="caso-2-operador-de-activos-que-requiere-transparencia">Caso 2:
+Operador de Activos que Requiere Transparencia</h3>
+<p><strong>Perfil:</strong> Empresa gestora de flota de robots de
+construcción (múltiples unidades, múltiples proyectos)</p>
+<p><strong>Situación actual:</strong> - Historial de cada activo
+disperso en sistemas incompatibles - Dificultad para demostrar estado de
+mantenimiento a clientes y aseguradoras - Valoración actualizada
+requiere tasadores externos costosos</p>
+<p><strong>Con BASHOOD:</strong></p>
+<pre><code>1. Registro centralizado verificable:
+   → Todos los activos de la flota registrados en Base L2
+   → Estado operativo actual de cada activo visible on-chain
+
+2. OperationalMetricsAggregator:
+   → Consulta agregada de métricas de flota completa
+   → activeRatio, distribución de estados, totales de horas/carga
+
+3. Valoración automática:
+   → OracleValuationModule actualiza currentValue vía Chainlink
+   → Historial completo de valoraciones on-chain para due diligence
+
+4. Compliance:
+   → CertificationModule: estado CE Mark, ISO 9001, etc.
+   → InsuranceModule: póliza vigente verificable por cualquier parte</code></pre>
+<hr />
+<h3 id="caso-3-integrador-plataforma-que-construye-sobre-bashood">Caso
+3: Integrador / Plataforma que Construye sobre BASHOOD</h3>
+<p><strong>Perfil:</strong> Plataforma que desea lanzar un product de
+RWA industrial sobre infraestructura existente</p>
+<p><strong>Situación actual:</strong> - Construir infraestructura de
+registro de activos from scratch es costoso y lento - Los estándares
+técnicos para activos industriales no están establecidos</p>
+<p><strong>Con BASHOOD:</strong></p>
+<pre><code>1. Estándar abierto:
+   → BASHOOD-RWA-1 es open-source y extensible
+   → Interfaces IBashoodRWA, IBashoodModule como base
+   → ERC-721 UUPS upgradeable: actualizable sin redeploy
+
+2. Módulos plug-and-play:
+   → Todos los lifecycle modules son contratos externos
+   → El integrador despliega solo los módulos que necesita
+   → Core BashoodRWAReference: nunca modificado, siempre compatible
+
+3. Interoperabilidad:
+   → Compatible con cualquier frontend EVM estándar
+   → API REST disponible para integraciones ERP (SAP, Oracle, NetSuite)
+   → Compatible con mercados secundarios regulados cuando aplique
+
+4. Gobernanza del protocolo:
+   → Cambios de estándar sujetos a gobernanza on-chain (BHT/BHTVotes)
+   → Actualizaciones predecibles para integradores</code></pre>
+<hr />
+<h2 id="ventajas-competitivas">VENTAJAS COMPETITIVAS</h2>
+<h3 id="bashood-vs-otros-protocolos-rwa">BASHOOD vs Otros Protocolos
+RWA</h3>
+<table style="width:100%;">
+<colgroup>
+<col style="width: 15%" />
+<col style="width: 20%" />
+<col style="width: 18%" />
+<col style="width: 23%" />
+<col style="width: 22%" />
+</colgroup>
+<thead>
+<tr>
+<th>Aspecto</th>
+<th>Centrifuge</th>
+<th>Goldfinch</th>
+<th>Ondo Finance</th>
+<th><strong>BASHOOD</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Sector</strong></td>
+<td>Real estate</td>
+<td>Préstamos PyME</td>
+<td>Treasury bonds</td>
+<td><strong>Robótica industrial</strong></td>
+</tr>
+<tr>
+<td><strong>Modelo de depreciación</strong></td>
+<td>Lineal</td>
+<td>N/A</td>
+<td>N/A</td>
+<td><strong>6 modelos por uso real</strong></td>
+</tr>
+<tr>
+<td><strong>Telemetría on-chain</strong></td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+<td><strong>Sí (Chainlink)</strong></td>
+</tr>
+<tr>
+<td><strong>Lifecycle modules</strong></td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+<td><strong>Sí (6 módulos)</strong></td>
+</tr>
+<tr>
+<td><strong>Gobernanza on-chain</strong></td>
+<td>Parcial</td>
+<td>No</td>
+<td>Parcial</td>
+<td><strong>Sí (BHT/Governor/Timelock)</strong></td>
+</tr>
+<tr>
+<td><strong>Estándar abierto</strong></td>
+<td>Parcial</td>
+<td>No</td>
+<td>No</td>
+<td><strong>Sí (BASHOOD-RWA-1)</strong></td>
+</tr>
+<tr>
+<td><strong>Análisis fuzzing</strong></td>
+<td>N/D</td>
+<td>N/D</td>
+<td>N/D</td>
+<td><strong>197 tests, invariant testing</strong></td>
+</tr>
+</tbody>
+</table>
+<h3 id="ventajas-técnicas-del-protocolo">Ventajas Técnicas del
+Protocolo</h3>
+<ol type="1">
+<li><strong>Primer estándar RWA para activos industriales:</strong>
+BASHOOD-RWA-1, open-source, extensible</li>
+<li><strong>Coste de operación ultra-bajo:</strong> Base L2 ~$0.01/tx vs
+$20–50 en Ethereum mainnet</li>
+<li><strong>Arquitectura upgradeable:</strong> UUPS proxy — sin redeploy
+para actualizaciones</li>
+<li><strong>Modularidad:</strong> Core inmutable + módulos externos
+plug-and-play</li>
+<li><strong>Gobernanza descentralizada:</strong> BashoodGovernor +
+BashoodTimelock on-chain</li>
+<li><strong>Seguridad verificada:</strong> Slither 0.11.3, Forge
+invariant fuzzing (256 runs × 3.840 calls)</li>
+</ol>
+<h3 id="por-qué-base-l2">Por qué Base L2</h3>
+<ul>
+<li>Coste por transacción: ~$0.01 (vs $20–50 en mainnet Ethereum)</li>
+<li>Finalidad: &lt;2 segundos</li>
+<li>Seguridad: hereda consenso de Ethereum mainnet (Optimistic
+Rollup)</li>
+<li>Infraestructura: Coinbase — grado institucional</li>
+<li>Compatible con todo el ecosistema de herramientas EVM estándar</li>
+</ul>
+<hr />
+<h2 id="participantes">PARTICIPANTES DEL ECOSISTEMA</h2>
+<p>BASHOOD está diseñado para cuatro tipos de participantes. Ninguno de
+ellos es un “inversor retail en activos industriales”.</p>
+<h3 id="emisores-de-rwa">1. Emisores de RWA</h3>
+<p><strong>Quiénes son:</strong> Fabricantes, propietarios de activos,
+gestores de flota que desean tokenizar activos físicos.</p>
+<p><strong>Qué obtienen:</strong> - Registro on-chain verificable de sus
+activos - Digital twin con telemetría y lifecycle tracking -
+Infraestructura de compliance (certificaciones, seguros) - Herramienta
+para demostrar estado técnico a financiadores y aseguradoras</p>
+<p><strong>Acceso:</strong> Directo a BASHOOD como emisor. Acuerdo de
+integración requerido.</p>
+<hr />
+<h3 id="operadores-de-activos">2. Operadores de Activos</h3>
+<p><strong>Quiénes son:</strong> Empresas que operan, gestionan o dan
+servicio a los activos tokenizados.</p>
+<p><strong>Qué obtienen:</strong> - Visibilidad en tiempo real del
+estado de la flota - Historial auditable de inspecciones y mantenimiento
+- Notificaciones de vencimiento de certificaciones y seguros - API para
+integración con sistemas propios (ERP, CMMS)</p>
+<p><strong>Acceso:</strong> Via API del protocolo o integración directa
+con contratos.</p>
+<hr />
+<h3 id="custodios-y-vehículos-legales-spv">3. Custodios y Vehículos
+Legales (SPV)</h3>
+<p><strong>Quiénes son:</strong> Entidades que estructuran el vehículo
+legal off-chain para el activo tokenizado.</p>
+<p><strong>Qué obtienen:</strong> - Base técnica verificable para due
+diligence - Historial on-chain de valoraciones, estado operativo y
+compliance - Referencia estándar para documentación legal del activo</p>
+<p><strong>Nota:</strong> La construcción del vehículo legal (SPV,
+contrato de arrendamiento, participación en ingresos) es responsabilidad
+del custodio y su asesor legal. BASHOOD provee la capa técnica, no la
+estructura legal ni financiera.</p>
+<hr />
+<h3 id="mercados-secundarios-regulados">4. Mercados Secundarios
+Regulados</h3>
+<p><strong>Quiénes son:</strong> Plataformas, brokers o exchanges que
+operan bajo licencia y desean integrar activos tokenizados como
+subyacente.</p>
+<p><strong>Qué obtienen:</strong> - Datos técnicos estandarizados y
+verificables del activo (BASHOOD-RWA-1) - Oracle de valoración
+actualizado on-chain - Historial de lifecycle para due diligence -
+Interoperabilidad con infraestructura EVM estándar</p>
+<p><strong>Nota:</strong> Cualquier estructuración de participación
+económica en activos se realiza a través del vehículo legal del mercado
+correspondiente, bajo su propia licencia regulatoria. BASHOOD no opera
+como mercado, broker ni plataforma de inversión.</p>
+<hr />
+<h2 id="para-operadores">PARA OPERADORES DE ACTIVOS</h2>
+<h3 id="servicios-de-gestión-operativa">Servicios de Gestión
+Operativa</h3>
+<p><strong>1. Registro y digitalización del activo</strong></p>
+<ul>
+<li>Tokenización conforme al estándar BASHOOD-RWA-1</li>
+<li>Metadata técnica completa en IPFS</li>
+<li>Digital twin vinculado al activo físico desde el día 1</li>
+</ul>
+<p><strong>Referencia de costes operativos en Base L2:</strong> -
+Registro inicial: ~$0.65 por activo (650k gas) - Update de estado:
+~$0.12 por operación - Log de mantenimiento: ~$0.09–$0.13 por
+registro</p>
+<hr />
+<p><strong>2. Acceso a tecnología industrial sin adquisición
+directa</strong></p>
+<p>Los operadores que requieren acceso temporal a equipamiento pueden
+estructurar acuerdos de uso con el propietario del activo a través del
+vehículo legal correspondiente.</p>
+<p>BASHOOD provee el registro técnico del activo que facilita esa
+negociación — estado de mantenimiento, certificaciones, historial de uso
+— pero no ejecuta ni media en el acuerdo económico.</p>
+<hr />
+<p><strong>3. Especificaciones operativas de referencia</strong></p>
+<p><strong>Sistemas Gantry (ej. EVOCONS EVOBLOCK):</strong></p>
+<pre><code>Área: 300–1.000 m² | Producción: 30–100 m³/semana
+Altura: 3–8m | Materiales: hormigón, mortero, composites
+Personal: 2–4 operarios certificados
+Capacitación: 2 días on-site (incluida en integración)</code></pre>
+<p><strong>Robots Móviles (ej. Apis Cor, CyBe):</strong></p>
+<pre><code>Área: 100–400 m² | Setup: 30–90 min
+Transporte: contenedor 20ft | Personal: 2–3 operarios
+Depreciación: por número de configuraciones de sitio</code></pre>
+<p><strong>Fábricas Modulares UV (ej. Mighty Buildings):</strong></p>
+<pre><code>Output: 500–2.000 paneles/mes | Dimensiones: 2×4m
+Certificaciones requeridas: LEED, Passive House
+Personal: 15–40 operarios según escala</code></pre>
+<h3 id="certificaciones-y-cumplimiento">Certificaciones y
+Cumplimiento</h3>
+<ul>
+<li>ISO 9001 (Quality Management) — requerido</li>
+<li>ISO 14001 (Environmental) — recomendado</li>
+<li>CE Mark (UE) / UL 3401 (USA) — según jurisdicción</li>
+</ul>
+<hr />
+<h2 id="para-fabricantes">PARA FABRICANTES</h2>
+<h3 id="por-qué-integrar-bashood-rwa-1">Por qué Integrar
+BASHOOD-RWA-1</h3>
+<p><strong>1. Visibilidad real del ciclo de vida de tus
+activos</strong></p>
+<p>Una vez que el equipo está en campo, el fabricante pierde visibilidad
+sobre cómo se usa realmente. Con BASHOOD y la integración de
+telemetría:</p>
+<div class="sourceCode" id="cb16"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Datos agregados disponibles (anonimizados por defecto)</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>{</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;usage_patterns&quot;</span>: {</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;peak_hours&quot;</span>: <span class="st">&quot;06:00-14:00&quot;</span>,</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;avg_load_per_day&quot;</span>: <span class="fl">12.5</span>,   <span class="co"># toneladas</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;materials_most_used&quot;</span>: <span class="st">&quot;Mortar 60%, Concrete 30%, Other 10%&quot;</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>  },</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;maintenance_predictive&quot;</span>: {</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;component_wear&quot;</span>: <span class="st">&quot;Extruder nozzle 78</span><span class="sc">% li</span><span class="st">fetime used&quot;</span>,</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;next_service_recommended&quot;</span>: <span class="st">&quot;2026-04-15&quot;</span></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>  },</span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;geographic_performance&quot;</span>: {</span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;Spain&quot;</span>:    {<span class="st">&quot;efficiency&quot;</span>: <span class="st">&quot;94%&quot;</span>, <span class="st">&quot;uptime&quot;</span>: <span class="st">&quot;92%&quot;</span>},</span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;UAE&quot;</span>:      {<span class="st">&quot;efficiency&quot;</span>: <span class="st">&quot;89%&quot;</span>, <span class="st">&quot;uptime&quot;</span>: <span class="st">&quot;88%&quot;</span>}</span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p>Resultado: mejora de diseño de producto, reducción de garantías,
+optimización de pieza de repuesto.</p>
+<hr />
+<p><strong>2. Ampliar el mercado accesible</strong></p>
+<p>Con el activo tokenizado y su historial técnico verificable: -
+Financiadores pueden hacer due diligence del activo sin auditoría
+presencial - Aseguradoras pueden verificar estado de mantenimiento
+on-chain - Operadores pueden demostrar el estado del activo a clientes
+finales</p>
+<p>El fabricante sigue siendo el referente técnico del activo. BASHOOD
+provee la infraestructura de visibilidad.</p>
+<hr />
+<p><strong>3. Proceso de integración</strong></p>
+<p><strong>Fase 1: Onboarding (2–4 semanas)</strong></p>
+<pre><code>Semana 1: Auditoría técnica del activo
+   → Especificaciones validadas y documentadas
+   → Definición del modelo de depreciación aplicable
+   → Documentación legal del activo verificada
+
+Semana 2–3: Desarrollo del smart contract
+   → Customización del modelo BASHOOD-RWA-1 al activo
+   → Integración de API de telemetría (si aplica)
+   → Deploy en Base Sepolia y pruebas end-to-end
+
+Semana 4: Launch en Base Mainnet
+   → Metadata IPFS generada y fijada
+   → Dashboard de administración entregado
+   → NDA de datos de telemetría firmado</code></pre>
+<p><strong>Fase 2: Operación continua</strong></p>
+<pre><code>Diario:      telemetría → Chainlink → on-chain update
+Semanal:     reporting de estado de flota
+Mensual:     reconciliación de métricas y mantenimiento predictivo
+On-demand:   lifecycle events, inspecciones, cambios de estado</code></pre>
+<hr />
+<h3 id="modelos-de-fee-de-infraestructura">Modelos de Fee de
+Infraestructura</h3>
+<p><strong>Opción A: Fee Flat</strong></p>
+<pre><code>Setup inicial: $25.000
+Fee mensual SaaS: $500/activo
+Fee de telemetría: incluido
+BASHOOD fee: 0% sobre ingresos del activo</code></pre>
+<p><strong>Opción B: Fee por uso</strong></p>
+<pre><code>Setup inicial: $0
+BASHOOD fee: 2.5% sobre fees de infraestructura cobrados por el protocolo
+(No sobre los ingresos del activo — esos son off-chain)</code></pre>
+<p><strong>Opción C: Híbrido</strong> (recomendado para integraciones
+complejas)</p>
+<pre><code>Setup inicial: $10.000
+Fee mensual SaaS: $250/activo
+Fee de telemetría: $50/activo/mes</code></pre>
+<hr />
+<h3 id="partners-piloto">Partners Piloto</h3>
+<table>
+<thead>
+<tr>
+<th>Fabricante</th>
+<th>País</th>
+<th>Activo</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>EVOCONS</td>
+<td>España</td>
+<td>EVOBLOCK Gantry</td>
+<td>✅ Piloto técnico activo</td>
+</tr>
+<tr>
+<td>ICON</td>
+<td>USA</td>
+<td>VULCAN Printer</td>
+<td>En conversaciones</td>
+</tr>
+<tr>
+<td>Apis Cor</td>
+<td>UAE</td>
+<td>Mobile Robot</td>
+<td>En conversaciones</td>
+</tr>
+<tr>
+<td>CyBe</td>
+<td>Países Bajos</td>
+<td>RC Track Robot</td>
+<td>En conversaciones</td>
+</tr>
+<tr>
+<td>Mighty Buildings</td>
+<td>USA</td>
+<td>Factory UV Line</td>
+<td>En conversaciones</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="faq">PREGUNTAS FRECUENTES</h2>
+<h3 id="sobre-el-protocolo">Sobre el Protocolo</h3>
+<p><strong>P: ¿Es BASHOOD una plataforma de inversión?</strong><br />
+R: No. BASHOOD es infraestructura técnica de protocolo para registro,
+valoración y lifecycle tracking de activos industriales. Los flujos
+económicos derivados del uso de un activo tokenizado son gestionados
+off-chain, entre el operador y los titulares legales, en el vehículo
+legal que éstos hayan constituido.</p>
+<p><strong>P: ¿Qué blockchain utilizan?</strong><br />
+R: Base L2 — infraestructura de Coinbase. Coste ~$0.01/tx, finalidad
+&lt;2 segundos, seguridad heredada de Ethereum mainnet.</p>
+<p><strong>P: ¿Cuándo se despliega en mainnet?</strong><br />
+R: Q2 2026. Actualmente operativo en Base Sepolia testnet.</p>
+<p><strong>P: ¿Es BASHOOD compatible con MiCA u otras
+regulaciones?</strong><br />
+R: El protocolo está diseñado para compatibilidad regulatoria, tomando
+el marco UE/MiCA como referencia desde el inicio. La clasificación
+regulatoria definitiva de cualquier producto construido sobre BASHOOD
+depende de su estructura específica y debe ser evaluada por asesor legal
+independiente.</p>
+<hr />
+<h3 id="sobre-el-token-bht">Sobre el Token BHT</h3>
+<p><strong>P: ¿Para qué sirve el BHT?</strong><br />
+R: BHT (BashoodToken) es el token de utilidad del protocolo con tres
+funciones concretas: - Descuento en fees de registro e infraestructura
+(hasta 60%) - Participación en gobernanza on-chain (1 BHT = 1 voto via
+BHTVotes) - Mecanismo deflacionario: 0.1% de cada transacción se quema
+permanentemente</p>
+<p><strong>P: ¿El BHT da derechos sobre los activos
+tokenizados?</strong><br />
+R: No. BHT no representa participación en activos físicos, no otorga
+derechos sobre ingresos generados por esos activos, y no es un
+instrumento de inversión. Su valor depende exclusivamente de su adopción
+como herramienta de acceso y gobernanza del protocolo.</p>
+<p><strong>P: ¿El BHT garantiza rendimientos?</strong><br />
+R: No. El BHT no garantiza ni promete rendimientos de ningún tipo. No
+existe garantía contractual entre el crecimiento del protocolo y el
+precio del token.</p>
+<hr />
+<h3 id="sobre-los-nfts-bashood-rwa-1">Sobre los NFTs BASHOOD-RWA-1</h3>
+<p><strong>P: ¿Un NFT BASHOOD-RWA-1 me da propiedad del activo
+físico?</strong><br />
+R: No. El token es un registro digital del activo — un digital twin — no
+un título de propiedad. La propiedad legal del activo físico es una
+relación off-chain entre el propietario y el ordenamiento jurídico de su
+país.</p>
+<p><strong>P: ¿Se pueden transferir los tokens?</strong><br />
+R: Sí, como cualquier NFT ERC-721. La transferencia del token de
+referencia no implica la transferencia de la propiedad legal del activo
+físico, que se gestiona off-chain.</p>
+<p><strong>P: ¿Quién puede verificar los registros?</strong><br />
+R: Cualquier persona puede verificar los registros on-chain en BaseScan
+sin crear ninguna cuenta ni conectar wallet. El código es completamente
+open-source.</p>
+<hr />
+<h3 id="para-operadores-1">Para Operadores</h3>
+<p><strong>P: ¿Necesito conocimientos de blockchain para
+operar?</strong><br />
+R: No para las funciones básicas. El protocolo dispone de API REST y
+dashboards de gestión. Para integraciones avanzadas con ERP, se requiere
+soporte técnico del equipo de integración.</p>
+<p><strong>P: ¿Qué pasa si necesito actualizar las especificaciones del
+activo?</strong><br />
+R: Los datos de identificación son inmutables post-mint. Las métricas
+operativas y el estado son actualizables por roles autorizados. Si hay
+un error en los datos fundacionales, se requiere un proceso documentado
+de corrección con evidencia técnica.</p>
+<hr />
+<h3 id="para-fabricantes-1">Para Fabricantes</h3>
+<p><strong>P: ¿Pierdo control técnico sobre mis activos?</strong><br />
+R: No. El fabricante mantiene control técnico, mantenimiento y
+certificaciones. BASHOOD gestiona la capa de registro digital, no la
+operación del equipo.</p>
+<p><strong>P: ¿Qué datos de mi API son compartidos?</strong><br />
+R: Solo métricas operativas agregadas y anonimizadas. La IP técnica del
+fabricante está protegida por NDA. Los datos granulares son propiedad
+del fabricante.</p>
+<p><strong>P: ¿Compatible con mi ERP existente?</strong><br />
+R: Sí. API REST disponible para integración con SAP, Oracle, NetSuite,
+etc.</p>
+<hr />
+<h2 id="datos-técnicos">DATOS TÉCNICOS CLAVE</h2>
+<h3 id="activos-tokenizados-live-en-base-sepolia-testnet">Activos
+Tokenizados (Live en Base Sepolia Testnet)</h3>
+<p>Los siguientes registros son instalaciones piloto en testnet,
+utilizados para validar el protocolo. Los valores indicados son los
+valores de registro del activo físico de referencia.</p>
+<table>
+<colgroup>
+<col style="width: 15%" />
+<col style="width: 12%" />
+<col style="width: 18%" />
+<col style="width: 29%" />
+<col style="width: 24%" />
+</colgroup>
+<thead>
+<tr>
+<th>Token ID</th>
+<th>Activo</th>
+<th>Fabricante</th>
+<th>Valor de Registro</th>
+<th>Verificable en</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>202</td>
+<td>EVOBLOCK Gantry</td>
+<td>EVOCONS</td>
+<td>$1.200.000</td>
+<td><a
+href="https://sepolia.basescan.org/tx/0x05c53a716b86838b1f155b0629062e53531762a88e496757f5c26c79c4de226a">BaseScan
+Sepolia</a></td>
+</tr>
+<tr>
+<td>203</td>
+<td>VULCAN Printer</td>
+<td>ICON</td>
+<td>$1.600.000</td>
+<td><a
+href="https://sepolia.basescan.org/tx/0xedb0ccce4135ea92e765d24fdf66a37425f08760cab8898acac9d275eecb20e5">BaseScan
+Sepolia</a></td>
+</tr>
+<tr>
+<td>204</td>
+<td>Mobile Robot</td>
+<td>Apis Cor</td>
+<td>$325.000</td>
+<td><a
+href="https://sepolia.basescan.org/tx/0x963ec5b5067689fa7c5b6e2e9f58b16a4991088c0a440b57e8253edba91087bc">BaseScan
+Sepolia</a></td>
+</tr>
+<tr>
+<td>205</td>
+<td>RC Printer</td>
+<td>CyBe</td>
+<td>$240.000</td>
+<td><a
+href="https://sepolia.basescan.org/tx/0x8268306e8a4cb841dd936b91cecf649292682903adb603f2a3dcfb1e10d962bf">BaseScan
+Sepolia</a></td>
+</tr>
+<tr>
+<td>206</td>
+<td>Factory Line</td>
+<td>Mighty Buildings</td>
+<td>$5.200.000</td>
+<td><a
+href="https://sepolia.basescan.org/tx/0x1520f6917f7452c19a53fbaba62e66583529aa93a4fcaf48756bcfecdc89a5e1">BaseScan
+Sepolia</a></td>
+</tr>
+</tbody>
+</table>
+<p><em>Nota: Los valores de registro son los precios de adquisición
+originales del activo físico, registrados en el momento del mint. No
+representan valoración de mercado actual ni precio de venta.</em></p>
+<hr />
+<h3 id="smart-contracts">Smart Contracts</h3>
+<p><strong>Testnet — Base Sepolia (operativo):</strong> -
+BashoodRWAReference:
+<code>0x25e686Ccd10846C1Da16e204D1334640F07d4d96</code> - <a
+href="https://sepolia.basescan.org/address/0x25e686Ccd10846C1Da16e204D1334640F07d4d96">Ver
+en Basescan</a></p>
+<p><strong>Mainnet — Base (Q2 2026):</strong> - BashoodRWAReference: TBD
+(pendiente auditoría externa) - BashoodPresaleFinal: TBD - BashoodToken
+(BHT): TBD</p>
+<hr />
+<h3 id="métricas-del-protocolo">Métricas del Protocolo</h3>
+<p><strong>Estado del desarrollo (4 de marzo de 2026):</strong> -
+Solidity 0.8.28 | EVM: cancun | Optimizador: activado - Contratos de
+producción compilados: 193 - Test suite Hardhat: 197 passing, 0 failing
+- Forge invariant tests: 25 passing (256 runs × 3.840 calls c/u) - Forge
+fuzz tests: 5 suites, 1.000 runs cada uno - Seguridad: Slither 0.11.3 —
+0 vulnerabilidades críticas en contratos de producción - Patrón de
+actualización: UUPS (EIP-1967) en BashoodRWAReference y BashoodToken</p>
+<p><strong>Módulos M4 (lifecycle):</strong> - InspectionModule: 35 tests
+- MaintenanceHistoryModule: 32 tests - LifecycleEventsModule: 33 tests -
+OperationalMetricsAggregator: 33 tests</p>
+<hr />
+<h3 id="roadmap-técnico">Roadmap Técnico</h3>
+<p><strong>Q2 2026 — Mainnet Launch</strong> - Deploy en Base Mainnet
+con auditoría de seguridad externa - Activación de oracle Chainlink de
+producción para los 5 activos piloto - Apertura del registro a primeros
+emisores externos - KYC/AML integration (Civic/Persona)</p>
+<p><strong>Q3 2026 — Lifecycle Infrastructure</strong> - Activación de
+todos los módulos M4 en producción - API de telemetría para fabricantes
+piloto - Gobernanza DAO operativa (BHT/BHTVotes/Governor) -
+Documentación BASHOOD-RWA-2 (draft)</p>
+<p><strong>Q4 2026 — Compliance y Ecosistema</strong> - Custodia
+institucional (Fireblocks integration) - Interoperabilidad con mercados
+secundarios regulados - Módulos de carbon credits (BASHOOD-RWA-2 draft)
+- Insurance protocol integration (Nexus Mutual / Uno Re)</p>
+<p><strong>2027 — Expansión</strong> - Multi-chain: Arbitrum, Optimism -
+Expansión de sectores (vehículos pesados, energía, infraestructura
+logística) - Mantenimiento predictivo vía AI sobre datos de telemetría
+agregados</p>
+<hr />
+<h2 id="próximos-pasos">PRÓXIMOS PASOS</h2>
+<h3 id="para-distribuidores-y-partners">Para Distribuidores y
+Partners</h3>
+<p><strong>Acción inmediata:</strong> 1. Explorar registros piloto en <a
+href="https://sepolia.basescan.org/address/0x25e686Ccd10846C1Da16e204D1334640F07d4d96">Base
+Sepolia testnet</a> 2. Revisar documentación técnica: WHITEPAPER.md y
+BASHOOD-RWA-1-SPECIFICATION.md 3. Agendar sesión de onboarding con el
+equipo BASHOOD</p>
+<p><strong>Training disponible:</strong> - Sesión 1: Arquitectura del
+protocolo (2 horas) - Sesión 2: Demo técnica en testnet (1 hora) -
+Sesión 3: Casos de uso sector específico (1 hora)</p>
+<p><strong>Fees de referencia distribuidores:</strong> - Emisores
+referidos: fee por proyecto (estructura a acordar) - Operadores
+referidos: fee por integración SaaS completada - Fabricantes referidos:
+fee flat + fee mensual del contrato SaaS</p>
+<hr />
+<h3 id="para-emisores-potenciales">Para Emisores Potenciales</h3>
+<p><strong>Proceso de integración:</strong> 1. NDA + call técnica
+exploratoria 2. Auditoría técnica del activo (2 semanas) 3. Desarrollo y
+customización smart contract (3 semanas) 4. Deploy testnet + validación
+(1 semana) 5. Pilot program (3 meses) 6. Deploy mainnet + launch</p>
+<p><strong>Contacto:</strong> - Email: issuers@bashood.com - LinkedIn:
+<a href="https://linkedin.com/company/bashood">BASHOOD Protocol</a> -
+Agendar: <a
+href="https://calendly.com/bashood">calendly.com/bashood</a></p>
+<hr />
+<h3 id="para-operadores-de-activos">Para Operadores de Activos</h3>
+<p><strong>Proceso:</strong> 1. Call exploratoria (30 min) 2. Evaluación
+de activos a integrar 3. Propuesta técnica + comercial 4. Integración
+piloto (4–6 semanas)</p>
+<p><strong>Contacto:</strong> - Email: operators@bashood.com - WhatsApp:
++34 XXX XXX XXX</p>
+<hr />
+<h3 id="para-fabricantes-2">Para Fabricantes</h3>
+<p><strong>Proceso:</strong> 1. NDA 2. Auditoría técnica del activo (2
+semanas) 3. Negociación de términos 4. Desarrollo del smart contract (3
+semanas) 5. Pilot program (3 meses) → Full launch</p>
+<p><strong>Contacto:</strong> - Email: manufacturers@bashood.com</p>
+<hr />
+<h2 id="contacto-y-soporte">CONTACTO Y SOPORTE</h2>
+<p><strong>Oficinas:</strong> - España: Madrid (HQ) - USA: Delaware
+(entidad legal) - UAE: Dubai (operaciones MENA)</p>
+<p><strong>Soporte técnico:</strong> - Email: support@bashood.com -
+Discord: #soporte (24/7) - GitHub: github.com/bashood (código
+open-source)</p>
+<p><strong>Redes:</strong> - Twitter/X: <span class="citation"
+data-cites="BashoodRWA">@BashoodRWA</span> - LinkedIn: BASHOOD Protocol
+- GitHub: github.com/bashood</p>
+<hr />
+<h2 id="disclaimer-legal">DISCLAIMER LEGAL</h2>
+<p><em>Este documento es exclusivamente informativo y está destinado a
+distribuidores y partners autorizados de BASHOOD.</em></p>
+<p><em>Nada en este documento constituye oferta pública de valores,
+solicitud de inversión, promesa de rendimiento, ni participación en
+beneficios derivados de activos físicos o del protocolo.</em></p>
+<p><em>Los tokens BASHOOD-RWA-1 son registros digitales estructurados de
+activos industriales físicos. No representan título de propiedad sobre
+el activo físico ni instrumento financiero. Los derechos económicos
+específicos de cualquier activo tokenizado son definidos por el emisor
+en un marco contractual separado, off-chain, bajo su
+responsabilidad.</em></p>
+<p><em>BHT es un token de utilidad funcional para acceso y gobernanza
+del protocolo. No incorpora derechos financieros ni promesas de
+rendimiento.</em></p>
+<p><em>La compatibilidad regulatoria de cualquier producto construido
+sobre BASHOOD depende de su estructura específica y de la jurisdicción
+aplicable. El receptor de este documento es responsable de obtener
+asesoramiento legal independiente.</em></p>
+<p><em>Última actualización: 4 de marzo de 2026</em><br />
+<em>Versión: 2.0 — Confidencial para distribuidores y partners
+autorizados</em></p>
+<hr />
+<p><em>Para documentación técnica completa: WHITEPAPER.md y
+BASHOOD-RWA-1-SPECIFICATION.md</em><br />
+<em>Código fuente: repositorio oficial (open-source)</em><br />
+<em>Bashood Technologies SL — 2026</em></p>
+<hr />
+<p><strong>© 2026 BASHOOD Protocol. Todos los derechos
+reservados.</strong></p>
+</body>
+</html>

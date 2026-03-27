@@ -92,6 +92,7 @@ async function main() {
     presaleParams.nftContract,
     presaleParams.referralContract,
     presaleParams.projectWallet,
+    process.env.OPERATIONS_WALLET || deployer.address, // _operationsWallet
     presaleParams.nftPriceETH,
     presaleParams.nftPriceBHT,
     presaleParams.presaleStart,

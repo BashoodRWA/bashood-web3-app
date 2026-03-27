@@ -12,7 +12,7 @@ describe("Deploy BashoodReferral - test mínimo", function () {
     await token.waitForDeployment();
 
     const Validator = await ethers.getContractFactory("ReferralValidator");
-    const validator = await Validator.deploy(owner.address);
+    const validator = await Validator.deploy(owner.address, ethers.ZeroAddress, 0, 0);
     await validator.waitForDeployment();
 
   const NFT = await ethers.getContractFactory("contracts/mocks/MockNFT1155.sol:MockNFT1155");

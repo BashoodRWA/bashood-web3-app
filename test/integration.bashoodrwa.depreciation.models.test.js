@@ -57,7 +57,7 @@ describe("BashoodRWAReference - Depreciation Integration (EXTRUSION_BASED, SETUP
       .map(log => { try { return rwa.interface.parseLog(log); } catch { return null; } })
       .find(e => e && e.name === "AssetMinted");
     const tokenId = event.args.tokenId;
-    const dep = await rwa.getDepreciation(tokenId);
+    const dep = await rwa.getDepreciationPercentage(tokenId);
     expect(dep).to.equal(10000); // 100% depreciación
   });
 
@@ -103,7 +103,7 @@ describe("BashoodRWAReference - Depreciation Integration (EXTRUSION_BASED, SETUP
       .map(log => { try { return rwa.interface.parseLog(log); } catch { return null; } })
       .find(e => e && e.name === "AssetMinted");
     const tokenId = event.args.tokenId;
-    const dep = await rwa.getDepreciation(tokenId);
+    const dep = await rwa.getDepreciationPercentage(tokenId);
     expect(dep).to.equal(10000); // 100% depreciación
   });
 
@@ -149,7 +149,7 @@ describe("BashoodRWAReference - Depreciation Integration (EXTRUSION_BASED, SETUP
       .map(log => { try { return rwa.interface.parseLog(log); } catch { return null; } })
       .find(e => e && e.name === "AssetMinted");
     const tokenId = event.args.tokenId;
-    const dep = await rwa.getDepreciation(tokenId);
+    const dep = await rwa.getDepreciationPercentage(tokenId);
     expect(dep).to.equal(10000); // 100% depreciación
   });
 });

@@ -122,6 +122,48 @@ describe("LifecycleEventsModule", function () {
         module_.connect(owner).grantOperator(operator.address)
       ).to.be.revertedWith("LifecycleEvents: already operator");
     });
+
+    it("revert revokeOperator si no es operador", async function () {
+      await expect(
+        module_.connect(owner).revokeOperator(attacker.address)
+      ).to.be.revertedWith("LifecycleEvents: not an operator");
+    });
+
+    it("revokeOperator emite OperatorRevoked", async function () {
+      await module_.connect(owner).grantOperator(operator.address);
+      await expect(module_.connect(owner).revokeOperator(operator.address))
+        .to.emit(module_, "OperatorRevoked")
+        .withArgs(operator.address);
+    });
+
+    it("empresa revocada pierde acceso inmediatamente (lockout)", async function () {
+      await module_.connect(owner).grantOperator(operator.address);
+      // Opera correctamente antes de la revocación
+      await module_.connect(operator).logTransition(
+        TOKEN_ID, STATUS.OPERATIONAL, STATUS.MAINTENANCE, "pre-revoke", ethers.ZeroHash
+      );
+      // Revocación
+      await module_.connect(owner).revokeOperator(operator.address);
+      // Intento post-revocación → debe revertir
+      await expect(
+        module_.connect(operator).logTransition(
+          TOKEN_ID, STATUS.MAINTENANCE, STATUS.OPERATIONAL, "post-revoke", ethers.ZeroHash
+        )
+      ).to.be.revertedWith("LifecycleEvents: not an operator");
+    });
+
+    it("ciclo grant → revoke → re-grant restaura el acceso", async function () {
+      await module_.connect(owner).grantOperator(operator.address);
+      await module_.connect(owner).revokeOperator(operator.address);
+      // Re-acreditación
+      await module_.connect(owner).grantOperator(operator.address);
+      expect(await module_.isOperator(operator.address)).to.equal(true);
+      // Puede operar de nuevo
+      await module_.connect(operator).logTransition(
+        TOKEN_ID, STATUS.OPERATIONAL, STATUS.MAINTENANCE, "re-grant", ethers.ZeroHash
+      );
+      expect(await module_.getEventCount(TOKEN_ID)).to.equal(1n);
+    });
   });
 
   // ─── logTransition ───────────────────────────────────────────────────────────

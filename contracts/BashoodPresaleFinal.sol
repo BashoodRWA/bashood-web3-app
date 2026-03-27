@@ -56,6 +56,16 @@ error StalePrice();
  * @notice NFT presale contract with ETH and BHT payment, Chainlink oracle, referral system, and rescue mechanisms.
  * @dev Uses AccessControl (ADMIN_ROLE, EMERGENCY_ROLE, WHITELIST_ROLE), ReentrancyGuard, Pausable.
  *      Implements IERC1155Receiver for holding NFTs. Integrates with Chainlink for ETH/USD pricing.
+ *
+ * @custom:security-contact security@bashood.io
+ *
+ * @custom:architecture FROZEN
+ *   Este contrato es un orquestador de presale. Su lógica interna está cerrada.
+ *   - NO añadir nueva lógica de negocio dentro de este contrato.
+ *   - Nueva funcionalidad → library externa o módulo independiente invocado por interfaz.
+ *   - Bytecode desplegado: 17.88 KB | Límite EVM: 24.0 KB | Margen: 6.12 KB (2026-03-23)
+ *   - Regla de tamaño: si un PR hace crecer el bytecode más de 0.5 KB, requiere revisión de arquitectura.
+ *   - Ver ARCHITECTURE.md en la raíz del repositorio para el razonamiento completo.
  */
 contract BashoodPresaleFinal is ReentrancyGuard, AccessControl, IERC1155Receiver, Pausable {
     address public signerAddress;
@@ -157,6 +167,20 @@ contract BashoodPresaleFinal is ReentrancyGuard, AccessControl, IERC1155Receiver
         return uint256(answer);
     }
 
+    /// @dev Única fuente de verdad para validación del oracle. Retorna el precio y los decimales.
+    ///      Todos los mensajes de revert son idénticos a la implementación previa para que
+    ///      los tests existentes sigan pasando sin modificación.
+    function _getOracleData() internal view returns (int256 answer, uint8 decimals_) {
+        require(maxPriceStaleness > 0, "Staleness req");
+        require(address(priceFeed) != address(0), "PriceFeed req");
+        (uint80 roundId, int256 _answer, , uint256 updatedAt, uint80 answeredInRound) = priceFeed.latestRoundData();
+        require(_answer > 0, "Invalid price");
+        require(updatedAt > 0, "Price too stale");
+        require(block.timestamp - updatedAt <= maxPriceStaleness, "Price too stale");
+        require(answeredInRound >= roundId, "Incomplete round");
+        return (_answer, priceFeed.decimals());
+    }
+
     /// @notice Set the burn basis points (max 1500 = 15%)
     function setBurnBps(uint16 newBurnBps) external onlyRole(ADMIN_ROLE) {
         require(newBurnBps <= 1500, "Burn cap exceeded"); // 15% max
@@ -187,17 +211,9 @@ contract BashoodPresaleFinal is ReentrancyGuard, AccessControl, IERC1155Receiver
     /// @param fiatQuoteUsd The fiat amount in USD with 18 decimals
     /// @return The equivalent amount of BHT tokens (18 decimals)
     function _bhtFromFiat(uint256 fiatQuoteUsd) internal view returns (uint256) {
-        require(maxPriceStaleness > 0, "Staleness req");
-        require(address(priceFeed) != address(0), "PriceFeed req");
-        (uint80 roundId, int256 answer, , uint256 updatedAt, uint80 answeredInRound) = priceFeed.latestRoundData();
-    require(answer > 0, "Invalid price");
-    require(updatedAt > 0, "Price too stale");
-        require(block.timestamp - updatedAt <= maxPriceStaleness, "Price too stale");
-        require(answeredInRound >= roundId, "Incomplete round");
-        uint8 decimals_ = priceFeed.decimals();
+        (int256 answer, uint8 decimals_) = _getOracleData();
         // fiatQuoteUsd has 18 decimals; answer has decimals_ decimals representing USD per BHT
         // bhtAmount = fiatQuoteUsd * (10 ** decimals_) / uint256(answer)
-        // Use mulDiv to avoid precision loss: (fiatQuoteUsd * 10**decimals_) / answer
         return Math.mulDiv(fiatQuoteUsd, 10 ** uint256(decimals_), uint256(answer));
     }
 
@@ -512,15 +528,7 @@ contract BashoodPresaleFinal is ReentrancyGuard, AccessControl, IERC1155Receiver
         require(bhtDiscountBps <= 2000, "Discount cap");
         require(burnBps <= 1500, "Burn cap");
         require(operationsWallet != address(0), "Ops wallet req");
-        require(maxPriceStaleness > 0, "Staleness req");
-        require(address(priceFeed) != address(0), "PriceFeed req");
-
-        (uint80 roundId, int256 answer, , uint256 updatedAt, uint80 answeredInRound) = priceFeed.latestRoundData();
-        require(answer > 0, "Invalid price");
-        require(updatedAt > 0, "Price too stale");
-        require(block.timestamp - updatedAt <= maxPriceStaleness, "Price too stale");
-        require(answeredInRound >= roundId, "Incomplete round");
-
+        _getOracleData(); // Valida freshness del oracle — el precio en BHT es fijo (nftPriceBHT)
         uint256 baseCost = Math.mulDiv(nftPriceBHT, quantity, 1);
         // Usar constante MAX_BPS para cálculos optimizados
         discountedCost = Math.mulDiv(baseCost, (_MAX_BPS - bhtDiscountBps), _MAX_BPS);
@@ -602,6 +610,7 @@ contract BashoodPresaleFinal is ReentrancyGuard, AccessControl, IERC1155Receiver
     /// @param _nftContract Address of the ERC1155 NFT contract
     /// @param _referralContract Address of the BashoodReferral contract
     /// @param _projectWallet Payable address for project fund collection
+    /// @param _operationsWallet Address of the operations wallet for BHT payment routing
     /// @param _nftPriceETH Price per NFT in ETH (wei)
     /// @param _nftPriceBHT Price per NFT in BHT tokens (18 decimals)
     /// @param _presaleStart Unix timestamp for presale start
@@ -612,6 +621,7 @@ contract BashoodPresaleFinal is ReentrancyGuard, AccessControl, IERC1155Receiver
         address _nftContract,
         address _referralContract,
         address payable _projectWallet,
+        address _operationsWallet,
         uint256 _nftPriceETH,
         uint256 _nftPriceBHT,
         uint256 _presaleStart,
@@ -625,6 +635,7 @@ contract BashoodPresaleFinal is ReentrancyGuard, AccessControl, IERC1155Receiver
         require(_referralContract != address(0), "Referral contract required");
     require(_isContract(_referralContract), "Referral must be contract");
         require(_projectWallet != address(0), "Project wallet required");
+        require(_operationsWallet != address(0), "Invalid operations wallet");
     _grantRole(DEFAULT_ADMIN_ROLE, msg.sender);
     _grantRole(ADMIN_ROLE, msg.sender);
     _grantRole(EMERGENCY_ROLE, msg.sender);
@@ -651,7 +662,7 @@ contract BashoodPresaleFinal is ReentrancyGuard, AccessControl, IERC1155Receiver
         whitelistEnabled = false;
         bhtDiscountBps = 0;
         burnBps = 0;
-        operationsWallet = address(0);
+        operationsWallet = _operationsWallet;
         maxPriceStaleness = 0;
     }
 

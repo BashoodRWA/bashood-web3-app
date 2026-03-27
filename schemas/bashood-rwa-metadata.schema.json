@@ -1,0 +1,874 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://bashood.com/schemas/bashood-rwa-metadata/v1.0.0",
+  "title": "BASHOOD-RWA-1 Asset Metadata",
+  "description": "Schema universal para metadatos off-chain de activos tokenizados mediante el protocolo Bashood. Compatible con el estándar ERC-721 metadata. El campo metadataURI del contrato BashoodRWAReference apunta a un documento que cumple este schema.",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "name",
+    "description",
+    "image",
+    "assetClass",
+    "protocol",
+    "identification",
+    "condition",
+    "financials",
+    "documents"
+  ],
+  "additionalProperties": false,
+  "properties": {
+
+    "schemaVersion": {
+      "type": "string",
+      "const": "BASHOOD-RWA-1.0",
+      "description": "Versión del schema. Incrementar a 1.1 para cambios backwards-compatible; a 2.0 para cambios de ruptura."
+    },
+
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 200,
+      "description": "Nombre descriptivo del activo. Requerido por ERC-721 metadata standard."
+    },
+
+    "description": {
+      "type": "string",
+      "minLength": 10,
+      "maxLength": 2000,
+      "description": "Descripción completa del activo para display en marketplaces y frontends."
+    },
+
+    "image": {
+      "type": "string",
+      "pattern": "^(ipfs://|https://)",
+      "description": "URI de la imagen principal del activo. Se prefiere IPFS (ipfs://CID) sobre HTTPS para inmutabilidad."
+    },
+
+    "external_url": {
+      "type": "string",
+      "format": "uri",
+      "description": "URL pública de la página de detalle del activo en el frontend de Bashood. Opcional pero recomendado."
+    },
+
+    "assetClass": {
+      "type": "string",
+      "enum": ["CONSTRUCTION", "MACHINERY", "ENERGY", "LOGISTICS"],
+      "description": "Clasificación de primer nivel por industria. Determina cuál bloque de extensiones es requerido. Mapea al enum AssetCategory del contrato: CONSTRUCTION → CONSTRUCTION_3D_PRINTER_* / MODULAR_FACTORY_UV; MACHINERY → HEAVY_VEHICLE; ENERGY → ENERGY_EQUIPMENT; LOGISTICS → LOGISTICS_INFRASTRUCTURE."
+    },
+
+    "protocol": {
+      "type": "object",
+      "description": "Vínculo al registro on-chain. Permite validar que el JSON corresponde al token correcto.",
+      "required": ["contractAddress", "tokenId", "chainId", "standard"],
+      "additionalProperties": false,
+      "properties": {
+        "contractAddress": {
+          "type": "string",
+          "pattern": "^0x[a-fA-F0-9]{40}$",
+          "description": "Dirección del contrato BashoodRWAReference en Base L2."
+        },
+        "tokenId": {
+          "type": "integer",
+          "minimum": 201,
+          "description": "Token ID asignado por el contrato (empieza en 201 para la colección industrial)."
+        },
+        "chainId": {
+          "type": "integer",
+          "const": 8453,
+          "description": "Chain ID de Base L2 mainnet. Valor fijo."
+        },
+        "standard": {
+          "type": "string",
+          "const": "BASHOOD-RWA-1",
+          "description": "Identificador del estándar del protocolo."
+        },
+        "mintedAt": {
+          "type": "integer",
+          "description": "Unix timestamp del bloque donde se realizó mintAsset()."
+        },
+        "mintedBy": {
+          "type": "string",
+          "pattern": "^0x[a-fA-F0-9]{40}$",
+          "description": "Dirección que realizó el mint (ASSET_MANAGER_ROLE)."
+        },
+        "metadataCID": {
+          "type": "string",
+          "pattern": "^Qm|^baf",
+          "description": "CID de IPFS de este propio documento. Permite verificar integridad del JSON."
+        }
+      }
+    },
+
+    "identification": {
+      "type": "object",
+      "description": "Datos de identificación del activo físico. Replica y extiende AssetIdentification del contrato.",
+      "required": ["serialNumber", "manufacturer", "model", "yearManufactured", "countryOfOrigin"],
+      "additionalProperties": false,
+      "properties": {
+        "serialNumber": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 100,
+          "description": "Número de serie del fabricante. Debe ser único por activo físico."
+        },
+        "manufacturer": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 100,
+          "description": "Nombre del fabricante. Debe coincidir exactamente con AssetIdentification.manufacturer on-chain."
+        },
+        "model": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 100,
+          "description": "Modelo comercial del activo. Debe coincidir con AssetIdentification.model on-chain."
+        },
+        "yearManufactured": {
+          "type": "integer",
+          "minimum": 1900,
+          "maximum": 2100,
+          "description": "Año de fabricación. Debe coincidir con AssetIdentification.yearManufactured on-chain."
+        },
+        "countryOfOrigin": {
+          "type": "string",
+          "pattern": "^[A-Z]{2}$",
+          "description": "País de fabricación en formato ISO 3166-1 alpha-2 (ej: ES, US, NL, AE)."
+        },
+        "vin": {
+          "type": "string",
+          "description": "VIN o número de chasis para vehículos. Opcional."
+        },
+        "oemPartNumber": {
+          "type": "string",
+          "description": "Número de parte OEM. Opcional."
+        }
+      }
+    },
+
+    "condition": {
+      "type": "object",
+      "description": "Estado físico actual del activo. Datos dinámicos actualizados por el operador.",
+      "required": ["status", "operatingHours", "inspectionDate"],
+      "additionalProperties": false,
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": ["OPERATIONAL", "MAINTENANCE", "INACTIVE", "DECOMMISSIONED"],
+          "description": "Estado operativo. Debe mantenerse sincronizado con OperationalMetrics.status on-chain."
+        },
+        "operatingHours": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Horas de operación acumuladas. Debe mantenerse sincronizado con OperationalMetrics.operatingHours on-chain."
+        },
+        "maxLifetimeHours": {
+          "type": "number",
+          "minimum": 1,
+          "description": "Vida útil máxima estimada en horas."
+        },
+        "conditionGrade": {
+          "type": "string",
+          "enum": ["EXCELLENT", "GOOD", "FAIR", "POOR"],
+          "description": "Grado de condición física según última inspección."
+        },
+        "inspectionDate": {
+          "type": "integer",
+          "description": "Unix timestamp de la última inspección física."
+        },
+        "inspectionProvider": {
+          "type": "string",
+          "description": "Empresa o persona que realizó la última inspección."
+        },
+        "notes": {
+          "type": "string",
+          "maxLength": 1000,
+          "description": "Observaciones adicionales sobre el estado del activo."
+        }
+      }
+    },
+
+    "financials": {
+      "type": "object",
+      "description": "Datos financieros del activo. Complementa FinancialData on-chain con detalle adicional.",
+      "required": ["purchasePrice", "currency", "depreciationModel"],
+      "additionalProperties": false,
+      "properties": {
+        "purchasePrice": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Precio de adquisición del activo. Debe coincidir con FinancialData.purchasePrice on-chain (expresado en USD, sin escalar)."
+        },
+        "currency": {
+          "type": "string",
+          "pattern": "^[A-Z]{3}$",
+          "description": "Moneda del precio de compra en ISO 4217 (ej: USD, EUR). El contrato siempre convierte a USD internamente."
+        },
+        "depreciationModel": {
+          "type": "string",
+          "enum": ["LINEAR", "LOAD_BASED", "EXTRUSION_BASED", "SETUP_BASED", "TIME_BASED", "EFFICIENCY_BASED"],
+          "description": "Modelo de depreciación. Debe coincidir con FinancialData.depModel on-chain."
+        },
+        "residualValuePct": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100,
+          "description": "Porcentaje de valor residual (valor de rescate al final de vida útil). Típico: 10-25%."
+        },
+        "annualMaintenancePct": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100,
+          "description": "Costo anual de mantenimiento como % del precio de compra. Típico: 2-5%."
+        },
+        "insurancePremiumPct": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100,
+          "description": "Prima de seguro anual como % del valor actual. Típico: 1-3%."
+        },
+        "acquisitionDate": {
+          "type": "integer",
+          "description": "Unix timestamp de la fecha de adquisición del activo físico."
+        },
+        "lastAppraisalValue": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Último valor de tasación formal en USD. Referencia: FinancialData.currentValue on-chain."
+        },
+        "lastAppraisalDate": {
+          "type": "integer",
+          "description": "Unix timestamp de la última tasación formal."
+        },
+        "appraisalProvider": {
+          "type": "string",
+          "description": "Empresa o entidad que realizó la tasación."
+        }
+      }
+    },
+
+    "location": {
+      "type": "object",
+      "description": "Ubicación geográfica del activo. Opcional para activos móviles; recomendado para activos fijos.",
+      "additionalProperties": false,
+      "properties": {
+        "country": {
+          "type": "string",
+          "pattern": "^[A-Z]{2}$",
+          "description": "País de ubicación actual en ISO 3166-1 alpha-2."
+        },
+        "region": { "type": "string" },
+        "city": { "type": "string" },
+        "address": {
+          "type": "string",
+          "description": "Dirección postal. Omitir o hashear si es privada."
+        },
+        "coordinates": {
+          "type": "object",
+          "required": ["lat", "lng"],
+          "additionalProperties": false,
+          "properties": {
+            "lat": { "type": "number", "minimum": -90, "maximum": 90 },
+            "lng": { "type": "number", "minimum": -180, "maximum": 180 }
+          }
+        },
+        "what3words": {
+          "type": "string",
+          "description": "Dirección What3Words del emplazamiento. Opcional."
+        },
+        "locationType": {
+          "type": "string",
+          "enum": ["FIXED_SITE", "MOBILE", "LAST_KNOWN"],
+          "description": "FIXED_SITE: activo inmóvil en instalación permanente. MOBILE: activo en movimiento. LAST_KNOWN: posición GPS más reciente."
+        },
+        "updatedAt": {
+          "type": "integer",
+          "description": "Unix timestamp de la última actualización de ubicación."
+        }
+      }
+    },
+
+    "documents": {
+      "type": "array",
+      "description": "Documentos adjuntos del activo. Mínimo 1 documento requerido (factura de compra u hoja de especificaciones).",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["type", "uri", "sha256"],
+        "additionalProperties": false,
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "PURCHASE_INVOICE",
+              "TECHNICAL_DATASHEET",
+              "INSPECTION_REPORT",
+              "CERTIFICATION",
+              "INSURANCE_POLICY",
+              "MAINTENANCE_RECORD",
+              "PHOTO_PRIMARY",
+              "PHOTO_GALLERY",
+              "VIDEO",
+              "LEGAL_TITLE",
+              "APPRAISAL_REPORT",
+              "OTHER"
+            ],
+            "description": "Tipo de documento."
+          },
+          "uri": {
+            "type": "string",
+            "pattern": "^(ipfs://|https://)",
+            "description": "URI del documento. IPFS preferido para inmutabilidad."
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$",
+            "description": "Hash SHA-256 del archivo. Permite verificar integridad sin depender del proveedor de almacenamiento."
+          },
+          "name": { "type": "string", "description": "Nombre descriptivo del documento." },
+          "mimeType": { "type": "string", "description": "MIME type del archivo (ej: application/pdf, image/jpeg)." },
+          "issuedBy": { "type": "string", "description": "Entidad emisora del documento." },
+          "issuedAt": { "type": "integer", "description": "Unix timestamp de emisión." },
+          "expiresAt": { "type": "integer", "description": "Unix timestamp de vencimiento. Null si no vence." }
+        }
+      }
+    },
+
+    "certifications": {
+      "type": "array",
+      "description": "Certificaciones activas del activo. El backend debe sincronizar con CertificationModule on-chain.",
+      "items": {
+        "type": "object",
+        "required": ["type", "status", "issuedBy", "expiresAt"],
+        "additionalProperties": false,
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "Tipo de certificación. Debe coincidir con el certType bytes32 en CertificationModule (keccak256 del mismo string).",
+            "examples": ["CE_MARK", "ISO_9001", "ISO_14001", "UL_3401", "IBC_COMPLIANT", "OSHA_COMPLIANT", "ISO_45001"]
+          },
+          "status": {
+            "type": "string",
+            "enum": ["ACTIVE", "EXPIRED", "SUSPENDED", "PENDING_RENEWAL"]
+          },
+          "issuedBy": { "type": "string" },
+          "issuedAt": { "type": "integer" },
+          "expiresAt": { "type": "integer" },
+          "certificateNumber": { "type": "string" },
+          "documentUri": {
+            "type": "string",
+            "pattern": "^(ipfs://|https://)",
+            "description": "URI del certificado. Debe corresponder a un documento de tipo CERTIFICATION en documents[]."
+          }
+        }
+      }
+    },
+
+    "telemetry": {
+      "type": "object",
+      "description": "Configuración de telemetría en tiempo real. Debe sincronizarse con TelemetryConfig on-chain.",
+      "additionalProperties": false,
+      "properties": {
+        "hasRealTimeAPI": { "type": "boolean" },
+        "provider": {
+          "type": "string",
+          "description": "Proveedor de API de telemetría (ej: EVOCONS_REALTIME, MAGWARE, TRACKUNIT)."
+        },
+        "oracleAddress": {
+          "type": "string",
+          "pattern": "^0x[a-fA-F0-9]{40}$",
+          "description": "Dirección del Chainlink oracle configurada en TelemetryConfig.oracleAddress on-chain."
+        },
+        "dataFrequency": {
+          "type": "string",
+          "enum": ["REAL_TIME", "HOURLY", "DAILY", "ON_DEMAND"],
+          "description": "Frecuencia de actualización de datos de telemetría."
+        },
+        "metrics": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Lista de métricas disponibles (ej: ['ENGINE_HOURS', 'FUEL_LEVEL', 'GPS_POSITION'])."
+        }
+      }
+    },
+
+    "extensions": {
+      "type": "object",
+      "description": "Datos técnicos específicos por industria. Solo el bloque correspondiente a assetClass es requerido. Toda la información que no cabe en TechnicalSpecs on-chain va aquí.",
+      "additionalProperties": false,
+      "properties": {
+        "construction": { "$ref": "#/$defs/ExtensionConstruction" },
+        "machinery": { "$ref": "#/$defs/ExtensionMachinery" },
+        "energy": { "$ref": "#/$defs/ExtensionEnergy" },
+        "logistics": { "$ref": "#/$defs/ExtensionLogistics" }
+      }
+    }
+  },
+
+  "if": { "properties": { "assetClass": { "const": "CONSTRUCTION" } } },
+  "then": {
+    "required": ["extensions"],
+    "properties": {
+      "extensions": { "required": ["construction"] }
+    }
+  },
+  "else": {
+    "if": { "properties": { "assetClass": { "const": "MACHINERY" } } },
+    "then": {
+      "required": ["extensions"],
+      "properties": {
+        "extensions": { "required": ["machinery"] }
+      }
+    },
+    "else": {
+      "if": { "properties": { "assetClass": { "const": "ENERGY" } } },
+      "then": {
+        "required": ["extensions"],
+        "properties": {
+          "extensions": { "required": ["energy"] }
+        }
+      },
+      "else": {
+        "if": { "properties": { "assetClass": { "const": "LOGISTICS" } } },
+        "then": {
+          "required": ["extensions"],
+          "properties": {
+            "extensions": { "required": ["logistics"] }
+          }
+        }
+      }
+    }
+  },
+
+  "$defs": {
+
+    "ExtensionConstruction": {
+      "type": "object",
+      "title": "Extensión: Construcción e Infraestructura Habitacional",
+      "description": "Campos específicos para impresoras 3D de construcción, fábricas modulares y vivienda industrializada.",
+      "required": ["constructionType"],
+      "additionalProperties": false,
+      "properties": {
+        "constructionType": {
+          "type": "string",
+          "enum": [
+            "3D_PRINTER_GANTRY",
+            "3D_PRINTER_MOBILE",
+            "3D_PRINTER_ROBOTIC_ARM",
+            "MODULAR_FACTORY",
+            "MODULAR_HOME_UNIT",
+            "CONTOUR_CRAFTING_SYSTEM"
+          ],
+          "description": "Subtipo dentro de la industria de construcción."
+        },
+        "mobilityClass": {
+          "type": "string",
+          "enum": ["FIXED", "MOBILE", "TRAILER_MOUNTED", "CONTAINERIZED"],
+          "description": "Capacidad de desplazamiento de la máquina."
+        },
+        "printSpecs": {
+          "type": "object",
+          "description": "Especificaciones de impresión. Aplicable a impresoras 3D de construcción.",
+          "additionalProperties": false,
+          "properties": {
+            "buildVolumeX_m": { "type": "number", "minimum": 0, "description": "Volumen de construcción eje X en metros." },
+            "buildVolumeY_m": { "type": "number", "minimum": 0, "description": "Volumen de construcción eje Y en metros." },
+            "buildVolumeZ_m": { "type": "number", "minimum": 0, "description": "Altura máxima imprimible en metros." },
+            "printSpeed_m_per_hour": { "type": "number", "minimum": 0 },
+            "layerHeight_mm": { "type": "number", "minimum": 0 },
+            "nozzleDiameter_mm": { "type": "number", "minimum": 0 },
+            "materialTypes": {
+              "type": "array",
+              "items": { "type": "string" },
+              "description": "Materiales admitidos (ej: ['CONCRETE', 'MORTAR', 'LAVACRETE', 'EARTHEN'])."
+            },
+            "materialPSI": { "type": "integer", "minimum": 0, "description": "Resistencia del material en PSI (ICON Lavacrete: 6000)." },
+            "extrusionRate_kg_per_hour": { "type": "number", "minimum": 0 }
+          }
+        },
+        "output": {
+          "type": "object",
+          "description": "Capacidad de producción de vivienda.",
+          "additionalProperties": false,
+          "properties": {
+            "maxFloorArea_m2_per_print": { "type": "number", "minimum": 0 },
+            "typicalBuildTime_hours": { "type": "number", "minimum": 0 },
+            "storiesCapacity": { "type": "integer", "minimum": 1 },
+            "annualUnitsCapacity": { "type": "integer", "minimum": 0 },
+            "setupTime_hours": {
+              "type": "number",
+              "minimum": 0,
+              "description": "Tiempo de instalación en nuevo sitio (Apis Cor: <1h)."
+            }
+          }
+        },
+        "siteRequirements": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "minPlotArea_m2": { "type": "number" },
+            "powerRequirement_kW": { "type": "number" },
+            "waterRequirement_L_per_hour": { "type": "number" },
+            "craneRequired": { "type": "boolean" }
+          }
+        },
+        "automation": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "controlSystem": { "type": "string", "description": "Sistema de control (ej: MAGWARE, CUSTOM_CNC, ROS2)." },
+            "hasAutoLubrication": { "type": "boolean" },
+            "hasRemoteMonitoring": { "type": "boolean" },
+            "programmingLanguage": { "type": "string", "description": "Lenguaje de programación del sistema (ej: G-CODE, PROPRIETARY)." }
+          }
+        }
+      }
+    },
+
+    "ExtensionMachinery": {
+      "type": "object",
+      "title": "Extensión: Maquinaria Industrial",
+      "description": "Campos específicos para maquinaria pesada, equipos industriales, vehículos de trabajo.",
+      "required": ["machineType", "operatingSpecs"],
+      "additionalProperties": false,
+      "properties": {
+        "machineType": {
+          "type": "string",
+          "enum": [
+            "EXCAVATOR",
+            "CRAWLER_CRANE",
+            "MOBILE_CRANE",
+            "TOWER_CRANE",
+            "FORKLIFT",
+            "WHEEL_LOADER",
+            "BULLDOZER",
+            "CONCRETE_PUMP",
+            "PILING_RIG",
+            "INDUSTRIAL_PRESS",
+            "CNC_MACHINE",
+            "INJECTION_MOLDER",
+            "MINING_DRILL",
+            "COMPACTOR",
+            "GRADER",
+            "OTHER_HEAVY"
+          ],
+          "description": "Tipo de maquinaria."
+        },
+        "operatingSpecs": {
+          "type": "object",
+          "required": ["enginePower_kW", "operatingWeight_kg"],
+          "additionalProperties": false,
+          "properties": {
+            "enginePower_kW": { "type": "number", "minimum": 0 },
+            "engineModel": { "type": "string" },
+            "fuelType": {
+              "type": "string",
+              "enum": ["DIESEL", "ELECTRIC", "HYBRID_DIESEL_ELECTRIC", "HYDROGEN", "LNG", "BIODIESEL"],
+              "description": "Tipo de combustible o fuente de energía."
+            },
+            "fuelCapacity_L": { "type": "number", "minimum": 0 },
+            "operatingWeight_kg": { "type": "number", "minimum": 0 },
+            "maxLoadCapacity_kg": {
+              "type": "number",
+              "minimum": 0,
+              "description": "Capacidad máxima de carga. Usado por modelo de depreciación LOAD_BASED."
+            },
+            "maxReach_m": { "type": "number", "minimum": 0 },
+            "maxDigDepth_m": { "type": "number", "minimum": 0, "description": "Profundidad máxima de excavación. Solo excavadoras." },
+            "maxLiftHeight_m": { "type": "number", "minimum": 0, "description": "Altura máxima de elevación. Solo grúas y carretillas." },
+            "travelSpeed_km_h": { "type": "number", "minimum": 0 },
+            "undercarriageType": {
+              "type": "string",
+              "enum": ["CRAWLER", "WHEELED", "RAIL", "NONE"],
+              "description": "Tipo de tren de rodaje."
+            }
+          }
+        },
+        "usageHistory": {
+          "type": "object",
+          "description": "Historial acumulado de uso. Debe mantenerse sincronizado con OperationalMetrics on-chain.",
+          "additionalProperties": false,
+          "properties": {
+            "totalHours": { "type": "number", "minimum": 0 },
+            "maxLifetimeHours": { "type": "number", "minimum": 0 },
+            "totalLoadLifted_t": {
+              "type": "number",
+              "minimum": 0,
+              "description": "Toneladas totales levantadas. Usado por LOAD_BASED depreciation."
+            },
+            "maxLoadLifetime_t": { "type": "number", "minimum": 0 },
+            "majorOverhaulHistory": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": ["date", "description"],
+                "properties": {
+                  "date": { "type": "integer" },
+                  "hoursAtOverhaul": { "type": "number" },
+                  "description": { "type": "string" },
+                  "cost_usd": { "type": "number" },
+                  "provider": { "type": "string" }
+                }
+              }
+            }
+          }
+        },
+        "attachments": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Accesorios incluidos en la venta (ej: ['BUCKET_1.5m3', 'HYDRAULIC_HAMMER', 'GRAPPLE'])."
+        },
+        "emissionsStandard": {
+          "type": "string",
+          "enum": ["STAGE_V", "STAGE_IV", "TIER_4F", "TIER_4I", "TIER_3", "ZERO_EMISSION", "NONE"],
+          "description": "Estándar de emisiones de motores de combustión. Crítico para operar en UE."
+        }
+      }
+    },
+
+    "ExtensionEnergy": {
+      "type": "object",
+      "title": "Extensión: Energía Distribuida",
+      "description": "Campos específicos para generación solar, eólica, sistemas de almacenamiento y transformadores.",
+      "required": ["energyType", "capacitySpecs"],
+      "additionalProperties": false,
+      "properties": {
+        "energyType": {
+          "type": "string",
+          "enum": [
+            "SOLAR_PV",
+            "WIND_TURBINE",
+            "DIESEL_GENERATOR",
+            "GAS_GENERATOR",
+            "HYDROGEN_FUEL_CELL",
+            "BATTERY_STORAGE",
+            "TRANSFORMER",
+            "INVERTER_STATION",
+            "HVDC_CONVERTER",
+            "BIOGAS_PLANT",
+            "MICRO_HYDRO"
+          ],
+          "description": "Tipo de equipo de energía."
+        },
+        "capacitySpecs": {
+          "type": "object",
+          "required": ["nominalPower_kW"],
+          "additionalProperties": false,
+          "properties": {
+            "nominalPower_kW": { "type": "number", "minimum": 0, "description": "Potencia nominal en kW." },
+            "peakPower_kW": { "type": "number", "minimum": 0 },
+            "annualProduction_kWh": {
+              "type": "number",
+              "minimum": 0,
+              "description": "Producción anual estimada en kWh. Base para modelo depreciación EFFICIENCY_BASED."
+            },
+            "efficiency_pct": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100,
+              "description": "Eficiencia de conversión actual. Usado por EFFICIENCY_BASED depreciation."
+            },
+            "baselineEfficiency_pct": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100,
+              "description": "Eficiencia en estado nuevo (Day-1)."
+            },
+            "degradationRate_pct_per_year": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100,
+              "description": "Tasa de degradación anual. Solar PV típico: 0.5-0.7%/año."
+            },
+            "storageCapacity_kWh": {
+              "type": "number",
+              "minimum": 0,
+              "description": "Capacidad de almacenamiento en kWh. Solo para BATTERY_STORAGE."
+            },
+            "roundTripEfficiency_pct": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100,
+              "description": "Eficiencia round-trip del almacenamiento. Solo para BATTERY_STORAGE."
+            }
+          }
+        },
+        "gridConnection": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "connectionType": {
+              "type": "string",
+              "enum": ["ON_GRID", "OFF_GRID", "HYBRID", "MICROGRID"],
+              "description": "Tipo de conexión a red eléctrica."
+            },
+            "voltage_V": { "type": "number", "minimum": 0, "description": "Tensión nominal en voltios." },
+            "frequency_Hz": { "type": "number", "enum": [50, 60], "description": "Frecuencia de red (50Hz EU, 60Hz AMER)." },
+            "gridOperator": { "type": "string" },
+            "gridAccessPoint": { "type": "string" }
+          }
+        },
+        "installation": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "type": {
+              "type": "string",
+              "enum": ["ROOFTOP", "GROUND_MOUNTED", "FLOATING", "OFFSHORE", "BUILDING_INTEGRATED", "STANDALONE"],
+              "description": "Tipo de instalación."
+            },
+            "installedAt": { "type": "integer", "description": "Unix timestamp de la fecha de puesta en marcha." },
+            "tiltAngle_deg": { "type": "number", "description": "Ángulo de inclinación de paneles solares." },
+            "orientation_deg": { "type": "number", "description": "Orientación azimutal (0=Norte, 180=Sur)." },
+            "hubHeight_m": { "type": "number", "description": "Altura del buje. Solo turbinas eólicas." },
+            "rotorDiameter_m": { "type": "number", "description": "Diámetro del rotor. Solo turbinas eólicas." }
+          }
+        },
+        "regulatoryRegistration": {
+          "type": "object",
+          "description": "Registro regulatorio ante autoridades de energía.",
+          "additionalProperties": false,
+          "properties": {
+            "registrationNumber": { "type": "string" },
+            "authority": { "type": "string", "description": "Autoridad reguladora (ej: CNMC, FERC, OFGEM)." },
+            "country": { "type": "string", "pattern": "^[A-Z]{2}$" },
+            "registrationDate": { "type": "integer" },
+            "expiryDate": { "type": "integer" }
+          }
+        }
+      }
+    },
+
+    "ExtensionLogistics": {
+      "type": "object",
+      "title": "Extensión: Logística y Transporte",
+      "description": "Campos específicos para contenedores, vehículos de transporte, almacenes y activos de infraestructura logística.",
+      "required": ["assetSubtype", "capacity"],
+      "additionalProperties": false,
+      "properties": {
+        "assetSubtype": {
+          "type": "string",
+          "enum": [
+            "ISO_CONTAINER_20FT",
+            "ISO_CONTAINER_40FT",
+            "ISO_CONTAINER_HC",
+            "REEFER_CONTAINER",
+            "TANK_CONTAINER",
+            "FLAT_RACK_CONTAINER",
+            "SEMI_TRAILER",
+            "ARTICULATED_TRUCK",
+            "RIGID_TRUCK",
+            "RAIL_WAGON",
+            "RO_RO_VESSEL",
+            "BULK_CARRIER",
+            "CONTAINER_VESSEL",
+            "WAREHOUSE_AUTOMATED",
+            "WAREHOUSE_CONVENTIONAL",
+            "DISTRIBUTION_CENTER",
+            "COLD_CHAIN_FACILITY"
+          ],
+          "description": "Subtipo de activo logístico."
+        },
+        "capacity": {
+          "type": "object",
+          "required": ["maxPayload_kg"],
+          "additionalProperties": false,
+          "properties": {
+            "maxPayload_kg": { "type": "number", "minimum": 0 },
+            "volume_m3": { "type": "number", "minimum": 0 },
+            "TEU": {
+              "type": "number",
+              "minimum": 0,
+              "description": "Equivalente en Twenty-foot Equivalent Units. Solo para contenedores estándar."
+            },
+            "floorArea_m2": { "type": "number", "minimum": 0, "description": "Superficie útil. Para almacenes." },
+            "rackingCapacity_pallets": { "type": "integer", "minimum": 0, "description": "Capacidad de paletización. Para almacenes." },
+            "axleCount": { "type": "integer", "minimum": 0, "description": "Número de ejes. Para vehículos." },
+            "maxSpeed_km_h": { "type": "number", "minimum": 0, "description": "Velocidad máxima de servicio. Para vehículos." }
+          }
+        },
+        "mobility": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "mode": {
+              "type": "string",
+              "enum": ["FIXED", "ROAD", "RAIL", "SEA", "AIR", "MULTIMODAL"],
+              "description": "Modo de transporte."
+            },
+            "registrationNumber": {
+              "type": "string",
+              "description": "Matrícula, IMO number (buques) o número de registro del vehículo."
+            },
+            "flagCountry": {
+              "type": "string",
+              "pattern": "^[A-Z]{2}$",
+              "description": "País de bandera para buques. ISO 3166-1 alpha-2."
+            },
+            "imoNumber": {
+              "type": "string",
+              "pattern": "^IMO[0-9]{7}$",
+              "description": "Número IMO para embarcaciones."
+            },
+            "licenseClass": { "type": "string", "description": "Clase de licencia requerida para operar." }
+          }
+        },
+        "usageMetrics": {
+          "type": "object",
+          "description": "Métricas de uso acumuladas del activo logístico.",
+          "additionalProperties": false,
+          "properties": {
+            "totalKm": { "type": "number", "minimum": 0, "description": "Kilómetros totales recorridos. Para vehículos de carretera." },
+            "totalTrips": { "type": "integer", "minimum": 0, "description": "Número total de viajes completados." },
+            "totalTEUsMoved": { "type": "number", "minimum": 0, "description": "TEUs movidos totales. Para buques portacontenedores." },
+            "utilizationRate_pct": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100,
+              "description": "Porcentaje de utilización promedio (ocupación / capacidad total)."
+            },
+            "lastTripDate": { "type": "integer" },
+            "currentLocation": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "lat": { "type": "number" },
+                "lng": { "type": "number" },
+                "updatedAt": { "type": "integer" },
+                "provider": { "type": "string", "description": "Proveedor GPS/AIS." }
+              }
+            }
+          }
+        },
+        "specialFeatures": {
+          "type": "object",
+          "description": "Características especiales del activo logístico.",
+          "additionalProperties": false,
+          "properties": {
+            "isRefrigerated": {
+              "type": "boolean",
+              "description": "El activo tiene capacidad de refrigeración (reefer)."
+            },
+            "temperatureRange": {
+              "type": "object",
+              "description": "Rango de temperatura para activos refrigerados.",
+              "properties": {
+                "min_C": { "type": "number" },
+                "max_C": { "type": "number" }
+              }
+            },
+            "isHazmatCertified": { "type": "boolean", "description": "Certificado para transporte de materiales peligrosos (ADR/IMDG/IATA)." },
+            "hazmatClasses": {
+              "type": "array",
+              "items": { "type": "string" },
+              "description": "Clases de mercancías peligrosas autorizadas (ej: ['3', '8'])."
+            },
+            "hasAutomatedSorting": { "type": "boolean", "description": "Sistema de clasificación automática. Para almacenes." },
+            "crane_SWL_t": { "type": "number", "description": "Safe Working Load de grúa incorporada, en toneladas." }
+          }
+        }
+      }
+    }
+
+  }
+}

@@ -1,0 +1,179 @@
+{
+  "schemaVersion": "BASHOOD-RWA-1.0",
+
+  "name": "Parque Solar Agrovoltaico Murcia — Bloque C (1.8 MWp)",
+  "description": "Instalación fotovoltaica agrovoltaica de 1.8 MWp ubicada en Murcia, España. Compuesta por 3.960 módulos bifaciales Jinko Solar Tiger Pro 455W sobre seguidores solares de un eje. Inversor central Huawei SUN2000. Producción anual estimada: 3.240 MWh. Conectada a red MT 20kV. La instalación combina generación de energía renovable con cultivos bajo los módulos (tomate cherry). Registrada en el Registro de Instalaciones de Producción de Energía Eléctrica (RIPRE) de la CNMC.",
+  "image": "ipfs://QmEnergySolarMurcia001Photo",
+  "external_url": "https://app.bashood.com/assets/312",
+
+  "assetClass": "ENERGY",
+
+  "protocol": {
+    "contractAddress": "0x0000000000000000000000000000000000000000",
+    "tokenId": 312,
+    "chainId": 8453,
+    "standard": "BASHOOD-RWA-1",
+    "mintedAt": 1743200000,
+    "mintedBy": "0x0000000000000000000000000000000000000001",
+    "metadataCID": "QmSolarMurcia001MetadataHash"
+  },
+
+  "identification": {
+    "serialNumber": "CNMC-RIPRE-MU-2023-04471",
+    "manufacturer": "Jinko Solar",
+    "model": "Tiger Pro 455W Bifacial — Instalación Agrovoltaica 1.8MWp",
+    "yearManufactured": 2023,
+    "countryOfOrigin": "ES"
+  },
+
+  "condition": {
+    "status": "OPERATIONAL",
+    "operatingHours": 6840,
+    "maxLifetimeHours": 219000,
+    "conditionGrade": "EXCELLENT",
+    "inspectionDate": 1740500000,
+    "inspectionProvider": "DNV Renewables Advisory",
+    "notes": "Inspección termográfica anual completada sin hotspots detectados. Eficiencia medida 98.3% vs baseline. Seguidores solares operando dentro de especificaciones. Sin módulos degradados fuera del rango normal (<0.5%/año)."
+  },
+
+  "financials": {
+    "purchasePrice": 1620000,
+    "currency": "EUR",
+    "depreciationModel": "EFFICIENCY_BASED",
+    "residualValuePct": 10,
+    "annualMaintenancePct": 1.8,
+    "insurancePremiumPct": 0.5,
+    "acquisitionDate": 1694000000,
+    "lastAppraisalValue": 1598000,
+    "lastAppraisalDate": 1740500000,
+    "appraisalProvider": "DNV Renewables Advisory"
+  },
+
+  "location": {
+    "country": "ES",
+    "region": "Región de Murcia",
+    "city": "Torre Pacheco",
+    "coordinates": { "lat": 37.7400, "lng": -0.9500 },
+    "what3words": "///solar.murcia.campo",
+    "locationType": "FIXED_SITE",
+    "updatedAt": 1743200000
+  },
+
+  "documents": [
+    {
+      "type": "TECHNICAL_DATASHEET",
+      "uri": "ipfs://QmDatasheetSolarMurcia001",
+      "sha256": "e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6a7b8c9d0e1f2",
+      "name": "Proyecto de instalación solar fotovoltaica — Expediente completo",
+      "mimeType": "application/pdf",
+      "issuedBy": "Ingeniería Solar Mediterráneo S.L.",
+      "issuedAt": 1690000000
+    },
+    {
+      "type": "CERTIFICATION",
+      "uri": "ipfs://QmRIPRESolarMurcia001",
+      "sha256": "f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6a7b8c9d0e1f2a3",
+      "name": "Resolución de inscripción RIPRE — CNMC",
+      "mimeType": "application/pdf",
+      "issuedBy": "CNMC — Comisión Nacional de los Mercados y la Competencia",
+      "issuedAt": 1698000000
+    },
+    {
+      "type": "INSPECTION_REPORT",
+      "uri": "ipfs://QmInspectionSolarMurcia2025",
+      "sha256": "a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6a7b8c9d0e1f2a3b4",
+      "name": "Informe inspección termográfica 2025 — DNV",
+      "mimeType": "application/pdf",
+      "issuedBy": "DNV Renewables Advisory Spain",
+      "issuedAt": 1740500000
+    },
+    {
+      "type": "LEGAL_TITLE",
+      "uri": "ipfs://QmConcesionSolarMurcia001",
+      "sha256": "b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5",
+      "name": "Autorización administrativa y licencia de obras — Ayto. Torre Pacheco",
+      "mimeType": "application/pdf",
+      "issuedBy": "Ayuntamiento de Torre Pacheco",
+      "issuedAt": 1693000000
+    },
+    {
+      "type": "PHOTO_PRIMARY",
+      "uri": "ipfs://QmPhotoSolarMurcia001Aerial",
+      "sha256": "c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6",
+      "name": "Fotografía aérea drone — Vista general campo solar",
+      "mimeType": "image/jpeg",
+      "issuedAt": 1740500000
+    }
+  ],
+
+  "certifications": [
+    {
+      "type": "ISO_9001",
+      "status": "ACTIVE",
+      "issuedBy": "AENOR",
+      "issuedAt": 1698000000,
+      "expiresAt": 1793000000,
+      "certificateNumber": "AENOR-9001-2023-ES-71422"
+    },
+    {
+      "type": "ISO_14001",
+      "status": "ACTIVE",
+      "issuedBy": "AENOR",
+      "issuedAt": 1698000000,
+      "expiresAt": 1793000000,
+      "certificateNumber": "AENOR-14001-2023-ES-71422"
+    }
+  ],
+
+  "telemetry": {
+    "hasRealTimeAPI": true,
+    "provider": "HUAWEI_FUSIONSOLAR",
+    "oracleAddress": "0x0000000000000000000000000000000000000004",
+    "dataFrequency": "REAL_TIME",
+    "metrics": [
+      "ACTIVE_POWER_KW",
+      "DAILY_YIELD_KWH",
+      "TOTAL_YIELD_KWH",
+      "PR_PERFORMANCE_RATIO",
+      "IRRADIANCE_W_M2",
+      "MODULE_TEMP_C",
+      "INVERTER_EFFICIENCY_PCT",
+      "GRID_FREQUENCY_HZ",
+      "GRID_VOLTAGE_V",
+      "CO2_AVOIDED_KG"
+    ]
+  },
+
+  "extensions": {
+    "energy": {
+      "energyType": "SOLAR_PV",
+      "capacitySpecs": {
+        "nominalPower_kW": 1800,
+        "peakPower_kW": 1980,
+        "annualProduction_kWh": 3240000,
+        "efficiency_pct": 22.1,
+        "baselineEfficiency_pct": 22.5,
+        "degradationRate_pct_per_year": 0.55
+      },
+      "gridConnection": {
+        "connectionType": "ON_GRID",
+        "voltage_V": 20000,
+        "frequency_Hz": 50,
+        "gridOperator": "Iberdrola Distribución Eléctrica",
+        "gridAccessPoint": "CT-TORRE-PACHECO-MU-04"
+      },
+      "installation": {
+        "type": "GROUND_MOUNTED",
+        "installedAt": 1698000000,
+        "tiltAngle_deg": 0,
+        "orientation_deg": 180
+      },
+      "regulatoryRegistration": {
+        "registrationNumber": "CNMC-RIPRE-MU-2023-04471",
+        "authority": "CNMC",
+        "country": "ES",
+        "registrationDate": 1698000000
+      }
+    }
+  }
+}

@@ -21,7 +21,7 @@ describe("BashoodPresaleFinal", function () {
     // Use the existing ReferralValidator contract (no MockValidator in repo)
   const Validator = await ethers.getContractFactory("ReferralValidator");
   const fakePresaleAddress = "0x1000000000000000000000000000000000000001";
-  validator = await Validator.deploy(fakePresaleAddress);
+  validator = await Validator.deploy(fakePresaleAddress, ethers.ZeroAddress, 0, 0);
     await validator.waitForDeployment();
     const validatorAddress = await validator.getAddress();
 

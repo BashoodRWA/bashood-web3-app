@@ -1,0 +1,181 @@
+{
+  "schemaVersion": "BASHOOD-RWA-1.0",
+
+  "name": "EVOCONS EVOBLOCK-500 #001 — Impresora 3D Pórtico de Construcción",
+  "description": "Impresora 3D de construcción tipo pórtico de gran formato fabricada por EVOCONS (España). Capacidad de imprimir estructuras de hormigón de hasta 500m² en planta. Sistema de lubricación automática y telemetría en tiempo real EVOCONS_REALTIME. Propulsada por sistema CNC propio con extrusión continua. Dedicada a proyectos de vivienda asequible en Europa.",
+  "image": "ipfs://QmConstruction001PrimaryPhoto",
+  "external_url": "https://app.bashood.com/assets/201",
+
+  "assetClass": "CONSTRUCTION",
+
+  "protocol": {
+    "contractAddress": "0x0000000000000000000000000000000000000000",
+    "tokenId": 201,
+    "chainId": 8453,
+    "standard": "BASHOOD-RWA-1",
+    "mintedAt": 1743000000,
+    "mintedBy": "0x0000000000000000000000000000000000000001",
+    "metadataCID": "QmEVOBLOCK001MetadataHash"
+  },
+
+  "identification": {
+    "serialNumber": "EVBL-2024-ES-0001",
+    "manufacturer": "EVOCONS",
+    "model": "EVOBLOCK-500",
+    "yearManufactured": 2024,
+    "countryOfOrigin": "ES"
+  },
+
+  "condition": {
+    "status": "OPERATIONAL",
+    "operatingHours": 1247,
+    "maxLifetimeHours": 40000,
+    "conditionGrade": "EXCELLENT",
+    "inspectionDate": 1742500000,
+    "inspectionProvider": "TÜV Rheinland Iberia",
+    "notes": "Primera inspección mayor completada a las 1000h. Sin anomalías estructurales. Cabezal de extrusión reemplazado preventivamente según protocolo fabricante."
+  },
+
+  "financials": {
+    "purchasePrice": 285000,
+    "currency": "EUR",
+    "depreciationModel": "LOAD_BASED",
+    "residualValuePct": 15,
+    "annualMaintenancePct": 3,
+    "insurancePremiumPct": 1.5,
+    "acquisitionDate": 1720000000,
+    "lastAppraisalValue": 271500,
+    "lastAppraisalDate": 1742500000,
+    "appraisalProvider": "Tasaciones Inmobiliarias y Maquinaria S.L."
+  },
+
+  "location": {
+    "country": "ES",
+    "region": "Cataluña",
+    "city": "Sabadell",
+    "coordinates": { "lat": 41.5494, "lng": 2.1056 },
+    "locationType": "FIXED_SITE",
+    "updatedAt": 1743000000
+  },
+
+  "documents": [
+    {
+      "type": "PURCHASE_INVOICE",
+      "uri": "ipfs://QmInvoiceEVOBLOCK001",
+      "sha256": "a3f8d2c1b4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1",
+      "name": "Factura de compra EVOBLOCK-500",
+      "mimeType": "application/pdf",
+      "issuedBy": "EVOCONS S.L.",
+      "issuedAt": 1720000000
+    },
+    {
+      "type": "TECHNICAL_DATASHEET",
+      "uri": "ipfs://QmDatasheetEVOBLOCK500",
+      "sha256": "b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3",
+      "name": "Ficha técnica EVOBLOCK-500 v3.1",
+      "mimeType": "application/pdf",
+      "issuedBy": "EVOCONS I+D",
+      "issuedAt": 1700000000
+    },
+    {
+      "type": "CERTIFICATION",
+      "uri": "ipfs://QmCEMarkEVOBLOCK001",
+      "sha256": "c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4",
+      "name": "Certificado CE Marca — Directiva Maquinaria 2006/42/CE",
+      "mimeType": "application/pdf",
+      "issuedBy": "TÜV Rheinland",
+      "issuedAt": 1715000000,
+      "expiresAt": 1778000000
+    },
+    {
+      "type": "INSPECTION_REPORT",
+      "uri": "ipfs://QmInspection1000hEVOBLOCK001",
+      "sha256": "d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5",
+      "name": "Informe inspección 1000 horas — TÜV Rheinland",
+      "mimeType": "application/pdf",
+      "issuedBy": "TÜV Rheinland Iberia",
+      "issuedAt": 1742500000
+    },
+    {
+      "type": "PHOTO_PRIMARY",
+      "uri": "ipfs://QmPhotoFrontEVOBLOCK001",
+      "sha256": "e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6",
+      "name": "Foto frontal — instalación en Sabadell",
+      "mimeType": "image/jpeg",
+      "issuedAt": 1742500000
+    }
+  ],
+
+  "certifications": [
+    {
+      "type": "CE_MARK",
+      "status": "ACTIVE",
+      "issuedBy": "TÜV Rheinland",
+      "issuedAt": 1715000000,
+      "expiresAt": 1778000000,
+      "certificateNumber": "TUV-CE-2024-EVBL-001",
+      "documentUri": "ipfs://QmCEMarkEVOBLOCK001"
+    },
+    {
+      "type": "ISO_9001",
+      "status": "ACTIVE",
+      "issuedBy": "Bureau Veritas",
+      "issuedAt": 1710000000,
+      "expiresAt": 1773000000,
+      "certificateNumber": "BV-9001-2024-ES-001"
+    }
+  ],
+
+  "telemetry": {
+    "hasRealTimeAPI": true,
+    "provider": "EVOCONS_REALTIME",
+    "oracleAddress": "0x0000000000000000000000000000000000000002",
+    "dataFrequency": "REAL_TIME",
+    "metrics": [
+      "OPERATING_HOURS",
+      "EXTRUSION_RATE_KG_H",
+      "NOZZLE_TEMPERATURE",
+      "MOTOR_VIBRATION",
+      "MATERIAL_LEVEL",
+      "GPS_POSITION",
+      "POWER_CONSUMPTION_KW"
+    ]
+  },
+
+  "extensions": {
+    "construction": {
+      "constructionType": "3D_PRINTER_GANTRY",
+      "mobilityClass": "FIXED",
+      "printSpecs": {
+        "buildVolumeX_m": 20,
+        "buildVolumeY_m": 14,
+        "buildVolumeZ_m": 9,
+        "printSpeed_m_per_hour": 3.5,
+        "layerHeight_mm": 40,
+        "nozzleDiameter_mm": 50,
+        "materialTypes": ["CONCRETE", "MORTAR", "GEOPOLYMER"],
+        "materialPSI": 5000,
+        "extrusionRate_kg_per_hour": 380
+      },
+      "output": {
+        "maxFloorArea_m2_per_print": 280,
+        "typicalBuildTime_hours": 72,
+        "storiesCapacity": 3,
+        "annualUnitsCapacity": 22,
+        "setupTime_hours": 8
+      },
+      "siteRequirements": {
+        "minPlotArea_m2": 350,
+        "powerRequirement_kW": 45,
+        "waterRequirement_L_per_hour": 600,
+        "craneRequired": false
+      },
+      "automation": {
+        "controlSystem": "EVOCONS_CNC_V4",
+        "hasAutoLubrication": true,
+        "hasRemoteMonitoring": true,
+        "programmingLanguage": "G-CODE"
+      }
+    }
+  }
+}

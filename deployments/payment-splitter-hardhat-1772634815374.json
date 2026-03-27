@@ -1,0 +1,17 @@
+{
+  "network": "hardhat",
+  "timestamp": "2026-03-04T14:33:35.374Z",
+  "paymentSplitter": "0x5FbDB2315678afecb367f032d93F642f64180aa3",
+  "wallets": {
+    "development": "0x0370C18DD149355057CDDD3E636CcF5C97Bf098e",
+    "operations": "0x70997970C51812dc3A010C7d01b50e0d17dc79C8",
+    "marketing": "0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC",
+    "treasury": "0xE4dE660B6EfD0241f827c0f17CEe721aC5F44afE"
+  },
+  "distribution": {
+    "development": "45%",
+    "operations": "25%",
+    "marketing": "20%",
+    "treasury": "10%"
+  }
+}

@@ -46,6 +46,7 @@ contract BashoodPresaleInvariantTest is Test {
             address(nft),
             address(referral),
             payable(TREASURY),
+            address(0x5678), // _operationsWallet
             0.1 ether,  // nftPriceETH
             1000 * 10**18, // nftPriceBHT
             block.timestamp,

@@ -35,7 +35,7 @@ describe('Presale focused coverage', function () {
   await price.waitForDeployment();
 
     const Ref = await ethers.getContractFactory('ReferralValidator');
-    const ref = await Ref.deploy(await owner.getAddress());
+    const ref = await Ref.deploy(await owner.getAddress(), ethers.ZeroAddress, 0, 0);
     await ref.waitForDeployment();
 
     const bhtAddr = (typeof bht.getAddress === 'function') ? await bht.getAddress() : bht.address;
@@ -85,7 +85,7 @@ describe('Presale focused coverage', function () {
     await price.waitForDeployment();
 
     const Ref = await ethers.getContractFactory('ReferralValidator');
-    const ref = await Ref.deploy(await owner.getAddress());
+    const ref = await Ref.deploy(await owner.getAddress(), ethers.ZeroAddress, 0, 0);
     await ref.waitForDeployment();
 
     const bhtAddr = (typeof bht.getAddress === 'function') ? await bht.getAddress() : bht.address;

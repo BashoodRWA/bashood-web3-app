@@ -16,12 +16,12 @@ describe('Targeted branches and edge cases', function () {
   it('ReferralValidator: constructor and isValid', async function () {
     const Ref = await ethers.getContractFactory('ReferralValidator');
     // valid deploy
-    const ref = await Ref.deploy(owner.address);
+    const ref = await Ref.deploy(owner.address, ethers.ZeroAddress, 0, 0);
   expect(await ref.isValid(owner.address)).to.equal(true);
   expect(await ref.isValid(ZERO_ADDRESS)).to.equal(false);
 
     // invalid deploy should revert
-  await expect(Ref.deploy(ZERO_ADDRESS)).to.be.revertedWith('Invalid owner');
+  await expect(Ref.deploy(ZERO_ADDRESS, ethers.ZeroAddress, 0, 0)).to.be.revertedWith('Invalid owner');
   });
 
   it('BashoodMultiToken: mint/mintBatch edge cases, mintAllNFTs and withdraw', async function () {
@@ -67,7 +67,7 @@ describe('Targeted branches and edge cases', function () {
     await mockNFT.waitForDeployment();
 
     const Ref = await ethers.getContractFactory('ReferralValidator');
-    const ref = await Ref.deploy(owner.address);
+    const ref = await Ref.deploy(owner.address, ethers.ZeroAddress, 0, 0);
     await ref.waitForDeployment();
 
     const mockERCAddr = (typeof mockERC.getAddress === 'function') ? await mockERC.getAddress() : mockERC.address;

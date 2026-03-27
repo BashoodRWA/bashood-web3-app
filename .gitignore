@@ -11,6 +11,18 @@ cache/
 # Hardhat artifacts
 artifacts/
 
+# Foundry build artifacts (regenerados con `forge build`)
+out/
+cache_forge/
+forge-cache/
+forge-out/
+forge-results.txt
+forge-vvv-output.txt
+forge_fuzz_tmp.txt
+
+# Audit pipeline — reportes generados (no se versionan, se regeneran)
+reports/
+
 # backup files
 .github/workflows/ci.yml.bak
 

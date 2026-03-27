@@ -119,7 +119,9 @@ describe("Coverage: BashoodReferral focused tests", function () {
     await expect(referral.connect(referred).registerReferral(await referrer.getAddress())).to.be.revertedWith("Already referred");
 
     expect(await referral.getReferrerOf(await referred.getAddress())).to.equal(await referrer.getAddress());
-    expect(await referral.getReferralCount(await referrer.getAddress())).to.equal(1);
+    // H-03 fix: registerReferral no longer increments referralCount.
+    // Only rewardReferrer (called by the presale on a real purchase) does.
+    expect(await referral.getReferralCount(await referrer.getAddress())).to.equal(0);
   });
 
   it("covers claimNFT success and failure paths", async function () {
@@ -135,10 +137,12 @@ describe("Coverage: BashoodReferral focused tests", function () {
     // not enough referrals -> revert
     await expect(referral.connect(referrer).claimNFT()).to.be.revertedWith("Not enough referrals to claim");
 
-    // increase referral count by having three different accounts register referrer
-    await referral.connect(ref1).registerReferral(await referrer.getAddress());
-    await referral.connect(ref2).registerReferral(await referrer.getAddress());
-    await referral.connect(ref3).registerReferral(await referrer.getAddress());
+    // H-03 fix: referralCount can only be incremented via rewardReferrer (real purchases),
+    // NOT via registerReferral. Use owner (= presaleAddress in this deployment) to simulate
+    // three real purchases that credit the referrer.
+    await referral.connect(owner).rewardReferrer(await ref1.getAddress(), await referrer.getAddress());
+    await referral.connect(owner).rewardReferrer(await ref2.getAddress(), await referrer.getAddress());
+    await referral.connect(owner).rewardReferrer(await ref3.getAddress(), await referrer.getAddress());
 
     expect(await referral.getReferralCount(await referrer.getAddress())).to.equal(3);
 

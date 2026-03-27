@@ -80,7 +80,7 @@ describe("BashoodRWAReference - Depreciation Integration", function () {
     const tokenId = event.args.tokenId;
 
     // Obtener depreciación real
-    const dep = await rwa.getDepreciation(tokenId);
+    const dep = await rwa.getDepreciationPercentage(tokenId);
     console.log("Depreciation real:", dep.toString());
 
     // Comparar con valor esperado

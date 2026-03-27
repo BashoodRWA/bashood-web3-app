@@ -73,6 +73,7 @@ contract PresaleFuzzingTest is Test {
             address(nft),
             address(referral),
             payable(address(paymentSplitter)),
+            operations, // _operationsWallet
             NFT_PRICE_ETH,
             NFT_PRICE_BHT,
             PRESALE_START,
