@@ -47,12 +47,12 @@
 
 | Severity   | Count | Status                                             |
 |------------|-------|----------------------------------------------------|
-| 🔴 HIGH    | 3     | Requires fix before external audit                 |
+| 🔴 HIGH    | 3     | ✅ **RESOLVED** — post v0.4-audit-stable            |
 | 🟠 MEDIUM  | 5     | Requires fix or explicit risk acceptance           |
 | 🟡 LOW     | 7     | Recommended to fix; low immediate risk             |
 | ℹ️ INFO  | 4     | Informational / best-practice suggestions          |
 
-**Critical path:** H-01 (DoS unbounded loops) and H-03 (Referral Sybil attack) are blocking issues that must be resolved before mainnet deployment.
+**Critical path:** H-01 (DoS unbounded loops) and H-03 (Referral Sybil attack) were blocking issues. **Both are RESOLVED — see v0.4-audit-stable changelog.**
 
 ---
 
@@ -473,7 +473,11 @@ Cross-referencing against the Foundry invariant suite (`BashoodCoreInvariant.t.s
 
 ---
 
-### 🔴 H-01 — DoS via Unbounded Loops in View Functions
+### ✅ H-01 — DoS via Unbounded Loops in View Functions [**RESOLVED**]
+
+> **Resolution (v0.4-audit-stable, 2026-03-28):** Paginated view functions added. Off-chain indexer pattern documented. Token-to-category mapping maintained at mint time.
+
+**Original finding — preserved for audit trail:**
 
 **Location:** `BashoodRWAReference.sol` — `getAssetsByCategory()`, `getAssetsByManufacturer()`, `getTotalAssetValue()`
 
@@ -511,7 +515,11 @@ Additionally, maintain an off-chain index (event-driven) or an on-chain category
 
 ---
 
-### 🔴 H-02 — ORACLE_ROLE Can Corrupt All Asset Depreciation via Full Struct Overwrite
+### ✅ H-02 — ORACLE_ROLE Can Corrupt All Asset Depreciation via Full Struct Overwrite [**RESOLVED**]
+
+> **Resolution (v0.4-audit-stable, 2026-03-28):** `receiveTelemetryData()` refactored to partial-update semantics. Reference maximums (`maxLifetimeHours`, `maxLoadLifetime`) now writable only by `ASSET_MANAGER_ROLE` at mint or via separate admin function. Oracle can only update telemetry counters.
+
+**Original finding — preserved for audit trail:**
 
 **Location:** `BashoodRWAReference.sol` — `receiveTelemetryData()`
 
@@ -550,7 +558,11 @@ function receiveTelemetryData(uint256 tokenId, OracleTelemetryUpdate calldata up
 
 ---
 
-### 🔴 H-03 — Referral Sybil Attack: Validator Disabled in Production Code
+### ✅ H-03 — Referral Sybil Attack: Validator Disabled in Production Code [**RESOLVED**]
+
+> **Resolution (v0.4-audit-stable, 2026-03-28):** Validator re-enabled. Sybil guard added: off-chain KYC signature required before `registerReferral()`. Minimum 48-hour hold period before referral count increments. `REQUIRED_REFERRALS` raised from 3 to 5.
+
+**Original finding — preserved for audit trail:**
 
 **Location:** `BashoodReferral.sol` — `registerReferral()` / `rewardReferrer()`
 
@@ -903,9 +915,9 @@ There is no on-chain mapping from `moduleId → (address, version, grantedRole)`
 
 | # | Finding | Priority | Effort |
 |---|---|---|---|
-| 1 | H-01: Add paginated getters; maintain category→tokenId mapping at mint | BLOCKING | Medium |
-| 2 | H-02: Separate oracle telemetry into partial-update interface | BLOCKING | Low |
-| 3 | H-03: Re-enable referral validator; add Sybil guard | BLOCKING | Low |
+| 1 | H-01: Add paginated getters; maintain category→tokenId mapping at mint | ✅ RESOLVED | Medium |
+| 2 | H-02: Separate oracle telemetry into partial-update interface | ✅ RESOLVED | Low |
+| 3 | H-03: Re-enable referral validator; add Sybil guard | ✅ RESOLVED | Low |
 | 4 | M-01: Remove burn fallback or properly account for dead-address transfers | HIGH | Low |
 | 5 | M-02: Transfer `UPGRADER_ROLE` to `BashoodTimelock` post-deploy | HIGH | Low |
 | 6 | L-07: Add pre-condition checks in `lockParameters()` | HIGH | Low |
@@ -938,11 +950,11 @@ There is no on-chain mapping from `moduleId → (address, version, grantedRole)`
 
 The Bashood protocol demonstrates solid foundational architecture: UUPS upgradeable Core with proper `__gap[50]` storage protection, well-separated roles (ASSET_MANAGER vs ORACLE vs UPGRADER), comprehensive Chainlink staleness checks, ECDSA replay protection in the presale, nonReentrant guards on all ETH-handling functions, and a mature Foundry invariant test suite (39/39 @ 10k runs).
 
-**Three issues require resolution before engaging external auditors:**
+**All three H-level blockers have been resolved as of v0.4-audit-stable (2026-03-28):**
 
-1. The O(n) unbounded loops (**H-01**) will fail at production scale — this requires an architectural change (event-sourced indexer + paginated on-chain views).
-2. The full-struct telemetry overwrite (**H-02**) creates a critical oracle manipulation path that undermines the core value proposition of the protocol.
-3. The disabled referral validator (**H-03**) combined with the trivially farmable `REQUIRED_REFERRALS = 3` threshold is an active Sybil vulnerability.
+1. The O(n) unbounded loops (**H-01**) — ✅ **RESOLVED**: paginated getters implemented, category→tokenId mapping maintained at mint.
+2. The full-struct telemetry overwrite (**H-02**) — ✅ **RESOLVED**: partial-update oracle interface, reference maximums protected.
+3. The disabled referral validator (**H-03**) — ✅ **RESOLVED**: validator re-enabled, Sybil guard added.
 
 With these three issues resolved, the codebase will be in a strong position for a formal external audit. The governance layer (Governor + Timelock) is correctly configured; the remaining gap is wiring `UPGRADER_ROLE` to the Timelock (**M-02**), which is a single configuration step at deployment time.
 
@@ -951,5 +963,6 @@ With these three issues resolved, the codebase will be in a strong position for 
 ---
 
 *Zenith Internal Security Review — Bashood Protocol v1.0*  
-*Generated: 2025-12-10 | Next step: External audit engagement after blocker resolution*  
+*Generated: 2025-12-10 | Updated: 2026-03-28 (v0.4-audit-stable) | H-01/H-02/H-03 RESOLVED*  
+*Next step: External audit engagement — codebase cleared of all HIGH blockers*  
 *This report is confidential. Do not distribute outside the Bashood engineering team.*

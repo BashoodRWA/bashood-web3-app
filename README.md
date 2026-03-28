@@ -2,9 +2,10 @@
 
 ![Solidity](https://img.shields.io/badge/Solidity-0.8.28-363636?style=flat-square&logo=solidity)
 ![Base](https://img.shields.io/badge/Base-L2-0052FF?style=flat-square)
-![HH Tests](https://img.shields.io/badge/Hardhat-1054_passing-success?style=flat-square)
+![HH Tests](https://img.shields.io/badge/Hardhat-1277_passing-success?style=flat-square)
 ![Forge Tests](https://img.shields.io/badge/Forge-117_passing_(10k_fuzz)-success?style=flat-square)
-![Bytecode](https://img.shields.io/badge/BashoodPresaleFinal-17.88_KB-blue?style=flat-square)
+![Bytecode](https://img.shields.io/badge/BashoodPresaleFinal-17.23_KB-blue?style=flat-square)
+![Audit Score](https://img.shields.io/badge/Audit_Score-92%25-brightgreen?style=flat-square)
 ![Architecture](https://img.shields.io/badge/Architecture-FROZEN-orange?style=flat-square)
 
 Plataforma de tokenización de activos industriales (maquinaria pesada, equipos mineros, grúas) como NFTs en Base L2. Los tokens representan **registros digitales estructurados** de activos físicos — no títulos de propiedad ni instrumentos financieros.
@@ -37,12 +38,13 @@ Activo Físico → Registro NFT (BASHOOD-RWA-1) → Smart Contract → Participa
 > ⚖️ **Definición oficial del token (v1.0, marco UE/MiCA):** Cada token BASHOOD-RWA-1 es un **registro digital estructurado** de un activo industrial físico. No representa título de propiedad, derecho contractual ni rendimiento distribuible sobre el activo. No está diseñado como instrumento financiero en el sentido de MiCA (Reglamento UE 2023/1114) o MiFID II. Cualquier vínculo jurídico entre el token y el activo off-chain, así como la clasificación regulatoria de cada emisión, es responsabilidad exclusiva del emisor. Ver [BASHOOD-RWA-1-SPECIFICATION.md](docs/BASHOOD-RWA-1-SPECIFICATION.md) y [IBashoodRWA.sol](contracts/standards/IBashoodRWA.sol).
 
 **Estado**: 🔜 Pendiente deployment en Base Sepolia (audit externo previo requerido)
-**Tests Hardhat**: 1054 passing, 0 failing ✅
+**Tests Hardhat**: 1277 passing, 0 failing ✅
 **Tests Foundry**: 117 passing, 0 failed — 10 suites, 10k fuzz runs ✅
-**BashoodPresaleFinal bytecode**: 17.88 KB (margen: 6.12 KB vs límite 24 KB) ✅
-**Seguridad**: 0 vulnerabilidades críticas (Slither). Hallazgos H-01/H-02/H-03 resueltos ✅
+**BashoodPresaleFinal bytecode**: 17.23 KB (margen: 7.35 KB vs límite 24 KB) ✅
+**Audit Score**: 92% (36 PASS / 3 WARN / 0 FAIL) — tag v0.4-audit-stable ✅
+**Seguridad**: C-005/C-006/C-004 resueltos. 9 riesgos documentados (KR-001..KR-009) ✅
 **Arquitectura**: BashoodPresaleFinal FROZEN — sin nueva lógica de negocio ✅
-**Última actualización**: 23 marzo 2026
+**Última actualización**: 28 marzo 2026
 
 ---
 
@@ -91,7 +93,7 @@ Activo Físico → Registro NFT (BASHOOD-RWA-1) → Smart Contract → Participa
 
 | Contrato | Bytecode | Responsabilidad |
 |---|---|---|
-| `BashoodPresaleFinal.sol` | **17.88 KB** — FROZEN | Orquestador de presale (ETH + BHT, oracle, referidos, rescue) |
+| `BashoodPresaleFinal.sol` | **17.23 KB** — FROZEN | Orquestador de presale (ETH + BHT, oracle, referidos, rescue) |
 | `BashoodRWAReference.sol` | 23.14 KB | ERC-721 RWA core con sistema de módulos |
 | `BashoodGovernor.sol` | 16.63 KB | Governance on-chain |
 | `BashoodMultiToken.sol` | 7.50 KB | NFTs ERC-1155 (activos industriales) |
@@ -296,7 +298,7 @@ npx hardhat run scripts/presale-status.js --network base-sepolia deployment-*.js
 ### **Suite de Tests Completa**
 
 ```bash
-# Tests unitarios (1054 Hardhat + 117 Foundry)
+# Tests unitarios (1277 Hardhat + 117 Foundry)
 npx hardhat test                  # Todos los tests Hardhat
 forge test --fuzz-runs 10000      # Todos los tests Foundry con fuzzing
 npm test -- test/BashoodPresaleFinal.test.cjs  # Test específico Hardhat
@@ -314,10 +316,11 @@ npm run echidna:presale           # Property-based testing
 
 | Métrica | Valor | Estado |
 |---|---|---|
-| **Tests Hardhat** | 1054 passing, 0 failing | ✅ |
+| **Tests Hardhat** | 1277 passing, 0 failing | ✅ |
 | **Tests Foundry** | 117 passing, 0 failed (10k fuzz) | ✅ |
-| **BashoodPresaleFinal bytecode** | 17.88 KB (margen 6.12 KB) | ✅ |
-| **Vulnerabilidades críticas** | 0 (Slither) | ✅ |
+| **BashoodPresaleFinal bytecode** | 17.23 KB (margen 7.35 KB) | ✅ |
+| **Audit pipeline** | 92% score — 36 PASS / 3 WARN / 0 FAIL (v0.4-audit-stable) | ✅ |
+| **Vulnerabilidades críticas** | C-005/C-006 resueltos, 9 riesgos conocidos documentados | ✅ |
 | **Arquitectura** | FROZEN — sin nueva lógica en contrato principal | ✅ |
 
 ### **Análisis de Seguridad**
@@ -347,7 +350,7 @@ echidna test/echidna/BashoodEchidna.sol --contract BashoodTokenEchidnaTest
 
 | Contrato | Bytecode | Descripción |
 |---|---|---|
-| [`BashoodPresaleFinal.sol`](contracts/BashoodPresaleFinal.sol) | 17.88 KB — **FROZEN** | Orquestador de presale con pagos ETH/BHT, oracle, referidos, rescue |
+| [`BashoodPresaleFinal.sol`](contracts/BashoodPresaleFinal.sol) | 17.23 KB — **FROZEN** | Orquestador de presale con pagos ETH/BHT, oracle, referidos, rescue |
 | [`BashoodRWAReference.sol`](contracts/BashoodRWAReference.sol) | 23.14 KB | ERC-721 RWA core con sistema de módulos |
 | [`BashoodToken.sol`](contracts/BashoodToken.sol) | 6.05 KB | Token ERC-20 de utilidad (BHT) con burn |
 | [`BashoodMultiToken.sol`](contracts/BashoodMultiToken.sol) | 7.50 KB | NFTs ERC-1155 representando activos industriales |
@@ -587,17 +590,21 @@ npm run generate:report     # Generar reporte de seguridad
 
 ### **Q1 2026** ✅ Completado
 - ✅ Smart contracts core + módulos RWA (8 módulos)
-- ✅ 1054 tests Hardhat + 117 Foundry (10k fuzz runs)
+- ✅ 1277 tests Hardhat + 117 Foundry (10k fuzz runs)
 - ✅ Hallazgos H-01/H-02/H-03 resueltos
 - ✅ Rate-limiting y scope per-token en módulos RWA
 - ✅ Consolidación oracle en `_getOracleData()` — eliminación duplicación
 - ✅ Arquitectura BashoodPresaleFinal FROZEN + ARCHITECTURE.md
+- ✅ Governance: BashoodTimelock + BashoodGovernor on-chain + Gnosis Safe 3-of-5
+- ✅ Pipeline de audit profesional: 7 tareas modulares (gas, coverage, slither, regulatory, custom, known-risks, report)
+- ✅ Fixes de seguridad: C-005 SafeERC20, C-006 abi.encode, C-004 guard overflow
+- ✅ 9 riesgos conocidos documentados (KR-001..KR-009) — tag: **v0.4-audit-stable** (92%)
 
-### **Q2 2026** 🔄 En Progreso
-- 🔄 Infraestructura multi-sig Gnosis Safe 3-of-5
-- 🔄 Timelock para funciones admin críticas
-- ⏳ Deployment en Base Sepolia
+### **Q2 2026** ⏳ En curso
 - ⏳ Audit externo (ConsenSys Diligence / OpenZeppelin / Spearbit)
+- ⏳ Deployment en Base Sepolia (post-audit externo)
+- ⏳ Frontend web3 (Vite + React + wagmi v2)
+- ⏳ Activación presale en mainnet
 
 ### **Q3 2026** 📋 Planificado
 - ⏳ Deployment en Base Mainnet

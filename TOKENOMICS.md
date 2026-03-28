@@ -1,8 +1,8 @@
 # 📊 BASHOOD TOKEN ECONOMICS (TOKENOMICS)
 
 **Documento de Economía del Token - Versión 1.0**  
-**Fecha:** 4 de marzo de 2026  
-**Estado:** v1.1 — Architecture Freeze Alineado  
+**Fecha:** 28 de marzo de 2026  
+**Estado:** v1.2 — Alineado con v0.4-audit-stable  
 **Preparado para:** Mainnet Launch, Auditoría Técnica, Revisión Legal Externa
 
 ---

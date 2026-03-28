@@ -1,6 +1,6 @@
 # Arquitectura del Proyecto Bashood
 
-## Estado: Cerrada para BashoodPresaleFinal (2026-03-23)
+## Estado: Cerrada para BashoodPresaleFinal (2026-03-28)
 
 ---
 
@@ -13,9 +13,9 @@ Orquestador de presale. Gestiona el flujo de compra (ETH y BHT), ciclo de vida d
 
 | Métrica | Valor | Fecha |
 |---|---|---|
-| Bytecode desplegado | 18,306 bytes (17.88 KB) | 2026-03-23 |
+| Bytecode desplegado | 17,641 bytes (17.23 KB) | 2026-03-28 |
 | Límite EVM (EIP-170) | 24,576 bytes (24.0 KB) | — |
-| Margen disponible | 6,270 bytes (6.12 KB) | 2026-03-23 |
+| Margen disponible | 6,935 bytes (6.77 KB) | 2026-03-28 |
 | Optimizer | `runs: 10`, `enabled: true` | — |
 | EVM target | `cancun` | — |
 
@@ -112,19 +112,40 @@ Los módulos siguen el patrón: **contratos independientes con ownership, invoca
 
 | Suite | Tests | Estado |
 |---|---|---|
-| Hardhat | 1054 passing | ✅ 0 failing |
+| Hardhat | **1277 passing** | ✅ 0 failing |
 | Forge (10k fuzz runs, 10 suites) | 117 passing | ✅ 0 failed |
 
 Cualquier PR que reduzca el número de tests sin justificación documentada es bloqueado.
 
 ---
 
+## 6b. Pipeline de Audit Profesional (v0.4-audit-stable)
+
+Hardhat expone 7 tareas de audit modulares ejecutables con `npx hardhat audit:full`:
+
+| Tarea | Propósito |
+|---|---|
+| `audit:gas` | GasReporter — detecta funciones > 200k gas |
+| `audit:coverage` | Istanbul — umbrales: statements 60%, branches 50%, líneas 65% |
+| `audit:slither` | Análisis estático — filtra findings conocidos |
+| `audit:regulatory` | Checks de compliance (USDT pausable, centralización) |
+| `audit:custom` | Detectores propios: C-004, C-005, C-006, R-011 |
+| `audit:known-risks` | 9 riesgos documentados (KR-001..KR-009) ACKNOWLEDGED |
+| `audit:report` | Reporte consolidado en Markdown |
+| `audit:full` | Orquestador — ejecuta los 7 anteriores y calcula score |
+
+**Score actual (tag v0.4-audit-stable):** **92%** — 36 PASS / 3 WARN (C-004, M-013, R-008 aceptados) / 0 FAIL
+
+---
+
 ## 7. Lo que falta antes de mainnet (no es arquitectura — es proceso)
 
 1. **Audit externo** — ConsenSys Diligence / OpenZeppelin / Spearbit. Contratar con el código en este estado exacto.
-2. **Infraestructura multi-sig** — Gnosis Safe 3-of-5 en Base Sepolia antes de testnet público.
+2. ✅ ~~Infraestructura multi-sig~~ — Gnosis Safe 3-of-5 desplegado.
 3. **Despliegue testnet** — Base Sepolia con scripts de deploy documentados.
-4. **Timelock** — para funciones admin críticas (`setBurnBps`, `setDiscountBps`, `setPriceFeed`).
+4. ✅ ~~Timelock~~ — BashoodTimelock + BashoodGovernor on-chain. UPGRADER_ROLE pendiente de conectar al Timelock post-deploy.
+
+> ⚠️ **Alerta de tamaño de contrato:** BashoodRWAReferenceV2 está al **99.0%** del límite EVM (24,341 / 24,576 bytes). Cualquier PR que añada lógica a este contrato requiere revisión de arquitectura antes de mergear.
 
 ---
 
@@ -136,4 +157,6 @@ Cualquier PR que reduzca el número de tests sin justificación documentada es b
 | 2026-03-23 | Consolidar validación oracle en `_getOracleData()` | Mantener duplicación en `_bhtFromFiat` + `_calculateBhtAmounts` | DRY, −384 bytes bytecode, todos los mensajes de revert preservados |
 | 2026-03-23 | No limpiar rescue (try/catch con string concat) | Simplificar a custom errors | Tests explícitamente comprueban el mensaje concatenado — cambio rompería suite |
 | Phase 8 | Rate-limiting por epoch en módulos RWA | Sin límite | Mitigación de Storage DoS Medium finding |
-| Phase 8 | Whitelist per-token en módulos | Whitelist global | Empresa A no debe poder escribir en token de empresa B |
+| Phase 8 | Whitelist per-token en módulos | Whitelist global | Empresa A no debe poder escribir en token de empresa B || 2026-03-28 | SafeERC20 en todos los `transferFrom`/`transfer` (C-005) | IERC20 directo | Non-standard tokens (USDT, etc.) que no retornan bool causan reverts silenciosos sin SafeERC20 |
+| 2026-03-28 | `abi.encode` en vez de `encodePacked` para anti-replay keys (C-006) | Mantener `encodePacked` | `encodePacked` con dos fields variables es vulnerable a hash collision |
+| 2026-03-28 | Guard `require(newValue <= type(uint32).max)` en `setSetupCount` (C-004) | Aceptar overflow silencioso | Valores oracle externos no tienen bound implícito; el de `block.timestamp` es aceptado como riesgo conocido (KR-009) |
