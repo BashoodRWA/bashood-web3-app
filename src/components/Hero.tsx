@@ -25,8 +25,8 @@ export default function Hero() {
 
         {/* Heading */}
         <h1 className="text-5xl sm:text-6xl md:text-7xl font-bold tracking-tight leading-[1.06] mb-8">
-          Una excavadora genera<br />
-          ingresos reales cada día.<br />
+          Una excavadora produce<br />
+          valor real cada día.<br />
           <span className="text-[#00C896]">Ahora tú también puedes tener tu parte.</span>
         </h1>
 
@@ -34,7 +34,7 @@ export default function Hero() {
         <p className="text-lg md:text-xl text-[#8892A4] max-w-2xl mx-auto mb-12 leading-relaxed">
           Bashood convierte maquinaria industrial real —excavadoras, impresoras 3D de construcción,
           plantas de energía solar, líneas de ensamblaje— en participaciones digitales. Compra desde
-          el 10%, cobra rendimientos y vende cuando quieras. Sin papeleo. Sin intermediarios.
+          el 10%, participa en la actividad del activo y vende cuando quieras. Sin papeleo. Sin intermediarios.
         </p>
 
         {/* CTAs */}
@@ -52,6 +52,19 @@ export default function Hero() {
             Unirme a la lista de espera
           </a>
         </div>
+      </motion.div>
+
+      {/* Positioning tagline */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.2 }}
+        className="relative z-10 mt-16 flex flex-col items-center gap-3"
+      >
+        <div className="w-16 h-px bg-gradient-to-r from-transparent via-[#1E2030] to-transparent" />
+        <p className="text-sm text-[#4B5563] tracking-wide">
+          Infraestructura para conectar activos reales con capital digital.
+        </p>
       </motion.div>
 
       {/* Scroll indicator */}

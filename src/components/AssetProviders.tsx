@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { motion } from 'framer-motion'
 
 const benefits = [
@@ -125,18 +126,111 @@ export default function AssetProviders() {
             <div>
               <p className="font-semibold mb-1">¿Quieres registrar tu primer activo?</p>
               <p className="text-[#8892A4] text-sm">
-                Escríbenos y te guiamos por el proceso de verificación.
+                Te guiamos por el proceso de verificación step by step.
               </p>
             </div>
             <a
-              href="mailto:assets@bashood.io"
-              className="shrink-0 inline-flex items-center gap-2 border border-[#0052FF]/50 hover:border-[#0052FF] text-[#0052FF] hover:text-white hover:bg-[#0052FF] font-semibold px-6 py-3 rounded-xl transition-all text-sm"
+              href="#registro-activo"
+              className="shrink-0 inline-flex items-center gap-2 bg-[#0052FF] hover:bg-[#0047E0] text-white font-semibold px-6 py-3 rounded-xl transition-colors text-sm"
             >
-              assets@bashood.io →
+              Registrar un activo →
             </a>
           </div>
         </motion.div>
+
+        {/* Registration form */}
+        <RegisterForm />
       </div>
     </section>
+  )
+}
+
+function RegisterForm() {
+  const [form, setForm] = useState({ company: '', assetType: '', email: '' })
+  const [submitted, setSubmitted] = useState(false)
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    setSubmitted(true)
+  }
+
+  const inputClass =
+    'w-full bg-[#111118] border border-[#1E2030] text-white placeholder-[#4B5563] rounded-xl px-5 py-3.5 text-sm focus:outline-none focus:border-[#0052FF] transition-colors'
+
+  return (
+    <motion.div
+      id="registro-activo"
+      initial={{ opacity: 0, y: 24 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.6, delay: 0.2 }}
+      className="mt-6 bg-[#0D0D16] border border-[#1E2030] rounded-2xl p-8"
+    >
+      <p className="text-xs font-semibold tracking-widest uppercase text-[#8892A4] mb-2">
+        Registro de activo
+      </p>
+      <h3 className="text-xl font-bold mb-6">
+        Empieza el proceso de verificación
+      </h3>
+
+      {submitted ? (
+        <div className="bg-[#00C896]/10 border border-[#00C896]/30 rounded-xl px-6 py-5 text-[#00C896] text-sm font-medium">
+          ✓ Solicitud recibida. Nuestro equipo revisará tu activo y se pondrá en contacto en menos de 48 horas.
+        </div>
+      ) : (
+        <form onSubmit={handleSubmit} className="grid sm:grid-cols-2 gap-4">
+          <div className="flex flex-col gap-1.5">
+            <label className="text-xs text-[#8892A4] font-medium">Empresa o propietario</label>
+            <input
+              type="text"
+              placeholder="Nombre de tu empresa"
+              value={form.company}
+              onChange={e => setForm(f => ({ ...f, company: e.target.value }))}
+              required
+              className={inputClass}
+            />
+          </div>
+          <div className="flex flex-col gap-1.5">
+            <label className="text-xs text-[#8892A4] font-medium">Tipo de activo</label>
+            <select
+              value={form.assetType}
+              onChange={e => setForm(f => ({ ...f, assetType: e.target.value }))}
+              required
+              className={inputClass + ' cursor-pointer'}
+            >
+              <option value="" disabled>Selecciona una categoría</option>
+              <option value="maquinaria-construccion">Maquinaria de construcción</option>
+              <option value="energia">Plantas de energía</option>
+              <option value="manufactura">Manufactura e industria</option>
+              <option value="logistica">Logística e infraestructura</option>
+              <option value="impresion3d">Impresión 3D industrial</option>
+              <option value="otro">Otro</option>
+            </select>
+          </div>
+          <div className="flex flex-col gap-1.5 sm:col-span-2">
+            <label className="text-xs text-[#8892A4] font-medium">Email de contacto</label>
+            <input
+              type="email"
+              placeholder="tu@empresa.com"
+              value={form.email}
+              onChange={e => setForm(f => ({ ...f, email: e.target.value }))}
+              required
+              className={inputClass}
+            />
+          </div>
+          <div className="sm:col-span-2 flex items-center justify-between gap-4 pt-2">
+            <p className="text-xs text-[#4B5563]">
+              El equipo revisará tu solicitud y te contactará en menos de 48h.
+            </p>
+            <button
+              type="submit"
+              className="shrink-0 bg-[#0052FF] hover:bg-[#0047E0] text-white font-semibold px-7 py-3.5 rounded-xl transition-colors text-sm"
+            >
+              Enviar solicitud
+            </button>
+          </div>
+        </form>
+      )}
+    </motion.div>
   )
 }
