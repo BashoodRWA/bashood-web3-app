@@ -59,7 +59,7 @@ export default function AssetProviders() {
               <p className="text-[#8892A4] text-lg max-w-2xl leading-relaxed">
                 Bashood es la infraestructura que conecta activos reales con capital global.
                 Si tienes maquinaria, infraestructura o sistemas productivos, puedes
-                registrarlos y acceder a financiación sin bancos ni intermediarios.
+                registrarlos y acceder a nuevas fuentes de liquidez sin bancos ni intermediarios.
               </p>
             </div>
             <a
