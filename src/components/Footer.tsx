@@ -23,8 +23,8 @@ export default function Footer() {
         <div className="grid md:grid-cols-3 gap-10 mb-12">
           {/* Brand */}
           <div>
-            <div className="flex items-center gap-2 font-bold text-xl mb-3">
-              <span className="text-[#0052FF] text-2xl">⬡</span>
+            <div className="flex items-center gap-2.5 font-bold text-xl mb-3">
+              <img src="/logo.png" alt="Bashood logo" className="h-7 w-7 object-contain" />
               BASHOOD
             </div>
             <p className="text-sm text-[#8892A4] leading-relaxed">

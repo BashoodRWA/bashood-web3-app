@@ -2,10 +2,10 @@ import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 
 const links = [
+  { href: '#por-que', label: 'Por qué Bashood' },
   { href: '#como-funciona', label: 'Cómo funciona' },
-  { href: '#tokenomics', label: 'Tokenomics' },
-  { href: '#roadmap', label: 'Roadmap' },
-  { href: '#seguridad', label: 'Seguridad' },
+  { href: '#tokenomics', label: 'El token' },
+  { href: '#seguridad', label: 'Para inversores' },
 ]
 
 export default function NavBar() {
@@ -31,8 +31,8 @@ export default function NavBar() {
     >
       <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
         {/* Logo */}
-        <a href="#" className="flex items-center gap-2 font-bold text-xl tracking-tight">
-          <span className="text-[#0052FF] text-2xl leading-none">⬡</span>
+        <a href="#" className="flex items-center gap-2.5 font-bold text-xl tracking-tight">
+          <img src="/logo.png" alt="Bashood logo" className="h-8 w-8 object-contain" />
           <span>BASHOOD</span>
         </a>
 

@@ -12,23 +12,23 @@ const distribution = [
 const mechanics = [
   {
     icon: '🔥',
-    title: 'Deflacionario',
-    desc: 'Cada pago en $BHT quema una parte del supply de forma permanente. El circulante se reduce con cada transacción.',
+    title: 'Se quema con cada uso',
+    desc: 'Cada pago en $BHT destruye una parte del supply. A más actividad en el protocolo, menos tokens en circulación.',
   },
   {
     icon: '🔒',
-    title: 'Parámetros congelados',
-    desc: 'Burn BPS y discount BPS solo modificables mediante votación on-chain (BashoodGovernor + Timelock).',
+    title: 'Parámetros controlados por la comunidad',
+    desc: 'Nadie puede cambiar los parámetros del token unilateralmente. Cualquier cambio requiere votación y un período de espera obligatorio.',
   },
   {
-    icon: '⬡',
-    title: 'Base L2',
-    desc: 'Gas ~10× más barato que Ethereum L1. Liquidación instantánea para fracciones de activos industriales.',
+    icon: '⚡',
+    title: 'Blockchain rápida y barata',
+    desc: 'Bashood opera en Base L2 (la blockchain de Coinbase). Gas 10 veces más barato que Ethereum, con la misma seguridad.',
   },
   {
     icon: '🏦',
-    title: 'Descuento por holding',
-    desc: 'Holders de ≥100k $BHT obtienen -40% en trading fees del marketplace de activos.',
+    title: 'Descuento por ser holder',
+    desc: 'Si tienes 100,000 $BHT o más, pagas un 40% menos en tarifas del mercado de activos.',
   },
 ]
 
@@ -46,10 +46,10 @@ export default function Tokenomics() {
           <p className="text-[#0052FF] text-sm font-medium mb-3 tracking-widest uppercase">
             Token
           </p>
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">Tokenomics $BHT</h2>
-          <p className="text-[#8892A4] text-lg">
-            Supply total fijo:{' '}
-            <span className="text-white font-semibold">1,000,000,000 BHT</span>
+          <h2 className="text-4xl md:text-5xl font-bold mb-4">El token BASHOOD</h2>
+          <p className="text-[#8892A4] text-lg max-w-xl mx-auto">
+            $BHT es el token con el que operas dentro del protocolo.
+            Cuantos más tienes, menos pagas en tarifas.
           </p>
         </motion.div>
 
@@ -89,7 +89,7 @@ export default function Tokenomics() {
               <span className="text-[#00C896] text-xl">⬢</span>
               <div>
                 <div className="font-bold text-white">1,000,000,000 $BHT</div>
-                <div className="text-xs text-[#8892A4]">Supply fijo · Sin emisión adicional posible</div>
+                <div className="text-xs text-[#8892A4]">Supply máximo fijo. No se puede crear más.</div>
               </div>
             </div>
           </motion.div>

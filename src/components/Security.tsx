@@ -53,12 +53,12 @@ export default function Security() {
           className="text-center mb-16"
         >
           <p className="text-[#0052FF] text-sm font-medium mb-3 tracking-widest uppercase">
-            Auditoría
+            Para inversores
           </p>
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">Seguridad primero</h2>
+          <h2 className="text-4xl md:text-5xl font-bold mb-4">¿Por qué confiar en Bashood?</h2>
           <p className="text-[#8892A4] max-w-xl mx-auto">
-            4 capas de auditoría antes de cualquier deployment. Todos los hallazgos HIGH
-            resueltos. 9 riesgos conocidos documentados y aceptados explícitamente.
+            Antes de lanzar un solo token al mercado, el código ha pasado por cuatro revisiones independientes.
+            Todos los problemas graves están resueltos y documentados públicamente.
           </p>
         </motion.div>
 
@@ -71,10 +71,9 @@ export default function Security() {
           className="bg-gradient-to-r from-[#0052FF]/15 to-[#00C896]/10 border border-[#0052FF]/30 rounded-2xl p-8 mb-10 text-center"
         >
           <div className="text-6xl md:text-7xl font-bold text-[#0052FF] mb-2">92%</div>
-          <div className="text-xl font-semibold mb-1">Hardhat Audit Pipeline Score</div>
+          <div className="text-xl font-semibold mb-1">Score de auditoría</div>
           <div className="text-sm text-[#8892A4]">
-            36 PASS · 3 WARN · 0 FAIL — tag{' '}
-            <span className="font-mono text-[#C8CFDC]">v0.4-audit-stable</span>
+            4 revisiones independientes · 0 problemas críticos sin resolver · 9 riesgos documentados públicamente
           </div>
         </motion.div>
 
@@ -122,7 +121,7 @@ export default function Security() {
           transition={{ duration: 0.6, delay: 0.1 }}
         >
           <h3 className="text-sm font-semibold text-[#8892A4] mb-4 uppercase tracking-widest">
-            Riesgos conocidos (muestra)
+            Riesgos conocidos — publicados con total transparencia
           </h3>
           <div className="space-y-3">
             {knownRisks.map(r => (

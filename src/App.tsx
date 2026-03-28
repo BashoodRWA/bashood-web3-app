@@ -1,5 +1,6 @@
 import NavBar from './components/NavBar'
 import Hero from './components/Hero'
+import WhyBashood from './components/WhyBashood'
 import HowItWorks from './components/HowItWorks'
 import Stats from './components/Stats'
 import Tokenomics from './components/Tokenomics'
@@ -13,6 +14,7 @@ export default function App() {
     <div className="min-h-screen bg-[#07070E] text-[#F0F2F5]">
       <NavBar />
       <Hero />
+      <WhyBashood />
       <HowItWorks />
       <Stats />
       <Tokenomics />

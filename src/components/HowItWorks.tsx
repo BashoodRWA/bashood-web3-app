@@ -4,20 +4,20 @@ const steps = [
   {
     n: '01',
     icon: '🏭',
-    title: 'Tokeniza',
-    desc: 'Sube fotos, certificaciones y datos GPS del activo. El smart contract emite un ERC-721 único en Base L2 con todos los metadatos verificados.',
+    title: 'Elige un activo',
+    desc: 'Una fresadora CNC en Bilbao, un panel solar en Sevilla, una cinta transportadora en Düsseldorf. Cada activo tiene documentación, valoración y ubicación verificadas antes de entrar al mercado.',
   },
   {
     n: '02',
-    icon: '📡',
-    title: 'Sigue en tiempo real',
-    desc: 'Oráculos Chainlink actualizan el valor. Sensores IoT envían telemetría de horas de operación, índice de depreciación y ubicación exacta.',
+    icon: '💳',
+    title: 'Compra tu parte',
+    desc: '€500 te dan el 1% de un activo valorado en €50.000. Sin banco, sin notario, sin esperar semanas. El registro es inmediato y la propiedad queda únicamente a tu nombre.',
   },
   {
     n: '03',
     icon: '⚡',
-    title: 'Fracciona y comercia',
-    desc: 'Compra el 10%, 25% o 50% de cualquier activo industrial. Liquidación instantánea frente a los 15-30 días del mercado tradicional.',
+    title: 'Vende cuando quieras',
+    desc: 'El valor de tu parte se actualiza solo. Cuando decidas vender, hay un mercado abierto. No buscas comprador durante meses. La operación se liquida en segundos.',
   },
 ]
 
@@ -33,9 +33,12 @@ export default function HowItWorks() {
           className="text-center mb-16"
         >
           <p className="text-[#0052FF] text-sm font-medium mb-3 tracking-widest uppercase">
-            Proceso
+            Tres pasos
           </p>
           <h2 className="text-4xl md:text-5xl font-bold">¿Cómo funciona?</h2>
+          <p className="text-[#8892A4] mt-4 text-lg max-w-xl mx-auto">
+            Sin cuenta bancaria especial, sin intermediarios, sin mínimos prohibitivos.
+          </p>
         </motion.div>
 
         <div className="grid md:grid-cols-3 gap-6">
@@ -62,7 +65,7 @@ export default function HowItWorks() {
         {/* Connector line */}
         <div className="hidden md:flex items-center justify-center mt-12 gap-2 text-[#8892A4] text-sm">
           <span className="w-16 h-px bg-[#1E2030]" />
-          <span>Activo tokenizado en menos de 30 minutos · 0.3% de fee</span>
+          <span>Sin papeleo · Sin intermediarios · Tarifas desde el 0.3%</span>
           <span className="w-16 h-px bg-[#1E2030]" />
         </div>
       </div>

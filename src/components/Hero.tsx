@@ -1,12 +1,5 @@
 import { motion } from 'framer-motion'
 
-const chips = [
-  { icon: '✓', text: '1277 Tests Hardhat + Foundry' },
-  { icon: '✓', text: '92% Audit Score' },
-  { icon: '⬡', text: 'Base L2 (Coinbase)' },
-  { icon: '🔒', text: 'v0.4-audit-stable' },
-]
-
 export default function Hero() {
   return (
     <section className="min-h-screen flex flex-col items-center justify-center text-center px-6 pt-20 relative overflow-hidden">
@@ -20,54 +13,43 @@ export default function Hero() {
         transition={{ duration: 0.8 }}
         className="relative z-10 max-w-4xl mx-auto"
       >
-        {/* Chips row */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
+        {/* Eyebrow */}
+        <motion.p
+          initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="flex flex-wrap justify-center gap-2 mb-10"
+          transition={{ duration: 0.6, delay: 0.15 }}
+          className="text-sm font-medium tracking-widest uppercase text-[#8892A4] mb-8"
         >
-          {chips.map(c => (
-            <span
-              key={c.text}
-              className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#111118] border border-[#1E2030] text-xs text-[#8892A4]"
-            >
-              <span className="text-[#0052FF]">{c.icon}</span>
-              {c.text}
-            </span>
-          ))}
-        </motion.div>
+          Real World Assets · Base L2
+        </motion.p>
 
         {/* Heading */}
-        <h1 className="text-5xl sm:text-6xl md:text-7xl font-bold tracking-tight leading-[1.05] mb-7">
-          Tokeniza Activos<br />
-          <span className="text-[#0052FF]">Industriales.</span>
-          <br />
-          On-Chain.
+        <h1 className="text-5xl sm:text-6xl md:text-7xl font-bold tracking-tight leading-[1.06] mb-8">
+          Una fresadora industrial<br />
+          produce dinero cada día.<br />
+          <span className="text-[#0052FF]">Ahora puedes tener un trozo.</span>
         </h1>
 
         {/* Subheading */}
         <p className="text-lg md:text-xl text-[#8892A4] max-w-2xl mx-auto mb-12 leading-relaxed">
-          Bashood convierte maquinaria, equipos y activos de producción en{' '}
-          <span className="text-[#C8CFDC]">NFTs ERC-721 verificados en Base L2</span>.
-          Trazabilidad total, telemetría Chainlink en tiempo real, fraccionamiento.
+          Bashood convierte activos industriales reales en participaciones digitales.
+          Compra desde el 10%, sigue su valor en tiempo real
+          y vende al instante. Sin papeleo. Sin intermediarios. Sin mínimos absurdos.
         </p>
 
         {/* CTAs */}
         <div className="flex flex-col sm:flex-row justify-center gap-4">
           <a
-            href="#presale"
+            href="#por-que"
             className="bg-[#0052FF] hover:bg-[#0047E0] text-white font-semibold px-8 py-4 rounded-xl transition-colors text-base"
           >
-            Ver la presale →
+            Por qué existe Bashood →
           </a>
           <a
-            href="https://github.com/BashoodRWA/bashood-web3-app"
-            target="_blank"
-            rel="noopener noreferrer"
+            href="#presale"
             className="border border-[#1E2030] hover:border-[#0052FF] text-[#8892A4] hover:text-white font-semibold px-8 py-4 rounded-xl transition-colors text-base"
           >
-            GitHub →
+            Unirme a la lista de espera
           </a>
         </div>
       </motion.div>
