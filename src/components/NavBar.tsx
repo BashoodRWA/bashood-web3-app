@@ -5,6 +5,7 @@ import { BashoodLogo } from './BashoodLogo'
 const links = [
   { href: '#por-que', label: 'Por qué Bashood' },
   { href: '#como-funciona', label: 'Cómo funciona' },
+  { href: '#empresas', label: 'Para empresas' },
   { href: '#tokenomics', label: 'El token' },
   { href: '#seguridad', label: 'Para inversores' },
 ]

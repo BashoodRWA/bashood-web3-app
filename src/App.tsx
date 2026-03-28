@@ -3,6 +3,7 @@ import Hero from './components/Hero'
 import WhyBashood from './components/WhyBashood'
 import HowItWorks from './components/HowItWorks'
 import Stats from './components/Stats'
+import AssetProviders from './components/AssetProviders'
 import Tokenomics from './components/Tokenomics'
 import Roadmap from './components/Roadmap'
 import Security from './components/Security'
@@ -17,6 +18,7 @@ export default function App() {
       <WhyBashood />
       <HowItWorks />
       <Stats />
+      <AssetProviders />
       <Tokenomics />
       <Roadmap />
       <Security />
