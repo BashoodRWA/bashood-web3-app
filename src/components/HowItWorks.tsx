@@ -11,13 +11,13 @@ const steps = [
     n: '02',
     icon: '💳',
     title: 'Compra tu parte',
-    desc: '€500 te dan el 1% de un activo valorado en €50.000. Sin banco, sin notario, sin esperar semanas. El registro es inmediato y la propiedad queda únicamente a tu nombre.',
+    desc: 'Puedes acceder a una parte proporcional del activo desde importes accesibles. Sin banco, sin notario, sin esperar semanas. El registro es inmediato y la propiedad queda únicamente a tu nombre.',
   },
   {
     n: '03',
     icon: '⚡',
-    title: 'Vende cuando quieras',
-    desc: 'El valor de tu parte se actualiza solo. Cuando decidas vender, hay un mercado abierto. No buscas comprador durante meses. La operación se liquida en segundos.',
+    title: 'Accede a liquidez cuando lo necesites',
+    desc: 'El valor se actualiza en función de la actividad del activo y del mercado. Cuando quieras salir, hay un mercado abierto. No buscas comprador durante meses. La operación se liquida en segundos.',
   },
 ]
 

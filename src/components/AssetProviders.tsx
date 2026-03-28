@@ -5,7 +5,7 @@ const benefits = [
   {
     icon: '🏗️',
     title: 'Capital sin bancos ni dilución',
-    desc: 'Abre participaciones de tu maquinaria o infraestructura a inversores globales. Sin préstamos bancarios, sin ceder equity de tu empresa.',
+    desc: 'Abre participaciones de tu maquinaria o infraestructura a capital global. Sin préstamos bancarios, sin ceder equity de tu empresa.',
   },
   {
     icon: '🔒',
@@ -27,7 +27,7 @@ const benefits = [
 const steps = [
   { n: '1', label: 'Registras tu activo', desc: 'Documentación + valoración.' },
   { n: '2', label: 'Due diligence on-chain', desc: '7–14 días de verificación.' },
-  { n: '3', label: 'Recibes el capital', desc: 'Directo, sin intermediarios.' },
+  { n: '3', label: 'Accedes a liquidez', desc: 'Directo, sin intermediarios.' },
 ]
 
 export default function AssetProviders() {
@@ -57,10 +57,9 @@ export default function AssetProviders() {
                 <span className="text-[#0052FF]">productivos?</span>
               </h2>
               <p className="text-[#8892A4] text-lg max-w-2xl leading-relaxed">
-                Bashood no es solo una plataforma de inversión. Es la infraestructura
-                que conecta activos reales con capital global. Si tienes maquinaria,
-                infraestructura o sistemas productivos, puedes registrarlos y acceder a
-                financiación sin bancos ni intermediarios.
+                Bashood es la infraestructura que conecta activos reales con capital global.
+                Si tienes maquinaria, infraestructura o sistemas productivos, puedes
+                registrarlos y acceder a financiación sin bancos ni intermediarios.
               </p>
             </div>
             <a
@@ -126,15 +125,9 @@ export default function AssetProviders() {
             <div>
               <p className="font-semibold mb-1">¿Quieres registrar tu primer activo?</p>
               <p className="text-[#8892A4] text-sm">
-                Te guiamos por el proceso de verificación step by step.
+                Te guiamos por el proceso de verificación paso a paso.
               </p>
             </div>
-            <a
-              href="#registro-activo"
-              className="shrink-0 inline-flex items-center gap-2 bg-[#0052FF] hover:bg-[#0047E0] text-white font-semibold px-6 py-3 rounded-xl transition-colors text-sm"
-            >
-              Registrar un activo →
-            </a>
           </div>
         </motion.div>
 
