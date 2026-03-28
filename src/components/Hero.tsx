@@ -5,7 +5,7 @@ export default function Hero() {
     <section className="min-h-screen flex flex-col items-center justify-center text-center px-6 pt-20 relative overflow-hidden">
       {/* Radial glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full bg-[#0052FF]/8 blur-[140px] pointer-events-none" />
-      <div className="absolute top-1/3 left-1/3 w-[300px] h-[300px] rounded-full bg-[#00C896]/5 blur-[100px] pointer-events-none" />
+      <div className="absolute top-[40%] left-[30%] w-[450px] h-[450px] rounded-full bg-[#00C896]/12 blur-[120px] pointer-events-none" />
 
       <motion.div
         initial={{ opacity: 0, y: 40 }}
@@ -18,23 +18,23 @@ export default function Hero() {
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.15 }}
-          className="text-sm font-medium tracking-widest uppercase text-[#8892A4] mb-8"
+          className="text-sm font-medium tracking-widest uppercase text-[#00C896] mb-8"
         >
           Real World Assets · Base L2
         </motion.p>
 
         {/* Heading */}
         <h1 className="text-5xl sm:text-6xl md:text-7xl font-bold tracking-tight leading-[1.06] mb-8">
-          Una fresadora industrial<br />
-          produce dinero cada día.<br />
-          <span className="text-[#0052FF]">Ahora puedes tener un trozo.</span>
+          Una excavadora genera<br />
+          ingresos reales cada día.<br />
+          <span className="text-[#00C896]">Ahora tú también puedes tener tu parte.</span>
         </h1>
 
         {/* Subheading */}
         <p className="text-lg md:text-xl text-[#8892A4] max-w-2xl mx-auto mb-12 leading-relaxed">
-          Bashood convierte activos industriales reales en participaciones digitales.
-          Compra desde el 10%, sigue su valor en tiempo real
-          y vende al instante. Sin papeleo. Sin intermediarios. Sin mínimos absurdos.
+          Bashood convierte maquinaria industrial real —excavadoras, impresoras 3D de construcción,
+          plantas de energía solar, líneas de ensamblaje— en participaciones digitales. Compra desde
+          el 10%, cobra rendimientos y vende cuando quieras. Sin papeleo. Sin intermediarios.
         </p>
 
         {/* CTAs */}

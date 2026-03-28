@@ -5,7 +5,7 @@ const steps = [
     n: '01',
     icon: '🏭',
     title: 'Elige un activo',
-    desc: 'Una fresadora CNC en Bilbao, un panel solar en Sevilla, una cinta transportadora en Düsseldorf. Cada activo tiene documentación, valoración y ubicación verificadas antes de entrar al mercado.',
+    desc: 'Una excavadora en una obra de Madrid, una impresora 3D de construcción en Dubái, un panel solar en Sevilla. Cada activo tiene documentación, valoración y ubicación verificadas antes de entrar al mercado.',
   },
   {
     n: '02',
@@ -32,7 +32,7 @@ export default function HowItWorks() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <p className="text-[#0052FF] text-sm font-medium mb-3 tracking-widest uppercase">
+          <p className="text-[#00C896] text-sm font-medium mb-3 tracking-widest uppercase">
             Tres pasos
           </p>
           <h2 className="text-4xl md:text-5xl font-bold">¿Cómo funciona?</h2>

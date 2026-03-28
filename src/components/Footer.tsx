@@ -16,6 +16,8 @@ const resourceLinks = [
   { href: '#presale', label: 'Lista de espera presale' },
 ]
 
+import { BashoodLogo } from './BashoodLogo'
+
 export default function Footer() {
   return (
     <footer className="border-t border-[#1E2030] py-14 px-6">
@@ -24,7 +26,7 @@ export default function Footer() {
           {/* Brand */}
           <div>
             <div className="flex items-center gap-2.5 font-bold text-xl mb-3">
-              <img src="/logo.png" alt="Bashood logo" className="h-7 w-7 object-contain" />
+              <BashoodLogo size={28} />
               BASHOOD
             </div>
             <p className="text-sm text-[#8892A4] leading-relaxed">
