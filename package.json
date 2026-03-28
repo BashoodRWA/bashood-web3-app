@@ -22,9 +22,12 @@
     "security:report": "node scripts/generate-security-report.js"
   },
   "dependencies": {
+    "@tailwindcss/vite": "^4.2.2",
     "dotenv": "^16.1.4",
+    "framer-motion": "^12.38.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "tailwindcss": "^4.2.2",
     "viem": "^1.0.2"
   },
   "devDependencies": {
