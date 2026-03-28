@@ -211,8 +211,9 @@ describe("[A] Replay y manipulación de firma", function () {
     const nonce = 7001;
     const sig   = await signFor(signer, buyer.address, nonce);
     await presale.connect(buyer).purchaseWithETH(1, 1, nonce, sig, { value: nftPriceETH });
+    // El contrato ahora usa abi.encode (no encodePacked) — mismo padding que uint256
     const hash = ethers.keccak256(
-      ethers.concat([ethers.getBytes(buyer.address), ethers.getBytes(ethers.toBeHex(nonce, 32))])
+      ethers.AbiCoder.defaultAbiCoder().encode(['address', 'uint256'], [buyer.address, nonce])
     );
     expect(await presale.usedHashes(hash)).to.be.true;
     // Intentar volver a comprar con el mismo nonce
@@ -495,10 +496,10 @@ describe("[E] Burn con tokens no estándar", function () {
     await bht.connect(buyer).approve(await presale.getAddress(), ethers.parseUnits("10000", 18));
 
     const sig = await signFor(signer, buyer.address, 21001);
-    // El transfer a projectWallet (operationsWallet) devuelve false → "Ops transfer failed"
+    // SafeERC20: cuando transferFrom devuelve false se lanza SafeERC20FailedOperation (no string)
     await expect(
       presale.connect(buyer).purchaseWithBHT(1, 1, 21001, sig)
-    ).to.be.revertedWith("Ops transfer failed");
+    ).to.be.reverted;
   });
 
   it("E3: burnBps = 0, opsAmount = discountedCost completo → sin burn, todo a opsWallet", async function () {

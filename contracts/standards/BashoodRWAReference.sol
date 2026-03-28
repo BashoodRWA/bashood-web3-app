@@ -489,6 +489,7 @@ contract BashoodRWAReference is
             _operationalMetrics[tokenId].metersExtruded = newValue;
         } else if (metricEnum == 2) { // SETUP
             oldValue = _operationalMetrics[tokenId].setupCount;
+            require(newValue <= type(uint32).max, "BashoodRWA: setupCount overflow");
             _operationalMetrics[tokenId].setupCount = uint32(newValue);
         } else if (metricEnum == 3) { // HOURS
             oldValue = _operationalMetrics[tokenId].operatingHours;

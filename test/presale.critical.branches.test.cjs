@@ -1569,9 +1569,10 @@ describe('🎯 BashoodPresaleFinal - Critical Branch Coverage (Excellence 90%+)'
             await bhtFailAll.mint(alice.address, ethers.parseUnits('10000', 18));
             await bhtFailAll.connect(alice).approve(await presaleFailAll.getAddress(), ethers.parseUnits('10000', 18));
 
+            // SafeERC20: el fallo de transferFrom revierte con SafeERC20FailedOperation (no string manual)
             await expect(
                 presaleFailAll.connect(alice)["payServiceWithBHT(uint256,uint256)"](1, ethers.parseUnits('100', 18))
-            ).to.be.revertedWith("Burn transfer failed");
+            ).to.be.reverted;
         });
     });
 

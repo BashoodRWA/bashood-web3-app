@@ -143,6 +143,13 @@ const PATTERNS = [
 // Pesos para scoring
 const RISK_WEIGHT = { HIGH: 3, MEDIUM: 2, LOW: 1 };
 
+// Descripción de impacto por nivel para el sidecar JSON
+const IMPACT_BY_LEVEL = {
+  HIGH  : "Alta probabilidad de clasificación como instrumento de inversión regulado. Puede resultar en acciones de enforcement, multas o suspensión operativa.",
+  MEDIUM: "Riesgo regulatorio significativo que requiere revisión jurídica. Puede limitar el acceso a ciertos mercados o requerir licencias adicionales.",
+  LOW   : "Riesgo regulatorio menor o informativo. Se recomienda adoptar las buenas prácticas indicadas antes de la salida a producción.",
+};
+
 // ── File walker ───────────────────────────────────────────────────────────────
 function walkContracts(dir, results = []) {
   let entries;
@@ -312,6 +319,36 @@ task("audit:regulatory", "Detecta riesgos regulatorios (staking, income, RWA) y 
 
     const reportText = lines_out.join("\n");
     fs.writeFileSync(outputPath, reportText, "utf8");
+
+    // ── Sidecar JSON (findings estructurados) ───────────────────────────────────────────
+    const structuredFindings = [];
+    for (const level of ["HIGH", "MEDIUM", "LOW"]) {
+      const byPatId = {};
+      for (const f of byRisk[level]) {
+        if (!byPatId[f.pattern.id]) byPatId[f.pattern.id] = { pat: f.pattern, fileSet: [] };
+        byPatId[f.pattern.id].fileSet.push({ rel: f.relFile, lines: f.lines });
+      }
+      for (const { pat, fileSet } of Object.values(byPatId)) {
+        structuredFindings.push({
+          id            : pat.id,
+          severity      : level,
+          category      : pat.category,
+          title         : pat.name,
+          description   : pat.description,
+          impact        : IMPACT_BY_LEVEL[level],
+          recommendation: pat.recommendation,
+          status        : "UNRESOLVED",
+          source        : "audit:regulatory",
+          files         : fileSet.map(f => f.rel),
+          lines         : fileSet.flatMap(f => f.lines.slice(0, 3)),
+        });
+      }
+    }
+    const findingsPath = path.resolve("reports/regulatory-findings.json");
+    fs.writeFileSync(findingsPath, JSON.stringify({
+      meta    : { task: "audit:regulatory", date: new Date().toISOString(), projectRisk, totalScore },
+      findings: structuredFindings,
+    }, null, 2), "utf8");
 
     // Imprimir resumen en consola
     console.log(`  HIGH   : ${byRisk.HIGH.length} hallazgos`);

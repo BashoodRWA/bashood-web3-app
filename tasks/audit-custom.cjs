@@ -4,8 +4,10 @@
  *   Módulo 1 — Role & Permission Audit   : roles definidos, funciones protegidas, escalada de privilegios.
  *   Módulo 2 — Presale Logic Audit       : bounds de fees, oracle, fases, caps.
  *   Módulo 3 — RWA Model Coherence       : storage gaps, invariantes financieros, modelos de depreciación.
+ *   Módulo 4 — Vulnerability Patterns    : patrones de vulnerabilidad críticos (cross-contrato).
  *
  * No ejecuta ningún compilador ni subprocess. Análisis estático puro sobre fuentes .sol.
+ * Genera reports/custom-audit-report.txt y reports/custom-findings.json (sidecar estructurado).
  *
  * Uso: npx hardhat audit:custom
  */
@@ -22,7 +24,54 @@ function readSol(relPath) {
   if (!fs.existsSync(full)) return null;
   return fs.readFileSync(full, "utf8");
 }
+// Camina contratos de producción (sin mocks/tests/deprecated)
+const EXCL_DIRS_M4  = new Set(["node_modules","test","tests","mocks","mock","deprecated","bak"]);
+const EXCL_FILES_M4 = [/^Mock/,/^Attacker/,/^BadReceiver/,/^Libra(?:Vulnerable)?/,/^Lock\.sol/,/^NotRescue/,/\.sol\.disabled$/];
 
+function walkProdContracts(dir, acc = []) {
+  let entries;
+  try { entries = fs.readdirSync(dir, { withFileTypes: true }); }
+  catch { return acc; }
+  for (const e of entries) {
+    const full = path.join(dir, e.name);
+    if (e.isDirectory()) {
+      if (!EXCL_DIRS_M4.has(e.name)) walkProdContracts(full, acc);
+    } else if (e.name.endsWith(".sol") && !e.name.endsWith(".disabled")) {
+      if (!EXCL_FILES_M4.some(re => re.test(e.name))) acc.push(full);
+    }
+  }
+  return acc;
+}
+
+// ── Severidad por check ID (para sidecar estructurado) ────────────────────────
+const SEVERITY_MAP = {
+  "R-001": "INFO",    "R-002": "HIGH",     "R-003": "HIGH",     "R-004": "HIGH",
+  "R-005": "MEDIUM",  "R-006": "CRITICAL", "R-007": "CRITICAL", "R-008": "HIGH",
+  "R-009": "HIGH",   "R-010": "MEDIUM",   "R-011": "HIGH",     "R-012": "MEDIUM",
+  "P-001": "MEDIUM",  "P-002": "MEDIUM",   "P-003": "MEDIUM",   "P-004": "MEDIUM",
+  "P-005": "LOW",     "P-006": "MEDIUM",   "P-007": "LOW",      "P-008": "CRITICAL",
+  "P-009": "MEDIUM",  "P-010": "LOW",      "P-011": "LOW",      "P-012": "LOW",
+  "M-001": "HIGH",   "M-002": "HIGH",     "M-003": "MEDIUM",   "M-004": "LOW",
+  "M-005": "MEDIUM",  "M-006": "LOW",      "M-007": "LOW",      "M-008": "INFO",
+  "M-009": "INFO",   "M-010": "INFO",     "M-011": "MEDIUM",   "M-012": "MEDIUM",
+  "M-013": "LOW",    "M-014": "LOW",
+  "C-001": "MEDIUM",  "C-002": "CRITICAL", "C-003": "CRITICAL", "C-004": "HIGH",
+  "C-005": "MEDIUM",  "C-006": "HIGH",
+};
+
+// Descripción de impacto por check ID (los más críticos tienen descripción específica)
+const IMPACT_DESC = {
+  "R-006": "Un atacante con SPENDER_ROLE puede vaciar la tesoría de BHT sin restriction on-chain adicional.",
+  "R-007": "Un atacante con SPENDER_ROLE puede extraer todo el ETH de la tesoría.",
+  "P-008": "Reentrancy en presale permite realizar compras múltiples en una sola transacción, rompiendo los caps.",
+  "C-002": "Storage slot calculado manualmente puede sobreescribir el espacio del proxy, causando pérdida total de control del contrato.",
+  "C-003": "Un contrato sin protección en initialize puede ser capturado por cualquier actor antes del dueño legítimo.",
+  "C-004": "Un cast a tipo más estrecho (ej: uint256→uint112) puede truncar silenciosamente valores grandes, corrompiendo balances.",
+  "C-006": "keccak256(abi.encodePacked(a,b)) con tipos dinámicos permite colisión de hash: hash(\"AB\",\"C\") == hash(\"A\",\"BC\").",
+  "R-009": "Sin onlyPresale en rewardReferrer, cualquier actor puede incrementar counters de referral sin realizar compra real.",
+  "M-001": "Sin storage gap en V1, cualquier upgrade de V2 que añada variables de estado corromperiá el storage del proxy.",
+};
+const DEFAULT_IMPACT = "Riesgo identificado que puede comprometer la seguridad, corrección o conformidad del protocolo.";
 /** Devuelve la primera línea que coincide con el regex, o -1 */
 function firstLine(content, regex) {
   const lines = content.split("\n");
@@ -207,11 +256,16 @@ function runRoleAudit() {
   ));
 
   // 9. Módulo base: módulos NO pueden llamar grantRole en el Core
+  // Eliminamos líneas de comentario antes de buscar el patrón para evitar falsos positivos
+  const modBaseSrcNoComments = (SRC.modBase || "")
+    .split("\n")
+    .filter(l => !/^\s*(\/\/|\/\*|\*)/.test(l))
+    .join("\n");
   checks.push(check(
     "R-011", "Módulos NO delegan grantRole al Core (M4 Pattern)",
     C.modBase,
     /grantRole\s*\(/,
-    SRC.modBase,
+    modBaseSrcNoComments,
     { expectMatch: false, warnOnly: true, detail: "Si existe una llamada a grantRole en BashoodModuleBase, viola el patrón M4" }
   ));
 
@@ -462,6 +516,175 @@ function runRwaAudit() {
 }
 
 // ═══════════════════════════════════════════════════════════════════════════════
+// MÓDULO 4 — VULNERABILITY PATTERNS (cross-contrato)
+// ═══════════════════════════════════════════════════════════════════════════════
+
+/**
+ * Escanea todos los contratos de producción en busca de 6 patrones de vulnerabilidad
+ * críticos: balanceOf sin validación, sload manual, initialize sin guard, casts inseguros,
+ * ERC20.transfer sin check de retorno, y keccak256(encodePacked) con tipos dinámicos.
+ */
+function runVulnerabilityPatternAudit() {
+  // Check result type: { id, name, file, status, detail, lineHint? }
+  const aggregated = {}; // id -> { name, desc, files: [{rel, lines}] }
+
+  // Definición de patrones
+  const VULNPATTERNS = [
+    {
+      id: "C-001", name: "balanceOf usado en cálculo arítmético sin validación de fallo",
+      // Detecta: <var> = something.balanceOf( seguido de operaciones aritméticas
+      // Relevante para BHT (fee-on-transfer): usar balanceOf como referencia exacta es incorrecto
+      regex: /\.balanceOf\s*\([^)]+\)\s*[-+*\/]|[-+*\/]\s*\.?balanceOf\s*\(/,
+      desc: "Uso de balanceOf en aritmética: puede ser incorrecto con tokens fee-on-transfer (BHT burn 0.1% + fee 0.5%).",
+    },
+    {
+      id: "C-002", name: "Cálculo manual de storage slot (assembly/sload)",
+      // Detecta uso de assembly con sload/sstore o manejo manual de slots de storage
+      regex: /assembly\s*\{[^}]{0,400}(?:sload|sstore|slot)/ms,
+      desc: "Cálculo manual de storage slot via assembly. En contratos UUPS/proxy, un slot incorrecto puede sobreescribir el slot 0 del proxy (ERC1967) y tomar control del contrato.",
+    },
+    {
+      id: "C-003", name: "Función initialize sin modificador initializer / onlyInitializing",
+      // Detecta function initialize(...) que NO tiene modificador initializer NI onlyInitializing
+      // en el mismo bloque de declaración (primeras 4 líneas tras la firma)
+      regex: /function\s+initialize\s*\(/,
+      negativeRegex: /function\s+initialize\s*\([^)]*\)[^{]{0,200}(?:initializer|onlyInitializing)/ms,
+      desc: "Función initialize sin protección: cualquier actor puede llamarla antes que el deployer legítimo, tomando el rol de admin.",
+    },
+    {
+      id: "C-004", name: "Cast de estrechamiento inseguro (uint256 → uint112/96/64/32/16)",
+      // Detecta casts que reducen precisión silenciosamente
+      regex: /uint(?:112|96|64|32|16)\s*\(|int(?:112|96|64|32|16)\s*\(/,
+      desc: "Cast a tipo más estrecho puede truncar silenciosamente valores > max del tipo destino, corrompiendo balances o contadores.",
+    },
+    {
+      id: "C-005", name: "ERC20.transfer / transferFrom sin verificación del valor de retorno",
+      // Detecta .transfer( o .transferFrom( donde el resultado bool no es asignado ni verificado
+      // Patrón: línea contiene .transfer( o .transferFrom( pero no bool|require|=
+      regex: /(?<![A-Za-z])(?:transfer|transferFrom)\s*\(/,
+      lineFilter: (line) => {
+        // Excluir líneas de comentario de bloque (/** ... */ con * al inicio)
+        if (/^\s*\*/.test(line)) return false;
+        // Excluir declaraciones de función (no son llamadas externas)
+        if (/function\s+(?:transfer|transferFrom)\s*\(/.test(line)) return false;
+        // Excluir llamadas internas al hook _transfer (ERC20Upgradeable interno)
+        if (/_transfer\s*\(/.test(line)) return false;
+        // Excluir transferencias ETH nativas: .transfer(address(this).balance)
+        if (/\.transfer\s*\(\s*address\s*\(this\)\.balance/.test(line)) return false;
+        // Excluir emit de eventos Transfer
+        if (/emit\s+\w*[Tt]ransfer/.test(line)) return false;
+        // Excluir ya usa SafeERC20
+        if (/safeTransfer|SafeERC20/.test(line)) return false;
+        // Solo es problemático si el valor de retorno NO está verificado
+        const hasBoolAssign = /bool\s+\w+\s*=|\w+\s*=\s*.*(?:transfer|transferFrom)|require\s*\(/.test(line);
+        return !hasBoolAssign;
+      },
+      desc: "Tokens ERC20 no-standard (pre-EIP-20) pueden retornar false en lugar de revertir. Sin verificación del bool, la operación aparece exitosa aunque falle.",
+    },
+    {
+      id: "C-006", name: "keccak256(abi.encodePacked) con múltiples tipos dinámicos",
+      // Detecta keccak256(abi.encodePacked( con ≥2 argumentos (coma dentro del encodePacked)
+      // Riesgo: hash("AB","C") == hash("A","BC") con strings/bytes
+      regex: /keccak256\s*\(\s*abi\.encodePacked\s*\([^)]+,[^)]+\)/,
+      lineFilter: (line) => {
+        // Excluir patrones legítimos que no tienen riesgo de colisión:
+        // 1. EIP-191: "\x19Ethereum Signed Message" — esquema de firma estándar, NO cambiar
+        // 2. Merkle tree (bytes32, bytes32): tipos fijos sin colisión posible
+        // 3. abi.encode ya aplicado (safeEncode/abi.encode)
+        if (/\\x19|Ethereum Signed Message/i.test(line)) return false;
+        // Detectar patrones Merkle: dos identificadores sin espacios/comas internas (bytes32 + bytes32)
+        // p.ej. encodePacked(computed, p) o encodePacked(p, computed)
+        if (/encodePacked\s*\(\s*\w+\s*,\s*\w+\s*\)/.test(line)) {
+          // Si los dos argumentos son identificadores simples (Merkle-tree pattern) podría ser seguro
+          // Solo reportar si hay strings literales u operaciones complejas
+          const inner = line.match(/encodePacked\s*\(([^)]+)\)/);
+          if (inner) {
+            const args = inner[1].split(",").map(s => s.trim());
+            // Si todos los args son identificadores simples (variable names), es patrón Merkle/bytes32
+            const allSimpleIdents = args.every(a => /^\w+$/.test(a));
+            if (allSimpleIdents) return false; // bytes32+bytes32 Merkle — no es vulnerable
+          }
+        }
+        return true;
+      },
+      desc: "Colisión de hash: keccak256(abi.encodePacked(a,b)) puede producir el mismo hash para diferentes (a,b) cuando son tipos dinámicos. Usar abi.encode() en su lugar.",
+    },
+  ];
+
+  const prodFiles = walkProdContracts(path.resolve("contracts"));
+
+  for (const pat of VULNPATTERNS) {
+    const matchedFiles = [];
+
+    for (const file of prodFiles) {
+      const rel     = path.relative(process.cwd(), file).replace(/\\/g, "/");
+      const content = fs.readFileSync(file, "utf8");
+      const lines   = content.split("\n");
+      const hitLines = [];
+
+      if (pat.id === "C-003") {
+        // Caso especial: initialize SIN guard
+        const hasInitialize = pat.regex.test(content);
+        pat.regex.lastIndex = 0;
+        if (hasInitialize) {
+          const isProtected = pat.negativeRegex.test(content);
+          pat.negativeRegex.lastIndex = 0;
+          if (!isProtected) {
+            // Encontrar la línea exacta
+            for (let i = 0; i < lines.length; i++) {
+              if (/function\s+initialize\s*\(/.test(lines[i])) hitLines.push(i + 1);
+            }
+          }
+        }
+      } else {
+        for (let i = 0; i < lines.length; i++) {
+          const line = lines[i];
+          // Ignorar comentarios de línea
+          if (/^\s*\/\//.test(line)) continue;
+          pat.regex.lastIndex = 0;
+          if (pat.regex.test(line)) {
+            // Aplicar lineFilter si existe
+            if (pat.lineFilter && !pat.lineFilter(line)) continue;
+            hitLines.push(i + 1);
+          }
+          pat.regex.lastIndex = 0;
+        }
+      }
+
+      if (hitLines.length > 0) {
+        matchedFiles.push({ rel, lines: hitLines });
+      }
+    }
+
+    if (matchedFiles.length > 0) {
+      aggregated[pat.id] = { pat, files: matchedFiles };
+    }
+  }
+
+  // Convertir agrupados en checks individuales por patrón (un check por patrón encontrado)
+  const checks = [];
+  for (const patId of ["C-001","C-002","C-003","C-004","C-005","C-006"]) {
+    const found = aggregated[patId];
+    if (found) {
+      const firstFile = found.files[0];
+      const firstLine = firstFile.lines[0];
+      checks.push({
+        id      : patId,
+        name    : found.pat.name,
+        file    : `${found.files.length} contrato(s): ${found.files.map(f=>f.rel).slice(0,3).join(", ")}`,
+        status  : "WARN", // Requieren revisión manual — pueden ser falsos positivos
+        lineHint: firstLine,
+        detail  : `${found.pat.desc} (${found.files.length} archivo(s), primera ocurrencia L${firstLine} en ${firstFile.rel})`,
+        // Guardar datos extendidos para el sidecar JSON
+        _vulnFiles: found.files,
+      });
+    }
+  }
+
+  return checks;
+}
+
+// ═══════════════════════════════════════════════════════════════════════════════
 // TASK PRINCIPAL
 // ═══════════════════════════════════════════════════════════════════════════════
 
@@ -481,6 +704,7 @@ task("audit:custom", "Valida roles/permisos, lógica de presale y coherencia del
       { name: "MÓDULO 1 — ROLE & PERMISSION AUDIT", fn: runRoleAudit },
       { name: "MÓDULO 2 — PRESALE LOGIC AUDIT",     fn: runPresaleAudit },
       { name: "MÓDULO 3 — RWA MODEL COHERENCE",     fn: runRwaAudit },
+      { name: "MÓDULO 4 — VULNERABILITY PATTERNS",  fn: runVulnerabilityPatternAudit },
     ];
 
     const allChecks  = [];
@@ -562,6 +786,36 @@ task("audit:custom", "Valida roles/permisos, lógica de presale y coherencia del
 
     const reportText = lines_out.join("\n");
     fs.writeFileSync(outputPath, reportText, "utf8");
+
+    // ── Sidecar JSON (findings estructurados) ───────────────────────────────────────────
+    const structuredFindings = [];
+    for (const c of allChecks) {
+      if (c.status === "PASS") continue; // Solo reportar hallazgos con acción requerida
+      const severity = SEVERITY_MAP[c.id] || "LOW";
+      structuredFindings.push({
+        id            : c.id,
+        severity,
+        category      : c.id.startsWith("R-") ? "ROLE_PERMISSION"
+                      : c.id.startsWith("P-") ? "PRESALE_LOGIC"
+                      : c.id.startsWith("M-") ? "RWA_COHERENCE"
+                      : "VULNERABILITY_PATTERN",
+        title         : c.name,
+        description   : c.detail || c.name,
+        impact        : IMPACT_DESC[c.id] || DEFAULT_IMPACT,
+        recommendation: `Revisar check [${c.id}] en modo manual. Ver fichero: ${c.file}.`,
+        status        : "UNRESOLVED",
+        source        : "audit:custom",
+        files         : [c.file],
+        lines         : c.lineHint ? [c.lineHint] : [],
+        // Para Módulo 4, incluir todos los archivos afectados
+        ...(c._vulnFiles ? { files: c._vulnFiles.map(f => f.rel), lines: c._vulnFiles.flatMap(f => f.lines.slice(0,3)) } : {}),
+      });
+    }
+    const findingsPath = path.resolve("reports/custom-findings.json");
+    fs.writeFileSync(findingsPath, JSON.stringify({
+      meta    : { task: "audit:custom", date: new Date().toISOString(), pass, warn, fail, score },
+      findings: structuredFindings,
+    }, null, 2), "utf8");
 
     console.log(`\n  Resultado: ${pass} PASS / ${warn} WARN / ${fail} FAIL  (score ${score}%)`);
     console.log(`  ✅  Reporte guardado: ${outputPath}\n`);

@@ -5,6 +5,7 @@ import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
+import "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/access/AccessControl.sol";
 import "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
@@ -13,7 +14,9 @@ import "@openzeppelin/contracts/utils/Pausable.sol";
 /// @title BashoodPropertyNFT - Real Estate NFT Collection
 /// @notice NFT contract for tokenizing real estate properties in the Bashood ecosystem
 /// @dev Extends ERC721 with enumerable, URI storage, and advanced property management
+///      Uses SafeERC20 for all ERC20 token interactions.
 contract BashoodPropertyNFT is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable, ReentrancyGuard, Pausable, AccessControl {
+    using SafeERC20 for IERC20;
     
     // ==================== STRUCTS ====================
     
@@ -392,7 +395,7 @@ contract BashoodPropertyNFT is ERC721, ERC721Enumerable, ERC721URIStorage, Ownab
     /// @param amount Amount to recover
     function emergencyTokenRecovery(address tokenAddress, uint256 amount) external onlyOwner {
         require(tokenAddress != address(this), "Cannot recover own tokens");
-        IERC20(tokenAddress).transfer(owner(), amount);
+        IERC20(tokenAddress).safeTransfer(owner(), amount);
     }
     
     // ==================== INTERNAL FUNCTIONS ====================

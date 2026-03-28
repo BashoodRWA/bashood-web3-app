@@ -8,6 +8,9 @@ require("./tasks/audit-coverage.cjs");
 require("./tasks/audit-slither.cjs");
 require("./tasks/audit-regulatory.cjs");
 require("./tasks/audit-custom.cjs");
+require("./tasks/audit-known-risks.cjs");
+require("./tasks/audit-report.cjs");
+require("./tasks/audit-full.cjs");
 require("./tasks/audit-full.cjs");
 // ─────────────────────────────────────────────────────────────────────────────
 

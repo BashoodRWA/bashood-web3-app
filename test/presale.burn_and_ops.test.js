@@ -100,8 +100,8 @@ describe('Presale burn fallback and ops transfer failure', function () {
     const nonce = 2;
     const sig = await signNonce(owner, buyer.address, nonce);
 
-  // ops transfer fails and should revert with Ops transfer failed (contract requires ops transfer success)
-  await expect(presale2.connect(buyer).purchaseWithBHT(1, 1, nonce, sig)).to.be.revertedWith('Ops transfer failed');
+  // SafeERC20: cuando transferFrom devuelve false se lanza SafeERC20FailedOperation (no string manual)
+  await expect(presale2.connect(buyer).purchaseWithBHT(1, 1, nonce, sig)).to.be.reverted;
   });
 });
 

@@ -247,14 +247,12 @@ contract BashoodPresaleFinal is ReentrancyGuard, AccessControl, IERC1155Receiver
             try IBashoodToken(address(bashoodToken)).burnFrom(msg.sender, burnAmount) {
                 emit BHTBurned(msg.sender, burnAmount);
             } catch {
-                bool burnOk = bashoodToken.transferFrom(msg.sender, 0x000000000000000000000000000000000000dEaD, burnAmount);
-                require(burnOk, "Burn transfer failed");
+                bashoodToken.safeTransferFrom(msg.sender, 0x000000000000000000000000000000000000dEaD, burnAmount);
                 emit BHTBurned(msg.sender, burnAmount);
             }
         }
         if (opsAmount > 0) {
-            bool opsOk = bashoodToken.transferFrom(msg.sender, operationsWallet, opsAmount);
-            require(opsOk, "Ops transfer failed");
+            bashoodToken.safeTransferFrom(msg.sender, operationsWallet, opsAmount);
         }
         emit ServicePaid(serviceId, msg.sender, fiatQuoteUsd, bhtAmount);
     }
@@ -284,14 +282,12 @@ contract BashoodPresaleFinal is ReentrancyGuard, AccessControl, IERC1155Receiver
             try IBashoodToken(address(bashoodToken)).burnFrom(msg.sender, burnAmount) {
                 emit BHTBurned(msg.sender, burnAmount);
             } catch {
-                bool burnOk = bashoodToken.transferFrom(msg.sender, 0x000000000000000000000000000000000000dEaD, burnAmount);
-                require(burnOk, "Burn transfer failed");
+                bashoodToken.safeTransferFrom(msg.sender, 0x000000000000000000000000000000000000dEaD, burnAmount);
                 emit BHTBurned(msg.sender, burnAmount);
             }
         }
         if (opsAmount > 0) {
-            bool opsOk = bashoodToken.transferFrom(msg.sender, operationsWallet, opsAmount);
-            require(opsOk, "Ops transfer failed");
+            bashoodToken.safeTransferFrom(msg.sender, operationsWallet, opsAmount);
         }
         emit MilestonePaid(projectId, stage, msg.sender, fiatQuoteUsd, bhtAmount);
     }
@@ -366,7 +362,7 @@ contract BashoodPresaleFinal is ReentrancyGuard, AccessControl, IERC1155Receiver
         require(msg.sender == tx.origin, "E10");
         require(address(referralContract) != address(0), "E11");
         require(_verifySignature(msg.sender, nonce, signature), "E12");
-        bytes32 hash = keccak256(abi.encodePacked(msg.sender, nonce));
+        bytes32 hash = keccak256(abi.encode(msg.sender, nonce));
         require(!usedHashes[hash], "E13");
         usedHashes[hash] = true;
         require(allowedNftIds[nftId], "E14");
@@ -416,7 +412,7 @@ contract BashoodPresaleFinal is ReentrancyGuard, AccessControl, IERC1155Receiver
         require(msg.sender != signerAddress, "E22");
         require(msg.sender != deployer, "E23");
         require(_verifySignature(msg.sender, nonce, signature), "E24");
-        bytes32 hash = keccak256(abi.encodePacked(msg.sender, nonce));
+        bytes32 hash = keccak256(abi.encode(msg.sender, nonce));
         require(!usedHashes[hash], "E25");
         usedHashes[hash] = true;
         require(allowedNftIds[nftId], "E26");
@@ -547,13 +543,11 @@ contract BashoodPresaleFinal is ReentrancyGuard, AccessControl, IERC1155Receiver
             try IBashoodToken(address(bashoodToken)).burnFrom(user, burnAmount) {
                 // Burn successful
             } catch {
-                bool burnOk = bashoodToken.transferFrom(user, 0x000000000000000000000000000000000000dEaD, burnAmount);
-                require(burnOk, "Burn transfer failed");
+                bashoodToken.safeTransferFrom(user, 0x000000000000000000000000000000000000dEaD, burnAmount);
             }
         }
         if (opsAmount > 0) {
-            bool opsOk = bashoodToken.transferFrom(user, operationsWallet, opsAmount);
-            require(opsOk, "Ops transfer failed");
+            bashoodToken.safeTransferFrom(user, operationsWallet, opsAmount);
         }
     }
 
