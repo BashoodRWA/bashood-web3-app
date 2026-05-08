@@ -1,0 +1,18 @@
+{
+  "name": "Golden House Collection",
+  "description": "Premium collection of 12 unique real estate NFTs in the Bashood metaverse. Each property represents luxury, innovation, and exclusive digital ownership.",
+  "image": "ipfs://QmPLACEHOLDER_COLLECTION_BANNER",
+  "banner_image": "ipfs://QmPLACEHOLDER_COLLECTION_BANNER_LARGE",
+  "external_link": "https://bashood.com/golden-house-collection",
+  "seller_fee_basis_points": 500,
+  "fee_recipient": "0x742d35Cc6634C0532925a3b8D4D1C8B1B5c45C00",
+  "total_supply": 12,
+  "total_estimated_value": 62100000,
+  "avg_estimated_value": 5175000,
+  "verification": {
+    "metadata_verified": true,
+    "erc721_compliant": true,
+    "prepared_for_ipfs": "2025-11-20T22:18:28.077Z",
+    "provenance_hash": "701ebd7980d06fcf1b0499c70440ad73aed7133d24973cc57cfa52bd865929fe"
+  }
+}

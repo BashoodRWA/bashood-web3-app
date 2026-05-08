@@ -1,0 +1,1527 @@
+﻿
+
+  BashoodMultiToken
+    Ô£ö Deber├¡a permitir al minter crear nuevos tokens
+    Ô£ö Deber├¡a fallar si un usuario no autorizado intenta mintear
+    Ô£ö Deber├¡a permitir transferencias seguras de tokens
+    Ô£ö Deber├¡a revertir si se intenta transferir sin balance
+    Ô£ö Deber├¡a manejar setApprovalForAll y isApprovedForAll correctamente
+    Ô£ö Deber├¡a devolver la URI correctamente
+    Ô£ö Deber├¡a manejar m├║ltiples roles correctamente
+    Ô£ö Deber├¡a permitir revocar roles y bloquear funciones
+    Ô£ö Deber├¡a permitir renunciar a un rol
+    Ô£ö Deber├¡a soportar interfaces ERC1155 y AccessControl
+    Ô£ö Deber├¡a revertir si se transfiere a un contrato que no acepta ERC1155
+    Ô£ö Deber├¡a fallar al hacer mint a address(0)
+    Ô£ö Deber├¡a fallar al hacer transfer a address(0)
+    Ô£ö Deber├¡a fallar safeBatchTransfer con arrays desbalanceados
+    Ô£ö Deber├¡a fallar setApprovalForAll con uno mismo como operador
+
+  BashoodNFT
+    Ô£ö 1. Deber├¡a permitir al owner mintear un NFT correctamente
+    Ô£ö 2. Deber├¡a fallar si un usuario no autorizado intenta mintear
+    Ô£ö 3. Deber├¡a fallar si se intenta mintear a la direcci├│n cero
+    Ô£ö 4. Deber├¡a asignar correctamente la URI personalizada (si no es ID 1)
+    Ô£ö 5. Deber├¡a devolver la URI fija si tokenId es 1 (Runa)
+    Ô£ö 6. Deber├¡a transferir el NFT correctamente
+    Ô£ö 7. Deber├¡a fallar si no es el owner o approved al transferir
+    Ô£ö 8. Deber├¡a permitir approve y transferFrom
+    Ô£ö 9. Deber├¡a devolver correctamente el balance del owner
+    Ô£ö 10. Deber├¡a fallar si se consulta URI de un token inexistente
+    Ô£ö 11. Deber├¡a devolver correctamente el nombre del token
+    Ô£ö 12. Deber├¡a devolver correctamente el s├¡mbolo del token
+    Ô£ö 13. Deber├¡a permitir setApprovalForAll y reconocer isApprovedForAll
+    Ô£ö 14. Deber├¡a permitir revocar setApprovalForAll
+    Ô£ö 15. Deber├¡a permitir transferencias seguras (safeTransferFrom)
+    Ô£ö 16. Deber├¡a fallar transferFrom a direcci├│n cero
+    Ô£ö 17. Deber├¡a soportar la interfaz ERC721
+    Ô£ö 18. Deber├¡a soportar la interfaz ERC165
+    Ô£ö 19. Deber├¡a fallar safeTransferFrom hacia un contrato no ERC721Receiver
+
+  BashoodPresaleFinal - BHT edge cases
+    Ô£ö reverts E30 when allowance is insufficient (BHT) (172ms)
+    Ô£ö reverts when price oracle is stale (BHT) (169ms)
+    Ô£ö reverts ETH purchase when project wallet rejects ETH transfer (165ms)
+
+  BashoodPresaleFinal - BHT happy path and role checks
+    Ô£ö happy path BHT purchase updates totals and balances (167ms)
+    Ô£ö reverts E22 when buyer is the signer (161ms)
+    Ô£ö reverts E23 when buyer is the deployer (162ms)
+
+  BashoodPresaleFinal - edge cases
+    Ô£ö reverts E14 when nftId not allowed (ETH) (126ms)
+    Ô£ö reverts E17 when maxPerUser exceeded (ETH) (153ms)
+    Ô£ö reverts E16 when presale lacks NFT stock (ETH) (139ms)
+    Ô£ö reverts E13 when reusing nonce (ETH) (145ms)
+
+  BashoodPresaleFinal - exhaustive suite
+    Ô£ö ETH happy path: purchase transfers NFT and ETH (151ms)
+    Ô£ö BHT happy path: balances and totals updated (232ms)
+    Ô£ö signature validation: invalid signature reverts E24 (BHT) (293ms)
+    Ô£ö nonce reuse prevented (E25/E13) across ETH/BHT (198ms)
+
+  BashoodPresaleFinal - focused branches
+    Ô£ö purchaseWithETH: success happy path and project wallet receive (58ms)
+    Ô£ö purchaseWithETH: reverts when msg.value incorrect and when not allowed nftId or out of stock
+    Ô£ö purchaseWithBHT: success and failure paths for allowance and nonce reuse (39ms)
+    Ô£ö rescue delegation failures when rescueContract not set or projectWallet reverts
+
+  BashoodPresaleFinal - focused2
+    Ô£ö should allow purchaseWithBHT happy path and increment totals
+    Ô£ö purchaseWithETH should revert on missing signature or invalid allowed id
+
+  BashoodPresaleFinal - purchaseWithBHT
+    Ô£ö setupPresaleActivo deja la preventa activa dentro del rango esperado (169ms)
+    Ô£ö rechaza compra fuera de la ventana de preventa (206ms)
+
+  BashoodPresaleFinal - BHT transfer to projectWallet fails
+    Ô£ö reverts when projectWallet rejects token transfers (235ms)
+
+  BashoodPresaleFinal IERC1155Receiver
+    Ô£ö acepta onERC1155Received y onERC1155BatchReceived
+    Ô£ö supports IERC1155Receiver interface
+
+  Scaffold: BashoodPresaleFinal_IERC1155Receiver
+    Ô£ö placeholder: test file present
+
+  ­ƒÅá BashoodPropertyNFT
+    ­ƒôï Deployment & Initial State
+­ƒÅù´©Å Deploying BashoodPropertyNFT...
+Ô£à BashoodPropertyNFT deployed at: 0xA9d0Fb5837f9c42c874e16da96094b14Af0e2784
+      Ô£ö Should set the correct name and symbol
+­ƒÅù´©Å Deploying BashoodPropertyNFT...
+Ô£à BashoodPropertyNFT deployed at: 0x1f53E116c31F171e59f45f0752AEc5d1F5aA3714
+      Ô£ö Should set the correct base URI
+­ƒÅù´©Å Deploying BashoodPropertyNFT...
+Ô£à BashoodPropertyNFT deployed at: 0xF9c0bF1CFAAB883ADb95fed4cfD60133BffaB18a
+      Ô£ö Should have owner as authorized minter
+­ƒÅù´©Å Deploying BashoodPropertyNFT...
+Ô£à BashoodPropertyNFT deployed at: 0x6f2E42BB4176e9A7352a8bF8886255Be9F3D2d13
+      Ô£ö Should start with token counter at 1
+    ­ƒÅá Property Minting
+­ƒÅù´©Å Deploying BashoodPropertyNFT...
+Ô£à BashoodPropertyNFT deployed at: 0x25A1DF485cFBb93117f12fc673D87D1cddEb845a
+      Ô£ö Should mint property NFT successfully
+­ƒÅù´©Å Deploying BashoodPropertyNFT...
+Ô£à BashoodPropertyNFT deployed at: 0xF45B1CdbA9AACE2e9bbE80bf376CE816bb7E73FB
+      Ô£ö Should fail if not authorized minter
+­ƒÅù´©Å Deploying BashoodPropertyNFT...
+Ô£à BashoodPropertyNFT deployed at: 0x5A569Ad19272Afa97103fD4DbadF33B2FcbaA175
+      Ô£ö Should fail with invalid property type
+­ƒÅù´©Å Deploying BashoodPropertyNFT...
+Ô£à BashoodPropertyNFT deployed at: 0x7036124464A2d2447516309169322c8498ac51e3
+      Ô£ö Should fail with empty property name
+­ƒÅù´©Å Deploying BashoodPropertyNFT...
+Ô£à BashoodPropertyNFT deployed at: 0x5c932424AcBfab036969b3B9D94bA9eCbae7565D
+      Ô£ö Should update property type counters
+    ­ƒîƒ Public Minting
+­ƒÅù´©Å Deploying BashoodPropertyNFT...
+Ô£à BashoodPropertyNFT deployed at: 0x9e7F7d0E8b8F38e3CF2b3F7dd362ba2e9E82baa4
+      Ô£ö Should fail if public minting not enabled
+­ƒÅù´©Å Deploying BashoodPropertyNFT...
+Ô£à BashoodPropertyNFT deployed at: 0xE7FF84Df24A9a252B6E8A5BB093aC52B1d8bEEdf
+      Ô£ö Should mint successfully when public minting enabled
+­ƒÅù´©Å Deploying BashoodPropertyNFT...
+Ô£à BashoodPropertyNFT deployed at: 0x3de00f44ce68FC56DB0e0E33aD4015C6e78eCB39
+      Ô£ö Should fail with insufficient fee
+­ƒÅù´©Å Deploying BashoodPropertyNFT...
+Ô£à BashoodPropertyNFT deployed at: 0x92A00fc48Ad3dD4A8b5266a8F467a52Ac784fC83
+      Ô£ö Should refund excess payment
+    ­ƒôØ Property Management
+­ƒÅù´©Å Deploying BashoodPropertyNFT...
+Ô£à BashoodPropertyNFT deployed at: 0x44863F234b137A395e5c98359d16057A9A1fAc55
+      Ô£ö Should update property data by owner
+­ƒÅù´©Å Deploying BashoodPropertyNFT...
+Ô£à BashoodPropertyNFT deployed at: 0x1c39BA375faB6a9f6E0c01B9F49d488e101C2011
+      Ô£ö Should fail to update if not owner
+­ƒÅù´©Å Deploying BashoodPropertyNFT...
+Ô£à BashoodPropertyNFT deployed at: 0xc0c5618f0F3Fa66b496F2940f373DC366d765BAe
+      Ô£ö Should add amenities
+­ƒÅù´©Å Deploying BashoodPropertyNFT...
+Ô£à BashoodPropertyNFT deployed at: 0x6212cb549De37c25071cF506aB7E115D140D9e42
+      Ô£ö Should toggle property status by contract owner
+    ­ƒöì Query Functions
+­ƒÅù´©Å Deploying BashoodPropertyNFT...
+Ô£à BashoodPropertyNFT deployed at: 0x0bF7dE8d71820840063D4B8653Fd3F0618986faF
+      Ô£ö Should get properties by type
+­ƒÅù´©Å Deploying BashoodPropertyNFT...
+Ô£à BashoodPropertyNFT deployed at: 0x5E5713a0d915701F464DEbb66015adD62B2e6AE9
+      Ô£ö Should get properties by owner
+­ƒÅù´©Å Deploying BashoodPropertyNFT...
+Ô£à BashoodPropertyNFT deployed at: 0xC0BF43A4Ca27e0976195E6661b099742f10507e5
+      Ô£ö Should calculate total value by owner
+­ƒÅù´©Å Deploying BashoodPropertyNFT...
+Ô£à BashoodPropertyNFT deployed at: 0x9D3DA37d36BB0B825CD319ed129c2872b893f538
+      Ô£ö Should return collection statistics
+    ­ƒææ Admin Functions
+­ƒÅù´©Å Deploying BashoodPropertyNFT...
+Ô£à BashoodPropertyNFT deployed at: 0x9d136eEa063eDE5418A6BC7bEafF009bBb6CFa70
+      Ô£ö Should add and remove minters
+­ƒÅù´©Å Deploying BashoodPropertyNFT...
+Ô£à BashoodPropertyNFT deployed at: 0x30426D33a78afdb8788597D5BFaBdADc3Be95698
+      Ô£ö Should toggle public minting
+­ƒÅù´©Å Deploying BashoodPropertyNFT...
+Ô£à BashoodPropertyNFT deployed at: 0x021DBfF4A864Aa25c51F0ad2Cd73266Fde66199d
+      Ô£ö Should update minting fee
+­ƒÅù´©Å Deploying BashoodPropertyNFT...
+Ô£à BashoodPropertyNFT deployed at: 0x447786d977Ea11Ad0600E193b2d07A06EfB53e5F
+      Ô£ö Should update base URI
+­ƒÅù´©Å Deploying BashoodPropertyNFT...
+Ô£à BashoodPropertyNFT deployed at: 0xE2b5bDE7e80f89975f7229d78aD9259b2723d11F
+      Ô£ö Should pause and unpause
+­ƒÅù´©Å Deploying BashoodPropertyNFT...
+Ô£à BashoodPropertyNFT deployed at: 0x9155497EAE31D432C0b13dBCc0615a37f55a2c87
+      Ô£ö Should withdraw contract balance
+    ­ƒÜ½ Edge Cases & Security
+­ƒÅù´©Å Deploying BashoodPropertyNFT...
+Ô£à BashoodPropertyNFT deployed at: 0xfaE849108F2A63Abe3BaB17E21Be077d07e7a9A2
+      Ô£ö Should fail to mint to zero address
+­ƒÅù´©Å Deploying BashoodPropertyNFT...
+Ô£à BashoodPropertyNFT deployed at: 0xce830DA8667097BB491A70da268b76a081211814
+      Ô£ö Should fail to query non-existent token
+­ƒÅù´©Å Deploying BashoodPropertyNFT...
+Ô£à BashoodPropertyNFT deployed at: 0x77AD263Cd578045105FBFC88A477CAd808d39Cf6
+      Ô£ö Should respect MAX_SUPPLY limit
+­ƒÅù´©Å Deploying BashoodPropertyNFT...
+Ô£à BashoodPropertyNFT deployed at: 0x05bB67cB592C1753425192bF8f34b95ca8649f09
+      Ô£ö Should fail admin functions if not owner
+
+  Registro y restricciones adicionales
+    Ô£ö 1. Deber├¡a iniciar sin referidos ni NFTs reclamados
+    Ô£ö 6. Debe registrar exitosamente si el usuario posee el NFT permitido
+    Ô£ö 7. Debe fallar si el usuario intenta referirse a s├¡ mismo
+    Ô£ö 8. Debe fallar si se intenta registrar un usuario ya referido
+    Ô£ö 9. Debe permitir referidos m├║ltiples
+    Ô£ö 10. Debe fallar si se intenta reclamar un NFT sin suficientes referidos
+    Ô£ö 11. Debe distribuir recompensas correctamente
+    Ô£ö 12. Debe permitir reclamar NFT si se tienen suficientes referidos
+    Ô£ö 13. Debe distribuir recompensas correctamente despu├®s de m├║ltiples referidos
+    Ô£ö 14. Debe fallar si se intenta reclamar un NFT sin suficientes referidos
+    Ô£ö 15. No debe permitir registrar referidos m├║ltiples veces por diferentes usuarios
+    Ô£ö 16. Debe fallar si se usa direcci├│n cero como referido
+    Ô£ö 17. Debe verificar que el NFT fue transferido correctamente al reclamar
+    Ô£ö 24. Debe permitir verificar el n├║mero de referidos de un usuario
+    Ô£ö 25. Debe permitir verificar si un usuario ha reclamado su NFT
+
+  Scaffold: BashoodReferralFull
+    Ô£ö placeholder: test file present
+
+  BashoodRescue - claim edge cases (reentrancy / revert / duplicate)
+    Ô£ö claim resists reentrancy: reentrant contract attempt fails and leaves pending intact (337ms)
+    Ô£ö claim reverts when project wallet rejects ETH
+    Ô£ö duplicate claims are prevented: second claim fails with no pending
+
+  BashoodRescue - focused branch coverage
+    Ô£ö authorize and revoke caller flows and events
+    Ô£ö rescueERC20 succeeds only for authorized caller and reverts otherwise
+    Ô£ö rescueUnsoldNFTs handles success and rejects zero address and unauthorized
+    Ô£ö emergencyWithdrawETH only with role and emits event
+
+  BashoodRescue - multisig EIP712 flow
+    Ô£ö happy path: N owners sign, executor calls claim -> multisig receives funds and pending zeroed (40ms)
+    Ô£ö insufficient signatures: fail (51ms)
+    Ô£ö wrong signer: fail
+    Ô£ö duplicate signatures: counted once
+    Ô£ö replay: same signatures + same nonce fails on second attempt (38ms)
+    Ô£ö revert on transfer: ensure state preserved when claim reverts (61ms)
+
+  BashoodRescue - multisig project wallet flow
+    Ô£ö multisig requires approvals then can execute claim and withdraw (41ms)
+
+  ComplianceRegistry + TokenWrapper POC
+    Ô£ö denies wrap if no root set
+    Ô£ö allows wrap when merkle root matches
+
+  Coverage: AttackerBatch
+    Ô£ö covers setTarget, attack revert, hooks, supportsInterface (74ms)
+
+  Coverage: AttackerConditional & AttackerLoop
+    Ô£ö AttackerConditional acts only on data flag (53ms)
+    Ô£ö AttackerLoop attempts multiple withdraws but none succeed (45ms)
+
+  Coverage: AttackerReceiver
+    Ô£ö covers attack and hook withdraw attempt (64ms)
+
+  Coverage: BashoodMultiToken focused tests
+    Ô£ö mintAllNFTs onlyOwner and nftCounter behavior + withdrawFunds transfer failure (94ms)
+    Ô£ö approveMarketplace emits correct events and buyTokens mints BASHOOD_TOKEN (53ms)
+
+  Coverage: BashoodPresaleFinal extra focused tests
+    Ô£ö submitProposal: burns via fallback transferFrom when burnFrom not available (188ms)
+    Ô£ö submitProposal: reverts when price is stale (158ms)
+    Ô£ö payServiceWithBHT: handles burn and ops transfers (fallback burn path) (171ms)
+    1) delegate rescue: handles success and revert-with-reason and revert-without-reason
+
+  Coverage: BashoodReferral focused tests
+    Ô£ö covers setPresaleContract owner and failure cases (51ms)
+    Ô£ö covers rewardReferrer happy path and revert branches (66ms)
+    Ô£ö covers registerReferral branches and getters (77ms)
+    Ô£ö covers claimNFT success and failure paths (57ms)
+
+  Coverage: BashoodRescue focused tests
+    Ô£ö constructor rejects zero addresses and grants roles (39ms)
+DEBUG: alice call reverted as expected VM Exception while processing transaction: reverted with reason string 'Rescue: not authorized'
+    Ô£ö authorize/revoke caller and rescueUnsoldNFTs happy and revert paths (80ms)
+    Ô£ö rescueERC20 happy and error flows (87ms)
+    Ô£ö emergencyWithdrawETH covers role and error branches (50ms)
+
+  Coverage extras
+DBG addrs {
+  ownerAddr: '0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266',
+  aliceAddr: '0x70997970C51812dc3A010C7d01b50e0d17dc79C8',
+  bobAddr: '0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC'
+}
+STEP: deploy MockBHT
+STEP: deploy BashoodToken
+STEP: before transfers
+STEP: before approve/transferFrom
+STEP: before donate
+OK: transfer to alice.address
+OK: transfer to aliceAddr
+DEBUG: bht address for approve 0xd8E4Af8145A8288537B85878bb2371fa070Aa5eF
+OK: approve bht.address
+OK: donate
+STEP: before burn
+STEP: before periodicBurn
+STEP: before setStakingContract/sendToStaking
+    Ô£ö BashoodToken: transfer, fee, burn, donate, burn and treasury/staking flows (104ms)
+    Ô£ö MockBHT and MockRescue basic behaviors (41ms)
+    Ô£ö TaxHandler: initialize, updates and calculateTax (112ms)
+DBG mint balance 2
+OK: two buyTokens
+DEBUG: m.address 0xf09e7Af8b380cD01BD0d009F83a6b668A47742ec owner.address 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266
+OK: owner bought tokens twice to fund contract
+    Ô£ö BashoodMultiToken: minting, buyTokens, withdrawFunds (51ms)
+
+  Coverage fillers: small mocks and helpers
+    Ô£ö ChainlinkPriceFeed: success and failure paths (60ms)
+    Ô£ö OwnableLocal: transfer ownership and restrictions (49ms)
+    Ô£ö Mock tokens: mint and balances (50ms)
+    Ô£ö TokenWrapperERC20: wrap and unwrap happy path (72ms)
+    Ô£ö MockPresale delegates to rescue (47ms)
+
+  Deploy BashoodReferral - test m├¡nimo
+    Ô£ö deber├¡a desplegar BashoodReferral con argumentos v├ílidos (76ms)
+
+  BashoodPresaleFinal - Edge Cases
+    Ô£ö revierta si el usuario no tiene suficiente BHT
+    Ô£ö revierta si el or├ículo devuelve precio cero
+    Ô£ö revierta si se intenta finalizar una propuesta inexistente
+    Ô£ö revierta si un usuario intenta pagar con cantidad cero
+
+  Test m├¡nimo de entorno
+    Ô£ö deber├¡a pasar siempre
+
+  Integraci├│n BashoodPresaleFinal: pagos, propuestas y roles
+    Ô£ö flujo completo: pago de servicio, propuesta y finalizaci├│n
+    Ô£ö bloquea todo si el contrato est├í pausado
+    Ô£ö flujo: pago de milestone y chequeo de eventos
+
+  Libra - ReentrancyGuard example
+    Ô£ö allows deposit and withdraw normally (57ms)
+
+  Scaffold: Lock
+    Ô£ö placeholder: test file present
+
+  Lock
+    Deployment
+      Ô£ö Should set the right unlockTime
+      Ô£ö Should set the right owner
+      Ô£ö Should receive and store the funds to lock
+      Ô£ö Should fail if the unlockTime is not in the future
+    Withdrawals
+      Validations
+        Ô£ö Should revert with the right error if called too soon
+        Ô£ö Should revert with the right error if called from another account
+        Ô£ö Shouldn't fail if the unlockTime has arrived and the owner calls it
+      Events
+        Ô£ö Should emit an event on withdrawals
+      Transfers
+        Ô£ö Should transfer the funds to the owner
+
+  ­ƒöÑ MAXIMAL DANGER ATTACKER TEST ­ƒöÑ
+    ­ƒÄ» ATTACK VECTOR 1: Advanced Reentrancy
+­ƒÜÇ Deploying target contracts...
+­ƒÆÇ Deploying MAXIMAL DANGER ATTACKER...
+ÔÜí Setup complete - Ready for WAR!
+­ƒö┤ LAUNCHING REENTRANCY ATTACK...
+­ƒÆ░ Attacker initial balance: 5.0 ETH
+ÔÜí Attack transaction gas used: 156753
+­ƒôè Attack Results:
+   ­ƒÄ» Currently attacking: true
+   ­ƒôê Attack step: 3
+   ­ƒöä Reentry attempts: 2
+   ­ƒÆÄ Stolen amount: 0.0 ETH
+   ­ƒÿÁ Victim address: 0x0000000000000000000000000000000000000000
+­ƒÆ░ Attacker final balance: 2.5 ETH
+Ô£à ATTACK BLOCKED: expected true to be false
+      2) Should attempt sophisticated reentrancy attack
+­ƒÜÇ Deploying target contracts...
+­ƒÆÇ Deploying MAXIMAL DANGER ATTACKER...
+ÔÜí Setup complete - Ready for WAR!
+­ƒö┤ TESTING ERC1155 CALLBACK REENTRANCY...
+Ô£à CALLBACK ATTACK BLOCKED: no matching fragment (operation="fragment", info={ "args": [ "0x904df20E7d5A1D577c3763FC7bF35EFa51Df94da", 1, 1, "0x" ], "key": "mint" }, code=UNSUPPORTED_OPERATION, version=6.15.0)
+      Ô£ö Should test ERC1155 callback reentrancy
+    ­ƒÄ» ATTACK VECTOR 2: Flash Loan Simulation
+­ƒÜÇ Deploying target contracts...
+­ƒÆÇ Deploying MAXIMAL DANGER ATTACKER...
+ÔÜí Setup complete - Ready for WAR!
+­ƒö┤ LAUNCHING FLASH LOAN ATTACK...
+­ƒôè Flash loan attack attempted
+      Ô£ö Should attempt flash loan price manipulation attack
+    ­ƒÄ» ATTACK VECTOR 3: Front-Running & MEV
+­ƒÜÇ Deploying target contracts...
+­ƒÆÇ Deploying MAXIMAL DANGER ATTACKER...
+ÔÜí Setup complete - Ready for WAR!
+­ƒö┤ LAUNCHING FRONT-RUNNING ATTACK...
+­ƒôè Front-running attack attempted
+      Ô£ö Should attempt front-running attack
+    ­ƒÄ» ATTACK VECTOR 4: Gas Griefing
+­ƒÜÇ Deploying target contracts...
+­ƒÆÇ Deploying MAXIMAL DANGER ATTACKER...
+ÔÜí Setup complete - Ready for WAR!
+­ƒö┤ LAUNCHING GAS GRIEFING ATTACK...
+Ôø¢ Gas griefing used: 25681451 gas
+      Ô£ö Should attempt gas griefing attack (243ms)
+    ­ƒÄ» ATTACK VECTOR 5: Batch Attack Coordination
+­ƒÜÇ Deploying target contracts...
+­ƒÆÇ Deploying MAXIMAL DANGER ATTACKER...
+ÔÜí Setup complete - Ready for WAR!
+­ƒö┤ LAUNCHING BATCH COORDINATION ATTACK...
+­ƒôè Batch attack completed
+      Ô£ö Should attempt coordinated batch attack
+    ­ƒøí´©Å DEFENSE VERIFICATION
+­ƒÜÇ Deploying target contracts...
+­ƒÆÇ Deploying MAXIMAL DANGER ATTACKER...
+ÔÜí Setup complete - Ready for WAR!
+­ƒöì VERIFYING DEFENSE MECHANISMS...
+­ƒÅª Presale balance: 2.0 ETH
+­ƒ¬Ö Token supply: 999999985.0 BHT
+­ƒòÁ´©Å Attacker token balance: 4970.0 BHT
+      3) Should verify all defenses are working
+­ƒÜÇ Deploying target contracts...
+­ƒÆÇ Deploying MAXIMAL DANGER ATTACKER...
+ÔÜí Setup complete - Ready for WAR!
+­ƒÜ¿ TESTING EMERGENCY STOP...
+Ô£à Emergency stop successful
+      Ô£ö Should test emergency stop functionality
+    ­ƒôè ATTACK SUMMARY & REPORT
+­ƒÜÇ Deploying target contracts...
+­ƒÆÇ Deploying MAXIMAL DANGER ATTACKER...
+ÔÜí Setup complete - Ready for WAR!
+
+============================================================
+­ƒöÑ MAXIMAL DANGER ATTACK REPORT ­ƒöÑ
+============================================================
+­ƒôì Attacker Address: 0x5C3A8b1E8273F52EF64D70CEAB437AA6f7092f65
+­ƒÄ» Target Contracts:
+   - Presale: 0xcfbD78F3D57B620ddEff73F193dD5Bf595a730db
+   - Token: 0x8233369E29653b70E50E93d1276a50B8f2122a01
+   - MultiToken: 0xBA6BfBa894B5cAF04c3462A5C8556fFBa4de6782
+
+­ƒôè Attack Statistics:
+   - Currently Attacking: false
+   - Final Attack Step: 0
+   - Total Reentry Attempts: 0
+   - Funds Stolen: 0.0 ETH
+
+­ƒøí´©Å Defense Status:
+   - Reentrancy Guards: Ô£à ACTIVE
+   - Access Controls: Ô£à ACTIVE
+   - State Integrity: Ô£à MAINTAINED
+
+­ƒÆ░ Final Contract States:
+   - Presale Balance: 2.0 ETH
+   - Token Supply: 999999985.0 BHT
+
+­ƒÄë CONCLUSION: ALL ATTACKS SUCCESSFULLY MITIGATED! ­ƒÄë
+============================================================
+
+      Ô£ö Should generate complete attack report
+
+  Mock: RejectingWallet helper and receive/fallback behavior
+    Ô£ö reverts on plain ether receive
+    Ô£ö callWithdraw bubbles revert reason from target (45ms)
+
+  MockBHT basic behaviors
+    Ô£ö mint and approve behave as expected
+
+  MockERC20 basic behaviors
+    Ô£ö mint, transfer and approve work
+
+  MockPriceFeed basic behaviors
+    Ô£ö returns and updates price and timestamp
+
+  MockPriceFeed Test
+MockPriceFeed constructor args: 8 decimals, 100e8 price
+    Ô£ö Should deploy successfully
+MockPriceFeed constructor args: 8 decimals, 100e8 price
+Latest round data: Result(5) [ 1n, 10000000000n, 1795784991n, 1795784991n, 1n ]
+    Ô£ö Should return latest round data
+
+  MockTreasuryHandler
+    Ô£ö 1. Inicializa sin revertir
+    Ô£ö 2. Inicializa con address(0)
+    Ô£ö 3. updateTreasuryWallet con address v├ílida
+    Ô£ö 4. updateTreasuryWallet con address(0)
+    Ô£ö 5. getTreasury retorna address(this)
+    Ô£ö 6. handleTreasuryTransfer con datos v├ílidos
+    Ô£ö 7. handleTreasuryTransfer con from=address(0)
+    Ô£ö 8. handleTreasuryTransfer con to=address(0)
+    Ô£ö 9. handleTreasuryTransfer con amount=0
+    Ô£ö 10. Emite FeeTransferred correctamente
+    Ô£ö 11. Emite FeeTransferred varias veces
+    Ô£ö 12. updateTreasuryWallet varias veces
+    Ô£ö 13. initialize varias veces
+    Ô£ö 14. handleTreasuryTransfer desde diferentes cuentas
+    Ô£ö 15. updateTreasuryWallet desde diferentes cuentas
+    Ô£ö 16. No almacena balances
+    Ô£ö 39. handleTreasuryTransfer en paralelo (Promise.all)
+    Ô£ö 40. No cambia storage tras m├║ltiples llamadas
+
+  Scaffold: MockTreasuryHandler
+    Ô£ö placeholder: test file present
+
+  Oracle Debug Tests
+Operations wallet set to: 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266
+Minted 1000 BHT to owner
+Setting fresh price...
+Round data: {
+  roundId: 2n,
+  answer: '15000000000',
+  startedAt: 1795785056n,
+  updatedAt: 1795785056n,
+  answeredInRound: 2n
+}
+Current block timestamp: 1795785056
+Price age: 0
+Max staleness: 3600n
+Attempting submitProposal...
+SUCCESS: Oracle validation passed, gas used: 141112n
+    Ô£ö Debug oracle call (149ms)
+
+  BashoodPresaleFinal - Oracle Functions Tests
+    Oracle Configuration
+Using mock deployment for oracle tests
+      - Should set max price staleness correctly
+Using mock deployment for oracle tests
+      - Should emit MaxPriceStalenessChanged event
+Using mock deployment for oracle tests
+      - Should reject staleness outside valid range
+Using mock deployment for oracle tests
+      - Should only allow admin to set staleness
+    Price Feed Configuration
+Using mock deployment for oracle tests
+      - Should set price feed correctly
+Using mock deployment for oracle tests
+      - Should emit PriceFeedChanged event
+Using mock deployment for oracle tests
+      - Should reject zero address for price feed
+    Mock Oracle Price Updates
+Using mock deployment for oracle tests
+      - Should update price correctly
+Using mock deployment for oracle tests
+      - Should handle price staleness simulation
+
+  BashoodPresaleFinal - Oracle Validation Tests
+    Oracle Configuration
+      Ô£ö Should set max price staleness correctly
+      Ô£ö Should emit MaxPriceStalenessChanged event
+      Ô£ö Should reject staleness outside valid range
+      Ô£ö Should only allow admin to set staleness
+    Oracle Price Validation
+      Ô£ö Should accept fresh price data
+      Ô£ö Should reject stale price data
+      Ô£ö Should reject zero price data
+      Ô£ö Should reject negative price data
+      Ô£ö Should reject when priceFeed is not set (57ms)
+    Oracle Edge Cases
+      Ô£ö Should handle multiple rapid price updates correctly
+      Ô£ö Should handle price at staleness boundary
+      Ô£ö Should reject price one second past staleness limit
+    Integration with Proposal System
+      Ô£ö Should validate oracle before burning tokens
+
+  BashoodPresaleFinal - Oracle Validation Tests
+    Oracle Configuration
+      4) "before each" hook for "Should set max price staleness correctly"
+
+  ChainlinkPriceFeed - decimals handling
+    Ô£ö returns correct decimals and price from mock
+
+  ChainlinkPriceFeed - max change rejection
+    Ô£ö reverts when change is larger than maxChangePct
+
+  ChainlinkPriceFeed - permissions
+    Ô£ö setFeed onlyOwner
+
+  ChainlinkPriceFeed wrapper
+    Ô£ö compiles and returns latest price from mock
+
+  ChainlinkPriceFeed - stale handling
+    Ô£ö reverts when feed updatedAt == 0
+
+  BashoodPresaleFinal - payMilestoneWithBHT
+    Ô£ö permite pagar un milestone con BHT y emite BHTBurned
+    Ô£ö revierta si el or├ículo est├í stale
+    5) revierta si el descuento supera el cap
+    6) revierta si la quema supera el cap
+
+  BashoodPresaleFinal - payServiceWithBHT
+    Ô£ö permite pagar un servicio con BHT y emite BHTBurned
+    Ô£ö revierta si el or├ículo est├í stale
+    7) revierta si el descuento supera el cap
+    8) revierta si la quema supera el cap
+
+  PoC: BashoodMultiToken - mintAllNFTs reentrancy checks
+    Ô£ö should not allow withdrawFunds during mintAllNFTs (ReentrancyGuard PoC)
+
+  PoC: BashoodPresaleFinal - referral contract revert does not break purchases
+    9) should swallow referral revert if we implement try/catch (test shows current behavior)
+
+  PoC: BashoodRescue emergencyWithdrawETH reentrancy and reject tests
+    Ô£ö should revert when project wallet rejects ETH (MockProjectWalletRevert) (43ms)
+    Ô£ö PoC: ensure EMERGENCY_ROLE check prevents reentry attempts from project wallet callback
+
+  PoC: BashoodMultiToken attacker-owner reentrancy attempt
+    Ô£ö attacker owner tries to trigger withdrawFunds from onERC1155Received (60ms)
+
+  PoC: BashoodMultiToken mintAllNFTs reentrancy
+    Ô£ö attempt to reenter via ERC1155 receiver callback (54ms)
+
+  PoC: BashoodMultiToken mintAllNFTs reentrancy attempt
+multi.address undefined
+multiAddr 0x063b9875d6B1d7B354a0b7518efF94B68FB3b3c0
+att.address undefined
+attAddr 0x5C956bedDDA675c0cAe32409b75804e93F05F337
+    Ô£ö should NOT allow withdrawFunds to succeed during mintAllNFTs (ReentrancyGuard) (77ms)
+
+  PoC variants: BashoodMultiToken attacker receiver patterns
+post-mint bal 1
+    Ô£ö variant: batch attacker should attempt but not succeed (62ms)
+    Ô£ö variant: loop attacker should attempt multiple calls but not succeed (65ms)
+    Ô£ö variant: conditional attacker should only act on calldata flag and fail to withdraw (58ms)
+
+  PoC: BashoodRescue.emergencyWithdrawETH -> recipient rejects ETH
+    Ô£ö reverts when project wallet rejects plain ETH (simulate transfer failure) (53ms)
+
+  PoC: BashoodRescue emergencyWithdrawETH revert path
+    Ô£ö should revert when projectWallet rejects ETH (51ms)
+
+  PoC: BashoodRescue emergencyWithdrawETH
+    Ô£ö should send ETH to projectWallet and record reception (PoC) (51ms)
+
+  Presale burn fallback and delegate rescue branches
+    Ô£ö reverts when burnFrom reverts and transfer to dead returns false (176ms)
+    10) delegateRescueUnsoldNfts reverts with reason from rescue
+    11) delegateEmergencyWithdrawEth reverts with generic message when rescue reverts without reason
+
+  Presale burn fallback and ops transfer failure
+    Ô£ö falls back to transfer to dead when burnFrom reverts and ops transfer succeeds (270ms)
+    Ô£ö reverts when ops transfer fails (270ms)
+
+  Presale burn/ops combinations and proposals
+    12) payServiceWithBHT reverts when burnBps > 1500
+    13) setBurnBps enforces burn cap (<=1500)
+    Ô£ö submitProposal uses burnFrom when available and falls back correctly (169ms)
+    Ô£ö submitProposal falls back to transfer to dead when burnFrom absent (165ms)
+
+  BashoodPresaleFinal - targeted coverage
+    14) submitProposal: reverts when price is stale and when deposit is zero
+    Ô£ö assignRoles rejects zero addresses and grants roles on success (139ms)
+    Ô£ö pause/unpause and finalizePresale emit expected behavior (128ms)
+    Ô£ö payServiceWithBHT: fails on ops wallet unset and on zero fiat; and payMilestone burn fallback (154ms)
+    15) rescue functions bubble reason and generic catch
+
+  Presale - rescue try/catch coverage
+    16) delegateRescueUnsoldNfts reverts with reason from rescue contract
+    17) delegateRescueUnsoldNfts reverts without reason (generic path)
+    18) delegateEmergencyWithdrawEth handles revert with reason and without
+
+  BashoodPresaleFinal - rescue try/catch coverage
+    Ô£ö rescueUnsoldNFTs reverts with reason from rescue (catch Error) (139ms)
+    19) rescueUnsoldNFTs reverts generic when rescue reverts without reason
+    Ô£ö delegateRescueErc20 and delegateEmergencyWithdrawEth bubble up reason and no-reason cases (188ms)
+
+  BashoodPresaleFinal ÔÇö extra coverage step2
+    20) submitProposal: reverts when deposit is zero
+    Ô£ö submitProposal: reverts when oracle stale (152ms)
+    Ô£ö assignRoles: rejects zero addresses and accepts valid set (140ms)
+    Ô£ö payServiceWithBHT: operations wallet unset -> revert (133ms)
+    Ô£ö payServiceWithBHT: fiat zero -> revert (143ms)
+    Ô£ö payServiceWithBHT: transferFrom reverting mock -> bubbled revert (147ms)
+    21) rescue wrapper: revert-with-reason caught path
+    22) rescue wrapper: revert-without-reason caught path
+
+  BashoodPresaleFinal - cover remaining branches
+    Ô£ö payServiceWithBHT: successful burn branch (emit Burned/BHTBurned) (147ms)
+    Ô£ö payMilestoneWithBHT: successful burn branch (emit BHTBurned and MilestonePaid) (153ms)
+    Ô£ö purchaseWithETH: calls referral.rewardReferrer when referrer exists (153ms)
+    Ô£ö endPresale: sets presaleActive false and presaleEnded true (143ms)
+    Ô£ö purchaseWithBHT: successful burn branch and referral.rewardReferrer invoked (162ms)
+
+  Presale coverage step4 (caller & rescue branches)
+    Ô£ö purchaseWithBHT should revert when called from contract (tx.origin check) (177ms)
+    Ô£ö purchaseWithBHT should revert when msg.sender == signerAddress (E22) (159ms)
+    Ô£ö rescueUnsoldNFTs should bubble Error(reason) from rescue (with reason) (151ms)
+    23) rescueUnsoldNFTs should bubble no-reason revert from rescue (no reason)
+
+  BashoodPresaleFinal coverage - step5
+    Ô£ö purchaseWithBHT uses burnFrom when BHT exposes burnFrom (166ms)
+    Ô£ö purchaseWithBHT falls back to transferFrom when burnFrom not available (160ms)
+    Ô£ö payServiceWithBHT executes full flow emitting ServicePaid (146ms)
+
+  Presale coverage - step6 (targeted branches)
+    Ô£ö falls back to transferFrom when burnFrom not available and ops transfer fails (162ms)
+    24) delegate rescue functions propagate revert reasons and no-reason branches
+
+  BashoodPresaleFinal - extra critical branches
+    Ô£ö submitProposal reverts when burnFrom absent and transfer to dead returns false (146ms)
+    Ô£ö payServiceWithBHT reverts when ops transfer fails after burn fallback (151ms)
+
+  Presale coverage edge branches
+    25) submitProposal reverts when operationsWallet not set (Ops wallet req)
+    26) delegateRescueErc20 bubbles revert reason and generic when rescue reverts without reason
+
+  BashoodPresaleFinal - delegate rescue and ERC1155 selectors
+    27) delegateRescueErc20 wraps revert reason and generic when no reason
+    28) delegateRescueUnsoldNfts wraps reason and generic
+    29) delegateEmergencyWithdrawEth wraps reason and generic
+    Ô£ö onERC1155Received and batch return selectors (129ms)
+
+  Presale oracle edge cases
+    Ô£ö reverts when oracle price is zero (143ms)
+    30) reverts when oracle price is stale
+
+  Presale: ETH transfer failure and rescue delegation
+    Ô£ö reverts when project wallet rejects ETH (198ms)
+    31) rescue delegates bubble Error(reason) and generic revert appropriately
+
+  Presale targeted branches
+    Ô£ö reverts when operations transferFrom returns false (payServiceWithBHT) (162ms)
+    Ô£ö purchaseWithBHT reverts when ops transfer returns false in _transferAndBurnBHT (171ms)
+
+  Presale: whitelist and signature/nonce edge cases
+    Ô£ö blocks purchases when whitelist enabled and buyer not whitelisted, allows after grant (148ms)
+    Ô£ö reverts if signer not set (E31) when verifying signature (137ms)
+    Ô£ö prevents nonce reuse across ETH -> BHT and BHT -> ETH (168ms)
+
+  BashoodPresaleFinal - Proposals
+    Ô£ö permite enviar propuesta y emite BHTBurned y ProposalSubmitted
+    Ô£ö revierta si el or├ículo est├í stale
+    32) revierta si la quema supera el cap
+    Ô£ö permite finalizar propuesta solo a ADMIN_ROLE
+
+  PurchaseWithBHT integration
+    Ô£ö allows purchaseWithBHT when allowances and params correct (happy path) (50ms)
+
+  PurchaseWithETH integration
+    Ô£ö allows purchaseWithETH and transfers NFT and funds
+
+  Reentrancy demo: vulnerable vs protected
+    Ô£ö attacker can drain vulnerable contract but not protected one (64ms)
+
+  Rescue delegation and authorization
+    Ô£ö authorized presale can call rescue functions
+    Ô£ö unauthorized caller cannot invoke rescue direct methods
+
+  Presale rescue interface enforcement
+    Ô£ö setRescueContract reverts if target does not support IBashoodRescue (168ms)
+
+  BashoodRescue interface checks
+    Ô£ö supportsInterface for IBashoodRescue should be true (40ms)
+
+  rolesAndPause (cjs)
+    Ô£ö placeholder
+
+  Scaffold: rolesAndPause
+    Ô£ö placeholder: test file present
+
+  Targeted branches and edge cases
+    Ô£ö ReferralValidator: constructor and isValid
+    Ô£ö BashoodMultiToken: mint/mintBatch edge cases, mintAllNFTs and withdraw (67ms)
+    Ô£ö BashoodPresaleFinal: admin setters and validation reverts (136ms)
+
+  Presale focused coverage
+    Ô£ö should exercise _bhtFromFiat and burn fallback when burnFrom is missing (154ms)
+    Ô£ö should revert when price is stale (153ms)
+
+  Scaffold: TestBashoodMultiToken
+    Ô£ö placeholder: test file present
+
+  TestBashoodMultiToken (cjs)
+    Ô£ö placeholder
+
+  Scaffold: TestBashoodNFT
+    Ô£ö placeholder: test file present
+
+  TestBashoodNFT (cjs)
+    Ô£ö placeholder
+
+  Scaffold: TestBashoodPresaleFinal
+    Ô£ö placeholder: test file present
+
+  BashoodPresaleFinal
+    Ô£ö Should set the right unlockTime
+
+  Scaffold: TestBashoodPresaleFinalMinimal
+    Ô£ö placeholder: test file present
+
+  Scaffold: TestBashoodReferralFull
+    Ô£ö placeholder: test file present
+
+  Scaffold: TestBashoodTokenUpgradeable
+    Ô£ö placeholder: test file present
+
+
+  300 passing (33s)
+  9 pending
+  32 failing
+
+  1) Coverage: BashoodPresaleFinal extra focused tests
+       delegate rescue: handles success and revert-with-reason and revert-without-reason:
+     AssertionError: Expected transaction to be reverted with reason 'Delegate rescue NFT failed', but it reverted with reason 'Delegate rescue NFT failed: Mock rescue reverts'
+      at Context.<anonymous> (test\coverage.bashoodpresalefinal.test.cjs:138:5)
+
+  2) ­ƒöÑ MAXIMAL DANGER ATTACKER TEST ­ƒöÑ
+       ­ƒÄ» ATTACK VECTOR 1: Advanced Reentrancy
+         Should attempt sophisticated reentrancy attack:
+     AssertionError: expected 'expected true to be false' to include 'revert'
+      at Context.<anonymous> (test\MaximalDangerAttacker.test.js:142:42)
+
+  3) ­ƒöÑ MAXIMAL DANGER ATTACKER TEST ­ƒöÑ
+       ­ƒøí´©Å DEFENSE VERIFICATION
+         Should verify all defenses are working:
+
+      AssertionError: expected 4970000000000000000000 to equal 5000000000000000000000.
+      + expected - actual
+
+      -4970000000000000000000
+      +5000000000000000000000
+      
+      at Context.<anonymous> (test\MaximalDangerAttacker.test.js:268:45)
+
+  4) BashoodPresaleFinal - Oracle Validation Tests
+       "before each" hook for "Should set max price staleness correctly":
+     HardhatError: HH701: There are multiple artifacts for contract "MockPriceFeed", please use a fully qualified name.
+
+Please replace MockPriceFeed for one of these options wherever you are trying to read its artifact:
+
+contracts/MockPriceFeed.sol:MockPriceFeed
+contracts/mocks/MockPriceFeed.sol:MockPriceFeed
+
+      at Artifacts._getArtifactPathFromFiles (C:\Users\Franchu\Desktop\bashood-hardhat-tests\node_modules\hardhat\src\internal\artifacts.ts:860:13)
+      at Artifacts._getArtifactPath (C:\Users\Franchu\Desktop\bashood-hardhat-tests\node_modules\hardhat\src\internal\artifacts.ts:516:21)
+      at Artifacts.readArtifact (C:\Users\Franchu\Desktop\bashood-hardhat-tests\node_modules\hardhat\src\internal\artifacts.ts:71:26)
+      at getContractFactory (C:\Users\Franchu\Desktop\bashood-hardhat-tests\node_modules\@nomicfoundation\hardhat-ethers\src\internal\helpers.ts:120:22)
+      at Proxy.hre.ethers.getContractFactory (C:\Users\Franchu\Desktop\bashood-hardhat-tests\test\setup.js:22:21)
+      at Context.<anonymous> (C:\Users\Franchu\Desktop\bashood-hardhat-tests\test\oracle.validation.test.js:18:31)
+
+  5) BashoodPresaleFinal - payMilestoneWithBHT
+       revierta si el descuento supera el cap:
+     Error: VM Exception while processing transaction: reverted with reason string 'Discount cap exceeded'
+    at BashoodPresaleFinal.setMaxPriceStaleness (contracts/BashoodPresaleFinal.sol:191)
+    at BashoodPresaleFinal.setDiscountBps (contracts/BashoodPresaleFinal.sol:218)
+    at EdrProviderWrapper.request (node_modules\hardhat\src\internal\hardhat-network\provider\provider.ts:359:41)
+    at HardhatEthersSigner.sendTransaction (node_modules\@nomicfoundation\hardhat-ethers\src\signers.ts:181:18)
+    at send (node_modules\ethers\src.ts\contract\contract.ts:313:20)
+    at Proxy.setDiscountBps (node_modules\ethers\src.ts\contract\contract.ts:352:16)
+    at Context.<anonymous> (test\payMilestoneWithBHT.test.cjs:84:5)
+  
+
+  6) BashoodPresaleFinal - payMilestoneWithBHT
+       revierta si la quema supera el cap:
+     Error: VM Exception while processing transaction: reverted with reason string 'Burn cap exceeded'
+    at BashoodPresaleFinal.setMaxPriceStaleness (contracts/BashoodPresaleFinal.sol:191)
+    at BashoodPresaleFinal.setBurnBps (contracts/BashoodPresaleFinal.sol:211)
+    at EdrProviderWrapper.request (node_modules\hardhat\src\internal\hardhat-network\provider\provider.ts:359:41)
+    at HardhatEthersSigner.sendTransaction (node_modules\@nomicfoundation\hardhat-ethers\src\signers.ts:181:18)
+    at send (node_modules\ethers\src.ts\contract\contract.ts:313:20)
+    at Proxy.setBurnBps (node_modules\ethers\src.ts\contract\contract.ts:352:16)
+    at Context.<anonymous> (test\payMilestoneWithBHT.test.cjs:91:5)
+  
+
+  7) BashoodPresaleFinal - payServiceWithBHT
+       revierta si el descuento supera el cap:
+     Error: VM Exception while processing transaction: reverted with reason string 'Discount cap exceeded'
+    at BashoodPresaleFinal.setMaxPriceStaleness (contracts/BashoodPresaleFinal.sol:191)
+    at BashoodPresaleFinal.setDiscountBps (contracts/BashoodPresaleFinal.sol:218)
+    at EdrProviderWrapper.request (node_modules\hardhat\src\internal\hardhat-network\provider\provider.ts:359:41)
+    at HardhatEthersSigner.sendTransaction (node_modules\@nomicfoundation\hardhat-ethers\src\signers.ts:181:18)
+    at send (node_modules\ethers\src.ts\contract\contract.ts:313:20)
+    at Proxy.setDiscountBps (node_modules\ethers\src.ts\contract\contract.ts:352:16)
+    at Context.<anonymous> (test\payServiceWithBHT.test.cjs:67:5)
+  
+
+  8) BashoodPresaleFinal - payServiceWithBHT
+       revierta si la quema supera el cap:
+     Error: VM Exception while processing transaction: reverted with reason string 'Burn cap exceeded'
+    at BashoodPresaleFinal.setMaxPriceStaleness (contracts/BashoodPresaleFinal.sol:191)
+    at BashoodPresaleFinal.setBurnBps (contracts/BashoodPresaleFinal.sol:211)
+    at EdrProviderWrapper.request (node_modules\hardhat\src\internal\hardhat-network\provider\provider.ts:359:41)
+    at HardhatEthersSigner.sendTransaction (node_modules\@nomicfoundation\hardhat-ethers\src\signers.ts:181:18)
+    at send (node_modules\ethers\src.ts\contract\contract.ts:313:20)
+    at Proxy.setBurnBps (node_modules\ethers\src.ts\contract\contract.ts:352:16)
+    at Context.<anonymous> (test\payServiceWithBHT.test.cjs:74:5)
+  
+
+  9) PoC: BashoodPresaleFinal - referral contract revert does not break purchases
+       should swallow referral revert if we implement try/catch (test shows current behavior):
+     Error: VM Exception while processing transaction: reverted with reason string 'Invalid staleness: 1s-24h'
+    at BashoodPresaleFinal.setMaxPriceStaleness (contracts/BashoodPresaleFinal.sol:191)
+    at EdrProviderWrapper.request (node_modules\hardhat\src\internal\hardhat-network\provider\provider.ts:359:41)
+    at HardhatEthersSigner.sendTransaction (node_modules\@nomicfoundation\hardhat-ethers\src\signers.ts:181:18)
+    at send (node_modules\ethers\src.ts\contract\contract.ts:313:20)
+    at Proxy.setMaxPriceStaleness (node_modules\ethers\src.ts\contract\contract.ts:352:16)
+    at Context.<anonymous> (test\poc.bashoodpresale.referralRevert.test.js:57:5)
+  
+
+  10) Presale burn fallback and delegate rescue branches
+       delegateRescueUnsoldNfts reverts with reason from rescue:
+     AssertionError: Expected transaction to be reverted with reason 'Delegate Rescue NFT failed: boom', but it reverted with reason 'Delegate rescue NFT failed: boom'
+      at Context.<anonymous> (test\presale.burn_and_delegate.test.js:62:5)
+
+  11) Presale burn fallback and delegate rescue branches
+       delegateEmergencyWithdrawEth reverts with generic message when rescue reverts without reason:
+     AssertionError: Expected transaction to be reverted with reason 'Delegate rescue ETH failed', but it reverted with reason 'Delegate rescue ETH failed: Mock rescue reverts'
+      at Context.<anonymous> (test\presale.burn_and_delegate.test.js:78:5)
+
+  12) Presale burn/ops combinations and proposals
+       payServiceWithBHT reverts when burnBps > 1500:
+     Error: VM Exception while processing transaction: reverted with reason string 'Burn cap exceeded'
+    at BashoodPresaleFinal.setMaxPriceStaleness (contracts/BashoodPresaleFinal.sol:191)
+    at BashoodPresaleFinal.setBurnBps (contracts/BashoodPresaleFinal.sol:211)
+    at EdrProviderWrapper.request (node_modules\hardhat\src\internal\hardhat-network\provider\provider.ts:359:41)
+    at HardhatEthersSigner.sendTransaction (node_modules\@nomicfoundation\hardhat-ethers\src\signers.ts:181:18)
+    at send (node_modules\ethers\src.ts\contract\contract.ts:313:20)
+    at Proxy.setBurnBps (node_modules\ethers\src.ts\contract\contract.ts:352:16)
+    at Context.<anonymous> (test\presale.burn_ops_proposals.test.js:21:3)
+  
+
+  13) Presale burn/ops combinations and proposals
+       setBurnBps enforces burn cap (<=1500):
+     Error: VM Exception while processing transaction: reverted with reason string 'Burn cap exceeded'
+    at BashoodPresaleFinal.setMaxPriceStaleness (contracts/BashoodPresaleFinal.sol:191)
+    at BashoodPresaleFinal.setBurnBps (contracts/BashoodPresaleFinal.sol:211)
+    at EdrProviderWrapper.request (node_modules\hardhat\src\internal\hardhat-network\provider\provider.ts:359:41)
+    at HardhatEthersSigner.sendTransaction (node_modules\@nomicfoundation\hardhat-ethers\src\signers.ts:181:18)
+    at send (node_modules\ethers\src.ts\contract\contract.ts:313:20)
+    at Proxy.setBurnBps (node_modules\ethers\src.ts\contract\contract.ts:352:16)
+    at Context.<anonymous> (test\presale.burn_ops_proposals.test.js:43:5)
+  
+
+  14) BashoodPresaleFinal - targeted coverage
+       submitProposal: reverts when price is stale and when deposit is zero:
+     AssertionError: Expected transaction to be reverted with reason 'Deposit req', but it reverted with a custom error
+      at Context.<anonymous> (test\presale.coverage.final.test.js:27:5)
+
+  15) BashoodPresaleFinal - targeted coverage
+       rescue functions bubble reason and generic catch:
+     AssertionError: Expected transaction to be reverted with reason 'Rescue NFT failed', but it reverted with reason 'Rescue NFT failed: Mock rescue reverts'
+      at Context.<anonymous> (test\presale.coverage.final.test.js:113:5)
+
+  16) Presale - rescue try/catch coverage
+       delegateRescueUnsoldNfts reverts with reason from rescue contract:
+     AssertionError: Expected transaction to be reverted with reason 'Delegate Rescue NFT failed: boom', but it reverted with reason 'Delegate rescue NFT failed: boom'
+      at Context.<anonymous> (test\presale.coverage.rescue.test.js:23:5)
+
+  17) Presale - rescue try/catch coverage
+       delegateRescueUnsoldNfts reverts without reason (generic path):
+     AssertionError: Expected transaction to be reverted with reason 'Delegate Rescue NFT failed', but it reverted with reason 'Delegate rescue NFT failed: Mock rescue reverts'
+      at Context.<anonymous> (test\presale.coverage.rescue.test.js:32:5)
+
+  18) Presale - rescue try/catch coverage
+       delegateEmergencyWithdrawEth handles revert with reason and without:
+     AssertionError: Expected transaction to be reverted with reason 'Delegate rescue ETH failed', but it reverted with reason 'Delegate rescue ETH failed: Mock rescue reverts'
+      at Context.<anonymous> (test\presale.coverage.rescue.test.js:46:5)
+
+  19) BashoodPresaleFinal - rescue try/catch coverage
+       rescueUnsoldNFTs reverts generic when rescue reverts without reason:
+     AssertionError: Expected transaction to be reverted with reason 'Rescue NFT failed', but it reverted with reason 'Rescue NFT failed: Mock rescue reverts'
+      at Context.<anonymous> (test\presale.coverage.rescue.test.js:69:5)
+
+  20) BashoodPresaleFinal ÔÇö extra coverage step2
+       submitProposal: reverts when deposit is zero:
+     AssertionError: Expected transaction to be reverted with reason 'Deposit req', but it reverted with a custom error
+      at Context.<anonymous> (test\presale.coverage.step2.test.js:14:5)
+
+  21) BashoodPresaleFinal ÔÇö extra coverage step2
+       rescue wrapper: revert-with-reason caught path:
+     AssertionError: Expected transaction to be reverted with reason 'Delegate Rescue NFT failed: boom', but it reverted with reason 'Delegate rescue NFT failed: boom'
+      at Context.<anonymous> (test\presale.coverage.step2.test.js:81:5)
+
+  22) BashoodPresaleFinal ÔÇö extra coverage step2
+       rescue wrapper: revert-without-reason caught path:
+     AssertionError: Expected transaction to be reverted with reason 'Delegate Rescue ERC20 failed', but it reverted with reason 'Delegate rescue ERC20 failed: Mock rescue reverts'
+      at Context.<anonymous> (test\presale.coverage.step2.test.js:95:3)
+
+  23) Presale coverage step4 (caller & rescue branches)
+       rescueUnsoldNFTs should bubble no-reason revert from rescue (no reason):
+     AssertionError: Expected transaction to be reverted with reason 'Rescue NFT failed', but it reverted with reason 'Rescue NFT failed: Mock rescue reverts'
+      at Context.<anonymous> (test\presale.coverage.step4.test.js:109:5)
+
+  24) Presale coverage - step6 (targeted branches)
+       delegate rescue functions propagate revert reasons and no-reason branches:
+     AssertionError: Expected transaction to be reverted with reason 'Delegate Rescue NFT failed: boom', but it reverted with reason 'Delegate rescue NFT failed: boom'
+      at Context.<anonymous> (test\presale.coverage.step6.test.js:48:3)
+
+  25) Presale coverage edge branches
+       submitProposal reverts when operationsWallet not set (Ops wallet req):
+     AssertionError: Expected transaction to be reverted with reason 'Ops wallet req', but it reverted with a custom error
+      at Context.<anonymous> (test\presale.coverage_edges.test.js:39:5)
+
+  26) Presale coverage edge branches
+       delegateRescueErc20 bubbles revert reason and generic when rescue reverts without reason:
+     AssertionError: Expected transaction to be reverted with reason 'Delegate Rescue ERC20 failed: erc20-boom', but it reverted with reason 'Delegate rescue ERC20 failed: erc20-boom'
+      at Context.<anonymous> (test\presale.coverage_edges.test.js:78:5)
+
+  27) BashoodPresaleFinal - delegate rescue and ERC1155 selectors
+       delegateRescueErc20 wraps revert reason and generic when no reason:
+     AssertionError: Expected transaction to be reverted with reason 'Delegate Rescue ERC20 failed: erc20-boom', but it reverted with reason 'Delegate rescue ERC20 failed: erc20-boom'
+      at Context.<anonymous> (test\presale.delegate_rescue_batch.test.js:23:5)
+
+  28) BashoodPresaleFinal - delegate rescue and ERC1155 selectors
+       delegateRescueUnsoldNfts wraps reason and generic:
+     AssertionError: Expected transaction to be reverted with reason 'Delegate Rescue NFT failed: boom', but it reverted with reason 'Delegate rescue NFT failed: boom'
+      at Context.<anonymous> (test\presale.delegate_rescue_batch.test.js:46:5)
+
+  29) BashoodPresaleFinal - delegate rescue and ERC1155 selectors
+       delegateEmergencyWithdrawEth wraps reason and generic:
+     AssertionError: Expected transaction to be reverted with reason 'Delegate rescue ETH failed', but it reverted with reason 'Delegate rescue ETH failed: Mock rescue reverts'
+      at Context.<anonymous> (test\presale.delegate_rescue_batch.test.js:72:5)
+
+  30) Presale oracle edge cases
+       reverts when oracle price is stale:
+     AssertionError: Expected transaction to be reverted with reason 'Oracle: Invalid/stale', but it reverted with reason 'Price too stale'
+      at Context.<anonymous> (test\presale.oracle_edgecases.test.js:64:5)
+
+  31) Presale: ETH transfer failure and rescue delegation
+       rescue delegates bubble Error(reason) and generic revert appropriately:
+     AssertionError: Expected transaction to be reverted with reason 'Rescue ERC20 failed', but it reverted with reason 'Rescue ERC20 failed: Mock rescue reverts'
+      at Context.<anonymous> (test\presale.rescue_and_ethfail.test.js:77:3)
+
+  32) BashoodPresaleFinal - Proposals
+       revierta si la quema supera el cap:
+     Error: VM Exception while processing transaction: reverted with reason string 'Burn cap exceeded'
+    at BashoodPresaleFinal.setMaxPriceStaleness (contracts/BashoodPresaleFinal.sol:191)
+    at BashoodPresaleFinal.setBurnBps (contracts/BashoodPresaleFinal.sol:211)
+    at EdrProviderWrapper.request (node_modules\hardhat\src\internal\hardhat-network\provider\provider.ts:359:41)
+    at HardhatEthersSigner.sendTransaction (node_modules\@nomicfoundation\hardhat-ethers\src\signers.ts:181:18)
+    at send (node_modules\ethers\src.ts\contract\contract.ts:313:20)
+    at Proxy.setBurnBps (node_modules\ethers\src.ts\contract\contract.ts:352:16)
+    at Context.<anonymous> (test\proposals.test.cjs:81:5)
+  
+
+
+
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|  [32m[1mSolidity and Network Configuration[22m[39m                                                                                                     Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|  [36mSolidity: 0.8.28[39m                                   ┬À  [36mOptim: true[39m    ┬À  [36mRuns: 200[39m    ┬À  [36mviaIR: false[39m   ┬À     [36mBlock: 30,000,000 gas[39m     Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|  [32m[1mMethods[22m[39m                                                                                                                                Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|  [32m[1mContracts / Methods[22m[39m                                ┬À  [1mMin[22m            ┬À  [1mMax[22m          ┬À  [1mAvg[22m            ┬À  [1m# calls[22m       ┬À  [1musd (avg)[22m   Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|  [1mAttackerBatch[22m                                      ┬À                                                                                   Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      onERC1155BatchReceived                         ┬À              [90m-[39m  ┬À            [90m-[39m  ┬À         38,158  ┬À             1  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      setTarget                                      ┬À              [90m-[39m  ┬À            [90m-[39m  ┬À         46,066  ┬À             2  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|  [1mAttackerConditional[22m                                ┬À                                                                                   Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      onERC1155Received                              ┬À         [36m24,720[39m  ┬À       [31m33,130[39m  ┬À         28,925  ┬À             2  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      setTarget                                      ┬À              [90m-[39m  ┬À            [90m-[39m  ┬À         46,066  ┬À             2  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|  [1mAttackerLoop[22m                                       ┬À                                                                                   Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      attack                                         ┬À              [90m-[39m  ┬À            [90m-[39m  ┬À      1,122,973  ┬À             1  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      onERC1155Received                              ┬À              [90m-[39m  ┬À            [90m-[39m  ┬À         65,794  ┬À             1  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      setTarget                                      ┬À              [90m-[39m  ┬À            [90m-[39m  ┬À         46,110  ┬À             2  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|  [1mAttackerOwner[22m                                      ┬À                                                                                   Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      triggerMint                                    ┬À              [90m-[39m  ┬À            [90m-[39m  ┬À        937,438  ┬À             2  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|  [1mAttackerReceiver[22m                                   ┬À                                                                                   Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      attack                                         ┬À              [90m-[39m  ┬À            [90m-[39m  ┬À        948,193  ┬À             2  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      setTarget                                      ┬À              [90m-[39m  ┬À            [90m-[39m  ┬À         46,066  ┬À             2  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|  [1mAttackerReentrancy[22m                                 ┬À                                                                                   Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      attack                                         ┬À              [90m-[39m  ┬À            [90m-[39m  ┬À         89,137  ┬À             1  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|  [1mBashoodMultiToken[22m                                  ┬À                                                                                   Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      approveMarketplace                             ┬À         [36m26,191[39m  ┬À       [31m48,105[39m  ┬À         37,148  ┬À             8  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      buyTokens                                      ┬À         [36m46,302[39m  ┬À       [31m97,602[39m  ┬À         84,448  ┬À            13  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      grantRole                                      ┬À         [36m29,259[39m  ┬À       [31m51,487[39m  ┬À         30,648  ┬À            16  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      mint                                           ┬À         [36m36,484[39m  ┬À       [31m62,805[39m  ┬À         51,037  ┬À             8  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      mintAllNFTs                                    ┬À              [90m-[39m  ┬À            [90m-[39m  ┬À        841,533  ┬À             5  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      mintBatch                                      ┬À              [90m-[39m  ┬À            [90m-[39m  ┬À         94,068  ┬À             2  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      renounceRole                                   ┬À              [90m-[39m  ┬À            [90m-[39m  ┬À         25,063  ┬À             1  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      revokeRole                                     ┬À              [90m-[39m  ┬À            [90m-[39m  ┬À         29,601  ┬À             1  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      safeTransferFrom                               ┬À              [90m-[39m  ┬À            [90m-[39m  ┬À         57,128  ┬À             1  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      setApprovalForAll                              ┬À              [90m-[39m  ┬À            [90m-[39m  ┬À         46,198  ┬À             2  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      transferOwnership                              ┬À              [90m-[39m  ┬À            [90m-[39m  ┬À         28,700  ┬À             6  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      withdrawFunds                                  ┬À              [90m-[39m  ┬À            [90m-[39m  ┬À         34,468  ┬À             4  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|  [1mBashoodNFT[22m                                         ┬À                                                                                   Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      approve                                        ┬À              [90m-[39m  ┬À            [90m-[39m  ┬À         48,691  ┬À             1  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      mintNFT                                        ┬À         [36m60,118[39m  ┬À       [31m94,318[39m  ┬À         89,056  ┬À            13  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      safeTransferFrom                               ┬À              [90m-[39m  ┬À            [90m-[39m  ┬À         57,888  ┬À             1  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      setApprovalForAll                              ┬À         [36m24,308[39m  ┬À       [31m46,220[39m  ┬À         38,916  ┬À             3  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      transferFrom                                   ┬À         [36m55,059[39m  ┬À       [31m55,565[39m  ┬À         55,312  ┬À             2  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|  [1mBashoodPresaleFinal[22m                                ┬À                                                                                   Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      assignRoles                                    ┬À              [90m-[39m  ┬À            [90m-[39m  ┬À         84,715  ┬À             3  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      delegateRescueUnsoldNfts                       ┬À              [90m-[39m  ┬À            [90m-[39m  ┬À         56,819  ┬À             2  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      endPresale                                     ┬À              [90m-[39m  ┬À            [90m-[39m  ┬À         28,784  ┬À             1  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      finalizePresale                                ┬À              [90m-[39m  ┬À            [90m-[39m  ┬À         46,892  ┬À             2  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      finalizeProposal                               ┬À              [90m-[39m  ┬À            [90m-[39m  ┬À         52,303  ┬À             5  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      grantRole                                      ┬À         [36m26,924[39m  ┬À       [31m51,497[39m  ┬À         30,507  ┬À            35  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      pause                                          ┬À         [36m30,007[39m  ┬À       [31m47,107[39m  ┬À         38,557  ┬À             2  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      payMilestoneWithBHT                            ┬À              [90m-[39m  ┬À            [90m-[39m  ┬À        119,982  ┬À             2  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      payMilestoneWithBHT                            ┬À         [36m91,475[39m  ┬À      [31m119,461[39m  ┬À        108,463  ┬À             6  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      payServiceWithBHT                              ┬À        [36m100,237[39m  ┬À      [31m119,609[39m  ┬À        115,846  ┬À            11  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      payServiceWithBHT                              ┬À              [90m-[39m  ┬À            [90m-[39m  ┬À         89,081  ┬À             2  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      purchaseWithBHT                                ┬À        [36m162,811[39m  ┬À      [31m264,174[39m  ┬À        239,345  ┬À            15  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      purchaseWithETH                                ┬À        [36m195,427[39m  ┬À      [31m218,782[39m  ┬À        203,165  ┬À            11  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      setBurnBps                                     ┬À         [36m27,356[39m  ┬À       [31m30,180[39m  ┬À         29,627  ┬À            41  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      setDiscountBps                                 ┬À         [36m27,298[39m  ┬À       [31m30,122[39m  ┬À         28,525  ┬À            23  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      setMaxPerUser                                  ┬À              [90m-[39m  ┬À            [90m-[39m  ┬À         29,024  ┬À             1  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      setMaxPriceStaleness                           ┬À         [36m27,422[39m  ┬À       [31m47,322[39m  ┬À         36,497  ┬À            99  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      setOperationsWallet                            ┬À         [36m27,659[39m  ┬À       [31m47,571[39m  ┬À         40,563  ┬À            98  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      setPriceFeed                                   ┬À         [36m47,532[39m  ┬À       [31m47,544[39m  ┬À         47,543  ┬À            88  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      setRescueContract                              ┬À         [36m32,676[39m  ┬À       [31m49,878[39m  ┬À         45,504  ┬À            28  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      setSigner                                      ┬À         [36m26,551[39m  ┬À       [31m46,451[39m  ┬À         43,421  ┬À            77  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      setWhitelistEnabled                            ┬À              [90m-[39m  ┬À            [90m-[39m  ┬À         29,036  ┬À             1  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      startPresale                                   ┬À              [90m-[39m  ┬À            [90m-[39m  ┬À         46,082  ┬À            61  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      submitProposal                                 ┬À        [36m141,112[39m  ┬À      [31m166,140[39m  ┬À        151,245  ┬À            20  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      unpause                                        ┬À              [90m-[39m  ┬À            [90m-[39m  ┬À         25,162  ┬À             1  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|  [1mBashoodPropertyNFT[22m                                 ┬À                                                                                   Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      addAmenities                                   ┬À              [90m-[39m  ┬À            [90m-[39m  ┬À        118,613  ┬À             1  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      addMinter                                      ┬À              [90m-[39m  ┬À            [90m-[39m  ┬À         47,419  ┬À            33  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      mintProperty                                   ┬À        [36m401,976[39m  ┬À      [31m550,766[39m  ┬À        431,466  ┬À            24  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      pause                                          ┬À              [90m-[39m  ┬À            [90m-[39m  ┬À         46,918  ┬À             1  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      publicMint                                     ┬À        [36m412,555[39m  ┬À      [31m419,782[39m  ┬À        415,508  ┬À             5  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      removeMinter                                   ┬À              [90m-[39m  ┬À            [90m-[39m  ┬À         25,413  ┬À             2  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      setBaseURI                                     ┬À              [90m-[39m  ┬À            [90m-[39m  ┬À         54,279  ┬À             2  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      setMintingFee                                  ┬À              [90m-[39m  ┬À            [90m-[39m  ┬À         29,830  ┬À             2  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      setPublicMintingEnabled                        ┬À              [90m-[39m  ┬À            [90m-[39m  ┬À         46,942  ┬À             6  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      togglePropertyStatus                           ┬À              [90m-[39m  ┬À            [90m-[39m  ┬À         26,271  ┬À             1  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      unpause                                        ┬À              [90m-[39m  ┬À            [90m-[39m  ┬À         24,907  ┬À             1  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      updateProperty                                 ┬À              [90m-[39m  ┬À            [90m-[39m  ┬À         45,088  ┬À             2  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      withdraw                                       ┬À              [90m-[39m  ┬À            [90m-[39m  ┬À         32,939  ┬À             1  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|  [1mBashoodReferral[22m                                    ┬À                                                                                   Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      claimNFT                                       ┬À              [90m-[39m  ┬À            [90m-[39m  ┬À         78,884  ┬À             2  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      registerReferral                               ┬À         [36m50,993[39m  ┬À       [31m68,093[39m  ┬À         63,427  ┬À            11  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      rewardReferrer                                 ┬À         [36m75,913[39m  ┬À       [31m93,001[39m  ┬À         90,865  ┬À             8  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      setPresaleContract                             ┬À         [36m28,564[39m  ┬À       [31m28,576[39m  ┬À         28,570  ┬À             4  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|  [1mBashoodRescue[22m                                      ┬À                                                                                   Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      authorizeCaller                                ┬À         [36m47,542[39m  ┬À       [31m47,554[39m  ┬À         47,553  ┬À             8  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      claimEmergencyWithdrawal                       ┬À              [90m-[39m  ┬À            [90m-[39m  ┬À         32,344  ┬À             4  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      emergencyWithdrawETH                           ┬À              [90m-[39m  ┬À            [90m-[39m  ┬À         52,095  ┬À            22  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      rescueERC20                                    ┬À         [36m60,588[39m  ┬À       [31m60,600[39m  ┬À         60,596  ┬À             3  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      rescueUnsoldNFTs                               ┬À         [36m63,356[39m  ┬À       [31m65,856[39m  ┬À         64,189  ┬À             3  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      revokeCaller                                   ┬À         [36m25,810[39m  ┬À       [31m25,822[39m  ┬À         25,819  ┬À             4  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      setProjectWallet                               ┬À              [90m-[39m  ┬À            [90m-[39m  ┬À         46,530  ┬À            16  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|  [1mBashoodToken[22m                                       ┬À                                                                                   Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      approve                                        ┬À         [36m26,527[39m  ┬À       [31m46,451[39m  ┬À         39,802  ┬À             3  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      burn                                           ┬À              [90m-[39m  ┬À            [90m-[39m  ┬À         42,546  ┬À             1  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      donate                                         ┬À              [90m-[39m  ┬À            [90m-[39m  ┬À         79,254  ┬À             1  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      periodicBurn                                   ┬À              [90m-[39m  ┬À            [90m-[39m  ┬À         44,984  ┬À             1  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      sendToStaking                                  ┬À              [90m-[39m  ┬À            [90m-[39m  ┬À         40,782  ┬À             1  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      setStakingContract                             ┬À         [36m27,946[39m  ┬À       [31m47,846[39m  ┬À         37,896  ┬À             2  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      transfer                                       ┬À         [36m67,010[39m  ┬À      [31m140,234[39m  ┬À        104,831  ┬À            24  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      transferFrom                                   ┬À              [90m-[39m  ┬À            [90m-[39m  ┬À         94,957  ┬À             1  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|  [1mCaller[22m                                             ┬À                                                                                   Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      approveToken                                   ┬À              [90m-[39m  ┬À            [90m-[39m  ┬À         50,157  ┬À             1  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|  [1mComplianceRegistry[22m                                 ┬À                                                                                   Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      setRoot                                        ┬À         [36m50,800[39m  ┬À       [31m50,812[39m  ┬À         50,806  ┬À             2  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|  [1mLibra[22m                                              ┬À                                                                                   Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      deposit                                        ┬À              [90m-[39m  ┬À            [90m-[39m  ┬À         44,956  ┬À             7  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      withdraw                                       ┬À              [90m-[39m  ┬À            [90m-[39m  ┬À         32,617  ┬À             3  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|  [1mLibraVulnerable[22m                                    ┬À                                                                                   Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      deposit                                        ┬À              [90m-[39m  ┬À            [90m-[39m  ┬À         44,959  ┬À             1  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|  [1mLock[22m                                               ┬À                                                                                   Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      withdraw                                       ┬À              [90m-[39m  ┬À            [90m-[39m  ┬À         33,820  ┬À             7  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|  [1mMaximalDangerAttacker[22m                              ┬À                                                                                   Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      configureAttack                                ┬À              [90m-[39m  ┬À            [90m-[39m  ┬À         31,892  ┬À             1  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      emergencyStop                                  ┬À              [90m-[39m  ┬À            [90m-[39m  ┬À         23,678  ┬À             1  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      executeBatchAttack                             ┬À              [90m-[39m  ┬À            [90m-[39m  ┬À         41,872  ┬À             1  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      executeFrontRunningAttack                      ┬À              [90m-[39m  ┬À            [90m-[39m  ┬À         68,925  ┬À             1  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      executeGasGriefingAttack                       ┬À              [90m-[39m  ┬À            [90m-[39m  ┬À     25,681,451  ┬À             2  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      executeReentrancyAttack                        ┬À              [90m-[39m  ┬À            [90m-[39m  ┬À        156,753  ┬À             2  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      prepareBatchAttack                             ┬À              [90m-[39m  ┬À            [90m-[39m  ┬À        116,158  ┬À             1  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      setTargets                                     ┬À         [36m91,323[39m  ┬À       [31m91,335[39m  ┬À         91,330  ┬À             9  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      simulateFlashLoanAttack                        ┬À              [90m-[39m  ┬À            [90m-[39m  ┬À         89,865  ┬À             1  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|  [1mMockBashoodToken.sol:MockBashoodToken[22m              ┬À                                                                                   Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      approve                                        ┬À         [36m24,399[39m  ┬À       [31m46,683[39m  ┬À         44,601  ┬À            55  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      mint                                           ┬À         [36m34,221[39m  ┬À       [31m68,469[39m  ┬À         66,373  ┬À            58  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|  [1mMockBHTRejecting[22m                                   ┬À                                                                                   Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      approve                                        ┬À         [36m46,372[39m  ┬À       [31m46,684[39m  ┬À         46,456  ┬À             4  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      mint                                           ┬À         [36m68,532[39m  ┬À       [31m68,544[39m  ┬À         68,538  ┬À             4  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      setRejectTo                                    ┬À              [90m-[39m  ┬À            [90m-[39m  ┬À         43,891  ┬À             1  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|  [1mMockBHTReturnFalse[22m                                 ┬À                                                                                   Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      approve                                        ┬À         [36m46,372[39m  ┬À       [31m46,684[39m  ┬À         46,425  ┬À             7  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      mint                                           ┬À         [36m68,520[39m  ┬À       [31m68,532[39m  ┬À         68,530  ┬À             7  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      setRejectTo                                    ┬À         [36m26,575[39m  ┬À       [31m43,891[39m  ┬À         36,965  ┬À             5  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|  [1mMockBHTWithBurn[22m                                    ┬À                                                                                   Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      approve                                        ┬À         [36m46,371[39m  ┬À       [31m46,383[39m  ┬À         46,379  ┬À             8  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      mint                                           ┬À         [36m34,233[39m  ┬À       [31m51,321[39m  ┬À         49,184  ┬À             8  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|  [1mMockNFT1155.sol:MockNFT1155[22m                        ┬À                                                                                   Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      mint                                           ┬À              [90m-[39m  ┬À            [90m-[39m  ┬À         52,715  ┬À             1  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      mintTo                                         ┬À         [36m47,976[39m  ┬À       [31m52,200[39m  ┬À         49,321  ┬À             5  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|  [1mMockPresale.sol:MockPresale[22m                        ┬À                                                                                   Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      delegateEmergencyWithdrawEth                   ┬À              [90m-[39m  ┬À            [90m-[39m  ┬À         34,159  ┬À             1  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      delegateRescueErc20                            ┬À              [90m-[39m  ┬À            [90m-[39m  ┬À         34,973  ┬À             1  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      delegateRescueUnsoldNfts                       ┬À              [90m-[39m  ┬À            [90m-[39m  ┬À         52,140  ┬À             1  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      setRescueContract                              ┬À              [90m-[39m  ┬À            [90m-[39m  ┬À         46,113  ┬À             1  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|  [1mMockProjectWalletClaimCaller[22m                       ┬À                                                                                   Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      doClaim                                        ┬À              [90m-[39m  ┬À            [90m-[39m  ┬À         58,007  ┬À             1  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|  [1mMockProjectWalletMultiSig[22m                          ┬À                                                                                   Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      approve                                        ┬À         [36m50,945[39m  ┬À       [31m68,045[39m  ┬À         59,495  ┬À             2  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      executeClaim                                   ┬À              [90m-[39m  ┬À            [90m-[39m  ┬À         40,165  ┬À             1  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      withdrawTo                                     ┬À              [90m-[39m  ┬À            [90m-[39m  ┬À         31,178  ┬À             1  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|  [1mMockProjectWalletMultiSigEIP712[22m                    ┬À                                                                                   Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      executeClaimWithSignatures                     ┬À         [36m86,537[39m  ┬À       [31m86,549[39m  ┬À         86,543  ┬À             2  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|  [1mMockReferral[22m                                       ┬À                                                                                   Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      setReferrer                                    ┬À              [90m-[39m  ┬À            [90m-[39m  ┬À         44,440  ┬À             2  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|  [1mmocks\MockBashoodToken.sol:MockBashoodToken[22m        ┬À                                                                                   Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      approve                                        ┬À              [90m-[39m  ┬À            [90m-[39m  ┬À         46,407  ┬À             1  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      mint                                           ┬À              [90m-[39m  ┬À            [90m-[39m  ┬À         51,345  ┬À             1  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|  [1mmocks\MockBHT.sol:MockBHT[22m                          ┬À                                                                                   Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      approve                                        ┬À         [36m46,359[39m  ┬À       [31m46,371[39m  ┬À         46,366  ┬À             7  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      mint                                           ┬À         [36m51,273[39m  ┬À       [31m51,333[39m  ┬À         51,310  ┬À             9  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|  [1mmocks\MockERC20.sol:MockERC20[22m                      ┬À                                                                                   Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      approve                                        ┬À         [36m46,311[39m  ┬À       [31m46,683[39m  ┬À         46,509  ┬À             4  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      mint                                           ┬À         [36m68,373[39m  ┬À       [31m68,433[39m  ┬À         68,394  ┬À            11  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      transfer                                       ┬À              [90m-[39m  ┬À            [90m-[39m  ┬À         51,632  ┬À             1  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|  [1mmocks\MockNFT1155.sol:MockNFT1155[22m                  ┬À                                                                                   Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      mint                                           ┬À         [36m35,056[39m  ┬À       [31m52,212[39m  ┬À         48,854  ┬À            46  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      safeBatchTransferFrom                          ┬À              [90m-[39m  ┬À            [90m-[39m  ┬À         55,306  ┬À             2  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      safeTransferFrom                               ┬À         [36m53,962[39m  ┬À       [31m58,762[39m  ┬À         54,262  ┬À            16  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      setApprovalForAll                              ┬À              [90m-[39m  ┬À            [90m-[39m  ┬À         46,175  ┬À             1  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|  [1mmocks\MockPresale.sol:MockPresale[22m                  ┬À                                                                                   Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      delegateRescueUnsoldNfts                       ┬À              [90m-[39m  ┬À            [90m-[39m  ┬À         71,491  ┬À             1  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      setRescueContract                              ┬À         [36m46,113[39m  ┬À       [31m46,125[39m  ┬À         46,119  ┬À             2  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|  [1mmocks\MockPriceFeed.sol:MockPriceFeed[22m              ┬À                                                                                   Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      setAnswer                                      ┬À         [36m42,103[39m  ┬À       [31m64,015[39m  ┬À         46,321  ┬À            21  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      setAnsweredInRound                             ┬À              [90m-[39m  ┬À            [90m-[39m  ┬À         21,705  ┬À             1  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      setAnswerWithTimestamp                         ┬À         [36m35,465[39m  ┬À       [31m54,607[39m  ┬À         43,469  ┬À            63  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      setUpdatedAt                                   ┬À         [36m35,332[39m  ┬À       [31m44,213[39m  ┬À         43,321  ┬À            10  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|  [1mMockTreasuryHandler.sol:MockTreasuryHandler[22m        ┬À                                                                                   Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      handleTreasuryTransfer                         ┬À         [36m24,038[39m  ┬À       [31m24,278[39m  ┬À         24,257  ┬À            27  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      initialize                                     ┬À         [36m23,817[39m  ┬À       [31m43,957[39m  ┬À         34,644  ┬À             4  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      updateTreasuryWallet                           ┬À         [36m23,773[39m  ┬À       [31m43,913[39m  ┬À         33,704  ┬À             7  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|  [1moracles\ChainlinkPriceFeed.sol:ChainlinkPriceFeed[22m  ┬À                                                                                   Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      getLatestPrice                                 ┬À              [90m-[39m  ┬À            [90m-[39m  ┬À         62,680  ┬À             1  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|  [1mOwnableLocal[22m                                       ┬À                                                                                   Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      transferOwnership                              ┬À              [90m-[39m  ┬À            [90m-[39m  ┬À         28,597  ┬À             1  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|  [1mTaxHandler[22m                                         ┬À                                                                                   Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      updateTaxRate                                  ┬À              [90m-[39m  ┬À            [90m-[39m  ┬À         34,934  ┬À             1  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      updateTaxReceiver                              ┬À              [90m-[39m  ┬À            [90m-[39m  ┬À         35,679  ┬À             1  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|  [1mTokenWrapperERC20[22m                                  ┬À                                                                                   Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      unwrap                                         ┬À              [90m-[39m  ┬À            [90m-[39m  ┬À         42,537  ┬À             1  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|      wrap                                           ┬À        [36m118,696[39m  ┬À      [31m120,317[39m  ┬À        119,507  ┬À             2  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|  [32m[1mDeployments[22m[39m                                                          ┬À                                 ┬À  [1m% of limit[22m    ┬À              Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|  [1mAttackerBatch[22m                                      ┬À              [90m-[39m  ┬À            [90m-[39m  ┬À        402,580  ┬À         1.3 %  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|  [1mAttackerConditional[22m                                ┬À              [90m-[39m  ┬À            [90m-[39m  ┬À        398,434  ┬À         1.3 %  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|  [1mAttackerLoop[22m                                       ┬À              [90m-[39m  ┬À            [90m-[39m  ┬À        399,478  ┬À         1.3 %  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|  [1mAttackerOwner[22m                                      ┬À              [90m-[39m  ┬À            [90m-[39m  ┬À        250,185  ┬À         0.8 %  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|  [1mAttackerReceiver[22m                                   ┬À              [90m-[39m  ┬À            [90m-[39m  ┬À        375,979  ┬À         1.3 %  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|  [1mAttackerReentrancy[22m                                 ┬À              [90m-[39m  ┬À            [90m-[39m  ┬À        263,594  ┬À         0.9 %  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|  [1mBadReceiver[22m                                        ┬À              [90m-[39m  ┬À            [90m-[39m  ┬À         66,424  ┬À         0.2 %  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|  [1mBadReceiver721[22m                                     ┬À              [90m-[39m  ┬À            [90m-[39m  ┬À         66,412  ┬À         0.2 %  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|  [1mBashoodMultiToken[22m                                  ┬À              [90m-[39m  ┬À            [90m-[39m  ┬À      2,006,886  ┬À         6.7 %  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|  [1mBashoodNFT[22m                                         ┬À              [90m-[39m  ┬À            [90m-[39m  ┬À      1,154,214  ┬À         3.8 %  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|  [1mBashoodPresaleFinal[22m                                ┬À      [36m5,558,132[39m  ┬À    [31m5,582,380[39m  ┬À      5,581,446  ┬À        18.6 %  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|  [1mBashoodPropertyNFT[22m                                 ┬À              [90m-[39m  ┬À            [90m-[39m  ┬À      3,868,534  ┬À        12.9 %  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|  [1mBashoodReferral[22m                                    ┬À        [36m702,754[39m  ┬À      [31m702,982[39m  ┬À        702,980  ┬À         2.3 %  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|  [1mBashoodRescue[22m                                      ┬À      [36m1,339,814[39m  ┬À    [31m1,339,826[39m  ┬À      1,339,824  ┬À         4.5 %  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|  [1mBashoodToken[22m                                       ┬À              [90m-[39m  ┬À            [90m-[39m  ┬À      1,456,515  ┬À         4.9 %  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|  [1mCaller[22m                                             ┬À              [90m-[39m  ┬À            [90m-[39m  ┬À        219,506  ┬À         0.7 %  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|  [1mComplianceRegistry[22m                                 ┬À              [90m-[39m  ┬À            [90m-[39m  ┬À        369,735  ┬À         1.2 %  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|  [1mERC1155ReentrantReceiver[22m                           ┬À              [90m-[39m  ┬À            [90m-[39m  ┬À        251,337  ┬À         0.8 %  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|  [1mInterfaceIdResolver[22m                                ┬À              [90m-[39m  ┬À            [90m-[39m  ┬À         80,453  ┬À         0.3 %  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|  [1mLibra[22m                                              ┬À              [90m-[39m  ┬À            [90m-[39m  ┬À        300,677  ┬À           1 %  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|  [1mLibraVulnerable[22m                                    ┬À              [90m-[39m  ┬À            [90m-[39m  ┬À        237,042  ┬À         0.8 %  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|  [1mLock[22m                                               ┬À              [90m-[39m  ┬À            [90m-[39m  ┬À        204,277  ┬À         0.7 %  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|  [1mMaximalDangerAttacker[22m                              ┬À              [90m-[39m  ┬À            [90m-[39m  ┬À      2,146,700  ┬À         7.2 %  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|  [1mMockAttackerProjectWallet[22m                          ┬À              [90m-[39m  ┬À            [90m-[39m  ┬À        112,013  ┬À         0.4 %  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|  [1mMockBashoodToken.sol:MockBashoodToken[22m              ┬À              [90m-[39m  ┬À            [90m-[39m  ┬À        521,309  ┬À         1.7 %  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|  [1mMockBHTRejecting[22m                                   ┬À        [36m576,207[39m  ┬À      [31m596,503[39m  ┬À        586,325  ┬À           2 %  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|  [1mMockBHTReturnFalse[22m                                 ┬À        [36m563,909[39m  ┬À      [31m584,049[39m  ┬À        575,412  ┬À         1.9 %  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|  [1mMockBHTWithBurn[22m                                    ┬À              [90m-[39m  ┬À            [90m-[39m  ┬À        600,215  ┬À           2 %  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|  [1mMockERC20.sol:MockERC20[22m                            ┬À              [90m-[39m  ┬À            [90m-[39m  ┬À        521,353  ┬À         1.7 %  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|  [1mMockNFT1155.sol:MockNFT1155[22m                        ┬À              [90m-[39m  ┬À            [90m-[39m  ┬À      1,081,242  ┬À         3.6 %  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|  [1mMockPresale.sol:MockPresale[22m                        ┬À              [90m-[39m  ┬À            [90m-[39m  ┬À        312,498  ┬À           1 %  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|  [1mMockPresaleTarget.sol:MockPresaleTarget[22m            ┬À        [36m512,165[39m  ┬À      [31m512,177[39m  ┬À        512,174  ┬À         1.7 %  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|  [1mMockProjectWalletClaimCaller[22m                       ┬À              [90m-[39m  ┬À            [90m-[39m  ┬À        162,490  ┬À         0.5 %  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|  [1mMockProjectWalletMultiSig[22m                          ┬À              [90m-[39m  ┬À            [90m-[39m  ┬À        569,006  ┬À         1.9 %  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|  [1mMockProjectWalletMultiSigEIP712[22m                    ┬À      [36m1,040,046[39m  ┬À    [31m1,059,958[39m  ┬À      1,043,365  ┬À         3.5 %  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|  [1mMockProjectWalletReentrant[22m                         ┬À              [90m-[39m  ┬À            [90m-[39m  ┬À        188,709  ┬À         0.6 %  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|  [1mMockProjectWalletRevert[22m                            ┬À              [90m-[39m  ┬À            [90m-[39m  ┬À         91,521  ┬À         0.3 %  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|  [1mMockProjectWalletRevertCaller[22m                      ┬À              [90m-[39m  ┬À            [90m-[39m  ┬À        143,149  ┬À         0.5 %  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|  [1mMockProjectWalletRevertCallerPresale[22m               ┬À              [90m-[39m  ┬À            [90m-[39m  ┬À        143,149  ┬À         0.5 %  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|  [1mMockReferral[22m                                       ┬À        [36m223,157[39m  ┬À      [31m223,877[39m  ┬À        223,293  ┬À         0.7 %  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|  [1mMockRescueRecorder[22m                                 ┬À              [90m-[39m  ┬À            [90m-[39m  ┬À        250,006  ┬À         0.8 %  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|  [1mMockRescueRevertNoReason[22m                           ┬À              [90m-[39m  ┬À            [90m-[39m  ┬À        170,733  ┬À         0.6 %  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|  [1mMockRescueRevertWithReason[22m                         ┬À              [90m-[39m  ┬À            [90m-[39m  ┬À        192,593  ┬À         0.6 %  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|  [1mmocks\MockBashoodToken.sol:MockBashoodToken[22m        ┬À              [90m-[39m  ┬À            [90m-[39m  ┬À        579,802  ┬À         1.9 %  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|  [1mmocks\MockBHT.sol:MockBHT[22m                          ┬À              [90m-[39m  ┬À            [90m-[39m  ┬À        579,790  ┬À         1.9 %  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|  [1mmocks\MockERC20.sol:MockERC20[22m                      ┬À              [90m-[39m  ┬À            [90m-[39m  ┬À        521,353  ┬À         1.7 %  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|  [1mmocks\MockNFT1155.sol:MockNFT1155[22m                  ┬À              [90m-[39m  ┬À            [90m-[39m  ┬À      1,028,148  ┬À         3.4 %  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|  [1mmocks\MockPresale.sol:MockPresale[22m                  ┬À              [90m-[39m  ┬À            [90m-[39m  ┬À        312,498  ┬À           1 %  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|  [1mmocks\MockPriceFeed.sol:MockPriceFeed[22m              ┬À        [36m381,320[39m  ┬À      [31m381,344[39m  ┬À        381,335  ┬À         1.3 %  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|  [1mmocks\MockRescue.sol:MockRescue[22m                    ┬À              [90m-[39m  ┬À            [90m-[39m  ┬À         79,157  ┬À         0.3 %  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|  [1mMockTreasuryHandler.sol:MockTreasuryHandler[22m        ┬À              [90m-[39m  ┬À            [90m-[39m  ┬À        164,059  ┬À         0.5 %  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|  [1mNotRescue[22m                                          ┬À              [90m-[39m  ┬À            [90m-[39m  ┬À         92,949  ┬À         0.3 %  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|  [1moracles\ChainlinkPriceFeed.sol:ChainlinkPriceFeed[22m  ┬À        [36m719,221[39m  ┬À      [31m719,233[39m  ┬À        719,231  ┬À         2.4 %  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|  [1mOwnableLocal[22m                                       ┬À              [90m-[39m  ┬À            [90m-[39m  ┬À        182,745  ┬À         0.6 %  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|  [1mReferralValidator[22m                                  ┬À        [36m112,842[39m  ┬À      [31m113,058[39m  ┬À        113,052  ┬À         0.4 %  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|  [1mRejectingWallet[22m                                    ┬À              [90m-[39m  ┬À            [90m-[39m  ┬À        176,453  ┬À         0.6 %  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|  [1mTaxHandler[22m                                         ┬À              [90m-[39m  ┬À            [90m-[39m  ┬À        459,351  ┬À         1.5 %  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|  [1mTokenWrapperERC20[22m                                  ┬À        [36m940,038[39m  ┬À      [31m940,062[39m  ┬À        940,054  ┬À         3.1 %  ┬À           [32m[90m-[39m[32m[39m  Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À|┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|  [32m[1mKey[22m[39m                                                                                                                                    Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|  [35m[1mÔù»[22m[39m  Execution gas for this method does not include intrinsic gas overhead                                                               Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|  [35m[1mÔû│[22m[39m  Cost was non-zero but below the precision setting for the currency display (see options)                                            Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À
+|  [35mToolchain:[39m  hardhat                                                                                                                    Ôöé
+┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À┬À

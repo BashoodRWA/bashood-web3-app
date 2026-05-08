@@ -1,0 +1,112 @@
+{
+  "name": "Suburban Family House",
+  "description": "Perfect family home in quiet suburban neighborhood with excellent schools and community amenities.",
+  "external_url": "https://api.bashood.com/nft/property/3",
+  "image": "https://cdn.bashood.com/images/QmSuburbanHouse789.png",
+  "animation_url": "https://cdn.bashood.com/images/QmSuburbanHouse789-360.mp4",
+  "attributes": [
+    {
+      "trait_type": "Property Type",
+      "value": "House"
+    },
+    {
+      "trait_type": "Location",
+      "value": "Austin, TX"
+    },
+    {
+      "trait_type": "Area",
+      "value": 280,
+      "display_type": "number",
+      "trait_suffix": " sqm"
+    },
+    {
+      "trait_type": "Estimated Value",
+      "value": "450000000000000000000000",
+      "display_type": "number",
+      "trait_suffix": " USD"
+    },
+    {
+      "trait_type": "Rarity",
+      "value": "UNCOMMON"
+    },
+    {
+      "trait_type": "Amenities Count",
+      "value": 3,
+      "display_type": "number"
+    },
+    {
+      "trait_type": "Has Pool",
+      "value": "No"
+    },
+    {
+      "trait_type": "Has Garden",
+      "value": "Yes"
+    },
+    {
+      "trait_type": "Has Garage",
+      "value": "Yes"
+    },
+    {
+      "trait_type": "Has Gym",
+      "value": "No"
+    },
+    {
+      "trait_type": "Has Elevator",
+      "value": "No"
+    },
+    {
+      "trait_type": "Has Security",
+      "value": "No"
+    },
+    {
+      "trait_type": "Has Parking",
+      "value": "No"
+    },
+    {
+      "trait_type": "Has Balcony",
+      "value": "No"
+    },
+    {
+      "trait_type": "Has Fireplace",
+      "value": "Yes"
+    },
+    {
+      "trait_type": "Has Air Conditioning",
+      "value": "No"
+    },
+    {
+      "trait_type": "Year Built",
+      "value": 2015
+    },
+    {
+      "trait_type": "Bedrooms",
+      "value": 4
+    },
+    {
+      "trait_type": "Bathrooms",
+      "value": 2
+    },
+    {
+      "trait_type": "Stories",
+      "value": 2
+    },
+    {
+      "trait_type": "Lot Size",
+      "value": "0.3 acres"
+    }
+  ],
+  "properties": {
+    "category": "Real Estate",
+    "propertyType": "House",
+    "location": "Austin, TX",
+    "area": 280,
+    "estimatedValue": "450000000000000000000000",
+    "amenities": [
+      "Garden",
+      "Garage",
+      "Fireplace"
+    ],
+    "rarity": "UNCOMMON",
+    "generated": "2025-11-20T20:35:59.614Z"
+  }
+}

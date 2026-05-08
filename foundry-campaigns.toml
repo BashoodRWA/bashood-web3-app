@@ -1,0 +1,118 @@
+# Bashood Fuzzing Campaigns Configuration
+# Advanced fuzzing strategies for comprehensive security testing
+
+# =================================================================
+# CAMPAIGN 1: TOKEN SECURITY FUZZING
+# =================================================================
+[profile.token-security]
+src = "contracts"
+test = "test/foundry"
+out = "forge-out/token"
+
+# Extended fuzzing for token operations
+fuzz_runs = 100000
+fuzz_max_test_rejects = 100000
+invariant_runs = 1000
+invariant_depth = 50
+
+# Gas optimization
+optimizer = true
+optimizer_runs = 1000
+
+# Specific to token testing
+[profile.token-security.fuzz]
+dictionary = "test/foundry/dictionaries/token.txt"
+include_push_bytes = false
+
+# =================================================================
+# CAMPAIGN 2: PRESALE SECURITY FUZZING  
+# =================================================================
+[profile.presale-security]
+src = "contracts"
+test = "test/foundry"
+out = "forge-out/presale"
+
+# Intensive presale fuzzing
+fuzz_runs = 50000
+fuzz_max_test_rejects = 50000
+invariant_runs = 500
+invariant_depth = 30
+
+# Focus on reentrancy and state transitions
+[profile.presale-security.invariant]
+fail_on_revert = false
+call_override = true
+preserve_state = true
+
+# =================================================================
+# CAMPAIGN 3: INTEGRATION FUZZING
+# =================================================================
+[profile.integration]
+src = "contracts"
+test = "test/foundry"
+out = "forge-out/integration"
+
+# Multi-contract interaction fuzzing
+fuzz_runs = 25000
+invariant_runs = 200
+invariant_depth = 20
+
+# Complex state space exploration
+[profile.integration.fuzz]
+max_test_rejects = 25000
+
+# =================================================================
+# CAMPAIGN 4: STRESS TESTING
+# =================================================================
+[profile.stress]
+src = "contracts"
+test = "test/foundry"
+out = "forge-out/stress"
+
+# Extreme load testing
+fuzz_runs = 200000
+fuzz_max_test_rejects = 200000
+invariant_runs = 2000
+invariant_depth = 100
+
+# High gas scenarios
+gas_reports = ["*"]
+gas_limit = 30000000
+
+# =================================================================
+# CAMPAIGN 5: PROPERTY VERIFICATION  
+# =================================================================
+[profile.property]
+src = "contracts"
+test = "test/foundry"
+out = "forge-out/property"
+
+# Property-focused testing
+invariant_runs = 5000
+invariant_depth = 25
+invariant_fail_on_revert = true
+
+# Mathematical property verification
+[profile.property.invariant]
+preserve_state = false
+call_override = false
+
+# =================================================================
+# SHARED CONFIGURATIONS
+# =================================================================
+
+# RPC configurations for all campaigns
+[rpc_endpoints]
+mainnet = "https://eth.llamarpc.com"
+arbitrum = "https://arb1.arbitrum.io/rpc"
+polygon = "https://polygon-rpc.com"
+
+# Fork testing configurations
+[fork_configs]
+mainnet_block = 18500000
+arbitrum_block = 150000000
+
+# Optimizer settings
+solc_version = "0.8.28"
+evm_version = "paris"
+via_ir = false

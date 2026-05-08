@@ -1,0 +1,27 @@
+{
+  "network": "hardhat",
+  "contractAddress": "0x5FbDB2315678afecb367f032d93F642f64180aa3",
+  "deployer": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
+  "deploymentTime": "2025-11-20T21:06:34.367Z",
+  "contractDetails": {
+    "name": "Bashood Property NFT",
+    "symbol": "BPNFT",
+    "maxSupply": "10000",
+    "baseTokenURI": "https://api.bashood.com/nft/metadata/",
+    "mintingPrice": "100000000000000000"
+  },
+  "mintedTokens": [
+    {
+      "name": "Golden Villa Paradise"
+    },
+    {
+      "name": "Downtown Luxury Penthouse"
+    },
+    {
+      "name": "Suburban Family House"
+    }
+  ],
+  "transactionHashes": {
+    "deployment": "0x666e3c1d58503c05ca0964565899f9efe29d78ce77d1de55e074b2fac3d71058"
+  }
+}

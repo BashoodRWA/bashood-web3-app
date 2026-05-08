@@ -1,0 +1,114 @@
+{
+  "name": "Downtown Luxury Penthouse",
+  "description": "Exclusive penthouse in the heart of the city with 360-degree views and world-class amenities.",
+  "external_url": "https://api.bashood.com/nft/property/2",
+  "image": "https://cdn.bashood.com/images/QmPenthouse456.png",
+  "animation_url": "https://cdn.bashood.com/images/QmPenthouse456-360.mp4",
+  "attributes": [
+    {
+      "trait_type": "Property Type",
+      "value": "Penthouse"
+    },
+    {
+      "trait_type": "Location",
+      "value": "Manhattan, NY"
+    },
+    {
+      "trait_type": "Area",
+      "value": 400,
+      "display_type": "number",
+      "trait_suffix": " sqm"
+    },
+    {
+      "trait_type": "Estimated Value",
+      "value": "8000000000000000000000000",
+      "display_type": "number",
+      "trait_suffix": " USD"
+    },
+    {
+      "trait_type": "Rarity",
+      "value": "LEGENDARY"
+    },
+    {
+      "trait_type": "Amenities Count",
+      "value": 5,
+      "display_type": "number"
+    },
+    {
+      "trait_type": "Has Pool",
+      "value": "No"
+    },
+    {
+      "trait_type": "Has Garden",
+      "value": "No"
+    },
+    {
+      "trait_type": "Has Garage",
+      "value": "No"
+    },
+    {
+      "trait_type": "Has Gym",
+      "value": "No"
+    },
+    {
+      "trait_type": "Has Elevator",
+      "value": "Yes"
+    },
+    {
+      "trait_type": "Has Security",
+      "value": "Yes"
+    },
+    {
+      "trait_type": "Has Parking",
+      "value": "Yes"
+    },
+    {
+      "trait_type": "Has Balcony",
+      "value": "Yes"
+    },
+    {
+      "trait_type": "Has Fireplace",
+      "value": "No"
+    },
+    {
+      "trait_type": "Has Air Conditioning",
+      "value": "Yes"
+    },
+    {
+      "trait_type": "Year Built",
+      "value": 2022
+    },
+    {
+      "trait_type": "Bedrooms",
+      "value": 4
+    },
+    {
+      "trait_type": "Bathrooms",
+      "value": 3
+    },
+    {
+      "trait_type": "Floor",
+      "value": 45
+    },
+    {
+      "trait_type": "View",
+      "value": "City Skyline"
+    }
+  ],
+  "properties": {
+    "category": "Real Estate",
+    "propertyType": "Penthouse",
+    "location": "Manhattan, NY",
+    "area": 400,
+    "estimatedValue": "8000000000000000000000000",
+    "amenities": [
+      "Elevator",
+      "Balcony",
+      "Air Conditioning",
+      "Security",
+      "Parking"
+    ],
+    "rarity": "LEGENDARY",
+    "generated": "2025-11-20T20:35:59.614Z"
+  }
+}

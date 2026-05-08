@@ -1,0 +1,114 @@
+{
+  "name": "Modern Tech Estate",
+  "description": "Casa tecnológica moderna con base plateada elegante. Ventanas verdes que simbolizan sustentabilidad y techo blanco minimalista que define el futuro de la arquitectura.",
+  "external_url": "https://bashood.com/nft/golden-house-collection/109",
+  "image": "ipfs://QmPLACEHOLDER_IMAGE_109",
+  "animation_url": "ipfs://QmPLACEHOLDER_ANIMATION_109",
+  "attributes": [
+    {
+      "trait_type": "Collection",
+      "value": "Golden House Collection"
+    },
+    {
+      "trait_type": "Subset",
+      "value": "Modern Tech"
+    },
+    {
+      "trait_type": "Token ID",
+      "value": 109,
+      "display_type": "number"
+    },
+    {
+      "trait_type": "Rarity",
+      "value": "LEGENDARY"
+    },
+    {
+      "trait_type": "Property Type",
+      "value": "House"
+    },
+    {
+      "trait_type": "Location",
+      "value": "Tech Valley, Bashood City"
+    },
+    {
+      "trait_type": "Area",
+      "value": 350,
+      "display_type": "number",
+      "trait_suffix": " sqm"
+    },
+    {
+      "trait_type": "Estimated Value",
+      "value": 4800000,
+      "display_type": "number",
+      "trait_suffix": " USD"
+    },
+    {
+      "trait_type": "Material",
+      "value": "Silver Tech Base"
+    },
+    {
+      "trait_type": "Window Style",
+      "value": "Green Sustainability Glass"
+    },
+    {
+      "trait_type": "Roof Type",
+      "value": "White Minimalist"
+    },
+    {
+      "trait_type": "Base Type",
+      "value": "Modern Silver"
+    },
+    {
+      "trait_type": "Silver Base",
+      "value": "Yes"
+    },
+    {
+      "trait_type": "Green Tech Windows",
+      "value": "Yes"
+    },
+    {
+      "trait_type": "White Roof",
+      "value": "Yes"
+    },
+    {
+      "trait_type": "Modern Design",
+      "value": "Yes"
+    },
+    {
+      "trait_type": "Eco-Friendly",
+      "value": "Yes"
+    },
+    {
+      "trait_type": "Smart Home",
+      "value": "Yes"
+    }
+  ],
+  "properties": {
+    "category": "Premium Real Estate",
+    "collection": "Golden House Collection",
+    "subset": "Modern Tech",
+    "tokenId": 109,
+    "rarity": "LEGENDARY",
+    "propertyType": "House",
+    "location": "Tech Valley, Bashood City",
+    "area": 350,
+    "estimatedValue": 4800000,
+    "features": {
+      "material": "Silver Tech Base",
+      "windows": "Green Sustainability Glass",
+      "roof": "White Minimalist",
+      "base": "Modern Silver"
+    },
+    "amenities": [
+      "Silver Base",
+      "Green Tech Windows",
+      "White Roof",
+      "Modern Design",
+      "Eco-Friendly",
+      "Smart Home"
+    ],
+    "generated": "2025-11-20T21:55:56.971Z",
+    "ipfs_prepared": "2025-11-20T22:18:28.050Z",
+    "version": "1.0.0"
+  }
+}

@@ -1,0 +1,457 @@
+{
+  "standard": "BASHOOD-RWA-1",
+  "version": "1.0.0",
+  "name": "ICON VULCAN 3D Construction Printer #001",
+  "description": "Industrial-scale 3D construction printer using proprietary Lavacrete material (6,000 PSI). Building the world's largest 3D-printed neighborhood in collaboration with NASA. Features Magware software integration and real-time structural integrity monitoring.",
+  "external_url": "https://bashood.com/assets/203",
+  "image": "ipfs://QmICONVULCAN001MainImage",
+  "animation_url": "ipfs://QmICONVULCAN001_360Video",
+  
+  "asset": {
+    "name": "ICON VULCAN 3D Construction Printer #001",
+    "category": "CONSTRUCTION_3D_PRINTER_GANTRY",
+    "subcategory": "LAVACRETE_EXTRUSION_SYSTEM",
+    "manufacturer": "ICON",
+    "model": "VULCAN",
+    "tags": ["3D_PRINTING", "CONSTRUCTION", "LAVACRETE", "NASA", "RESIDENTIAL"]
+  },
+  
+  "identification": {
+    "serialNumber": "VULCAN-2024-USA-001",
+    "yearManufactured": 2024,
+    "countryOfOrigin": "USA",
+    "internalAssetId": "BSH-203",
+    "previousOwners": []
+  },
+  
+  "specifications": {
+    "dimensions": {
+      "length": 11500,
+      "width": 11500,
+      "height": 4200,
+      "unit": "mm"
+    },
+    "weight": {
+      "value": 6200,
+      "unit": "kg"
+    },
+    "power": {
+      "consumption": 32,
+      "unit": "kW"
+    },
+    "printVolume": {
+      "x": 11.5,
+      "y": 11.5,
+      "z": 4,
+      "unit": "m",
+      "description": "Single-pass print width capability"
+    },
+    "materialType": "LAVACRETE",
+    "materialPSI": 6000,
+    "extrusionRate": {
+      "value": 15,
+      "unit": "m³/hour"
+    },
+    "features": [
+      "Proprietary Lavacrete material (6,000 PSI)",
+      "Magware software integration",
+      "Real-time structural integrity monitoring",
+      "NASA-certified technology",
+      "Residential-scale construction"
+    ]
+  },
+  
+  "financials": {
+    "purchasePrice": {
+      "value": 1600000,
+      "currency": "USD",
+      "date": "2024-06-20",
+      "note": "High-end configuration: $1.2M-$2M"
+    },
+    "currentValue": {
+      "value": 1488000,
+      "currency": "USD",
+      "lastAppraisal": "2026-01-12",
+      "appraisalMethod": "EXTRUSION_BASED_DEPRECIATION"
+    },
+    "depreciationModel": "EXTRUSION_BASED",
+    "residualValue": {
+      "percentage": 12,
+      "estimatedValue": 192000,
+      "currency": "USD",
+      "note": "After 10 years or lifetime extrusion limit: electronic components and heavy-duty chassis"
+    },
+    "insuranceValue": {
+      "value": 1550000,
+      "currency": "USD",
+      "annualPremium": 40000,
+      "premiumPercentage": 2.5,
+      "note": "2.5% of CAPEX for advanced equipment coverage"
+    },
+    "maintenanceReserve": {
+      "percentage": 6,
+      "currentBalance": 72000,
+      "currency": "USD"
+    }
+  },
+  
+  "operational": {
+    "status": "OPERATIONAL",
+    "operatingHours": 2850,
+    "maxLifetimeHours": 15000,
+    "usageMetrics": {
+      "metersExtruded": {
+        "current": 28500,
+        "max": 150000,
+        "unit": "m",
+        "description": "Primary depreciation metric: linear meters of Lavacrete"
+      },
+      "structuralIntegrity": {
+        "averagePSI": 5850,
+        "targetPSI": 6000,
+        "complianceRate": 97.5
+      },
+      "homesCompleted": 12,
+      "squareMetersBuilt": 1680
+    },
+    "lastMaintenance": "2025-11-28",
+    "nextMaintenanceRequired": "2026-02-28",
+    "maintenanceIntervalHours": 1500,
+    "maintenanceCostPercentage": 2.8,
+    "maintenanceHistory": [
+      {
+        "date": "2025-11-28",
+        "type": "PREVENTIVE",
+        "cost": 12000,
+        "provider": "ICON Service Center Austin",
+        "notes": "1,500-hour service: nozzle replacement, pump inspection, Magware software update"
+      }
+    ],
+    "location": {
+      "facility": "ICON Construction Yard - Austin",
+      "address": "2140 E Martin Luther King Jr Blvd, Austin, TX",
+      "city": "Austin",
+      "country": "USA",
+      "gps": {
+        "latitude": 30.2793,
+        "longitude": -97.7284
+      },
+      "mobile": false
+    }
+  },
+  
+  "certifications": {
+    "required": [
+      {
+        "name": "UL_3401",
+        "issueDate": "2024-06-01",
+        "expiryDate": "2029-06-01",
+        "issuingBody": "Underwriters Laboratories",
+        "documentHash": "QmCertICON_UL3401_2024"
+      },
+      {
+        "name": "IBC",
+        "issueDate": "2024-05-15",
+        "expiryDate": "2027-05-15",
+        "issuingBody": "International Code Council",
+        "documentHash": "QmCertICON_IBC_2024"
+      },
+      {
+        "name": "ISO_9001",
+        "issueDate": "2024-05-01",
+        "expiryDate": "2027-05-01",
+        "issuingBody": "ISO Certification Board",
+        "documentHash": "QmCertICON_ISO9001"
+      }
+    ],
+    "optional": [
+      "NASA Technology Certification",
+      "ASTM C1856 (Cementitious materials for 3D construction)"
+    ]
+  },
+  
+  "insurance": {
+    "provider": "Liberty Mutual Industrial Equipment",
+    "policyNumber": "LM-IND-TX-2024-00456",
+    "type": "COMPREHENSIVE",
+    "coverage": {
+      "value": 1550000,
+      "currency": "USD"
+    },
+    "annualPremium": {
+      "value": 40000,
+      "currency": "USD",
+      "percentageOfCAPEX": 2.5
+    },
+    "expiryDate": "2026-06-19",
+    "coverageDetails": [
+      "Equipment breakdown",
+      "Software malfunction (Magware)",
+      "Material defects (Lavacrete)",
+      "Structural failure liability",
+      "Construction errors and omissions"
+    ]
+  },
+  
+  "telemetry": {
+    "provider": "ICON_MAGWARE",
+    "apiEndpoint": "https://api.icon.build/magware/VULCAN-2024-USA-001",
+    "apiKeyEncrypted": "encrypted_icon_api_key_bashood_b2b_001",
+    "accessNote": "Proprietary API - Requires B2B integration token",
+    "metrics": [
+      {
+        "name": "metersExtruded",
+        "updateFrequency": "REALTIME",
+        "lastValue": 28500,
+        "lastUpdate": "2026-01-16T08:45:00Z",
+        "unit": "m"
+      },
+      {
+        "name": "lavacretePSI",
+        "updateFrequency": "DAILY",
+        "lastValue": 5920,
+        "lastUpdate": "2026-01-16T06:00:00Z",
+        "unit": "psi"
+      },
+      {
+        "name": "structuralIntegrity",
+        "updateFrequency": "DAILY",
+        "lastValue": 98.2,
+        "lastUpdate": "2026-01-16T06:00:00Z",
+        "unit": "percentage"
+      },
+      {
+        "name": "operatingHours",
+        "updateFrequency": "REALTIME",
+        "lastValue": 2850,
+        "lastUpdate": "2026-01-16T08:45:00Z"
+      }
+    ],
+    "oracleIntegration": {
+      "chainlinkNode": true,
+      "oracleAddress": "0x742d35Cc6634C0532925a3b844c0112c8c7d6009",
+      "verificationMethod": "B2B_API_SIGNED_DATA",
+      "updateFrequency": "DAILY"
+    }
+  },
+  
+  "tokenization": {
+    "strategy": "REVENUE_SHARE",
+    "fractional": {
+      "totalShares": 1600,
+      "minInvestment": {
+        "value": 1000,
+        "currency": "USD",
+        "note": "$1.6M / 1600 shares"
+      },
+      "revenueSharePercentage": 82,
+      "note": "82% to investors, 12% maintenance reserve, 6% protocol fee"
+    },
+    "revenueModel": {
+      "perHomeRevenue": {
+        "value": 45000,
+        "currency": "USD",
+        "note": "Average revenue per completed home"
+      },
+      "homesPerMonth": 2.5,
+      "monthlyRevenue": {
+        "estimated": 112500,
+        "currency": "USD"
+      },
+      "annualRevenue": {
+        "estimated": 1350000,
+        "currency": "USD",
+        "note": "$112.5k/month * 12"
+      },
+      "distributionFrequency": "MONTHLY",
+      "nextDistribution": "2026-02-01"
+    },
+    "maintenanceReservePct": 12
+  },
+  
+  "esg": {
+    "carbonFootprint": {
+      "annualTonsCO2": 22.4,
+      "offsetPercentage": 50,
+      "note": "32 kW * 2850 hours/year * 0.4 kg CO2/kWh Texas grid mix"
+    },
+    "wasteReduction": 42,
+    "energyEfficiency": "B",
+    "greenBondEligible": true,
+    "sustainabilityCertifications": [
+      "ISO 14001 (Environmental Management)",
+      "LEED Compatible Materials"
+    ],
+    "socialImpact": {
+      "affordableHomesBuilt": 12,
+      "jobsCreated": 15,
+      "communityImpactScore": 92
+    }
+  },
+  
+  "secondaryMarket": {
+    "marketExists": true,
+    "averageRetentionRate": 58,
+    "liquidityScore": 8,
+    "comparableSales": [
+      {
+        "saleDate": "2025-10-08",
+        "salePrice": 980000,
+        "age": 3,
+        "condition": "GOOD",
+        "note": "ICON VULCAN Gen 1 sold after NASA pilot program completion"
+      }
+    ],
+    "demandIndicators": {
+      "usMarket": "VERY_HIGH",
+      "internationalMarket": "HIGH",
+      "typicalTimeToSale": "2-4 months"
+    }
+  },
+  
+  "documentation": {
+    "images": [
+      "ipfs://QmICONVULCAN001_Exterior",
+      "ipfs://QmICONVULCAN001_PrintingAction",
+      "ipfs://QmICONVULCAN001_MagwareInterface",
+      "ipfs://QmICONVULCAN001_CompletedHome"
+    ],
+    "manuals": [
+      "ipfs://QmICON_OperatorManual_VULCAN",
+      "ipfs://QmICON_MagwareSoftwareGuide",
+      "ipfs://QmICON_LavacreteSpecifications"
+    ],
+    "certificates": [
+      "ipfs://QmCertICON_UL3401_2024",
+      "ipfs://QmCertICON_IBC_2024",
+      "ipfs://QmCertICON_ISO9001",
+      "ipfs://QmCertICON_NASA_Approved"
+    ],
+    "inspectionReports": [
+      {
+        "date": "2026-01-08",
+        "inspector": "Michael Chen, UL Certified Inspector",
+        "result": "PASS",
+        "documentHash": "QmInspection_VULCAN001_2026Q1",
+        "notes": "All safety systems operational. Lavacrete PSI within spec. Magware software up to date."
+      }
+    ],
+    "videos": [
+      {
+        "title": "VULCAN Printing Complete Home - Time Lapse",
+        "url": "ipfs://QmICON_TimeLapse_Home",
+        "duration": 300
+      },
+      {
+        "title": "ICON x NASA - Mars Habitat Technology",
+        "url": "ipfs://QmICON_NASA_Collaboration",
+        "duration": 420
+      }
+    ]
+  },
+  
+  "ownership": {
+    "legalOwner": "Bashood Protocol DAO",
+    "custodian": "ICON Construction Yard LLC",
+    "tokenized": true,
+    "tokenContract": "0x742d35Cc6634C0532925a3b844c0112c8c7d6008",
+    "tokenId": 203,
+    "blockchain": "BASE",
+    "chainId": 8453
+  },
+  
+  "attributes": [
+    {
+      "trait_type": "Manufacturer",
+      "value": "ICON"
+    },
+    {
+      "trait_type": "Model",
+      "value": "VULCAN"
+    },
+    {
+      "trait_type": "Category",
+      "value": "Construction 3D Printer (Gantry)"
+    },
+    {
+      "trait_type": "Year Manufactured",
+      "value": 2024,
+      "display_type": "number"
+    },
+    {
+      "trait_type": "Material PSI",
+      "value": 6000,
+      "display_type": "number",
+      "trait_suffix": " psi"
+    },
+    {
+      "trait_type": "Print Width",
+      "value": 11.5,
+      "display_type": "number",
+      "trait_suffix": " m"
+    },
+    {
+      "trait_type": "Purchase Price",
+      "value": 1600000,
+      "display_type": "number",
+      "trait_suffix": " USD"
+    },
+    {
+      "trait_type": "Current Value",
+      "value": 1488000,
+      "display_type": "number",
+      "trait_suffix": " USD"
+    },
+    {
+      "trait_type": "Meters Extruded",
+      "value": 28500,
+      "display_type": "number",
+      "trait_suffix": " m"
+    },
+    {
+      "trait_type": "Homes Completed",
+      "value": 12,
+      "display_type": "number"
+    },
+    {
+      "trait_type": "Remaining Life",
+      "value": 81,
+      "display_type": "number",
+      "trait_suffix": " %"
+    },
+    {
+      "trait_type": "Depreciation Model",
+      "value": "Extrusion-Based"
+    },
+    {
+      "trait_type": "NASA Certified",
+      "value": "Yes"
+    },
+    {
+      "trait_type": "Magware Integration",
+      "value": "Yes"
+    },
+    {
+      "trait_type": "Tokenization Strategy",
+      "value": "Revenue Share (1600 shares)"
+    },
+    {
+      "trait_type": "Annual Revenue (Estimated)",
+      "value": 1350000,
+      "display_type": "number",
+      "trait_suffix": " USD"
+    },
+    {
+      "trait_type": "Certifications",
+      "value": "UL 3401, IBC, ISO 9001, NASA"
+    },
+    {
+      "trait_type": "Green Bond Eligible",
+      "value": "Yes"
+    },
+    {
+      "trait_type": "Rarity",
+      "value": "LEGENDARY"
+    }
+  ]
+}

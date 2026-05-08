@@ -1,0 +1,104 @@
+{
+  "name": "Golden Rustic Retreat",
+  "description": "Refugio rústico dorado que combina elegancia con naturaleza. Ventanas naranjas cálidas que crean una atmósfera acogedora.",
+  "external_url": "https://bashood.com/nft/golden-house-collection/104",
+  "image": "ipfs://QmPLACEHOLDER_IMAGE_104",
+  "animation_url": "ipfs://QmPLACEHOLDER_ANIMATION_104",
+  "attributes": [
+    {
+      "trait_type": "Collection",
+      "value": "Golden House Collection"
+    },
+    {
+      "trait_type": "Subset",
+      "value": "Golden Rustic"
+    },
+    {
+      "trait_type": "Token ID",
+      "value": 104,
+      "display_type": "number"
+    },
+    {
+      "trait_type": "Rarity",
+      "value": "LEGENDARY"
+    },
+    {
+      "trait_type": "Property Type",
+      "value": "House"
+    },
+    {
+      "trait_type": "Location",
+      "value": "Golden Nature Reserve, Bashood City"
+    },
+    {
+      "trait_type": "Area",
+      "value": 380,
+      "display_type": "number",
+      "trait_suffix": " sqm"
+    },
+    {
+      "trait_type": "Estimated Value",
+      "value": 5500000,
+      "display_type": "number",
+      "trait_suffix": " USD"
+    },
+    {
+      "trait_type": "Material",
+      "value": "Rustic Gold Blend"
+    },
+    {
+      "trait_type": "Window Style",
+      "value": "Warm Orange Glow"
+    },
+    {
+      "trait_type": "Roof Type",
+      "value": "Rustic Golden Tiles"
+    },
+    {
+      "trait_type": "Base Type",
+      "value": "Natural Golden Stone"
+    },
+    {
+      "trait_type": "Rustic Gold",
+      "value": "Yes"
+    },
+    {
+      "trait_type": "Warm Windows",
+      "value": "Yes"
+    },
+    {
+      "trait_type": "Natural Roof",
+      "value": "Yes"
+    },
+    {
+      "trait_type": "Stone Base",
+      "value": "Yes"
+    }
+  ],
+  "properties": {
+    "category": "Premium Real Estate",
+    "collection": "Golden House Collection",
+    "subset": "Golden Rustic",
+    "tokenId": 104,
+    "rarity": "LEGENDARY",
+    "propertyType": "House",
+    "location": "Golden Nature Reserve, Bashood City",
+    "area": 380,
+    "estimatedValue": 5500000,
+    "features": {
+      "material": "Rustic Gold Blend",
+      "windows": "Warm Orange Glow",
+      "roof": "Rustic Golden Tiles",
+      "base": "Natural Golden Stone"
+    },
+    "amenities": [
+      "Rustic Gold",
+      "Warm Windows",
+      "Natural Roof",
+      "Stone Base"
+    ],
+    "generated": "2025-11-20T21:43:25.011Z",
+    "ipfs_prepared": "2025-11-20T22:18:28.043Z",
+    "version": "1.0.0"
+  }
+}

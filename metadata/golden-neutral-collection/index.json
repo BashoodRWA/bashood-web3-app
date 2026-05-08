@@ -1,0 +1,36 @@
+{
+  "collection": "Golden Neutral Collection",
+  "description": "Segunda serie de la Golden House Collection con diseños neutros y elegantes. Tonos tierra y cobrizos que evocan sofisticación y modernidad en el metaverso Bashood.",
+  "series_number": 2,
+  "parent_collection": "Golden House Collection",
+  "total_items": 4,
+  "collection_metadata": "collection.json",
+  "nft_files": [
+    {
+      "tokenId": 201,
+      "name": "Neutral Classic Estate",
+      "filename": "201.json",
+      "value": 3500000
+    },
+    {
+      "tokenId": 202,
+      "name": "Copper Elite Manor",
+      "filename": "202.json",
+      "value": 4550000
+    },
+    {
+      "tokenId": 203,
+      "name": "Copper Tech Residence",
+      "filename": "203.json",
+      "value": 4900000
+    },
+    {
+      "tokenId": 204,
+      "name": "Copper Heritage Mansion",
+      "filename": "204.json",
+      "value": 4200000
+    }
+  ],
+  "generated": "2025-11-20T21:30:17.050Z",
+  "total_value": 17150000
+}

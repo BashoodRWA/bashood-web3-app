@@ -1,0 +1,104 @@
+{
+  "name": "Copper Tech Residence",
+  "description": "Residencia tecnológica con impresionantes ventanas azul neón. Base cobriza que fusiona tradición con futurismo innovador.",
+  "external_url": "https://bashood.com/nft/golden-house-collection/107",
+  "image": "ipfs://QmPLACEHOLDER_IMAGE_107",
+  "animation_url": "ipfs://QmPLACEHOLDER_ANIMATION_107",
+  "attributes": [
+    {
+      "trait_type": "Collection",
+      "value": "Golden House Collection"
+    },
+    {
+      "trait_type": "Subset",
+      "value": "Copper Tech"
+    },
+    {
+      "trait_type": "Token ID",
+      "value": 107,
+      "display_type": "number"
+    },
+    {
+      "trait_type": "Rarity",
+      "value": "LEGENDARY"
+    },
+    {
+      "trait_type": "Property Type",
+      "value": "House"
+    },
+    {
+      "trait_type": "Location",
+      "value": "Innovation District, Bashood City"
+    },
+    {
+      "trait_type": "Area",
+      "value": 380,
+      "display_type": "number",
+      "trait_suffix": " sqm"
+    },
+    {
+      "trait_type": "Estimated Value",
+      "value": 5000000,
+      "display_type": "number",
+      "trait_suffix": " USD"
+    },
+    {
+      "trait_type": "Material",
+      "value": "Copper Tech Alloy"
+    },
+    {
+      "trait_type": "Window Style",
+      "value": "Tech Blue Neon"
+    },
+    {
+      "trait_type": "Roof Type",
+      "value": "Smart Copper Tiles"
+    },
+    {
+      "trait_type": "Base Type",
+      "value": "Tech Foundation"
+    },
+    {
+      "trait_type": "Tech Copper",
+      "value": "Yes"
+    },
+    {
+      "trait_type": "Neon Windows",
+      "value": "Yes"
+    },
+    {
+      "trait_type": "Smart Roof",
+      "value": "Yes"
+    },
+    {
+      "trait_type": "Innovation Base",
+      "value": "Yes"
+    }
+  ],
+  "properties": {
+    "category": "Premium Real Estate",
+    "collection": "Golden House Collection",
+    "subset": "Copper Tech",
+    "tokenId": 107,
+    "rarity": "LEGENDARY",
+    "propertyType": "House",
+    "location": "Innovation District, Bashood City",
+    "area": 380,
+    "estimatedValue": 5000000,
+    "features": {
+      "material": "Copper Tech Alloy",
+      "windows": "Tech Blue Neon",
+      "roof": "Smart Copper Tiles",
+      "base": "Tech Foundation"
+    },
+    "amenities": [
+      "Tech Copper",
+      "Neon Windows",
+      "Smart Roof",
+      "Innovation Base"
+    ],
+    "generated": "2025-11-20T21:43:25.014Z",
+    "ipfs_prepared": "2025-11-20T22:18:28.048Z",
+    "version": "1.0.0"
+  }
+}

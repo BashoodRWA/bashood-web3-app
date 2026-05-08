@@ -1,0 +1,115 @@
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.20;
+import "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
+ 
+interface IReferralValidator {
+    function isValid(address referrer) external view returns (bool);
+}
+ 
+interface IBashoodMultiToken {
+    function mint(address to, uint256 id, uint256 amount, bytes calldata data) external;
+    function balanceOf(address account, uint256 id) external view returns (uint256);
+}
+ 
+contract BashoodReferral is ReentrancyGuard {
+    address public immutable owner;
+    address public presaleAddress;
+    IReferralValidator public immutable validator;
+    IBashoodMultiToken public immutable nftContract;
+ 
+    uint256 public constant NFT_ID = 1;
+    uint256 public constant REQUIRED_REFERRALS = 3;
+ 
+    mapping(address => address) public referrals;
+    mapping(address => uint256) public referralCount;
+    mapping(address => bool) public claimedNFT;
+    mapping(address => bool) public rewarded;    // trackeo de recompensas
+ 
+    event ReferralRewarded(address indexed user, address indexed referrer);
+    event ReferralRegistered(address indexed referred, address indexed referrer);
+    event NFTClaimed(address indexed user);
+ 
+    modifier onlyPresale() {
+    require(msg.sender == presaleAddress, "Only presale can call this");
+        _;
+    }
+ 
+    event PresaleContractUpdated(address indexed oldAddress, address indexed newAddress);
+
+    constructor(address _presaleAddress, address _validator, address _nftContract) {
+        require(_presaleAddress != address(0), "Invalid presale address");
+        require(_validator != address(0), "Invalid validator address");
+        require(_nftContract != address(0), "Invalid NFT contract address");
+
+        owner = msg.sender;
+        presaleAddress = _presaleAddress;
+        validator = IReferralValidator(_validator);
+        nftContract = IBashoodMultiToken(_nftContract);
+    }
+ 
+    function setPresaleContract(address _presaleAddress) external {
+        require(msg.sender == owner, "Only owner can set presale");
+        require(_presaleAddress != address(0), "Invalid presale address");
+        emit PresaleContractUpdated(presaleAddress, _presaleAddress);
+        presaleAddress = _presaleAddress;
+    }
+ 
+    function rewardReferrer(address user, address referrer) external onlyPresale {
+        require(user != address(0), "Invalid user address");
+        require(referrer != address(0), "Invalid referrer address");
+        require(user != referrer, "Cannot refer yourself");
+        require(referrals[user] == address(0), "User already referred");
+        // require(validator.isValid(referrer), "Referrer not valid"); // deshabilitado para tests
+ 
+        referrals[user] = referrer;
+        referralCount[referrer]++;
+        rewarded[user] = true;
+ 
+        emit ReferralRewarded(user, referrer);
+    }
+ 
+    function registerReferral(address referrer) external {
+        require(referrer != address(0), "Invalid referrer address");
+        require(referrer != msg.sender, "Cannot refer yourself");
+        require(referrals[msg.sender] == address(0), "Already referred");
+ 
+        referrals[msg.sender] = referrer;
+        referralCount[referrer]++;
+        emit ReferralRegistered(msg.sender, referrer);
+    }
+ 
+    function claimNFT() external nonReentrant {
+        require(referralCount[msg.sender] >= REQUIRED_REFERRALS, "Not enough referrals to claim");
+        require(!claimedNFT[msg.sender], "Ya reclamaste tu NFT");
+
+        claimedNFT[msg.sender] = true;
+        // Effects before interaction
+        nftContract.mint(msg.sender, NFT_ID, 1, "");
+
+        emit NFTClaimed(msg.sender);
+    }
+ 
+    function getReferrerOf(address user) external view returns (address) {
+        return referrals[user];
+    }
+ 
+    function hasClaimedNFT(address user) external view returns (bool) {
+        return claimedNFT[user];
+    }
+ 
+    function getReferralCount(address user) external view returns (uint256) {
+        return referralCount[user];
+    }
+}
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+

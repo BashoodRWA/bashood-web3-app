@@ -1,0 +1,35 @@
+name: Coverage
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  coverage:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+      - name: Install
+        run: npm ci
+      - name: Run tests (CI reporter)
+        run: npm run test:ci
+      - name: Run coverage
+        run: npm run coverage
+      - name: Upload reports
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-reports
+          path: |
+            coverage/**
+            reports/**
+      - name: Check coverage thresholds
+        run: node scripts/check-coverage.js
+        env:
+          MIN_LINES: 90
+          MIN_BRANCH: 85

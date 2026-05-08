@@ -1,0 +1,34 @@
+{
+  "collection": "Golden House Collection",
+  "description": "Colección limitada de casas premium con acabados dorados y diseños únicos. Cada NFT representa una propiedad de lujo en el metaverso Bashood.",
+  "total_items": 4,
+  "collection_metadata": "collection.json",
+  "nft_files": [
+    {
+      "tokenId": 101,
+      "name": "Golden Classic Manor",
+      "filename": "101.json",
+      "value": 5000000
+    },
+    {
+      "tokenId": 102,
+      "name": "Golden Prestige Estate",
+      "filename": "102.json",
+      "value": 6000000
+    },
+    {
+      "tokenId": 103,
+      "name": "Golden Heritage Villa",
+      "filename": "103.json",
+      "value": 5500000
+    },
+    {
+      "tokenId": 104,
+      "name": "Golden Rustic Retreat",
+      "filename": "104.json",
+      "value": 6500000
+    }
+  ],
+  "generated": "2025-11-20T21:16:18.200Z",
+  "total_value": 23000000
+}

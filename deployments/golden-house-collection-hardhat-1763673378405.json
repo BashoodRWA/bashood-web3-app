@@ -1,0 +1,45 @@
+{
+  "network": "hardhat",
+  "contractAddress": "0x5FbDB2315678afecb367f032d93F642f64180aa3",
+  "deployer": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
+  "collectionName": "Golden House Collection",
+  "totalSupply": 4,
+  "mintedTokens": [
+    {
+      "tokenId": "1",
+      "name": "Golden Classic Manor",
+      "recipient": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
+      "value": "5000000",
+      "txHash": "0xe41718d0b416cb5cc3d28cd61d8b68b615b90d86cf98be50459736ec2bac8272"
+    },
+    {
+      "tokenId": "2",
+      "name": "Golden Prestige Estate",
+      "recipient": "0x70997970C51812dc3A010C7d01b50e0d17dc79C8",
+      "value": "6000000",
+      "txHash": "0x5c49b369d006119e4e907bbe2434cf7d828571cb2c87a8689a938aca200c0f36"
+    },
+    {
+      "tokenId": "3",
+      "name": "Golden Heritage Villa",
+      "recipient": "0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC",
+      "value": "5500000",
+      "txHash": "0x32ca8c0f2d1777e66366c6d706a2345fb669456c550bff935d00b6608c7d36e4"
+    },
+    {
+      "tokenId": "4",
+      "name": "Golden Rustic Retreat",
+      "recipient": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
+      "value": "6500000",
+      "txHash": "0xe7653917feade890c65e5496a8d2765cfb8c2655d0f5ca2313edebcb9c267119"
+    }
+  ],
+  "metadataPath": "C:\\Users\\Franchu\\Desktop\\bashood-hardhat-tests\\metadata\\golden-collection",
+  "deploymentTime": "2025-11-20T21:16:18.405Z",
+  "collectionValue": 23000000,
+  "premiumSettings": {
+    "mintingFee": "1.0 ETH",
+    "publicMinting": false,
+    "rarity": "LEGENDARY"
+  }
+}

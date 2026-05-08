@@ -1,0 +1,468 @@
+{
+  "standard": "BASHOOD-RWA-1",
+  "version": "1.0.0",
+  "name": "Apis Cor Mobile 3D Construction Robot #001",
+  "description": "World's most mobile 3D construction printer. Transported in standard truck, 60-minute setup time. Built the world's largest 3D-printed structure in Dubai. Features GPS tracking and cloud-based telemetry for micro-leasing operations.",
+  "external_url": "https://bashood.com/assets/204",
+  "image": "ipfs://QmAPISCOR001MainImage",
+  "animation_url": "ipfs://QmAPISCOR001_360Video",
+  
+  "asset": {
+    "name": "Apis Cor Mobile 3D Construction Robot #001",
+    "category": "CONSTRUCTION_3D_PRINTER_MOBILE",
+    "subcategory": "ROBOTIC_ARM_PORTABLE",
+    "manufacturer": "Apis Cor",
+    "model": "Apis Cor Mobile Robot",
+    "tags": ["3D_PRINTING", "MOBILE", "PORTABLE", "GPS", "MICRO_LEASING"]
+  },
+  
+  "identification": {
+    "serialNumber": "APISCOR-2024-UAE-001",
+    "yearManufactured": 2024,
+    "countryOfOrigin": "UAE",
+    "internalAssetId": "BSH-204",
+    "previousOwners": []
+  },
+  
+  "specifications": {
+    "dimensions": {
+      "length": 4200,
+      "width": 1600,
+      "height": 1500,
+      "unit": "mm",
+      "note": "Compact - fits in standard truck"
+    },
+    "weight": {
+      "value": 2100,
+      "unit": "kg"
+    },
+    "power": {
+      "consumption": 8,
+      "unit": "kW"
+    },
+    "printVolume": {
+      "radius": 3.1,
+      "height": 3.3,
+      "unit": "m",
+      "description": "Radial printing area"
+    },
+    "materialType": "CONCRETE",
+    "setupTime": {
+      "value": 45,
+      "unit": "min",
+      "note": "< 60 minutes typical"
+    },
+    "features": [
+      "Full mobility - truck transportable",
+      "Fast setup (< 60 minutes)",
+      "GPS tracking integrated",
+      "Cloud telemetry",
+      "Radial arm design",
+      "Dubai record holder (largest 3D printed building)"
+    ]
+  },
+  
+  "financials": {
+    "purchasePrice": {
+      "value": 325000,
+      "currency": "USD",
+      "date": "2024-08-10",
+      "note": "Mid-range: $250k-$400k"
+    },
+    "currentValue": {
+      "value": 298000,
+      "currency": "USD",
+      "lastAppraisal": "2026-01-14",
+      "appraisalMethod": "SETUP_BASED_DEPRECIATION"
+    },
+    "depreciationModel": "SETUP_BASED",
+    "residualValue": {
+      "percentage": 20,
+      "estimatedValue": 65000,
+      "currency": "USD",
+      "note": "High residual due to portability and international demand"
+    },
+    "insuranceValue": {
+      "value": 315000,
+      "currency": "USD",
+      "annualPremium": 6500,
+      "premiumPercentage": 2.0,
+      "note": "2% for Inland Marine coverage (mobile equipment)"
+    },
+    "maintenanceReserve": {
+      "percentage": 8,
+      "currentBalance": 14400,
+      "currency": "USD"
+    }
+  },
+  
+  "operational": {
+    "status": "OPERATIONAL",
+    "operatingHours": 1680,
+    "maxLifetimeHours": 10000,
+    "usageMetrics": {
+      "setupCount": {
+        "current": 42,
+        "max": 2000,
+        "description": "Primary depreciation metric: site mobilizations"
+      },
+      "avgSetupTime": {
+        "value": 48,
+        "unit": "min"
+      },
+      "projectsCompleted": 38,
+      "squareMetersBuilt": 890,
+      "transportDistance": {
+        "total": 12400,
+        "unit": "km"
+      }
+    },
+    "lastMaintenance": "2025-12-15",
+    "nextMaintenanceRequired": "2026-03-15",
+    "maintenanceIntervalHours": 1000,
+    "maintenanceCostPercentage": 3.2,
+    "maintenanceHistory": [
+      {
+        "date": "2025-12-15",
+        "type": "PREVENTIVE",
+        "cost": 4200,
+        "provider": "Apis Cor Service Dubai",
+        "notes": "1,000-hour service: robotic arm calibration, GPS module check, hydraulics inspection"
+      }
+    ],
+    "location": {
+      "facility": "Mobile - Currently at Dubai Construction Site",
+      "address": "Al Quoz Industrial Area 3, Dubai",
+      "city": "Dubai",
+      "country": "UAE",
+      "gps": {
+        "latitude": 25.1372,
+        "longitude": 55.2096,
+        "lastUpdate": "2026-01-16T09:15:00Z"
+      },
+      "mobile": true
+    }
+  },
+  
+  "certifications": {
+    "required": [
+      {
+        "name": "CE_MARK",
+        "issueDate": "2024-07-20",
+        "expiryDate": "2029-07-20",
+        "issuingBody": "BSI Group",
+        "documentHash": "QmCertAPISCOR_CE_2024"
+      },
+      {
+        "name": "OSHA",
+        "issueDate": "2024-08-01",
+        "expiryDate": "2026-08-01",
+        "issuingBody": "OSHA International",
+        "documentHash": "QmCertAPISCOR_OSHA"
+      },
+      {
+        "name": "ISO_9001",
+        "issueDate": "2024-07-15",
+        "expiryDate": "2027-07-15",
+        "issuingBody": "ISO Certification",
+        "documentHash": "QmCertAPISCOR_ISO9001"
+      }
+    ],
+    "optional": [
+      "Dubai Municipality Construction Permit"
+    ]
+  },
+  
+  "insurance": {
+    "provider": "Zurich Inland Marine Insurance",
+    "policyNumber": "ZUR-IM-UAE-2024-00892",
+    "type": "INLAND_MARINE",
+    "coverage": {
+      "value": 315000,
+      "currency": "USD"
+    },
+    "annualPremium": {
+      "value": 6500,
+      "currency": "USD",
+      "percentageOfCAPEX": 2.0
+    },
+    "expiryDate": "2026-08-09",
+    "coverageDetails": [
+      "Equipment in transit",
+      "On-site operations",
+      "Third-party liability",
+      "Setup/teardown coverage"
+    ]
+  },
+  
+  "telemetry": {
+    "provider": "APISCOR_CLOUD_GPS",
+    "apiEndpoint": "https://api.apis-cor.com/cloud/APISCOR-2024-UAE-001",
+    "apiKeyEncrypted": "encrypted_apiscor_cloud_key_001",
+    "metrics": [
+      {
+        "name": "gpsLocation",
+        "updateFrequency": "REALTIME",
+        "lastValue": "25.1372,55.2096",
+        "lastUpdate": "2026-01-16T09:15:00Z"
+      },
+      {
+        "name": "setupCount",
+        "updateFrequency": "ON_DEMAND",
+        "lastValue": 42,
+        "lastUpdate": "2026-01-14T14:30:00Z"
+      },
+      {
+        "name": "operatingHours",
+        "updateFrequency": "HOURLY",
+        "lastValue": 1680,
+        "lastUpdate": "2026-01-16T09:00:00Z"
+      },
+      {
+        "name": "lastSetupTime",
+        "updateFrequency": "ON_DEMAND",
+        "lastValue": 52,
+        "lastUpdate": "2026-01-14T14:30:00Z",
+        "unit": "min"
+      }
+    ],
+    "oracleIntegration": {
+      "chainlinkNode": true,
+      "oracleAddress": "0x742d35Cc6634C0532925a3b844c0112c8c7d6010",
+      "verificationMethod": "GPS_SIGNED_DATA",
+      "updateFrequency": "HOURLY"
+    }
+  },
+  
+  "tokenization": {
+    "strategy": "MICRO_LEASING",
+    "microLeasing": {
+      "minPeriod": {
+        "value": 1,
+        "unit": "day"
+      },
+      "dailyRate": {
+        "value": 1500,
+        "currency": "USD"
+      },
+      "weeklyRate": {
+        "value": 9500,
+        "currency": "USD"
+      },
+      "monthlyRate": {
+        "value": 35000,
+        "currency": "USD"
+      },
+      "setupFee": {
+        "value": 500,
+        "currency": "USD",
+        "note": "One-time per mobilization"
+      },
+      "transportCost": "DISTANCE_BASED",
+      "insurance": "INCLUDED"
+    },
+    "fractional": {
+      "totalShares": 325,
+      "minInvestment": {
+        "value": 1000,
+        "currency": "USD"
+      },
+      "revenueSharePercentage": 80,
+      "note": "80% to investors, 15% maintenance reserve, 5% protocol fee"
+    },
+    "revenueModel": {
+      "avgLeaseDays": 18,
+      "leasesPerMonth": 2.2,
+      "monthlyRevenue": {
+        "estimated": 60000,
+        "currency": "USD",
+        "note": "$1,500/day * 18 days * 2.2 leases + setup fees"
+      },
+      "annualRevenue": {
+        "estimated": 720000,
+        "currency": "USD"
+      },
+      "distributionFrequency": "MONTHLY",
+      "nextDistribution": "2026-02-01"
+    },
+    "maintenanceReservePct": 15
+  },
+  
+  "esg": {
+    "carbonFootprint": {
+      "annualTonsCO2": 6.7,
+      "offsetPercentage": 100,
+      "note": "Low consumption (8 kW) + portability reduces transport emissions"
+    },
+    "wasteReduction": 38,
+    "energyEfficiency": "A",
+    "greenBondEligible": true,
+    "sustainabilityCertifications": [
+      "ISO 14001"
+    ],
+    "socialImpact": {
+      "emergencyHousingUnits": 8,
+      "internationalProjects": 15,
+      "trainingPrograms": 6
+    }
+  },
+  
+  "secondaryMarket": {
+    "marketExists": true,
+    "averageRetentionRate": 68,
+    "liquidityScore": 9,
+    "comparableSales": [
+      {
+        "saleDate": "2025-11-20",
+        "salePrice": 245000,
+        "age": 2,
+        "condition": "GOOD",
+        "note": "High demand in emerging markets"
+      }
+    ],
+    "demandIndicators": {
+      "emergingMarkets": "VERY_HIGH",
+      "middleEast": "HIGH",
+      "typicalTimeToSale": "1-2 months"
+    }
+  },
+  
+  "documentation": {
+    "images": [
+      "ipfs://QmAPISCOR001_Compact",
+      "ipfs://QmAPISCOR001_OnTruck",
+      "ipfs://QmAPISCOR001_Setup",
+      "ipfs://QmAPISCOR001_DubaiProject"
+    ],
+    "manuals": [
+      "ipfs://QmAPISCOR_OperatorManual",
+      "ipfs://QmAPISCOR_TransportGuide",
+      "ipfs://QmAPISCOR_CloudInterface"
+    ],
+    "certificates": [
+      "ipfs://QmCertAPISCOR_CE_2024",
+      "ipfs://QmCertAPISCOR_OSHA",
+      "ipfs://QmCertAPISCOR_ISO9001"
+    ],
+    "inspectionReports": [
+      {
+        "date": "2026-01-10",
+        "inspector": "Ahmed Al-Mansoori, Dubai Municipality Inspector",
+        "result": "PASS",
+        "documentHash": "QmInspection_APISCOR001_2026Q1"
+      }
+    ],
+    "videos": [
+      {
+        "title": "Apis Cor - World Record Dubai Building",
+        "url": "ipfs://QmAPISCOR_DubaiRecord",
+        "duration": 360
+      },
+      {
+        "title": "60-Second Setup Time Lapse",
+        "url": "ipfs://QmAPISCOR_Setup_TimeLapse",
+        "duration": 90
+      }
+    ]
+  },
+  
+  "ownership": {
+    "legalOwner": "Bashood Protocol DAO",
+    "custodian": "Apis Cor Middle East FZ-LLC",
+    "tokenized": true,
+    "tokenContract": "0x742d35Cc6634C0532925a3b844c0112c8c7d6008",
+    "tokenId": 204,
+    "blockchain": "BASE",
+    "chainId": 8453
+  },
+  
+  "attributes": [
+    {
+      "trait_type": "Manufacturer",
+      "value": "Apis Cor"
+    },
+    {
+      "trait_type": "Model",
+      "value": "Mobile Robot"
+    },
+    {
+      "trait_type": "Category",
+      "value": "Mobile 3D Construction Printer"
+    },
+    {
+      "trait_type": "Year Manufactured",
+      "value": 2024,
+      "display_type": "number"
+    },
+    {
+      "trait_type": "Setup Time",
+      "value": 48,
+      "display_type": "number",
+      "trait_suffix": " min"
+    },
+    {
+      "trait_type": "Purchase Price",
+      "value": 325000,
+      "display_type": "number",
+      "trait_suffix": " USD"
+    },
+    {
+      "trait_type": "Current Value",
+      "value": 298000,
+      "display_type": "number",
+      "trait_suffix": " USD"
+    },
+    {
+      "trait_type": "Setup Count",
+      "value": 42,
+      "display_type": "number"
+    },
+    {
+      "trait_type": "Projects Completed",
+      "value": 38,
+      "display_type": "number"
+    },
+    {
+      "trait_type": "Remaining Life",
+      "value": 97.9,
+      "display_type": "number",
+      "trait_suffix": " %"
+    },
+    {
+      "trait_type": "Depreciation Model",
+      "value": "Setup-Based"
+    },
+    {
+      "trait_type": "GPS Tracking",
+      "value": "Yes"
+    },
+    {
+      "trait_type": "Mobility",
+      "value": "Full (Truck Transportable)"
+    },
+    {
+      "trait_type": "Tokenization Strategy",
+      "value": "Micro-Leasing (325 shares)"
+    },
+    {
+      "trait_type": "Daily Lease Rate",
+      "value": 1500,
+      "display_type": "number",
+      "trait_suffix": " USD"
+    },
+    {
+      "trait_type": "Annual Revenue (Estimated)",
+      "value": 720000,
+      "display_type": "number",
+      "trait_suffix": " USD"
+    },
+    {
+      "trait_type": "World Record Holder",
+      "value": "Yes (Dubai)"
+    },
+    {
+      "trait_type": "Rarity",
+      "value": "EPIC"
+    }
+  ]
+}

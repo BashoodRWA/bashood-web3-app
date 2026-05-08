@@ -1,0 +1,40 @@
+{
+  "name": "Golden House Collection",
+  "description": "Colección limitada de casas premium con acabados dorados y diseños únicos. Cada NFT representa una propiedad de lujo en el metaverso Bashood.",
+  "image": "https://cdn.bashood.com/golden-collection/collection-banner.png",
+  "banner_image": "https://cdn.bashood.com/golden-collection/collection-banner-large.png",
+  "external_link": "https://bashood.com/golden-collection",
+  "seller_fee_basis_points": 500,
+  "fee_recipient": "0x742d35Cc6634C0532925a3b8D4D1C8B1B5c45C00",
+  "properties": {
+    "category": "Premium Real Estate",
+    "blockchain": "Ethereum",
+    "total_supply": 4,
+    "series": "Golden House Collection",
+    "rarity": "LEGENDARY",
+    "collection_type": "Limited Edition",
+    "launch_date": "2025-11-20",
+    "utility_features": [
+      "Metaverse Premium Access",
+      "VIP Governance Rights",
+      "Golden Staking Rewards",
+      "Exclusive Community Access",
+      "Investment Grade Asset",
+      "Heritage Collection Value"
+    ]
+  },
+  "collection_features": {
+    "3D_Design": "Professional Studio Quality",
+    "Animation_Support": "360° Interactive Views",
+    "Rarity_Level": "Ultra Legendary",
+    "Investment_Potential": "High Premium Growth",
+    "Utility_Access": "Full Metaverse Integration",
+    "Community_Benefits": "VIP Golden Circle Access"
+  },
+  "socials": {
+    "website": "https://bashood.com/golden-collection",
+    "twitter": "https://twitter.com/BashoodGolden",
+    "discord": "https://discord.gg/bashood-golden",
+    "telegram": "https://t.me/bashood_golden"
+  }
+}

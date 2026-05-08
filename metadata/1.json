@@ -1,0 +1,114 @@
+{
+  "name": "Golden Villa Paradise",
+  "description": "Luxurious villa with stunning golden architecture and premium amenities. Located in an exclusive neighborhood with panoramic views.",
+  "external_url": "https://api.bashood.com/nft/property/1",
+  "image": "https://cdn.bashood.com/images/QmGoldenVilla123.png",
+  "animation_url": "https://cdn.bashood.com/images/QmGoldenVilla123-360.mp4",
+  "attributes": [
+    {
+      "trait_type": "Property Type",
+      "value": "Villa"
+    },
+    {
+      "trait_type": "Location",
+      "value": "Beverly Hills, CA"
+    },
+    {
+      "trait_type": "Area",
+      "value": 650,
+      "display_type": "number",
+      "trait_suffix": " sqm"
+    },
+    {
+      "trait_type": "Estimated Value",
+      "value": "2500000000000000000000000",
+      "display_type": "number",
+      "trait_suffix": " USD"
+    },
+    {
+      "trait_type": "Rarity",
+      "value": "EPIC"
+    },
+    {
+      "trait_type": "Amenities Count",
+      "value": 5,
+      "display_type": "number"
+    },
+    {
+      "trait_type": "Has Pool",
+      "value": "Yes"
+    },
+    {
+      "trait_type": "Has Garden",
+      "value": "Yes"
+    },
+    {
+      "trait_type": "Has Garage",
+      "value": "Yes"
+    },
+    {
+      "trait_type": "Has Gym",
+      "value": "Yes"
+    },
+    {
+      "trait_type": "Has Elevator",
+      "value": "No"
+    },
+    {
+      "trait_type": "Has Security",
+      "value": "Yes"
+    },
+    {
+      "trait_type": "Has Parking",
+      "value": "No"
+    },
+    {
+      "trait_type": "Has Balcony",
+      "value": "No"
+    },
+    {
+      "trait_type": "Has Fireplace",
+      "value": "No"
+    },
+    {
+      "trait_type": "Has Air Conditioning",
+      "value": "No"
+    },
+    {
+      "trait_type": "Year Built",
+      "value": 2020
+    },
+    {
+      "trait_type": "Bedrooms",
+      "value": 6
+    },
+    {
+      "trait_type": "Bathrooms",
+      "value": 4
+    },
+    {
+      "trait_type": "Stories",
+      "value": 2
+    },
+    {
+      "trait_type": "Architectural Style",
+      "value": "Modern Mediterranean"
+    }
+  ],
+  "properties": {
+    "category": "Real Estate",
+    "propertyType": "Villa",
+    "location": "Beverly Hills, CA",
+    "area": 650,
+    "estimatedValue": "2500000000000000000000000",
+    "amenities": [
+      "Pool",
+      "Garden",
+      "Garage",
+      "Security",
+      "Gym"
+    ],
+    "rarity": "EPIC",
+    "generated": "2025-11-20T20:35:59.612Z"
+  }
+}

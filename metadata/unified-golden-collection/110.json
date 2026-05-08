@@ -1,0 +1,112 @@
+{
+  "name": "Purple Innovation House",
+  "description": "Residencia innovadora con impresionantes ventanas púrpura neón. Casa negra sobre base plateada que representa la vanguardia tecnológica en el metaverso Bashood.",
+  "external_url": "https://bashood.com/nft/golden-house-collection/110",
+  "image": "https://cdn.bashood.com/golden-house-collection/QmPurpleInnovation110.png",
+  "animation_url": "https://cdn.bashood.com/golden-house-collection/QmPurpleInnovation110_360.mp4",
+  "attributes": [
+    {
+      "trait_type": "Collection",
+      "value": "Golden House Collection"
+    },
+    {
+      "trait_type": "Subset",
+      "value": "Purple Innovation"
+    },
+    {
+      "trait_type": "Token ID",
+      "value": 110,
+      "display_type": "number"
+    },
+    {
+      "trait_type": "Rarity",
+      "value": "LEGENDARY"
+    },
+    {
+      "trait_type": "Property Type",
+      "value": "House"
+    },
+    {
+      "trait_type": "Location",
+      "value": "Innovation Hub, Bashood City"
+    },
+    {
+      "trait_type": "Area",
+      "value": 340,
+      "display_type": "number",
+      "trait_suffix": " sqm"
+    },
+    {
+      "trait_type": "Estimated Value",
+      "value": 5200000,
+      "display_type": "number",
+      "trait_suffix": " USD"
+    },
+    {
+      "trait_type": "Material",
+      "value": "Silver Innovation Base"
+    },
+    {
+      "trait_type": "Window Style",
+      "value": "Purple Neon Tech"
+    },
+    {
+      "trait_type": "Roof Type",
+      "value": "Metallic Innovation"
+    },
+    {
+      "trait_type": "Base Type",
+      "value": "Silver Premium"
+    },
+    {
+      "trait_type": "Silver Base",
+      "value": "Yes"
+    },
+    {
+      "trait_type": "Purple Neon Windows",
+      "value": "Yes"
+    },
+    {
+      "trait_type": "Metal Roof",
+      "value": "Yes"
+    },
+    {
+      "trait_type": "Innovation Design",
+      "value": "Yes"
+    },
+    {
+      "trait_type": "Future Tech",
+      "value": "Yes"
+    },
+    {
+      "trait_type": "AI Integration",
+      "value": "Yes"
+    }
+  ],
+  "properties": {
+    "category": "Premium Real Estate",
+    "collection": "Golden House Collection",
+    "subset": "Purple Innovation",
+    "tokenId": 110,
+    "rarity": "LEGENDARY",
+    "propertyType": "House",
+    "location": "Innovation Hub, Bashood City",
+    "area": 340,
+    "estimatedValue": 5200000,
+    "features": {
+      "material": "Silver Innovation Base",
+      "windows": "Purple Neon Tech",
+      "roof": "Metallic Innovation",
+      "base": "Silver Premium"
+    },
+    "amenities": [
+      "Silver Base",
+      "Purple Neon Windows",
+      "Metal Roof",
+      "Innovation Design",
+      "Future Tech",
+      "AI Integration"
+    ],
+    "generated": "2025-11-20T21:55:56.976Z"
+  }
+}

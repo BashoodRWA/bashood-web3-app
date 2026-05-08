@@ -1,0 +1,156 @@
+{
+  "collection": "Unified Golden House Collection",
+  "description": "Colección expandida de 12 casas premium Bashood. Desde elegantes tonos dorados hasta diseños tech innovadores, cada NFT representa exclusividad en el metaverso.",
+  "total_items": 12,
+  "collection_metadata": "collection.json",
+  "subsets": {
+    "golden": [
+      {
+        "tokenId": 101,
+        "name": "Golden Classic Manor",
+        "subset": "Golden Classic",
+        "filename": "101.json",
+        "value": 5000000
+      },
+      {
+        "tokenId": 102,
+        "name": "Golden Prestige Estate",
+        "subset": "Golden Prestige",
+        "filename": "102.json",
+        "value": 6000000
+      },
+      {
+        "tokenId": 103,
+        "name": "Golden Heritage Villa",
+        "subset": "Golden Heritage",
+        "filename": "103.json",
+        "value": 6500000
+      },
+      {
+        "tokenId": 104,
+        "name": "Golden Rustic Retreat",
+        "subset": "Golden Rustic",
+        "filename": "104.json",
+        "value": 5500000
+      }
+    ],
+    "neutral": [
+      {
+        "tokenId": 105,
+        "name": "Neutral Classic Estate",
+        "subset": "Neutral Classic",
+        "filename": "105.json",
+        "value": 3500000
+      },
+      {
+        "tokenId": 106,
+        "name": "Copper Elite Manor",
+        "subset": "Copper Elite",
+        "filename": "106.json",
+        "value": 4500000
+      },
+      {
+        "tokenId": 107,
+        "name": "Copper Tech Residence",
+        "subset": "Copper Tech",
+        "filename": "107.json",
+        "value": 5000000
+      },
+      {
+        "tokenId": 108,
+        "name": "Copper Heritage Mansion",
+        "subset": "Copper Heritage",
+        "filename": "108.json",
+        "value": 4000000
+      }
+    ]
+  },
+  "all_nfts": [
+    {
+      "tokenId": 101,
+      "name": "Golden Classic Manor",
+      "subset": "Golden Classic",
+      "filename": "101.json",
+      "value": 5000000
+    },
+    {
+      "tokenId": 102,
+      "name": "Golden Prestige Estate",
+      "subset": "Golden Prestige",
+      "filename": "102.json",
+      "value": 6000000
+    },
+    {
+      "tokenId": 103,
+      "name": "Golden Heritage Villa",
+      "subset": "Golden Heritage",
+      "filename": "103.json",
+      "value": 6500000
+    },
+    {
+      "tokenId": 104,
+      "name": "Golden Rustic Retreat",
+      "subset": "Golden Rustic",
+      "filename": "104.json",
+      "value": 5500000
+    },
+    {
+      "tokenId": 105,
+      "name": "Neutral Classic Estate",
+      "subset": "Neutral Classic",
+      "filename": "105.json",
+      "value": 3500000
+    },
+    {
+      "tokenId": 106,
+      "name": "Copper Elite Manor",
+      "subset": "Copper Elite",
+      "filename": "106.json",
+      "value": 4500000
+    },
+    {
+      "tokenId": 107,
+      "name": "Copper Tech Residence",
+      "subset": "Copper Tech",
+      "filename": "107.json",
+      "value": 5000000
+    },
+    {
+      "tokenId": 108,
+      "name": "Copper Heritage Mansion",
+      "subset": "Copper Heritage",
+      "filename": "108.json",
+      "value": 4000000
+    },
+    {
+      "tokenId": 109,
+      "name": "Modern Tech Estate",
+      "subset": "Modern Tech",
+      "filename": "109.json",
+      "value": 4800000
+    },
+    {
+      "tokenId": 110,
+      "name": "Purple Innovation House",
+      "subset": "Purple Innovation",
+      "filename": "110.json",
+      "value": 5200000
+    },
+    {
+      "tokenId": 111,
+      "name": "Golden Marble Mansion",
+      "subset": "Golden Marble",
+      "filename": "111.json",
+      "value": 7500000
+    },
+    {
+      "tokenId": 112,
+      "name": "Classic Tech Residence",
+      "subset": "Classic Tech",
+      "filename": "112.json",
+      "value": 4600000
+    }
+  ],
+  "generated": "2025-11-20T21:55:56.981Z",
+  "total_value": 62100000
+}

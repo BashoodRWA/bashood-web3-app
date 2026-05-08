@@ -1,0 +1,161 @@
+{
+  "name": "Golden Rustic Retreat",
+  "description": "Refugio rústico único con techo de paja dorada y ventanas púrpuras místicas. Diseño eco-luxury que combina materiales naturales con toques dorados exclusivos de la colección.",
+  "external_url": "https://bashood.com/nft/golden-collection/104",
+  "image": "https://cdn.bashood.com/golden-collection/QmGoldenRustic004.png",
+  "animation_url": "https://cdn.bashood.com/golden-collection/QmGoldenRustic004_360.mp4",
+  "attributes": [
+    {
+      "trait_type": "Collection",
+      "value": "Golden House Collection"
+    },
+    {
+      "trait_type": "Series",
+      "value": "Golden House Collection #004"
+    },
+    {
+      "trait_type": "Rarity",
+      "value": "LEGENDARY"
+    },
+    {
+      "trait_type": "Property Type",
+      "value": "Townhouse"
+    },
+    {
+      "trait_type": "Location",
+      "value": "Mystic Woods, Bashood City"
+    },
+    {
+      "trait_type": "Area",
+      "value": 380,
+      "display_type": "number",
+      "trait_suffix": " sqm"
+    },
+    {
+      "trait_type": "Estimated Value",
+      "value": 6500000,
+      "display_type": "number",
+      "trait_suffix": " USD"
+    },
+    {
+      "trait_type": "Collection Series",
+      "value": "#004"
+    },
+    {
+      "trait_type": "Roof Type",
+      "value": "Golden Thatch"
+    },
+    {
+      "trait_type": "Base Material",
+      "value": "Pure Gold Luxe"
+    },
+    {
+      "trait_type": "Window Count",
+      "value": 2
+    },
+    {
+      "trait_type": "Window Color",
+      "value": "Mystic Purple"
+    },
+    {
+      "trait_type": "Door Style",
+      "value": "Rustic Golden"
+    },
+    {
+      "trait_type": "Wall Material",
+      "value": "Natural Wood"
+    },
+    {
+      "trait_type": "Lighting",
+      "value": "Purple Mystical"
+    },
+    {
+      "trait_type": "Chimney",
+      "value": "Golden Rustic"
+    },
+    {
+      "trait_type": "Exclusivity Level",
+      "value": "Ultra Unique"
+    },
+    {
+      "trait_type": "Eco Rating",
+      "value": "Premium Green"
+    },
+    {
+      "trait_type": "Year Designed",
+      "value": 2025
+    },
+    {
+      "trait_type": "Designer",
+      "value": "Bashood Studios"
+    },
+    {
+      "trait_type": "Golden Roof",
+      "value": "Yes"
+    },
+    {
+      "trait_type": "Premium Base",
+      "value": "No"
+    },
+    {
+      "trait_type": "VIP Access",
+      "value": "No"
+    },
+    {
+      "trait_type": "Metaverse Ready",
+      "value": "No"
+    },
+    {
+      "trait_type": "Collectible Series",
+      "value": "Yes"
+    },
+    {
+      "trait_type": "Investment Grade",
+      "value": "No"
+    },
+    {
+      "trait_type": "Luxury Lighting",
+      "value": "Yes"
+    },
+    {
+      "trait_type": "Premium Windows",
+      "value": "No"
+    },
+    {
+      "trait_type": "Exclusive Design",
+      "value": "No"
+    },
+    {
+      "trait_type": "Heritage Value",
+      "value": "No"
+    }
+  ],
+  "properties": {
+    "category": "Premium Real Estate",
+    "collection": "Golden House Collection",
+    "series": "Golden House Collection #004",
+    "rarity": "LEGENDARY",
+    "propertyType": "Townhouse",
+    "location": "Mystic Woods, Bashood City",
+    "area": 380,
+    "estimatedValue": 6500000,
+    "features": {
+      "roofMaterial": "Golden Thatched Straw",
+      "baseMaterial": "Pure Gold Luxe",
+      "windowStyle": "Mystic Purple Glow",
+      "lighting": "Purple Mystical Aura",
+      "exclusivity": "Ultra Rare Series #004"
+    },
+    "amenities": [
+      "Thatched Golden Roof",
+      "Pure Gold Base",
+      "Mystic Purple Windows",
+      "Natural Wood Walls",
+      "Eco-Luxury Design",
+      "Mystical Access",
+      "Collectible Unique",
+      "Environmental Harmony"
+    ],
+    "generated": "2025-11-20T21:16:18.199Z"
+  }
+}

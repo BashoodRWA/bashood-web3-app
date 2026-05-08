@@ -1,0 +1,44 @@
+[profile.default]
+# Foundry Configuration
+src = "contracts"
+out = "forge-out"
+libs = ["node_modules", "lib"]
+test = "test/foundry"
+cache_path = "forge-cache"
+
+# Solidity compiler settings
+solc_version = "0.8.28"
+optimizer = true
+optimizer_runs = 200
+via_ir = false
+
+# Testing settings
+fuzz_runs = 1000
+fuzz_max_test_rejects = 65536
+
+# Gas reporting
+gas_reports = ["*"]
+
+# Invariant testing
+invariant_runs = 256
+invariant_depth = 15
+invariant_fail_on_revert = false
+invariant_call_override = false
+
+# RPC endpoints
+[rpc_endpoints]
+mainnet = "https://eth.llamarpc.com"
+goerli = "https://eth-goerli.g.alchemy.com/v2/demo"
+arbitrum = "https://arb1.arbitrum.io/rpc"
+optimism = "https://mainnet.optimism.io"
+polygon = "https://polygon-rpc.com"
+
+# Etherscan API keys (add your own)
+[etherscan]
+mainnet = { key = "${ETHERSCAN_API_KEY}" }
+goerli = { key = "${ETHERSCAN_API_KEY}" }
+
+# Libraries
+[dependencies]
+forge-std = "1.7.6"
+openzeppelin-contracts = "4.9.6"

@@ -1,0 +1,104 @@
+{
+  "name": "Golden Heritage Villa",
+  "description": "Villa patrimonial con rica herencia dorada. Ventanas color ámbar que evocan tradición y lujo atemporal.",
+  "external_url": "https://bashood.com/nft/golden-house-collection/103",
+  "image": "ipfs://QmPLACEHOLDER_IMAGE_103",
+  "animation_url": "ipfs://QmPLACEHOLDER_ANIMATION_103",
+  "attributes": [
+    {
+      "trait_type": "Collection",
+      "value": "Golden House Collection"
+    },
+    {
+      "trait_type": "Subset",
+      "value": "Golden Heritage"
+    },
+    {
+      "trait_type": "Token ID",
+      "value": 103,
+      "display_type": "number"
+    },
+    {
+      "trait_type": "Rarity",
+      "value": "LEGENDARY"
+    },
+    {
+      "trait_type": "Property Type",
+      "value": "Villa"
+    },
+    {
+      "trait_type": "Location",
+      "value": "Heritage Golden Hills, Bashood City"
+    },
+    {
+      "trait_type": "Area",
+      "value": 480,
+      "display_type": "number",
+      "trait_suffix": " sqm"
+    },
+    {
+      "trait_type": "Estimated Value",
+      "value": 6500000,
+      "display_type": "number",
+      "trait_suffix": " USD"
+    },
+    {
+      "trait_type": "Material",
+      "value": "Heritage Gold"
+    },
+    {
+      "trait_type": "Window Style",
+      "value": "Amber Heritage Crystal"
+    },
+    {
+      "trait_type": "Roof Type",
+      "value": "Traditional Golden Shingles"
+    },
+    {
+      "trait_type": "Base Type",
+      "value": "Heritage Foundation"
+    },
+    {
+      "trait_type": "Heritage Gold",
+      "value": "Yes"
+    },
+    {
+      "trait_type": "Amber Windows",
+      "value": "Yes"
+    },
+    {
+      "trait_type": "Traditional Roof",
+      "value": "Yes"
+    },
+    {
+      "trait_type": "Heritage Base",
+      "value": "Yes"
+    }
+  ],
+  "properties": {
+    "category": "Premium Real Estate",
+    "collection": "Golden House Collection",
+    "subset": "Golden Heritage",
+    "tokenId": 103,
+    "rarity": "LEGENDARY",
+    "propertyType": "Villa",
+    "location": "Heritage Golden Hills, Bashood City",
+    "area": 480,
+    "estimatedValue": 6500000,
+    "features": {
+      "material": "Heritage Gold",
+      "windows": "Amber Heritage Crystal",
+      "roof": "Traditional Golden Shingles",
+      "base": "Heritage Foundation"
+    },
+    "amenities": [
+      "Heritage Gold",
+      "Amber Windows",
+      "Traditional Roof",
+      "Heritage Base"
+    ],
+    "generated": "2025-11-20T21:43:25.009Z",
+    "ipfs_prepared": "2025-11-20T22:18:28.041Z",
+    "version": "1.0.0"
+  }
+}
