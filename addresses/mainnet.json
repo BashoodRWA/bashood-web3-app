@@ -1,0 +1,22 @@
+{
+  "network": "mainnet",
+  "deployerNotes": "update with deploy txs and proxy admin multisig",
+  "contracts": {
+    "BashoodToken": {
+      "impl": "0x0000000000000000000000000000000000000000",
+      "proxy": "0x0000000000000000000000000000000000000000",
+      "proxyAdmin": "0x0000000000000000000000000000000000000000"
+    },
+    "BashoodNFT": {
+      "impl": "0x0000000000000000000000000000000000000000",
+      "proxy": "0x0000000000000000000000000000000000000000",
+      "proxyAdmin": "0x0000000000000000000000000000000000000000"
+    },
+    "Presale": {
+      "impl": "0x0000000000000000000000000000000000000000",
+      "proxy": "0x0000000000000000000000000000000000000000",
+      "proxyAdmin": "0x0000000000000000000000000000000000000000"
+    }
+  },
+  "notes": "who controls ProxyAdmin: <multisig address> / contact: dev@example.com"
+}
