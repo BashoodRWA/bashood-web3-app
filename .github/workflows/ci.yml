@@ -1,0 +1,133 @@
+name: CI
+
+on:
+  push:
+    branches: [ main, master, 'ci/*' ]
+  pull_request:
+    branches: [ main, master ]
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run ESLint and emit report
+        run: |
+          mkdir -p reports
+          npx eslint . -f json -o reports/eslint.json || true
+
+      - name: Upload lint report
+        uses: actions/upload-artifact@v4
+        with:
+          name: eslint-report
+          path: reports/eslint.json
+
+  test:
+    name: Tests
+    runs-on: ubuntu-latest
+    needs: lint
+    timeout-minutes: 30
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci --prefer-offline --no-audit --progress=false
+
+      - name: Clean hardhat cache
+        run: npx hardhat clean || true
+
+      - name: Compile contracts
+        run: npx hardhat compile --show-stack-traces
+
+      - name: Run tests and emit JUnit XML
+        env:
+          MOCHA_FILE: reports/test-results.xml
+        run: |
+          mkdir -p reports
+          # Use Hardhat's mocha runner with mocha-junit-reporter to emit JUnit XML
+          npx hardhat test --no-compile --reporter mocha-junit-reporter 2>&1 | tee reports/test-output.txt
+
+      - name: Upload test output
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-output
+          path: reports/test-output.txt
+
+      - name: Upload JUnit XML
+        uses: actions/upload-artifact@v4
+        with:
+          name: junit-report
+          path: reports/test-results.xml
+
+      - name: Upload coverage (if present)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage
+          path: coverage || ''
+
+  security:
+    name: Static analysis (Slither)
+    runs-on: ubuntu-latest
+    needs: test
+    timeout-minutes: 20
+    continue-on-error: true
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Prepare environment (install docker)
+        run: |
+          # Ubuntu runners include docker; ensure service is available
+          docker --version || true
+
+      - name: Run Slither via Docker (best-effort)
+        run: |
+          mkdir -p results
+          # Run slither in a container and write JSON report to results/
+          docker run --rm -v ${{ github.workspace }}:/src -w /src --entrypoint slither trailofbits/slither:latest --json results/slither-report.json contracts || true
+
+      - name: Upload slither report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: slither-report
+          path: results/slither-report.json
+
+  smoke:
+    name: Smoke (Minimal checks on push)
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Quick compile check
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+      - run: npm ci --prefer-offline --no-audit --progress=false && npx hardhat compile --show-stack-traces
