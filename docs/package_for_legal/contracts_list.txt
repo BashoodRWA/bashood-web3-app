@@ -1,0 +1,38 @@
+List of contract files included in repository (snapshot)
+
+- contracts/AttackerReceiver.sol
+- contracts/AttackerLoop.sol
+- contracts/AttackerConditional.sol
+- contracts/AttackerBatch.sol
+- contracts/AggregatorV3Interface.sol
+- contracts/AttackerReentrancy.sol
+- contracts/BadReceiver721.sol
+- contracts/BashoodMultiToken.sol
+- contracts/BadReceiver.sol
+- contracts/MockRescue.sol
+- contracts/TokenWrapperERC20.sol
+- contracts/TaxHandler.sol
+- contracts/ReferralValidator.sol
+- contracts/NotRescue.sol
+- contracts/MockTreasuryHandler.sol
+- contracts/MockPriceFeed.sol
+- contracts/MockPresale.sol
+- contracts/MockNFT1155.sol
+- contracts/MockERC20.sol
+- contracts/MockBHT.sol
+- contracts/MockBashoodToken.sol
+- contracts/Lock.sol
+- contracts/LibraVulnerable.sol
+- contracts/Libra.sol
+- contracts/InterfaceIdResolver.sol
+- contracts/IERC1155Mintable.sol
+- contracts/IBashoodRescue.sol
+- contracts/ComplianceRegistry.sol
+- contracts/ChainlinkPriceFeed.sol
+- contracts/BashoodTokenUpgradeable.sol
+- contracts/BashoodToken.sol
+- contracts/BashoodRescue.sol
+- contracts/BashoodReferral.sol
+- contracts/BashoodPresaleFinal.sol
+- contracts/BashoodNFT.sol
+- (additional mocks and duplicates present in repo)
