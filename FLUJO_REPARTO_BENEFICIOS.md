@@ -11,7 +11,7 @@ Las otras 3 wallets solo necesitan **direcciones públicas** para recibir fondos
 
 ### Wallet #1: DEPLOYER/OWNER (Development - 45%)
 ```
-Clave Privada: 0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80
+Clave Privada: [REDACTED — usar .env local, nunca commitear]
 Dirección: 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266
 Uso: Desplegar contratos, administrar sistema, recibir 45% de beneficios
 Rol: ADMIN_ROLE, deployer

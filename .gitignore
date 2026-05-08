@@ -1,5 +1,14 @@
-# Local env
+# Local env — nunca commitear claves privadas
 .env
+.env.*
+!.env.template
+
+# Archivos de configuración de wallets con datos sensibles
+WALLET_TESTNET_CONFIG.txt
+WALLET_MAINNET_CONFIG.txt
+
+# Deployments con direcciones de contratos
+deployments/
 
 # Coverage artifacts
 coverage/

@@ -11,7 +11,7 @@
 ### Wallet #1: DEVELOPMENT (45%)
 ```
 Dirección Pública: 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266
-Clave Privada: 0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80
+Clave Privada: [REDACTED — usar .env local, nunca commitear]
 Rol: Deployer/Owner/Admin
 Recibe: 45% de beneficios ($1,035,000 de $2.3M total)
 ```
@@ -227,7 +227,7 @@ await splitter.releaseAll(); // Distribuye a las 4 wallets
 3. **PaymentSplitter divide automáticamente**: No hay reparto manual
 4. **Testnet es seguro**: ETH de prueba sin valor real
 5. **Mainnet requiere multi-sig**: Gnosis Safe con múltiples signers
-6. **Hardhat key es pública**: NUNCA usar 0xac0974... en mainnet
+6. **Hardhat key es pública**: NUNCA usar la clave por defecto de Hardhat en mainnet
 
 ---
 
