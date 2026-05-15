@@ -1,0 +1,46 @@
+{
+  "name": "Bashood RWA — Impresora 3D Construcción EVOCONS EVOBLOCK #T3",
+  "description": "Fracción de participación económica sobre una impresora 3D de construcción tipo pórtico EVOCONS EVOBLOCK. El tenedor de este NFT tiene derechos sobre ingresos de arrendamiento operativo definidos en el documento legal vinculado mediante legalDocHash on-chain. No representa propiedad directa del activo físico.",
+  "image": "ipfs://bafybeieolrebdrbanl2fdxmlzyrd7zfte22vavzkjpxk24yfvoxdzc7zji",
+  "external_url": "https://bashood.io/assets/tier-3",
+  "background_color": "2B1A0E",
+
+  "rwa_model": "BASHOOD-RWA-1",
+  "asset_type": "CONSTRUCTION_3D_PRINTER_GANTRY",
+  "jurisdiction": "ES",
+  "legal_hash": "PENDIENTE — SHA-256 del documento legal firmado (bytes32 on-chain en defineAsset)",
+  "valuation_usd": 280000,
+  "currency": "USD",
+  "fractional": true,
+  "max_supply_tier": 200,
+
+  "asset_details": {
+    "manufacturer": "EVOCONS",
+    "model": "EVOBLOCK",
+    "category": "Impresora 3D Construcción — Tipo Pórtico",
+    "print_speed_m3_day": 12,
+    "max_structure_height_m": 6,
+    "material": "Hormigón / Cemento especializado",
+    "location_country": "España",
+    "year_manufacture": 2023,
+    "condition": "Operativo"
+  },
+
+  "depreciation": {
+    "model": "LOAD_BASED",
+    "unit": "toneladas_extruidas",
+    "estimated_useful_life_tons": 500000
+  },
+
+  "attributes": [
+    { "trait_type": "Asset Type",         "value": "CONSTRUCTION_3D_PRINTER_GANTRY" },
+    { "trait_type": "Manufacturer",       "value": "EVOCONS" },
+    { "trait_type": "Model",              "value": "EVOBLOCK" },
+    { "trait_type": "Jurisdiction",       "value": "ES" },
+    { "trait_type": "Valuation USD",      "value": 280000, "display_type": "number" },
+    { "trait_type": "Max Supply Tier",    "value": 200,    "display_type": "number" },
+    { "trait_type": "Depreciation",       "value": "LOAD_BASED" },
+    { "trait_type": "Print Speed m³/day", "value": 12,     "display_type": "number" },
+    { "trait_type": "Legal Binding",      "value": "SHA-256 on-chain" }
+  ]
+}

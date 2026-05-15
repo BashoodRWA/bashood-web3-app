@@ -1,0 +1,46 @@
+{
+  "name": "Bashood RWA — Planta Solar 5MW #T2",
+  "description": "Fracción de participación económica sobre una instalación de energía solar fotovoltaica de 5MW ubicada en Emiratos Árabes Unidos. El tenedor de este NFT tiene derechos sobre ingresos de generación definidos en el documento legal vinculado mediante legalDocHash on-chain. No representa propiedad directa del activo físico.",
+  "image": "ipfs://bafybeigy23o5zi7bktl36kc77ufpjq4bi3wvwqwwwqdtn6khimxiwxrgwm",
+  "external_url": "https://bashood.io/assets/tier-2",
+  "background_color": "1A2B0E",
+
+  "rwa_model": "BASHOOD-RWA-1",
+  "asset_type": "ENERGY_EQUIPMENT",
+  "jurisdiction": "AE",
+  "legal_hash": "PENDIENTE — SHA-256 del documento legal firmado (bytes32 on-chain en defineAsset)",
+  "valuation_usd": 500000,
+  "currency": "USD",
+  "fractional": true,
+  "max_supply_tier": 100,
+
+  "asset_details": {
+    "type": "Solar Fotovoltaica",
+    "capacity_mw": 5,
+    "panel_count": 12500,
+    "annual_yield_mwh": 9000,
+    "location_country": "Emiratos Árabes Unidos",
+    "location_emirate": "Abu Dhabi",
+    "grid_connected": true,
+    "year_commissioned": 2024,
+    "condition": "Operativo"
+  },
+
+  "depreciation": {
+    "model": "LINEAR",
+    "unit": "years",
+    "estimated_useful_life_years": 25
+  },
+
+  "attributes": [
+    { "trait_type": "Asset Type",       "value": "ENERGY_EQUIPMENT" },
+    { "trait_type": "Subtype",          "value": "Solar Fotovoltaica" },
+    { "trait_type": "Capacity MW",      "value": 5,       "display_type": "number" },
+    { "trait_type": "Jurisdiction",     "value": "AE" },
+    { "trait_type": "Valuation USD",    "value": 500000,  "display_type": "number" },
+    { "trait_type": "Max Supply Tier",  "value": 100,     "display_type": "number" },
+    { "trait_type": "Depreciation",     "value": "LINEAR" },
+    { "trait_type": "Grid Connected",   "value": "Sí" },
+    { "trait_type": "Legal Binding",    "value": "SHA-256 on-chain" }
+  ]
+}

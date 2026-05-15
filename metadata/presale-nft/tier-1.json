@@ -1,0 +1,46 @@
+{
+  "name": "Bashood RWA — Excavadora Doosan DX360LC #T1",
+  "description": "Fracción de participación económica sobre una Excavadora Hidráulica Doosan DX360LC valorada en €150,000. El tenedor de este NFT tiene derechos definidos en el documento legal vinculado mediante legalDocHash on-chain. No representa propiedad directa del activo físico.",
+  "image": "ipfs://bafybeifcdgrpqrl6qy5sexkllrxjixdqpgsyelgrg64st7xtbpalsbenhy",
+  "external_url": "https://bashood.io/assets/tier-1",
+  "background_color": "0E1A2B",
+
+  "rwa_model": "BASHOOD-RWA-1",
+  "asset_type": "HEAVY_VEHICLE",
+  "jurisdiction": "ES",
+  "legal_hash": "PENDIENTE — SHA-256 del documento legal firmado (bytes32 on-chain en defineAsset)",
+  "valuation_eur": 150000,
+  "currency": "EUR",
+  "fractional": true,
+  "max_supply_tier": 500,
+
+  "asset_details": {
+    "manufacturer": "Doosan",
+    "model": "DX360LC",
+    "category": "Excavadora Hidráulica",
+    "operating_weight_ton": 36.5,
+    "engine_power_kw": 202,
+    "bucket_capacity_m3": 1.74,
+    "year_manufacture": 2022,
+    "location_country": "España",
+    "condition": "Operativo"
+  },
+
+  "depreciation": {
+    "model": "TIME_BASED",
+    "unit": "hours",
+    "estimated_useful_life_hours": 12000
+  },
+
+  "attributes": [
+    { "trait_type": "Asset Type",       "value": "HEAVY_VEHICLE" },
+    { "trait_type": "Manufacturer",     "value": "Doosan" },
+    { "trait_type": "Model",            "value": "DX360LC" },
+    { "trait_type": "Jurisdiction",     "value": "ES" },
+    { "trait_type": "Valuation EUR",    "value": 150000,  "display_type": "number" },
+    { "trait_type": "Max Supply Tier",  "value": 500,     "display_type": "number" },
+    { "trait_type": "Depreciation",     "value": "TIME_BASED" },
+    { "trait_type": "Condition",        "value": "Operativo" },
+    { "trait_type": "Legal Binding",    "value": "SHA-256 on-chain" }
+  ]
+}
